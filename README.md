@@ -1,2 +1,3 @@
-# mfocs
-Mathematics and Foundations of Computer Science at Oxford, 2023/24
+# MFoCS
+
+Mathematics and Foundations of Computer Science at Oxford, 2023/24.
