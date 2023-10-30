@@ -1,8 +1,7 @@
 ---
-title: smooth-manifolds
+title: Smooth manifolds
 date: 2023-10-11 13:25
 ---
-
 # Definitions
 
 - A *topological manifold of dimension $n$* is a topological space $X$
@@ -10,16 +9,16 @@ date: 2023-10-11 13:25
   1. Hausdorff,
   2. second countable, and
   3. locally homeomorphic to $\mathbb{R}^n$.
-- A *chart* on a topologial space $X$ is a open $U\subseteq\mathbb{R}^n$
+- A *chart* on a topological space $X$ is a open $U\subseteq\mathbb{R}^n$
   and a map $\phi:U\to X$ such that
   1. $\phi\left({U}\right)\subseteq X$, and
   2. $\phi:U\to\phi(U)$ is a homeomorphism.
-- Two charts $\phi:U\to X$ and $\psi:V\to X$ are compatbile if, and only if,
+- Two charts $\phi:U\to X$ and $\psi:V\to X$ are compatible if, and only if,
   both ${\psi}^{-1}\circ\phi$ and ${\phi}^{-1}\circ\psi$ are smooth.
 - An *atlas* on $X$ is a family of charts that are pairwise compatible and
   whose images cover $X$.
 - An atlas is *maximal* if its not a proper subset of another atlas.
-- A *differentiable manifold* is a topological manifold with a maximal atlas.
+- A *smooth manifold* is a topological manifold with a maximal atlas.
 
 # Examples
 
