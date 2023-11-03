@@ -5,10 +5,9 @@ date: 2023-10-23 14:52
 # Exponential map
 The *exponential map* $\exp:\text{Lie}(G)\to G$ is given by
 $$
-X\mapsto \alpha^e(1)
+X\mapsto \phi_1(e)
 $$
-where $\alpha_e$ is the [integral curve](flow_of_a_vector_field.md) of $X$
-through $e$.
+where $\phi$ is the [flow](flow_of_a_vector_field.md) of $X$.
 
 # Properties
 - For a Lie group homomorphism $F:G\to H$, $\exp(dF_e(X_e)) = F(\exp(X_e))$.
@@ -16,3 +15,7 @@ through $e$.
   1. $G$ is abelian, and
   2. $\exp : \text{Lie}(G)\to G$ is a group homomorphism,
   3. $G\cong T^k \times \mathbb{R}^{n-k}$
+- $\im(\exp)\subseteq G_0$ where $G_0\ni e$ is a connected component.
+- $\exp((s+t)X)=\exp(sX)\exp(tX)$
+- ${(\exp(X))}^{-1}=\exp(-X)$
+- $\exp(X)$ has $n$th roots for all $n$

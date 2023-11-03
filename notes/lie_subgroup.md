@@ -15,6 +15,8 @@ An *embedded subgroup* of a Lie group $G$ is a Lie group $H$ such that $H$
 is a subgroup of $G$ and the inclusion $j:H\to G$ is a Lie group
 homomorphism.
 
+> Let $H\leq G$ as groups. Then $H$ is an embedded Lie subgroup if, and only if, $H\subseteq G$ is closed.
+
 # Properties
 - Immersions need not be injective, only their derivatives.
 - The topology on an embedded $H\leq G$ may be very different to the one on

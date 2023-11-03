@@ -20,3 +20,6 @@ $(f\circ\alpha)'(0)$:
 $$
 \left\lbrace{\text{functions $M\to\mathbb{R}$, smooth at $p$}}\right\rbrace\to\mathbb{R}
 $$
+
+# Properties
+- Consider a [Lie group](lie_groups.md) $G$ which arises as the pre-image of a regular value ${F}^{-1}(e)$. Then $T_e G = \ker dF_e$. (Hitchin notes 3.2.1)

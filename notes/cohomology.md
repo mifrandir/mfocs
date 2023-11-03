@@ -11,7 +11,15 @@ $$
 
 The *cohomology functor* $H^*:\text{Ch}(\mathcal A)^\text{op}\to\text{Graded}_{\mathbb{Z}}(\mathcal A)$ is given by 
 $$
-\text{Ch}(\mathcal A)\xrightarrow{\text{Hom}(-,R)}\text{Ch}(\mathcal A)^{\text{op}}\xrightarrow{H_*}\text{Graded}_{\mathbb{Z}}(\mathcal A).
+\text{Ch}(\mathcal A)
+\xrightarrow{\text{Hom}(-,R)}\text{Ch}(\mathcal A)^{\text{op}}
+\xrightarrow{H_*}\text{Graded}_{\mathbb{Z}}(\mathcal A)^{\text{op}}.
 $$
 
-TODO verify
+In particular, if $\mathcal A=\text{Ab}$, we have
+$$
+\text{Graded}_{\mathbb{Z}}(\text{Ab})^{\text{op}}\cong\text{Graded}_{\mathbb{Z}}(\text{Ab})
+$$
+so $H^*:\text{Ch}(\text{Ab})\to \text{Graded}_{\mathbb{Z}}(\text{Ab})$
+and similarly for simplicial and singular cohomologies.
+

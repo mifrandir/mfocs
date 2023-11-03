@@ -12,6 +12,7 @@ $$
 \xrightarrow{{\psi}^{-1}}
 \mathbb{R}^n.
 $$
+(see [Smooth manifolds](smooth_manifolds.md))
 
 # Algebra structure
 Denote by $C^\infty(M)$ the set of all smooth functions $M\to M$. This admits
@@ -19,7 +20,9 @@ an $\mathbb{R}$-algebra structure under pointwise addition, pointwise multiplica
 and scalar multiplication.
 
 Further, there is a full subcategory
-$$C^\infty\text{-algebras}\to\textbf{Alg}_\mathbb{R}.$$
+$$
+C^\infty\text{-algebras}\to\textbf{Alg}_\mathbb{R}.
+$$
 
 # Properties
 On any manfild  there are enough global smooth functions to define local

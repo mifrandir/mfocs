@@ -34,21 +34,3 @@ $$
 = X_{g^{-1}h}(f\circ L_g)
 = X_h(f)
 $$
-
-# Alternative definition
-Note that a vector field $X$ on $M$ is a map
-$$
-M\to C^\infty(M)\to\mathbb{R}.
-$$
-By exponential transposition, this may be thought of as a map
-$$
-C^\infty(M)\to M\to\mathbb{R},\text{ i.e. }
-C^\infty(M)\to C^\infty(M).
-$$
-Thus we may write $X_p\in T_p M$ and $X(f)\in C^\infty(M)$.
-
-The smoothness of $M\to TM$ is now equivalent to the Leibnitz rule:
-$$
-X(fg)=fX(g)+gX(f).
-$$
-(TODO why?)

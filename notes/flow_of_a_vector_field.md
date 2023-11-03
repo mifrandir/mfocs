@@ -20,5 +20,5 @@ given by $\phi_t(q) = \alpha_q(t)$.
 
 Notice that $\phi_t$ is the identity on $V$.
 
-> A vector fields vectors point in the direction of the flow at every point.
+> *A vector field's vectors point in the direction of the flow at every point.*
 

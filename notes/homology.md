@@ -10,7 +10,7 @@ $$
 
 This is well-defined as $0\subseteq B_n\subseteq Z_n\subseteq C_n$.
 
-# The homology functor
+# The functor
 Note that for each morphism  $f:C_n\to D_n$ induces a morphism
 $f_* : H_n(C_\bullet)\to H_n(D_\bullet)$ on the quotients. 
 
@@ -25,3 +25,11 @@ This defines a functor
 $$
 H_* : \text{Ch}({\mathcal A})\to\text{Graded}_{\mathbb{Z}}(\mathcal A).
 $$
+
+# Chain homotopy
+Maps of [chain complexes](chain_complexes.md) $f_\bullet,g_\bullet:C_\bullet\to
+D_\bullet$ are *chain homotopic* if there exists a family of maps
+$h_n : C_n\to D_{n+1}$
+such that $\partial\circ h + h\circ\partial = g - f$.
+
+> If $f_\bullet\simeq g_\bullet$ then $f_* = g_*$.

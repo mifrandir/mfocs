@@ -17,5 +17,6 @@ $f_n:C_n\to D_n$ such that, for all $n$, $\partial\circ f = f\circ\partial$.
 We thus have a category $\text{Ch}_\bullet({\mathcal A})$ of chain complexes in
 the abelian category $\mathcal A$.
 
+
 # Observations
 - $0 \subseteq B_n \subseteq Z_n \subseteq C_n$ as $\partial_{n+1}\circ \partial_n = 0$ so $B_n\subseteq Z_n$
