@@ -10,12 +10,14 @@ date: 2023-11-01 14:46
    - all matrices: $\text{Lie}G=M_n(\mathbb R)$
    - $\text{Ad}A(X)=AX{A}^{-1}$
    - $\text{ad}X(Y)=[X,Y]=XY-YX$
-3. $G=O(n)=\left\lbrace{A\in GL(n,\mathbb{R}) : A^\top = {A}^{-1}}\right\rbrace$
+2. $G=O(n)=\left\lbrace{A\in GL(n,\mathbb{R}) : A^\top = {A}^{-1}}\right\rbrace$
    - disconnected
-4. $G=SO(n)=\left\lbrace{A\in O(n) : \det A = 1}\right\rbrace$
+3. $G=SO(n)=\left\lbrace{A\in O(n) : \det A = 1}\right\rbrace$
    - connected
-   - skew-symmetric matrices: $\left\lbrace{X\in M_n(\mathbb{R}) : X^\top = -X}\right\rbrace$
-5. $G=SL(n,\mathbb{R})$
+   - $\left\lbrace{X\in M_n(\mathbb{R}) : X^\top = -X}\right\rbrace$
+   - $\tilde{SO(3)}=SU(2)$.
+4. $G=SL(n,\mathbb{R})$
    - non-compact
-   - trace zero matrices: $\text{Lie}G = \left\lbrace{A \in M_n(\mathbb{R}) : \text{tr} A = 0}\right\rbrace$
-   - 
+   - $\text{Lie}G = \left\lbrace{A \in M_n(\mathbb{R}) : \text{tr} A = 0}\right\rbrace$
+5. $G=SU(2)$
+   - Pauli matrices: $\text{Lie}G = \text{span}\left\lbrace{X,Y,Z}\right\rbrace$

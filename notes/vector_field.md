@@ -34,3 +34,10 @@ $$
 = X_{g^{-1}h}(f\circ L_g)
 = X_h(f)
 $$
+
+> If $X$ is left-invariant then, for all $g\in G$ and $f\in C^\infty(M)$,
+  $$
+  X_g(f) = \left.\frac{d}{dt}\right\vert_{t=0} f(g\exp(tX))
+  $$
+  (see [exponential_map](exponential_map.md))
+  Proof: https://web.math.ku.dk/~schlicht/Liegroups/ad.pdf

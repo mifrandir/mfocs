@@ -14,6 +14,7 @@ A *morphism of Lie groups* is a smooth group homomorphism.
 # Properties
 - Let $e\in V\subseteq G$ be open and suppose $G$ is connected. Then every
   element of $G$ is a finite product of elements in $W$ and their inverses.
+- The connected component $e\in G_0\subseteq G$ is a normal Lie subgroup of $G$.
 
 # Examples 
 

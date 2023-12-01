@@ -17,11 +17,15 @@ homomorphism.
 
 > Let $H\leq G$ as groups. Then $H$ is an embedded Lie subgroup if, and only if, $H\subseteq G$ is closed.
 
+> If $\phi : G\to H$ is a Lie group homomorphism, then $\ker\phi\subseteq G$ is a closed and hence embedded Lie subgroup of $G$ with Lie algebra $\text{Lie}(\ker\phi)=\ker(d\phi_e)$.
+
 # Properties
 - Immersions need not be injective, only their derivatives.
 - The topology on an embedded $H\leq G$ may be very different to the one on
   $G$. E.g. the kernel of a Lie group homomorphism does not have the
   induced topology.
+- Any compact Lie group may be embedded in some $GL(n,\mathbb{R})$.
+- $\tilde{SL(2,\mathbb{R})}$ may not be embedded in any $GL(n,\mathbb{R})$ (see [covering](covering.md))
 
 # Examples
 - The connected component containing the identity is an embedded subgroup.

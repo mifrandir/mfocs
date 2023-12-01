@@ -12,6 +12,15 @@ $$
 L_X Y(p) = \left.\frac{d}{dt}\right\vert_{t=0}\left({}\right)
 $$
 
+# Cartan's formula
+
+The *interior product* of a vector field $X$ with a $k$-form $\omega$
+is the $(k-1)$-form
+
+$$
+i_X(\omega)(p)(Y_1,\ldots,Y_{k-1}) = \omega(p)(X(p),Y_1,\ldots,Y_{k-1})
+$$
+
 # Properties
 - $L_X Y$ defines a vector field on $M$.
 - $L_X Y=[X,Y]$.

@@ -21,3 +21,10 @@ $$
   $$
   is a homomorphism of Lie algebras.
 - Non-isomorphic Lie groups need not induce non-isomorphic Lie algebras. E.g. take $G=O(n)$ and $H=U(n)$.
+
+> *Theorem*. Let $G,H$ Lie groups, $G$ simply-connected. Then
+>   - there is a 1-1 correspondence between Lie algebra homomorphisms $\text{Lie}(G)\to\text{Lie}(H)$ and Lie group homomorphisms $G\to H$, and
+>   - if $H$ is also simply-connected and $\text{Lie}(G)\cong\text{Lie}(H)$ then $G\cong H$.
+
+> *Theorem*. There is a 1-1 correspondence of Lie algebras, up to isomorphism,
+> and simply connected Lie groups, up to isomorphism.

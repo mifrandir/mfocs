@@ -4,8 +4,11 @@ date: 2023-10-18 14:46
 ---
 # Definition
 The *cotangent space* of $X$ at $p\in X$ is the [dual space](dual_space.md) 
-$T^*_p X = \left({T_p X}\right)^*$. Elements of $T^*_p X$ are
-called 1-forms.
+$$
+T^*_p X = \left({T_p X}\right)^*=\text{Hom}(T_p X,\mathbb{R}).
+$$
+Elements of $T^*_p X$ are
+called 1-forms. (see [differential form](differential_form.md))
 
 Let $\left\lbrace{x_i}\right\rbrace$ be local coordinates of $X$
 near $x$. Then we have a basis $\left\lbrace{\frac{\partial}{\partial x_i}}\right\rbrace$ of $T_p X$ with the corresponding dual basis
