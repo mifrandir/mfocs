@@ -1,0 +1,154 @@
+\documentclass{article}
+\usepackage{assignment}
+\begin{document}
+\title{De Rahm Cohomology}
+\author{Franz Miltz}
+% TODO date
+\date{\today}
+\maketitle
+
+
+\section{The exterior algebra}
+
+Recall that the tensor product $U\otimes V$ of two vector spaces $U$ and $V$ is, up to isomorphism, defined by the universal property that any bilinear map $f:U\times V\to W$ determines a unique linear map $\tilde f : U\otimes V\to W$ making the following diagram commute:
+
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJVXFx0aW1lcyBWIl0sWzEsMSwiVVxcb3RpbWVzIFYiXSxbMiwwLCJXIl0sWzAsMiwiZiJdLFsxLDIsIlxcdGlsZGUgZiIsMl0sWzAsMSwiXFxwaSIsMl1d
+  \begin{tikzcd}
+    {U\times V} && W \\
+                & {U\otimes V}
+                \arrow["f", from=1-1, to=1-3]
+                \arrow["{\tilde f}"', from=2-2, to=1-3]
+                \arrow["\pi"', from=1-1, to=2-2]
+  \end{tikzcd}
+\end{equation*}
+
+This is associative up to a canonical isomoprhism and hence we may write
+\begin{align*}
+  \bigotimes^k V = V \otimes \cdots \otimes V
+\end{align*}
+for the $k$-fold tensor product of $V$.
+
+\begin{definition}
+  Let $V$ be an $n$-dimensional vector space. The \emph{exterior algebra of
+  $V$} is the quotient
+  \begin{align*}
+    \Lambda V = \frac{\bigotimes V}{\langle\left\lbrace{v\otimes v : v \in V}\right\rbrace\rangle}.
+  \end{align*}
+  We write $\Lambda^k V$ for the image of $\bigotimes^k V$ under the quotient
+  map.
+\end{definition}
+
+\begin{lemma}
+  Let $V$ be an $n$-dimensional vector space and $v_1,\ldots,v_n$ a basis.
+  Then
+  \begin{align*}
+    \left\lbrace{v_{j_1}\wedge\cdots\wedge v_{j_k} : 1\leq j_1<\cdots<j_k\leq n }\right\rbrace
+  \end{align*}
+  is a basis for $\Lambda^k V$.
+  \begin{proof}
+    \todo{proof}
+  \end{proof}
+\end{lemma}
+
+To simplify notation, we will use multi-indices. A multi-index $I$ of size
+$k$ and dimension $n$ is a tuple $(i_1,\ldots,i_k)$ such that
+$1\leq i_1<\cdots<i_k\leq n$. We will write $v_I = v_{i_1}\wedge \cdots \wedge
+v_{i_k}$ for the basis vectors of $\Lambda^k V$ so a general
+element $x\in\Lambda^k V$ will be written as
+$x = \sum_I x_I v_I$ where the $I$ is understood to range over
+all the $\binom{n}{k}$ multi-indices of size $k$ and dimension $n$.
+
+\begin{example}
+  We are going to be interested in studying the exterior
+  algebra of the cotangent spaces $T_p^* X$ of a manifold $X$.
+  Let $\alpha\in \Lambda^k T^*_p X$. Then there is a corresponding $a\in
+  \bigotimes^k T_p^* X$. Now
+  \begin{align*}
+    \bigotimes^k T_p^* X = \bigotimes^k \Hom(T_p X,\mathbb{R}) \cong \Hom(\bigotimes^k T_p X, \bigotimes^k \mathbb{R}) \cong \Hom(\bigotimes^k T_p X,\mathbb{R}).
+  \end{align*}
+  Hence $a$ may be understood as a map $\bigotimes^k T_p X\to\mathbb{R}$
+  which is just a $k$-linear map $T_p X\times\cdots\times T_p X\to\mathbb{R}$. Now any two representatives $a,a'\in\bigotimes^k T_p^* X$ differ
+  at most by
+\end{example}
+
+\section{Vector bundles}
+
+\begin{definition}
+  Let $X$ be an $n$-manifold and $k\geq 0$.
+  A \emph{rank $k$ vector bundle on $X$} consists of
+  \begin{enumerate}
+    \item an $(n+k)$-manifold $E$,
+    \item a smooth surjective map $\pi : E\to X$, and
+    \item for each $x\in X$, a $k$-dimensional real vector space structure on ${\pi}^{-1}\left\lbrace{x}\right\rbrace$,
+  \end{enumerate}
+  such that, for each $x\in X$ there is an open neighbourhood $U\ni x$
+  together with a diffeomorphism $\psi : {\pi}^{-1} U \to U\times\mathbb{R}^k$ that restricts to an isomorphism $\psi : {\pi}^{-1}\left\lbrace{u}\right\rbrace\to \left\lbrace{u}\right\rbrace\times\mathbb{R}^k$ for all $u\in U$.
+\end{definition}
+
+\begin{example}\label{ex:bundles}
+  Let $X$ be an $n$-manifold. Then there are several obvious vector bundles:
+  \begin{itemize}
+    \item The manifold $X\times\mathbb{R}^m$ together with the projection $\pi : X\times\mathbb{R}^m\to X$ trivially forms a vector bundle.
+    \item Define
+      \begin{align*}
+        TX = \bigsqcup_{p\in X} T_p X = \left\lbrace{(p, v) : x \in X, v \in T_p X}\right\rbrace
+      \end{align*}
+      where $T_p X$ denotes the tangent space of $X$ at $p$. The manifold
+      structure on $TX$ is induced by the manifold structure on $X$ in the
+      obvious way: For each chart $\phi:U\to X$, define a map
+      $\psi:U\times\mathbb{R}^n\to TX$ by
+      \begin{align*}
+        \psi(p,y_1,\ldots y_n)
+        = \sum_{j=1}^k y_j \res{\frac{\partial}{\partial x_j}}{p}.
+      \end{align*}
+      This turns out to be a chart \todo{prove this?} and, moreover, gives rise
+      to an atlas on $TX$. We thus have a $2n$-manifold $TX$ which, together with the projection $(p,v)\mapsto p$, forms a vector bundle called the \emph{tangent bundle}.
+    \item One may similarly define the \emph{cotangent bundle} $T^*X$.
+      More generally, the exterior powers $\Lambda^k T^* X$ are going
+      to be of interest to us. Define
+      \begin{align*}
+        \Lambda^k T^*X = \bigsqcup_{p\in X} \Lambda^k T^*_p X
+      \end{align*}
+      where $T^*_p X$ is the dual $(T_pX)^*$, i.e.~the space of linear
+      maps $T_p X\to\mathbb{R}$. Once again, we extend a chart
+      $\phi:U\to X$ to a chart $\psi : U\times\mathbb{R}^{\binom{n}{k}}\to \Lambda^k T^*X$ in the obvious way:
+      \begin{align*}
+        \psi(p,y) = \sum_I y_I \res{dx_I}{p}
+      \end{align*}
+      where $\res{dx_1}{p},\ldots,\res{dx_n}{p}$ are the usual basis vectors of
+      $T^*_p X$. Once again, direct computation shows that this is a chart and
+      thus we have a manifold $\Lambda^k T^*_p X$ of dimension
+      $n+\binom{n}{k}$ which forms a vector bundle with the
+      projection $(p,v)\mapsto p$.
+  \end{itemize}
+\end{example}
+
+\begin{definition}
+  A  (smooth) \emph{section} of a vector bundle $\pi:E\to X$ is a (smooth)
+  section of the map $\pi$, i.e. a smooth map $\sigma : X\to E$ such that $\pi
+  \circ \sigma = \identity_X$. Denote by $\Gamma(E)$ the set of all sections of
+  a vector bundle $E$.
+\end{definition}
+
+\begin{example}
+  Let us inspect the sections of the bundles in~\ref{ex:bundles}.
+  \begin{itemize}
+    \item A section of the trivial bundle is a map $p\mapsto (p,\phi(p))$ where $\phi:X\to\mathbb{R}^m$ is smooth.
+    \item A section of the tangent bundle is a smooth map of the form
+      $p\mapsto (p,v_p)$ where $v_p\in T_p X$. Such a section is called
+      a \emph{vector field}.
+    \item Similarly, a section of $\Lambda^k T^* X$ smoothly assigns to each
+      $p\in X$ an element $\alpha\in\Lambda^k T^*_p X$.
+  \end{itemize}
+\end{example}
+\todo{example}
+
+\section{Differential forms}
+
+\begin{definition}
+  Let $X$ be a manifold. The set of \emph{differential $k$-forms} is
+  $\Omega^k(X) = \Gamma^\infty(\Lambda^k T^* X)$.
+\end{definition}
+
+\end{document}
