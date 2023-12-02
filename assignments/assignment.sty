@@ -11,7 +11,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \RequirePackage[a4paper]{geometry}
-\geometry{tmargin=3cm, bmargin=3cm, lmargin=2cm, rmargin=2cm}
+\geometry{tmargin=3cm, bmargin=3cm, lmargin=2.5cm, rmargin=2.5cm}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Required packages                                             %%%%%
@@ -39,6 +39,13 @@
 \RequirePackage{proof}
 \RequirePackage{varioref}
 \RequirePackage{quiver}
+\RequirePackage{authoraftertitle}
+\RequirePackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhead[L]{\MyTitle}
+\fancyhead[R]{Franz Miltz}
+\renewcommand{\headrulewidth}{0.5pt}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -66,3 +73,9 @@
 \DeclareMathOperator{\Hom}{Hom}
 \newcommand{\res}[2]{\left.{#1}\right\vert_{#2}}
 
+\DeclareMathOperator*{\Motimes}{\text{\raisebox{0.3ex}{\scalebox{0.6}{$\bigotimes$}}}}
+\newcommand{\tensor}[2]{\Motimes\nolimits^{#1}\!#2}
+\DeclareMathOperator*{\Mwedge}{\text{\raisebox{0.3ex}{\scalebox{0.75}{$\bigwedge$}}}}
+\newcommand{\exterior}[2]{\Mwedge\nolimits^{#1}\!#2}
+
+\setlength{\parskip}{5pt plus 1pt minus 1pt}

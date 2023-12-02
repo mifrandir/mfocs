@@ -1,12 +1,15 @@
 \documentclass{article}
 \usepackage{assignment}
 \begin{document}
-\title{De Rahm Cohomology}
+\title{C3.1 Algebraic Topology Mini Project: De Rahm Cohomology}
 \author{Franz Miltz}
-% TODO date
 \date{\today}
 \maketitle
+\tableofcontents
 
+\section{Manifolds}
+
+\todo{write recap}
 
 \section{The exterior algebra}
 
@@ -23,21 +26,78 @@ Recall that the tensor product $U\otimes V$ of two vector spaces $U$ and $V$ is,
   \end{tikzcd}
 \end{equation*}
 
-This is associative up to a canonical isomoprhism and hence we may write
+This is associative up to a canonical isomorphism and hence we may write
 \begin{align*}
-  \bigotimes^k V = V \otimes \cdots \otimes V
+  \tensor{k}{V} = V \otimes \cdots \otimes V
 \end{align*}
 for the $k$-fold tensor product of $V$.
+
+\begin{definition}
+  The \emph{tensor algebra} of a vector space $V$ is the set
+  \begin{align*}
+    \tensor{}{V} = \bigcup_{k=1}^\infty \tensor{k}{V}
+  \end{align*}
+  equipped with the tensor products
+  \begin{align*}
+    \otimes : \tensor{k}{V} \times \tensor{\ell}{V}\to \tensor{k+\ell} V.
+  \end{align*}
+\end{definition}
+
+This is an $\mathbb{R}$-algebra in the usual sense. It will prove fruitful to define the ideal spanned by elements of the form $v\otimes v$ in $\tensor{}{V}$. Let us write
+\begin{align*}
+  I(V) = \langle\left\lbrace{v\otimes v : v \in V}\right\rbrace.
+\end{align*}
+Then an element $a\in I(V)\subseteq \tensor{}{V}$ is a linear combination
+of multiples of $v\otimes v$ for some $v\in V$. There are a few
+logical consequences worth highlighting:
+\begin{itemize}
+  \item For all $u,v\in V$, $u\otimes v + v \otimes u \in I(V)$
+    because
+    \begin{align*}
+      u\otimes v + v \otimes u = (u+v)\otimes(u+v)-u\otimes u-v\otimes v.
+    \end{align*}
+  \item For all $a,b\in\tensor{}{V}$, $a\otimes b+b\otimes a$ due to
+    a similar argument as the above. \todo{wrong}
+  \item For all $a,b\in V$, $a\otimes b\otimes a\in I(V)$ because
+    \begin{align*}
+      a\otimes b\otimes a = (a\otimes b\otimes a + a \otimes a \otimes b) - a\otimes a\otimes b.
+    \end{align*}
+\end{itemize}
+
+This lets us define a construction that we will be studying for the remainder
+of this project:
 
 \begin{definition}
   Let $V$ be an $n$-dimensional vector space. The \emph{exterior algebra of
   $V$} is the quotient
   \begin{align*}
-    \Lambda V = \frac{\bigotimes V}{\langle\left\lbrace{v\otimes v : v \in V}\right\rbrace\rangle}.
+    \exterior{}{V} = \tensor{}{V}/I(V).
   \end{align*}
-  We write $\Lambda^k V$ for the image of $\bigotimes^k V$ under the quotient
+  We write $\exterior{k}{V}$ for the image of $\tensor{k}{V}$ under the quotient
   map.
 \end{definition}
+
+\begin{lemma}
+  Let $V$ be an $n$-dimensional vector space.
+  Then for all $\alpha\in\exterior{k}{V}$ and $\beta\in\exterior{\ell}{V}$,
+  \begin{align*}
+    \alpha\wedge\beta = (-1)^{k\ell}\beta\wedge\alpha.
+  \end{align*}
+  \begin{proof}
+    We have seen $u\wedge v + v\wedge u = 0$ for any $u,v\in V$.
+    By linearity of the quotient map $\tensor{}{V}\to\exterior{}{V}$,
+    it follows that interchaning any adjacent elements in an expression
+    $u_1\wedge\cdots\wedge u_k$ changes the sign. Now,
+    for $u_1,\ldots,u_k,v_1,\ldots,v_\ell\in V$,
+    \begin{align*}
+      (u_1\wedge\cdots\wedge u_k)\wedge(v_1\wedge\cdots\wedge v_\ell)
+      = (-1)^{k\ell}(v_1\wedge\cdots\wedge v_\ell)\wedge(u_1\wedge\cdots\wedge u_k)
+    \end{align*}
+    by moving each $v_i$ individually. The claim then follows
+    by writing elements of $\exterior{k}{V}$ as linear combinations
+    of $k$-fold wedges $v_1\wedge\cdots\wedge v_k$.
+  \end{proof}
+\end{lemma}
 
 \begin{lemma}
   Let $V$ be an $n$-dimensional vector space and $v_1,\ldots,v_n$ a basis.
@@ -45,31 +105,34 @@ for the $k$-fold tensor product of $V$.
   \begin{align*}
     \left\lbrace{v_{j_1}\wedge\cdots\wedge v_{j_k} : 1\leq j_1<\cdots<j_k\leq n }\right\rbrace
   \end{align*}
-  is a basis for $\Lambda^k V$.
+  is a basis for $\exterior{k}{V}$. Thus $\dim\exterior{k}{V} = \binom{n}{k}$.
   \begin{proof}
-    \todo{proof}
   \end{proof}
 \end{lemma}
 
 To simplify notation, we will use multi-indices. A multi-index $I$ of size
 $k$ and dimension $n$ is a tuple $(i_1,\ldots,i_k)$ such that
 $1\leq i_1<\cdots<i_k\leq n$. We will write $v_I = v_{i_1}\wedge \cdots \wedge
-v_{i_k}$ for the basis vectors of $\Lambda^k V$ so a general
-element $x\in\Lambda^k V$ will be written as
+v_{i_k}$ for the basis vectors of $\exterior{k}{V}$ so a general
+element $x\in\exterior{k}{V}$ will be written as
 $x = \sum_I x_I v_I$ where the $I$ is understood to range over
 all the $\binom{n}{k}$ multi-indices of size $k$ and dimension $n$.
 
 \begin{example}
   We are going to be interested in studying the exterior
   algebra of the cotangent spaces $T_p^* X$ of a manifold $X$.
-  Let $\alpha\in \Lambda^k T^*_p X$. Then there is a corresponding $a\in
-  \bigotimes^k T_p^* X$. Now
+  Let $\alpha\in \exterior{k}{T^*_p X}$. Then there is a corresponding $a\in
+  \tensor{k}{T_p^* X}$. Now
   \begin{align*}
-    \bigotimes^k T_p^* X = \bigotimes^k \Hom(T_p X,\mathbb{R}) \cong \Hom(\bigotimes^k T_p X, \bigotimes^k \mathbb{R}) \cong \Hom(\bigotimes^k T_p X,\mathbb{R}).
+    \tensor{k}{T_p^* X} = \tensor{k}{\Hom(T_p X,\mathbb{R})} \cong \Hom(\tensor{k}{T_p X}, \tensor{k}{\mathbb{R}}) \cong \Hom(\tensor{k}{T_p X},\mathbb{R}).
   \end{align*}
-  Hence $a$ may be understood as a map $\bigotimes^k T_p X\to\mathbb{R}$
-  which is just a $k$-linear map $T_p X\times\cdots\times T_p X\to\mathbb{R}$. Now any two representatives $a,a'\in\bigotimes^k T_p^* X$ differ
-  at most by
+  Hence $a$ may be understood as a map $\tensor{k}{T_p X}\to\mathbb{R}$
+  which is just a multilinear map $T_p X\times\cdots\times T_p X\to\mathbb{R}$. It is not difficult to see that the elements of $\exterior{k}{T^*_p X}$
+  correspond exactly to those multilinear maps that are alternating,
+  i.e. for all $1\leq i < j\leq k$,
+  \begin{align*}
+    a(x_1,\ldots,x_i,\ldots,x_j,\ldots x_k) = -a(x_1,\ldots,x_{i-1},x_j,x_{i+1},\ldots,x_{j-1},x_i,x_{j+1},\ldots,x_k)
+  \end{align*}
 \end{example}
 
 \section{Vector bundles}
@@ -105,20 +168,20 @@ all the $\binom{n}{k}$ multi-indices of size $k$ and dimension $n$.
       This turns out to be a chart \todo{prove this?} and, moreover, gives rise
       to an atlas on $TX$. We thus have a $2n$-manifold $TX$ which, together with the projection $(p,v)\mapsto p$, forms a vector bundle called the \emph{tangent bundle}.
     \item One may similarly define the \emph{cotangent bundle} $T^*X$.
-      More generally, the exterior powers $\Lambda^k T^* X$ are going
+      More generally, the exterior powers $\exterior{k}{T^* X}$ are going
       to be of interest to us. Define
       \begin{align*}
-        \Lambda^k T^*X = \bigsqcup_{p\in X} \Lambda^k T^*_p X
+        \exterior{k}{T^*X} = \bigsqcup_{p\in X} \exterior{k}{T^*_p X}
       \end{align*}
       where $T^*_p X$ is the dual $(T_pX)^*$, i.e.~the space of linear
       maps $T_p X\to\mathbb{R}$. Once again, we extend a chart
-      $\phi:U\to X$ to a chart $\psi : U\times\mathbb{R}^{\binom{n}{k}}\to \Lambda^k T^*X$ in the obvious way:
+      $\phi:U\to X$ to a chart $\psi : U\times\mathbb{R}^{\binom{n}{k}}\to \exterior{k}{T^*X}$ in the obvious way:
       \begin{align*}
         \psi(p,y) = \sum_I y_I \res{dx_I}{p}
       \end{align*}
       where $\res{dx_1}{p},\ldots,\res{dx_n}{p}$ are the usual basis vectors of
-      $T^*_p X$. Once again, direct computation shows that this is a chart and
-      thus we have a manifold $\Lambda^k T^*_p X$ of dimension
+      $T^*_p X$. Direct computation shows that this is a chart and
+      thus we have a manifold $\exterior{k}{T^*_p X}$ of dimension
       $n+\binom{n}{k}$ which forms a vector bundle with the
       projection $(p,v)\mapsto p$.
   \end{itemize}
@@ -138,17 +201,115 @@ all the $\binom{n}{k}$ multi-indices of size $k$ and dimension $n$.
     \item A section of the tangent bundle is a smooth map of the form
       $p\mapsto (p,v_p)$ where $v_p\in T_p X$. Such a section is called
       a \emph{vector field}.
-    \item Similarly, a section of $\Lambda^k T^* X$ smoothly assigns to each
-      $p\in X$ an element $\alpha\in\Lambda^k T^*_p X$.
+    \item Similarly, a section of $\exterior{k}{T^* X}$ smoothly assigns to each
+      $p\in X$ an element $\alpha\in\exterior{k}{T^*_p X}$. That is,
+      if we have coordinates $(x_1,\ldots,x_n)$ on $U\subseteq X$,
+      then
+      \begin{align}\label{eq:local_differential_form}
+        \res{\alpha}{U} = \sum_I \alpha_I dx_I
+      \end{align}
+      where each $\alpha_I$ is a smooth function $U\to \mathbb{R}$.
   \end{itemize}
 \end{example}
-\todo{example}
 
 \section{Differential forms}
 
 \begin{definition}
-  Let $X$ be a manifold. The set of \emph{differential $k$-forms} is
-  $\Omega^k(X) = \Gamma^\infty(\Lambda^k T^* X)$.
+  Let $X$ be a manifold. For $k\geq 1$, the set of \emph{differential
+  $k$-forms} is $\Omega^k(X) = \Gamma^\infty(\exterior{k}{T^* X})$.
+  Further define $\Omega^0(X)$ to be the set of smooth functions
+  $X\to\mathbb{R}$.
 \end{definition}
+
+\todo{note how $k>n$ leads to zeros}
+
+We saw in (\ref{eq:local_differential_form}) that, locally, a differential
+form is just a smooth linear combination of $dx_I$. This turns out
+to be a good way to think about differential forms.
+
+While differential forms are useful in their own right, in particular
+to generalise the notions of integration and orientation to general
+manifolds, we will use them to define a co-chain complex whose cohomology will be the de Rahm cohomology, which itself is equivalent to singular
+cohomology with real coefficients. In this sense, differential forms
+may be thought of an analog to chains.
+
+The objects in our co-chain complex will be the vector spaces $\Omega^k(X)$. Let us now define the boundary map. Recall that, in local coordinates,
+the derivative of a smooth function $f:X\to\mathbb{R}$ is
+\begin{align*}
+  df = \sum_{i=1}^n \frac{\partial f}{\partial x_i} dx_i.
+\end{align*}
+That is, differentiating a function yields a 1-form. This is easily
+generalised to a derivative of $k$-forms by considering a smooth
+multiple $a dx_I$ on an open subset $U\subseteq X$. Hence
+\begin{align}\label{eq:local_exterior_derivative}
+  d(adx_I) = da\wedge dx_I = \sum_{i=1}^n \frac{\partial a}{\partial x_i} dx_i\wedge dx_I.
+\end{align}
+Note that this is a strong candidate for a boundary map:
+\begin{align*}
+  d^2(adx_I) &= \sum_{i=1}^{n} d\left({\frac{\partial a}{\partial x_i}}\right)\wedge dx_i \wedge dx_I\\
+             &= \sum_{i=1}^{n} \sum_{j=1}^{n} \frac{\partial^2 a}{\partial x_i \partial x_j} dx_j\wedge dx_i \wedge dx_I \\
+             &= 0
+\end{align*}
+where the last step holds because $\partial^2/\partial x_i\partial x_j$ is symmetric in $i$ and $j$ but $dx_i\wedge dx_j = -dx_j \wedge dx_i$.
+
+This derivative of $k$-forms also inherits one of the essential properties of the usual derivative. Consider $\alpha=adx_I\in\Omega^k(X)$ and $\beta=bdx_J\in\Omega^\ell(X)$. Then
+\begin{align*}
+  d(\alpha\wedge\beta) &= d(abdx_I\wedge dx_J) \\
+                       &= d(ab)\wedge dx_I\wedge dx_J \\
+                       &= (adb + bda)\wedge dx_I\wedge dx_J \\
+                       &=(-1)^k a dx_I\wedge db \wedge dx_J
+                       + da \wedge dx_I\wedge bdx_J \\
+                       &= (-1)^k \alpha\wedge d\beta + d\alpha\wedge\beta.
+\end{align*}
+
+We avoid referencing local coordinates in our definition by taking these
+properties as axioms:
+
+\begin{definition}
+  Let $X$ be an $n$-manifold. The \emph{exterior derivative} is the
+  unique family of linear maps
+  \begin{align*}
+    d : \Omega^k(X) \to \Omega^{k+1}(X)
+  \end{align*}
+  such that
+  \begin{enumerate}
+    \item for $f\in\Omega^0(X)$, $df\in\Omega^1(X)$ is the usual derivative,
+    \item $d^2 = 0$,
+    \item for $\alpha\in\Omega^k(X)$, $d(\alpha\wedge\beta) = d\alpha\wedge\beta + (-1)^k \alpha\wedge d\beta$.
+  \end{enumerate}
+\end{definition}
+
+We have already seen that (\ref{eq:local_exterior_derivative}) satisfies
+these conditions. Moreover, taking $f\in\Omega^0(X)$ and $\alpha\in\Omega^k$
+with $\res{\alpha}{U} = dx_I$ for some $U\subseteq X$, e.g. by considering a partition of unity, we find
+\begin{align*}
+  \res{d(f\alpha)}{U}
+  &= \res{d(f\wedge\alpha)}{U}\\
+  &= \res{(df\wedge\alpha + f\wedge d\alpha)}{U}\\
+  &= \res{(df\wedge\alpha)}{U} + \res{f}{U}\wedge \res{d\alpha}{U}\\
+  &= \res{(df\wedge\alpha)}{U} + \res{f}{U}\wedge \res{d^2x_I}{U}\\
+  &= \res{(df\wedge\alpha)}{U}.
+\end{align*}
+Hence our local expression (\ref{eq:local_exterior_derivative}) must
+hold for any family of maps satisfying the definition. In particular,
+this shows that the exterior derivative is in fact unique and given by
+the expression (\ref{eq:local_exterior_derivative}) in any coordinates.
+
+By setting $\Omega^k(X)=0$ for $k<0$, we have a cochain complex
+\begin{align*}
+  \cdots
+  \xrightarrow{d} \Omega^k(X)
+  \xrightarrow{d} \Omega^{k+1}(X)
+  \xrightarrow{d} \cdots
+\end{align*}
+This is the \emph{de Rahm complex}.
+
+\section{De Rahm cohomology}
+
+\section{Homotopy invariance}
+
+\section{K\"unneth's theorem}
+
+\section{Poincar\'e duality}
 
 \end{document}
