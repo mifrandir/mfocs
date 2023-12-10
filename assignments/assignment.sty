@@ -18,6 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \RequirePackage[british]{babel}
+\RequirePackage{biblatex}
 \RequirePackage{pseudo}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
@@ -27,20 +28,13 @@
 \RequirePackage{mathtools}
 \RequirePackage{todonotes}
 \RequirePackage{hyperref}
-\hypersetup{
-  colorlinks,
-  citecolor=black,
-  filecolor=black,
-  linkcolor=black,
-  urlcolor=black
-}
 \RequirePackage{listings}
-\RequirePackage{minted}
 \RequirePackage{proof}
 \RequirePackage{varioref}
 \RequirePackage{quiver}
 \RequirePackage{authoraftertitle}
 \RequirePackage{fancyhdr}
+\RequirePackage{csquotes}
 
 \pagestyle{fancy}
 \fancyhead[L]{\MyTitle}
@@ -77,5 +71,12 @@
 \newcommand{\tensor}[2]{\Motimes\nolimits^{#1}\!#2}
 \DeclareMathOperator*{\Mwedge}{\text{\raisebox{0.3ex}{\scalebox{0.75}{$\bigwedge$}}}}
 \newcommand{\exterior}[2]{\Mwedge\nolimits^{#1}\!#2}
+\newcommand{\prc}[2]{\Pr\left({{#1}\:|\:#2}\right)}
 
 \setlength{\parskip}{5pt plus 1pt minus 1pt}
+
+\newcommand{\missingproof}{\todo[color=red]{proof!}}
+\newcommand{\doublecheck}{\todo[color=yellow]{check this}}
+\newcommand{\missingexample}{\todo[color=blue]{example}}
+\newcommand{\missingdefinition}[1]{\todo[color=green]{definition of #1}}
+\DeclareMathOperator*{\supp}{supp}

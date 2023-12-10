@@ -1,11 +1,556 @@
 \documentclass{article}
+\usepackage{assignment}
+\addbibresource{references.bib}
 \begin{document}
-% TODO title
-\title{Homework}
+\title{The Complexity of Computing Mixed Nash Equilibria}
 \author{Franz Miltz}
-% TODO date
 \date{\today}
 \maketitle
-\
+
+\section{Mixed strategy NE}
+
+A Nash equilibrium is a strategy configuration with no beneficial
+deviation for any player, i.e. no player has a strategy that would have
+lead to a higher pay-off.
+
+For a strategy profile $\mu$ and a strategy $\mu_i'$ write
+$\mu_i' | \mu$ to mean the strategy profile with
+\begin{align*}
+  (\mu_i' | \mu)_j = \begin{cases}
+    \mu_j & i\neq j \\
+    \mu_i' & i = j
+  \end{cases}
+\end{align*}
+
+\begin{definition}
+  A (mixed strategy) \emph{Nash equilibrium} a mixed strategy profile $\mu$
+  such that, for all $1\leq i\leq k$ and all mixed strategies $\mu_i'$,
+  $EU_i(\mu_i' | \mu) \leq EU_i(\mu)$.
+\end{definition}
+
+Note that we may write any strategy $\mu_i$ as a linear
+combination of pure strategies:
+\begin{align*}
+  \mu_i = \sum_{\sigma_i\in\Sigma_i} \prc{\sigma_i}{\mu_i} \sigma_i.
+\end{align*}
+The support of a mixed strategy $\mu_i$ is
+\begin{align*}
+  \supp(\mu_i) = \left\lbrace{\sigma_i \in \Sigma_i : \prc{\sigma_i}{\mu_i} > 0}\right\rbrace.
+\end{align*}
+Pure strategies are important because they allow us to characterise
+Nash equilibria:
+
+\begin{theorem}\label{thm:indifference}
+  A strategy configuration $\mu$ is a
+  Nash equilibrium if, and only if, for all $1\leq i\leq k$,
+  and all $\sigma_i\in\supp(\mu_i)$ and $\sigma_i'\in\Sigma_i$,
+  \begin{align}\label{eq:indifference}
+    EU_i(\sigma_i | \mu) \geq EU_i(\sigma_i' | \mu).
+  \end{align}
+  \begin{proof}
+    Firstly, note that the condition implies $EU_i(\sigma_i|\mu)=EU_i(\sigma_i'|\mu)$ whenever $\sigma_i,\sigma_i'\in\supp(\mu_i)$. By the
+    indifference principle, this holds whenever $\mu$ is a Nash
+    equilibrium. Moreover, we must have $EU_i(\sigma_i|\mu)\geq EU_i(\sigma'_i|\mu)$ whenever $\sigma'_i\not\in\supp(\mu_i)$ as otherwise
+    $\sigma'_i$ would provide player $i$ with a beneficial deviation
+    from $\mu$.
+
+    Now suppose $\mu$ is a strategy profile that satisfies (\ref{eq:indifference}) and fix a player $1\leq i\leq k$.
+    Then, for any strategy $\mu_i'$ and distinguished
+    $\sigma_i^*\in\supp(\mu_i)$ and $\sigma_i'\in\Sigma_i$, we use linearity
+    of expectation to find
+    \begin{align*}
+      EU_i(\mu_i' | \mu)
+      = \sum_{\sigma_i\in\Sigma_i} EU_i (\sigma_i|\mu)\prc{\sigma_i}{\mu_i'}
+      = EU_i (\sigma_i|\mu) \sum_{\sigma_i\in\supp(\mu'_i)} \prc{\sigma_i}{\mu_i'}
+      = EU_i (\sigma_i'|\mu)
+      \leq EU_i (\sigma_i^*|\mu).
+    \end{align*}
+    Hence $EU_i(\mu_i' | \mu) \leq EU_i(\sigma^*_i | \mu) = EU_i(\mu^*_i | \mu) =
+    EU_i(\mu)$. This shows that $\mu$ is a Nash equilibrium.
+  \end{proof}
+\end{theorem}
+
+The theorem gives us a way to verify that a given strategy configuration is in fact a Nash equilibrium. This is similar to problems in \textbf{NP}
+in that, given a witness, we may verify in polynomial time that the
+output is correct.
+
+However, in contrast to problems in \textbf{NP}, computing Nash
+equilibria is not truly a decision problem: by Nash's theorem, every
+game has a mixed strategy equilibrium. Hence we need to phrase
+things in terms of search problems.
+
+\section{Search problems}
+
+We are going to make precise the idea that, in order to solve
+a problem, one is not only required to decide whether there exists
+a solution, but rather to exhibit a witness. That is, we require a
+machine that, given a problem instance, produces an output satisfying
+a certain binary relation.
+
+\begin{definition}
+  A \emph{search problem} is given by a set of instances $X$,
+  a set of candidates $Y$, and a relation $R\subseteq X\times Y$.
+\end{definition}
+
+One search problem is computing Nash equilibria:
+
+\begin{definition}\label{def:nash}
+  The problem of computing a Nash equilibrium of a $k$-player game,
+  $k$\texttt{-Nash}, has as its instances $X$ the set of all normal
+  form games, as its candidates $Y$ all strategy configurations, and
+  as its defining relation
+  \begin{align*}
+    R = \left\lbrace{ (G,\mu) : \text{$\mu$ is a Nash equilibrium in $G$}}\right\rbrace\subseteq X\times Y.
+  \end{align*}
+\end{definition}
+
+While the typical \textbf{NP}-complete decision problems have
+associated search problems of similar difficulty, \todo{reference lectures}
+we have seen that the converse does not hold for $k$\texttt{-Nash}. Hence
+we require new complexity classes to study search problems:
+
+\begin{definition}
+  The class \textbf{FNP} contains all search problems $R\subseteq X\times Y$
+  for which the characteristic function $\chi_R : X\times
+  Y\to\left\lbrace{0,1}\right\rbrace$ is computable in polynomial time.
+\end{definition}
+
+Note that every game has a Nash equilibrium. However, for general $k$,
+it need not be the case that the probabilities involved are rational.
+While the complexity of finding such irrational equilibria may be
+phrased in terms of approximation, we avoid such problems by focusing
+on the two player case. Henceforth we write $\texttt{Nash}=2\texttt{-Nash}$.
+\todo{introduce approximate nash equilibria}
+
+Finally, we need to make precise what we mean by the size of a game.
+As we will be concerned with whether or not and in what sense Nash
+equilibria are computable in polynomial time, we do not need to be
+particularly careful. Define the size of a $k$-player game $G$ to be
+$|G|=\max_i|\Sigma_i|\leq n$.
+
+\begin{corollary}
+  $\texttt{Nash}\in\textbf{FNP}$.
+  \begin{proof}
+    Fix $G$. Suppose we are given a strategy configuration $\mu$.
+    By \ref{thm:indifference}, it suffices to check that
+    $EU_i(\mu) \geq EU_i(\sigma_i|\mu)$ for all players $i$ and all
+    pure strategies $\sigma_i\in\Sigma_i$. Hence we may decide whether
+    $\mu$ is a Nash equilibrium in $kn=O(n)$ checks.
+  \end{proof}
+\end{corollary}
+
+In order to compare the complexities of different search problems,
+we need to extend the notion of reductions from decision problems to
+search problems:
+
+\begin{definition}
+  Let $P=(X,Y,R)$ and $P'=(X',Y',R')$ be search problems. We say
+  $P$ reduces to $P'$ (in polynomial time) and write $P\leq_P P'$
+  if there exist polynomial time computable functions $f:X\to X'$ and
+  $g:X\times Y'\to Y$ such that
+  \begin{align*}
+    (f(x),y)\in R' \text{ if, and only if, } (x,g(x,y))\in R.
+  \end{align*}
+\end{definition}
+
+\todo{explain why it is unlikely that nash is in P}
+
+We have already noted that \textbf{FNP} contains some problems,
+such as \texttt{FSAT} \todo{define this}, for which there may not be any solutions
+as well as others, such as \texttt{Nash}, for which there is
+guaranteed to be a solution.
+
+To capture this difference, we have the following subclass
+of \textbf{FNP}:
+
+\begin{definition}
+  The class \textbf{TFNP} contains all search problems in \textbf{FNP}
+  that are guaranteed to have a solution. That is
+  \begin{align*}
+    \textbf{TFNP} = \left\lbrace{R \in \textbf{FNP} : \forall x\in X. \exists y\in Y. xRy}\right\rbrace
+  \end{align*}
+\end{definition}
+
+\todo{introduce some \textbf{TFNP} problems that reduce to end of line}
+
+\section{The End-of-Line problem and PPAD}
+
+Let $V$ be a set of size $2^n$. We may use functions
+$p,s:V\to V$ to define a directed acyclic graph $G(p,s)=(V,E)$ by
+saying there is an edge $(u,v)\in E$ if, and only if, $p(v)=u$
+and $s(u)=v$. A sink then is a vertex $u\in V$ such that,
+for all $v\in V$, $u\neq p(v)$ or $v\neq s(u)$. Similarly,
+a source is a vertex $v\in V$ such that, for all $u\in V$,
+$u\neq p(v)$ or $v\neq s(u)$.
+
+Moreover, if we have $V=\left\lbrace{0,1}\right\rbrace^n$,
+any such $p$ and $s$ may be thought of a Boolean circuits.
+
+\begin{definition}
+  Let $P$ and $S$ be algorithms computing functions
+  $\left\lbrace{0,1}\right\rbrace^n\to\left\lbrace{0,1}\right\rbrace^n$.
+  Then the \emph{induced graph $G(P,S)$} has vertices $\left\lbrace{0,1}\right\rbrace^n$
+  and edges
+  \begin{align*}
+    E = \left\lbrace{(u,v) : u,v\in V, u=P(v), v=S(u)}\right\rbrace.
+  \end{align*}
+\end{definition}
+
+\begin{definition}\todo{make more readable}
+  \texttt{EndOfLine} is the search problem $(X,Y,R)$ with
+  \begin{itemize}
+    \item $(P,S,t)\in X$ if, and only if,
+      \begin{itemize}
+        \item $P,S$ are polynomial time algorithms computing
+          functions $\left\lbrace{0,1}\right\rbrace^n\to\left\lbrace{0,1}\right\rbrace^n$,
+        \item $G(P,S)$ is a directed acyclic graph, and
+        \item $t$ is a source in $G(P,S)$.
+      \end{itemize}
+    \item $Y = \left\lbrace{0,1}\right\rbrace^* = \bigcup_{n=1}^\infty \left\lbrace{0,1}\right\rbrace^n$, and
+    \item $((P,S,s),y)\in R$ if, and only if, at least one of the followoing holds:
+      \begin{itemize}
+        \item $y$ is a source in $G(P,S)$ and $y\neq s$, or
+        \item $y$ is a sink in $G(P,S)$.
+      \end{itemize}
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  The class \textbf{PPAD} consists of all problems in \textbf{FNP}
+  that reduce to \texttt{EndOfLine}.
+\end{definition}
+
+We observe $\texttt{EndOfLine}\in\textbf{TFNP}$ so
+$\textbf{PPAD}\subseteq\textbf{TFNP}\subseteq\textbf{FNP}$.
+Over the next two chapters we will establish a few more members
+of \textbf{PPAD} and eventually show that \texttt{Nash} is
+\textbf{PPAD}-complete.
+
+\section{Brouwer's fixed point theorem}
+
+From topology, we have the following very important result:
+
+\begin{theorem}[Brouwer]
+  Every continuous function $[0,1]^n\to[0,1]^n$ has a fixed point.
+\end{theorem}
+
+This leads to the natural problem of computing such fixed points.
+However, once again there are some problems we need to address.
+The fixed points may be irrational. Hence we make the following
+definition:
+
+\begin{definition}
+  Let $f:\left[{0,1}\right]^k \to \left[{0,1}\right]^k$ be continuous and
+  $d\geq 0$. A $d$-fixed point is an $x\in\left[{0,1}\right]^k$ such that
+  $|f(x)-x|\leq 2^{-d}$.
+\end{definition}
+
+Intuitively, $x$ is a $d$-fixed point of $f$ if $x$ and $f(x)$ agree on the
+first $d$ bits. We will also require our functions to be reasonably
+well-behaved.
+
+\begin{definition}
+  Let $K\geq 0$. A function $f:\left[{0,1}\right]^k\to\left[{0,1}\right]^k$ is \emph{$K$-Lipschitz} if, for all $x,x'\in\left[{0,1}\right]^k$,
+  \begin{align*}
+    |f(x)-f(x')| \leq K|x-x'|.
+  \end{align*}
+\end{definition}
+
+We now show that Brouwer fixed points of Lipschitz functions may always be
+approximated by multiples of $2^{-d}$.
+
+\begin{lemma}
+  Let $f:\left[{0,1}\right]^k\to\left[{0,1}\right]^k$ be a
+  $K$-Lipschitz function and $d\geq 0$. Then there is a $\tilde x \in [0,1]^k$ such that $\tilde x$ is a multiple of $2^{-d'}$ and $\tilde x$
+  is an $d$-fixed point of $f$ and $d'-d=O(\log(K))$.
+  \begin{proof}
+    Fix $d,K,f$. Let $x$ be a Brouwer fixed point of $f$.
+    Choose
+    \begin{align}\label{eq:d}
+      d' = \lceil \log_2\left({kK}\right) + d + 1\rceil
+    \end{align}
+    and $\tilde x = \lfloor{2^{d'} x}\rfloor2^{-d'}$.
+    Then
+    \begin{align*}
+      |\tilde x - x| \leq \sqrt{k} 2^{-d'} \leq 2^{\log_2 k-d'}.
+    \end{align*}
+    Using that $x$ is a fixed point and the triangle inequality,
+    \begin{align*}
+      |f(\tilde x)-\tilde x| \leq |f(\tilde x)-f(x)|+|\tilde x - x|
+      \leq (K+1)2^{\log_2 k-d'} \leq K2^{\log_2 k+1-d'}\leq 2^{-d}.
+    \end{align*}
+    Thus $\tilde x$ is a $d$-fixed point.
+  \end{proof}
+\end{lemma}
+
+The second issue we encounter when turning Brouwer's theorem into
+a search problem is the representation of a continuous function
+$\left[{0,1}\right]^k\to\left[{0,1}\right]^k$. In light of the result
+above, it will be sufficient to consider functions which are
+efficiently computable for multiples of $2^{-d}$ corresponding
+to $\varepsilon$ and $K$.
+
+Hence we may assume, without contradicting
+any of the previous considerations, that $f$ is given using a
+circuit of classical circuit of the following elementary gates:
+
+\begin{itemize}
+  \item $(x,y)\mapsto xy$,
+  \item $(x,y)\mapsto x + y$,
+  \item $x\mapsto x/2$,
+  \item $(x,y)\mapsto \begin{cases}
+      0 & \text{if }x>y \\
+      1 & \text{if }x\leq y.
+    \end{cases}$
+\end{itemize}
+
+\begin{definition}
+  Let $f:\left[{0,1}\right]^k\to\left[{0,1}\right]^k$ be a
+  $K$-Lipschitz function. A family of circuits $\{C_d\}$ \emph{efficiently computes} $f$ if
+  \begin{enumerate}
+
+    \item for all integer multiples $\tilde x\in\left[{0,1}\right]^k$ of $2^{-d}$, $|C_d(\tilde x) - f(\tilde x)|\leq 2^{-d}$,
+    \item if each $C_d$ may be constructed in time
+      polynomial in $d$.
+  \end{enumerate}
+\end{definition}
+
+Note that our definition immediately implies that such $C_d$ contain
+at most $O(\text{poly}(d))$ gates and hence, given the algorithm to
+construct $C_d$, computing $f(\tilde x)$ up to an error $2^{-d}$ is
+$O(\text{poly}(d))$ as a whole.
+
+\begin{definition}\todo{polish this, too many $d$'s}
+  Denote by $\texttt{Brouwer}$ the search problem defined as follows:
+  \begin{itemize}
+    \item an instance consists of integers $K,d$ and a family of
+      circuits $\left\lbrace{C_d}\right\rbrace$ that
+      efficiently computes a $K$-Lipschitz function $f:\left[{0,1}\right]^k\to\left[{0,1}\right]^k$,
+    \item a candidate is any integer multiple $\tilde x\in\left[{0,1}\right]^k$ of $2^{-d}$ for any positive integer $d$ and $k$,
+    \item a candidate is a solution if, and only if, it is a
+      $d$-fixed point of $f$. \todo{this is not quite right}
+  \end{itemize}
+\end{definition}
+
+\section{\texttt{Brouwer} is PPAD complete}
+
+\begin{theorem} \todo{generalise to $k$}
+  $\texttt{Brouwer}\leq_P\texttt{EndOfLine}$.
+  \begin{proof}
+    Fix an instance $(\varepsilon,K,A_f)$ of $\texttt{Brouwer}$.
+    Triangulate $[0,1]^2$ in such a way that each triangle is
+    contained in a disk of diameter $\leq\varepsilon$. This is
+    possible by dividing $[0,1]^2$ into $O(K/\varepsilon)=O(2^n)$ squares
+    and then splitting each square into two triangles.
+    Colour each
+    vertex $x$ in the triangulation based on the direction of
+    $(f(x)-x)/|f(x)-x|$ by assigning green, blue, and red to $[0,\pi/2)$, $[\pi/2,5\pi/4)$, and $[5\pi/4,2\pi)$, respectively.
+    Should the angle be undefined because $f(x)-x=0$ then we have
+    found a fixed point.
+    We extend the triangulation by adding a column of red vertices on the
+    left where we colour the bottom most vertex green and all the others
+    red.
+
+    We then construct a directed graph $G$ by taking the vertices to be the triangles
+    and draw an edge between adjacent triangles such that there is
+    a red vertex on the left and a green vertex on the right.
+    It is
+    easy to see that the resulting graph contains only cycles
+    and paths from source to target. Note that the triangle $t_0$ where
+    the unique change from red to green occurs on the left is not
+    trichromatic. This is the case because points on the left
+    boundary may not be moved further to the left, hence they cannot
+    be coloured blue. Moreover, there is an outgoing edge of $t_0$
+    which cannot be part of a cycle. Thus it must lead to
+    a sink, i.e. a trichromatic triangle.
+
+    By construction, we have a sink $t_0$. Further, given a triangle one
+    may efficiently check the colours of the nodes by using $A_f$
+    and then find the neighbouring triangles by reflecting the
+    remaining vertex.
+    Hence we have polynomial time algorithms to compute the neighbour(s)
+    of any triangle. This gives us an instance of \texttt{EndOfLine} with the solution yielding
+    a trichromatic triangle.
+    It is now straightforward to argue
+    that, because the distances between the nodes of the trichromatic
+    triangle are small and because each node is mapped in a different
+    direction, each node must be an approximate fixed point of $f$.
+    This finishes the reduction.
+  \end{proof}
+\end{theorem}
+
+\begin{theorem}
+  $\texttt{EndOfLine}\leq_P\texttt{Brouwer}$.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
+
+
+\section{\texttt{Nash} is PPAD-complete}
+
+Now that we have established that \texttt{Brouwer} is PPAD complete,
+we need only show that \texttt{Nash} is equivalent to \texttt{Bouwer}.
+This indirect way of showing that \texttt{Nash} is equivalent to
+\texttt{EndOfLine} is an obvious thing to do because the classical
+proof of Nash's theorem uses Bouwer's fixed point theorem and hence
+almost gives us the reduction for free:
+
+\begin{theorem}
+  $\texttt{Nash}\leq_P\texttt{Brouwer}$.
+  \begin{proof}[Sketch of the proof]
+    When using Brouwer's theorem to prove Nash's theorem one
+    constructs a function $b$ on strategy configurations that
+    moves each players strategy towards the best response.
+    (see e.g. \cite{karsten2017})
+    If one identifies the space of mixed strategies with a suitable
+    $\left[{0,1}\right]^n$ then $b$ is continuous and hence has a
+    fixed points. Fixed points correspond to Nash equilibria.
+
+    While this proves Nash's theorem, some work is required to
+    yield the reduction:
+    \begin{enumerate}
+      \item check that $b:\left[{0,1}\right]^n\to\left[{0,1}\right]^n$
+        is Lipschitz,
+      \item check that $b$ is computable in polynomial time,
+      \item check that $\varepsilon$-fixed points correspond to
+        $\varepsilon$-Nash equilibria,
+      \item check that the \texttt{Brouwer} has size polynomial
+        in the size of the original \texttt{Nash} instance.
+    \end{enumerate}
+    These checks turn out to be routine. Depending on the exact
+    definition of the function $b$ one may be requried to do some
+    scaling to be able to use the same $\varepsilon$ for both
+    instances.
+  \end{proof}
+\end{theorem}
+
+The other direction is far less obvious. Our goal now is to
+construct a game whose Nash equilibria correspond to fixed points of
+a function $f:\left[{0,1}\right]^k\to\left[{0,1}\right]^k$.
+More precisely, we are given a family of circuits $\left\lbrace{C_d}\right\rbrace$ that efficiently compute $f$ and we want to construct a
+family of games $\left\lbrace{G_d}\right\rbrace$ such that
+the $d$-fixed points of $C_d$ correspond to the $d$-Nash equilibria of $G_d$.
+
+We begin by constructing such games for each of the elementary gates
+in $C_d$:
+\begin{itemize}
+  \item $G^\times$ has four players $x,y,z,w$, each of whom have two pure strategies
+    $S$ and $G$.
+    Define the following utilities:
+    \begin{align*}
+      U_w(\sigma_x,\sigma_y,\sigma_z, S_w) = \begin{cases}
+        1 & \text{if } \sigma_x=\sigma_y= G \\
+        0 & \text{otherwise}
+      \end{cases}
+    \end{align*}
+  \item $G^+$ has four players $x,y,z,w$, each of whom have two pure strategies
+    $S$ and $G$.
+    Define the following utilities:
+    \begin{align*}
+      U_w(\sigma_x,\sigma_y,\sigma_z, S_w) = |\left\lbrace{p\in\left\lbrace{x,y}\right\rbrace : \sigma_p = G}\right\rbrace|,
+    \end{align*}
+  \item $G^{/2}$ has three players $x,z,w$, each of whom have two pure strategies
+    $S$ and $G$.
+    Define the following utilities:
+    \begin{align*}
+      U_w(\sigma_x,\sigma_z, S_w) = \begin{cases}
+        2 & \text{if } \sigma_x= G \\
+        1 & \text{otherwise}
+      \end{cases}
+    \end{align*}
+  \item $G^<$ has four players $x,y,z,w$ each of whom have two pure strategies $S$ and $G$. Define the following utilities:
+    \begin{align*}
+      U_w(\sigma_x,\sigma_y,\sigma_z,S_w) = \begin{cases}
+        1 & \text{if }\sigma_x = S,\sigma_y = G\\
+        0 & \text{otherwise}
+      \end{cases}, \hspace{1cm}
+      U_w(\sigma_x,\sigma_y,\sigma_z,G_w) = \begin{cases}
+        1 & \text{if }\sigma_x = G,\sigma_y = S\\
+        0 & \text{otherwise}
+      \end{cases}
+    \end{align*}
+\end{itemize}
+Moreover, for each of the games we define
+\begin{align*}
+  U_w(\sigma_x,\sigma_y,\sigma_z, G_w) = \begin{cases}
+    1 & \text{if } \sigma_z= G \\
+    0 & \text{otherwise}
+  \end{cases}
+  , \hspace{1cm}
+  U_z(\sigma_x,\sigma_y,\sigma_z,\sigma_w) = \begin{cases}
+    1 & \text{if }\sigma_z\neq\sigma_w\\
+    0 & \text{otherwise}
+  \end{cases}
+\end{align*}
+
+It is now straightfoward to see that in the Nash
+equilibria $\mu$ of $G^\times$, $G^+$ and $G^{/2}$ we must have $\mu_z =
+\mu_x\mu_y$, $\mu_z = \mu_x + \mu_y$, and $\mu_z = \mu_x / 2$, respectively,
+where we write $\mu_p = \prc{G_p}{\mu}$. Note also that if we have
+players $x,t,y$ where we pay $t$ to play the opposite of $x$ and
+$y$ to play the opposite of $t$, then $\mu_x=\mu_y$. Using this
+construction we may compose games to achieve more complicated
+computations.
+
+However, there is a problem: while for $G^<$ we have
+$\mu_z = 0$ if $\mu_x<\mu_y$ and $\mu_z = 1$ if $\mu_x>\mu_y$,
+$\mu_z$ could take any value in the case where $\mu_x=\mu_y$.
+Moreover, there is the following result that says that constructing
+a better game to handle comparisons is hopeless:
+
+\begin{lemma}
+  Consider a $k$ player game where each player has exactly
+  two pure strategies $S$ and $G$. Then there is no triple $x,y,z$ of
+  distinct players such that
+  \begin{enumerate}
+    \item for all $p,q\in[0,1]$, there is a Nash equilibrium
+      $\mu$ with $\mu_x = p$ and $\mu_y = q$, and
+    \item every Nash equilibrium $\mu$ satisfies
+      \begin{align}\label{eq:good_comparator}
+        \mu_z = \begin{cases}
+          1 & \text{if }\mu_x < \mu_y \\
+          0 & \text{otherwise}
+        \end{cases}.
+      \end{align}
+  \end{enumerate}
+  \begin{proof}
+    Suppose there was such a game. We extend it as follows:
+    \begin{enumerate}
+      \item add a new player $t$ who receives a pay-off if, and only if,
+        she plays opposite to $x$,
+      \item player $x$ receives a pay-off if, and only if, she plays
+        opposite to $t$,
+      \item player $y$ receives a pay-off if, and only if, she plays
+        opposite to $z$.
+    \end{enumerate}
+    Note that we did not change the pay-offs for $z$. Hence any
+    Nash equilibrium must satisfy (\ref{eq:good_comparator}).
+    However, our extensions force $\mu_x = \mu_t = 1/2$
+    and $\mu_y = 1-\mu_z$. Thus we obtain the unsatisfiable condition
+    \begin{align*}
+      \mu_z = \begin{cases}
+        1 & \text{if }1/2 > \mu_z \\
+        0 & \text{otherwise}
+      \end{cases}.
+    \end{align*}
+    This means there cannot be a Nash equilibrium in this new game,
+    contradicting Nash's theorem.
+  \end{proof}
+\end{lemma}
+
+We are going to solve this problem by evaluating the circuit
+for several points close to our point of interest and averaging the
+result. The Lipschitz property of the function will then allow
+us to bound the error. Hence we obtain an approximate Nash equilibrium.
+
+\begin{theorem}
+  $\texttt{Brouwer}\leq_P\texttt{Nash}$.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
+
+\printbibliography
 
 \end{document}

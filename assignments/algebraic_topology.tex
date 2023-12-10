@@ -10,8 +10,11 @@
 \section{Manifolds}
 
 \todo{write recap}
+\begin{definition}
+  \missingdefinition{manifold with boundary}
+\end{definition}
 
-\section{The exterior algebra}
+\section{Tensor algebras}
 
 Recall that the tensor product $U\otimes V$ of two vector spaces $U$ and $V$ is, up to isomorphism, defined by the universal property that any bilinear map $f:U\times V\to W$ determines a unique linear map $\tilde f : U\otimes V\to W$ making the following diagram commute:
 
@@ -43,9 +46,15 @@ for the $k$-fold tensor product of $V$.
   \end{align*}
 \end{definition}
 
-This is an $\mathbb{R}$-algebra in the usual sense. It will prove fruitful to define the ideal spanned by elements of the form $v\otimes v$ in $\tensor{}{V}$. Let us write
+This is an $\mathbb{R}$-algebra in the usual sense. Note that linear
+maps $f:V\to W$ induce linear maps $\tensor{k}{V}$ and hence algebra
+homomorphisms $f:\tensor{}{V}\to\tensor{}{V}$.
+
+\section{Exterior algebras}
+
+It will prove fruitful to define the ideal spanned by elements of the form $v\otimes v$ in $\tensor{}{V}$. Let us write
 \begin{align*}
-  I(V) = \langle\left\lbrace{v\otimes v : v \in V}\right\rbrace.
+  I(V) = \langle\left\lbrace{v\otimes v : v \in V}\right\rbrace\rangle.
 \end{align*}
 Then an element $a\in I(V)\subseteq \tensor{}{V}$ is a linear combination
 of multiples of $v\otimes v$ for some $v\in V$. There are a few
@@ -74,7 +83,9 @@ of this project:
     \exterior{}{V} = \tensor{}{V}/I(V).
   \end{align*}
   We write $\exterior{k}{V}$ for the image of $\tensor{k}{V}$ under the quotient
-  map.
+  map. Further, linear maps $f:V\to W$ induce algebra homomorphisms
+  $\exterior{}{f}:\exterior{}{V}\to\exterior{}{W}$ and hence linear maps
+  $\exterior{k}{f}:\exterior{k}{V}\to\exterior{k}{W}$.
 \end{definition}
 
 \begin{lemma}
@@ -99,7 +110,7 @@ of this project:
   \end{proof}
 \end{lemma}
 
-\begin{lemma}
+\begin{lemma}\label{lem:basis_of_exterior_product}
   Let $V$ be an $n$-dimensional vector space and $v_1,\ldots,v_n$ a basis.
   Then
   \begin{align*}
@@ -221,11 +232,18 @@ all the $\binom{n}{k}$ multi-indices of size $k$ and dimension $n$.
   $X\to\mathbb{R}$.
 \end{definition}
 
-\todo{note how $k>n$ leads to zeros}
+As a consequence of \ref{lem:basis_of_exterior_product} we have
+$\dim\Omega^k(X)=\binom{n}{k}$ for all $0\leq k\leq n$. We further
+note that, for $k<0$ or $k>n$, $\Omega^k(X)=0$.
 
-We saw in (\ref{eq:local_differential_form}) that, locally, a differential
-form is just a smooth linear combination of $dx_I$. This turns out
-to be a good way to think about differential forms.
+Similar to how continuous maps between topological spaces induce
+maps on chains, smooth maps between manifolds induce maps on forms:
+
+\begin{definition}
+  \missingdefinition{induced map on forms}
+\end{definition}
+
+\section{Exterior derivative}
 
 While differential forms are useful in their own right, in particular
 to generalise the notions of integration and orientation to general
@@ -304,12 +322,95 @@ By setting $\Omega^k(X)=0$ for $k<0$, we have a cochain complex
 \end{align*}
 This is the \emph{de Rahm complex}.
 
+\todo{smooth maps of manifolds induce maps of cochain complexes}
+
 \section{De Rahm cohomology}
+
+\begin{definition}
+  \missingdefinition{de rahm cohomology}
+\end{definition}
+
+\begin{definition}
+  The \emph{cup product} is the family induced linear map
+  \begin{align*}
+    \cup : H^k(X)\times H^\ell(X) &\to H^{k+\ell}(X) \\
+    [\alpha],[\beta] &\mapsto [\alpha\wedge\beta]
+  \end{align*}
+\end{definition}
+
+To see that this is well defined, let $[\alpha]\in H^k(X)$ and $[\beta]\in
+H^\ell(X)$ and write $\alpha' = \alpha + d\gamma$ so $[\alpha']=[\alpha]$. Now
+\begin{align*}
+  [\alpha']\cup[\beta] &= [\alpha' \wedge \beta] \\
+                       &= [\alpha\wedge\beta + d\gamma\wedge\beta ] \\
+                       &= [\alpha\wedge\beta + d(\gamma\wedge\beta)] \\
+                       &= [\alpha\wedge\beta]
+\end{align*}
+where we used $\gamma\wedge d\beta = \gamma\wedge 0 = 0$.
 
 \section{Homotopy invariance}
 
-\section{K\"unneth's theorem}
+\begin{lemma}
+  If $f,g:X\to Y$ are homotopic smooth maps of manifolds, then
+  the induced maps $f^*,g^*:H^*(Y)\to H^*(X)$ are equal.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+\begin{lemma}
+  Let $f:X\times[0,1]\to Y$ be smooth and write $f_t(X) = f(x,t)$.
+  Then $f_0^*=f_1^*$ as maps $H^*(Y)\to H^*(X)$.
+  \begin{proof} \todo{from DM class}
+    Consider $[\alpha]\in H^k(X)$. We may write the pullback form
+    \todo{need definition}
+    of $\alpha$ by $f$ as $f^*\alpha = \beta_t + dt\wedge\gamma_t$
+    where $\beta_t$ and $\gamma_t$ are $t$-dependent $k$ and $k-1$
+    forms on $X$, respectively. Note $d\alpha = 0$ so $d(f^*\alpha)=0$.
+    \todo{reference theorem}
+    Thus
+    \begin{align*}
+      d(\beta_t + dt\wedge\gamma_t) = d\beta_t - dt\wedge d\gamma_t
+      = d_X\beta_t - \frac{\partial \beta_t}{dt}\wedge dt + d_X \gamma_t \wedge dt = 0.
+    \end{align*}
+    As $d_X\beta_t$ does not involve $dt$, we must have
+    \begin{align*}
+      d_X \gamma_t - \frac{\partial \beta_t}{dt}  = 0.
+    \end{align*}
+    Hence
+    \begin{align*}
+      f_1^*\alpha - f_0^*\alpha = \beta_1 - \beta_0
+      = \int_0^1 \frac{\partial\beta_t}{\partial t}dt
+      = \int_0^1 (d_X\gamma_t) dt
+      = d_X\left({\int_0^1 \gamma_t dt}\right).
+    \end{align*}
+    This shows that $f_1^*\alpha - f_0^*\alpha$ is exact and hence
+    $f_1^*=f_0^*$ in cohomology.
+  \end{proof}
+\end{lemma}
+
+\begin{theorem}
+  If $X,Y$ are homotopic manifolds, then the cohomology groups
+  $H^*(X)$ and $H^*(Y)$ are isomorphic.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
 
 \section{Poincar\'e duality}
+
+\begin{theorem}
+  Let $X$ be a compact, orientable $n$-manifold. Then,
+  for all $k\in\mathbb{Z}$, the pairing
+  \begin{align*}
+    \int_X (-\wedge -) : H^k(X) \times H^{n-k}(X) \to \mathbb{R}
+  \end{align*}
+  is non-degenerate, i.e. if $[\alpha]\in H^k(X)$
+  and $\int_X \alpha\wedge\beta=0$ for all $[\beta]\in H^{n-k}(X)$ then
+  $[\alpha]=0$.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
 
 \end{document}
