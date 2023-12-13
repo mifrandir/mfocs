@@ -6,64 +6,14 @@
 \date{\today}
 \maketitle
 
-Manifolds are special topological spaces. This is hinted at by the
-statement of Poincar\'e duality that we have seen in the course.
-Differentiable manifolds are special manifolds and hence even
-more special from a topological point of view. This does not make
-them uninteresting, however. As we will see, the differential structure
-allows for the construction of an alternative cohomology theory.
-We use this theory to revisit some results from singular homology
-leading up to Poincar\'e duality, which takes a particularly beautiful
-form in this setting.
+\section{Manifolds}
 
-Of course these developments will not tell us anything strictly new as,
-by de Rahm's theorem, de Rahm cohomology is equivalent to singular
-homology with real coefficients. Hence everything we know to be true
-about the latter must be true about the former. However, it turns out
-to be refreshing to see a treatment of cohomology whose underlying
-cochain complex is useful in its own right.
+\todo{write recap}
+\begin{definition}
+  \missingdefinition{manifold with boundary}
+\end{definition}
 
-We will draw on two main sources: This year's course on differentiable
-manifolds and the corresponding material by Joyce \cite{joyce2023}, Hitchin
-\cite{hitchin2014}, and Lotay \cite{lotay2021} and Bott and Tu's book on
-de Rahm cohomology \cite{bott1982}.
-
-\section{Differentiable Manifolds}
-
-We begin by recalling some elementary definitions from differential
-geometry, establishing notation along the way.
-
-Recall that a chart $\phi:U\to X$ consists of
-an open $U\subseteq\mathbb{R}^n$ and a local homeomorphism
-$\phi:U\to X$. An atlas is then a collection of charts $\left\lbrace{\phi_i : U_i \to X}\right\rbrace$ such that $X=\bigcup_i \phi_i(U_i)$
-and, for all $i$ and $j$, ${\phi_j}^{-1}\circ\phi_i$ is smooth.
-Now atlases $\left\lbrace{\phi_i}\right\rbrace$ and $\left\lbrace{\psi_j}\right\rbrace$ are compatible if ${\phi_i}^{-1}\circ\psi_j$ and ${\psi_j}^{-1}\circ\phi_i$ are always smooth and an atlas is maximal if it contains
-all compatible atlases, i.e. no further charts may be added.
-A manifold is a Hausdorff space $X$ with countable basis equipped with
-a maximal atlas. We say $(x_1,\ldots x_n)$ are coordinates near $p\in X$
-if there is a chart $\phi:U\to X$ with $0\in U$, $\phi(0)=p$, and
-$\phi(e_i) = x_i$, i.e. we may write $q=p + \sum_i \lambda_i x_i$
-for all $q$ in an open neighbourhood $U$ of $p$.
-
-With each point $p\in X$ of a manifold is associated a vector
-space $T_p X$ which has a basis of operators $(\partial/\partial x_1,\ldots,\partial/\partial x_n)$ for each set of coordinates $(x_1,\ldots,x_n)$.
-Moreover, a smooth map of manifolds $f:X\to Y$ induces a linear map
-$df_p : T_p X\to T_{f(p)} Y$ of tangent spaces at each $p\in X$.
-The dual $\left({T_p X}\right)^*= T^*_p X$ is called the cotangent space
-and we write $d^* f_p : T_{f(p)}^* Y\to T_p^* X$ for the dual of the
-derivative.
-
-Last but not least, recall that a partition of unity subordinate
-to a covering $\left\lbrace{U_i}\right\rbrace$ of $X$ is a set of smooth
-functions $\left\lbrace{\eta_i : X\to\mathbb{R}}\right\rbrace$ satisfying
-\begin{enumerate}
-  \item $\supp \eta_i \subseteq U_i$,
-  \item $\eta_i\geq 0$,
-  \item $\left\lbrace{ i : \eta_i(p) > 0}\right\rbrace$ is finite for all $p\in X$, and
-  \item $\sum_i \eta_i = 1$.
-\end{enumerate}
-Partitions of unity exist for all coverings. This summarises all the
-differential geometry we require. Next, let us revisit some linear algebra.
+\todo{partitions of unity}
 
 \section{Tensor algebras}
 
@@ -97,9 +47,9 @@ for the $k$-fold tensor product of $V$.
   \end{align*}
 \end{definition}
 
-This is an $\mathbb{R}$-algebra in the usual sense. Note that linear maps
-$f:V\to W$ induce linear maps $\tensor{k}{f}:\tensor{k}{V}\to\tensor{k}{V}$ and
-hence algebra homomorphisms $f:\tensor{}{V}\to\tensor{}{V}$.
+This is an $\mathbb{R}$-algebra in the usual sense. Note that linear
+maps $f:V\to W$ induce linear maps $\tensor{k}{V}$ and hence algebra
+homomorphisms $f:\tensor{}{V}\to\tensor{}{V}$.
 
 \section{Exterior algebras}
 
@@ -108,7 +58,22 @@ It will prove fruitful to define the ideal spanned by elements of the form $v\ot
   I(V) = \langle\left\lbrace{v\otimes v : v \in V}\right\rbrace\rangle.
 \end{align*}
 Then an element $a\in I(V)\subseteq \tensor{}{V}$ is a linear combination
-of multiples of $v\otimes v$ for some $v\in V$.
+of multiples of $v\otimes v$ for some $v\in V$. There are a few
+logical consequences worth highlighting:
+\begin{itemize}
+  \item For all $u,v\in V$, $u\otimes v + v \otimes u \in I(V)$
+    because
+    \begin{align*}
+      u\otimes v + v \otimes u = (u+v)\otimes(u+v)-u\otimes u-v\otimes v.
+    \end{align*}
+  \item For all $a,b\in\tensor{}{V}$, $a\otimes b+b\otimes a$ due to
+    a similar argument as the above. \todo{wrong}
+  \item For all $a,b\in V$, $a\otimes b\otimes a\in I(V)$ because
+    \begin{align*}
+      a\otimes b\otimes a = (a\otimes b\otimes a + a \otimes a \otimes b) - a\otimes a\otimes b.
+    \end{align*}
+\end{itemize}
+
 This lets us define a construction that we will be studying for the remainder
 of this project:
 
@@ -149,31 +114,11 @@ of this project:
 \begin{lemma}\label{lem:basis_of_exterior_product}
   Let $V$ be an $n$-dimensional vector space and $v_1,\ldots,v_n$ a basis.
   Then
-  \begin{align}\label{eq:exterior_basis}
+  \begin{align*}
     \left\lbrace{v_{j_1}\wedge\cdots\wedge v_{j_k} : 1\leq j_1<\cdots<j_k\leq n }\right\rbrace
-  \end{align}
+  \end{align*}
   is a basis for $\exterior{k}{V}$. Thus $\dim\exterior{k}{V} = \binom{n}{k}$.
   \begin{proof}
-    The vectors in (\ref{eq:exterior_basis}) span $\exterior{k}{V}$
-    because we know that
-    \begin{align*}
-      \left\lbrace{v_{j_1}\otimes \cdots\otimes v_{j_k} : 1\leq j_1,\ldots,j_k\leq n}\right\rbrace
-    \end{align*}
-    is a basis of $\tensor{k}{V}$ whose image under the quotient map
-    is
-    \begin{align*}
-      \left\lbrace{0}\right\rbrace\cup
-      \left\lbrace{\pm v_{j_1}\wedge\cdots\wedge v_{j_k} : 1\leq j_1<\cdots<j_k\leq n }\right\rbrace.
-    \end{align*}
-    To see that (\ref{eq:exterior_basis}) is linearly independent,
-    consider
-    \begin{align*}
-      \sum a_{j_1,\ldots,j_k} v_{j_1}\wedge\cdots\wedge v_{j_k} = 0.
-    \end{align*}
-    Wedging with elements of $w\in\exterior{n-k}{V}$ we find $w\wedge
-    v_{j_1}\wedge\cdots\wedge v_{j_k}=0$ for all but at most one summands. This
-    leaves us with the equation $a_{j_1,\ldots,j_k}v_1\wedge\cdots\wedge v_n=0$
-    i.e. $a_{j_1,\ldots,j_k}=0$.
   \end{proof}
 \end{lemma}
 
@@ -232,15 +177,16 @@ all the $\binom{n}{k}$ multi-indices of size $k$ and dimension $n$.
         \psi(p,y_1,\ldots y_n)
         = \sum_{j=1}^k y_j \res{\frac{\partial}{\partial x_j}}{p}.
       \end{align*}
-      This turns out to be a chart and, moreover, gives rise
+      This turns out to be a chart \todo{prove this?} and, moreover, gives rise
       to an atlas on $TX$. We thus have a $2n$-manifold $TX$ which, together with the projection $(p,v)\mapsto p$, forms a vector bundle called the \emph{tangent bundle}.
     \item One may similarly define the \emph{cotangent bundle} $T^*X$.
       More generally, the exterior powers $\exterior{k}{T^* X}$ are going
       to be of interest to us. Define
       \begin{align*}
-        \exterior{k}{T^*X} = \bigsqcup_{p\in X} \exterior{k}{T^*_p X}.
+        \exterior{k}{T^*X} = \bigsqcup_{p\in X} \exterior{k}{T^*_p X}
       \end{align*}
-      Once again, we extend a chart
+      where $T^*_p X$ is the dual $(T_pX)^*$, i.e.~the space of linear
+      maps $T_p X\to\mathbb{R}$. Once again, we extend a chart
       $\phi:U\to X$ to a chart $\psi : U\times\mathbb{R}^{\binom{n}{k}}\to \exterior{k}{T^*X}$ in the obvious way:
       \begin{align*}
         \psi(p,y) = \sum_I y_I \res{dx_I}{p}
@@ -321,8 +267,7 @@ to a $k$-form on $X$:
 
 While differential forms are useful in their own right, in particular
 to generalise the notions of integration and orientation to general
-manifolds, we will use them to define a co-chain complex. The corresponding
-cohomology will be the de Rahm cohomology which is equivalent to singular
+manifolds, we will use them to define a co-chain complex whose cohomology will be the de Rahm cohomology, which itself is equivalent to singular
 cohomology with real coefficients. In this sense, differential forms
 may be thought of an analog to chains.
 
@@ -402,19 +347,20 @@ By setting $\Omega^k(X)=0$ for $k<0$, we have a cochain complex:
   \end{align*}
 \end{definition}
 
-The pullback map $\alpha\mapsto f^*\alpha$ of a smooth
-$f:X\to Y$ induces a morphism of cochain complexes $f^*:\Omega^*(Y)\to\Omega^*(X)$:
+The pullback map $\alpha\mapsto F^*\alpha$ of a smooth
+$F:X\to Y$ induces a morphism of cochain complexes $F^*:\Omega^*(Y)\to\Omega^*(X)$:
 
+\todo{capitalise smooth maps and derivatives everywhere}
 
 \begin{lemma}\label{lem:pullback_is_chain_map}
-  Let $f:X\to Y$ be a smooth map of manifolds and $\alpha\in\Omega^k(Y)$.
-  Then $f^*(d\alpha) = d(F^*\alpha)$.
-  \begin{proof} E.g. \cite{hitchin2014} or \cite{joyce2023}.
+  Let $F:X\to Y$ be a smooth map of manifolds and $\alpha\in\Omega^k(Y)$.
+  Then $F^*(d\alpha) = d(F^*\alpha)$.
+  \begin{proof}
     Consider the case $\alpha\in\Omega^0(Y)$.
     By definition of the derivative, we have
-    $\res{d^* f(d\alpha)}{f(x)} = \res{d(\alpha\circ f)}{x}$.
-    Noting that $f^*\alpha = \alpha \circ f$, we find
-    $f^*(d\alpha) = d(f^*\alpha)$. This may be extended to general
+    $\res{D^* f(d\alpha)}{F(x)} = \res{d(\alpha\circ F)}{x}$.
+    Noting that $F^*\alpha = \alpha \circ F$, we find
+    $F^*(d\alpha) = d(F^*\alpha)$. This may be extended to general
     $k$ by inspecting coordiante expressions.
   \end{proof}
 \end{lemma}
@@ -435,7 +381,7 @@ These maps behave well with respect to homotopy:
 \begin{lemma}
   Let $f:X\times[0,1]\to Y$ be smooth and write $f_t(X) = f(x,t)$.
   Then $f_0^*=f_1^*$ as maps $H^*(Y)\to H^*(X)$.
-  \begin{proof} We follow \cite{joyce2023}.
+  \begin{proof} \todo{from DM class}
     Consider $[\alpha]\in H^k(X)$. We may write the pullback form
     as $f^*\alpha = \beta_t + dt\wedge\gamma_t$
     where $\beta_t$ and $\gamma_t$ are $t$-dependent $k$ and $k-1$
@@ -467,28 +413,15 @@ $H^*(Y)\to H^*(X)$ remains unchanged. Note that this statement is
 weaker than the usual invariance under possibly not smooth
 deformations. Thus we obtain the slightly weaker statement:
 
-\begin{corollary}
+\begin{theorem}
   If $X,Y$ are smoothly homotopic manifolds, then the cohomology groups
   $H^*(X)$ and $H^*(Y)$ are isomorphic.
   \begin{proof}
-    Fix the smooth maps $f:X\to Y:g$. As $g\circ f\simeq\identity_X$ and
-    $f\circ g\simeq\identity_Y$, we must have $(g\circ f)^* = \identity :
-    H^*(X)\to H^*(X)$ and $(f\circ g)^* = \identity : H^*(Y)\to H^*(Y)$ and
-    thus we have an isomorphism $f^*:H^*(Y)\cong H^*(X):g^*$.
+    Fix the smooth maps $f:X\to Y:g$ and smooth homotopies $h:\id_X \simeq g\circ f$ and $h':\id_Y \simeq f\circ g$.
   \end{proof}
-\end{corollary}
+\end{theorem}
 
-\begin{lemma}[Poincar\'e]\label{lem:poincare}
-  \begin{align*}
-    H^k(\mathbb{R}^n) = \begin{cases}
-      \mathbb{R} & \text{if }n=0 \\
-      0 &\text{otherwise}
-    \end{cases}
-  \end{align*}
-  \begin{proof}
-    \missingproof
-  \end{proof}
-\end{lemma}
+\section{Mayer-Vietoris}
 
 Note that an open subset $U$ of a manifold $X$ has a canonical
 manifold structure given by restricting each of the charts
@@ -496,7 +429,7 @@ $\phi_i : U_i\to X$ to the inverse image ${\phi}^{-1}(U)$.
 Thus the inclusion $U\to X$ is smooth and the restriction
 $\Omega^*(X)\to\Omega^*(U)$ is a map of complexes.
 
-\begin{theorem}[Mayer-Vietoris]
+\begin{theorem}
   Let $X$ be a manifold with an open cover $X=U\cup V$. Then
   there is a long exact sequence
   \begin{align}\label{eq:mv}
@@ -508,7 +441,7 @@ $\Omega^*(X)\to\Omega^*(U)$ is a map of complexes.
     \longrightarrow \cdots
   \end{align}
   \begin{proof}
-    We use the short exact sequence of chain complexes from \cite{bott1982}:
+    Note that we have a short exact sequence of chain complexes
     \begin{align}\label{eq:short_mv}
       0
       \longrightarrow \Omega^*(X)
@@ -516,7 +449,7 @@ $\Omega^*(X)\to\Omega^*(U)$ is a map of complexes.
       \longrightarrow \Omega^*(U\cap V)
       \longrightarrow 0
     \end{align}
-    Here the first map takes a $k$-form $\alpha\in\Omega^k(X)$
+    where the first map takes a $k$-form $\alpha\in\Omega^k(X)$
     to its restrictions $\res{\alpha}{U}\oplus\res{\alpha}{V}$ and the
     second map takes $k$-forms $\alpha\in\Omega^k(U)$
     and $\beta\in\Omega^k(V)$ to the difference of their restrictions
@@ -553,243 +486,11 @@ and hence a long exact sequence of vector spaces
   \longrightarrow \cdots
 \end{align}
 
-\section{Compactly supported forms}
-
-We would like to establish Poincar\'e duality, i.e. $H^k(X)\cong
-(H^{n-k}(X))^*$ for suitable manifolds $X$. When dealing with manifolds,
-it is common to restrict our attention coordinate neighbourhoods and
-prove results locally first and subsequently extend them. In this case,
-however, the Poincar\'e lemma \label{lem:poincare} poses a problem:
-If we regard a coordinate neighbourhood $U\subseteq X$ as a submanifold
-and consider its cohomology, we find that Poincar\'e duality does not hold.
-This is because open subsets of a manifold are usually not compact,
-even when the manifold itself is.
-
-To work around this problem we are required to introduce another
-cochain complex and coresponding cohomology. We obtain this by focusing
-on $k$-forms of compact support. Note that the derivative of a
-compactly supported $k$-form itself has compact support.
-
-\begin{definition}
-  Denote by $\Omega^k_c(X)$ the vector space of $k$-forms on $X$ with compact
-  support. Then we have the \emph{de Rahm complex of compactly supported
-  forms}:
-  \begin{align*}
-    \cdots
-    \xrightarrow{d} \Omega_c^k(X)
-    \xrightarrow{d} \Omega_c^{k+1}(X)
-    \xrightarrow{d} \cdots
-  \end{align*}
-  and corresponding cohomology $H^*_c(X)$.
-\end{definition}
-
-While usual de Rahm cohomology is equivalent to singular cohomology,
-even though we have not shown this, it is easily seen that this is,
-by design, not the case in the compactly supported case. Hence we
-obtain a Poincar\'e lemma that will not contradict Poincar\'e duality:
-
-\begin{lemma}[Poincar\'e]\label{lem:compact_poincare}
-  \begin{align*}
-    H_c^k(\mathbb{R}^n) = \begin{cases}
-      \mathbb{R} & \text{if }k=n \\
-      0          &\text{otherwise}
-    \end{cases}
-  \end{align*}
-  \begin{proof}
-    \missingproof
-  \end{proof}
-\end{lemma}
-
-Moreover, we also obtain a different Mayer-Vieotris sequence. This is
-because inclusions go the other way: A compactly supported $k$-form on
-an open subset $U\subseteq X$ may be extended to a compactly supported
-$k$-form on $X$ because one may simply extend by zero. However,
-the restriction of a compactly supported $k$-form on $X$ to an open subset
-$U\subseteq X$ need not be compactly supported. Hence we obtain a
-different Mayer-Vietoris sequence:
-
-\begin{theorem}[Mayer-Vietoris]
-  Let $X$ be a manifold with an open cover $X=U\cup V$. Then
-  there is a long exact sequence
-  \begin{align}\label{eq:compact_mv}
-    \cdots
-    \longrightarrow H^k_c{k+1}(X)
-    \longrightarrow H^k_c(U\cap V)
-    \longrightarrow H^k_c(U)\oplus H^k(V)
-    \longrightarrow H^k_c(X)
-    \longrightarrow \cdots
-  \end{align}
-  \begin{proof}
-    We use the short exact sequence of chain complexes from \cite{bott1982}:
-    \begin{align}\label{eq:short_compact_mv}
-      0
-      \longrightarrow \Omega^*_c(U\cap V)
-      \longrightarrow \Omega^*_c(U)\oplus \Omega^*_c(V)
-      \longrightarrow \Omega^*_c(X)
-      \longrightarrow 0
-    \end{align}
-    Here the first map is $\alpha\mapsto (\alpha,\alpha)$ and
-    the second is $\alpha\oplus\beta \mapsto \alpha-\beta$. To see
-    surjectivity of the second map consider a partition of unity
-    $\left\lbrace{\eta_U,\eta_V}\right\rbrace$ and fix
-    $\alpha\in\Omega_c^k(X)$. Note that $\eta_U\omega$ is
-    compactly supported on $U$ as
-    $\supp(\eta_U \omega)\subseteq\supp\eta_U \cap\supp\omega$
-    where $\supp\omega$ is compact and supports are closed by definition.
-
-    Again the short exact sequence of cochain complexes (\ref{eq:short_mv})
-    induces the long exact sequence of cohomologies (\ref{eq:mv}).
-  \end{proof}
-\end{theorem}
-
-Note by taking duals we obtain a short exact sequence
-of chain complexes
-\begin{align*}
-  0
-  \longrightarrow \left(\Omega^*_c(X)\right)^*
-  \longrightarrow \left(\Omega^*_c(U)\right)^*\oplus \left(\Omega^*_c(V)\right)^*
-  \longrightarrow \left(\Omega^*_c(U\cap V)\right)^*
-  \longrightarrow 0
-\end{align*}
-and hence a long exact sequence of vector spaces
-\begin{align}\label{eq:compact_dual_mv}
-  \cdots
-  \longrightarrow \left(H^k_c(X)\right)^*
-  \longrightarrow \left(H^k_c(U)\right)^*\oplus \left(H^k_c(V)\right)^*
-  \longrightarrow \left(H^k_c(U\cap V)\right)^*
-  \longrightarrow \left(H^{k+1}_c(X)\right)^*
-  \longrightarrow \cdots
-\end{align}
-It is the symmetry of this exact sequence with (\ref{eq:dual_mv}) that
-we will exploit.
-
 \section{Integration}
 
-\begin{definition}
-  An $n$-manifold $X$ is \emph{orientable} whenever it has an
-  everywhere non-vanishing $n$-form $\omega$.
-
-  An \emph{orientation} on $X$ is a choice of equivalence class of
-  everywhere non-vanishing $n$-form under multiplication by positive
-  functions. I.e. $\omega \sim f\omega$ for all $f>0$.
-\end{definition}
-
-We care about orientability due to the following:
-
-\begin{lemma}
-  A manifold is orientable if, and only if, it has an atlas
-  $\left\lbrace{\phi_\alpha :U_\alpha\to X}\right\rbrace$
-  such that, for each intersection $\phi_\alpha(U_\alpha)\cap\phi_\beta(U_\beta)$,
-  the determinant of the change of coordinates matrix
-  is positive, i.e. $\det(\partial y_i /\partial x_j)>0$
-  where $(x_1,\ldots,x_n)$ are coordinates on $U_\alpha$
-  and $(y_1,\ldots,y_n)$ are coordinates on $U_\beta$.
-  \begin{proof}
-    As in \cite{hitchin2014}.
-    Assume $X$ is orientable and choose an orientation $[\omega]$.
-    In local coordinates,
-    \begin{align*}
-      \omega = f dx_1 \wedge\cdots\wedge dx_n.
-    \end{align*}
-    We assume without loss of generality that $f>0$. This may be
-    achieved by swapping a single coordinate $x_j\mapsto c-x_j$.
-    For another set of local coordinates, we may similarly write
-    $\omega=g dy_1\wedge\cdots\wedge dy_n$. Then, on the intersection
-    of the neighbourhoods,
-    \begin{align*}
-      \omega &= g dy_1\wedge\cdots\wedge dy_n \\
-             &= g(y_1(x),\ldots,y_n(x))det(\partial y_i/\partial x_j) dx_1\wedge\cdots\wedge dx_n \\
-             &= f dx_1\wedge\cdots\wedge dx_n.
-    \end{align*}
-    As $f,g>0$ we must have $\det(\partial y_i /\partial x_j)>0$.
-
-    Conversely, assume we have such an atlas. Using a partition
-    of unity $\left\lbrace{\eta_\alpha}\right\rbrace$ subordinate to the
-    atlas write
-    \begin{align*}
-      \omega = \sum_\alpha \eta_\alpha dx_1^\alpha \wedge\cdots\wedge dx_n^\alpha.
-    \end{align*}
-    Then on a neighbourhood $\phi_\beta(U_\beta)$ with coordinates
-    $(x_1,\ldots,x_n)$ we have
-    \begin{align*}
-      \res{\omega}{\eta_\alpha(U_\alpha)}
-      = \sum_\alpha \eta_\alpha \det(\partial y^\alpha_i/\partial x_j) dx_1\wedge\cdots\wedge dx_n.
-    \end{align*}
-    Since $\eta_\alpha\geq 0$, $\sum_\alpha \eta_\alpha = 1$, and $\det(\partial y^\alpha_i/\partial x_i)>0$,
-    this is non-vanishing.
-  \end{proof}
-\end{lemma}
-
-We call such an atlas oriented. This allows us to define integration of top
-degree forms on a manifold in the obvious way:
-
-\begin{definition}
-  Let $X$ be a compact orientable $n$-manifold, let $\alpha\in\Omega^n(X)$, let
-  $\left\lbrace{\phi_\alpha : U_i \to X}\right\rbrace$ be an oriented atlas,
-  let $\left\lbrace{\eta_i}\right\rbrace$ be a partition of unity subordinate
-  to $U_i$, and write $\res{\alpha}{U_i} = f_i(x_1,\ldots,x_n)
-  dx_1\wedge\cdots\wedge dx_n$. The \emph{integral of $\alpha$ on $X$} is
-  \begin{align*}
-    \int_X \alpha
-    = \sum_i \int_{U_i} \eta_i\alpha
-    = \sum_i \int_{\mathbb{R}^n} f_i(x_1,\ldots,x_n)dx_1\cdots dx_n.
-  \end{align*}
-\end{definition}
-
-This is well-defined as we require the atlas to be oriented and hence
-the change of variables formula applies.
-As we do not require manifolds with boundary, we only state and prove
-a special case of Stokes' theorem:
-
-\begin{theorem}[Stokes]
-  Let $X$ be an orientable $n$-manifold and let $\alpha\in\Omega^{n-1}(X)$
-  be of compact support. Then
-  \begin{align*}
-    \int_X d\alpha = 0.
-  \end{align*}
-  \begin{proof}
-    From \cite{hitchin2014}. Write
-    \begin{align*}
-      \alpha = \sum_i \eta_i \alpha
-    \end{align*}
-    where $\left\lbrace{\eta_i}\right\rbrace$ is a partition of
-    unity subordinate to $\left\lbrace{\phi_i(U_i)}\right\rbrace$
-    where $\left\lbrace{\phi_i : U_i\to X}\right\rbrace$ is an atlas.
-
-    Then within such a $U_i$ we have
-    \begin{align*}
-      \eta_i\alpha = \sum_{j=1}^n (-1)^{j+1}\alpha_j dx_1\wedge\cdots dx_{j-1}\wedge
-      dx_{j+1}\wedge\cdots\wedge dx_n
-    \end{align*}
-    for some smooth functions $\alpha_j$ and hence
-    \begin{align*}
-      d(\eta_i\alpha) = \left(\sum_{j=1}^n {\frac{\partial \alpha_j}{\partial x_j}}\right) dx_1\wedge\cdots\wedge dx_n.
-    \end{align*}
-    Now note
-    \begin{align*}
-      \int_{\mathbb{R}^n}\left({\frac{\partial \alpha_j}{\partial x_j}}\right) dx_1\cdots dx_n = \int_{\mathbb{R}} \cdots\int_{\mathbb{R}} \frac{\partial \alpha_j}{\partial x_j} = 0
-    \end{align*}
-    as $\alpha_j$ has compact support and thus
-    \begin{align*}
-      \int_{\mathbb{R}} \left({\frac{\partial \alpha_j}{\partial x_j}}\right)dx_j = [\alpha_j]_{-N}^N = 0
-    \end{align*}
-    for $N$ sufficiently large. Thus
-    \begin{align*}
-      \int_X d(\eta_i\alpha) = \int_{U_i} d(\eta_i\alpha) = \sum_{j=1}^n \int_{\mathbb{R}^n}{\frac{\partial \alpha_j}{\partial x_j}dx_1\cdots dx_n} = 0.
-    \end{align*}
-    The claim follows by definition of integration.
-  \end{proof}
-\end{theorem}
+\section{Stoke's theorem}
 
 \section{Poincar\'e duality}
-
-We aim to finish this exploration of the intersection of differential
-geometry and algebraic topology by establishing Poincar\'e duality.
-This is a particularly interesting result in this setting because
-it gives an idea in what sense manifolds are special from a topological
-point of view. Moreover, the proof works out very naturally in
-differential geometry as it involves not only the wedge product but
-also integration, the second large application of differential forms.
 
 Suppose $\alpha = \beta + d\theta$. Then, by Stokes' Theorem,
 \begin{align*}
@@ -797,91 +498,20 @@ Suppose $\alpha = \beta + d\theta$. Then, by Stokes' Theorem,
   = \int \beta.
 \end{align*}
 Thus we have a linear map $\int : H^n(X) \to \mathbb{R}$
-which turns out to be an isomorphism. We follow the Hitchin notes
-in proving this. Before we get to the heart of it, we require the
-following technical lemma:
+which turns out to be an isomorphism:
 
-\begin{lemma}\label{lem:integral_zero_implies_exact}
-  If $U=\left\lbrace{x\in\mathbb{R}^n : \left\vert{x}\right\vert<1}\right\rbrace$ and $\alpha\in\Omega^n(\mathbb{R}^n)$ such that $\supp\alpha\subseteq U$
-  and $\int\alpha=0$ then there is $\theta\in\Omega^{n-1}(\mathbb{R}^n)$
-  with $\supp\theta\subseteq U$ such that $\alpha=d\theta$.
-  \begin{proof}[Proof idea.]
-    We see that this must be true for $n=1$: If
-    $\alpha\in\Omega^1(\mathbb{R}^n)$ with $\supp\alpha\subseteq U$ then
-    $\alpha = f(x)dx$. We may then take $\theta = \frac{1}{2}\int_{-x}^x f(u)du$ to find
-    $d\theta = \alpha$. As $\supp f \subseteq U = (-1,1)$ we must
-    have $\int_{-x}^x f(t) dt = \int_{-1}^{1} f(t) dt = 0$ so
-    $\supp\beta \subseteq U$.
-
-    This may then be extended to arbitrary $n$ by induction. The precise
-    argument is rather tedious and not very insightful, hence we omit it.
-    Details may be found in \cite{hitchin2014}.
-  \end{proof}
-\end{lemma}
-
-\begin{theorem}\label{thm:integration_is_iso}
-  Let $X$ be a compact connected orientable $n$-manifold. The map
+\begin{lemma}[Poincar\'e]
+  Let $X$ be a compact, orientable $n$-manifold. The map
   \begin{align*}
     \int : H^n(X) \to \mathbb{R} :
     \alpha \mapsto \int_X \alpha
   \end{align*}
   is an isomorphism.
   \begin{proof}
-    We use the technique presented in \cite{hitchin2014}.
-    Now consider an atlas $\left\lbrace{\phi_i : U_i \to X}\right\rbrace$
-    such that $X=\bigcup_i \phi_i(\left\lbrace{x : \left\vert{x}\right\vert < 1}\right\rbrace)$.
-    By compactness we may assume to be finite and choose corresponding partition of
-    unity $\left\lbrace{\eta_i}\right\rbrace$. Fix $\alpha\in\Omega^n(X)$.
-    Now, pick a distinguished $U_1$ and,
-    for each $i$, choose $p_i\in U_i$ and choose $U_1 = U^i_1,\ldots,
-    U^i_{m_i}=U_i$ such that $U^i_j \cap U^i_{j+1} \neq \emptyset$. This
-    is possible due to compactness and connectedness.
 
-    Note, for any coordinate neighbourhood $U\subseteq X$, we may
-    choose an $n$-form $\beta\in\Omega^n(X)$ with $\supp\beta \subseteq U$
-    such that
-    \begin{align*}
-      \int_X \beta = \int_{U} \beta = 1
-    \end{align*}
-    e.g. by scaling $dx_1\wedge \cdots\wedge dx_n$ appropriately using
-    a bump function.
-    Now note, by Stokes' theorem, we cannot have $d\omega = \alpha_0$
-    as this would imply $\int_X \beta = 0$. Thus $[\beta]\neq 0$
-    in $H^n(X)$.
-
-    We apply this observation as follows: Choose a $\beta_0$ with
-    $\supp\beta_0 \subseteq U_1$ and, moreover, choose $\beta^i_j$ with
-    $\supp\beta^i_j\subseteq U^i_j\cap U^i_{j+1}$ for all $i$ and $j$,
-    all with integral 1.
-
-    For convenience write $\beta_0=\beta^i_0$. By linearity, we then have
-    \begin{align*}
-      \int_{U^i_{j+1}} (\beta^i_{j+1}-\beta^i_j) = 0.
-    \end{align*}
-
-    We may now apply \ref{lem:integral_zero_implies_exact} to find
-    $n-1$-forms $\theta^i_j$ such that $d\theta^i_j = \beta^i_{j} -
-    \beta^i_{j-1}$. By telescoping we find
-    $\beta^i_{m_i-1}-\beta_0=d(\sum_j \theta^i_j)$.
-    Moroever, we note
-    \begin{align*}
-      \int_{U_i} \left(\eta_i\alpha - \left({\int\eta_i\alpha}\right)\beta_{m_i-1}\right) = 0
-    \end{align*}
-    so we may write $d\theta^i_0 = \eta_i\alpha - \left({\int\eta_i\alpha}\right)\beta_{m_i-1}$.
-
-    Putting all of this together we have
-    \begin{align*}
-      \alpha
-      = \sum_i \eta_i\alpha
-      = \sum_i \left({\int\eta_i\alpha}\right)\beta_{m_i-1} + d\theta_0^i
-      = \sum_i \beta_0\left(\int\eta_i\alpha\right) + d\left({\sum_j \theta^i_j}\right)
-      = \beta_0\int\alpha + d\left({\sum_{i,j} \theta^i_j}\right).
-    \end{align*}
-    Thus $[\alpha]=\left({\int\alpha}\right)[\beta_0]$
-    in $H^n(X)$. In particular, this shows $\int\alpha = \int\alpha'$
-    if, and only if, $[\alpha]=[\alpha']$ and hence the claim follows.
+    \missingproof
   \end{proof}
-\end{theorem}
+\end{lemma}
 
 Moreover, the wedge product respects cohomology. That is,
 if $[\alpha]=[\alpha']\in H^k(X)$ then, for all $[\beta]\in H^\ell(X)$,
@@ -910,25 +540,27 @@ contractible. We will take the following for granted:
 \end{lemma}
 
 Proving this involves more differential geometry than is worth
-introducing. \cite{bott1982} This allows us to prove that the integration map
+introducing. This allows us to prove that the integration map
 above yields the usual Poincar\'e duality:
 
 \begin{theorem}[Poincar\'e duality]
-  Let $X$ be an orientable $n$-manifold. Then,
+  Let $X$ be a compact, orientable $n$-manifold. Then,
   for all $k\in\mathbb{Z}$, there is an isomorphism
   \begin{align*}
-    \int : H^k(X) \cong \left(H^{n-k}_c(X)\right)^*.
+    \int : H^k(X) \cong \left(H^{n-k}(X)\right)^*.
   \end{align*}
   \begin{proof}
-    Following \cite{bott1982}. If $X$ is contractible,
-    i.e. has a good cover with a single element, the claim
-    holds due to \ref{lem:poincare} and \ref{lem:compact_poincare}.
+
+    We have seen in \ref{lem:poincare} that integration
+    defines an isomorphism $H^n(\mathbb{R}^n)=\mathbb{R}$.
+    Thus the claim holds whenever $X$ is contractible, i.e.
+    if there exists a good cover with a single element. \todo{write about this}
 
     Now assume that the claim holds whenever a manifold has a good
     cover of size $\ell$ and that $X$ has a good cover
     $\left\lbrace{U_i}\right\rbrace_{i=0}^{\ell}$ of size $\ell+1$.
     Write $U=U_0$ and $V=\bigcup_{i=1}^{\ell} U_i$.
-    Using the long exact sequences (\ref{eq:mv}) and (\ref{eq:compact_dual_mv}) we obtain a diagram
+    Using the long exact sequences (\ref{eq:mv}) and (\ref{eq:dual_mv}) we obtain a diagram
     \begin{equation*}
       % https://q.uiver.app/#q=WzAsMTAsWzAsMiwiSF5rKFVcXGN1cCBWKSJdLFsxLDIsIihIXntuLWt9KFVcXGN1cCBWKSleKiJdLFswLDMsIkheayhVKVxcb3BsdXMgSF5rKFYpIl0sWzAsMSwiSF57ay0xfShVXFxjYXAgVikiXSxbMCwwLCJIXntrLTF9KFUpXFxvcGx1cyBIXntrLTF9KFYpIl0sWzAsNCwiSF5rKFVcXGNhcCBWKSJdLFsxLDAsIihIXntuLWsrMX0oVSkpXipcXG9wbHVzIChIXntuLWsrMX0oVikpXioiXSxbMSwxLCIoSF57bi1rKzF9KFVcXGNhcCBWKSleKiJdLFsxLDMsIihIXntuLWt9KFUpKV4qXFxvcGx1cyAoSF57bi1rfShWKSleKiJdLFsxLDQsIihIXntuLWt9KFVcXGNhcCBWKSleKiJdLFs0LDYsIlxcaW50XFxvcGx1c1xcaW50IiwxLHsiY3VydmUiOi0yfV0sWzMsNywiXFxpbnQiLDEseyJjdXJ2ZSI6LTJ9XSxbMiw4LCJcXGludFxcb3BsdXNcXGludCIsMSx7ImN1cnZlIjotMn1dLFs2LDddLFs0LDNdLFszLDBdLFs3LDFdLFswLDJdLFsxLDhdLFs4LDldLFs1LDksIlxcaW50IiwxLHsiY3VydmUiOi0yfV0sWzIsNV0sWzAsMSwiXFxpbnQiLDEseyJjdXJ2ZSI6LTJ9XV0=
       \begin{tikzcd}
@@ -967,17 +599,5 @@ above yields the usual Poincar\'e duality:
     cover. This completes the proof.
   \end{proof}
 \end{theorem}
-
-Using the trivial observation $\Omega^k_c(X)=\Omega^k(X)$ for
-compact $X$, we have the usual statement:
-
-\begin{corollary}
-  Let $X$ be a compact orientable $n$-manifold. Then, for all $k\in\mathbb{Z}$,
-  \begin{align*}
-    H^k(X)\cong (H^{n-k}(X))^*.
-  \end{align*}
-\end{corollary}
-
-\printbibliography
 
 \end{document}
