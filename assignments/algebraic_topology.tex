@@ -45,13 +45,20 @@ if there is a chart $\phi:U\to X$ with $0\in U$, $\phi(0)=p$, and
 $\phi(e_i) = x_i$, i.e. we may write $q=p + \sum_i \lambda_i x_i$
 for all $q$ in an open neighbourhood $U$ of $p$.
 
-With each point $p\in X$ of a manifold is associated a vector
+There are several ways in which we can construct manifolds. Particularly
+important for us will be the following: For manifolds $X$ and $Y$ there
+is a canonical manifold struture on the product $X\times Y$. Moreover,
+every open subset of a manifold has a manifold structure by
+restricting all the charts.
+
+Associated with each point $p\in X$ of a manifold is a vector
 space $T_p X$ which has a basis of operators $(\partial/\partial x_1,\ldots,\partial/\partial x_n)$ for each set of coordinates $(x_1,\ldots,x_n)$.
 Moreover, a smooth map of manifolds $f:X\to Y$ induces a linear map
 $df_p : T_p X\to T_{f(p)} Y$ of tangent spaces at each $p\in X$.
 The dual $\left({T_p X}\right)^*= T^*_p X$ is called the cotangent space
 and we write $d^* f_p : T_{f(p)}^* Y\to T_p^* X$ for the dual of the
-derivative.
+derivative. The dual vectors of the $\partial/\partial x_i$ are denoted
+$dx_i$ and form a basis of the cotangent space.
 
 Last but not least, recall that a partition of unity subordinate
 to a covering $\left\lbrace{U_i}\right\rbrace$ of $X$ is a set of smooth
@@ -198,7 +205,7 @@ all the $\binom{n}{k}$ multi-indices of size $k$ and dimension $n$.
   correspond exactly to those multilinear maps that are alternating,
   i.e. for all $1\leq i < j\leq k$,
   \begin{align*}
-    a(x_1,\ldots,x_i,\ldots,x_j,\ldots x_k) = -a(x_1,\ldots,x_{i-1},x_j,x_{i+1},\ldots,x_{j-1},x_i,x_{j+1},\ldots,x_k)
+    a(x_1,\ldots,x_i,\ldots,x_j,\ldots x_k) = -a(x_1,\ldots,x_{i-1},x_j,x_{i+1},\ldots,x_{j-1},x_i,x_{j+1},\ldots,x_k).
   \end{align*}
 \end{example}
 
@@ -222,7 +229,7 @@ all the $\binom{n}{k}$ multi-indices of size $k$ and dimension $n$.
     \item The manifold $X\times\mathbb{R}^m$ together with the projection $\pi : X\times\mathbb{R}^m\to X$ trivially forms a vector bundle.
     \item Define
       \begin{align*}
-        TX = \bigsqcup_{p\in X} T_p X = \left\lbrace{(p, v) : x \in X, v \in T_p X}\right\rbrace
+        TX = \bigsqcup_{p\in X} T_p X = \left\lbrace{(p, v) : p \in X, v \in T_p X}\right\rbrace
       \end{align*}
       where $T_p X$ denotes the tangent space of $X$ at $p$. The manifold
       structure on $TX$ is induced by the manifold structure on $X$ in the
@@ -256,7 +263,7 @@ all the $\binom{n}{k}$ multi-indices of size $k$ and dimension $n$.
 \begin{definition}
   A  (smooth) \emph{section} of a vector bundle $\pi:E\to X$ is a (smooth)
   section of the map $\pi$, i.e. a smooth map $\sigma : X\to E$ such that $\pi
-  \circ \sigma = \identity_X$. Denote by $\Gamma(E)$ the set of all sections of
+  \circ \sigma = \identity_X$. Denote by $\Gamma^\infty(E)$ the set of all sections of
   a vector bundle $E$.
 \end{definition}
 
@@ -408,7 +415,7 @@ $f:X\to Y$ induces a morphism of cochain complexes $f^*:\Omega^*(Y)\to\Omega^*(X
 
 \begin{lemma}\label{lem:pullback_is_chain_map}
   Let $f:X\to Y$ be a smooth map of manifolds and $\alpha\in\Omega^k(Y)$.
-  Then $f^*(d\alpha) = d(F^*\alpha)$.
+  Then $f^*(d\alpha) = d(f^*\alpha)$.
   \begin{proof} E.g. \cite{hitchin2014} or \cite{joyce2023}.
     Consider the case $\alpha\in\Omega^0(Y)$.
     By definition of the derivative, we have
@@ -427,7 +434,7 @@ of this chain complex:
   $H^k(X) = H^k(\Omega^k(X))$.
 \end{definition}
 
-Note that each $\Omega^k(X)$ is a vector space, hence the $H^k(X)$ are
+Note that each $\Omega^k(X)$ is a real vector space, hence the $H^k(X)$ are
 vector spaces, too. Moreover, cochain maps extend to cohomology and
 thus smooth $f:X\to Y$ induce linear maps $f^*:H^*(Y)\to H^*(X)$.
 These maps behave well with respect to homotopy:
@@ -478,6 +485,11 @@ deformations. Thus we obtain the slightly weaker statement:
   \end{proof}
 \end{corollary}
 
+One of the core principles when studying manifolds is to reason about
+the coordinate neighbourhoods and extend results to the whole manifold.
+As each coordinate neighbourhood may be assumed to be contractible,
+it will be helpful to know the cohomology of $\mathbb{R}^n$.
+
 \begin{lemma}[Poincar\'e]\label{lem:poincare}
   \begin{align*}
     H^k(\mathbb{R}^n) = \begin{cases}
@@ -485,11 +497,14 @@ deformations. Thus we obtain the slightly weaker statement:
       0 &\text{otherwise}
     \end{cases}
   \end{align*}
-  \begin{proof}
-    \missingproof
-  \end{proof}
 \end{lemma}
 
+We omit the proof in favour of \ref{lem:compact_poincare}. Note however that
+de Rahm cohomology agrees with singular cohomology with real coefficients
+so the is not at all surprising.
+
+A useful tool to extend statements about coordinate neighbourhoods
+to larger manifolds will be the Mayer-Vietoris sequence.
 Note that an open subset $U$ of a manifold $X$ has a canonical
 manifold structure given by restricting each of the charts
 $\phi_i : U_i\to X$ to the inverse image ${\phi}^{-1}(U)$.
@@ -546,18 +561,22 @@ of chain complexes
 and hence a long exact sequence of vector spaces
 \begin{align}\label{eq:dual_mv}
   \cdots
-  \longrightarrow \left(H^{k+1}(X)\right)^*
-  \longrightarrow \left(H^k(U\cap V)\right)^*
-  \longrightarrow \left(H^k(U)\right)^*\oplus \left(H^k(V)\right)^*
   \longrightarrow \left(H^k(X)\right)^*
+  \longrightarrow \left(H^{k+1}(U\cap V)\right)^*
+  \longrightarrow \left(H^{k+1}(U)\right)^*\oplus \left(H^k(V)\right)^*
+  \longrightarrow \left(H^{k+1}(X)\right)^*
   \longrightarrow \cdots
 \end{align}
+
+Observe that this necessarily goes in the opposite direction of
+(\ref{eq:mv}). This will prove to be a problem that we solve in the
+next chapter.
 
 \section{Compactly supported forms}
 
 We would like to establish Poincar\'e duality, i.e. $H^k(X)\cong
 (H^{n-k}(X))^*$ for suitable manifolds $X$. When dealing with manifolds,
-it is common to restrict our attention coordinate neighbourhoods and
+it is common to restrict our attention coordinate neighbourhoods,
 prove results locally first and subsequently extend them. In this case,
 however, the Poincar\'e lemma \label{lem:poincare} poses a problem:
 If we regard a coordinate neighbourhood $U\subseteq X$ as a submanifold
@@ -596,12 +615,69 @@ obtain a Poincar\'e lemma that will not contradict Poincar\'e duality:
     \end{cases}
   \end{align*}
   \begin{proof}
-    \missingproof
+    Consider an $n$-manifold $X$ and the maps
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsMixbMCwwLCJYXFx0aW1lc1xcbWF0aGJiIFJebiJdLFsyLDAsIlgiXSxbMCwxLCJcXHBpIiwwLHsiY3VydmUiOi0yfV0sWzEsMCwiXFxzaWdtYSIsMCx7ImN1cnZlIjotMn1dXQ==
+      \begin{tikzcd}
+        {X\times\mathbb R^n} && X
+        \arrow["\pi", curve={height=-12pt}, from=1-1, to=1-3]
+        \arrow["\sigma", curve={height=-12pt}, from=1-3, to=1-1]
+      \end{tikzcd}
+    \end{equation*}
+    where $\pi(x,t) = x$ and $\sigma(x) = (x,0)$.
+    Consider a form $\alpha\in\Omega_c^k(M\times\mathbb{R})$.
+    We may then write
+    \begin{align*}
+      \alpha = \sum_i f_i(x,t) (\pi^*\beta_i) + \sum_j g_j(x,t) (\pi^*\gamma_j)\wedge dt
+    \end{align*}
+    for some $\beta_i\in\Omega^k(X)$, $\gamma_i\in\Omega^{k-1}(X)$,
+    and $f_i,g_i:X\times\mathbb{R}\to\mathbb{R}$ are functions with compact
+    support. Define $\pi_* : \Omega^k_c(X\times\mathbb{R})\to\Omega^{k-1}_c(X)$
+    by
+    \begin{align*}
+      f(x,t)(\pi^*\beta) \mapsto 0,\hspace{1cm}
+      g(x,t)(\pi^*\gamma)\wedge dt \mapsto \left({\int_{-\infty}^\infty g(x,t)dt}\right)\gamma
+    \end{align*}
+    We now note
+    \begin{align*}
+      \pi_*(d(f(x,t)(\pi^*\beta)))
+      &= \pi_*\left(\frac{\partial f}{\partial t}dt\wedge \pi^*\beta + \sum_i \frac{\partial f}{\partial x_i}dx_i\wedge \pi^*\beta\right)\\
+      &= \beta \int_{-\infty}^\infty \frac{\partial f}{\partial t}dt\\
+      &= 0\\
+      &= d(\pi_*(f(x,t)\pi^*\beta))
+    \end{align*}
+    and similarly $\pi_*(d(g(x,t)(\pi^*\gamma)\wedge dt))=d(\pi_*(g(x,t)(\pi^*\gamma)\wedge dt))$. Thus $\pi_*\circ d = d\circ \pi_*$, i.e. $\pi_*$
+    defines a map of cochain complexes and we have maps
+    $\pi_* : H^k_c(X\times\mathbb{R})\to H^{k-1}_c(X)$. We want to show $H^k_C(X\times\mathbb{R})\cong H^{k-1}(X)$. Hence we require a map in the
+    other direction. Fix a $\sigma\in\Omega^1(\mathbb{R})$ such that
+    $\int\sigma = 1$ and define
+    \begin{align*}
+      \sigma_* : \Omega^k(X)&\to \Omega^{k+1}(X\times\mathbb{R}) \\
+      \alpha &\mapsto \alpha\wedge\sigma
+    \end{align*}
+    Once again this defines a cochain map and thus a map
+    in cohomology $\sigma_* : H^k(X) \to H^{k+1}(X\times\mathbb{R})$.
+    Moreover, since $\int\sigma = 1$ we have $\pi_* \circ \sigma_* = \identity$ on cochains. To see $\sigma_* \circ\pi_* = \identity$ in cohomology,
+    we show that there is a cochain homotopy $\sigma_* \circ\pi_* \simeq
+    \identity$.
+
+    We define $h:\Omega_c^k(M\times\mathbb{R})\to\Omega_c^{k-1}(M\times\mathbb{R})$ by
+    \begin{align*}
+      \pi^*\beta f(x,t) \mapsto 0, \hspace{1cm}
+      \pi^*\gamma g(x,t)\wedge dt \mapsto \gamma\int_{-\infty}^t fdt
+      - \gamma\left({\int_{-\infty}^t \sigma}\right)\left({\int_{-\infty}^\infty fdt}\right).
+    \end{align*}
+    We claim $\identity - \sigma_*\circ\pi_* = \pm (d\circ h \pm h\circ d)$.
+    This is proven in full detail in \cite{bott1982}. Hence we have
+    $\sigma_*\circ\pi_*=\identity$ in cohomology, completing the proof that
+    $H^k_c(X\times\mathbb{R})\cong H^{k-1}_c(X)$.
+    The claim then follows by induction by noting that $H^0(\mathbb{R}^0)$ is
+    the space of constant functions $\mathbb{R}^0\to\mathbb{R}$.
   \end{proof}
 \end{lemma}
 
-Moreover, we also obtain a different Mayer-Vieotris sequence. This is
-because inclusions go the other way: A compactly supported $k$-form on
+Compactly supported de Rahm cohomology gives rise to a different Mayer-Vieotris sequence. This is
+because the inclusions go in the opposite direction: A compactly supported $k$-form on
 an open subset $U\subseteq X$ may be extended to a compactly supported
 $k$-form on $X$ because one may simply extend by zero. However,
 the restriction of a compactly supported $k$-form on $X$ to an open subset
@@ -613,10 +689,10 @@ different Mayer-Vietoris sequence:
   there is a long exact sequence
   \begin{align}\label{eq:compact_mv}
     \cdots
-    \longrightarrow H^k_c{k+1}(X)
-    \longrightarrow H^k_c(U\cap V)
-    \longrightarrow H^k_c(U)\oplus H^k(V)
     \longrightarrow H^k_c(X)
+    \longrightarrow H^{k+1}_c(U\cap V)
+    \longrightarrow H^{k+1}_c(U)\oplus H^k(V)
+    \longrightarrow H^{k+1}_c(X)
     \longrightarrow \cdots
   \end{align}
   \begin{proof}
@@ -930,13 +1006,13 @@ above yields the usual Poincar\'e duality:
     Write $U=U_0$ and $V=\bigcup_{i=1}^{\ell} U_i$.
     Using the long exact sequences (\ref{eq:mv}) and (\ref{eq:compact_dual_mv}) we obtain a diagram
     \begin{equation*}
-      % https://q.uiver.app/#q=WzAsMTAsWzAsMiwiSF5rKFVcXGN1cCBWKSJdLFsxLDIsIihIXntuLWt9KFVcXGN1cCBWKSleKiJdLFswLDMsIkheayhVKVxcb3BsdXMgSF5rKFYpIl0sWzAsMSwiSF57ay0xfShVXFxjYXAgVikiXSxbMCwwLCJIXntrLTF9KFUpXFxvcGx1cyBIXntrLTF9KFYpIl0sWzAsNCwiSF5rKFVcXGNhcCBWKSJdLFsxLDAsIihIXntuLWsrMX0oVSkpXipcXG9wbHVzIChIXntuLWsrMX0oVikpXioiXSxbMSwxLCIoSF57bi1rKzF9KFVcXGNhcCBWKSleKiJdLFsxLDMsIihIXntuLWt9KFUpKV4qXFxvcGx1cyAoSF57bi1rfShWKSleKiJdLFsxLDQsIihIXntuLWt9KFVcXGNhcCBWKSleKiJdLFs0LDYsIlxcaW50XFxvcGx1c1xcaW50IiwxLHsiY3VydmUiOi0yfV0sWzMsNywiXFxpbnQiLDEseyJjdXJ2ZSI6LTJ9XSxbMiw4LCJcXGludFxcb3BsdXNcXGludCIsMSx7ImN1cnZlIjotMn1dLFs2LDddLFs0LDNdLFszLDBdLFs3LDFdLFswLDJdLFsxLDhdLFs4LDldLFs1LDksIlxcaW50IiwxLHsiY3VydmUiOi0yfV0sWzIsNV0sWzAsMSwiXFxpbnQiLDEseyJjdXJ2ZSI6LTJ9XV0=
+      % https://q.uiver.app/#q=WzAsMTAsWzAsMiwiSF5rKFVcXGN1cCBWKSJdLFsxLDIsIihIX2Nee24ta30oVVxcY3VwIFYpKV4qIl0sWzAsMywiSF5rKFUpXFxvcGx1cyBIXmsoVikiXSxbMCwxLCJIXntrLTF9KFVcXGNhcCBWKSJdLFswLDAsIkhee2stMX0oVSlcXG9wbHVzIEhee2stMX0oVikiXSxbMCw0LCJIXmsoVVxcY2FwIFYpIl0sWzEsMCwiKEhfY157bi1rKzF9KFUpKV4qXFxvcGx1cyAoSF9jXntuLWsrMX0oVikpXioiXSxbMSwxLCIoSF9jXntuLWsrMX0oVVxcY2FwIFYpKV4qIl0sWzEsMywiKEhfY157bi1rfShVKSleKlxcb3BsdXMgKEhfY157bi1rfShWKSleKiJdLFsxLDQsIihIX2Nee24ta30oVVxcY2FwIFYpKV4qIl0sWzQsNiwiXFxpbnRcXG9wbHVzXFxpbnQiLDEseyJjdXJ2ZSI6LTJ9XSxbMyw3LCJcXGludCIsMSx7ImN1cnZlIjotMn1dLFsyLDgsIlxcaW50XFxvcGx1c1xcaW50IiwxLHsiY3VydmUiOi0yfV0sWzYsN10sWzQsM10sWzMsMF0sWzcsMV0sWzAsMl0sWzEsOF0sWzgsOV0sWzUsOSwiXFxpbnQiLDEseyJjdXJ2ZSI6LTJ9XSxbMiw1XSxbMCwxLCJcXGludCIsMSx7ImN1cnZlIjotMn1dXQ==
       \begin{tikzcd}
-        {H^{k-1}(U)\oplus H^{k-1}(V)} & {(H^{n-k+1}(U))^*\oplus (H^{n-k+1}(V))^*} \\
-        {H^{k-1}(U\cap V)} & {(H^{n-k+1}(U\cap V))^*} \\
-        {H^k(U\cup V)} & {(H^{n-k}(U\cup V))^*} \\
-        {H^k(U)\oplus H^k(V)} & {(H^{n-k}(U))^*\oplus (H^{n-k}(V))^*} \\
-        {H^k(U\cap V)} & {(H^{n-k}(U\cap V))^*}
+        {H^{k-1}(U)\oplus H^{k-1}(V)} & {(H_c^{n-k+1}(U))^*\oplus (H_c^{n-k+1}(V))^*} \\
+        {H^{k-1}(U\cap V)} & {(H_c^{n-k+1}(U\cap V))^*} \\
+        {H^k(U\cup V)} & {(H_c^{n-k}(U\cup V))^*} \\
+        {H^k(U)\oplus H^k(V)} & {(H_c^{n-k}(U))^*\oplus (H_c^{n-k}(V))^*} \\
+        {H^k(U\cap V)} & {(H_c^{n-k}(U\cap V))^*}
         \arrow["\int\oplus\int"{description}, curve={height=-12pt}, from=1-1, to=1-2]
         \arrow["\int"{description}, curve={height=-12pt}, from=2-1, to=2-2]
         \arrow["\int\oplus\int"{description}, curve={height=-12pt}, from=4-1, to=4-2]

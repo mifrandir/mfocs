@@ -1,12 +1,705 @@
 \documentclass{article}
 \usepackage{assignment}
 \begin{document}
-% TODO title
-\title{Differentiable Manifolds Mini-project}
+\title{C3.3 Differentiable Manifolds Mini Project: Principal Bundles}
 \author{Franz Miltz}
-% TODO date
 \date{\today}
 \maketitle
 
+\todo{overall better citations}
+
+\section{Vector bundles}
+
+Recall the definition of a vector bundle:
+
+\begin{definition}
+  Let $X$ be an $n$-manifold and $k\geq 0$.
+  A \emph{rank $k$ vector bundle on $X$} consists of
+  \begin{enumerate}
+    \item an $(n+k)$-manifold $E$,
+    \item a smooth surjective map $\pi : E\to X$, and
+    \item for each $x\in X$, a $k$-dimensional real vector space structure on $E_x = {\pi}^{-1}\left\lbrace{x}\right\rbrace$,
+  \end{enumerate}
+  such that, for each $x\in X$ there is an open neighbourhood $U\ni x$
+  together with a diffeomorphism ${\pi}^{-1}(U)\cong U\times\mathbb{R}^k$ that restricts to an isomorphism ${\pi}^{-1}\left\lbrace{y}\right\rbrace\cong\left\lbrace{y}\right\rbrace\times\mathbb{R}^k$ for all $y\in U$.
+\end{definition}
+
+We write $E_x$ and $E_U$ for the pre-images of
+$\left\lbrace{x}\right\rbrace\subseteq X$ and $U\subseteq X$ under the
+projection, respectively. We have a category. Here are the morphisms:
+
+\begin{definition}
+  Let $E\to X$ and $F\to Y$ be vector bundles.
+  A morphism $E\to F$ consists of smooth maps $\phi:E\to F$ and
+  $f:X\to Y$ making the following commute:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJFIl0sWzIsMCwiRiJdLFswLDEsIlgiXSxbMiwxLCJZIl0sWzAsMSwiXFxwaGkiXSxbMiwzLCJmIl0sWzAsMiwiXFxwaSIsMl0sWzEsMywiXFxwaSJdXQ==
+    \begin{tikzcd}
+      E && F \\
+      X && Y
+      \arrow["\phi", from=1-1, to=1-3]
+      \arrow["f", from=2-1, to=2-3]
+      \arrow["\pi"', from=1-1, to=2-1]
+      \arrow["\pi", from=1-3, to=2-3]
+    \end{tikzcd}
+  \end{equation*}
+\end{definition}
+
+\section{Principal bundles}
+
+\begin{definition}
+  Let $X$ be a manifold and $G$ a Lie group. A \emph{principal $G$-bundle
+  $P\to X$} consists of
+  \begin{enumerate}
+    \item a manifold $P$,
+    \item a smooth, free $G$-action $\mu:G\times P\to P$,
+    \item a $G$-invariant smooth projection $\pi:P\to X$
+  \end{enumerate}
+  such that there exists a covering of $X$ by open sets
+  $U$ with diffeomorphisms ${\pi}^{-1}(U)\cong G\times U$
+  identifying $\mu : G\times{\pi}^{-1}(U)\to{\pi}^{-1}(U)$
+  and $\pi:{\pi}^{-1}(U)\to U$ with the maps
+  $(g,(h,x))\mapsto (gh,x)$ and $(g,x)\mapsto x$, respectively.
+\end{definition}
+
+We will denote the fibre over $x\in X$ by $P_x = {\pi}^{-1}\left\lbrace{x}\right\rbrace$. Similarly, write $P_U = {\pi}^{-1}(U)$.
+Let us do a little warm-up:
+
+\begin{lemma}
+  Let $P\to X$ be a principal $G$-bundle and $U\subseteq X$ any open
+  subset. Then ${\pi}^{-1}(U)\to X$
+  is a principal $G$-bundle.
+  \begin{proof}
+    The manifold structure ${\pi}^{-1}(U)$ is inherited from $P$,
+    we have $\mu(G\times{\pi}^{-1}(U))$ by using the identification
+    of $\mu$ with $(g,(h,x))\mapsto (gh,x)$, $\pi:{\pi}^{-1}(U)\to U$
+    remains smooth and $G$-invariant, and the covering and the
+    diffeomorphisms are obtained by intersection and restriction, respectively.
+  \end{proof}
+\end{lemma}
+
+Like most mathematical objects, principal bundles form categories.
+To make this precise, we need to define morphisms of principal bundles:
+
+\begin{definition}
+  Let $P \to X$ and $Q\to Y$ be principal $G$-bundles.
+  A morphism $P\to Q$ is a pair of smooth maps $\phi:P\to Q$ and $f:X\to Y$
+  such that $\phi$ is $G$-equivariant and the following commute:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJQIl0sWzIsMCwiUSJdLFswLDEsIlgiXSxbMiwxLCJZIl0sWzAsMSwiXFxwaGkiXSxbMiwzLCJmIl0sWzAsMiwiXFxwaSIsMl0sWzEsMywiXFxwaSJdXQ==
+    \begin{tikzcd}
+      P && Q \\
+      X && Y
+      \arrow["\phi", from=1-1, to=1-3]
+      \arrow["f", from=2-1, to=2-3]
+      \arrow["\pi"', from=1-1, to=2-1]
+      \arrow["\pi", from=1-3, to=2-3]
+    \end{tikzcd}
+  \end{equation*}
+\end{definition}
+
+\section{Associated bundles}
+
+The similarities between vector bundles and principal bundles are
+hard to miss. This is not an accident. One way to think of principal
+bundles is as a generalisation of vector bundles.
+
+If a group $G$ acts on $A$ and $B$, we have the diagonal action
+of $G$ on $A\times B$ given by $g(a,b)=(ga,{g}^{-1}b)$. We then
+write the quotient $A\times B/G$ under this action as
+\begin{align*}
+  A\times_G B = \left\lbrace{G(a,b) : a\in A, b\in B}\right\rbrace.
+\end{align*}
+We will use this in the case where $P$ is a principal bundle and $V$ is
+a representation. Hence we have $P\times_G V$. \todo{prove that
+this is a manifold?}
+
+\begin{definition}
+  Let $P\to X$ be a principal $G$-bundle and let $V$ be a finite dimensional
+  representation of $G$. The \emph{associated vector bundle} consists of
+  \begin{enumerate}
+    \item the manifold $E(P;V)=P\times_G V$,
+    \item the map $E(P;V)\to X$ given by $[p,v]\mapsto \pi(p)$
+      where $\pi:P\to X$,
+    \item the vector space structure on $E_x$ given by the
+      isomorphism $P_x\cong G$, i.e.
+      \begin{align*}
+        \mu[p,u]+\lambda[q,v] = [pq,\mu u+\lambda v].
+      \end{align*}
+  \end{enumerate}
+\end{definition}
+
+We write $E(P)=E(P,\mathbb{R}^r)$ for principal $GL(r,\mathbb{R})$-bundles $P$
+and the standard representation $\mathbb{R}^r$.
+Note that the projection $E(P;V)\to X$ is well-defined as $P\to X$ is
+$G$-invariant. To see that this defines a vector bundle, we need to find the
+trivialisations. Consider $x\in X$. Take an open $U\subseteq X$ such that
+$P_U\cong G\times U$. Thus
+\begin{align*}
+  E(P;V)_U
+  = P_U\times_G V
+  \cong (G\times U)\times_G V
+\end{align*}
+The isomorphism $E(P;V)_U \cong U\times\mathbb{R}^k$ is now simply
+$[g,x,u]\mapsto (x,gu)$ where we fix $V\cong\mathbb{R}^k$. That this introduces
+an isomorphism $E(P;V)_x\cong\mathbb{R}^r$ on fibres follows from the observation
+that $P_x\cong G$ and hence $E(P;V)_x = P_x\times_G V \cong G\times_G V$.
+
+\begin{definition}
+  Let $P\to X$ and $Q\to Y$ be principal $G$-bundles, $V$ a representation,
+  and consider a bundle map $(\phi,f):P\to Q$. The \emph{associated
+  bundle map} $E(\phi,f):E(P;V)\to E(Q;V)$ consists of
+  \begin{enumerate}
+    \item the smooth map $E(\phi;V):E(P;V)\to E(Q;V)$ given by
+      $[p,v]\mapsto [\phi(p),v]$,
+    \item the smooth map $E(f;V)=f:X\to Y$.
+  \end{enumerate}
+\end{definition}
+
+We verify that this is well-defined. Let $[p,u]=[q,v]\in E(P;V)$.
+Then there is a $g\in G$ such that $p=gq$ and $u={g}^{-1}v$.
+By $G$-equivariance of $\phi$, we have $\phi(p)=g\phi(q)$ and
+hence $[\phi(p),u]=[\phi(q),v]$ in $E(Q;V)$. This defines a bundle map
+as one may easily calculate:
+\begin{align*}
+  \pi(E(\phi;V)\left[{p,u}\right])
+  =\pi_E\left[{\phi(p),u}\right]
+  =\pi_P(\phi(p))
+  = f(\pi_P(p))
+  = E(f;V)(\pi_P(p))
+  = E(f;V)(\pi_E\left[p,u\right]).
+\end{align*}
+
+\section{Frame bundles}
+
+It is also possible to move in the other direction, that is to define
+a principal bundle using a vector bundle. To do this,
+one defines the frame bundle. Consider a rank $r$ vector bundle $E\to X$.
+A frame of $E$ at $x$ is an ordered basis of $E_x$. Thus a frame is
+a linear isomorphism $\mathbb{R}^r\to E_x$ where $x\in X$.
+Write $F_x E$ for the set of all frames on at $x$.
+
+\begin{definition}
+  Let $E\to X$ be a rank $r$ vector bundle. The \emph{frame bundle} consists of
+  \begin{enumerate}
+    \item the manifold $P(E)=\bigsqcup_{x\in X} F_x E$ of all frames on
+      $E$,
+    \item the action $g(x,e)=(x,e\circ g)$
+      of $g\in GL(r,\mathbb{R})$,
+    \item the projection $(x,e)\mapsto x$.
+  \end{enumerate}
+\end{definition}
+
+There is an obvious manifold structure on $P(E)$ that
+makes $P(E)\to X$ into a principal $GL(r,\mathbb{R})$-bundle.
+This structure is obtained by considering a trivialisation
+$\phi:E_U\cong U\times\mathbb{R}^r$. This then induces a bijection
+\begin{align*}
+  P(E)_U &\to U \times GL(r,\mathbb{R}) \\
+  (x,e) &\mapsto (x,\res{\phi}{E_x}\circ e)
+\end{align*}
+Thus if we choose a trivialisation $\phi_x : E_{U_x} \cong U_x \times
+\mathbb{R}^r$, for all $x\in X$, then charts $\psi_E : V_E\to E$ and $\psi_G :
+V_G \to GL(r,\mathbb{R})$ induce a chart
+\begin{align*}
+  \psi : \pi(\psi_E(V_E)) \times V_G &\to P(E)
+\end{align*}
+\missingproof
+
+\begin{definition}
+  Let $E\to X$ and $F\to Y$ be rank $r$ vector bundles and
+  consider a bundle map $(\phi,f):E\to F$. The \emph{frame bundle
+  map} $P(\phi,f):P(E)\to P(F)$ consists of
+  \begin{enumerate}
+    \item the smooth map $P(\phi):P(E)\to P(F)$ given by
+      $(x,e)\mapsto (f(x),\phi\circ e)$, and
+    \item the smooth map $P(f)=f:X\to Y$.
+  \end{enumerate}
+\end{definition}
+
+This is easily checked to be a map of principal bundles:
+\begin{align*}
+  \pi(P(\phi)(x,e)) = \pi(f(x),\phi\circ e) = f(x) = f(\pi(x,e)).
+\end{align*}
+and
+\begin{align*}
+  P(\phi)(g(x,e))
+  = P(\phi)(x, e\circ g)
+  = (f(x),\phi\circ e\circ g)
+  = g(f(x),\phi\circ e)
+  = gP(\phi)(x,e).
+\end{align*}
+
+\section{Vector bundles are $GL(r,\mathbb{R})$-principal bundles}
+
+Consider the categories $\textbf{VB}_r$ of rank $r$ vector bundles
+and $\textbf{PB}(G)$ of principal $G$-bundles up to isomorphism.
+The associated bundle is a vector bundle corresponding to a
+principal $GL(r,\mathbb{R})$-bundle. In the other direction,
+we may use the standard representation
+$GL(r,\mathbb{R})\to\Aut(\mathbb{R}^r)$ to construct from each
+vector bundle a frame bundle, i.e. principal $GL(r,\mathbb{R})$-bundle.
+
+Thus we have functors
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsMixbMCwwLCJcXHRleHRiZntQQn0oRykiXSxbMiwwLCJcXHRleHRiZntWQn1fayJdLFswLDEsIkUiLDAseyJjdXJ2ZSI6LTJ9XSxbMSwwLCJQIiwwLHsiY3VydmUiOi0yfV1d
+  \begin{tikzcd}
+    {\textbf{PB}(GL(r,\mathbb{R}))} && {\textbf{VB}_r}
+    \arrow["E", curve={height=-12pt}, from=1-1, to=1-3]
+    \arrow["P", curve={height=-12pt}, from=1-3, to=1-1]
+  \end{tikzcd}
+\end{equation*}
+
+These functors turn out to be inverses:
+
+\begin{theorem}
+  For all $r\geq 0$, there is an isomorphism of categories
+  \begin{align*}
+    E : \textbf{PB}(GL(r,\mathbb{R})) \cong \textbf{VB}_k : P.
+  \end{align*}
+  \begin{proof}
+    We use functor $E$ with respect to the standard representation
+    of $GL(r,\mathbb{R})$ on $\mathbb{R}^r$.
+
+    Consider a principal $GL(r,\mathbb{R})$-bundle $P\to X$. Then
+    \begin{align*}
+      P(E(P)) = P\left({P\times_{GL(r,\mathbb{R})}\mathbb{R}^r}\right)
+      = \bigsqcup_{x\in X} F_x \left({P\times_{GL(r,\mathbb{R})}\mathbb{R}^r}\right).
+    \end{align*}
+    Now a frame of $E(P)$ at $x$ is a linear isomorphism
+    $\mathbb{R}^r \to E(P)_x$, i.e. a linear isomorphism
+    \begin{align}\label{eq:frame_linear_iso}
+      \mathbb{R}^r\to P_x\times_{GL(r,\mathbb{R})}\mathbb{R}^r
+      \cong \left(GL(r,\mathbb{R})\times\left\lbrace{x}\right\rbrace\right)\times_{GL(r,\mathbb{R})}\mathbb{R}^r \cong \mathbb{R}^r.
+    \end{align}
+    That is, an element of $P(E(P))_x$ is a linear isomorphism
+    $\mathbb{R}^r\to\mathbb{R}^r$, i.e. an element of $GL(r,\mathbb{R})$.
+    Thus if we fix the isomorphism on the right-hand side of (\ref{eq:frame_linear_iso}) to be $[g,x,u]\mapsto gu$ then we have a bijection of
+    fibres $\phi_x : P(E(P))_x \to P_x$ which, through the trivialisations,
+    extends to a Lie group diffeomorphsim $GL(r,\mathbb{R})\to
+    GL(r,\mathbb{R})$. The smoothness follows from the smoothness of the action
+    of $GL(r,\mathbb{R})$ on $\mathbb{R}^r$. It remains to show that
+    the induced map $X\to\Diff(GL(r,\mathbb{R}))$ is smooth.
+    However, the diffeomorphisms $\phi_x$ may be described as
+    the local trivialisations $P_x\cong GL(r,\mathbb{R})\times\left\lbrace{x}\right\rbrace$ composed with various smooth maps. These trivialisations
+    vary smoothly in $x$ by definition of a principal bundle and
+    hence we have an isomorphism of principal $GL(r,\mathbb{R})$-bundles
+    $P\to P(E(P))$.
+
+    Conversely, consider a rank $r$ vector bundle $E\to X$. Then
+    \begin{align*}
+      E(P(E)) = \frac{\bigsqcup_{x\in X} F_x E \times\mathbb{R}^r}{GL(r,\mathbb{R})}.
+    \end{align*}
+    Thus
+    \begin{align*}
+      E(P(E))_x = \frac{F_x E\times\mathbb{R}^r}{GL(r,\mathbb{R})}.
+    \end{align*}
+    Noting that an element $e\in F_x E$ is a linear isomorphism
+    $\mathbb{R}^r\to E_x$ and that the action of $g\in GL(r,\mathbb{R})$
+    on $F_x E$ is given by $e\mapsto e\circ g$,
+    we have a well-defined isomorphism $E(P(E))_x\to E_x$ given by
+    $[e,u]\mapsto e(u)$ whose inverse may be constructed by fixing
+    a non-zero $u^*\in\mathbb{R}^r$ and choosing,
+    for each $v\in E_x$, a frame $e\in F_x E$ that sends
+    $u^*\mapsto v$. All such $e$ are then related by a linear isomorphism
+    with eigenvector $u^*$ and hence represent the same class in
+    $E(P(E))_x$. Finally, we are once again obligated to verify that
+    the induced map $X\to\Diff(\mathbb{R}^r)$ is indeed smooth.
+
+    One may similarly show that $E\circ P$ and $P\circ E$ fix equivalence
+    classes of bundle maps and hence prove the claim.
+  \end{proof}
+\end{theorem}
+
+\section{Tangent frame bundles}
+
+While taking the standard representation $GL(r,\mathbb{R})$
+of $\mathbb{R}^r$ leads to $E=E(P(E))$, the same is not true in general.
+It is thus interesting to take the standard vector bundle on a manifold,
+the tangent bundle, and study where it gets sent by the functor $E(P(-); V)$.
+This leads to the observation that all tensor bundles
+are obtained in this way:
+
+\begin{theorem}
+  Consider the representation of $GL(r,\mathbb{R})$ on
+  $\tensor{k}{\mathbb{R}}^r\otimes\tensor{\ell}{(\mathbb{R}^r)^*}$,
+  and let $X$ be a manifold. Then
+  \begin{align*}
+    E(P(TX);\tensor{k}{\mathbb{R}}^r\otimes\tensor{\ell}{(\mathbb{R}^r)^*}) = \tensor{k}{TX}\otimes\tensor{\ell}{T^*X}.
+  \end{align*}
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
+
+\section{$G$-structures}
+
+In addition to giving rise to tensor bundles, the tangent frame bundle
+allows to endow manifolds with further geometric structures.
+
+\begin{definition}
+  Let $X$ be an $n$-manifold and $G$ be a Lie subgroup of $GL(n,\mathbb{R})$.
+  A $G$-structure on $X$ is a subbundle of the tangent frame bundle
+  $P(TX)$. That is, there is a submanifold $P\subseteq P(TX)$ such that
+  $\res{\pi}{P}:P\to X$ defines a principal $G$-bundle and $GP=P$.
+\end{definition}
+
+One particular structure on manifolds are Riemannian metrics. Recall the
+definition:
+
+\begin{definition}
+  A \emph{Riemannian metric} on a manifold $X$ is a section
+  $g\in\Gamma^\infty(T^*X\otimes T^*X)$ which is symmetric and positive
+  definite, i.e., for $x\in X$ and $u,v\in T^*_x X$,
+  $g_x(u,v)=g_x(v,u)$ and $g_x(u,v)\geq 0$ with $g_x(u,v)=0$
+  if, and only if, $u=v$.
+\end{definition}
+
+It turns out that Riemannian metrics are a special type of $G$-structure.
+
+\begin{theorem}\label{thm:metrics_are_structures}
+  Let $X$ be a manifold. There is a 1-1 correspondence between Riemannian
+  metrics and $O(n)$-structures on $X$.
+  \begin{proof}
+    We follow \cite{cap2021}. Riemannian metrics induce $O(n)$-structures by
+    \begin{align*}
+      P(g) = \left\lbrace{(x,e) \in P(TX) : \text{$e$ is orthonormal w.r.t $g_x$}}\right\rbrace.
+    \end{align*}
+    A frame $e:\mathbb{R}^n\to T_x X$ is orthonormal if $g_x(e(v_i),e(v_j))=\delta_{ij}$ where $v_1,\ldots,v_n$ is the standard basis of $\mathbb{R}^n$.
+    By choosing an isomorphism $T_x X \cong \mathbb{R}^n$, each $g_x$ defines
+    a symmetric, positive definite $A\in GL(n,\mathbb{R})$ such that $g_x(u,v)=u^\top A v$. In particular, there is a $B\in GL(n,\mathbb{R})$ such that
+    $A=B^\top B$, i.e. $g_x(u,v)=\langle Bu,Bv\rangle$.
+    \todo{be more elegant about this?}
+    Similarly, a frame $e:\mathbb{R}^n\to T_x X$ defines
+    a matrix $E\in GL(n,\mathbb{R})$ $e(u) = Eu$. Now $e$ is orthonormal if
+    \begin{align*}
+      g_x(e(v_i),e(v_j)) = \langle Be(v_i), Be(v_j)\rangle = \langle v_i, v_j \rangle,
+    \end{align*}
+    i.e. $I=E^\top B^\top B E$. Thus $BE\in O(n)$. Thus
+    we have a Lie group isomorphism $P(TX)_x \cong O(n)$. This
+    leads to a restriction of $P(TX)_U \cong GL(n,\mathbb{R})\times U$
+    to a diffeomorphism $P(g)_U \cong O(n)\times U$. Thus one sees that
+    $P(g)$ is indeed a submanifold of $P(TX)$ as well as a principal
+    $O(n)$-bundle. It remains to check that $O(n)P(g)=P(g)$. This is
+    obvious as, for all $C\in O(n)$ and $E\in P(g)$,
+    $C^\top E^\top B^\top BEC = C^\top C = I$ and hence $CE\in P(g)$.
+
+    Now suppose we have an $O(n)$-structure $P$. Then, for all $x\in X$,
+    $P_x$ consists of frames $e:\mathbb{R}^r\to T_x X$. We may choose
+    one such frame $e\in P_x$ to define
+    \begin{align*}
+      g^P_x(u,v) = \langle {e}^{-1}(u),{e}^{-1}(v)\rangle.
+    \end{align*}
+    Note that $P_x \cong O(n)$ and hence for all other $e'=e\circ A$ for
+    some $A\in O(n)$. Thus the $g^P_x$ does not depend on the choice of
+    $e$. Now observe that we have diffeomorphisms $P_U \cong O(n)\times U$
+    which allow us to define a smooth section $U\to T^*X\otimes T^*X$ by
+    $x\to g^P_x$. By covering $P$ with $\left\lbrace{U_i}\right\rbrace$
+    that have isomorphisms $P_{U_i}\cong O(n)\times U_i$ and a subordinate
+    partition of unity $\left\lbrace{\eta_i}\right\rbrace$ we may define
+    a smooth section $X\to T^*X \otimes T^*X$ by $x\mapsto \sum_i \eta_i g^P_x = g^P_x$.
+    We have thus constructed a smooth section $X\to T^*X\otimes T^*X$ whose
+    values are symmetric and positive definite, i.e. a Riemannian metric.
+
+    We observe
+    \begin{align*}
+      g^{P(g)}_x(u,v) = \langle {e}^{-1}(u),{e}^{-1}(v)\rangle
+      = g_x(e\circ{e}^{-1}(u), e\circ{e}^{-1}(v))
+    \end{align*}
+    so $g^{P(g)}=g$ for all Riemannian manifolds $(X,g)$.
+
+    The inverse holds, too. Consider $e\in P(g^P)_x$. By construction,
+    \begin{align*}
+      g^P_x(e(v_i),e(v_j))=\langle v_i, v_j\rangle
+    \end{align*}
+    and $g^P_x(u,v)=\langle{f}^{-1}(u),{f}^{-1}(v)\rangle$,
+    for all $f\in P_x$. Combining these we find
+    \begin{align*}
+      \langle {f}^{-1}\circ e(v_i), {f}^{-1}\circ e(v_j)\rangle
+      = \langle v_i, v_j\rangle.
+    \end{align*}
+    Thus ${f}^{-1}\circ e\in O(n)$ which implies $e\in P_x$.
+
+    Conversely, if $e\in P_x$ then
+    \begin{align*}
+      g_x^P(e(v_i),e(v_j)) = \langle {e}^{-1}\circ e(v_i),{e}^{-1}\circ e(v_j)\rangle = \langle v_i,v_j\rangle
+    \end{align*}
+    so $e\in P(g^P)_x$. Now both $P$ and $P(g^P)$ are subbundles
+    of $P(TX)$ with equal fibres, proving $P=P(g^P)$ and hence the claim.
+  \end{proof}
+\end{theorem}
+
+\begin{theorem}
+  Let $X$ be a manifold. There is a one-to-one correspondence between
+  orientations on $X$ and $GL_+(n,\mathbb{R})$-structures on $X$
+  where $GL_+(n,\mathbb{R})$ is the group of positive determinant
+  matrices.
+  \begin{proof}
+    Consider a $GL_+(n,\mathbb{R})$-structure $P$ on $X$.
+    \missingproof
+  \end{proof}
+\end{theorem}
+
+\begin{theorem}
+  Let $X$ be a manifold. There is a one-to-one correspondence between
+  $SO(n)$-structures on $X$ and pairs of orientations and Riemannian
+  metrics.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
+
+\section{Levi-Civita connection}
+
+Connections may be thought of as a way of taking directional derivatives
+of vector fields.
+
+\begin{definition}
+  Let $E\to X$ be a vector bundle. A \emph{connection in $E$} is a map
+  \begin{align*}
+    \nabla : \Gamma(TX) \times \Gamma(E) &\to \Gamma(E) \\
+    (u,s) &\mapsto \nabla_u s
+  \end{align*}
+  such that
+  \begin{enumerate}
+    \item $\nabla_u s$ is $C^\infty(X)$-linear in $u$,
+    \item $\nabla_u s$ is $\mathbb{R}$-linear in $s$, and
+    \item for $f\in C^\infty(X)$,
+      \begin{align*}
+        \nabla_u (fs) = f\nabla_u s + u(f)s.
+      \end{align*}
+  \end{enumerate}
+\end{definition}
+
+As the canonical non-trivial vector field on a manifold,
+we are going to be particularly interested in connections on the
+tangent bundle $TX$. Connections of the tangent bundle extend to
+general tensor bundles:
+
+The tangent bundle is even more relevant for
+Riemannian manifolds as the metric defines a form of inner product
+on vector fields, i.e. sections of the tangent bundle.
+It is thus reasonable to require that the connection, thought of
+as differentiation, respects the metric, thought of as the product,
+by satisfying the product rule:
+
+\begin{definition}
+  Let $(X,g)$ be a Riemannian manifold. A connection $\nabla$ in $TX$ is
+  \emph{metric} if, and only if, for all $u,v,w\in\Gamma(TX)$,
+  \begin{align*}
+    \nabla_u g(v,w) = g(\nabla_u v, w) + g(v,\nabla_u w)
+  \end{align*}
+  where we write $\nabla_u g(v,w) = u g(v,w)$
+\end{definition}
+
+The notation $\nabla_u g(v,w)$ is motivated by the fact that any
+connection in $TX$ uniquely extends to connections in any tensor bundle
+$\tensor{k}{TX}\otimes\tensor{\ell}{T^*X}$. In partiucular, $g(v,w)$
+is a smooth function $X\to\mathbb{R}$, i.e. a tensor with $k=\ell=0$.
+\cite{lee2018}
+
+Our goal is to obtain a canonical connection on a Riemannian manifold.
+We will use this to define the holonomy group in the next chapter.
+However, manifolds admit many metric connections. Therefore we require
+a stronger condition:
+
+\begin{definition}
+  Let $X$ be a manifold. A connection $\nabla$ in $TX$ is
+  \emph{symmetric} if, for all $u,v\in\Gamma(TX)$,
+  \begin{align*}
+    \nabla_u v - \nabla_v u = [u,v].
+  \end{align*}
+\end{definition}
+
+Here $[u,v]$ is the Lie-bracket or the Lie-derivative $\mathcal L_u v$
+which is given in coordinates by
+\begin{align*}
+  [u,v] = u(v_i)\frac{\partial }{\partial y_i} - v(u_i)\frac{\partial}{\partial x_i}
+\end{align*}
+where we have written $v=\sum_i u_i\frac{\partial}{\partial x_i}$
+and $v=\sum_i v_i\frac{\partial}{\partial y_i}$.
+This condition turns out to be the correct one to obtain a canonical connection in the tangent bundle of a Riemannian manifold:
+
+\begin{theorem}[Fundamental Theorem of Riemannian Geometry]
+  Let $(X,g)$ be a Riemannian manifold. Then there exists a unique
+  symmetric metric connection in $TX$.
+\end{theorem}
+
+We call this connection the \emph{Levi-Civita connection}.
+
+\section{Holonomy group of a connection}
+
+Given a smooth curve $\gamma:[0,1]\to X$, we may pull back vector bundles
+on $E\to X$ to vector bundles $\gamma^*E\to [0,1]$ by precomposition.
+Note that $[0,1]$ has boundry, but the definitions of vector bundles
+extend to this case. Alternatively, one may consider the smooth extension
+of $\gamma$ to $(-\varepsilon,1+\varepsilon)$ for some $\varepsilon>0$.
+Similarly, a connection $\nabla$ in $E$ pulls back to a connection
+$\gamma^*\nabla$ in $\gamma^* E$ by
+\begin{align*}
+  (\gamma^*\nabla)_v s = \nabla_v (s\circ {\gamma}^{-1})\circ\gamma
+\end{align*}
+where $v:[0,1]\to T[0,1]$ is a vector field and $s:[0,1]\to E$
+is a section of $\gamma^* E$. Note that $(\gamma^*\nabla)_v$ depends
+only on the values of $v$ along $\gamma$. This follows from the
+$C^\infty(X)$-linearity of connections by using bump functions around
+$\gamma$. Hence it makes sense to write $(\gamma^*\nabla)_v s$
+even when $v$ is only defined for $x\in\gamma[0,1]$.
+
+We use this pull-back to define the core ingredient of the holonomy group:
+
+\begin{definition}
+  Let $E\to X$ be a vector bundle, $\nabla$ a connection in $E$,
+  and $\gamma:I\to X$ a smooth curve. Then,
+  for each $e\in E_{\gamma(0)}$, there is a unique section $s_e\in\Gamma(\gamma^* E)$
+  such that $s_e(0)=e$ and, for all $t\in I$, $\nabla_{\dot\gamma} s(t) = 0$.
+  The \emph{parallel transport} along $\gamma$ is the linear map
+  \begin{align*}
+    P_\gamma : E_{\gamma(0)} &\to E_{\gamma(1)} \\
+    e &\mapsto s_e(1)
+  \end{align*}
+\end{definition}
+
+Here $\dot\gamma$ is the tangent vector field of $\gamma$ along the curve.
+In local coordinates, this is
+\begin{align*}
+  \dot\gamma = \sum_i \frac{\partial x_i}{\partial t} \frac{\partial}{\partial x_i}
+\end{align*}
+where $\gamma(t) = (x_1(t),\ldots,x_n(t))$.
+
+We call a curve $\gamma : I\to X$ a loop at $x\in X$ if $\gamma(0)=\gamma(1)=x$.
+
+\begin{definition}
+  Let $E\to X$ be a vector bundle, $\nabla$ a connection in $E$,
+  and $x\in X$. Then the \emph{holonomy group of $\nabla$ at $x$}
+  is
+  \begin{align*}
+    \Hol_x(\nabla) = \left\lbrace{P_\gamma : \text{$\gamma$ is a loop at $x$}}\right\rbrace.
+  \end{align*}
+\end{definition}
+
+The group sturcture on $\Hol_x(\nabla)$ is inherited from the group $GL(E_x)$ of linear automorphisms on $E_x$. To see that this is well-defined, note
+that, for loops $\gamma,\delta : I \to X$ at $x$, we have
+\begin{align*}
+  P_\gamma\circ P_\delta = P_{\gamma\delta}, \hspace{1cm}
+  {P_\gamma}^{-1} = P_{{\gamma}^{-1}}
+\end{align*}
+where $\gamma\delta$ is the usual concatenation of loops and ${\gamma}^{-1}$
+is the reverse of the loop. Moreover, $\Hol_x(\nabla)$ inherits the
+manifold structure of $GL(E_x)$ and is thus a Lie subgroup.
+
+As an abstract group, the holonomy group of a connection is independent
+of the base point:
+
+\begin{lemma}
+  Let $\nabla$ be a connection in a vector bundle $E\to X$, let $x,y\in X$,
+  and let $\gamma$ be a path from $x$ to $y$. Then
+  \begin{align*}
+    \Hol_y(\nabla)=P_\gamma \Hol_x(\nabla){P_\gamma}^{-1}.
+  \end{align*}
+  \begin{proof}
+
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+Thus, if $E$ has rank $k$ then one may regard $\Hol_x(\nabla)$ as
+a Lie subgroup of $GL(k,\mathbb{R})$ up to conjugation.
+
+\section{Holonomy groups of Riemannian metrics}
+
+Every Riemannian manifold $(X,g)$ has a canonical connection
+$\nabla$ in $TX$, the Levi-Citiva connection. Thus a metric $g$
+defines a holonomy group $\Hol_x(g) = \Hol_x(\nabla)\subseteq GL(T_x X)$.
+
+A section $s\in\Gamma(E)$ is constant if $\nabla s = 0$, i.e. $\nabla_v s=0$, for all $v\in\Gamma(TX)$. We mentioned earlier that connections in
+$TX$ extend to all tensor bundles. This defines the notion of a constant
+tensor. Note that, by definition of the Levi-Civita connection,
+$\nabla g = 0$ so $g$ is a constant tensor.
+
+Next, observe that $\Hol_x(g)\subseteq GL(T_x X)$ acts naturally
+on $T_x X$ and thus on all tensors. It is a property of this action that
+constant tensors are fixed by this action. In particular,
+$\Hol_x(g)$ preserves $g_x$. We showed in \ref{thm:metrics_are_structures} that the subgroup of $GL(T_x X)$ that preserves $g_x$ is exactly
+$O(n)$, making $\Hol_x(g)$ a subgroup of $O(n)$. This is indepedent of
+$x$ up to conjugation, hence we may simply write $\Hol(g)$.
+
+We conclude this section by classifying Riemannian holonomy groups.
+Firstly, observe that, if $(X,g)$ and $(Y,h)$ are Riemannian
+manifolds then $(g\times h)_{x,y} = g_x + h_y$ defines a Riemannian
+metric on $X\times Y$. Hence we may define
+the product of Riemannian manifolds $(X\times Y,g\times h)$.
+The holonomy groups then satisfy $\Hol_{x,y}(g\times
+h)=\Hol_x(g)\times\Hol_y(h)$. Thus the representation of
+$\Hol_{x,y}(g\times h)$ on $T_{x,y}(X\times Y)$ is reducible.
+
+The converse is not immediately true: If the representation of
+$Hol_x(g)$ is reducible it is in general not true that the metric
+may be written as $g=g_1\times g_2$. Thus we require the notion of
+local reduicibility:
+
+\begin{definition}
+  A Riemannian manifold $(X,g)$ is \emph{locally reducible} if, for
+  all $x\in X$, there is a neighbourhood $U\ni x$, Riemannian manifolds
+  $(V,g^V)$, $(W,g^W)$, and a diffeomorphism $U\cong V\times W$ such that
+  $\res{g}{U}$ is isometric to $g_X\times g_Y$.
+  A metric that is not locally reducible is called \emph{irreducible}.
+\end{definition}
+
+This is the correct notion of irreducibility as the representations
+of the holonomy groups of an irreducible metric are guaranteed to
+be irreducible. So, to classify Riemannian holonomy groups, it suffices
+to focus our attention on irreducible Riemannian manifolds.
+
+We then distinguish two types of Riemannian manifolds: symmetric
+and non-symmetric.
+
+\begin{definition}
+  A Riemannian manifold $(X,g)$ is symmetric if, for every point $x\in X$,
+  there is an isometry $s_x : X\to X$ with isolated fixed point $x$ which is
+  an involution, i.e. $s_x^2 = \identity$.
+\end{definition}
+
+Here isolated means that there exists an open neighbourhood $U\ni x$
+such that $x$ is the only fixed point of $\restriction{s_x}{U}$.
+The full list of holonomy groups of irreducible symmetric Riemannian
+manifolds may be found in \cite{besse1987}.
+
+The non-symmetric case is more compact:
+
+\begin{theorem}[Berger]
+  If $(X,g)$ is a simply-connected, non-symmetric, irreducible Riemannian
+  $n$-manifold then $\Hol_x(g)$ is one of
+  \begin{align*}
+    SO(n), \hspace{1cm}
+    U(n/2), \hspace{1cm}
+    SU(n/2), \hspace{1cm}
+    Sp(n/4), \hspace{1cm}
+    Sp(n/4)Sp(1), \hspace{1cm}
+    G_2, \hspace{1cm}
+    \text{Spin}(7).
+  \end{align*}
+\end{theorem}
+
+\section{Constructing manifolds with specific holonomy groups}
+
+Berger's theorem tells us exactly which groups arise as holonomy groups of
+Riemannian manifolds. However, it is not immediately obvious and in fact
+non-trivial to construct Riemannian manifolds that yield each of the listed
+holonomy groups. Particularly interesting are the two exceptional
+holonomy groups $G_2$ and $\text{Spin}(7)$.
+
+Fix $G$ to be one of the groups on Berger's list. Then one way
+construct a Riemannian manifold $(X,G)$ with $\Hol_x(g)=G$ by
+first constructing a $G$-structure. If this structure is not torsion
+free, then it may be possible to deform it to a torsion free $G$-structure
+with the same holonomy group. One may then need to check
+that the structure is topologically well-behaved to obtain a $G$-structure.
+For example, in the case $G=G_2$, it is required that $\pi_1(X)$ is
+finite to find that the $G_2$-structure does indeed yield a manifold
+with holonomy $G_2$. For full examples for the cases $G=G_2$
+and $G=\text{Spin}(7)$ see \cite{joyce2007}.
+
+\printbibliography{}
 
 \end{document}
