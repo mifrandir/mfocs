@@ -2,7 +2,7 @@
 \usepackage{assignment}
 \begin{document}
 \title{The Complexity of Computing Mixed Nash Equilibria}
-\author{Franz Miltz}
+\author{Candidate 1082394}
 \date{\today}
 \maketitle
 
@@ -283,7 +283,7 @@ establishing an intermediate problem $\texttt{Brouwer}$ and show
 \begin{align*}
   k\texttt{-Nash}\leq_P\texttt{Brouwer}\leq_P\texttt{EndOfLine},
   \hspace{1cm}
-  \texttt{EndOfLine}\leq_P P\leq_P k\texttt{-Nash}.
+  \texttt{EndOfLine}\leq_P \texttt{Brouwer}\leq_P k\texttt{-Nash}.
 \end{align*}
 
 Let us now introduce $\texttt{Brouwer}$.
@@ -371,12 +371,11 @@ $O(\text{poly}(d))$ as a whole.
 \begin{definition}
   Denote by $\texttt{Brouwer}$ the search problem with
   \begin{itemize}
-    \item an instance consists of integers $K,d$ and a family of
+    \item instances consisting of integers $K,d$ and a family of
       circuits $\left\lbrace{C_j}\right\rbrace$ that
       efficiently computes a $K$-Lipschitz function $f:\left[{0,1}\right]^k\to\left[{0,1}\right]^k$,
-    \item a candidate is any integer multiple $\tilde x\in\left[{0,1}\right]^k$ of $2^{-j}$ for any positive integers $j$ and $k$,
-    \item a candidate is a solution if, and only if, it is a
-      multiple of $2^{-d}$ and a $d$-fixed point of $f$.
+    \item candidate all integer multiples $\tilde x\in\left[{0,1}\right]^k$ of $2^{-j}$ for any positive integers $j$ and $k$, and
+    \item solutions multiples of $2^{-d}$ that are $d$-fixed points of $f$.
   \end{itemize}
 \end{definition}
 
@@ -385,7 +384,7 @@ $O(\text{poly}(d))$ as a whole.
 It is now time to establish \texttt{Brouwer} as a suitable intermediate
 problem to establish that \texttt{Nash} is \textbf{PPAD}-complete.
 While we will not dive deep into the technical details, we give an overview
-of the proof:
+of the proof given in \cite{daskalakis2008}.
 
 \begin{theorem}
   $\texttt{Brouwer}\leq_P\texttt{EndOfLine}$.
@@ -468,7 +467,7 @@ proof of Nash's theorem uses Bouwer's fixed point theorem and hence
 almost gives us the reduction for free:
 
 \begin{theorem}
-  $\texttt{Nash}\leq_P\texttt{Brouwer}$.
+  $k\texttt{-Nash}\leq_P\texttt{Brouwer}$.
   \begin{proof}[Sketch of the proof]
     When using Brouwer's theorem to prove Nash's theorem one
     constructs a function $b$ on strategy configurations that
@@ -484,14 +483,14 @@ almost gives us the reduction for free:
       \item check that $b:\left[{0,1}\right]^n\to\left[{0,1}\right]^n$
         is Lipschitz,
       \item check that $b$ is computable in polynomial time,
-      \item check that $\varepsilon$-fixed points correspond to
-        $\varepsilon$-Nash equilibria,
+      \item check that $d$-fixed points correspond to
+        $d$-Nash equilibria,
       \item check that the \texttt{Brouwer} has size polynomial
         in the size of the original \texttt{Nash} instance.
     \end{enumerate}
     These checks turn out to be routine. Depending on the exact
     definition of the function $b$ one may be requried to do some
-    scaling to be able to use the same $\varepsilon$ for both
+    scaling to be able to use the same parameter $d$ for both
     instances.
   \end{proof}
 \end{theorem}
@@ -580,14 +579,17 @@ a better game to handle comparisons is hopeless:
       $\mu$ with $\mu_x = p$ and $\mu_y = q$, and
     \item every Nash equilibrium $\mu$ satisfies
       \begin{align}\label{eq:good_comparator}
-        \mu_z = \max(\mu_x,\mu_y).
+        \mu_z = \begin{cases}
+          0 &\text{if }\mu_x \geq \mu_y, \\
+          1 & \text{if }\mu_x < \mu_y.
+        \end{cases}
       \end{align}
   \end{enumerate}
   \begin{proof}
     Suppose there was such a game. We extend it as follows:
     \begin{enumerate}
       \item add a new player $t$ who receives a pay-off if, and only if,
-        she plays opposite to $x$,
+        she plays the same as $x$,
       \item player $x$ receives a pay-off if, and only if, she plays
         opposite to $t$,
       \item player $y$ receives a pay-off if, and only if, she plays
@@ -599,8 +601,8 @@ a better game to handle comparisons is hopeless:
     and $\mu_y = 1-\mu_z$. Thus we obtain the unsatisfiable condition
     \begin{align*}
       \mu_z = \begin{cases}
-        1 & \text{if }1/2 > \mu_z \\
-        0 & \text{otherwise}
+        0 & \text{if } \mu_z \geq 1/2,\\
+        1 & \text{if } \mu_z < 1/2
       \end{cases}.
     \end{align*}
     This means there cannot be a Nash equilibrium in this new game,
@@ -627,10 +629,12 @@ to ensure that the resulting game may be 3-coloured in such a way as
 to make sure that no two nodes with the same colour are connected by a
 path of length two or shorter.
 
-Using this colouring, we may create a three super player game where each
-player represents a colour. Each of these players actions will correspond
-to one action by one player in the previous game. Thus each of these
-new players has a set of action linear in the number of players.
+Using this colouring, we may create a three player game where each
+player represents a colour. Call each the players in the new game a
+super player. Each of these players actions will correspond
+to one action by one player in the previous game which we constructed
+out of the elementary gates. Thus each of these
+super players has a set of actions linear in the number of players.
 The pay-offs are awarded to the super player whenever they represent
 an original player all of whose dependents have chosen a strategy,
 i.e. if the other super players have chosen strategies corresponding
@@ -649,8 +653,14 @@ Even though we have left out some key technical details, this outlines
 the proof of the following:
 
 \begin{theorem}
-  $\texttt{Brouwer}\leq_P\texttt{Nash}$.
+  $\texttt{Brouwer}\leq_P 3\texttt{-Nash}$.
 \end{theorem}
+
+Using the obvious reduction $k\texttt{-Nash}\leq_P k'\texttt{-Nash}$
+for $k\leq k'$ we thus obtain \textbf{PPAD}-completeness of $k\texttt{-Nash}$
+for $k\geq 3$.
+The case $k=2$ may be resolved in various ways, see e.g.
+\cite{chen2007}. Thus $k\texttt{-Nash}$ is \textbf{PPAD}-complete.
 
 \section{Consequences}
 
@@ -689,9 +699,8 @@ one of the inclusions
 \end{align*}
 is strict, but even showing that one is strict does not rule out
 any other. Thus proving that computing Nash equilibria
-is intractable proves $\textbf{P}\neq\textbf{NP}$ but leaves the
-other two questions open.
-
+is intractable would prove $\textbf{P}\neq\textbf{NP}$ but the
+other two questions would remain.
 
 \printbibliography
 

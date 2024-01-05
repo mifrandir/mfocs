@@ -2,11 +2,9 @@
 \usepackage{assignment}
 \begin{document}
 \title{C3.3 Differentiable Manifolds Mini Project: Principal Bundles}
-\author{Franz Miltz}
+\author{Candidate 1082394}
 \date{\today}
 \maketitle
-
-\todo{overall better citations}
 
 \section{Vector bundles}
 
@@ -103,7 +101,8 @@ bundles:
 
 The similarities between vector bundles and principal bundles are
 hard to miss. This is not an accident. One way to think of principal
-bundles is as a generalisation of vector bundles.
+bundles is as a generalisation of vector bundles. The following
+constructions are standard, see e.g.~\cite{mitchell2001}.
 
 If a group $G$ acts on $A$ from the right and $B$ from the left, we have the
 diagonal action of $G$ on $A\times B$ given by $g(a,b)=(ag,{g}^{-1}b)$. We then write the quotient $(A\times B)/G$ under this action as
@@ -250,7 +249,7 @@ and
 \section{Vector bundles are $GL(r,\mathbb{R})$-principal bundles}
 
 Consider the categories $\textbf{VB}_r$ of rank $r$ vector bundles
-and $\textbf{PB}(G)$ of principal $G$-bundles up to isomorphism.
+and $\textbf{PB}(G)$ of principal $G$-bundles, both up to isomorphism.
 The associated bundle is a vector bundle corresponding to a
 principal $GL(r,\mathbb{R})$-bundle. In the other direction,
 we may use the standard representation
@@ -341,7 +340,7 @@ of $\mathbb{R}^r$ leads to $E=E(P(E))$, the same is not true in general.
 It is thus interesting to take the standard vector bundle on a manifold,
 the tangent bundle, and study where it gets sent by the functor $E(P(-); V)$.
 This leads to the observation that all tensor bundles
-are obtained in this way:
+are obtained in this way. \cite{joyce2019}
 
 \begin{theorem}
   Consider the representation of $GL(r,\mathbb{R})$ on
@@ -543,7 +542,6 @@ The notation $\nabla_u g(v,w)$ is motivated by the fact that any
 connection in $TX$ uniquely extends to connections in any tensor bundle
 $\tensor{}{k}{TX}\otimes\tensor{}{\ell}{T^*X}$. In particular, $g(v,w)$
 is a smooth function $X\to\mathbb{R}$, i.e. a tensor with $k=\ell=0$.
-\cite{lee2018}
 
 Our goal is to obtain a canonical connection on a Riemannian manifold.
 We will use this to define the holonomy group in the next chapter.
@@ -667,7 +665,8 @@ Every Riemannian manifold $(X,g)$ has a canonical connection
 $\nabla$ in $TX$, the Levi-Citiva connection. Thus a metric $g$
 defines a holonomy group $\Hol_x(g) = \Hol_x(\nabla)\subseteq GL(T_x X)$.
 If one is to study the geometry of Riemannian manifolds, it is natural
-to study Riemannian holonomy groups.
+to study Riemannian holonomy groups. See e.g. \cite{joyce2007} for
+details.
 
 We begin by observing that Riemannian holonomy groups depend only on the
 metric, not on the base point.
@@ -719,7 +718,7 @@ and non-symmetric.
 \end{definition}
 
 Here isolated means that there exists an open neighbourhood $U\ni x$
-such that $x$ is the only fixed point of $\restriction{s_x}{U}$.
+such that $x$ is the only fixed point of $\res{s_x}{U}$.
 The full list of holonomy groups of irreducible symmetric Riemannian
 manifolds may be found in \cite{besse1987}.
 
