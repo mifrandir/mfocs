@@ -56,7 +56,7 @@
 { }               % Space after theorem head
 {}                % Theorem head spec
 \theoremstyle{sltheorem}
-\newtheorem{theorem}{Theorem}[section]
+\newtheorem{theorem}{Theorem}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
@@ -65,6 +65,7 @@
 \newtheorem{example}[theorem]{Example}
 
 \DeclareMathOperator{\identity}{id}
+\DeclareMathOperator{\Identity}{Id}
 \DeclareMathOperator{\Hom}{Hom}
 \newcommand{\res}[2]{\left.{#1}\right\vert_{#2}}
 
@@ -74,14 +75,25 @@
 \DeclareMathOperator*{\Mwedge}{\text{\raisebox{0.3ex}{\scalebox{0.75}{$\bigwedge$}}}}
 \newcommand{\exterior}[2]{\Mwedge\nolimits^{#1}\!#2}
 \newcommand{\prc}[2]{\Pr\left({{#1}\:|\:#2}\right)}
+\newcommand{\op}[1]{{#1}^\text{op}}
+\newcommand{\sslash}{/\!/}
+\newcommand{\affine}[2]{\mathbf{A}^{#1}_{#2}}
 
 \setlength{\parskip}{5pt plus 1pt minus 1pt}
 
-\newcommand{\missingproof}{\todo[color=red]{proof!}}
 \newcommand{\doublecheck}{\todo[color=yellow]{check this}}
-\newcommand{\missingexample}{\todo[color=blue]{example}}
-\newcommand{\missingdefinition}[1]{\todo[color=green]{definition of #1}}
+\newcommand{\question}[1]{\todo[color=green]{\textbf{QUESTION:} #1}}
+\newcommand{\missingexample}{\todo[color=cyan]{\textbf{MISSING} example}}
+\newcommand{\missingdefinition}[1]{\todo[color=orange]{\textbf{MISSING} definition of #1}}
+\newcommand{\missingproof}{\todo[color=red]{\textbf{MISSING} proof!}}
 \DeclareMathOperator*{\supp}{supp}
 \DeclareMathOperator{\Diff}{Diff}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Hol}{Hol}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Jac}{Jac}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Sch}{Sch}
+\DeclareMathOperator{\Set}{Set}
+\DeclareMathOperator{\Dol}{Dol}

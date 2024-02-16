@@ -1,0 +1,310 @@
+\documentclass{article}
+\usepackage{assignment}
+\addbibresource{higgs.bib}
+\begin{document}
+\title{Higgs bundle}
+\date{\today}
+\maketitle
+
+\section{Complex geometry}
+
+\subsection{Holomorphic functions}
+
+\subsection{Holomorphic 1-forms}
+
+\subsection{Complex vector bundles}
+
+\missingdefinition{trivial rank 1 bundle $1_M$}
+
+\begin{theorem}[\cite{mccarthy2020}]\label{thm:dim_rank_vector_bundles}
+  Let $E\to M$ be a real vector bundle on a smooth manifold. If $\rank E > \dim M$ then there is a real vector bundle $E'$ of rank $\rank E' = \dim M$
+  such that
+  \begin{align*}
+    E \cong E' \oplus \bigoplus_{\rank E - \dim M} 1_M.
+  \end{align*}
+\end{theorem}
+
+\subsection{Holomorphic connection}
+
+\subsection{Complex manifolds}
+
+A complex vector space is just a real vector space $V$ together with a
+$J\in\Aut(V)$ such that $J^2 = -\Identity$. We similarly define
+a complex structure on a real manifold to be automorphisms of the
+tangent bundle:
+
+\begin{definition}
+  Let $X$ be a real manifold. A \emph{complex structure} on $X$
+  is an automorphism of real vector bundles $J\in\Aut(TX)$ such
+  that $J^2 = -\Identity$. The pair $(X,J)$ is referred to as an
+  \emph{almost complex manifold}.
+\end{definition}
+
+\begin{itemize}
+  \item A complex structure smoothly assign a complex structure to each tangent
+    space. One may also think of a complex structure as a $(1,1)$-tensor field
+    $J\in\Gamma(TX\otimes T^* X)$.
+  \item Any real manifold that admits a complex structure must have even
+    dimension. This follows immediately from the analogous observation for real
+    vector spaces.
+  \item Each complex $n$-manifold $X$ induces a complex structure $J$ on the
+    real $2n$-manifold $X$. That is, every complex manifold is an almost
+    complex manifold. The converse need not be true. \missingexample
+  \item On a complex manifold $X$, the complex structure has eigenvalues
+    $\pm i$. This induces a splitting
+    \begin{align*}
+      T_x X = T^{1,0}_x X \oplus T^{0,1}_x X
+    \end{align*}
+    for each $x\in X$ where $T^{1,0}_x X$ and $T^{0,1}_x X$ correspond
+    to the eigenvalues $i$ and $-i$, respectively. There are obvious
+    vector bundles $T^{1,0} X$ and $T^{0,1} X$. \question{Is it
+    necessarily the case that $\rank(T^{1,0} X) = \rank(TX)/2$?}
+  \item By choosing coordinates around $x$ and writing $(\partial / \partial
+    z_j)_x = (\partial / \partial x_j - i\partial / \partial y_j)_x / 2$ we
+    have bases
+    \begin{align*}
+      \left\lbrace{\left(\frac{\partial}{\partial z_j}\right)_x}\right\rbrace_j, \hspace{1cm}
+      \left\lbrace{\left(\frac{\partial}{\partial \bar z_j}\right)_x}\right\rbrace_j
+    \end{align*}
+    for $T^{1,0}_x X$ and $T^{0,1}_x X$, respectively.
+  \item Analogously, we obtain the splitting
+    \begin{align*}
+      T^*_x X = \Lambda^{1,0}_x X \oplus \Lambda^{0,1}_x X
+    \end{align*}
+    and hence bundles $\Lambda^{1,0}X$ and $\Lambda^{0,1}X$. This
+    splitting extends to exterior powers of the cotangent bundle:
+    \begin{align*}
+      \Lambda^k X
+      = \bigoplus_{p+q = k} \Lambda^{p,q} X
+      = \bigoplus_{p+q=k}\left({\exterior{p}{\Lambda^{1,0} X}}\right)\wedge
+      \left({\exterior{q}{\Lambda^{0,1} X}}\right).
+    \end{align*}
+    We call sections of $\Lambda^{p,q} X$ $(p,q)$-forms and write
+    $\Omega^{p,q}(X)=\Gamma(\Lambda^{p,q}X)$.
+\end{itemize}
+
+\begin{example}[{\cite[Section 5.2]{neitzke2021}}]
+  Let $E\to\Sigma_g$ be a complex rank $k$ vector bundle
+  on a Riemannian surface with $d=\deg E$. Then $\End E$ is
+  a complex manifold whose structure is induced by the
+  homeomorphism $\End E \cong E\otimes E^*$.
+
+  Then $\Omega^{0,1}(\End E)$ is the
+\end{example}
+
+\begin{itemize}
+  \item Using the projections, the exterior derivative $d:\Omega^k(X)\to\Omega^{k+1}(X)$ splits into maps $d^{0,k+1},\ldots,d^{k+1,0}$ with
+    \begin{align*}
+      d^{p,q} : \Omega^k(X) \to \Omega^{p,q}(X).
+    \end{align*}
+\end{itemize}
+
+\section{Moduli spaces in algebraic geometry}
+
+While classifying geometric objects of a certain types, one often
+finds that the space of such objects has a rich geometric structure.
+For example, the space of all lines in $k^{n+1}$ is
+$\mathbb{P}^n_k$. The space of all objects of a certain type is referred
+to as a moduli space. \cite{bejleri2020}
+
+\begin{definition}
+  Let $F:\op{\Sch}_S\to\Set$ be a presheaf on $S$-schemes.
+  A \emph{fine moduli space} of $F$ is an $S$-scheme $M$ that
+  represents $F$, i.e. there exists a natural isomorphism
+  \begin{align*}
+    F \cong \Hom\left({-,M}\right).
+  \end{align*}
+\end{definition}
+
+\section{Geometric invariant theory}
+
+Consider $X=\Spec R$ and a group $G$ acting on $X$. We want to construct
+an affine scheme $X \sslash G$. The usual quotient does not work:
+Consider the action of $G_m$ on $\affine{n}{}$.
+
+\begin{definition}
+  A \emph{group scheme} $G/S$ is a group object in $\Sch_S$.
+\end{definition}
+
+\begin{definition}
+  An \emph{algebraic group over $k$} is a smooth separated
+  group scheme over $k$.
+\end{definition}
+
+\begin{definition}
+  A \emph{action} of $G/S$ on $X/S$ is a morphism
+  $\rho : G\times X\to X$ satisfying the usual laws with respect
+  to $\mu:G\times G\to G$.
+\end{definition}
+
+\section{Stable bundles}
+
+We aim to classify vector bundles on a Riemannian surface $\Sigma_g$
+of genus $g$. In light of \ref{thm:dim_rank_vector_bundles},
+a complex vector bundle $E\to\Sigma_g$ is classified by
+$\rank E$ and $\deg E$ where \question{what's $c_1$ here?}
+\begin{align*}
+  \deg E = c_1(E)[\Sigma_g].
+\end{align*}
+
+If $\rank E = 1$, $\deg E = 1$ then the complex vector bundles
+$E\to\Sigma_g$ corresponds to the complex torus of complex dimension
+$g$, i.e. $\Jac_0(\Sigma_g)=\mathbb{C}^g / \mathbb{Z}^{2g}$.
+
+If $\rank E = 1$ then the complex vector bundles $E\to\Sigma_g$
+correspond to the sheaf cohomology \question{what's sheaf cohomology?} group
+\begin{align*}
+  H^1(\Sigma_g,\mathcal O^*) \cong \mathbb{Z}\times\Jac_0(\Sigma_g).
+\end{align*}
+
+If $\rank E>1$ then things get hairy. For some reason \question{What is reallly happening here?}
+things stop being discrete (i.e. we don't get a distinct classification
+for each combination of rank and dimension). Instead we consider
+moduli spaces.
+
+\subsection{Dolbeault operator}
+
+\begin{lemma}
+  Let $E\to X$ be a smooth complex vector bundle $E\to X$ on a complex
+  manifold. Then
+  \begin{align*}
+    \Omega^{0,1}(E) = \Omega^{0,1}(X)\otimes\Gamma(E).
+  \end{align*}
+  \begin{proof}
+    Let $\omega\in\Omega^{0,1}(X)$ and $s\in\Gamma(E)$. Define
+    $t(s,\omega)\in\Omega^{0,1}=\Gamma({\left({T^{0,1}}\right)^* E})$
+    by
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsNCxbMCwwLCJFIl0sWzIsMCwiWCJdLFs0LDAsIihUXnswLDF9KV4qIFgiXSxbNiwwLCIoVF57MCwxfSleKkUiXSxbMCwxLCJcXHBpIl0sWzEsMiwiXFxvbWVnYSJdLFsyLDMsIihUXnswLDF9KV4qIHMiXV0=
+      \begin{tikzcd}
+        E && X && {(T^{0,1})^* X} && {(T^{0,1})^*E}
+        \arrow["\pi", from=1-1, to=1-3]
+        \arrow["\omega", from=1-3, to=1-5]
+        \arrow["{(T^{0,1})^* s}", from=1-5, to=1-7]
+      \end{tikzcd}
+    \end{equation*}
+    This defines a bilinear map
+    \begin{align*}
+      t : \Omega^{0,1} X \times \Gamma(E) \to \Omega^{0,1}(E).
+    \end{align*}
+    yadda yadda
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+\begin{definition}
+  A \emph{Dolbeault operator} on a smooth complex vector bundle
+  $E\to X$ on a complex manifold is a $\mathbb{C}$-linear operator
+  \begin{align*}
+    \bar\partial_E : \Gamma(E) \to \Omega^{0,1}(E)
+  \end{align*}
+  such that
+  \begin{enumerate}
+    \item $\bar\partial_E^2 = 0$,
+    \item $\bar\partial_E(fs) = \bar\partial f \otimes s + f\bar\partial_E s$
+      for $s\in\Gamma(E)$ and $f\in\Omega^0(X)$.
+  \end{enumerate}
+\end{definition}
+
+Two Dolbeault operators $\bar\partial_1$ and $\bar\partial_2$ on
+$E\to X$ are equivalent if there exists $\phi\in\Aut(E)$ such that
+the following commutes:
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEdhbW1hKEUpIl0sWzIsMCwiXFxPbWVnYV57MCwxfShFKSJdLFswLDEsIlxcR2FtbWEoRSkiXSxbMiwxLCJcXE9tZWdhXnswLDF9KEUpIl0sWzIsMywiXFxiYXJcXHBhcnRpYWxfMiJdLFswLDEsIlxcYmFyXFxwYXJ0aWFsXzEiXSxbMCwyLCJcXEdhbW1hKFxccGhpKSIsMl0sWzEsMywiXFxPbWVnYV57MCwxfShcXHBoaSkiXV0=
+  \begin{tikzcd}
+    {\Gamma(E)} && {\Omega^{0,1}(E)} \\
+    {\Gamma(E)} && {\Omega^{0,1}(E)}
+    \arrow["{\bar\partial_2}", from=2-1, to=2-3]
+    \arrow["{\bar\partial_1}", from=1-1, to=1-3]
+    \arrow["{\Gamma(\phi)}"', from=1-1, to=2-1]
+    \arrow["{\Omega^{0,1}(\phi)}", from=1-3, to=2-3]
+  \end{tikzcd}
+\end{equation*}
+It turns out that there is a one-to-one correspondence between
+holomorphic structures on a smooth complex vector bundle $E\to\Sigma_g$
+and Dolbeault operators on $E$ up to equivalence.
+
+More precisely, fix a smooth complex vector bundle $E\to\Sigma_G$
+and let $\Dol(E)$ denote the set of all Dolbeault operators on $E$.
+Now $\Aut(E)$ acts on $\Dol(E)$ by
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEdhbW1hKEUpIl0sWzIsMCwiXFxPbWVnYV57MCwxfShFKSJdLFswLDEsIlxcR2FtbWEoRSkiXSxbMiwxLCJcXE9tZWdhXnswLDF9KEUpIl0sWzIsMywiXFxiYXJcXHBhcnRpYWwiXSxbMCwxLCJcXHBoaVxcY2RvdFxcYmFyXFxwYXJ0aWFsIl0sWzAsMiwiXFxHYW1tYShcXHBoaSkiLDJdLFszLDEsIlxcT21lZ2FeezAsMX0oXFxwaGleey0xfSkiLDJdXQ==
+  \begin{tikzcd}
+    {\Gamma(E)} && {\Omega^{0,1}(E)} \\
+    {\Gamma(E)} && {\Omega^{0,1}(E)}
+    \arrow["\bar\partial", from=2-1, to=2-3]
+    \arrow["\phi\cdot\bar\partial", from=1-1, to=1-3]
+    \arrow["{\Gamma(\phi)}"', from=1-1, to=2-1]
+    \arrow["{\Omega^{0,1}(\phi^{-1})}"', from=2-3, to=1-3]
+  \end{tikzcd}
+\end{equation*}
+
+Now the holomorphic structures on $E$ up to isomorphism correspond to
+elements of \question{what's the map?}
+\begin{align*}
+  \Dol(E)/\Aut(E).
+\end{align*}
+Noting that $\Dol(E)$ is an affine space modelled on $\Omega^{0,1}(\End(E))$
+\cite{mccarthy2020} \question{what does this mean?} the quotient
+is a topological space. However, this space need not be Hausdorff.
+
+Write $\mu(E) = \deg(E)/\rank(E)$. We thus introduce the notion of
+stability:
+
+\begin{definition}
+  A holomorphic bundle $E\to\Sigma_g$ is \emph{stable} if,
+  for all proper non-zero holomorphic subbundles $F\subset E$,
+  \begin{align*}
+    \mu(F) < \mu(E).
+  \end{align*}
+\end{definition}
+
+Now let $\Dol(E)^s$ denote the set of Dolbeault operators corresponding
+to stable holomorphic structures on $E$. Then $\Dol(E)^s/\Aut(E)$
+is Hausdorff. Hence make the following definition:
+
+\begin{definition}
+  The moduli space of stable holomorphic vector bundles of rank $n$
+  and degree $d$ over a Riemannian surface $\Sigma_g$ is
+  \begin{align*}
+    \mathcal N^g_{n,d} = \Dol(E)^s / \Aut(E).
+  \end{align*}
+\end{definition}
+
+\subsection{Quot schemes}
+
+\section{Higgs bundles}
+
+\subsection{Definition}
+
+\begin{definition}
+  A \emph{Higgs bundle} consists of
+  \begin{itemize}
+    \item a holomorphic vector bundle $E\to\Sigma_g$,
+    \item
+  \end{itemize}
+\end{definition}
+
+\subsection{Stability}
+
+A Higgs bundle is said to be stable if its subbundles statisfy certain
+properties. Before we can make this precise, we need to define
+vector subbundles and their invariance with respect to the Higgs field.
+
+\subsection{$\mathcal M$ vs $\mathcal N$}
+
+\begin{proposition}
+  $T^*\mathcal N^g_{n,d}$ is an open dense subset of $\mathcal M^g_{n,d}$.
+\end{proposition}
+
+\section{Non-abelian Hodge theory}
+
+\begin{theorem}
+  Let $X$ be a compact K\"ahler manifold. Then there is an equivalence
+  of categories between irreducible flat vector bundles on $X$
+  and stable Higgs bundles
+\end{theorem}
+
+\printbibliography
+
+\end{document}

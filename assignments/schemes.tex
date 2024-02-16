@@ -1,0 +1,101 @@
+\documentclass{article}
+\usepackage{assignment}
+\begin{document}
+\title{Schemes Sheet 2}
+\author{Franz Miltz}
+\date{\today}
+\maketitle
+
+\section*{Question 5b}
+
+Consider the schemes $X=\Spec\mathbb{Z}[t]$ and $Y=\Spec\mathbb{Z}[u]$.
+Then the inclusions $\mathbb{Z}[t]\subset\mathbb{Z}[t^\pm]$ and
+$\mathbb{Z}[u]\subset\mathbb{Z}[u^\pm]$ induce subschemes
+$U=\Spec\mathbb{Z}[t^\pm]\subset X$ and
+$V=\Spec\mathbb{Z}[u^\pm]\subset Y$. Moreover, the ring isomorphism
+$t\mapsto{u}^{-1}$ induces an isomorphism of schemes $\phi:U\to V$.
+We may thus glue $X$ and $Y$ along $\phi$ to obtain a new schemes
+$Z=X\sqcup_\phi Y$. Note that the cocycle condition is trivially satisfied.
+
+\begin{proposition}
+  $\mathcal O_Z(Z)=\mathbb{Z}$.
+  \begin{proof}
+    Firstly, note that the structure sheaf $\mathcal O_Z$ is constructed
+    so that we have a commutative diagram
+    \begin{equation}
+      % https://q.uiver.app/#q=WzAsNyxbMSwwLCJcXG1hdGhjYWwgT19aKFopIl0sWzAsMSwiXFxtYXRoY2FsIE9fWihYKSJdLFsyLDEsIlxcbWF0aGNhbCBPX1ooWSkiXSxbMCwzLCJcXG1hdGhjYWwgT19YKFUpIl0sWzIsMywiXFxtYXRoY2FsIE9fWShWKSJdLFswLDIsIlxcbWF0aGNhbCBPX1goWCkiXSxbMiwyLCJcXG1hdGhjYWwgT19ZKFkpIl0sWzEsNSwiXFxjb25nIiwyXSxbMiw2LCJcXGNvbmciXSxbNSwzLCJcXHJob19VIiwyXSxbNiw0LCJcXHJob19WIl0sWzAsMSwiXFxyaG9fWCIsMl0sWzAsMiwiXFxyaG9fWSJdLFs0LDMsIlxccGhpXlxcc2hhcnAiXV0=
+      \begin{tikzcd}
+  & {\mathcal O_Z(Z)} \\
+        {\mathcal O_Z(X)} && {\mathcal O_Z(Y)} \\
+        {\mathcal O_X(X)} && {\mathcal O_Y(Y)} \\
+        {\mathcal O_X(U)} && {\mathcal O_Y(V)}
+        \arrow["\cong"', from=2-1, to=3-1]
+        \arrow["\cong", from=2-3, to=3-3]
+        \arrow["{\rho_U}"', from=3-1, to=4-1]
+        \arrow["{\rho_V}", from=3-3, to=4-3]
+        \arrow["{\rho_X}"', from=1-2, to=2-1]
+        \arrow["{\rho_Y}", from=1-2, to=2-3]
+        \arrow["{\phi}", from=4-3, to=4-1]
+      \end{tikzcd}
+    \end{equation}
+    Explicitly, this is
+    \begin{equation}
+      % https://q.uiver.app/#q=WzAsNyxbMSwwLCJcXG1hdGhjYWwgT19aKFopIl0sWzAsMSwiXFxtYXRoY2FsIE9fWihYKSJdLFsyLDEsIlxcbWF0aGNhbCBPX1ooWSkiXSxbMCwzLCJcXG1hdGhiYiBaW3ReXFxwbV0iXSxbMiwzLCJcXG1hdGhiYiBaW3VeXFxwbV0iXSxbMCwyLCJcXG1hdGhiYiBaW3RdIl0sWzIsMiwiXFxtYXRoYmIgWlt1XSJdLFsxLDUsIlxcY29uZyIsMl0sWzIsNiwiXFxjb25nIl0sWzUsMywiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNiw0LCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDEsIlxccmhvX1giLDJdLFswLDIsIlxccmhvX1kiXSxbNCwzLCJcXHBoaSJdXQ==
+      \begin{tikzcd}
+  & {\mathcal O_Z(Z)} \\
+        {\mathcal O_Z(X)} && {\mathcal O_Z(Y)} \\
+        {\mathbb Z[t]} && {\mathbb Z[u]} \\
+        {\mathbb Z[t^\pm]} && {\mathbb Z[u^\pm]}
+        \arrow["\cong"', from=2-1, to=3-1]
+        \arrow["\cong", from=2-3, to=3-3]
+        \arrow[hook, from=3-1, to=4-1]
+        \arrow[hook, from=3-3, to=4-3]
+        \arrow["{\rho_X}"', from=1-2, to=2-1]
+        \arrow["{\rho_Y}", from=1-2, to=2-3]
+        \arrow["\phi", from=4-3, to=4-1]
+      \end{tikzcd}
+    \end{equation}
+    Thus a section $s\in\mathcal O_Z(Z)$ is defined by its
+    restrictions to elements $\res{s}{X}\in\mathbb{Z}[t]$ and
+    $\res{s}{Y}\in\mathbb{Z}[u]$ which must satisfy
+    $\res{s}{X}=\phi(\res{s}{Y})$. Note that
+    $\phi(\mathbb{Z}[u])=\mathbb{Z}[{t}^{-1}]$
+    so $f\in\mathbb{Z}[t]\cap\mathbb{Z}[{t}^{-1}]=\mathbb{Z}$.
+    Similarly, $g\in\mathbb{Z}[u]\cap\mathbb{Z}[{u}^{-1}]$.
+    Finally, $\res{\phi}{\mathbb{Z}}=\identity$, completing the proof.
+  \end{proof}
+\end{proposition}
+
+\section*{Question 5c}
+
+Consider the same setup as above except $\phi(t) = u$.
+
+\begin{proposition}
+  $\mathcal O_Z(Z)=\mathbb{Z}$.
+  \begin{proof}
+    We obtain the diagram
+    \begin{equation}
+      % https://q.uiver.app/#q=WzAsNyxbMSwwLCJcXG1hdGhjYWwgT19aKFopIl0sWzAsMSwiXFxtYXRoY2FsIE9fWihYKSJdLFsyLDEsIlxcbWF0aGNhbCBPX1ooWSkiXSxbMCwzLCJcXG1hdGhiYiBaW3ReXFxwbV0iXSxbMCwyLCJcXG1hdGhiYiBaW3RdIl0sWzIsMiwiXFxtYXRoYmIgWlt1XSJdLFsyLDMsIlxcbWF0aGJiIFpbdV5cXHBtXSJdLFsxLDQsIlxcY29uZyIsMl0sWzIsNSwiXFxjb25nIl0sWzQsMywiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwxLCJcXHJob19YIiwyXSxbMCwyLCJcXHJob19ZIl0sWzUsNiwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMyw2LCIiLDIseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+      \begin{tikzcd}
+  & {\mathcal O_Z(Z)} \\
+        {\mathcal O_Z(X)} && {\mathcal O_Z(Y)} \\
+        {\mathbb Z[t]} && {\mathbb Z[u]} \\
+        {\mathbb Z[t^\pm]} && {\mathbb Z[u^\pm]}
+        \arrow["\cong"', from=2-1, to=3-1]
+        \arrow["\cong", from=2-3, to=3-3]
+        \arrow[hook, from=3-1, to=4-1]
+        \arrow["{\rho_X}"', from=1-2, to=2-1]
+        \arrow["{\rho_Y}", from=1-2, to=2-3]
+        \arrow[hook, from=3-3, to=4-3]
+        \arrow[Rightarrow, no head, from=4-1, to=4-3]
+      \end{tikzcd}
+    \end{equation}
+    Once again a section $s\in\mathcal O_Z(Z)$ is defined by its
+    restrictions to elements $\res{s}{X}\in\mathbb{Z}[t]$ and
+    $\res{s}{Y}\in\mathbb{Z}[u]$ which must satisfy
+    $\res{s}{X}=\phi(\res{s}{Y})$.
+    Noting $\phi(\mathbb{Z}[t])=\mathbb{Z}[u]$ it follows
+  \end{proof}
+\end{proposition}
+
+\end{document}
