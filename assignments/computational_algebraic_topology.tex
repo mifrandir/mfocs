@@ -1,0 +1,226 @@
+\documentclass{article}
+\usepackage{assignment}
+\begin{document}
+\title{C3.9 Mini Project: Cosheaf Homology}
+\author{Franz Miltz}
+\date{\today}
+\maketitle
+
+\section{Cosheaves and homology}
+
+\begin{definition}
+  A \emph{cosheaf} on a simplicial complex $K$ is a functor
+  $\mathscr C:(K,\geq)\to\FVect_{\mathbb{R}}$.
+\end{definition}
+
+If one more generally define a sheaf on any poset to be a
+functor $P\to\FVect_{\mathbb{R}}$ then it is straightforward to
+see that a cosheaf on $K$ is just a sheaf on the cocomplex
+$\mathcal P(K_0)\setminus K$ and we have an equivalence of categories
+\begin{align*}
+  \Cosh(K) \cong \Sh(\mathcal P(K_0)\setminus K)
+\end{align*}
+
+\begin{example}
+  \begin{itemize}
+    \item Let $V\in\FVect_{\mathbb{R}}$. Then the constant cosheaf
+      $\underline V_K$ sends each simplex to $V$ and each inclusion
+      $\tau\hookrightarrow\tau'$ to the identity $V\to V$. Note that
+      this is the same as the constant sheaf $\underline V_K$, hence
+      the notation is consistent.
+  \end{itemize}
+\end{example}
+
+\begin{definition}
+  Let $\mathscr C$ be a cosheaf on a simplicial complex $K$. Then, for $k\geq 0$,
+  define the \emph{vector space of $k$-chains of $K$ with coefficients
+  in $\mathscr C$} by
+  \begin{align*}
+    C_k(K;\mathscr C) = \bigoplus_{\dim \tau = k} \mathscr C(\tau).
+  \end{align*}
+\end{definition}
+
+\begin{definition}
+  The \emph{boundary map}
+  \begin{align*}
+    d : C_k(K;\mathscr C) \to C_{k-1}(K;\mathscr C)
+  \end{align*}
+  is given by
+  \begin{align*}
+    v \in \mathscr C(\sigma) \mapsto \bigoplus_{\dim\tau=k-1} [\tau:\sigma] \mathscr C(\tau\leq\sigma)(v)
+  \end{align*}
+\end{definition}
+
+\begin{definition}
+  The \emph{cosheaf homology of $K$ with $\mathscr C$-coefficients} is the
+  homology of the complex
+  \begin{align*}
+    \cdots\xlongrightarrow{d} C_k(K;\mathscr C)
+    \xlongrightarrow{d}C_{k-1}(K;\mathscr C)
+    \xlongrightarrow{d}\cdots.
+  \end{align*}
+  Explicitly,
+  \begin{align*}
+    H_k(K;\mathscr C) = \frac{\ker(C_k(K;\mathscr C) \to C_{k-1}(K;\mathscr C))}{\im(C_{k+1}(K;\mathscr C) \to C_k(K;\mathscr C))}
+  \end{align*}
+\end{definition}
+
+\section{Examples of cosheaf homology}
+
+\begin{lemma}
+  Consider the chosheaf $\mathscr C\in\Cosh(K)$ given by
+  \begin{align*}
+    \{x\}\hookrightarrow\{x,y\}\hookleftarrow\{y\}
+    \hspace{1cm}
+    \mapsto
+    \hspace{1cm}
+    \mathbb{R}\xleftarrow{\pi}\mathbb{R}^2\rightarrow 0
+  \end{align*}
+  Then
+  \begin{align*}
+    H_*(K;\underline{\mathbb{R}}_K) = H_*(*;\underline{\mathbb{R}}_K)
+    \hspace{1cm}
+    \text{and}
+    \hspace{1cm}
+    H_*(K;\mathscr C) \neq H_*(*;\mathscr C)
+  \end{align*}
+\end{lemma}
+
+\begin{lemma}
+  Consider the simplicial complex $K$ with two disconnected points
+  and $\mathscr C=\underline{0}_K$. Then
+  \begin{align*}
+    H_*(K;\underline{\mathbb{R}}_K) \neq H_*(*;\underline{\mathbb{R}}_K)
+    \hspace{1cm}
+    \text{and}
+    \hspace{1cm}
+    H_*(K;\mathscr C) = H_*(*;\mathscr C)
+  \end{align*}
+\end{lemma}
+
+\section{Maps}
+
+\begin{definition}
+  A \emph{map of cosheaves} $\phi:\mathscr C\to\mathscr D$ is
+  just a natural transformation, i.e. it consists of maps
+  $\phi_\tau:\mathscr C(\tau)\to\mathscr D(\tau)$ for every simplex
+  $\tau\in K$ such that, for all $\sigma\leq\tau$, the following commutes:
+  \begin{equation}\label{eq:naturality}
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhzY3IgQyhcXHRhdSkiXSxbMiwwLCJcXG1hdGhzY3IgQyhcXHNpZ21hKSJdLFswLDEsIlxcbWF0aHNjciBEKFxcdGF1KSJdLFsyLDEsIlxcbWF0aHNjciBEKFxcc2lnbWEpIl0sWzAsMiwiXFxwaGlfXFx0YXUiLDJdLFsyLDMsIlxcbWF0aHNjciBEKFxcc2lnbWFcXGxlcVxcdGF1KSIsMl0sWzEsMywiXFxwaGlfXFxzaWdtYSJdLFswLDEsIlxcbWF0aHNjciBDKFxcc2lnbWFcXGxlcVxcdGF1KSJdXQ==
+    \begin{tikzcd}
+      {\mathscr C(\tau)} && {\mathscr C(\sigma)} \\
+      {\mathscr D(\tau)} && {\mathscr D(\sigma)}
+      \arrow["{\phi_\tau}"', from=1-1, to=2-1]
+      \arrow["{\mathscr D(\sigma\leq\tau)}"', from=2-1, to=2-3]
+      \arrow["{\phi_\sigma}", from=1-3, to=2-3]
+      \arrow["{\mathscr C(\sigma\leq\tau)}", from=1-1, to=1-3]
+    \end{tikzcd}
+  \end{equation}
+\end{definition}
+
+Thus we have the category $\Cosh(K) := \text{Fun}((K,\geq),\FVect_{\mathbb{R}})$.
+
+\begin{itemize}
+  \item There are two notable examples of the constant cosheaf:
+    $\underline{0}_K$ and $\underline{\mathbb{R}}_K$ which
+    are initial and terminal in $K$, respectively.
+\end{itemize}
+
+\begin{proposition}
+  A map of cosheaves is mono, epi, or iso if, and only if,
+  each component is injective, surjective, or bijective, respectively.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{proposition}
+
+Fix a simplicial complex $K$ and a map of cosheaves
+$\phi : \mathscr C \to \mathscr D$ on $K$. We then have an induced
+linear map on $k$-chains given by
+\begin{align*}
+  \phi_* : C_k(K;\mathscr C) &\to C_k(K;\mathscr D) \\
+  v \in \mathscr C(\sigma) &\mapsto \phi_\sigma(v)
+\end{align*}
+It is unsurprising that this does indeed induce a chain map:
+\begin{proposition}
+  For all $K$, $k$, and $\phi : \mathscr C\to\mathscr D$,
+  the following commutes:
+  \begin{equation}
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX2soSztcXG1hdGhzY3IgQykiXSxbMiwwLCJDX3trKzF9KEs7XFxtYXRoc2NyIEMpIl0sWzAsMSwiQ19rKEs7XFxtYXRoc2NyIEQpIl0sWzIsMSwiQ197aysxfShLO1xcbWF0aHNjciBEKSJdLFswLDEsImQiXSxbMiwzLCJkIl0sWzAsMiwiXFxwaGlfKiIsMl0sWzEsMywiXFxwaGlfKiJdXQ==
+    \begin{tikzcd}
+      {C_k(K;\mathscr C)} && {C_{k+1}(K;\mathscr C)} \\
+      {C_k(K;\mathscr D)} && {C_{k+1}(K;\mathscr D)}
+      \arrow["d", from=1-1, to=1-3]
+      \arrow["d", from=2-1, to=2-3]
+      \arrow["{\phi_*}"', from=1-1, to=2-1]
+      \arrow["{\phi_*}", from=1-3, to=2-3]
+    \end{tikzcd}
+  \end{equation}
+  \begin{proof}
+    We observe that the following commutes:
+    \begin{equation}
+      % https://q.uiver.app/#q=WzAsOCxbMCwwLCJcXGJpZ29wbHVzX3tcXGRpbSBcXHNpZ21hID0ga30gXFxtYXRoc2NyIEMoXFxzaWdtYSkiXSxbMywwLCJcXGJpZ29wbHVzX3tcXGRpbSBcXHRhdSA9IGstMX0gXFxtYXRoc2NyIEMoXFx0YXUpIl0sWzAsMywiXFxiaWdvcGx1c197XFxkaW0gXFxzaWdtYSA9IGt9IFxcbWF0aHNjciBEKFxcc2lnbWEpIl0sWzMsMywiXFxiaWdvcGx1c197XFxkaW0gXFx0YXUgPSBrLTF9IFxcbWF0aHNjciBEKFxcdGF1KSJdLFsxLDEsIlxcbWF0aHNjciBDKFxcc2lnbWEpIl0sWzEsMiwiXFxtYXRoc2NyIEQoXFxzaWdtYSkiXSxbMiwxLCJcXG1hdGhzY3IgQyhcXHRhdSkiXSxbMiwyLCJcXG1hdGhzY3IgRChcXHRhdSkiXSxbMCwxLCJkIl0sWzIsMywiZCJdLFswLDIsIlxccGhpXyoiLDJdLFsxLDMsIlxccGhpXyoiXSxbMyw3XSxbMiw1XSxbMCw0XSxbNCw1XSxbMSw2XSxbNiw3XSxbNSw3XSxbNCw2XV0=
+      \begin{tikzcd}
+        {\bigoplus_{\dim \sigma = k} \mathscr C(\sigma)} &&& {\bigoplus_{\dim \tau = k-1} \mathscr C(\tau)} \\
+                                                         & {\mathscr C(\sigma)} & {\mathscr C(\tau)} \\
+                                                         & {\mathscr D(\sigma)} & {\mathscr D(\tau)} \\
+        {\bigoplus_{\dim \sigma = k} \mathscr D(\sigma)} &&& {\bigoplus_{\dim \tau = k-1} \mathscr D(\tau)}
+        \arrow["d", from=1-1, to=1-4]
+        \arrow["d", from=4-1, to=4-4]
+        \arrow["{\phi_*}"', from=1-1, to=4-1]
+        \arrow["{\phi_*}", from=1-4, to=4-4]
+        \arrow[from=4-4, to=3-3]
+        \arrow[from=4-1, to=3-2]
+        \arrow[from=1-1, to=2-2]
+        \arrow[from=2-2, to=3-2]
+        \arrow[from=1-4, to=2-3]
+        \arrow[from=2-3, to=3-3]
+        \arrow[from=3-2, to=3-3]
+        \arrow[from=2-2, to=2-3]
+      \end{tikzcd}
+    \end{equation}
+    Here the middle square is just naturality (\ref{eq:naturality})
+    and the diagonal maps are the projections from the product.
+    The claim now follows by the universal property of products.
+  \end{proof}
+\end{proposition}
+
+\section{Persistent homology}
+
+\begin{definition}
+  A \emph{filtration} of a cosheaf $\mathscr C\in\Cosh(K)$ is a sequence of
+  cosheaves $\mathscr C_\bullet = \mathscr C^0,\ldots,\mathscr C^n$ where
+  $\mathscr C_n = \mathscr C$ together with monomorphisms $\iota^i : \mathscr C_i
+  \hookrightarrow \mathscr C_{i+1}$ for $0\leq i<n$.
+\end{definition}
+
+Note that a filtration $\mathscr C_\bullet$ of a cosheaf
+induces a persistence module of homologies for every $k\geq 0$:
+\begin{align}\label{eq:cosheaf_persistence_module}
+  H_k(K;\mathscr C_0) \xlongrightarrow{\iota_*}
+  H_k(K;\mathscr C_1) \xlongrightarrow{\iota_*}
+  \cdots \xlongrightarrow{\iota_*}
+  H_k(K;\mathscr C_n)
+\end{align}
+
+Now the $k$-th persistent homology of the filtration is just the
+homology of the $k$-th persistence module:
+
+\begin{definition}
+  The \emph{persistent homology groups} of a simplicial complex $K$
+  with coefficients in a filtration of cosheaves $\mathscr C_i$
+  is the persistent homology of the persistence module
+  (\ref{eq:cosheaf_persistence_module}), i.e.
+  \begin{align*}
+    PH_{k,i\to j}(K;\mathscr C_\bullet) = \im\left(
+      H_k(K;\mathscr C_i) \xlongrightarrow{\iota_*}
+      \cdots \xlongrightarrow{\iota_*}
+      H_k(K;\mathscr C_j)
+    \right).
+  \end{align*}
+\end{definition}
+
+
+\printbibliography
+
+\end{document}

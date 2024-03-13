@@ -120,21 +120,142 @@ to as a moduli space. \cite{bejleri2020}
 
 Consider $X=\Spec R$ and a group $G$ acting on $X$. We want to construct
 an affine scheme $X \sslash G$. The usual quotient does not work:
-Consider the action of $G_m$ on $\affine{n}{}$.
+Consider the action of $\mathbb{G}_m$ on $\affine{n}{}$.
+
+\todo{story}
+
+\subsection{Group schemes and actions}
 
 \begin{definition}
   A \emph{group scheme} $G/S$ is a group object in $\Sch_S$.
 \end{definition}
 
-\begin{definition}
-  An \emph{algebraic group over $k$} is a smooth separated
-  group scheme over $k$.
+In particular, a group scheme comes equipped with three maps:
+\begin{align*}
+  e:S\to G,\hspace{1cm} i:G\to G,\hspace{1cm} m:G\times G\to G.
+\end{align*}
+
+\begin{example}
+  In the affine case $G = \Spec R$ we may specify the multiplication
+  and inverse maps in terms of $k$-algebra homomorphisms
+  $m^* : R \to R\otimes R$ and $i^* : R\to R$.
+  There are several affine group schemes that we are already familiar
+  with:
+  \begin{enumerate}
+    \item $\mathbb{G}_a = \Spec k[t]$ with comulitiplication
+      $t\mapsto t\otimes 1 + 1\otimes t$,
+    \item $\mathbb{G}_m = \Spec k[t^\pm] = \affine{}{1} \setminus \left\lbrace{0}\right\rbrace$ with comultiplication
+      $t\mapsto t\otimes t$,
+    \item $GL_n = \Spec k[x_{ij} : 1\leq i,j\leq n][1/\det((x_ij))]$
+      (see e.g. \cite[\href{https://stacks.math.columbia.edu/tag/022W}{Tag 022W}]{stacks-project} for details) with
+      comultiplication
+      \begin{align*}
+        x_{ij} \mapsto \sum_{k=1}^n x_{ik}\otimes x_{kj}.
+      \end{align*}
+  \end{enumerate}
+\end{example}
+
+Note that the functor of points $G=\Hom(-,G):\op{\Sch}_S\to\Set$ induces a
+group structure on $G(T)$ for all schemes $T/S$. The induced multiplication
+sends $x,y\in G(T)$ to
+\begin{align}\label{eq:induced_multiplication_of_points}
+  T \xrightarrow{(x,y)}
+  G\times G\xrightarrow{m}
+  G.
+\end{align}
+Similarly, we have the identity and inverse of $x\in G(T)$,
+\begin{align*}
+  T \rightarrow S \xrightarrow{e} G,\hspace{1cm}
+  T \xrightarrow{x} G \xrightarrow{i} G,
+\end{align*}
+respectively.
+
+\begin{example}
+  The induced grous of the affine group schemes behave as expected:
+  For a $k$-algebra $R$, $\mathbb{G}_a(R) = (R,+)$,
+  $\mathbb{G}_m(R) = (R^\times,\times)$, and
+  $GL_n(R)$ is the usual group of invertible $n\times n$ matrices
+  with coefficients in $R$.
+
+  For example, consider $x\in\mathbb{G}_a(R)$ where $R$ is
+  a $k$-algebra. Such an $x$ is given by algebra homomorphsims
+  $x^\sharp:k[t] \to R$. That is, we may identify $\mathbb{G}_a(R)$
+  with $R$ using the map $x \mapsto x^\sharp(t)$. Now, for
+  $x,y\in\mathbb{G}_a(R)$ and $f\in k[t]$, we have the induced group
+  multiplication given by
+  \begin{align*}
+    (xy)^\sharp(f)
+    = x^\sharp(f) \cdot 1 + 1 \cdot y^\sharp(f)
+    = x^\sharp(f) + y^\sharp(f).
+  \end{align*}
+  Thus the induced group structure on $\mathbb{G}_a(R)$ is just $(R,+)$.
+\end{example}
+
+The converse is also true: If the induced multiplication
+(\ref{eq:induced_multiplication_of_points}) defines a group structure
+on $G(T)$ for every $T/S$ then $G$ is a group scheme. This may be
+shown by constructing a group structure on $G(-)$ in
+$[\op{\Sch}_S,\Set]$ and then lifitng it to $G$ in $\Sch_S$ using
+Yoneda's lemma.
+
+Similarly, base change preserves group structures.
+In particular, if we have a map $T\to S$ then $G_T = G\times T$
+so $(G\times G)_T = G_T \times_T G_T$. Thus we obtain a group
+scheme $G_T/T$.
+
+\begin{definition}[\cite{lei2020}]
+  An \emph{algebraic group} is a smooth separated
+  group scheme over a field $k$.
 \end{definition}
+
+\begin{example}
+  $\mathbb{G}_a$, $\mathbb{G}_m$, and $GL_n$ are all examples of algebraic
+  groups. \missingproof
+\end{example}
 
 \begin{definition}
   A \emph{action} of $G/S$ on $X/S$ is a morphism
   $\rho : G\times X\to X$ satisfying the usual laws with respect
   to $\mu:G\times G\to G$.
+
+\end{definition}
+
+Note that an action $\rho : G\times X\to X$ induces an action of
+$G(T)$ on $X(T)$ by
+\begin{equation*}
+  T \xlongrightarrow{(g,x)} G\times X \xlongrightarrow{\rho} X.
+\end{equation*}
+Similarly, $G_T$ acts on $X_T$ by
+\begin{align*}
+  G_T \times_T X_T = (G \times X)_T \xlongrightarrow{\rho_T} X_T.
+\end{align*}
+
+Thus, given a $T$-scheme $T'$, we obtain an action of
+$G_T(T')$ on $X_T(T')$. We may then note that we may pull back
+any $x\in X(T)$ along $T'\to T$ to obtain a $T'$-point of $X$.
+This allows us to define stabilisers of group actions:
+
+\begin{definition}
+  Let $X/S$ and $T/S$ be schemes and $x\in X(T)$. The
+  \emph{stabilizer of $x$} is the subgroup scheme of $G_T$
+  that represents the functor $\op{\Sch}_T \to \Set$ given by \todo{op?}\question{how is this the pullback of $X\to X\times X \leftarrow G\times X$?}
+  \begin{align*}
+    T' \mapsto \left\lbrace{ g \in G_T(T') : g\cdot x = x}\right\rbrace.
+  \end{align*}
+\end{definition}
+
+Here the action of $G_T(T')$ on $X(T)$ arises as follows:
+Firstly, by previous considerations, $G_T(T')$ acts on $X_T(T')$.
+Now we may pull back $x\in X(T)$ along $T'\to T$ to obtain a
+$T'$-point of $X$. Finally, by universality of the pullback
+$X_T$ the maps $x:T'\to X$ and $T'\to T$ induce a unique map
+$T'\to X_T$.
+
+\subsection{Quotients}
+
+\begin{definition}
+  A \emph{categorical quotient} of a group $G$ acting on $X$
+  is
 \end{definition}
 
 \section{Stable bundles}
