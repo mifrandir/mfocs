@@ -12,15 +12,8 @@
   A \emph{cosheaf} on a simplicial complex $K$ is a functor
   $\mathscr C:(K,\geq)\to\FVect_{\mathbb{R}}$.
 \end{definition}
-
-If one more generally define a sheaf on any poset to be a
-functor $P\to\FVect_{\mathbb{R}}$ then it is straightforward to
-see that a cosheaf on $K$ is just a sheaf on the cocomplex
-$\mathcal P(K_0)\setminus K$ and we have an equivalence of categories
-\begin{align*}
-  \Cosh(K) \cong \Sh(\mathcal P(K_0)\setminus K)
-\end{align*}
-
+Let us familiarise ourselves with the notion of a cosheaf by looking
+at some examples:
 \begin{example}
   \begin{itemize}
     \item Let $V\in\FVect_{\mathbb{R}}$. Then the constant cosheaf
@@ -28,6 +21,26 @@ $\mathcal P(K_0)\setminus K$ and we have an equivalence of categories
       $\tau\hookrightarrow\tau'$ to the identity $V\to V$. Note that
       this is the same as the constant sheaf $\underline V_K$, hence
       the notation is consistent.
+    \item Cosheaves may be used to emphasise or deemphasise certain
+      subcomplexes of $K$. For example, if we have a subcomplex
+      $K'\subseteq K$ then we may define a cosheaf to be
+      $\underline{\mathbb{R}}_K$ on $K'$ and $\underline{0}_K$
+      everywhere else. Explicitly, we define the characteristic
+      cosheaf of $K'\subseteq K$ to be
+      \begin{align*}
+        \mathscr I_{K'}(\tau) := \begin{cases}
+          \mathbb{R} & \text{if }\tau\in K' \\
+          0 &\text{otherwise}
+        \end{cases}
+      \end{align*}
+      with $\mathscr I_{K'}(\tau\geq\sigma) = \identity$ whenever $\tau\in K'$.
+      Of course, if $K=K'$ then $\mathscr I_K=\underline{\mathbb{R}}_K$.
+    \item Subcomplexes also enable us to extend cosheaves to larger
+      domains. Consider once again a subcomplex $K'\subseteq K$
+      and a cosheaf $\mathscr C$ on $K$. By restricting
+      $\mathscr C$ to a functor
+      $\restrict{\mathscr C}{K'}:(K',\geq)\to\FVect_{\mathbb{R}}$
+      we obtain a cosheaf on $K'$.
   \end{itemize}
 \end{example}
 
@@ -36,28 +49,66 @@ $\mathcal P(K_0)\setminus K$ and we have an equivalence of categories
   define the \emph{vector space of $k$-chains of $K$ with coefficients
   in $\mathscr C$} by
   \begin{align*}
-    C_k(K;\mathscr C) = \bigoplus_{\dim \tau = k} \mathscr C(\tau).
+    C_k(K;\mathscr C) = \bigoplus_{\tau\in K_k} \mathscr C(\tau).
   \end{align*}
+  where $K_k = \left\lbrace{\sigma \in K : \dim \sigma = k}\right\rbrace$.
 \end{definition}
 
+Observe that this is a direct generalisation of the usual chain vector
+spaces as the case $\mathscr C = \underline{\mathbb{R}}_K$ yields the
+equality $C_k(K;\underline{\mathbb{R}}_K)=C_k(K)$. Of
+course we are not truly interested in the chains but rather in the
+chain complex that they are part of. It is thus natural to define
+the corresponding boundary operator:
+
 \begin{definition}
+  Let $\sigma,\tau\in K$. Then the \emph{boundary component}
+  is the map
+  \begin{align*}
+    \partial_{\sigma,\tau} = [\sigma:\tau]\mathscr C(\tau\geq\sigma) : \mathscr C(\tau) \to \mathscr C(\sigma).
+  \end{align*}
   The \emph{boundary map}
   \begin{align*}
-    d : C_k(K;\mathscr C) \to C_{k-1}(K;\mathscr C)
+    \partial : C_k(K;\mathscr C) \to C_{k-1}(K;\mathscr C)
   \end{align*}
-  is given by
-  \begin{align*}
-    v \in \mathscr C(\sigma) \mapsto \bigoplus_{\dim\tau=k-1} [\tau:\sigma] \mathscr C(\tau\leq\sigma)(v)
-  \end{align*}
+  is the unique linear map whose components are $d_{\sigma,\tau}$.
 \end{definition}
+
+Observe that the component $\partial_{\sigma,\tau}$ makes sense even if $\sigma\not\leq\tau$because
+then $[\sigma:\tau]=0$ so $\partial_{\sigma,\tau}$ is the zero map. Let us verify that
+this does indeed deserve to be called a boundary map:
+
+\begin{lemma}
+  $\partial^2 = 0$.
+  \begin{proof}
+    We have the $\mathscr C(\tau)\to\mathscr C(\sigma)$ component
+    of $\partial^2$:
+    \begin{align*}
+      \sum_{\delta\in K_{k-1}} \partial_{\delta,\sigma}\circ \partial_{\tau,\delta} = \left(\sum_{\delta\in K_{k-1}}[\sigma:\delta][\delta:\tau]\right)\mathscr C(\tau\geq\sigma).
+    \end{align*}
+    Write $\tau = \left\lbrace{v_1,\ldots,v_n}\right\rbrace$. And assume
+    $\sigma = \tau \setminus \left\lbrace{v_i,v_j}\right\rbrace$ with $i<j$.
+    Then $[\sigma:\delta][\delta:\tau]$  is non-zero if, and only if,
+    $\sigma$ is a face of $\delta$ which is a face of $\tau$. Hence
+    $\delta = \tau_{-i}$ or $\delta = \tau_{-j}$. We then note
+    $\sigma = (\tau_{-j})_{-i} = (\tau_{-i})_{-(j-1)}$. It is now
+    straightforward to calculate
+    \begin{align*}
+      [\sigma:\tau_{-i}][\tau_{-i}:\tau]=(-1)^{j-1}(-1)^i
+      = -(-1)^i(-1)^j =
+      -[\sigma:\tau_{-j}][\tau_{-j}:\tau]
+    \end{align*}
+    and hence $\partial^2=0$.
+  \end{proof}
+\end{lemma}
 
 \begin{definition}
   The \emph{cosheaf homology of $K$ with $\mathscr C$-coefficients} is the
   homology of the complex
   \begin{align*}
-    \cdots\xlongrightarrow{d} C_k(K;\mathscr C)
-    \xlongrightarrow{d}C_{k-1}(K;\mathscr C)
-    \xlongrightarrow{d}\cdots.
+    \cdots\xlongrightarrow{\partial} C_k(K;\mathscr C)
+    \xlongrightarrow{\partial}C_{k-1}(K;\mathscr C)
+    \xlongrightarrow{\partial}\cdots.
   \end{align*}
   Explicitly,
   \begin{align*}
@@ -65,110 +116,216 @@ $\mathcal P(K_0)\setminus K$ and we have an equivalence of categories
   \end{align*}
 \end{definition}
 
-\section{Examples of cosheaf homology}
+Once again this is a direct generalisation of singular homology as
+$\partial : C_k(K;\underline{\mathbb{R}}_K)
+\to C_{k-1}(K;\underline{\mathbb R}_K)$ agrees with the usual
+boundary map $\partial : C_k(K)\to C_{k-1}(K)$ and thus
+\begin{align*}
+  H_k(K;\underline{\mathbb{R}}_K) = H_k(K).
+\end{align*}
 
-\begin{lemma}
-  Consider the chosheaf $\mathscr C\in\Cosh(K)$ given by
-  \begin{align*}
-    \{x\}\hookrightarrow\{x,y\}\hookleftarrow\{y\}
-    \hspace{1cm}
-    \mapsto
-    \hspace{1cm}
-    \mathbb{R}\xleftarrow{\pi}\mathbb{R}^2\rightarrow 0
-  \end{align*}
-  Then
-  \begin{align*}
-    H_*(K;\underline{\mathbb{R}}_K) = H_*(*;\underline{\mathbb{R}}_K)
-    \hspace{1cm}
-    \text{and}
-    \hspace{1cm}
-    H_*(K;\mathscr C) \neq H_*(*;\mathscr C)
-  \end{align*}
-\end{lemma}
+We finish this section by considering some examples:
 
-\begin{lemma}
-  Consider the simplicial complex $K$ with two disconnected points
-  and $\mathscr C=\underline{0}_K$. Then
-  \begin{align*}
-    H_*(K;\underline{\mathbb{R}}_K) \neq H_*(*;\underline{\mathbb{R}}_K)
-    \hspace{1cm}
-    \text{and}
-    \hspace{1cm}
-    H_*(K;\mathscr C) = H_*(*;\mathscr C)
-  \end{align*}
-\end{lemma}
+\begin{example}
+  Consider the 1-disk $K=D_1$ with vertices and edges as in
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsMixbMCwwLCJcXHNpZ21hXzEiXSxbMiwwLCJcXHNpZ21hXzIiXSxbMCwxLCJcXHRhdSIsMSx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
+    \begin{tikzcd}
+      {\sigma_1} && {\sigma_2}
+      \arrow["\tau"{description}, no head, from=1-1, to=1-3]
+    \end{tikzcd}
+  \end{equation*}
+  Note that this is contractible, hence $H_0(K)=\mathbb{R}$ and
+  $H_i(K) = 0$ for $i>0$.
+  Define the chosheaf $\mathscr C\in\Cosh(K)$ by
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhiYiBSIl0sWzQsMCwiMCJdLFsyLDAsIlxcbWF0aGJiIFJeMiJdLFsyLDAsIih4LHkpXFxtYXBzdG8geCIsMl0sWzIsMV1d
+    \begin{tikzcd}
+      {\mathbb R} && {\mathbb R^2} && 0
+      \arrow["{(x,y)\mapsto x}"', from=1-3, to=1-1]
+      \arrow[from=1-3, to=1-5]
+    \end{tikzcd}
+  \end{equation*}
+  It is then straightforward to calculate the homologies
+  $H_0(K;\mathscr C)=0$ and $H_1(K;\mathscr C)=\mathbb{R}$.
+  Thus even though $K$ is contractible its higher homologies need
+  not be trivial!
+\end{example}
+
+\begin{example}
+  Consider the 1-sphere $K=S^1$ with vertices and edges as in
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHNpZ21hXzEiXSxbMiwwLCJcXHNpZ21hXzIiXSxbMSwxLCJcXHNpZ21hXzMiXSxbMCwyLCJcXHRhdV8zIiwxLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFswLDEsIlxcdGF1XzEiLDEseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsMSwiXFx0YXVfMiIsMSx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
+    \begin{tikzcd}
+      {\sigma_1} && {\sigma_2} \\
+                 & {\sigma_3}
+                 \arrow["{\tau_3}"{description}, no head, from=1-1, to=2-2]
+                 \arrow["{\tau_1}"{description}, no head, from=1-1, to=1-3]
+                 \arrow["{\tau_2}"{description}, no head, from=2-2, to=1-3]
+    \end{tikzcd}
+  \end{equation*}
+  Note that the homology in the first dimension is $H_1(K) = \mathbb{R}$,
+  i.e. non-trivial. However, if we consider
+  $\mathscr C=\underline{0}_K$ then $H_i(K;\underline{0}_K)=0$
+  for all $i$. This is an instance of a simplicial complex with non-trivial
+  $\mathbb{R}$-homology but trivial $\mathscr C$-homology.
+\end{example}
 
 \section{Maps}
 
+As we are now familiar with cosheaves by themselves, it is the logical
+next step to see how one cosheaf might relate to another. In particular,
+we are going to be interested in defining maps between cosheaves. Before
+we move on to persistent homology, we will then take some time to
+look at the category of cosheaves on a particular simplicial complex.
+
+As cosheaves are functors, it is unsurprising that maps of cosheaves
+are natural transformations:
+
 \begin{definition}
-  A \emph{map of cosheaves} $\phi:\mathscr C\to\mathscr D$ is
+  A \emph{map of cosheaves} $\varphi:\mathscr C\to\mathscr D$ is
   just a natural transformation, i.e. it consists of maps
-  $\phi_\tau:\mathscr C(\tau)\to\mathscr D(\tau)$ for every simplex
+  $\varphi_\tau:\mathscr C(\tau)\to\mathscr D(\tau)$ for every simplex
   $\tau\in K$ such that, for all $\sigma\leq\tau$, the following commutes:
   \begin{equation}\label{eq:naturality}
     % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhzY3IgQyhcXHRhdSkiXSxbMiwwLCJcXG1hdGhzY3IgQyhcXHNpZ21hKSJdLFswLDEsIlxcbWF0aHNjciBEKFxcdGF1KSJdLFsyLDEsIlxcbWF0aHNjciBEKFxcc2lnbWEpIl0sWzAsMiwiXFxwaGlfXFx0YXUiLDJdLFsyLDMsIlxcbWF0aHNjciBEKFxcc2lnbWFcXGxlcVxcdGF1KSIsMl0sWzEsMywiXFxwaGlfXFxzaWdtYSJdLFswLDEsIlxcbWF0aHNjciBDKFxcc2lnbWFcXGxlcVxcdGF1KSJdXQ==
     \begin{tikzcd}
       {\mathscr C(\tau)} && {\mathscr C(\sigma)} \\
       {\mathscr D(\tau)} && {\mathscr D(\sigma)}
-      \arrow["{\phi_\tau}"', from=1-1, to=2-1]
-      \arrow["{\mathscr D(\sigma\leq\tau)}"', from=2-1, to=2-3]
-      \arrow["{\phi_\sigma}", from=1-3, to=2-3]
-      \arrow["{\mathscr C(\sigma\leq\tau)}", from=1-1, to=1-3]
+      \arrow["{\varphi_\tau}"', from=1-1, to=2-1]
+      \arrow["{\mathscr D(\tau\geq\sigma)}"', from=2-1, to=2-3]
+      \arrow["{\varphi_\sigma}", from=1-3, to=2-3]
+      \arrow["{\mathscr C(\tau\geq\sigma)}", from=1-1, to=1-3]
     \end{tikzcd}
   \end{equation}
 \end{definition}
 
-Thus we have the category $\Cosh(K) := \text{Fun}((K,\geq),\FVect_{\mathbb{R}})$.
-
-\begin{itemize}
-  \item There are two notable examples of the constant cosheaf:
-    $\underline{0}_K$ and $\underline{\mathbb{R}}_K$ which
-    are initial and terminal in $K$, respectively.
-\end{itemize}
+Thus we have the category $\Cosh(K) :=
+\text{Fun}((K,\geq),\FVect_{\mathbb{R}})$.
+Considering a subcomplex $K'\subseteq K$ we have a on objects
+$\Cosh(K')\hookrightarrow\Cosh(K)$ extending a cosheaf
+$\mathscr C\in\Cosh(K')$ to a cosheaf on $K$ by setting
+$\mathscr C(\tau)=0$ whenever $\tau\not\in K'$. This canonically
+extends to a functor by observing that all the linear components
+not specified by a map $\varphi:\mathscr C\to\mathscr D$ in $\Cosh(K')$
+have signature $0\to 0$ and are thereby uniquely determined.
+This very observation now also implies that we have a full subcategory
+\begin{equation}\label{eq:subcomplex_full_subcategory}
+  I:\Cosh(K') \longinc \Cosh(K).
+\end{equation}
+Note that the characteristic cosheaf of $K'$ on $K$
+arises from $\underline{\mathbb{R}}_{K'}$ under this inclusion.
+Moreover, by restriction we obtain a functor in the opposite
+direction:
+\begin{align*}
+  R : \Cosh(K)\longrightarrow\Cosh(K').
+\end{align*}
+It is clear that these cannot form an equivalence of categories:
+$K$ is a larger complex so a functor on $K$ contains more data
+than its restriction to $K'$. However, we do have the next best
+thing which is an adjuction:
 
 \begin{proposition}
-  A map of cosheaves is mono, epi, or iso if, and only if,
-  each component is injective, surjective, or bijective, respectively.
+  There is an adjunction $R\dashv I$.
   \begin{proof}
-    \missingproof
+    We have $IR = \text{Id} : \Cosh(K')\to\Cosh(K')$.
+    Thus we need to construct a counit
+    $\varepsilon : RI\to\text{Id}$. Consider $\mathscr C\in\Cosh(K)$.
+    Define
+    \begin{align*}
+      \varepsilon_{\mathscr C} : RI(\mathscr C)\to\mathscr C
+    \end{align*}
+    by setting its component at $\tau$ to be the identity if $\tau\in K'$
+    or the zero map if $\tau\not\in K'$. We need to verify naturality
+    only in the case where $\sigma\leq\tau$ where $\sigma\in K'$ but
+    $\tau\not\in K'$. We have the diagram
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsNCxbMiwxLCJcXG1hdGhzY3IgQyhcXHNpZ21hKSJdLFsyLDAsIlxcbWF0aHNjciBDKFxcdGF1KSJdLFswLDAsIlJJXFxtYXRoc2NyIEMoXFx0YXUpIl0sWzAsMSwiUklcXG1hdGhzY3IgQyhcXHNpZ21hKSJdLFsyLDEsIlxcdmFyZXBzaWxvbiJdLFszLDAsIlxcdmFyZXBzaWxvbiIsMl0sWzEsMF0sWzIsM11d
+      \begin{tikzcd}
+        {RI\mathscr C(\tau)} && {\mathscr C(\tau)} \\
+        {RI\mathscr C(\sigma)} && {\mathscr C(\sigma)}
+        \arrow["\varepsilon", from=1-1, to=1-3]
+        \arrow["\varepsilon"', from=2-1, to=2-3]
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=1-1, to=2-1]
+      \end{tikzcd}
+    \end{equation*}
+    which trivially commutes because $RI\mathscr C(\tau)=0$.
+    Finally, it is easily verified that both of the following are
+    identities:
+    \begin{align*}
+      R = RIR \xlongrightarrow{\varepsilon R} R,\hspace{1cm}
+      I = IRI \xlongrightarrow{I \varepsilon} I.
+    \end{align*}
   \end{proof}
 \end{proposition}
 
-Fix a simplicial complex $K$ and a map of cosheaves
-$\phi : \mathscr C \to \mathscr D$ on $K$. We then have an induced
-linear map on $k$-chains given by
-\begin{align*}
-  \phi_* : C_k(K;\mathscr C) &\to C_k(K;\mathscr D) \\
-  v \in \mathscr C(\sigma) &\mapsto \phi_\sigma(v)
-\end{align*}
-It is unsurprising that this does indeed induce a chain map:
+As we are working with vector valued cosheaves, it turns out that
+the categorical notions of monomorphisms, epimorphisms, and isomorphisms
+agree exactly with the set-theoretic notions of injections,
+surjections, and bijections.
+
+\begin{proposition}\label{thm:epi_injective}
+  A map of cosheaves is mono, epi, or iso if, and only if,
+  each component is injective, surjective, or bijective, respectively.
+  \begin{proof}
+    This follows from a more general fact: A natural transformation
+    $\varphi : F \to G : \mathcal C \to\mathcal D$ is a mono, epi, or
+    iso in the functor category  $\text{Fun}(\mathcal C,\mathcal D)$
+    if, and only if, each component $\varphi_C : FC \to GC$ is a
+    mono, epi, or iso in $\mathcal D$, respectively. One may prove this
+    using the Yoneda lemma.
+
+    Considering the case $\mathcal C = (L,\geq)$ and
+    $\mathcal D=\FVect_{\mathbb{R}}$ we find that a map of cosheaves
+    $\varphi : \mathscr C\to\mathscr D$ is mono, epi, or iso if,
+    and only if, each linear component $\varphi_\tau$ is
+    injective, surjective, or bijective, respectively.
+  \end{proof}
+\end{proposition}
+
+In particular, if we have a subcomplex $K'\subseteq K$ then the
+characteristic cosheaf $\mathscr I_{K'}$ of $K'$ is a subobject of the
+constant sheaf $\underline{\mathbb{R}}_K$ in $\Cosh(K)$. If one
+thinks of $\underline{\mathbb{R}}_K$ as the characteristic
+cosheaf of $K$ then we find that each inclusion of subcomplexes
+$K''\subseteq K'\subseteq K$ gives rise to a monomorphism of
+characteristic cosheaves $\mathscr I_{K''} \hookrightarrow
+\mathscr I_{K'}$ in $\Cosh(K)$. We are going to make use of this
+observation to generalise the notion of filtration.
+
+Let us now fix a map of cosheaves
+$\varphi : \mathscr C \to \mathscr D$ on $K$. We then have an induced
+linear map on $k$-chains
+$\varphi_* : C_k(K;\mathscr C) \to C_k(K;\mathscr D)$
+whose components are $\varphi_\sigma : \mathscr C(\sigma) \to \mathscr D(\sigma)$.
+It is unsurprising that this is the component of a chain map:
 \begin{proposition}
-  For all $K$, $k$, and $\phi : \mathscr C\to\mathscr D$,
-  the following commutes:
-  \begin{equation}
+  For all $k$, the following commutes:
+  \begin{equation*}
     % https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX2soSztcXG1hdGhzY3IgQykiXSxbMiwwLCJDX3trKzF9KEs7XFxtYXRoc2NyIEMpIl0sWzAsMSwiQ19rKEs7XFxtYXRoc2NyIEQpIl0sWzIsMSwiQ197aysxfShLO1xcbWF0aHNjciBEKSJdLFswLDEsImQiXSxbMiwzLCJkIl0sWzAsMiwiXFxwaGlfKiIsMl0sWzEsMywiXFxwaGlfKiJdXQ==
     \begin{tikzcd}
       {C_k(K;\mathscr C)} && {C_{k+1}(K;\mathscr C)} \\
       {C_k(K;\mathscr D)} && {C_{k+1}(K;\mathscr D)}
-      \arrow["d", from=1-1, to=1-3]
-      \arrow["d", from=2-1, to=2-3]
-      \arrow["{\phi_*}"', from=1-1, to=2-1]
-      \arrow["{\phi_*}", from=1-3, to=2-3]
+      \arrow["\partial", from=1-1, to=1-3]
+      \arrow["\partial", from=2-1, to=2-3]
+      \arrow["{\varphi_*}"', from=1-1, to=2-1]
+      \arrow["{\varphi_*}", from=1-3, to=2-3]
     \end{tikzcd}
-  \end{equation}
+  \end{equation*}
   \begin{proof}
     We observe that the following commutes:
-    \begin{equation}
+    \begin{equation*}
       % https://q.uiver.app/#q=WzAsOCxbMCwwLCJcXGJpZ29wbHVzX3tcXGRpbSBcXHNpZ21hID0ga30gXFxtYXRoc2NyIEMoXFxzaWdtYSkiXSxbMywwLCJcXGJpZ29wbHVzX3tcXGRpbSBcXHRhdSA9IGstMX0gXFxtYXRoc2NyIEMoXFx0YXUpIl0sWzAsMywiXFxiaWdvcGx1c197XFxkaW0gXFxzaWdtYSA9IGt9IFxcbWF0aHNjciBEKFxcc2lnbWEpIl0sWzMsMywiXFxiaWdvcGx1c197XFxkaW0gXFx0YXUgPSBrLTF9IFxcbWF0aHNjciBEKFxcdGF1KSJdLFsxLDEsIlxcbWF0aHNjciBDKFxcc2lnbWEpIl0sWzEsMiwiXFxtYXRoc2NyIEQoXFxzaWdtYSkiXSxbMiwxLCJcXG1hdGhzY3IgQyhcXHRhdSkiXSxbMiwyLCJcXG1hdGhzY3IgRChcXHRhdSkiXSxbMCwxLCJkIl0sWzIsMywiZCJdLFswLDIsIlxccGhpXyoiLDJdLFsxLDMsIlxccGhpXyoiXSxbMyw3XSxbMiw1XSxbMCw0XSxbNCw1XSxbMSw2XSxbNiw3XSxbNSw3XSxbNCw2XV0=
       \begin{tikzcd}
-        {\bigoplus_{\dim \sigma = k} \mathscr C(\sigma)} &&& {\bigoplus_{\dim \tau = k-1} \mathscr C(\tau)} \\
-                                                         & {\mathscr C(\sigma)} & {\mathscr C(\tau)} \\
+        {\bigoplus_{\sigma\in K_k} \mathscr C({\sigma})} &&& {\bigoplus_{\tau\in K_{k-1}} \mathscr C({\tau})} \\
+                                                         & {\mathscr C({\sigma})} & {\mathscr C({\tau})} \\
                                                          & {\mathscr D(\sigma)} & {\mathscr D(\tau)} \\
-        {\bigoplus_{\dim \sigma = k} \mathscr D(\sigma)} &&& {\bigoplus_{\dim \tau = k-1} \mathscr D(\tau)}
-        \arrow["d", from=1-1, to=1-4]
-        \arrow["d", from=4-1, to=4-4]
-        \arrow["{\phi_*}"', from=1-1, to=4-1]
-        \arrow["{\phi_*}", from=1-4, to=4-4]
+        {\bigoplus_{\sigma\in K_k} \mathscr D(\sigma)} &&& {\bigoplus_{\tau\in K_{k-1}} \mathscr D(\tau)}
+        \arrow["\partial", from=1-1, to=1-4]
+        \arrow["\partial", from=4-1, to=4-4]
+        \arrow["{\varphi_*}"', from=1-1, to=4-1]
+        \arrow["{\varphi_*}", from=1-4, to=4-4]
         \arrow[from=4-4, to=3-3]
         \arrow[from=4-1, to=3-2]
         \arrow[from=1-1, to=2-2]
@@ -178,48 +335,636 @@ It is unsurprising that this does indeed induce a chain map:
         \arrow[from=3-2, to=3-3]
         \arrow[from=2-2, to=2-3]
       \end{tikzcd}
-    \end{equation}
+    \end{equation*}
     Here the middle square is just naturality (\ref{eq:naturality})
     and the diagonal maps are the projections from the product.
     The claim now follows by the universal property of products.
   \end{proof}
 \end{proposition}
+Thus $\varphi : \mathscr C \to \mathscr D$ induces a
+chain map $\varphi_* : C(K;\mathscr C)\to C(K;\mathscr D)$
+and therefore maps between homologies
+$\varphi_* : H_k(K;\mathscr C)\to H_k(K;\mathscr D)$.
+
+\begin{example}
+  Consider the map $\underline{\mathbb{R}}_K\to\mathscr C$ in $\Cosh(S^1)$
+  given by
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsOCxbMSwxLCJcXG1hdGhiYiBSXjIiXSxbMywxLCJcXG1hdGhiYiBSXjIiXSxbNSwxLCJcXG1hdGhiYiBSIl0sWzEsMCwiXFxtYXRoYmIgUiJdLFszLDAsIlxcbWF0aGJiIFIiXSxbNSwwLCJcXG1hdGhiYiBSIl0sWzAsMSwiXFxtYXRoc2NyIEM6Il0sWzAsMCwiXFx1bmRlcmxpbmV7XFxtYXRoYmIgUn1fSzoiXSxbMSwwXSxbMSwyLCJ4IiwyXSxbNCwzXSxbNCw1XSxbNCwxLCIoeCwwKSJdLFs1LDJdLFszLDAsIih4LDApIiwyXV0=
+    \begin{tikzcd}
+      {\underline{\mathbb R}_K:} & {\mathbb R} && {\mathbb R} && {\mathbb R} \\
+      {\mathscr C:} & {\mathbb R^2} && {\mathbb R^2} && {\mathbb R}
+      \arrow[from=2-4, to=2-2]
+      \arrow["x"', from=2-4, to=2-6]
+      \arrow[from=1-4, to=1-2]
+      \arrow[from=1-4, to=1-6]
+      \arrow["{(x,0)}", from=1-4, to=2-4]
+      \arrow[from=1-6, to=2-6]
+      \arrow["{(x,0)}"', from=1-2, to=2-2]
+    \end{tikzcd}
+  \end{equation*}
+  On the level of chains we then have
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNCxbMiwxLCJcXG1hdGhiYiBSXjMiXSxbMCwwLCJcXG1hdGhiYiBSIl0sWzAsMSwiXFxtYXRoYmIgUl4yIl0sWzIsMCwiXFxtYXRoYmIgUl4yIl0sWzEsMiwiKHgsMCkiLDJdLFsxLDMsIih4LHgpIl0sWzIsMCwiKHgseSx4KSIsMl0sWzMsMCwiKHgsMCx5KSJdXQ==
+    \begin{tikzcd}
+      {\mathbb R} && {\mathbb R^2} \\
+      {\mathbb R^2} && {\mathbb R^3}
+      \arrow["{(x,0)}"', from=1-1, to=2-1]
+      \arrow["{(x,x)}", from=1-1, to=1-3]
+      \arrow["{(x,y,x)}"', from=2-1, to=2-3]
+      \arrow["{(x,0,y)}", from=1-3, to=2-3]
+    \end{tikzcd}
+  \end{equation*}
+  Clearly homology is non-zero at $k=0$ only. We now see that
+  the induced map on homology is the unique map that makes the
+  following commute:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhiYiBSXjIiXSxbMiwwLCJcXG1hdGhiYiBSIl0sWzAsMSwiXFxtYXRoYmIgUl4zIl0sWzIsMSwiXFxtYXRoYmIgUiJdLFswLDEsIngteSJdLFsyLDMsIngteiIsMl0sWzAsMiwiKHgsMCx5KSIsMl0sWzEsM11d
+    \begin{tikzcd}
+      {\mathbb R^2} && {\mathbb R} \\
+      {\mathbb R^3} && {\mathbb R}
+      \arrow["{x-y}", from=1-1, to=1-3]
+      \arrow["{x-z}"', from=2-1, to=2-3]
+      \arrow["{(x,0,y)}"', from=1-1, to=2-1]
+      \arrow[from=1-3, to=2-3]
+    \end{tikzcd}
+  \end{equation*}
+  Here the horizontal maps are the quotient maps from
+  chains to homology. Thus the induced map in homology must be the
+  identity even though the map of cosheaves is not an isomorphism
+  and the cosheaves are not isomorphic.
+\end{example}
+
+The previous example shows that we may have a mono
+$\underline{\mathbb{R}}_K\to\mathscr C$ which induces an iso
+between homologies. One may reasonably ask whether the dual
+situation may arise. The answer is no.
+
+\begin{lemma}
+  Let $\varphi : \underline{\mathbb{R}}_K\to\mathscr C$ in $\Cosh(K)$
+  be an epi such that
+  $\varphi_* : H_*(K;\underline{\mathbb{R}}_K)\to H_*(K;\mathscr C)$
+  is an iso. Then $\varphi$ is an iso.
+  \begin{proof}
+    Suppose $\varphi$ is not an iso. Then some component
+    $\varphi_\tau : \mathbb{R}\to \mathscr C(\tau)$ is surjective but
+    not bijective. Thus we must have $\mathscr C(\tau)=0$.
+    Now choose a sequence $\sigma=\tau_0\leq\cdots\leq\tau_m = \tau$
+    such that $\dim\tau_d = d$. Observe that naturality yields
+    a commutative diagram:
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsOCxbMCwwLCJcXG1hdGhiYiBSIl0sWzIsMCwiXFxtYXRoYmIgUiJdLFs2LDAsIlxcbWF0aGJiIFIiXSxbMCwyLCJcXG1hdGhzY3IgQyhcXHRhdV9tKSJdLFsyLDIsIlxcbWF0aHNjciBDKFxcdGF1X3ttLTF9KSJdLFs2LDIsIlxcbWF0aHNjciBDKFxcdGF1XzEpIl0sWzQsMiwiXFxjZG90cyJdLFs0LDAsIlxcY2RvdHMiXSxbMCwzLCJcXHZhcnBoaV97XFx0YXVfbX0iLDFdLFswLDFdLFsxLDddLFs3LDJdLFszLDRdLFs0LDZdLFs2LDVdLFsxLDQsIlxcdmFycGhpX3tcXHRhdV97bS0xfX0iLDFdLFs3LDZdLFsyLDUsIlxcdmFycGhpXzEiLDFdXQ==
+      \begin{tikzcd}
+        {\mathbb R} && {\mathbb R} && \cdots && {\mathbb R} \\
+        \\
+        {\mathscr C(\tau_m)} && {\mathscr C(\tau_{m-1})} && \cdots && {\mathscr C(\tau_1)}
+        \arrow["{\varphi_{\tau_m}}"{description}, from=1-1, to=3-1]
+        \arrow[from=1-1, to=1-3]
+        \arrow[from=1-3, to=1-5]
+        \arrow[from=1-5, to=1-7]
+        \arrow[from=3-1, to=3-3]
+        \arrow[from=3-3, to=3-5]
+        \arrow[from=3-5, to=3-7]
+        \arrow["{\varphi_{\tau_{m-1}}}"{description}, from=1-3, to=3-3]
+        \arrow[from=1-5, to=3-5]
+        \arrow["{\varphi_1}"{description}, from=1-7, to=3-7]
+      \end{tikzcd}
+    \end{equation*}
+    Thus $\mathscr C(\tau_d)=0$ implies $\mathscr C(\tau_{d-1})=0$
+    and hence $\mathscr C(\sigma) = 0$. Now observe that
+    $[\sigma:\tau]= 0$ whenever $\sigma$ and $\tau$ belong to
+    different connected components. Hence the boundary map
+    decomposes into its restrictions to path-connected components.
+    We may therefore assume without loss of generality that
+    $K$ is path-connected, i.e. $H_0(K)=\mathbb{R}$.
+
+    We win if we are able to show that, for all $v\in C_0(K;\mathscr C)$,
+    there is a $u\in C_1(K;\mathscr C)$ such that $\partial u = v$,
+    i.e. $v = 0$ in $H_0(K;\mathscr C)$.
+    We do so as follows: Fix $v\in\mathscr C(\sigma')$ for some
+    $\sigma'\in K_0$ and use path-connectedness
+    to choose $\tau'_1,\ldots,\tau'_n\in K_1$ such that
+    \begin{align*}
+      \sigma = \sigma'_0 \leq \tau_1' \geq \sigma'_1 \leq \cdots \geq \sigma'_{n-1} \leq \tau'_n \geq \sigma'_n = \sigma'
+    \end{align*}
+    for some $\sigma'_1,\ldots,\sigma'_n \in K_0$. By relabelling $\sigma$
+    to be the first $\sigma'_i$ with $\mathscr C(\sigma'_i)=0$ we may
+    assume without loss of generality that $\mathscr C(\sigma'_i)\neq 0$
+    and by the previous argument that $\mathscr C(\tau'_i)\neq 0$ and
+    all $\mathscr C(\tau'_i \geq \sigma'_j)$ are isomorphisms.
+    We are now able to choose $u_i\in\mathscr C(\tau'_i)$ such that
+    $\mathscr C(\tau'_n\geq\sigma')(u_n) = v$ and
+    $\mathscr C(\tau'_i\geq\sigma_i)(u_i) = \mathscr C(\tau'_{i+1}\geq\sigma_i)(u_{i+1})$. We then have the boundary
+    \begin{align*}
+      \partial \left({\sum_{i=1}^n u_i}\right) =
+      \pm \sum_{i=1}^n (\mathscr C(\tau_i\geq \sigma_i) - \mathscr C(\tau_i\geq\sigma_{i-1}))(u_i)
+    \end{align*}
+    which telescopes to
+    \begin{align*}
+      \partial\left({\sum_{i=1}^{n} u_i}\right)
+      = \pm\mathscr C(\tau_n\geq\sigma')(u_n) \mp \mathscr C(\tau_1\geq\sigma)(u_1)
+      = \pm\mathscr C(\tau_n\geq\sigma')(u_n) = \pm v.
+    \end{align*}
+    Hence $v=0$ in $H_0(K;\mathscr C)$ and so $H_0(K;\mathscr C)=0$.
+  \end{proof}
+\end{lemma}
 
 \section{Persistent homology}
 
+Fix a simplicial complex $K$. A filtration $F^\bullet$ of $K$ is
+an increasing sequence of subcomplexes
+\begin{align*}
+  F^1 K \subseteq F^2 K \subseteq \cdots \subseteq F^m K = K
+\end{align*}
+and a map of filtrations $f^\bullet : F^\bullet \to G^\bullet$ is a
+sequence of simplicial maps $f^i : F^i K\to G^i K$ such that $\im(f^i)
+\subseteq \im(f^{i+1})$. We thus have a category $\Fil(K)$ of filtrations
+of $K$.
+
+We have seen that subcomplexes induce subcosheaves. It is thus
+natural to generalise filtrations in the following way:
+
 \begin{definition}
   A \emph{filtration} of a cosheaf $\mathscr C\in\Cosh(K)$ is a sequence of
-  cosheaves $\mathscr C_\bullet = \mathscr C^0,\ldots,\mathscr C^n$ where
-  $\mathscr C_n = \mathscr C$ together with monomorphisms $\iota^i : \mathscr C_i
-  \hookrightarrow \mathscr C_{i+1}$ for $0\leq i<n$.
+  cosheaves $\mathscr C^\bullet = \mathscr C^1,\ldots,\mathscr C^n$ where
+  $\mathscr C^n = \mathscr C$ together with monos $\mathscr C_i
+  \hookrightarrow \mathscr C_{i+1}$ for $1\leq i<n$.
+
+  A map of filtrations $\varphi^\bullet : \mathscr C^\bullet \to \mathscr D^\bullet$ is a sequence of natural transformations
+  $\varphi^i:\mathscr C^i \to\mathscr D^i$ that respects the inclusions,
+  i.e. the following commutes:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsOCxbMCwwLCJcXG1hdGhzY3IgQ14xIl0sWzEsMCwiXFxtYXRoc2NyIENeMiJdLFszLDAsIlxcbWF0aHNjciBDXm0iXSxbMCwxLCJcXG1hdGhzY3IgRF4xIl0sWzEsMSwiXFxtYXRoc2NyIEReMiJdLFszLDEsIlxcbWF0aHNjciBEXm0iXSxbMiwxLCJcXGNkb3RzIl0sWzIsMCwiXFxjZG90cyJdLFswLDEsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzEsNywiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNywyLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFszLDQsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzQsNiwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNiw1LCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDMsIlxcdmFycGhpXjEiLDJdLFsxLDQsIlxcdmFycGhpXjIiLDJdLFsyLDUsIlxcdmFycGhpXm0iLDJdXQ==
+    \begin{tikzcd}
+      {\mathscr C^1} & {\mathscr C^2} & \cdots & {\mathscr C^m} \\
+      {\mathscr D^1} & {\mathscr D^2} & \cdots & {\mathscr D^m}
+      \arrow[hook, from=1-1, to=1-2]
+      \arrow[hook, from=1-2, to=1-3]
+      \arrow[hook, from=1-3, to=1-4]
+      \arrow[hook, from=2-1, to=2-2]
+      \arrow[hook, from=2-2, to=2-3]
+      \arrow[hook, from=2-3, to=2-4]
+      \arrow["{\varphi^1}"', from=1-1, to=2-1]
+      \arrow["{\varphi^2}"', from=1-2, to=2-2]
+      \arrow["{\varphi^m}"', from=1-4, to=2-4]
+    \end{tikzcd}
+  \end{equation*}
+  Denote the category of filtrations of a cosheaf $\mathscr C$ by
+  $\Fil(\mathscr C)$.
 \end{definition}
 
-Note that a filtration $\mathscr C_\bullet$ of a cosheaf
+
+
+We previously observed that subcomplexes $K'\subseteq K$ induce
+subcosheaves $\mathscr I_{K'}\hookrightarrow \mathscr I_K$. It is now
+straightforwad to see that we have an inclusion of categories
+\begin{align*}
+  \Fil(K) \longinc \Fil(\underline{\mathbb{R}}_K)
+\end{align*}
+given by $F^{\bullet} \mapsto \mathscr I_{F^\bullet K}$.
+Note however that $\Fil(K)$ is not a full subcategory of
+$\Fil(\underline{\mathbb{R}}_K)$. For example if $K=\bullet$ is
+the trivial simplicial complex then there is a unique simplicial
+map $K\to K$. However, there are many linear maps
+$\mathbb{R}\to\mathbb{R}$.
+Moreover, there are many filtrations of cosheaves that do not
+arise as a filtration of the underlying complex.
+
+\begin{example}\label{ex:cosheaf_filtration_on_s1}
+  Consider the 1-sphere $K=S^1$ with vertices and edges as in
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHNpZ21hXzEiXSxbMiwwLCJcXHNpZ21hXzIiXSxbMSwxLCJcXHNpZ21hXzMiXSxbMCwyLCJcXHRhdV8zIiwxLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFswLDEsIlxcdGF1XzEiLDEseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsMSwiXFx0YXVfMiIsMSx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
+    \begin{tikzcd}
+      {\sigma_1} && {\sigma_2} \\
+                 & {\sigma_3}
+                 \arrow["{\tau_3}"{description}, no head, from=1-1, to=2-2]
+                 \arrow["{\tau_1}"{description}, no head, from=1-1, to=1-3]
+                 \arrow["{\tau_2}"{description}, no head, from=2-2, to=1-3]
+    \end{tikzcd}
+  \end{equation*}
+  We may now define a filtration
+  $\mathscr C^\bullet=\mathscr C^1\subseteq\cdots\subseteq\mathscr C^3\in\Fil(\underline{\mathbb{R}}^3_K)$ by
+  \begin{align}\label{eq:s1_filtration}
+    \mathscr C^i(\sigma_j) = \begin{cases}
+      \mathbb{R}^{i} & \text{for }i\leq 2, \\
+      \mathbb{R}^2 & \text{for }i > 2,
+    \end{cases}
+    \hspace{1cm}
+    \text{and}
+    \hspace{1cm}
+    \mathscr C^i(\tau_j) = \mathbb{R}^{i-1}
+  \end{align}
+  where all maps $\mathscr C^i(\alpha) \hookrightarrow \mathscr C^{i+1}(\alpha)$ and $\mathscr C^i(\tau)\hookrightarrow\mathscr C^i(\sigma)$ are the
+  obvious inclusions.
+\end{example}
+
+Note that a filtration $\mathscr C^\bullet$ of a cosheaf
 induces a persistence module of homologies for every $k\geq 0$:
 \begin{align}\label{eq:cosheaf_persistence_module}
-  H_k(K;\mathscr C_0) \xlongrightarrow{\iota_*}
-  H_k(K;\mathscr C_1) \xlongrightarrow{\iota_*}
-  \cdots \xlongrightarrow{\iota_*}
-  H_k(K;\mathscr C_n)
+  H_k(K;\mathscr C^0) \longinc
+  H_k(K;\mathscr C^1) \longinc
+  \cdots \longinc
+  H_k(K;\mathscr C^n)
 \end{align}
 
 Now the $k$-th persistent homology of the filtration is just the
-homology of the $k$-th persistence module:
-
-\begin{definition}
-  The \emph{persistent homology groups} of a simplicial complex $K$
+homology of the persistence module corresponding to the $k$-th
+homology:
+\begin{definition}\label{def:persistent_homology}
+  The \emph{persistent homology} of a simplicial complex $K$
   with coefficients in a filtration of cosheaves $\mathscr C_i$
   is the persistent homology of the persistence module
   (\ref{eq:cosheaf_persistence_module}), i.e.
   \begin{align*}
-    PH_{k,i\to j}(K;\mathscr C_\bullet) = \im\left(
-      H_k(K;\mathscr C_i) \xlongrightarrow{\iota_*}
-      \cdots \xlongrightarrow{\iota_*}
-      H_k(K;\mathscr C_j)
+    PH_{k,i\to j}(K;\mathscr C^\bullet) := \im\left(
+      H_k(K;\mathscr C^i) \longinc
+      \cdots \longinc
+      H_k(K;\mathscr C^j)
     \right).
   \end{align*}
 \end{definition}
 
+\begin{example}
+  Let us compute the homology groups of the cosheaf filtration
+  in \ref{ex:cosheaf_filtration_on_s1}. We obtain the following
+  complex of chain groups $C_i(K;\mathscr C^j)$ with $i=0,1$ from bottom to top
+  and $j=1,\ldots,4$ from left to right:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNixbMCwwLCIwIl0sWzAsMSwiXFxtYXRoYmIgUl4zIl0sWzEsMCwiXFxtYXRoYmIgUl4zIl0sWzEsMSwiXFxtYXRoYmIgUl42Il0sWzIsMSwiXFxtYXRoYmIgUl42Il0sWzIsMCwiXFxtYXRoYmIgUl42Il0sWzAsMV0sWzIsMywiZyIsMl0sWzUsNCwiaCIsMl0sWzEsMywiayIsMl0sWzMsNCwiXFxlbGwiLDJdLFswLDJdLFsyLDUsImYiXV0=
+    \begin{tikzcd}
+      0 & {\mathbb R^3} & {\mathbb R^6} \\
+      {\mathbb R^3} & {\mathbb R^6} & {\mathbb R^6}
+      \arrow[from=1-1, to=2-1]
+      \arrow["g"', from=1-2, to=2-2]
+      \arrow["h"', from=1-3, to=2-3]
+      \arrow["k"', from=2-1, to=2-2]
+      \arrow["\ell"', from=2-2, to=2-3]
+      \arrow[from=1-1, to=1-2]
+      \arrow["f", from=1-2, to=1-3]
+    \end{tikzcd}
+  \end{equation*}
+  By choosing a basis $e_1,\ldots,e_n$ of $\mathbb{R}^n$ we may write
+  the maps as
+  \begin{align*}
+    f(e_i) = e_{2i-1},\hspace{1cm}
+    g(e_i) = e_{2i-1}+e_{2i+1},\hspace{1cm}
+    h(e_i) = e_i + e_{i+2}, \hspace{1cm}
+    k(e_i) = e_{2i-1}, \hspace{1cm}
+    \ell(e_i) = e_i.
+  \end{align*}
+  Thus we have the complexes of homologies
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNixbMCwwLCIwIl0sWzAsMSwiXFxtYXRoYmIgUl4zIl0sWzEsMCwiXFxtYXRoYmIgUl4zIl0sWzEsMSwiXFxtYXRoYmIgUl4zIl0sWzIsMSwiMCJdLFsyLDAsIlxcbWF0aGJiIFJeNiJdLFsxLDMsImtfKiIsMl0sWzMsNCwiXFxlbGxfKiIsMl0sWzAsMl0sWzIsNSwiZl8qIl1d
+    \begin{tikzcd}
+      0 & {\mathbb R^3} & {\mathbb R^6} \\
+      {\mathbb R^3} & {\mathbb R^3} & 0
+      \arrow["{k_*}"', from=2-1, to=2-2]
+      \arrow["{\ell_*}"', from=2-2, to=2-3]
+      \arrow[from=1-1, to=1-2]
+      \arrow["{f_*}", from=1-2, to=1-3]
+    \end{tikzcd}
+  \end{equation*}
+  where
+  \begin{align*}
+    f_* = f, \hspace{1cm}
+    k_* = 0, \hspace{1cm}
+    \ell_* = 0.
+  \end{align*}
+  Therefore the only non-trivial persistent homology group is
+  \begin{align*}
+    PH_{1,2\to 3}(K;\mathscr C^\bullet) = \im f_* = \mathbb{R}^3.
+  \end{align*}
+\end{example}
+
+\section{Acyclic partial matchings}
+
+Consider a simplicial complex $K$. Recall that a partial matching
+$\Sigma$ on $K$ is a collection of pairs $\sigma\triangleleft\tau$
+such that $\sigma\leq\tau$ and no simplex appears in more than
+one such pair. A $\Sigma$-path $\rho$ then is a sequence
+\begin{align}\label{eq:path}
+  \sigma_\rho=\sigma_1\triangleleft\tau_1,
+  \sigma_2\triangleleft\tau_2,
+  \cdots,
+  \sigma_m\triangleleft\tau_m=\tau_\rho
+\end{align}
+such that $\tau_i\geq\sigma_{i+1}$ for all $i$.
+We will write $P(\Sigma)$ to denote the set of all paths of $\Sigma$.
+A partial matching $\Sigma$ is said to be acyclic
+if there exists no path $\rho\in P(\Sigma)$ such that
+$\sigma_\rho\triangleleft\tau_\rho\not\in\Sigma$ but
+$\sigma_\rho\leq\tau_\rho$ in $K$.
+
+Analogous to compatibility with a sheaf, we may define what it
+means for an acyclic partial matching to be compatible with a cosheaf:
+\begin{definition}\label{def:cosheaf_compatibility}
+  A partial matching $\Sigma$ is \emph{$\mathscr C$-compatible} if,
+  for all $\sigma\triangleleft\tau\in\Sigma$,
+  $\mathscr C_{\sigma,\tau}$ is an iso.
+\end{definition}
+
+Thus a path (\ref{eq:path}) in a $\mathscr C$-compatible partial
+matching gives rise to a map
+$d_\rho : \mathscr C(\sigma_\rho)\to\mathscr C(\tau_\rho)$ as in
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1hdGhzY3IgQyhcXHNpZ21hXzEpIl0sWzIsMCwiXFxtYXRoc2NyIEMoXFx0YXVfMSkiXSxbNCwwLCJcXGNkb3RzIl0sWzYsMCwiXFxtYXRoc2NyIEMoXFxzaWdtYV9tKSJdLFs4LDAsIlxcbWF0aHNjciBDKFxcdGF1X20pIl0sWzAsMSwiZF57LTF9X3tcXHNpZ21hXzEsXFx0YXVfMX0iXSxbMSwyLCJkX3tcXHNpZ21hXzIsXFx0YXVfMX0iXSxbMiwzLCJkX3tcXHNpZ21hX20sXFx0YXVfe20tMX19Il0sWzMsNCwiZF97XFxzaWdtYV9tLFxcdGF1X219XnstMX0iXV0=
+  \begin{tikzcd}
+    {\mathscr C(\sigma_1)} && {\mathscr C(\tau_1)} && \cdots && {\mathscr C(\sigma_m)} && {\mathscr C(\tau_m)}
+    \arrow["{\partial^{-1}_{\sigma_1,\tau_1}}", from=1-1, to=1-3]
+    \arrow["{\partial_{\sigma_2,\tau_1}}", from=1-3, to=1-5]
+    \arrow["{\partial_{\sigma_m,\tau_{m-1}}}", from=1-5, to=1-7]
+    \arrow["{\partial_{\sigma_m,\tau_m}^{-1}}", from=1-7, to=1-9]
+  \end{tikzcd}
+\end{equation*}
+Given our discussion of cosheaf filtratations, it is now natural to
+combine the notions of compatibility of a acyclic partial matching
+with respect to filtrations of complexes and cosheaves, respectively,
+into one:
+
+\begin{definition}
+  Let $\mathscr C^\bullet\in\Fil(\mathscr C)$. An acyclic partial
+  matching $\Sigma$ is $\mathscr C^\bullet$-compatible if, for all
+  $i$, it is $\mathscr C^i$-compatible.
+\end{definition}
+
+This clearly extends the notion of cosheaf compatibility from
+\ref{def:cosheaf_compatibility}. Let us verify that it also extends
+the notion of compatibility with a filtration of a complex.
+
+Recall that an acyclic partial matching $\Sigma$ is said to be
+compatible with a filtration $F^\bullet$ if,
+\begin{align*}
+  \text{$\sigma\in F^i K$ if, and only if, $\tau\in F^i K$}
+\end{align*}
+for all $i$ and all $\sigma\triangleleft\tau$.~\cite{nanda}
+\begin{proposition}
+  Let $F^\bullet \in\Fil(K)$ and $\Sigma$ an acyclic partial
+  matching. Then $\Sigma$ is $F^\bullet$-compatible if, and only if,
+  it is $\mathscr I_{F^\bullet K}$-compatible.
+  \begin{proof}
+    Assume $\Sigma$ is $F^\bullet$-compatible. Fix $i$ and some
+    pair $\sigma\triangleleft\tau$. Now
+    \begin{align*}
+      \mathscr I_{F^i K}(\tau\geq\sigma) = \begin{cases}
+        \identity : \mathbb{R}\to\mathbb{R} & \text{if }\sigma\in F^iK, \\
+        0\to 0 &\text{otherwise.}
+      \end{cases}
+    \end{align*}
+    Either way $\mathscr I_{F^i K}(\sigma\leq\tau)$ is an iso
+    and thus $\Sigma$ is $\mathscr I_{F^\bullet K}$-compatible.
+
+    Assume $\Sigma$ is $\mathscr I_{F^\bullet K}$-compatible.
+    Fix $i$ and some pair $\sigma\triangleleft\tau$. If
+    $\sigma\in F^i K$ then $\mathscr I_{F^i K}(\sigma) = \mathbb{R}$
+    and $\mathscr I_{F^i K}(\sigma\leq\tau)$ must be an iso so
+    $\mathscr I_{F^i K}(\tau) = \mathbb{R}$, i.e. $\tau\in F^i K$.
+    Similarly, if
+    $\sigma\not\in F^i K$ then $\mathscr I_{F^i K}(\sigma) = 0$
+    and $\mathscr I_{F^i K}(\sigma\leq\tau)$ must be an iso so
+    $\mathscr I_{F^i K}(\tau) = 0$, i.e. $\tau\not\in F^i K$.
+    Hence $\Sigma$ is $F^\bullet$-compatible.
+  \end{proof}
+\end{proposition}
+
+Before we move on to define the morse complex that such
+partial matchings give rise to, we ought to consider some examples
+and non-examples.
+
+\begin{example}
+  Note that every acyclic partial matching is trivially
+  $\underline{V}_K$-compatible for all $V\in\FVect_{\mathbb{R}}$.
+  In particular, the acyclic partial matching for the complex in
+  \ref{ex:cosheaf_filtration_on_s1} given by
+  \begin{align*}
+    \Sigma = \left\lbrace{
+        \sigma_1\triangleleft\tau_1,
+        \sigma_2\triangleleft\tau_2
+    }\right\rbrace
+  \end{align*}
+  is compatible with the cosheaf $\underline{\mathbb{R}}^3_K$ but
+  not with the filtration (\ref{eq:s1_filtration}). In fact, no
+  non-empty partial matching on $S^1$ can every be compatible with
+  this filtration as, for no $\sigma\leq\tau$, is
+  $\mathscr C^i(\sigma\leq\tau)$ an isomorphism for all $i$.
+\end{example}
+
+\begin{example}\label{ex:acyclic_partial_matching_s1}
+  Consider a different filtration $\mathscr C^\bullet\in\Fil(S^1)$ given by
+  \begin{equation*}
+    \mathscr C^1(S^1):
+    % https://q.uiver.app/#q=WzAsNixbMCwwLCIwIl0sWzIsMiwiMCJdLFsxLDEsIjAiXSxbMywxLCIwIl0sWzIsMCwiMCJdLFs0LDAsIlxcbWF0aGJiIFIiXSxbMiwwXSxbMiwxXSxbNCwwXSxbMywxXSxbMyw1XSxbNCw1XV0=
+    \begin{tikzcd}
+      0 && 0 && {\mathbb R} \\
+        & 0 && 0 \\
+        && 0
+        \arrow[from=2-2, to=1-1]
+        \arrow[from=2-2, to=3-3]
+        \arrow[from=1-3, to=1-1]
+        \arrow[from=2-4, to=3-3]
+        \arrow[from=2-4, to=1-5]
+        \arrow[from=1-3, to=1-5]
+    \end{tikzcd}
+  \end{equation*}
+  \begin{equation*}
+    \mathscr C^2(S^1):
+    % https://q.uiver.app/#q=WzAsNixbMCwwLCIwIl0sWzIsMiwiXFxSIl0sWzEsMSwiMCJdLFszLDEsIlxcUiJdLFsyLDAsIjAiXSxbNCwwLCJcXG1hdGhiYiBSIl0sWzIsMF0sWzIsMV0sWzQsMCwiXFx0ZXh0e2lkfSIsMV0sWzMsMSwiXFx0ZXh0e2lkfSIsMV0sWzMsNSwiXFx0ZXh0e2lkfSIsMV0sWzQsNSwiXFx0ZXh0e2lkfSIsMV1d
+    \begin{tikzcd}
+      0 && 0 && {\mathbb R} \\
+        & 0 && \mathbb{R} \\
+        && \mathbb{R}
+        \arrow[from=2-2, to=1-1]
+        \arrow[from=2-2, to=3-3]
+        \arrow[from=1-3, to=1-1]
+        \arrow["{-\text{id}}"{description}, from=2-4, to=3-3]
+        \arrow["{\text{id}}"{description}, from=2-4, to=1-5]
+        \arrow[from=1-3, to=1-5]
+    \end{tikzcd}
+  \end{equation*}
+  \begin{equation*}
+    \mathscr C^3(S^1):
+    % https://q.uiver.app/#q=WzAsNixbMCwwLCJcXFIiXSxbMiwyLCJcXFIiXSxbMSwxLCIwIl0sWzMsMSwiXFxSIl0sWzIsMCwiXFxSIl0sWzQsMCwiXFxSXjIiXSxbMiwwXSxbMiwxXSxbNCwwLCJcXHRleHR7aWR9IiwxXSxbMywxLCIoLTEpXmlcXHRleHR7aWR9IiwxXSxbMyw1LCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFs0LDUsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d
+    \begin{tikzcd}
+      \mathbb{R} && \mathbb{R} && {\mathbb{R}^2} \\
+                 & 0 && \mathbb{R} \\
+                 && \mathbb{R}
+                 \arrow[from=2-2, to=1-1]
+                 \arrow[from=2-2, to=3-3]
+                 \arrow["{-\text{id}}"{description}, from=1-3, to=1-1]
+                 \arrow["{\text{id}}"{description}, from=2-4, to=3-3]
+                 \arrow[hook, from=2-4, to=1-5]
+                 \arrow[hook, from=1-3, to=1-5]
+    \end{tikzcd}
+  \end{equation*}
+  where we choose a single inclusion
+  $\mathbb{R}\hookrightarrow\mathbb{R}^2$ throughout and the component
+  $\mathscr C^2(\sigma_3)\hookrightarrow\mathscr C^3(\sigma_3)$
+  is $-\identity$.
+
+  If we now choose $\Sigma = \left\lbrace{\sigma_1\triangleleft\tau_1,
+  \sigma_3\triangleleft\tau_2}\right\rbrace$ then $\Sigma$ is an
+  acyclic partial matching that, moreover, is
+  $\mathscr C^\bullet$-compatible.
+
+  One may also wish to calculate the corresponding persistent homologies.
+  We have the complex of chain groups
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNixbMCwwLCIwIl0sWzIsMCwiXFxtYXRoYmIgUiJdLFs0LDAsIlxcbWF0aGJiIFJeMiJdLFswLDIsIlxcbWF0aGJiIFIiXSxbMiwyLCJcXG1hdGhiYiBSXjIiXSxbNCwyLCJcXG1hdGhiYiBSXjQiXSxbMSwyLCIoMCx4KSJdLFsyLDUsIigteCx4K3ksMCx5KSJdLFs0LDUsIigwLHgsMCwteSkiLDJdLFsxLDQsIih4LC14KSIsMl0sWzMsNCwiKHgsMCkiLDJdLFswLDNdLFswLDFdXQ==
+    \begin{tikzcd}
+      0 && {\mathbb R} && {\mathbb R^2} \\
+      \\
+      {\mathbb R} && {\mathbb R^2} && {\mathbb R^4}
+      \arrow["{(0,x)}", from=1-3, to=1-5]
+      \arrow["{(-x,x+y,0,y)}", from=1-5, to=3-5]
+      \arrow["{(0,x,0,-y)}"', from=3-3, to=3-5]
+      \arrow["{(x,-x)}"', from=1-3, to=3-3]
+      \arrow["{(x,0)}"', from=3-1, to=3-3]
+      \arrow[from=1-1, to=3-1]
+      \arrow[from=1-1, to=1-3]
+    \end{tikzcd}
+  \end{equation*}
+  and thus the corresponding homology complexes:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsOCxbMSwwLCIwIl0sWzMsMCwiXFxtYXRoYmIgUiJdLFs1LDAsIlxcbWF0aGJiIFJeMiJdLFsxLDEsIlxcbWF0aGJiIFIiXSxbMywxLCJcXG1hdGhiYiBSIl0sWzUsMSwiXFxtYXRoYmIgUl4yIl0sWzAsMCwiSF8xKFNeMTtcXG1hdGhzY3IgQ15cXGJ1bGxldCk6Il0sWzAsMSwiSF8wKFNeMTtcXG1hdGhzY3IgQ15cXGJ1bGxldCk6Il0sWzEsMiwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNCw1LCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFszLDQsIlxcdGV4dHtpZH0iLDJdLFswLDFdXQ==
+    \begin{tikzcd}
+      {H_1(S^1;\mathscr C^\bullet):} & 0 && {\mathbb R} && {\mathbb R^2} \\
+      {H_0(S^1;\mathscr C^\bullet):} & {\mathbb R} && {\mathbb R} && {\mathbb R^2}
+      \arrow[hook, from=1-4, to=1-6]
+      \arrow[hook, from=2-4, to=2-6]
+      \arrow["{\text{id}}"', from=2-2, to=2-4]
+      \arrow[from=1-2, to=1-4]
+    \end{tikzcd}
+  \end{equation*}
+  The persistent homology groups may now simply be read off.
+\end{example}
+
+\section{Morse complex}
+
+Recall also that the critical points of a matching are those simplices
+that do not show up in any of the pairs. That is,
+\begin{align*}
+  C(\Sigma) = K_0 \setminus \bigcup_{\sigma\triangleleft\tau\in\Sigma} \left\lbrace{\sigma,\tau}\right\rbrace
+\end{align*}
+Such simplices are important for homology with field coefficients
+because they give rise to a new chain complex whose homology agrees
+with the usual homology. In particular, this means that the computation
+of homology groups may be sped up by finding a good acyclic partial
+matching.
+
+We would like to take this idea and extend it to persistent homology with
+cosheaf filtration coefficients. That is, we wish to construct
+vector spaces $C^\Sigma_k(K;\mathscr C^i)$ and maps
+\begin{align*}
+  \partial^\Sigma_{k,i} : C^\Sigma_k(K;\mathscr C^i)\to C^\Sigma_{k-1}(K;\mathscr C^i)
+\end{align*}
+whose persistent homologies
+\begin{align*}
+  PH^\Sigma_{k,i\to j}(K;\mathscr C^\bullet)
+  = \im(H^\Sigma_k(K;\mathscr C^i)\longinc\cdots\longinc H_k^\Sigma(K;\mathscr C^j))
+\end{align*}
+agree with those defined in \ref{def:persistent_homology}. Recalling that
+we may regard $\mathbb{R}$-homology as $\underline{\mathbb{R}}_K$-homology,
+we define the vector space of critical chains to be
+\begin{align*}
+  C_k^\Sigma(K;\mathscr C^i) := \bigoplus_{\sigma\in C(\Sigma)\cap K_k} \mathscr C^i(\sigma).
+\end{align*}
+
+\begin{definition}
+  The \emph{$(k,i)$-Morse boundary operator} is the linear map
+  \begin{align*}
+    \partial_{k,i}^\Sigma : C_k^\Sigma(K;\mathscr C^i) \to C_{k-1}^\Sigma(K;\mathscr C^i)
+  \end{align*}
+  whose $\mathscr C^i(\tau)\to\mathscr C^i(\sigma)$ component is
+  \begin{align}\label{eq:morse_boundary_component}
+    d_{\sigma,\tau} +
+    \sum_{\rho\in C(\Sigma)} (-1)^{|\rho|} d_{\sigma,\tau_\rho}\circ d_\rho \circ d_{\sigma_\rho,\tau}.
+  \end{align}
+\end{definition}
+
+We once again remind the reader that the expression (\ref{eq:morse_boundary_component}) makes sense even for those $\rho$ where
+$\sigma$ is not a face of $\tau_\rho$ or $\sigma_\rho$ is not a face of
+$\tau$ as then the boundary components are simply zero. Let us verify
+that these boundary operators do indeed yield a chain complex.
+
+\begin{lemma}
+  $\left({\partial^\Sigma}\right)^2=0$.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+We are now justified in considering the Morse homology of
+$\mathscr C^\bullet$ and $\Sigma$. We write $H^\Sigma_k(K;\mathscr C^i)$
+for the $k$-th homology group of the complex
+\begin{align*}
+  \cdots\xlongrightarrow{\partial^\Sigma} C^\Sigma_k(K;\mathscr C^i)
+  \xlongrightarrow{\partial^\Sigma}C^\Sigma_{k-1}(K;\mathscr C^i)
+  \xlongrightarrow{\partial^\Sigma}\cdots.
+\end{align*}
+
+
+Now note that the inclusions $\mathscr C^i\hookrightarrow\mathscr C^{i+1}$
+induce maps
+\begin{align*}
+  C^\Sigma_k(K;\mathscr C^i) \longinc C^\Sigma_k(K;\mathscr C^{i+1}).
+\end{align*}
+Once again we find that these are components of a chain map:
+
+\begin{lemma}
+  For all $k$ and $i$, the following commutes:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJDXlxcU2lnbWFfayhLO1xcbWF0aHNjciBDXmkpIl0sWzIsMCwiQ15cXFNpZ21hX3trLTF9KEs7XFxtYXRoc2NyIENeaSkiXSxbMCwxLCJDXlxcU2lnbWFfayhLO1xcbWF0aHNjciBDXntpKzF9KSJdLFsyLDEsIkNeXFxTaWdtYV97ay0xfShLO1xcbWF0aHNjciBDXntpKzF9KSJdLFswLDEsIlxccGFydGlhbF5cXFNpZ21hIl0sWzAsMiwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMSwzLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsyLDMsIlxccGFydGlhbF5cXFNpZ21hIiwyXV0=
+    \begin{tikzcd}
+      {C^\Sigma_k(K;\mathscr C^i)} && {C^\Sigma_{k-1}(K;\mathscr C^i)} \\
+      {C^\Sigma_k(K;\mathscr C^{i+1})} && {C^\Sigma_{k-1}(K;\mathscr C^{i+1})}
+      \arrow["{\partial^\Sigma}", from=1-1, to=1-3]
+      \arrow[hook, from=1-1, to=2-1]
+      \arrow[hook, from=1-3, to=2-3]
+      \arrow["{\partial^\Sigma}"', from=2-1, to=2-3]
+    \end{tikzcd}
+  \end{equation*}
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
+Thus we have inclusions of Morse homologies
+\begin{align*}
+  H^\Sigma_k(K;\mathscr C^i) \longinc H^\Sigma_k(K;\mathscr C^{i+1}).
+\end{align*}
+Therefore, we have persistence modules of Morse homologies and hence
+may define the corresponding persistent Morse homologies:
+\begin{definition}
+  The \emph{$k$-th persistent homology of $\Sigma$ with $\mathscr C^\bullet$-coefficients} is
+  \begin{align*}
+    PH^\Sigma_{k,i\to j}
+    = \im\left({
+        H^\Sigma_k(K;\mathscr C^i) \longinc \cdots \longinc H^\Sigma_k(K;\mathscr C^j)
+    }\right)
+  \end{align*}
+\end{definition}
+
+\begin{example}\label{ex:persistent_morse_homology}
+  Calculate Morse complex and persistent homology for
+  \ref{ex:acyclic_partial_matching_s1}.
+  \missingexample
+\end{example}
+
+It is of course no coincidence that the persistent homologies
+in \ref{ex:persistent_morse_homology} agree with \ref{ex:acyclic_partial_matching_s1}. We constructed the Morse complex with the explicit
+intention to obtain an alternative way of calculating the persistent
+homology groups. We finish this section by showing that we have
+achieved our goal:
+
+\begin{theorem}
+  $PH^\Sigma_{k,i\to j}(K;\mathscr C^\bullet) = PH_{k,i\to j}(K;\mathscr C^\bullet)$
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
+
+\section{Linear duality}
+
+\todo{write about the equivalence $\op{\Sh(K)}\cong\Cosh(K)$, if
+there is time}
 
 \printbibliography
 
