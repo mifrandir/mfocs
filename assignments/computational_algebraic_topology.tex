@@ -71,20 +71,20 @@ the corresponding boundary operator:
   \begin{align*}
     \partial : C_k(K;\mathscr C) \to C_{k-1}(K;\mathscr C)
   \end{align*}
-  is the unique linear map whose components are $d_{\sigma,\tau}$.
+  is the unique linear map whose components are $\partial_{\sigma,\tau}$.
 \end{definition}
 
 Observe that the component $\partial_{\sigma,\tau}$ makes sense even if $\sigma\not\leq\tau$because
 then $[\sigma:\tau]=0$ so $\partial_{\sigma,\tau}$ is the zero map. Let us verify that
 this does indeed deserve to be called a boundary map:
 
-\begin{lemma}
+\begin{lemma}\label{thm:cosheaf_chain_complex}
   $\partial^2 = 0$.
   \begin{proof}
     We have the $\mathscr C(\tau)\to\mathscr C(\sigma)$ component
     of $\partial^2$:
     \begin{align*}
-      \sum_{\delta\in K_{k-1}} \partial_{\delta,\sigma}\circ \partial_{\tau,\delta} = \left(\sum_{\delta\in K_{k-1}}[\sigma:\delta][\delta:\tau]\right)\mathscr C(\tau\geq\sigma).
+      \sum_{\delta\in K_{k-1}} \partial_{\sigma,\delta}\circ \partial_{\delta,\tau} = \left(\sum_{\delta\in K_{k-1}}[\sigma:\delta][\delta:\tau]\right)\mathscr C(\tau\geq\sigma).
     \end{align*}
     Write $\tau = \left\lbrace{v_1,\ldots,v_n}\right\rbrace$. And assume
     $\sigma = \tau \setminus \left\lbrace{v_i,v_j}\right\rbrace$ with $i<j$.
@@ -300,7 +300,7 @@ linear map on $k$-chains
 $\varphi_* : C_k(K;\mathscr C) \to C_k(K;\mathscr D)$
 whose components are $\varphi_\sigma : \mathscr C(\sigma) \to \mathscr D(\sigma)$.
 It is unsurprising that this is the component of a chain map:
-\begin{proposition}
+\begin{proposition}\label{thm:chain_map}
   For all $k$, the following commutes:
   \begin{equation*}
     % https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX2soSztcXG1hdGhzY3IgQykiXSxbMiwwLCJDX3trKzF9KEs7XFxtYXRoc2NyIEMpIl0sWzAsMSwiQ19rKEs7XFxtYXRoc2NyIEQpIl0sWzIsMSwiQ197aysxfShLO1xcbWF0aHNjciBEKSJdLFswLDEsImQiXSxbMiwzLCJkIl0sWzAsMiwiXFxwaGlfKiIsMl0sWzEsMywiXFxwaGlfKiJdXQ==
@@ -665,7 +665,7 @@ means for an acyclic partial matching to be compatible with a cosheaf:
 
 Thus a path (\ref{eq:path}) in a $\mathscr C$-compatible partial
 matching gives rise to a map
-$d_\rho : \mathscr C(\sigma_\rho)\to\mathscr C(\tau_\rho)$ as in
+$\partial_\rho : \mathscr C(\sigma_\rho)\to\mathscr C(\tau_\rho)$ as in
 \begin{equation*}
   % https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1hdGhzY3IgQyhcXHNpZ21hXzEpIl0sWzIsMCwiXFxtYXRoc2NyIEMoXFx0YXVfMSkiXSxbNCwwLCJcXGNkb3RzIl0sWzYsMCwiXFxtYXRoc2NyIEMoXFxzaWdtYV9tKSJdLFs4LDAsIlxcbWF0aHNjciBDKFxcdGF1X20pIl0sWzAsMSwiZF57LTF9X3tcXHNpZ21hXzEsXFx0YXVfMX0iXSxbMSwyLCJkX3tcXHNpZ21hXzIsXFx0YXVfMX0iXSxbMiwzLCJkX3tcXHNpZ21hX20sXFx0YXVfe20tMX19Il0sWzMsNCwiZF97XFxzaWdtYV9tLFxcdGF1X219XnstMX0iXV0=
   \begin{tikzcd}
@@ -875,8 +875,8 @@ we define the vector space of critical chains to be
   \end{align*}
   whose $\mathscr C^i(\tau)\to\mathscr C^i(\sigma)$ component is
   \begin{align}\label{eq:morse_boundary_component}
-    d_{\sigma,\tau} +
-    \sum_{\rho\in C(\Sigma)} (-1)^{|\rho|} d_{\sigma,\tau_\rho}\circ d_\rho \circ d_{\sigma_\rho,\tau}.
+    \partial_{\sigma,\tau} +
+    \sum_{\rho\in C(\Sigma)} (-1)^{|\rho|} \partial_{\sigma,\tau_\rho}\circ \partial_\rho \circ \partial_{\sigma_\rho,\tau}.
   \end{align}
 \end{definition}
 
@@ -888,7 +888,53 @@ that these boundary operators do indeed yield a chain complex.
 \begin{lemma}
   $\left({\partial^\Sigma}\right)^2=0$.
   \begin{proof}
-    \missingproof
+    Consider a component
+    $\mathscr C^i(\tau)\to\mathscr C^i(\sigma)$ for $\dim\tau=\dim\sigma+2$.
+    This must be of the form
+    \begin{align*}
+      \sum_{\delta}
+      \left(
+        \partial_{\sigma,\delta} +
+        \sum_{\rho\in C(\Sigma)} (-1)^{|\rho|} \partial_{\sigma,\tau_\rho}\circ \partial_\rho \circ \partial_{\sigma_\rho,\delta}
+      \right) \circ
+      \left(
+        \partial_{\delta,\tau} +
+        \sum_{\rho\in C(\Sigma)} (-1)^{|\rho|} \partial_{\delta,\tau_\rho}\circ \partial_\rho \circ \partial_{\sigma_\rho,\tau}
+      \right)\\
+      =
+      \sum_{\rho,{\rho'}\in C(\Sigma)}
+      (-1)^{|\rho|+|{\rho'}|}
+      \sum_{\delta}
+      \left(
+        \partial_{\sigma,\delta} +
+        \partial_{\sigma,\tau_\rho}\circ \partial_\rho \circ \partial_{\sigma_\rho,\delta}
+      \right) \circ
+      \left(
+        \partial_{\delta,\tau} +
+        \partial_{\delta,\tau_{\rho'}}\circ \partial_{\rho'} \circ \partial_{\sigma_{\rho'},\tau}
+      \right)
+    \end{align*}
+    Let us consider the inner sum. Isolating the parts that
+    depend on $\delta$, this splits into four components
+    \begin{align*}
+      &\sum_{\delta} \partial_{\sigma,\delta}\circ\partial_{\delta,\tau},
+      \hspace{1cm}
+      &&\left(\sum_\delta \partial_{\sigma,\delta} \circ  \partial_{\delta,\tau_{\rho'}}\right)\circ \partial_{\rho'} \circ \partial_{\sigma_{\rho'},\tau},
+      \\
+      &
+      \partial_{\sigma,\tau_\rho}\circ \partial_\rho \circ
+      \left(\sum_\delta \partial_{\sigma_\rho,\delta} \circ \partial_{\delta,\tau}\right),
+      \hspace{1cm}
+      &&
+      \partial_{\sigma,\tau_\rho}\circ \partial_\rho \circ
+      \left(
+        \sum_\delta \partial_{\sigma_\rho,\delta} \circ
+        \partial_{\delta,\tau_{\rho'}}
+      \right)
+      \circ \partial_{\rho'} \circ \partial_{\sigma_{\rho'},\tau}.
+    \end{align*}
+    By \ref{thm:cosheaf_chain_complex} we know that each of these
+    sums must yield the zero map, hence the claim follows.
   \end{proof}
 \end{lemma}
 
@@ -923,7 +969,9 @@ Once again we find that these are components of a chain map:
     \end{tikzcd}
   \end{equation*}
   \begin{proof}
-    \missingproof
+    This follows directly from the fact that $\partial^\Sigma$
+    consists of boundary operators with each of which the inclusions
+    commute by naturality. See \ref{thm:chain_map} for details.
   \end{proof}
 \end{lemma}
 Thus we have inclusions of Morse homologies
