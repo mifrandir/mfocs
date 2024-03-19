@@ -1,0 +1,673 @@
+\documentclass{article}
+\usepackage{assignment}
+\begin{document}
+\title{Categories, Proofs, and Processes Mini Project}
+\author{Franz Miltz}
+\date{\today}
+\maketitle
+
+\section{Monoidal categories}
+
+We begin this report by revisiting the notion of a monoidal category.
+
+\begin{definition}
+  \missingdefinition{monoidal category}
+\end{definition}
+
+\section{Monoidal categories are bicategories}
+
+Category theory may be used to generalise many mathematical
+concepts. Categories themselves are structures that have been
+observed to arise very naturally in many areas of mathematics.
+In this section we are going to define the notion of a bicategory.
+This is a fairly involved task which we will try and motivate
+in two distinct ways.
+
+Firstly, its has long been observed that, rather than studying mathematical structures
+by themselves, it is often fruitful to think about the structure
+preserving maps between them. This observation motivates the very
+existence of category theory. Taking this philosophy one step further
+one might wonder whether, rather than studying structure preserving
+maps between structures, one ought to study structure preserving
+maps between structure preserving maps between structures. This is
+in fact an approach that category theorists have adopted: Natural
+transformations are structure preserving maps between functors which
+themselves are structure preserving maps between categories. Yet,
+the usual category of categories does not contain any natural
+transformations. The bicategory of categories, functors, and natural
+transformations addresses the problem.
+
+Secondly, many genearlisations arise by regarding a certain mathematical
+structure as a single-object category and extending the definition
+to categories with more than one object. For example, groups are
+single object groupoids, rings are single object additive categories,
+monoids are single object categories (see \ref{sec:monoids_are_categories}). Observing this pattern leads to the study of enriched categories
+which we will not delve into. However, we will see that bicategories
+may be thought of as such a generalisation of monoidal categories.
+
+Before we state the definition, we remind ourselves of some useful notation. Let $\mathcal C$ and $\mathcal D$ be categories. Recall that we
+then have a product category $\mathcal C\times\mathcal D$ whose objects
+are pairs $(C,D)$ for $C\in\mathcal C$ and $D\in\mathcal D$ and whose
+maps are pairs $(f,g):(C,D)\to (C',D')$ where $f:C\to C'$ in $\mathcal C$
+and $g:D\to D'$ in $\mathcal D$. If we now have functors
+$F:\mathcal C\to\mathcal C'$ and $G:\mathcal D\to\mathcal D'$ there is
+a functor $F\times G:\mathcal C\times\mathcal D\to\mathcal C'\times\mathcal D'$ which is given by $(x,y)\mapsto (Fx,Gy)$ for objects and maps alike.
+In particular, for any functor $F : \mathcal C\to \mathcal C'$ we have
+a functor $\mathcal C\times \mathcal D\to\mathcal C'\times\mathcal D$
+which is the product of $F$ with the identity on $\mathcal D$.
+We will denote this by $F\times\mathcal D$.
+
+Moreover, if we have functors $F,G:\mathcal C\to\mathcal D$ and
+a natural transformation $\varphi : F\Rightarrow G$ we may combine
+all these components in a diagram
+
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsMixbMCwwLCJcXG1hdGhjYWwgQyJdLFsyLDAsIlxcbWF0aGNhbCBEIl0sWzAsMSwiRiIsMCx7ImN1cnZlIjotM31dLFswLDEsIkciLDIseyJjdXJ2ZSI6M31dLFsyLDMsIlxcdmFycGhpIiwxLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dXQ==
+  \begin{tikzcd}
+    {\mathcal C} && {\mathcal D}
+    \arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-18pt}, from=1-1, to=1-3]
+    \arrow[""{name=1, anchor=center, inner sep=0}, "G"', curve={height=18pt}, from=1-1, to=1-3]
+    \arrow["\varphi"{description}, shorten <=5pt, shorten >=5pt, Rightarrow, from=0, to=1]
+  \end{tikzcd}
+\end{equation*}
+
+With this knowledge fresh in our memories, we are ready to follow
+the definition of a bicategory:
+
+\begin{definition}\label{def:bicategory}
+  A \emph{bicategory} $\mathbf C$ consists of
+  \begin{itemize}
+    \item a class of objects $\text{Obj}_{\mathbf{C}}$ where
+      we will write $A\in\mathbf C$ to mean $A\in\text{Obj}_{\mathbf C}$;
+    \item for all $A,B\in\mathbf C$, a 1-category
+      $\Hom_{\mathbf C}[A,B]$ with
+      composition $\bullet$ whose objects $f:A\to B$ are called 1-cells and
+      whose morphisms $\mathbf u:f\Rightarrow g$ are called 2-cells;
+    \item for all $A\in\mathbf{C}$, a functor
+      $\identity_A:\mathbf 1\to \Hom_{\mathbf C}[A,A]$ which we identify
+      with a 1-cell $\identity_A : A\to A$;
+    \item for all $A,B,C\in\mathbf{C}$, a composition functor
+      \begin{align*}
+        \circ_{A,B,C} : \Hom_{\mathbf C}[B,C]\times\Hom_{\mathbf C}[A,B] \to \Hom_{\mathbf C}[A,C]
+      \end{align*}
+      whose value on 1-cells $f\in\Hom_{\mathbf C}[A,B]$ and
+      $g\in\Hom_{\mathbf C}[B,C]$ we will denote by
+      $g\circ f := \circ_{A,B,C}(g,f)$;
+    \item for all $A,B,C,D\in\mathbf C$, a natural transformation
+      \begin{equation*}
+        % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQyxEXVxcdGltZXNcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQixDXVxcdGltZXNcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxCXSJdLFswLDIsIlxcdGV4dHtIb219X3tcXG1hdGhiZiBDfVtCLERdXFx0aW1lc1xcdGV4dHtIb219X3tcXG1hdGhiZiBDfVtBLEJdIl0sWzMsMCwiXFx0ZXh0e0hvbX1fe1xcbWF0aGJmIEN9W0MsRF1cXHRpbWVzXFx0ZXh0e0hvbX1fe1xcbWF0aGJmIEN9W0EsQ10iXSxbMywyLCJcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxEXSJdLFsyLDMsIlxcY2lyY197QSxDLER9Il0sWzEsMywiXFxjaXJjX3tBLEIsRH0iLDJdLFswLDEsIlxcY2lyY197QixDLER9XFx0aW1lc3tcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxCXX0iLDJdLFswLDIsIntcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQyxEXX1cXHRpbWVzXFxjaXJjX3tBLEIsQ30iXSxbNiw0LCJcXGFscGhhX3tBLEIsQyxEfSIsMCx7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH19XV0=
+        \begin{tikzcd}
+          {\text{Hom}_{\mathbf C}[C,D]\times\text{Hom}_{\mathbf C}[B,C]\times\text{Hom}_{\mathbf C}[A,B]} &&& {\text{Hom}_{\mathbf C}[C,D]\times\text{Hom}_{\mathbf C}[A,C]} \\
+          \\
+          {\text{Hom}_{\mathbf C}[B,D]\times\text{Hom}_{\mathbf C}[A,B]} &&& {\text{Hom}_{\mathbf C}[A,D]}
+          \arrow[""{name=0, anchor=center, inner sep=0}, "{\circ_{A,C,D}}", from=1-4, to=3-4]
+          \arrow["{\circ_{A,B,D}}"', from=3-1, to=3-4]
+          \arrow[""{name=1, anchor=center, inner sep=0}, "{\circ_{B,C,D}\times{\text{Hom}_{\mathbf C}[A,B]}}"', from=1-1, to=3-1]
+          \arrow["{{\text{Hom}_{\mathbf C}[C,D]}\times\circ_{A,B,C}}", from=1-1, to=1-4]
+          \arrow["{\alpha_{A,B,C,D}}", shorten <=40pt, shorten >=40pt, Rightarrow, from=1, to=0]
+        \end{tikzcd}
+      \end{equation*}
+      whose components at $f\in\Hom_{\mathbf C}[A,B]$,
+      $g\in\Hom_{\mathbf C}[B,C]$, and $h\in\Hom_{\mathbf C}[C,D]$
+      we denote by
+      \begin{align*}
+        \alpha_{f,g,h} : (h\circ g) \circ f \Rightarrow h\circ(g\circ f)
+      \end{align*}
+    \item for all $A,B\in\mathbf C$, a natural transformation
+      \begin{equation*}
+        % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxCXVxcdGltZXNcXG1hdGhiZiAxIl0sWzAsMiwiXFx0ZXh0e0hvbX1fe1xcbWF0aGJmIEN9W0EsQl1cXHRpbWVzXFx0ZXh0e0hvbX1fe1xcbWF0aGJmIEN9W0EsQV0iXSxbMiwyLCJcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxCXSJdLFswLDEsIlxcdGV4dHtIb219X3tcXG1hdGhiZiBDfVtBLEJdXFx0aW1lcyBJX0EiLDJdLFsxLDIsIlxcY2lyY197QSxBLEJ9IiwyXSxbMCwyLCJcXGNvbmciLDFdLFszLDUsIlxccmhvX3tBLEJ9IiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dXQ==
+        \begin{tikzcd}
+          {\text{Hom}_{\mathbf C}[A,B]\times\mathbf 1} \\
+          \\
+          {\text{Hom}_{\mathbf C}[A,B]\times\text{Hom}_{\mathbf C}[A,A]} && {\text{Hom}_{\mathbf C}[A,B]}
+          \arrow[""{name=0, anchor=center, inner sep=0}, "{\text{Hom}_{\mathbf C}[A,B]\times \identity_A}"', from=1-1, to=3-1]
+          \arrow["{\circ_{A,A,B}}"', from=3-1, to=3-3]
+          \arrow[""{name=1, anchor=center, inner sep=0}, "\cong"{description}, from=1-1, to=3-3]
+          \arrow["{\rho_{A,B}}"', shorten <=11pt, shorten >=11pt, Rightarrow, from=0, to=1]
+        \end{tikzcd}
+      \end{equation*}
+      whose component at $f\in\Hom_{\mathbf C}[A,B]$ we will denote by
+      \begin{align*}
+        \rho_f : f \circ \identity_A \Rightarrow f;
+      \end{align*}
+    \item for all $A,B\in\mathbf C$, a natural transformation
+      \begin{equation*}
+        % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhiZiAxXFx0aW1lc1xcdGV4dHtIb219X3tcXG1hdGhiZiBDfVtBLEJdIl0sWzAsMiwiXFx0ZXh0e0hvbX1fe1xcbWF0aGJmIEN9W0IsQl1cXHRpbWVzXFx0ZXh0e0hvbX1fe1xcbWF0aGJmIEN9W0EsQl0iXSxbMiwyLCJcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxCXSJdLFswLDEsIklfQlxcdGltZXNcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxCXSIsMl0sWzEsMiwiXFxjaXJjX3tBLEIsQn0iLDJdLFswLDIsIlxcY29uZyIsMV0sWzMsNSwiXFxsYW1iZGFfe0EsQn0iLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9fV1d
+        \begin{tikzcd}
+          {\mathbf 1\times\text{Hom}_{\mathbf C}[A,B]} \\
+          \\
+          {\text{Hom}_{\mathbf C}[B,B]\times\text{Hom}_{\mathbf C}[A,B]} && {\text{Hom}_{\mathbf C}[A,B]}
+          \arrow[""{name=0, anchor=center, inner sep=0}, "{\identity_B\times\text{Hom}_{\mathbf C}[A,B]}"', from=1-1, to=3-1]
+          \arrow["{\circ_{A,B,B}}"', from=3-1, to=3-3]
+          \arrow[""{name=1, anchor=center, inner sep=0}, "\cong"{description}, from=1-1, to=3-3]
+          \arrow["{\lambda_{A,B}}"', shorten <=12pt, shorten >=12pt, Rightarrow, from=0, to=1]
+        \end{tikzcd}
+      \end{equation*}
+      whose component at $f\in\Hom_{\mathbf C}[A,B]$ we will denote by
+      \begin{align*}
+        \lambda_f : \identity_B\circ f \Rightarrow f;
+      \end{align*}
+  \end{itemize}
+  such that
+  \begin{itemize}
+    \item for all 1-cells
+      $ A \xlongrightarrow{f} B \xlongrightarrow{g} C \xlongrightarrow{h} D \xlongrightarrow{k} E $
+      the following commutes
+      \begin{equation}\label{eq:pentagon}
+        % https://q.uiver.app/#q=WzAsNSxbMCwwLCIoKGtcXGNpcmMgaClcXGNpcmMgZylcXGNpcmMgZiJdLFswLDIsIihrXFxjaXJjIGgpXFxjaXJjKGdcXGNpcmMgZikiXSxbNCwyLCJrXFxjaXJjKGhcXGNpcmMoZ1xcY2lyYyBmKSkiXSxbMiwwLCIoa1xcY2lyYyhoXFxjaXJjIGcpKVxcY2lyYyBmIl0sWzQsMCwia1xcY2lyYyAoKGhcXGNpcmMgZylcXGNpcmMgZikiXSxbMCwxLCJcXGFscGhhX3tmLGcsa1xcY2lyYyBofSIsMix7ImxldmVsIjoyfV0sWzEsMiwiXFxhbHBoYV97Z1xcY2lyYyBmLGgsa30iLDIseyJsZXZlbCI6Mn1dLFs0LDIsImtcXGNpcmMgXFxhbHBoYV97ZixnLGh9IiwwLHsibGV2ZWwiOjJ9XSxbMCwzLCJcXGFscGhhX3tnLGgsa31cXGNpcmMgZiIsMCx7ImxldmVsIjoyfV0sWzMsNCwiXFxhbHBoYV97ZixnXFxjaXJjIGgsa30iLDAseyJsZXZlbCI6Mn1dXQ==
+        \begin{tikzcd}
+          {((k\circ h)\circ g)\circ f} && {(k\circ(h\circ g))\circ f} && {k\circ ((h\circ g)\circ f)} \\
+          \\
+          {(k\circ h)\circ(g\circ f)} &&&& {k\circ(h\circ(g\circ f))}
+          \arrow["{\alpha_{f,g,k\circ h}}"', Rightarrow, from=1-1, to=3-1]
+          \arrow["{\alpha_{g\circ f,h,k}}"', Rightarrow, from=3-1, to=3-5]
+          \arrow["{k\circ \alpha_{f,g,h}}", Rightarrow, from=1-5, to=3-5]
+          \arrow["{\alpha_{g,h,k}\circ f}", Rightarrow, from=1-1, to=1-3]
+          \arrow["{\alpha_{f,g\circ h,k}}", Rightarrow, from=1-3, to=1-5]
+        \end{tikzcd}
+      \end{equation}
+    \item for all 1-cells $A\xlongrightarrow{f}B\xlongrightarrow{g} C$
+      the following commutes:
+      \begin{equation}\label{eq:triangle}
+        % https://q.uiver.app/#q=WzAsMyxbMCwwLCIoZ1xcY2lyYyBcXHRleHR7aWR9X0IpXFxjaXJjIGYiXSxbMiwwLCJnXFxjaXJjKFxcdGV4dHtpZH1fQlxcY2lyYyBmKSJdLFsxLDEsImdcXGNpcmMgZiJdLFswLDIsIlxccmhvX2cgXFxjaXJjIGYiLDIseyJsZXZlbCI6Mn1dLFsxLDIsImdcXGNpcmMgXFxsYW1iZGFfZiIsMCx7ImxldmVsIjoyfV0sWzAsMSwiXFxhbHBoYV97ZixcXHRleHR7aWR9X0IsZ30iLDAseyJsZXZlbCI6Mn1dXQ==
+        \begin{tikzcd}
+          {(g\circ \text{id}_B)\circ f} && {g\circ(\text{id}_B\circ f)} \\
+                                        & {g\circ f}
+                                        \arrow["{\rho_g \circ f}"', Rightarrow, from=1-1, to=2-2]
+                                        \arrow["{g\circ \lambda_f}", Rightarrow, from=1-3, to=2-2]
+                                        \arrow["{\alpha_{f,\text{id}_B,g}}", Rightarrow, from=1-1, to=1-3]
+        \end{tikzcd}
+      \end{equation}
+  \end{itemize}
+\end{definition}
+
+Throughout this definition we have been rigorous in identifying the
+precise functors and natural transformation involved. Such a level
+of detail is usually unnecessary and, moreover, tends to obscure
+interesting details. For this reason, we will drop subscripts whenever
+it is possible to infer them from context.
+
+Let us now see how one might define $\textbf{Cat}$, the bicategory with
+objects all small categories. For small categories $\mathbb C$ and
+$\mathbb D$, the hom-category $\Hom[\mathbb C,\mathbb D]$ is just
+the functor category $[\mathbb C,\mathbb D]$ and the functor
+$\identity_{\mathbb C} : \mathbf 1 \to [\mathbb C,\mathbb C]$
+maps to the identity functor $\text{Id}:\mathbb C\to\mathbb C$.
+We note that composition of functors is associative and respects
+identities as units, hence we may take $\alpha$, $\lambda$, and $\rho$
+to be the identities. Thus the conditions (\ref{eq:pentagon}) and
+(\ref{eq:triangle}) are trivially satisfied.
+
+The previous example is a little bit underwhelming: All the structure
+and conditions related to associativity and unitality is trivial.
+Let us construct a less trivial example:
+
+\begin{definition}
+  Let $\mathcal C$ be a category. The bicategory $\text{Span}(\mathcal C)$
+  consists of
+  \begin{itemize}
+    \item x
+  \end{itemize}
+\end{definition}
+
+We need to check that this is well-defined. In particular, one needs to
+verify the coherence conditions. \missingproof
+
+We will come back to this bicategory later on. For now, let us now make sure
+that bicategories with a single object are indeed the same as monoidal
+categories. Consider a monoidal
+category $(\mathcal C,\otimes, I,\alpha,\lambda,\rho)$.
+Then the corresponding bicategory $\mathbf C$ consists of
+\begin{itemize}
+  \item a single object $*$;
+  \item the unique hom-category $\Hom[*,*]=\mathcal C$;
+  \item the identity functor $\identity_*$ mapping to $I$;
+  \item the composition functor
+    \begin{align*}
+      \circ_{*,*,*} : \Hom[*,*]\times\Hom[*,*]\to\Hom[*,*]
+    \end{align*}
+    given by $\otimes : \mathcal C\times\mathcal C\to\mathcal C$;
+  \item the natural transformations $\alpha_{*,*,*}=\alpha$,
+    $\rho_{*,*}=\rho$ and $\lambda_{*,*}=\lambda$.
+\end{itemize}
+Thus the 1-cells of $\mathbf C$ are the objects of $\mathcal C$ and
+their composition is the monoidal product. Thus, for $A,B,C,D\in\mathcal C$, the conditions (\ref{eq:pentagon}) and (\ref{eq:triangle}) become
+
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsNSxbMCwwLCIoKGtcXGNpcmMgaClcXGNpcmMgZylcXGNpcmMgZiJdLFswLDIsIihrXFxjaXJjIGgpXFxjaXJjKGdcXGNpcmMgZikiXSxbNCwyLCJrXFxjaXJjKGhcXGNpcmMoZ1xcY2lyYyBmKSkiXSxbMiwwLCIoa1xcY2lyYyhoXFxjaXJjIGcpKVxcY2lyYyBmIl0sWzQsMCwia1xcY2lyYyAoKGhcXGNpcmMgZylcXGNpcmMgZikiXSxbMCwxLCJcXGFscGhhX3tmLGcsa1xcY2lyYyBofSIsMix7ImxldmVsIjoyfV0sWzEsMiwiXFxhbHBoYV97Z1xcY2lyYyBmLGgsa30iLDIseyJsZXZlbCI6Mn1dLFs0LDIsImtcXGNpcmMgXFxhbHBoYV97ZixnLGh9IiwwLHsibGV2ZWwiOjJ9XSxbMCwzLCJcXGFscGhhX3tnLGgsa31cXGNpcmMgZiIsMCx7ImxldmVsIjoyfV0sWzMsNCwiXFxhbHBoYV97ZixnXFxjaXJjIGgsa30iLDAseyJsZXZlbCI6Mn1dXQ==
+  \begin{tikzcd}
+    {((A\otimes B)\otimes C)\otimes D} && {(A\otimes(B\otimes C))\otimes D} && {A\otimes ((B\otimes C)\otimes D)} \\
+    \\
+    {(A\otimes B)\otimes(C\otimes D)} &&&& {A\otimes(B\otimes(C\otimes D))}
+    \arrow["{\alpha}"', Rightarrow, from=1-1, to=3-1]
+    \arrow["{\alpha}"', Rightarrow, from=3-1, to=3-5]
+    \arrow["{A\otimes \alpha}", Rightarrow, from=1-5, to=3-5]
+    \arrow["{\alpha\otimes D}", Rightarrow, from=1-1, to=1-3]
+    \arrow["{\alpha}", Rightarrow, from=1-3, to=1-5]
+  \end{tikzcd}
+\end{equation*}
+and
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCIoZ1xcY2lyYyBcXHRleHR7aWR9X0IpXFxjaXJjIGYiXSxbMiwwLCJnXFxjaXJjKFxcdGV4dHtpZH1fQlxcY2lyYyBmKSJdLFsxLDEsImdcXGNpcmMgZiJdLFswLDIsIlxccmhvX2cgXFxjaXJjIGYiLDIseyJsZXZlbCI6Mn1dLFsxLDIsImdcXGNpcmMgXFxsYW1iZGFfZiIsMCx7ImxldmVsIjoyfV0sWzAsMSwiXFxhbHBoYV97ZixcXHRleHR7aWR9X0IsZ30iLDAseyJsZXZlbCI6Mn1dXQ==
+  \begin{tikzcd}
+    {(A\otimes I)\otimes B} && {A\otimes(I\otimes B)} \\
+                            & {A\otimes B}
+                            \arrow["{\rho \otimes B}"', Rightarrow, from=1-1, to=2-2]
+                            \arrow["{A\otimes \lambda}", Rightarrow, from=1-3, to=2-2]
+                            \arrow["{\alpha}", Rightarrow, from=1-1, to=1-3]
+  \end{tikzcd}
+\end{equation*}
+But these are exactly the coherence conditions of monoidal categories! Thus they are obviously satisfied. It is not hard to see that it is easy to
+go in the other direction, i.e. if $\mathbf C$ is a bicategory with a single object $*$ then $\Hom[*,*]$ has a monoidal structure given
+by composition and the identity 1-cell.
+
+There is more to be said on this subject: One may define pseudofunctors,
+i.e. maps of bicategories, and hence a category of bicategories
+$\textbf{Bicat}$. In particular, there is a full subcategory
+$\textbf{1Bicat}\hookrightarrow\textbf{Bicat}$ of single-object bicategories. Moreover, there is the notion of monoidal functors,
+i.e. maps of monoidal categories. These may be used to form the
+category $\textbf{MonCat}$ of monoidal categories. One then obtains
+an equivalence $\textbf{1Bicat}\cong\textbf{MonCat}$. This statement
+is stronger than what we have discussed in this section in the sense
+that it proves that there truly is no difference between single-object
+bicategories and monoidal categories because their structure preserving
+morphisms agree. Unfortunately,
+rigorous pursuit of this idea is beyond the scope of this
+report.
+
+\section{Monoids are categories}
+
+We have seen that one may generalise monoidal categories to bicategories.
+Let us now turn our attention to a simpler example. It turns out that
+categories are a generalisation of monoids.
+Recall that a monoid consists of an underlying set equipped with
+a unital associative multiplication. More precisely:
+
+\begin{definition}
+  A \emph{monoid} $(M,e,m)$ consists of
+  a set $M$,
+  a distinguished element $e\in M$, and
+  a map $m : M\times M\to M$
+  such that, for all $x,y,z\in M$,
+  $m(e,x) = x = m(x,e)$ and $m(x,m(y,z)) = m(m(x,y),z)$.
+\end{definition}
+
+Now a map of monoids is a map of underlying sets that preserves
+identities and multiplication:
+
+\begin{definition}
+  A \emph{map of monoids} $f:(M,e,m)\to(M',e',m')$ is a map
+  $f:M\to M'$ such that, for all $x,y\in M$,
+  $f(m(x,y)) = m(f(x),f(y))$ and $f(e)=e'$.
+\end{definition}
+
+It is easy to check that composition of monoid maps yields another
+monoid map. Hence we have a category of monoids which we will
+denote by $\textbf{Mon}$.
+On the other hand, we have the full subcategory
+$\textbf{1Cat}\hookrightarrow\textbf{Cat}$ of small categories with
+a unique object. That is, $\textbf{1Cat}$ contains all small single-object
+categories and all functors between them.
+
+Note that the two conditions that we impose on the multiplication of a monoid
+are associativity and unitality. Those are exactly the conditions we require
+the composition of a category to satisfy. We may thus consider a monoid
+as a category:
+
+\begin{definition}
+  Let $(M,e,m)$ be a monoid. The induced category $I(M,e,m)$ has
+  has a single object $*$ with hom-set $\Hom(*,*):= M$, identity
+  $\identity_* := e$, and composition $x\circ y := m(x,y)$ for
+  $x,y\in\Hom(*,*)$.
+
+  Let $f:(M,e,m) \to (M',e',m')$ be a monoid map. The induced functor
+  $If:I(M,e,m)\to I(M',e',m')$ is given by the map on objects $*\mapsto *$
+  and the map on hom-sets $x \mapsto f(x)$ for $x\in\Hom(*,*)$.
+\end{definition}
+
+Let us make sure that this is well-defined. In particular, $I(M,e,m)$
+is a category as, for $x,y,z\in\Hom(*,*)$,
+\begin{align*}
+  x\circ(y\circ z) = m(x,m(y,z)) = m(m(x,y),z) = (x\circ y)\circ z
+\end{align*}
+and
+\begin{align*}
+  x \circ \identity_* = m(x,e) = x = m(e,x) = \identity_* \circ x.
+\end{align*}
+Further, $If$ is a functor as $If(\identity_*) = f(e) = e' = \identity_*$
+and, for $x,y\in\Hom(*,*)$,
+\begin{align*}
+  If(x\circ y) = f(m(x,y)) = m(f(x),f(y)) = If(x) \circ If(y).
+\end{align*}
+Our notation suggests that we have defined a functor from
+monoids to single object categories. This is indeed the case.
+\begin{lemma}
+  $I:\textbf{Mon}\to\textbf{1Cat}$ is a functor.
+  \begin{proof}
+    Consider a monoid map $f:(M,e,m)\to(M',e',m')$. We then
+    have $If(\identity_*) = f(e) = e' = \identity_*$, i.e. $I$
+    preserves identities. Moreover, for $x,y,z\in M$,
+    $If(x\circ y) = f(m(x,y)) = m(f(x),f(y)) = If(x)\circ If(y)$ by
+    definition of a monoid map. Thus $I$ is compatible with composition,
+    too.
+  \end{proof}
+\end{lemma}
+
+We may also go the other way:
+
+\begin{lemma}
+  Let $\mathbb C,\mathbb D$ be small categories with unique objects
+  $X\in\mathbb{C}$ and $Y\in\mathbb D$ and let $F:\mathbb{C}\to\mathbb D$
+  be a functor. Then $J\mathbb C := (\Hom(X,X),\identity_X,\circ)$ is a
+  monoid and $x\mapsto Fx$ defines a monoid map $JF : J\mathbb{C}\to J\mathbb D$.
+  \begin{proof}
+    We verify that $J\mathbb{C}$ is a monoid. For $x\in J\mathbb{C}$
+    we find
+    \begin{align*}
+      m(e,x) = \identity_X \circ x = x = x \circ \identity_X = m(x,e).
+    \end{align*}
+    Similarly, for $x,y,z\in J\mathbb{C}$,
+    \begin{align*}
+      m(x,m(y,z)) = x\circ (y\circ z) = (x\circ y)\circ z = m(m(x,y),z).
+    \end{align*}
+    Moreover, for $x,y\in J\mathbb{C}$,
+    \begin{align*}
+      JF(m(x,y)) = F(x\circ y) = Fx \circ Fy = m(JF(x), JF(y))
+    \end{align*}
+    and $JF(e) = F(\identity_X) = \identity_Y = e'$. Thus
+    $JF$ is a monoid map.
+  \end{proof}
+\end{lemma}
+
+Once again, this is a functor:
+
+\begin{lemma}
+  $J:\textbf{1Cat}\to\textbf{Mon}$ is a functor.
+  \begin{proof}
+    If $\text{Id}:\mathbb C\to\mathbb C$ is the identity functor
+    then $J(\text{Id})$ must be the identity map which is the
+    identity on $J\mathbb C$. Moreover, if we have functors
+    \begin{align*}
+      \mathbb C \xlongrightarrow{F} \mathbb D \xlongrightarrow{G} \mathbb E
+    \end{align*}
+    in $\textbf{1Cat}$ then, for $x\in J\mathbb C$,
+    \begin{align*}
+      JG\circ JF(x) = G(F(x)) = (G\circ F)(x) = J(G\circ F)(x).
+    \end{align*}
+    Thus $J$ respects composition and hence defines a functor.
+  \end{proof}
+\end{lemma}
+
+One might think that $I$ and $J$ are mutually inverse. However, this
+is not so: Consider $\mathbb C,\mathbb C'\in\textbf{1Cat}$ which are
+isomorphic through $X\mapsto Y$ on objects and $x\mapsto x$ on maps.
+Then $\mathbb{C}\neq\mathbb{C}'$ but $J\mathbb{C}=J\mathbb{C}'$.
+This is a common phenomenon in category theory. Hence one rarely
+speaks about isomorphic categories but rather about equivalent ones:
+
+\begin{definition}
+  An \emph{equivalence of categories $\mathbb C\cong\mathbb D$} consists
+  of functors $F:\mathbb{C}\to\mathbb D$ and $G:\mathbb D\to\mathbb C$
+  and natural isormopshims $\eta : \text{Id}\to GF$ and
+  $\epsilon:FG\to \text{Id}$ as in the diagram
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXG1hdGhiYiBDIl0sWzEsMCwiXFxtYXRoYmIgRCJdLFsyLDEsIlxcbWF0aGJiIEMiXSxbMywwLCJcXG1hdGhiYiBEIl0sWzAsMSwiRiJdLFsxLDIsIkciLDFdLFswLDIsIiIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsMywiIiwyLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMiwzLCJGIiwyXSxbNiwxLCJcXGV0YSIsMCx7InNob3J0ZW4iOnsic291cmNlIjoyMH19XSxbMiw3LCJcXGVwc2lsb24iLDIseyJzaG9ydGVuIjp7InRhcmdldCI6MjB9fV1d
+    \begin{tikzcd}
+  & {\mathbb D} && {\mathbb D} \\
+      {\mathbb C} && {\mathbb C}
+      \arrow["F", from=2-1, to=1-2]
+      \arrow["G"{description}, from=1-2, to=2-3]
+      \arrow[""{name=0, anchor=center, inner sep=0}, Rightarrow, no head, from=2-1, to=2-3]
+      \arrow[""{name=1, anchor=center, inner sep=0}, Rightarrow, no head, from=1-2, to=1-4]
+      \arrow["F"', from=2-3, to=1-4]
+      \arrow["\eta", shorten <=3pt, Rightarrow, from=0, to=1-2]
+      \arrow["\epsilon"', shorten >=3pt, Rightarrow, from=2-3, to=1]
+    \end{tikzcd}
+  \end{equation*}
+\end{definition}
+
+That is, functors $F:\mathbb{C}\to\mathbb D:G$ form an equivalence
+if they are inverses up to isomorphism. Our functors $I$ and $J$
+satisfy this condition:
+
+\begin{proposition}
+  There is an equivalence of categories $\textbf{Mon}\cong\textbf{1Cat}$.
+  \begin{proof}
+    It is straightforward to verify
+    $JI=\text{Id}:\textbf{Mon}\to\textbf{Mon}$. We need
+    to define a natural isormophism $\epsilon:IJ\to\text{Id}$.
+    Consider $X\in\mathbb C\in\textbf{1Cat}$. Define
+    $\epsilon_{\mathbb{C}}(*)=X$ and $\epsilon_{\mathbb{C}}(x) = x$ for
+    $x\in\Hom(X,X)$. This is natural in $\mathbb{C}$ as, for all
+    $F:\mathbb{C}\to\mathbb D$ in $\textbf{1Cat}$,
+    $\epsilon_{\mathbb D}(IJF(*))$ and $IJF(\epsilon_{\mathbb{C}})$
+    must be the unique object in $\mathbb D$ and on arrows $\varepsilon$
+    is the identity so there is nothing to check. Moreover,
+    $\epsilon_{\mathbb{C}}$ is a bijection on objects and arrows so
+    it is an isomorphism.
+  \end{proof}
+\end{proposition}
+
+\section{Monads are monoids}
+
+We have seen that categories are one generalisation of monoids. However,
+one may go in a different direction. Observe that an element $e\in M$
+may be identified with a map $e : 1 \to M$ where $1=\left\lbrace{*}\right\rbrace$ is a singleton set and we abuse notation to write $e(*) = e$.
+One may now ask what is special about $\textbf{Set}$? We could define
+a monoid to consists of maps $m:M\times M\to M$ and $e:1\to M$ in
+any cartesian category. We are going to go one step further and
+replace the cartesian structure with an arbitrary monoidal structure:
+
+\begin{definition}
+  Let $(\mathcal C,I,\otimes)$ be a monoidal category. A
+  $\mathcal C$-monoid $(M,e,m)$ consists of
+  \begin{itemize}
+    \item an object $M\in\mathcal C$;
+    \item a map $e:I\to\mathcal M$;
+    \item a map $m:M\otimes M\to M$ in $\mathcal C$
+  \end{itemize}
+  such that the following commute:
+  \begin{equation}\label{eq:monoid_axioms}
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJJXFxvdGltZXMgTSJdLFsyLDAsIk1cXG90aW1lcyBNIl0sWzIsMiwiTSJdLFs0LDAsIk1cXG90aW1lcyBJIl0sWzAsMSwiZVxcb3RpbWVzIE0iXSxbMSwyLCJtIl0sWzAsMiwiXFxsYW1iZGEiLDJdLFszLDEsIk1cXG90aW1lcyBlIiwyXSxbMywyLCJcXHJobyJdXQ==
+    \begin{tikzcd}
+      {I\otimes M} && {M\otimes M} && {M\otimes I} \\
+      \\
+                   && M
+                   \arrow["{e\otimes M}", from=1-1, to=1-3]
+                   \arrow["m", from=1-3, to=3-3]
+                   \arrow["\lambda"', from=1-1, to=3-3]
+                   \arrow["{M\otimes e}"', from=1-5, to=1-3]
+                   \arrow["\rho", from=1-5, to=3-3]
+    \end{tikzcd}, \hspace{1cm}
+    % https://q.uiver.app/#q=WzAsNSxbMCwwLCIoTVxcb3RpbWVzIE0pXFxvdGltZXMgTSJdLFswLDEsIk1cXG90aW1lcyBNIl0sWzEsMiwiTSJdLFsyLDEsIk1cXG90aW1lcyBNIl0sWzIsMCwiTVxcb3RpbWVzKE1cXG90aW1lcyBNKSJdLFswLDEsIm1cXG90aW1lcyBNIiwyXSxbMSwyLCJtIiwyXSxbMywyLCJtIl0sWzAsNCwiXFxhbHBoYSJdLFs0LDMsIk1cXG90aW1lcyBtIl1d
+    \begin{tikzcd}
+      {(M\otimes M)\otimes M} && {M\otimes(M\otimes M)} \\
+      {M\otimes M} && {M\otimes M} \\
+                   & M
+                   \arrow["{m\otimes M}"', from=1-1, to=2-1]
+                   \arrow["m"', from=2-1, to=3-2]
+                   \arrow["m", from=2-3, to=3-2]
+                   \arrow["\alpha", from=1-1, to=1-3]
+                   \arrow["{M\otimes m}", from=1-3, to=2-3]
+    \end{tikzcd}
+  \end{equation}
+\end{definition}
+
+Consider the monoidal structure on $\Set$ given by the cartesian structure.
+Then a $\Set$-monoid is just a monoid in the usual sense: We have a
+set $M$, a map $e:1\to M$, i.e. an element $e\in M$, and a multiplication
+$m:M\times M\to M$. The conditions \ref{eq:monoid_axioms} are just
+unitality and associativity, respectively.
+
+\begin{definition}
+  A \emph{map of $(\mathcal C,I,\otimes)$-monoids}
+  $f:(M,e,m)\to(M',e',m')$ is a map $f:M\to M'$ in $\mathcal C$
+  such that the following commute:
+  \begin{equation}\label{eq:monoid_map_axioms}
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJNXFxvdGltZXMgTSJdLFsyLDAsIk0nXFxvdGltZXMgTSciXSxbMCwxLCJNIl0sWzIsMSwiTSciXSxbMCwxLCJmXFxvdGltZXMgZiJdLFsxLDMsIm0nIl0sWzAsMiwibSIsMl0sWzIsMywiZiIsMl1d
+    \begin{tikzcd}
+      {M\otimes M} && {M'\otimes M'} \\
+      M && {M'}
+      \arrow["{f\otimes f}", from=1-1, to=1-3]
+      \arrow["{m'}", from=1-3, to=2-3]
+      \arrow["m"', from=1-1, to=2-1]
+      \arrow["f"', from=2-1, to=2-3]
+    \end{tikzcd}\hspace{1cm}
+    % https://q.uiver.app/#q=WzAsMyxbMCwxLCJNIl0sWzIsMSwiTSciXSxbMSwwLCJJIl0sWzIsMCwiZSIsMl0sWzIsMSwiZSciXSxbMCwxLCJmIiwyXV0=
+    \begin{tikzcd}
+  & I \\
+      M && {M'}
+      \arrow["e"', from=1-2, to=2-1]
+      \arrow["{e'}", from=1-2, to=2-3]
+      \arrow["f"', from=2-1, to=2-3]
+    \end{tikzcd}
+  \end{equation}
+\end{definition}
+
+It is easily verified that the composite of monoid maps
+\begin{align*}
+  (M,e,m)\xlongrightarrow{f}(M',e',m')\xlongrightarrow{g}(M'',e'',m'')
+\end{align*}
+is itself a monoid map as
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsNixbMCwxLCJNIl0sWzIsMSwiTSciXSxbMiwwLCJNJ1xcb3RpbWVzIE0nIl0sWzAsMCwiTVxcb3RpbWVzIE0iXSxbNCwwLCJNJydcXG90aW1lcyBNJyciXSxbNCwxLCJNJyciXSxbMCwxLCJmIiwyXSxbMiwxLCJtJyJdLFszLDIsImZcXG90aW1lcyBmIl0sWzMsMCwibSIsMl0sWzIsNCwiZ1xcb3RpbWVzIGciXSxbMSw1LCJnIiwyXSxbNCw1LCJtJyciLDFdLFszLDQsIihnXFxjaXJjIGYpXFxvdGltZXMgKGdcXGNpcmMgZikiLDAseyJjdXJ2ZSI6LTV9XV0=
+  \begin{tikzcd}
+    {M\otimes M} && {M'\otimes M'} && {M''\otimes M''} \\
+    M && {M'} && {M''}
+    \arrow["f"', from=2-1, to=2-3]
+    \arrow["{m'}", from=1-3, to=2-3]
+    \arrow["{f\otimes f}", from=1-1, to=1-3]
+    \arrow["m"', from=1-1, to=2-1]
+    \arrow["{g\otimes g}", from=1-3, to=1-5]
+    \arrow["g"', from=2-3, to=2-5]
+    \arrow["{m''}"{description}, from=1-5, to=2-5]
+    \arrow["{(g\circ f)\otimes (g\circ f)}", curve={height=-30pt}, from=1-1, to=1-5]
+  \end{tikzcd}
+\end{equation*}
+commutes by functoriality of $\otimes:\mathcal C\times\mathcal C\to\mathcal C$. If $f=\identity$, $M=M'$, $e=e'$, and $m=m'$ then the conditions
+are trivially satisfied. Hence we have a category of $(\mathcal C,I,\otimes)$-monoids $\textbf{Mon}(\mathcal C,I,\otimes)$.
+
+Other than generalisation for the sake of generalisation, it is not
+immediately obvious what we have achieved. However, one need only
+consider the category of $k$-vector spaces $\textbf{Vect}_k$ with
+its monoidal structure given by the tensor product. A
+$\textbf{Vect}_k$-monoid is a $k$-algebra! In particular, we do
+not require any additional compatibility conditions between the
+monoid multiplication and the scalar product of a vector space.
+
+A less obvious example of monoid objects are monads. Recall
+the definition:
+\begin{definition}
+  Let $\mathcal C$ be a category. A \emph{$\mathcal C$-monad} consists of
+  \begin{itemize}
+    \item a functor $T:\mathcal C\to\mathcal C$;
+    \item a natural transformation $\eta:\text{Id}\to T$;
+    \item a natural transformation $\mu:T^2\to T$
+  \end{itemize}
+  such that the following commute:
+  \begin{equation}\label{eq:monad_laws}
+    % https://q.uiver.app/#q=WzAsNCxbMiwwLCJUXjIiXSxbMiwyLCJUIl0sWzAsMCwiVCJdLFswLDIsIlReMiJdLFswLDEsIlxcbXUiXSxbMiwwLCJUXFxldGEiXSxbMiwxLCIiLDEseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDMsIlxcZXRhIFQiLDJdLFszLDEsIlxcbXUiLDJdXQ==
+    \begin{tikzcd}
+      T && {T^2} \\
+      \\
+      {T^2} && T
+      \arrow["\mu", from=1-3, to=3-3]
+      \arrow["T\eta", from=1-1, to=1-3]
+      \arrow[Rightarrow, no head, from=1-1, to=3-3]
+      \arrow["{\eta T}"', from=1-1, to=3-1]
+      \arrow["\mu"', from=3-1, to=3-3]
+    \end{tikzcd}\hspace{1cm}
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJUXjMiXSxbMiwwLCJUXjIiXSxbMCwyLCJUXjIiXSxbMiwyLCJUIl0sWzAsMSwiVFxcbXUiXSxbMCwyLCJcXG11IFQiLDJdLFsyLDMsIlxcbXUiLDJdLFsxLDMsIlxcbXUiXV0=
+    \begin{tikzcd}
+      {T^3} && {T^2} \\
+      \\
+      {T^2} && T
+      \arrow["T\mu", from=1-1, to=1-3]
+      \arrow["{\mu T}"', from=1-1, to=3-1]
+      \arrow["\mu"', from=3-1, to=3-3]
+      \arrow["\mu", from=1-3, to=3-3]
+    \end{tikzcd}
+  \end{equation}
+\end{definition}
+
+Here the natural transormation $\eta T : T\to T^2$ has
+components $(\eta T)_X = \eta_{TX}$ and similarly
+for $\mu T$.
+
+We have seen many examples of monads. Hence we
+are ready to move on to defining the category of monads.
+As usual, a map of monads is a map of underlying objects that plays
+well with the additional structure:
+
+\begin{definition}
+  A \emph{map of $\mathcal C$-monads} $\phi:(T,\eta,\mu)\to(T',\eta',\mu')$
+  is a natural transformation $\phi:T\to T'$ such that
+  \begin{equation}\label{eq:monad_map_laws}
+    % https://q.uiver.app/#q=WzAsNyxbMCwwLCJUXjIiXSxbMCwxLCJUIl0sWzIsMSwiVCciXSxbMiwwLCIoVCcpXjIiXSxbNSwwLCJcXHRleHR7SWR9Il0sWzQsMSwiVCJdLFs2LDEsIlQnIl0sWzAsMywiXFxwaGleMiJdLFsxLDIsIlxccGhpIl0sWzAsMSwiXFxtdSIsMl0sWzMsMiwiXFxtdSciXSxbNCw1LCJcXGV0YSIsMl0sWzUsNiwiXFxwaGkiLDJdLFs0LDYsIlxcZXRhJyJdXQ==
+    \begin{tikzcd}
+      {T^2} && {(T')^2} &&& {\text{Id}} \\
+      T && {T'} && T && {T'}
+      \arrow["{\phi^2}", from=1-1, to=1-3]
+      \arrow["\phi", from=2-1, to=2-3]
+      \arrow["\mu"', from=1-1, to=2-1]
+      \arrow["{\mu'}", from=1-3, to=2-3]
+      \arrow["\eta"', from=1-6, to=2-5]
+      \arrow["\phi"', from=2-5, to=2-7]
+      \arrow["{\eta'}", from=1-6, to=2-7]
+    \end{tikzcd}
+  \end{equation}
+\end{definition}
+
+Here the natural transformation $\phi^2 : T^2 \to (T')^2$ has
+components
+\begin{align*}
+  T^2 X = T(TX)
+  \xlongrightarrow{\phi_{TX}} T'(TX)
+  \xlongrightarrow{T'\phi_X} T'(T'X) = (T')^2 X.
+\end{align*}
+It is straightforward to verify that the composition of monad
+maps yields a monad map. Hence we have a category $\textbf{Monad}(\mathcal C)$.
+
+Now recall that we have a bicategory $\textbf{CAT}$ of
+categories, functors, and natural transformations. Moreover, we
+showed that, for each object $X$ in a bicategory $\mathbf{C}$,
+there is an induced monoidal structure on $\Hom(X,X)$. So for
+each category $\mathcal C\in\textbf{CAT}$ we obtain a monoidal structure
+$(\Hom[\mathcal C,\mathcal C],\text{Id},\circ)$.
+
+The monad laws (\ref{eq:monad_laws}) look similar to
+the monoid axioms (\ref{eq:monoid_axioms}). The monoidal structure
+on $\Hom[\mathcal C,\mathcal C]$ above allows us to regard monads
+as monoid objects and thus obtain an equivalence of categories.
+
+\begin{proposition}
+  There is an equivalence of categories
+  \begin{align*}
+    \textbf{Mon}(\Hom[\mathcal C,\mathcal C],\text{Id},\circ)
+    \cong \textbf{Monad}(\mathcal C).
+  \end{align*}
+  \begin{proof}
+    Consider a monad $(T,\eta,\mu)$ on $\mathcal C$. Note that no
+    modification is required to turn this into a monoid object:
+    We have $T\in\Hom[\mathcal C,\mathcal C]$, $\eta : \text{Id}\to T$
+    and $\mu : T \circ T \to T$. Moreover, the natural isomorphisms
+    in the bicategory $\textbf{CAT}$ are identities, hence the
+    monoid axioms (\ref{eq:monoid_axioms}) are precisely the monad
+    laws (\ref{eq:monad_laws}). Note that we have not changed
+    anything about the triple $(T,\eta,\mu)$, hence we have a bijection
+    of objects between $\textbf{Monad}(\mathcal C)$ and
+    $\textbf{Mon}(\Hom[\mathcal C,\mathcal C],\text{Id},\circ)$.
+
+    It is now even more straightforward to see straighforward to see
+    that (\ref{eq:monoid_map_axioms}) and (\ref{eq:monad_map_laws})
+    for $(\Hom[\mathcal C,\mathcal C],\text{Id},\circ)$-monoids
+    and $\mathcal C$-monads.
+  \end{proof}
+\end{proposition}
+
+\section{Categories are monads}
+
+
+\printbibliography
+
+\end{document}
