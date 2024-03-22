@@ -1,20 +1,87 @@
 \documentclass{article}
 \usepackage{assignment}
 \begin{document}
-\title{Categories, Proofs, and Processes Mini Project}
+\title{Monoids and bicategories}
 \author{Franz Miltz}
 \date{\today}
 \maketitle
 
-\section{Monoidal categories}
+\section{Bicategories and monoidal categories}
 
 We begin this report by revisiting the notion of a monoidal category.
+Recall that a monoidal structure equips a category with a multiplication
+which is associative and unital, up to a canonical isomorphism. Here
+canonical means that between any two objects there can be at most one
+isomorphism arising from the monoidal structure. This is made precise
+by specifying a few elementary isomorphisms which correspond to
+unitality and associativity and requiring that they satisfy some coherence axioms.
 
-\begin{definition}
-  \missingdefinition{monoidal category}
+We then extend these ideas to bicategories, a generalisation of categories that introduces maps between maps. We will study bicategories with
+some care, introducing the span bicategory which will come in handy later
+on. Towards the end of this section we see that monoidal categories
+may indeed be thought of as single object bicategories.
+
+\subsection{Monoidal categories}
+
+Before we state the definition, we remind ourselves of some useful notation which we will utilise heavily throughout this report. Let $\mathcal C$
+and $\mathcal D$ be categories. Recall that we
+then have a product category $\mathcal C\times\mathcal D$ whose objects
+are pairs $(C,D)$ for $C\in\mathcal C$ and $D\in\mathcal D$ and whose
+maps are pairs $(f,g):(C,D)\to (C',D')$ where $f:C\to C'$ in $\mathcal C$
+and $g:D\to D'$ in $\mathcal D$. If we now have functors
+$F:\mathcal C\to\mathcal C'$ and $G:\mathcal D\to\mathcal D'$ there is
+a functor $F\times G:\mathcal C\times\mathcal D\to\mathcal C'\times\mathcal D'$ which is given by $(x,y)\mapsto (Fx,Gy)$ for objects and maps alike.
+In particular, for any functor $F : \mathcal C\to \mathcal C'$ we have
+a functor $\mathcal C\times \mathcal D\to\mathcal C'\times\mathcal D$
+which is the product of $F$ with the identity on $\mathcal D$.
+We will denote this by $F\times\mathcal D$.
+
+\begin{definition}\label{def:monoidal_category}
+  A \emph{monoidal category} consists of a category $\mathcal C$,
+  an object $I\in\mathcal C$, a functor
+  $\otimes:\mathcal C\times\mathcal C\to\mathcal C$, and
+  natural isomorphisms with components
+  \begin{align*}
+    \alpha_{A,B,C} : (A\otimes B)\otimes C \to A\otimes(B\otimes C),
+    \hspace{1cm}
+    \lambda_A : I\otimes A\to A,
+    \hspace{1cm}
+    \rho_A : A\otimes I\to A
+  \end{align*}
+  such that
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNSxbMCwwLCIoKEFcXG90aW1lcyBCKVxcb3RpbWVzIEMpXFxvdGltZXMgRCJdLFswLDIsIihBXFxvdGltZXMoQlxcb3RpbWVzIEMpKVxcb3RpbWVzIEQiXSxbNCwyLCJBXFxvdGltZXMoKEJcXG90aW1lcyBDKVxcb3RpbWVzIEQpIl0sWzQsMCwiQVxcb3RpbWVzKEJcXG90aW1lcyhDXFxvdGltZXMgRCkpIl0sWzIsMCwiKEFcXG90aW1lcyBCKVxcb3RpbWVzKENcXG90aW1lcyBEKSJdLFswLDEsIlxcYWxwaGFfe0EsQixDfVxcb3RpbWVzIEQiLDJdLFsxLDIsIlxcYWxwaGFfe0EsQlxcb3RpbWVzIEMsRH0iLDJdLFsyLDMsIkFcXG90aW1lcyBcXGFscGhhX3tCLEMsRH0iLDJdLFswLDQsIlxcYWxwaGFfe0FcXG90aW1lcyBCLEMsRH0iXSxbNCwzLCJcXGFscGhhX3tBLEIsQ1xcb3RpbWVzIER9Il1d
+    \begin{tikzcd}
+      {((A\otimes B)\otimes C)\otimes D} && {(A\otimes B)\otimes(C\otimes D)} && {A\otimes(B\otimes(C\otimes D))} \\
+      \\
+      {(A\otimes(B\otimes C))\otimes D} &&&& {A\otimes((B\otimes C)\otimes D)}
+      \arrow["{\alpha_{A,B,C}\otimes D}"', from=1-1, to=3-1]
+      \arrow["{\alpha_{A,B\otimes C,D}}"', from=3-1, to=3-5]
+      \arrow["{A\otimes \alpha_{B,C,D}}"', from=3-5, to=1-5]
+      \arrow["{\alpha_{A\otimes B,C,D}}", from=1-1, to=1-3]
+      \arrow["{\alpha_{A,B,C\otimes D}}", from=1-3, to=1-5]
+    \end{tikzcd}
+  \end{equation*}
+  and
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCIoQVxcb3RpbWVzIEkpXFxvdGltZXMgQiJdLFsxLDEsIkFcXG90aW1lcyBCIl0sWzIsMCwiQVxcb3RpbWVzKElcXG90aW1lcyBCKSJdLFswLDEsIlxccmhvX3tBfVxcb3RpbWVzIEIiLDJdLFsyLDEsIkFcXG90aW1lc1xcbGFtYmRhX0IiXSxbMCwyLCJcXGFscGhhX3tBLEksQn0iXV0=
+    \begin{tikzcd}
+      {(A\otimes I)\otimes B} && {A\otimes(I\otimes B)} \\
+                              & {A\otimes B}
+                              \arrow["{\rho_{A}\otimes B}"', from=1-1, to=2-2]
+                              \arrow["{A\otimes\lambda_B}", from=1-3, to=2-2]
+                              \arrow["{\alpha_{A,I,B}}", from=1-1, to=1-3]
+    \end{tikzcd}
+  \end{equation*}
+  commute.
 \end{definition}
 
-\section{Monoidal categories are bicategories}
+The most common examples of monoidal categories arise from
+cartesian and cocartesian structures.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Bicategories}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Category theory may be used to generalise many mathematical
 concepts. Categories themselves are structures that have been
@@ -45,31 +112,6 @@ monoids are single object categories (see \ref{sec:monoids_are_categories}). Obs
 which we will not delve into. However, we will see that bicategories
 may be thought of as such a generalisation of monoidal categories.
 
-Before we state the definition, we remind ourselves of some useful notation. Let $\mathcal C$ and $\mathcal D$ be categories. Recall that we
-then have a product category $\mathcal C\times\mathcal D$ whose objects
-are pairs $(C,D)$ for $C\in\mathcal C$ and $D\in\mathcal D$ and whose
-maps are pairs $(f,g):(C,D)\to (C',D')$ where $f:C\to C'$ in $\mathcal C$
-and $g:D\to D'$ in $\mathcal D$. If we now have functors
-$F:\mathcal C\to\mathcal C'$ and $G:\mathcal D\to\mathcal D'$ there is
-a functor $F\times G:\mathcal C\times\mathcal D\to\mathcal C'\times\mathcal D'$ which is given by $(x,y)\mapsto (Fx,Gy)$ for objects and maps alike.
-In particular, for any functor $F : \mathcal C\to \mathcal C'$ we have
-a functor $\mathcal C\times \mathcal D\to\mathcal C'\times\mathcal D$
-which is the product of $F$ with the identity on $\mathcal D$.
-We will denote this by $F\times\mathcal D$.
-
-Moreover, if we have functors $F,G:\mathcal C\to\mathcal D$ and
-a natural transformation $\varphi : F\Rightarrow G$ we may combine
-all these components in a diagram
-
-\begin{equation*}
-  % https://q.uiver.app/#q=WzAsMixbMCwwLCJcXG1hdGhjYWwgQyJdLFsyLDAsIlxcbWF0aGNhbCBEIl0sWzAsMSwiRiIsMCx7ImN1cnZlIjotM31dLFswLDEsIkciLDIseyJjdXJ2ZSI6M31dLFsyLDMsIlxcdmFycGhpIiwxLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dXQ==
-  \begin{tikzcd}
-    {\mathcal C} && {\mathcal D}
-    \arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-18pt}, from=1-1, to=1-3]
-    \arrow[""{name=1, anchor=center, inner sep=0}, "G"', curve={height=18pt}, from=1-1, to=1-3]
-    \arrow["\varphi"{description}, shorten <=5pt, shorten >=5pt, Rightarrow, from=0, to=1]
-  \end{tikzcd}
-\end{equation*}
 
 With this knowledge fresh in our memories, we are ready to follow
 the definition of a bicategory:
@@ -187,10 +229,10 @@ of detail is usually unnecessary and, moreover, tends to obscure
 interesting details. For this reason, we will drop subscripts whenever
 it is possible to infer them from context.
 
-Let us now see how one might define $\textbf{Cat}$, the bicategory with
-objects all small categories. For small categories $\mathbb C$ and
-$\mathbb D$, the hom-category $\Hom[\mathbb C,\mathbb D]$ is just
-the functor category $[\mathbb C,\mathbb D]$ and the functor
+Let us now see how one might define $\textbf{CAT}$, the bicategory with
+objects all categories. For categories $\mathcal C$ and
+$\mathcal D$, the hom-category $\Hom[\mathbb C,\mathbb D]$ is just
+the functor category $\text{Fun}(\mathbb C,\mathbb D)$ and the functor
 $\identity_{\mathbb C} : \mathbf 1 \to [\mathbb C,\mathbb C]$
 maps to the identity functor $\text{Id}:\mathbb C\to\mathbb C$.
 We note that composition of functors is associative and respects
@@ -198,24 +240,383 @@ identities as units, hence we may take $\alpha$, $\lambda$, and $\rho$
 to be the identities. Thus the conditions (\ref{eq:pentagon}) and
 (\ref{eq:triangle}) are trivially satisfied.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Spans}\label{sec:spans}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 The previous example is a little bit underwhelming: All the structure
 and conditions related to associativity and unitality is trivial.
-Let us construct a less trivial example:
+This leads to the question of when this might not be the case. The answer
+is straightforward: whenever limits or colimits are involved. It is
+well-known that limits are not unique, but whenever one has two limits
+of the same diagram then there exists a unique isomorphism. This makes
+them perfect candidates for constructing bicategories whose structural
+isomorphisms are not identities.
+We will follow \cite{rebro} to construct such an example.
+
+Fix a category $\mathcal C$ which we assume to have all limits, although
+this is not strictly required.
+
 
 \begin{definition}
-  Let $\mathcal C$ be a category. The bicategory $\text{Span}(\mathcal C)$
-  consists of
+  Consider $A,B\in\mathcal C$. A \emph{span of $A$ and $B$} is
+  a pair of maps $A \leftarrow S \rightarrow B$ which we will
+  refer to simply as $S$. A map of spans is a map $f:S\to S'$
+  that makes the following commute:
+  \begin{equation}
+    % https://q.uiver.app/#q=WzAsNCxbMCwxLCJBIl0sWzIsMSwiQiJdLFsxLDAsIlMiXSxbMSwyLCJTJyJdLFsyLDMsImYiLDJdLFsyLDBdLFszLDBdLFszLDFdLFsyLDFdXQ==
+    \begin{tikzcd}
+  & S \\
+      A && B \\
+        & {S'}
+        \arrow["f"', from=1-2, to=3-2]
+        \arrow[from=1-2, to=2-1]
+        \arrow[from=3-2, to=2-1]
+        \arrow[from=3-2, to=2-3]
+        \arrow[from=1-2, to=2-3]
+    \end{tikzcd}
+  \end{equation}
+  Thus we have a category $\Span(A,B)$ of spans and span
+  maps.
+\end{definition}
+
+The bicategory that we are about to construct will have the same
+objects as $\mathcal C$ and $\Span(A,B)$ as its hom-categories.
+What we require now is a way to compose spans. We will use pullbacks:
+
+\begin{definition}
+  Consider maps $f:A\to X$ and $g:B\to X$ in $\mathcal C$.
+  A \emph{pullback} of $f$ and $g$ is a limit of the diagram
+  \begin{align*}
+    A \xlongrightarrow{f} X \xlongleftarrow{g} B.
+  \end{align*}
+\end{definition}
+
+In detail, a pullback consists of a span $P$ of $A$ and $B$ such that
+the following commutes
+\begin{equation}\label{eq:pullback}
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJQIl0sWzAsMiwiQSJdLFsyLDAsIkIiXSxbMiwyLCJYIl0sWzEsMywiZiIsMl0sWzIsMywiZyIsMl0sWzAsMV0sWzAsMl0sWzAsMywiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+  \begin{tikzcd}
+    P && B \\
+    \\
+    A && X
+    \arrow["f"', from=3-1, to=3-3]
+    \arrow["g"', from=1-3, to=3-3]
+    \arrow[from=1-1, to=3-1]
+    \arrow[from=1-1, to=1-3]
+    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=3-3]
+  \end{tikzcd}
+\end{equation}
+and universal in the sense that, for any other span $P'$
+satisfying (\ref{eq:pullback}) there is a unique map of spans $P'\to P$
+making the following commute:
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsNSxbMSwxLCJQIl0sWzEsMywiQSJdLFszLDEsIkIiXSxbMywzLCJYIl0sWzAsMCwiUCciXSxbMSwzLCJmIiwyXSxbMiwzLCJnIiwyXSxbMCwxXSxbMCwyXSxbMCwzLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbNCwxXSxbNCwyXSxbNCwwLCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+  \begin{tikzcd}
+    {P'} \\
+  & P && B \\
+  \\
+  & A && X
+  \arrow["f"', from=4-2, to=4-4]
+  \arrow["g"', from=2-4, to=4-4]
+  \arrow[from=2-2, to=4-2]
+  \arrow[from=2-2, to=2-4]
+  \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-2, to=4-4]
+  \arrow[from=1-1, to=4-2]
+  \arrow[from=1-1, to=2-4]
+  \arrow[dashed, from=1-1, to=2-2]
+  \end{tikzcd}
+\end{equation*}
+
+\begin{lemma}
+  For all $A,B,C$, there is a functor
+  \begin{align}\label{eq:span_composition}
+    \circ_{A,B,C}:\Span(B,C)\times\text{Span}(A,B)\to\text{Span}(A,C)
+  \end{align}
+  given by taking pullbacks.
+  \begin{proof}
+    Consider span maps $f:S\to S'$ in $\Span(A,B)$ and $g:T\to T'$
+    in $\Span(B,C)$. By the universal property of $S'\times_B T'$
+    these induce a unique span map $S\times_B T\to S'\times_B T'$
+    as in the diagram:
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsOSxbMCwwLCJTXFx0aW1lc19CIFQnIl0sWzAsNCwiUydcXHRpbWVzX0IgVCciXSxbMSwxLCJTIl0sWzEsMywiUyciXSxbMiwyLCJCIl0sWzAsMiwiQSJdLFszLDEsIlQiXSxbMywzLCJUJyJdLFs0LDIsIkMiXSxbMiwzLCJmIl0sWzAsMl0sWzEsM10sWzAsMSwiZlxcdGltZXNfQiBnIiwyLHsiY3VydmUiOjUsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFszLDRdLFsyLDRdLFsyLDVdLFszLDVdLFs2LDcsImciXSxbNiw4XSxbNyw4XSxbMCw2XSxbMSw3XSxbNiw0XSxbNyw0XV0=
+      \begin{tikzcd}
+        {S\times_B T'} \\
+  & S && T \\
+        A && B && C \\
+          & {S'} && {T'} \\
+          {S'\times_B T'}
+          \arrow["f", from=2-2, to=4-2]
+          \arrow[from=1-1, to=2-2]
+          \arrow[from=5-1, to=4-2]
+          \arrow["{f\times_B g}"', curve={height=30pt}, dashed, from=1-1, to=5-1]
+          \arrow[from=4-2, to=3-3]
+          \arrow[from=2-2, to=3-3]
+          \arrow[from=2-2, to=3-1]
+          \arrow[from=4-2, to=3-1]
+          \arrow["g", from=2-4, to=4-4]
+          \arrow[from=2-4, to=3-5]
+          \arrow[from=4-4, to=3-5]
+          \arrow[from=1-1, to=2-4]
+          \arrow[from=5-1, to=4-4]
+          \arrow[from=2-4, to=3-3]
+          \arrow[from=4-4, to=3-3]
+      \end{tikzcd}
+    \end{equation*}
+    Functoriality follows thus: If $f:S\to S$ and $g:T\to T$ are
+    identities then $f\times_B g:S\times_B T\to S\times_B T$ is
+    also the identity. Further, if $f,f'\in\Span(A,B)$ and
+    $g,g'\in\Span(B,C)$ are composable span maps then
+    $(f\times_B g)\circ(f'\times_B g')$ is a span map which must
+    agree with the span map induced by $(f\circ f')\times_B(g\circ g')$
+    by universality.
+  \end{proof}
+\end{lemma}
+
+Let us now make sure that taking pull-backs is associative,
+at least up to canonical isomorphism:
+
+\begin{lemma}
+  $(R\times_B S)\times_C T$ is a limit of the diagram
+  \begin{equation}\label{eq:triple_span}
+    % https://q.uiver.app/#q=WzAsNyxbMSwwLCJBIl0sWzMsMCwiQiJdLFs1LDAsIkMiXSxbMiwxLCJYIl0sWzQsMSwiWSJdLFswLDEsIlciXSxbNiwxLCJaIl0sWzAsM10sWzEsM10sWzEsNF0sWzIsNF0sWzAsNV0sWzIsNl1d
+    \begin{tikzcd}
+  & R && S && T \\
+      A && B && C && D
+      \arrow[from=1-2, to=2-3]
+      \arrow[from=1-4, to=2-3]
+      \arrow[from=1-4, to=2-5]
+      \arrow[from=1-6, to=2-5]
+      \arrow[from=1-2, to=2-1]
+      \arrow[from=1-6, to=2-7]
+    \end{tikzcd}
+  \end{equation}
+  \begin{proof}
+    Consider any object and maps that make the following commute:
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsOCxbMSwyLCJBIl0sWzMsMiwiQiJdLFs1LDIsIkMiXSxbMiwzLCJYIl0sWzQsMywiWSJdLFszLDAsIlAiXSxbMCwzLCJXIl0sWzYsMywiWiJdLFswLDNdLFsxLDNdLFsxLDRdLFsyLDRdLFs1LDJdLFswLDZdLFsyLDddLFs1LDFdLFs1LDBdXQ==
+      \begin{tikzcd}
+  &&& P \\
+  \\
+  & R && S && T \\
+        A && B && C && D
+        \arrow[from=3-2, to=4-3]
+        \arrow[from=3-4, to=4-3]
+        \arrow[from=3-4, to=4-5]
+        \arrow[from=3-6, to=4-5]
+        \arrow[from=1-4, to=3-6]
+        \arrow[from=3-2, to=4-1]
+        \arrow[from=3-6, to=4-7]
+        \arrow[from=1-4, to=3-4]
+        \arrow[from=1-4, to=3-2]
+      \end{tikzcd}
+    \end{equation*}
+    As the left square commutes, there is a unique map
+    $P\to R\times_B S$ through which the maps $P\to R$ and
+    $P\to S$ factor. Thus we have a diagram
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsOSxbMSwyLCJBIl0sWzMsMiwiQiJdLFs1LDIsIkMiXSxbMiwzLCJYIl0sWzQsMywiWSJdLFszLDAsIlAiXSxbMCwzLCJXIl0sWzYsMywiWiJdLFsyLDEsIkFcXHRpbWVzX1ggQiJdLFswLDNdLFsxLDNdLFsxLDRdLFsyLDRdLFs1LDJdLFswLDZdLFsyLDddLFs1LDhdLFs4LDBdLFs4LDFdXQ==
+      \begin{tikzcd}
+  &&& P \\
+  && {R\times_B S} \\
+  & R && S && T \\
+        A && B && C && D
+        \arrow[from=3-2, to=4-3]
+        \arrow[from=3-4, to=4-3]
+        \arrow[from=3-4, to=4-5]
+        \arrow[from=3-6, to=4-5]
+        \arrow[from=1-4, to=3-6]
+        \arrow[from=3-2, to=4-1]
+        \arrow[from=3-6, to=4-7]
+        \arrow[from=1-4, to=2-3]
+        \arrow[from=2-3, to=3-2]
+        \arrow[from=2-3, to=3-4]
+      \end{tikzcd}
+    \end{equation*}
+    The pentagon on the right yields a canonical morphism of spans
+    $P\to (R\times_B S)\times_C T$ through which the maps
+    $P\to R\times_B S$ and $P\to T$ factor.
+  \end{proof}
+\end{lemma}
+
+Note that, by symmetry, $R\times_B (S\times_C T)$ is also the
+limit of (\ref{eq:triple_span}) and hence we have a canonical isomorphism
+\begin{align}\label{eq:pullback_associator}
+  \alpha_{R,S,T}:(R\times_B S)\times_C T \cong R\times_B (S\times_C T)
+\end{align}
+in $\Span(A,D)$. This map is characterised by commuting with the
+projections in to the cone (\ref{eq:triple_span}).
+We ought to make sure that our associator is natural.
+
+\begin{lemma}
+  The map (\ref{eq:pullback_associator}) is natural in its arguments.
+  \begin{proof}
+    Consider a span map $f:R\to R'$ and note that
+    ${\alpha}^{-1}\circ (f\circ (S\circ T)) \circ \alpha$ provides
+    us with a span map as in the diagram:
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsNyxbMSwwLCIoUlxcY2lyYyBTKVxcY2lyYyBUIl0sWzEsMSwiUlxcY2lyYyhTXFxjaXJjIFQpIl0sWzEsNCwiKFInXFxjaXJjIFMpXFxjaXJjIFQiXSxbMSwzLCJSJ1xcY2lyYyhTXFxjaXJjIFQpIl0sWzAsMSwiUiJdLFswLDMsIlInIl0sWzIsMiwiU1xcY2lyYyBUIl0sWzAsMSwiXFxhbHBoYSJdLFszLDIsIlxcYWxwaGFeey0xfSIsMl0sWzEsMywiZlxcY2lyYyAoU1xcY2lyYyBUKSIsMV0sWzEsNF0sWzQsNSwiZiIsMV0sWzMsNV0sWzAsNF0sWzIsNV0sWzEsNl0sWzMsNl0sWzAsNl0sWzIsNl1d
+      \begin{tikzcd}
+  & {(R\circ S)\circ T} \\
+        R & {R\circ(S\circ T)} \\
+          && {S\circ T} \\
+        {R'} & {R'\circ(S\circ T)} \\
+             & {(R'\circ S)\circ T}
+             \arrow["\alpha", from=1-2, to=2-2]
+             \arrow["{\alpha^{-1}}"', from=4-2, to=5-2]
+             \arrow["{f\circ (S\circ T)}"{description}, from=2-2, to=4-2]
+             \arrow[from=2-2, to=2-1]
+             \arrow["f"{description}, from=2-1, to=4-1]
+             \arrow[from=4-2, to=4-1]
+             \arrow[from=1-2, to=2-1]
+             \arrow[from=5-2, to=4-1]
+             \arrow[from=2-2, to=3-3]
+             \arrow[from=4-2, to=3-3]
+             \arrow[from=1-2, to=3-3]
+             \arrow[from=5-2, to=3-3]
+      \end{tikzcd}
+    \end{equation*}
+    This respects $f$ and hence, by universality of $(R'\circ S)\circ T$,
+    must agree with the map $(f\circ S)\circ T$. I.e. the following
+    commutes:
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsNCxbMCwwLCIoUlxcY2lyYyBTKVxcY2lyYyBUIl0sWzIsMCwiUlxcY2lyYyhTXFxjaXJjIFQpIl0sWzAsMSwiKFInXFxjaXJjIFMpXFxjaXJjIFQiXSxbMiwxLCJSJ1xcY2lyYyhTXFxjaXJjIFQpIl0sWzAsMSwiXFxhbHBoYSJdLFsyLDMsIlxcYWxwaGEiLDJdLFsxLDMsImZcXGNpcmMgKFNcXGNpcmMgVCkiXSxbMCwyLCIoZlxcY2lyYyBTKVxcY2lyYyBUIiwyXV0=
+      \begin{tikzcd}
+        {(R\circ S)\circ T} && {R\circ(S\circ T)} \\
+        {(R'\circ S)\circ T} && {R'\circ(S\circ T)}
+        \arrow["\alpha", from=1-1, to=1-3]
+        \arrow["\alpha"', from=2-1, to=2-3]
+        \arrow["{f\circ (S\circ T)}", from=1-3, to=2-3]
+        \arrow["{(f\circ S)\circ T}"', from=1-1, to=2-1]
+      \end{tikzcd}
+    \end{equation*}
+    This proves naturality in the first argument. The others follow
+    similarly.
+  \end{proof}
+\end{lemma}
+
+Next, we need to check coherence as in (\ref{eq:pentagon}).
+\begin{lemma}
+  The natural isomorphism (\ref{eq:pullback_associator}) satisfies
+  (\ref{eq:pentagon}).
+  \begin{proof}
+    Consider the diagram
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsOSxbMCwwLCIoKFJcXGNpcmMgUylcXGNpcmMgVClcXGNpcmMgVSJdLFswLDMsIihSXFxjaXJjIFMpXFxjaXJjKFRcXGNpcmMgVSkiXSxbNCwzLCJSXFxjaXJjKFNcXGNpcmMoVFxcY2lyYyBVKSkiXSxbMiwwLCIoUlxcY2lyYyhTXFxjaXJjIFQpKVxcY2lyYyBVIl0sWzQsMCwiUlxcY2lyYyAoKFNcXGNpcmMgVClcXGNpcmMgVSkiXSxbMywyLCJSIl0sWzEsMiwiUlxcY2lyYyBTIl0sWzEsMSwiKFJcXGNpcmMgUylcXGNpcmMgVCJdLFsyLDEsIlJcXGNpcmMoU1xcY2lyYyBUKSJdLFswLDEsIlxcYWxwaGEiLDJdLFsxLDIsIlxcYWxwaGEiLDJdLFs0LDIsIlJcXGNpcmMgXFxhbHBoYSJdLFswLDMsIlxcYWxwaGFcXGNpcmMgVSJdLFszLDQsIlxcYWxwaGEiXSxbMiw1XSxbMCw3XSxbMSw2XSxbNCw1XSxbNiw1XSxbNyw2XSxbMyw4XSxbNyw4LCJcXGFscGhhIl0sWzgsNV1d
+      \begin{tikzcd}
+        {((R\circ S)\circ T)\circ U} && {(R\circ(S\circ T))\circ U} && {R\circ ((S\circ T)\circ U)} \\
+                                     & {(R\circ S)\circ T} & {R\circ(S\circ T)} \\
+                                     & {R\circ S} && R \\
+        {(R\circ S)\circ(T\circ U)} &&&& {R\circ(S\circ(T\circ U))}
+        \arrow["\alpha"', from=1-1, to=4-1]
+        \arrow["\alpha"', from=4-1, to=4-5]
+        \arrow["{R\circ \alpha}", from=1-5, to=4-5]
+        \arrow["{\alpha\circ U}", from=1-1, to=1-3]
+        \arrow["\alpha", from=1-3, to=1-5]
+        \arrow[from=4-5, to=3-4]
+        \arrow[from=1-1, to=2-2]
+        \arrow[from=4-1, to=3-2]
+        \arrow[from=1-5, to=3-4]
+        \arrow[from=3-2, to=3-4]
+        \arrow[from=2-2, to=3-2]
+        \arrow[from=1-3, to=2-3]
+        \arrow["\alpha", from=2-2, to=2-3]
+        \arrow[from=2-3, to=3-4]
+      \end{tikzcd}
+    \end{equation*}
+    It is straightforward to check that each face commutes, either by
+    functoriality of the pullback or by definition of the isomorphism
+    $\alpha$. One may construct similar diagrams with sinks $S$, $T$,
+    and $U$, respectively. Thus the outer maps define identical cones
+    and hence, by universality of the limit, must agree.
+  \end{proof}
+\end{lemma}
+
+It is straightforward to see that $A\leftarrow A\rightarrow A$
+is an identity for pullbacks. This is because whenever we have
+a commuting diagram
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsNixbMCwyLCJYIl0sWzIsMiwiWCJdLFs0LDIsIlkiXSxbMSwxLCJYIl0sWzMsMSwiQSJdLFsyLDAsIlAiXSxbMywwLCIiLDIseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDEsIiIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzQsMV0sWzQsMl0sWzUsNF0sWzUsM11d
+  \begin{tikzcd}
+  && P \\
+  & A && S \\
+    A && A && B
+    \arrow[Rightarrow, no head, from=2-2, to=3-1]
+    \arrow[Rightarrow, no head, from=2-2, to=3-3]
+    \arrow[from=2-4, to=3-3]
+    \arrow[from=2-4, to=3-5]
+    \arrow[from=1-3, to=2-4]
+    \arrow[from=1-3, to=2-2]
+  \end{tikzcd}
+\end{equation*}
+the map $P\to X$ factors through $A$ and hence there is a unique
+map of spans $P\to A$. Thus we obtain canonical isomorphisms
+\begin{align}\label{eq:pullback_unitors}
+  \lambda_S : A\times_A S \cong S,\hspace{1cm}
+  \rho_S : S\times_A A \cong S
+\end{align}
+in $\Span(A,B)$. We have thus assembled all the ingredients to
+define the bicategory with spans as 1-cells. Noting that the
+isomorphisms (\ref{eq:pullback_unitors}) are the projections into
+the components of the pullback, naturality follows easily. The final
+thing we need to check is the second coherence condition:
+
+\begin{lemma}
+  The natural isomorphisms (\ref{eq:pullback_associator}) and
+  (\ref{eq:pullback_unitors}) satisfy (\ref{eq:triangle}).
+  \begin{proof}
+    Once again we postcompose with the projections. Thus we have
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsNSxbMCwwLCIoU1xcY2lyYyBBKVxcY2lyYyBUIl0sWzQsMCwiU1xcY2lyYyhBXFxjaXJjIFQpIl0sWzIsMywiU1xcY2lyYyBUIl0sWzIsMSwiUyJdLFsxLDEsIlNcXGNpcmMgQSJdLFswLDIsIlxccmhvXFxjaXJjIFQiLDIseyJjdXJ2ZSI6NX1dLFsxLDIsIlNcXGNpcmNcXGxhbWJkYSIsMCx7ImN1cnZlIjotNX1dLFswLDEsIlxcYWxwaGEiXSxbMCw0XSxbNCwzLCJcXHJobyJdLFsyLDNdLFsxLDNdXQ==
+      \begin{tikzcd}
+        {(S\circ A)\circ T} &&&& {S\circ(A\circ T)} \\
+                            & {S\circ A} & S \\
+                            \\
+                            && {S\circ T}
+                            \arrow["{\rho\circ T}"', curve={height=30pt}, from=1-1, to=4-3]
+                            \arrow["S\circ\lambda", curve={height=-30pt}, from=1-5, to=4-3]
+                            \arrow["\alpha", from=1-1, to=1-5]
+                            \arrow[from=1-1, to=2-2]
+                            \arrow["\rho", from=2-2, to=2-3]
+                            \arrow[from=4-3, to=2-3]
+                            \arrow[from=1-5, to=2-3]
+      \end{tikzcd}
+    \end{equation*}
+    Where the top square is compatibility of $\alpha$ with the
+    projection into $S$ and the remaining faces hold by definition
+    of $\rho\circ T$ and $S\circ\lambda$, respectively.
+    Postcomposing with $S\circ T\to T$ is completely analogous.
+  \end{proof}
+\end{lemma}
+
+\begin{definition}\label{def:span_bicategory}
+  $\Span(\mathcal C)$ is the bicategory where
   \begin{itemize}
-    \item x
+    \item the same as in $\mathcal C$;
+    \item hom-categories are $\Hom[A,B]:=\Span(A,B)$;
+    \item the identity functors takes $A$ to the trivial span
+      $A\leftarrow A \rightarrow A$;
+    \item composition is given by the functor (\ref{eq:span_composition});
+    \item structural 2-cells $\alpha$, $\lambda$, $\rho$ as
+      in (\ref{eq:pullback_associator}) and (\ref{eq:pullback_unitors}).
   \end{itemize}
 \end{definition}
 
-We need to check that this is well-defined. In particular, one needs to
-verify the coherence conditions. \missingproof
+It is interesting to observe that the objects in $\Span(\mathcal C)$
+are objects in $\mathcal C$ and the 2-cells are maps in $\mathcal C$.
+Thus $\Span(\mathcal C)$ does not introduce maps of maps in the way that
+natural transformations map between functors, but rather we have introduced additional structure between objects and maps.
 
-We will come back to this bicategory later on. For now, let us now make sure
-that bicategories with a single object are indeed the same as monoidal
-categories. Consider a monoidal
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Monoidal categories are bicategories}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+As promised, we are now going to see that it is possible to make
+the resemblance between monoidal categories and bicategories precise.
+In particular, monoidal categories are single-object bicatgories.
+
+Consider a monoidal
 category $(\mathcal C,\otimes, I,\alpha,\lambda,\rho)$.
 Then the corresponding bicategory $\mathbf C$ consists of
 \begin{itemize}
@@ -279,7 +680,10 @@ report.
 
 We have seen that one may generalise monoidal categories to bicategories.
 Let us now turn our attention to a simpler example. It turns out that
-categories are a generalisation of monoids.
+categories are a generalisation of monoids. In particular, we will show
+that there is an equivalence of categories between single-object
+categories and monoids.
+
 Recall that a monoid consists of an underlying set equipped with
 a unital associative multiplication. More precisely:
 
@@ -461,11 +865,8 @@ replace the cartesian structure with an arbitrary monoidal structure:
 \begin{definition}
   Let $(\mathcal C,I,\otimes)$ be a monoidal category. A
   $\mathcal C$-monoid $(M,e,m)$ consists of
-  \begin{itemize}
-    \item an object $M\in\mathcal C$;
-    \item a map $e:I\to\mathcal M$;
-    \item a map $m:M\otimes M\to M$ in $\mathcal C$
-  \end{itemize}
+  an object $M\in\mathcal C$ and maps
+  $e:I\to M$ and $m:M\otimes M\to M$ in $\mathcal C$
   such that the following commute:
   \begin{equation}\label{eq:monoid_axioms}
     % https://q.uiver.app/#q=WzAsNCxbMCwwLCJJXFxvdGltZXMgTSJdLFsyLDAsIk1cXG90aW1lcyBNIl0sWzIsMiwiTSJdLFs0LDAsIk1cXG90aW1lcyBJIl0sWzAsMSwiZVxcb3RpbWVzIE0iXSxbMSwyLCJtIl0sWzAsMiwiXFxsYW1iZGEiLDJdLFszLDEsIk1cXG90aW1lcyBlIiwyXSxbMywyLCJcXHJobyJdXQ==
@@ -559,11 +960,8 @@ A less obvious example of monoid objects are monads. Recall
 the definition:
 \begin{definition}
   Let $\mathcal C$ be a category. A \emph{$\mathcal C$-monad} consists of
-  \begin{itemize}
-    \item a functor $T:\mathcal C\to\mathcal C$;
-    \item a natural transformation $\eta:\text{Id}\to T$;
-    \item a natural transformation $\mu:T^2\to T$
-  \end{itemize}
+  a functor $T:\mathcal C\to\mathcal C$ and natural transformations
+  $\eta:\text{Id}\to T$ and $\mu:T^2\to T$
   such that the following commute:
   \begin{equation}\label{eq:monad_laws}
     % https://q.uiver.app/#q=WzAsNCxbMiwwLCJUXjIiXSxbMiwyLCJUIl0sWzAsMCwiVCJdLFswLDIsIlReMiJdLFswLDEsIlxcbXUiXSxbMiwwLCJUXFxldGEiXSxbMiwxLCIiLDEseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDMsIlxcZXRhIFQiLDJdLFszLDEsIlxcbXUiLDJdXQ==
@@ -667,6 +1065,169 @@ as monoid objects and thus obtain an equivalence of categories.
 
 \section{Categories are monads}
 
+We have seen that monads are monoids in the category of endofunctors.
+One may now observe that functor categories are the hom-categories of
+the bicategory $\mathbf{CAT}$. Thus we may, more generally, refer
+to a monoid object in $T\in\Hom[A,A]$ for any object $A$ in any
+bicategory $\mathbf C$ as an monad.
+
+\begin{definition}
+  Let $\mathbf C$ be a bicategory. A \emph{formal monad in
+  $\mathbf C$} is a quadruple $(A,T,\eta,\mu)$ such that
+  $A\in\mathbf C$ and $(T,\eta,\mu)$ is a monoid object in
+  $\Hom[A,A]$.
+\end{definition}
+
+So far we have only defined
+maps of such monads in the case where the underlying objects agrees.
+We now rectify this:
+
+\begin{definition}
+  A \emph{map of formal monads}
+  $(H,\phi):(A,T,\eta,\mu)\to(A',T',\eta',\mu')$ consists of
+  a 1-cell $H:A\to A'$ and a 2-cell $\phi : H\circ T\to T'\circ H $
+  such that the following commute:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsOSxbMCwxLCJIXFxjaXJjIFQiXSxbMiwxLCJUJ1xcY2lyYyBIIl0sWzQsMCwiSFxcY2lyYyBUXFxjaXJjIFQiXSxbOCwwLCJUJ1xcY2lyYyBUJ1xcY2lyYyBIIl0sWzgsMSwiVCdcXGNpcmMgSCJdLFs0LDEsIkhcXGNpcmMgVCJdLFs2LDAsIlQnXFxjaXJjIEhcXGNpcmMgVCJdLFsyLDAsIkEnXFxjaXJjIEgiXSxbMCwwLCJIXFxjaXJjIEEiXSxbMCwxLCJcXHBoaSIsMl0sWzMsNCwiXFxtdSdcXGNpcmMgSCJdLFsyLDUsIkhcXGNpcmMgXFxtdSIsMl0sWzUsNCwiXFxwaGkiLDJdLFs2LDMsIlQnXFxjaXJjIFxccGhpIl0sWzIsNiwiXFxwaGlcXGNpcmMgVCJdLFs3LDEsIlxcZXRhJ1xcY2lyYyBIIl0sWzgsMCwiSFxcY2lyY1xcZXRhIiwyXSxbOCw3LCJcXGNvbmciXV0=
+    \begin{tikzcd}
+      {H\circ A} && {A'\circ H} && {H\circ T\circ T} && {T'\circ H\circ T} && {T'\circ T'\circ H} \\
+      {H\circ T} && {T'\circ H} && {H\circ T} &&&& {T'\circ H}
+      \arrow["\phi"', from=2-1, to=2-3]
+      \arrow["{\mu'\circ H}", from=1-9, to=2-9]
+      \arrow["{H\circ \mu}"', from=1-5, to=2-5]
+      \arrow["\phi"', from=2-5, to=2-9]
+      \arrow["{T'\circ \phi}", from=1-7, to=1-9]
+      \arrow["{\phi\circ T}", from=1-5, to=1-7]
+      \arrow["{\eta'\circ H}", from=1-3, to=2-3]
+      \arrow["H\circ\eta"', from=1-1, to=2-1]
+      \arrow["\cong", from=1-1, to=1-3]
+    \end{tikzcd}
+  \end{equation*}
+\end{definition}
+
+Note that this is only one of two possible definitions: We could
+have chosen the 2-cell to go the other way. This would have resulted
+in a fundamentally different notion. Our definition of a
+monad map is sometimes referred to as \emph{colax} whereas the
+version with the reversed 2-cell $\psi : T'\circ H\to H\circ T$
+is referred to as lax. \cite{clarke2019}
+
+We omit the proofs that composition of formal monad maps yields
+a formal monad map. We thus have a category of formal monads
+$\textbf{Monad}(\mathbf C)$. Let us investigate this category
+a little.
+
+In \ref{sec:spans} we constructed the bicategory $\Span(\mathcal
+C)$. The structure of $\Span(\mathcal C)$ depends heavily on our choice
+of $\mathcal C$. We are going to consider the case $\mathcal C=\Set$,
+a category which we know to have limits. What are formal monads
+in $\Span(\Set)$? They consist of a set $A$, a span
+$(s,t):S\to A\times A$, and morphisms of spans
+$\eta:A\to S$ and $\mu:S\times_A S\to S$.
+
+Now recall that our underlying category is $\Set$, hence we are justified
+in thinking about elements of objects. What do we know about elements
+$f$ of $S$?
+Firstly, the span $A\xleftarrow{s} S\xrightarrow{t} A$ provides
+us with two elements $s(f)$ and $t(f)$ of $A$. Moreover, if we
+have $f,g\in S$ such that $t(f) = s(g)$ then we have another element
+$\mu(f,g)\in S$. Note that $s(\mu(f,g))=s(f)$ and $t(\mu(f,g))=t(g)$.
+Moreover, each $a\in A$ provides us with a distinct $\eta(a)\in S$
+which, due to $\eta$ being a span map, must satisfy
+$s(\eta(a)) = t(\eta(a)) = a$.
+
+It is now not hard to see that this provides us with the structure of
+a small category. This correspondence between formal monads in
+$\Span(\Set)$
+and small categories is in fact a bijection. It is also possible to
+translate a functor of small categories into a colax map of formal
+monads. However, it is not the case that every colax map of formal
+monads
+corresponds to a functor and hence we fail to obtain an equivalence
+of categories. However, we have the next best thing:
+
+\begin{proposition}
+  There is an inclusion of categories
+  \begin{align*}
+    \textbf{Cat}\longinc\textbf{Monad}(\Span(\Set)).
+  \end{align*}
+  which is a bijection on objects.
+  \begin{proof}
+    Consider a small category $\mathbb C$. The corresponding
+    formal monad $M(\mathbb C)$ in $\Span(\Set)$ is given by the span
+    \begin{align*}
+      \text{Hom}_{\mathbb C} := \bigsqcup_{A,B\in\mathbb C} \Hom(A,B) &\to \text{Obj}_{\mathbb C} \times \text{Obj}_{\mathbb C} \\
+      (f:A\to B) &\mapsto (A,B)
+    \end{align*}
+    and the span maps $\eta(A) := \identity_A$ and
+    $\mu(f,g) := g\circ f$. Let us briefly verify the monad
+    axioms. We calculate
+    \begin{align*}
+      \mu(f,\eta(B)) = \identity_B \circ f = f = f\circ\identity_A = \mu(\eta(A), f)
+    \end{align*}
+    and
+    \begin{align*}
+      \mu(\mu(f,g),h) = h\circ g\circ f =\mu(f,\mu(g,h)).
+    \end{align*}
+    It is straightforward to see what the
+    inverse of this operation must be. Thus we have a bijection
+    on objects.
+
+    Somewhat less obvious is the behaviour of maps under this
+    inclusion.
+    Now consider a functor $F:\mathbb C\to\mathbb D$. We want
+    to construct a map of formal monads
+    $M(F) : M(\mathbb C)\to M(\mathbb D)$. Write $F_0$ for the map
+    on objects and $F_1$ for the map on maps. We then define
+    $M(F)$ to consists of the span
+    \begin{align*}
+      H=(\identity, F_0):\text{Obj}_{\mathbb C} &\to \text{Obj}_{\mathbb C}\times\text{Obj}_{\mathbb D} \\
+      A &\mapsto (A,FA)
+    \end{align*}
+    and the span map
+    \begin{align*}
+      \phi:\Hom_{\mathbb C} \times_{\text{Obj}} H &\to H\times_{\text{Obj}} \Hom_{\mathbb D} \\
+      (f:A\to B, B) &\mapsto (A, Ff : FA \to FB)
+    \end{align*}
+    Let us make sure that $\phi$ is a span map. We begin by
+    observing that elements of $H\times_{\text{Obj}}\Hom_{\mathbb C}$
+    and $\Hom_{\mathbb D}\times_{\text{Obj}} H$ are fully determined
+    by their projectons in $\Hom_{\mathbb C}$ and $\Hom_{\mathbb D}$,
+    respectively.
+    Under this isomorphism of spans, $\phi$ is just $F_1$ and the
+    condition on formal monad maps becomes:
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsNixbNCwxLCJcXHRleHR7SG9tfV97XFxtYXRoYmIgRH0iXSxbMywyLCJcXHRleHR7T2JqfV97XFxtYXRoYmIgRH0iXSxbMywwLCJcXHRleHR7T2JqfV97XFxtYXRoYmIgRH0iXSxbMSwwLCJcXHRleHR7T2JqfV97XFxtYXRoYmIgQ30iXSxbMSwyLCJcXHRleHR7T2JqfV97XFxtYXRoYmIgQ30iXSxbMCwxLCJcXHRleHR7SG9tfV97XFxtYXRoYmIgQ30iXSxbMCwxLCJ0IiwxXSxbMCwyLCJzIiwxXSxbNCwxLCJGXzAiLDFdLFs1LDMsInMiLDFdLFs1LDQsInQiLDFdLFszLDIsIkZfMCIsMV0sWzUsMCwiRl8xIiwxXV0=
+      \begin{tikzcd}
+  & {\text{Obj}_{\mathbb C}} && {\text{Obj}_{\mathbb D}} \\
+        {\text{Hom}_{\mathbb C}} &&&& {\text{Hom}_{\mathbb D}} \\
+                                 & {\text{Obj}_{\mathbb C}} && {\text{Obj}_{\mathbb D}}
+                                 \arrow["t"{description}, from=2-5, to=3-4]
+                                 \arrow["s"{description}, from=2-5, to=1-4]
+                                 \arrow["{F_0}"{description}, from=3-2, to=3-4]
+                                 \arrow["s"{description}, from=2-1, to=1-2]
+                                 \arrow["t"{description}, from=2-1, to=3-2]
+                                 \arrow["{F_0}"{description}, from=1-2, to=1-4]
+                                 \arrow["{F_1}"{description}, from=2-1, to=2-5]
+      \end{tikzcd}
+    \end{equation*}
+    which is just the condition $F(\Hom(A,B)) = \Hom(FA,FB)$ which
+    is satisfied by any functor $F$.
+
+    Finally, we need to verify that $M(F)$ is a map of formal monads.
+    The conditions reduce to $\identity_{F_0 A} = F_1(\identity_A)$
+    and $F_1(g\circ f) = F_1(g)\circ F_1(f)$, i.e. functoriality.
+  \end{proof}
+\end{proposition}
+
+So which formal monad map correspond to functors? In other words,
+what subcategory of $\textbf{Monad}(\Span(\Set))$ is $\textbf{Cat}$
+equivalent to? The necessary and sufficient condition on $(H,\phi)$
+is that the span $H$ needs to be of the form $(f,g)$ for some
+bijection. More generally, this means that $H$ is a left-adjoint
+in $\Span(\Set)$. \cite{lack2010} Similarly, the equivalence then
+extends extends to the study of internal categories.
+\cite{clarke2019}
 
 \printbibliography
 
