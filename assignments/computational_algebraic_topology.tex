@@ -824,11 +824,11 @@ and non-examples.
   \end{equation*}
   and thus the corresponding homology complexes:
   \begin{equation*}
-    % https://q.uiver.app/#q=WzAsOCxbMSwwLCIwIl0sWzMsMCwiXFxtYXRoYmIgUiJdLFs1LDAsIlxcbWF0aGJiIFJeMiJdLFsxLDEsIlxcbWF0aGJiIFIiXSxbMywxLCJcXG1hdGhiYiBSIl0sWzUsMSwiXFxtYXRoYmIgUl4yIl0sWzAsMCwiSF8xKFNeMTtcXG1hdGhzY3IgQ15cXGJ1bGxldCk6Il0sWzAsMSwiSF8wKFNeMTtcXG1hdGhzY3IgQ15cXGJ1bGxldCk6Il0sWzEsMiwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNCw1LCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFszLDQsIlxcdGV4dHtpZH0iLDJdLFswLDFdXQ==
+    % https://q.uiver.app/#q=WzAsOCxbMSwwLCIwIl0sWzMsMCwiMCJdLFs1LDAsIjAiXSxbMSwxLCJcXG1hdGhiYiBSIl0sWzMsMSwiXFxtYXRoYmIgUiJdLFs1LDEsIlxcbWF0aGJiIFJeMiJdLFswLDAsIkhfMShTXjE7XFxtYXRoc2NyIENeXFxidWxsZXQpOiJdLFswLDEsIkhfMChTXjE7XFxtYXRoc2NyIENeXFxidWxsZXQpOiJdLFsxLDJdLFs0LDUsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzMsNCwiXFx0ZXh0e2lkfSIsMl0sWzAsMV1d
     \begin{tikzcd}
-      {H_1(S^1;\mathscr C^\bullet):} & 0 && {\mathbb R} && {\mathbb R^2} \\
+      {H_1(S^1;\mathscr C^\bullet):} & 0 && 0 && 0 \\
       {H_0(S^1;\mathscr C^\bullet):} & {\mathbb R} && {\mathbb R} && {\mathbb R^2}
-      \arrow[hook, from=1-4, to=1-6]
+      \arrow[from=1-4, to=1-6]
       \arrow[hook, from=2-4, to=2-6]
       \arrow["{\text{id}}"', from=2-2, to=2-4]
       \arrow[from=1-2, to=1-4]
@@ -991,23 +991,147 @@ may define the corresponding persistent Morse homologies:
 \end{definition}
 
 \begin{example}\label{ex:persistent_morse_homology}
-  Calculate Morse complex and persistent homology for
-  \ref{ex:acyclic_partial_matching_s1}.
-  \missingexample
+  Let us now revisit \ref{ex:acyclic_partial_matching_s1}.
+  Note that $C(\Sigma)=\left\lbrace{\sigma_2,\tau_3}\right\rbrace$.
+  Thus we have the chain groups
+  $C^\Sigma_0(K;\mathscr C^i) = \mathscr C^i(\sigma_2)$
+  and
+  $C^\Sigma_1(K;\mathscr C^i) = \mathscr C^i(\tau_3) = 0$.
+  Thus Morse homology is only non-trivial in dimension $0$
+  where we may simply read off the complex:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNCxbMSwwLCJcXG1hdGhiYiBSIl0sWzMsMCwiXFxtYXRoYmIgUiJdLFs1LDAsIlxcbWF0aGJiIFJeMiJdLFswLDAsIkheXFxTaWdtYV8wKFNeMTtcXG1hdGhzY3IgQ15cXGJ1bGxldCk6Il0sWzEsMiwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwxLCJcXHRleHR7aWR9IiwyXV0=
+    \begin{tikzcd}
+      {H^\Sigma_0(S^1;\mathscr C^\bullet):} & {\mathbb R} && {\mathbb R} && {\mathbb R^2}
+      \arrow[hook, from=1-4, to=1-6]
+      \arrow["{\text{id}}"', from=1-2, to=1-4]
+    \end{tikzcd}
+  \end{equation*}
 \end{example}
+
+\section{Equivalence}
 
 It is of course no coincidence that the persistent homologies
 in \ref{ex:persistent_morse_homology} agree with \ref{ex:acyclic_partial_matching_s1}. We constructed the Morse complex with the explicit
 intention to obtain an alternative way of calculating the persistent
-homology groups. We finish this section by showing that we have
-achieved our goal:
+homology groups. The goal of this section is showing that we have
+achieved our goal. We do this by constructing appropriate chain
+homotopies.
+
+\begin{lemma}
+  If $\Sigma=\left\lbrace{\sigma\triangleleft\tau}\right\rbrace$
+  is compatible with $\mathscr C\in\Cosh(K)$ then the complexes
+  $(C_\bullet(K;\mathscr C),\partial)$ and
+  $(C^\Sigma_\bullet(K;\mathscr C),\partial^\Sigma)$ are chain homotopic.
+  \begin{proof}
+    Consider the linear maps $\phi_d : C_d(K;\mathscr C)\to C_d^\Sigma(K;\mathscr C)$ whose component $\mathscr C(\alpha)\to\mathscr C(\omega)$ is the identity whenever $\alpha=\omega$ and
+    \begin{align*}
+      \restrict{\phi_d}{\alpha,\omega} = \sum_{\rho\in P(\Sigma),\sigma_\rho = \alpha} \partial_{\omega,\tau_\rho}\circ\partial_\rho
+    \end{align*}
+    otherwise. In the other direction, we have the linear map
+    $\psi_d : C^\Sigma_d(K;\mathscr C)\to C_d(K;\mathscr C)$
+    whose component $\mathscr C(\omega)\to\mathscr C(\alpha)$
+    also is the identity if $\alpha=\omega$ and
+    \begin{align*}
+      \restrict{\psi_d}{\omega,\alpha}=\sum_{\rho\in P(\Sigma),\tau_\rho=\alpha} \partial_\rho \circ \partial_{\sigma_\rho,\omega}
+    \end{align*}
+    otherwise.
+
+    Let us verify that we have thus defined chain maps. \missingproof
+
+    Consider $\phi_d\circ\psi_d$. We have the component
+    $\mathscr C(\omega)\to\mathscr C(\omega')$ which is the identity when $\omega=\omega'$ and otherwise is given by
+    \begin{align*}
+      \restrict{(\phi_d \circ \psi_d)}{\omega,\omega'}
+      = \restrict{\phi_d}{\omega,\omega'}\circ\restrict{\psi_d}{\omega',\omega'}+\restrict{\phi_d}{\omega,\omega}\circ\restrict{\psi_d}{\omega,\omega'}
+    \end{align*}
+    where we used the fact that we cannot have $\tau_\rho \triangleleft \alpha \triangleleft \sigma_{\rho'}$. Hence
+    \begin{align*}
+      \restrict{(\phi_d \circ \psi_d-\identity)}{\omega,\omega'}
+      =
+      \sum_{\rho\in P(\Sigma),\sigma_\rho = \omega} \partial_{\omega',\tau_\rho}\circ\partial_\rho
+      +
+      \sum_{\rho\in P(\Sigma),\tau_\rho=\omega'} \partial_\rho \circ \partial_{\sigma_\rho,\omega}
+    \end{align*}
+    for all $\omega,\omega'\in C(\Sigma)$. But now note if
+    $\omega\in C(\Sigma)$ then $\sigma_\rho\neq\omega$ for all
+    $\rho\in P(\Sigma)$ and similarly for the sum on the right.
+    Thus $\phi_d\circ\psi_d-\identity = 0$.
+
+    In the other direction, we may calculate
+    \begin{align*}
+      \restrict{(\psi_d\circ\phi_d)}{\alpha,\alpha'}
+      &= \sum_{\omega\in C(\Sigma)\cap K_d}
+      \restrict{\psi_d}{\omega,\alpha'}\circ\restrict{\phi_d}{\alpha,\omega}\\
+      &= \sum_{\omega\in C(\Sigma)\cap K_d}
+      \left({
+          \sum_{\rho\in P(\Sigma),\tau_\rho=\alpha'} \partial_\rho \circ \partial_{\sigma_\rho,\omega}
+      }\right)
+      \circ
+      \left({
+          \sum_{\rho\in P(\Sigma),\sigma_\rho = \alpha} \partial_{\omega,\tau_\rho}\circ\partial_\rho
+      }\right)
+    \end{align*}
+    %   Now define
+    %   $\theta_d : C_d(K;\mathscr C)\to C_{d+1}(K;\mathscr C)$
+    %   by \todo{probably no $-1$ here so things cancel below}
+    %   \begin{align*}
+    %     \restrict{\theta_d}{\sigma,\tau}
+    %     = \sum_{\rho\in P(\Sigma),\sigma_\rho = \sigma,\tau_\rho=\tau}
+    %     (-1)^{\left\vert{\rho}\right\vert} \partial_\rho.
+    %   \end{align*}
+    %   It is now straightforward to calculate
+    %   \begin{align*}
+    %     \restrict{(\partial^\Sigma\circ\theta_d)}{\omega,\omega'}
+    %     &= \sum_{\tau\in C(\Sigma)\cap K_{d+1}} \restrict{\partial^\Sigma}{\tau,\omega'} \circ \restrict{\theta}{\omega,\tau}\\
+    %     &= \sum_{\tau\in C(\Sigma)\cap K_{d+1}}
+    %     \left({
+    %         \partial_{\omega',\tau} + \sum_{\rho\in P(\Sigma)} (-1)^{\left\vert{\rho}\right\vert}\partial_{\omega',\tau_\rho}\circ\partial_\rho\circ\partial_{\sigma_\rho,\tau}
+    %     }\right)
+    %     \circ
+    %     \left({
+    %         \sum_{\rho\in P(\Sigma),\sigma_\rho = \omega,\tau_\rho=\tau}(-1)^{\left\vert{\rho}\right\vert}\partial_\rho
+    %     }\right)\\
+    %     &= \sum_{\tau\in C(\Sigma)\cap K_{d+1}}
+    %     \left({
+    %         \sum_{\rho\in P(\Sigma),\sigma_\rho = \omega,\tau_\rho=\tau}(-1)^{|\rho|}\partial_{\omega',\tau}\circ\partial_\rho + \sum_{\rho\in P(\Sigma),\sigma_\rho=\omega} (-1)^{\left\vert{\rho}\right\vert}\partial_{\omega',\tau_\rho}\circ\partial_\rho
+    %     }\right)\\
+    %     &=
+    %     \sum_{\rho\in P(\Sigma),\sigma_\rho = \omega}(-1)^{|\rho|}\partial_{\omega',\tau_\rho}\circ\partial_\rho + \sum_{\rho\in P(\Sigma),\sigma_\rho=\omega} (-1)^{\left\vert{\rho}\right\vert}\partial_{\omega',\tau_\rho}\circ\partial_\rho
+    % \end{align*}
+    % and
+    % \begin{align*}
+    % \restrict{(\theta_{d-1}\circ\partial^\Sigma)}{\omega,\omega'}
+    %     &= \sum_{\tau\in C(\Sigma)\cap K_{d-1}}
+    %     \restrict{\theta}{\tau,\omega'}\circ\restrict{\partial^\Sigma}{\omega,\tau}\\
+    %     &= \sum_{\tau\in C(\Sigma)\cap K_{d-1}}
+    %     \left({
+    %         \sum_{\rho\in P(\Sigma),\sigma_\rho=\tau,\tau_\rho=\omega'}
+    %         (-1)^{\left\vert{\rho}\right\vert}\partial_\rho
+    %     }\right)
+    %     \circ
+    %     \left({
+    %         \partial_{\tau,\omega} +
+    %         \sum_{\rho\in P(\Sigma)} (-1)^{\left\vert{\rho}\right\vert}
+    %         \partial_{\tau,\tau_\rho}\circ\partial_\rho\circ\partial_{\sigma_\rho,\omega}
+    %     }\right)
+    %   \end{align*}
+    \missingproof
+  \end{proof}
+\end{lemma}
 
 \begin{theorem}
-  $PH^\Sigma_{k,i\to j}(K;\mathscr C^\bullet) = PH_{k,i\to j}(K;\mathscr C^\bullet)$
+  For each $i$, the complexes $(C_\bullet(K;\mathscr C^i),\partial)$
+  and $(C_\bullet^\Sigma(K;\mathscr C^i),\partial^\Sigma)$ are
+  chain-homotopic.
   \begin{proof}
     \missingproof
   \end{proof}
 \end{theorem}
+
+\begin{corollary}
+  $PH^\Sigma_{k,i\to j}(K;\mathscr C^\bullet) = PH_{k,i\to j}(K;\mathscr C^\bullet)$
+\end{corollary}
 
 \section{Linear duality}
 
