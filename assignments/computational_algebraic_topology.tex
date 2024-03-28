@@ -643,13 +643,14 @@ $\Sigma$ on $K$ is a collection of pairs $\sigma\triangleleft\tau$
 such that $\sigma\leq\tau$ and no simplex appears in more than
 one such pair. A $\Sigma$-path $\rho$ then is a sequence
 \begin{align}\label{eq:path}
-  \sigma_\rho=\sigma_1\triangleleft\tau_1,
+  \sigma_\rho:=\sigma_1\triangleleft\tau_1,
   \sigma_2\triangleleft\tau_2,
   \cdots,
-  \sigma_m\triangleleft\tau_m=\tau_\rho
+  \sigma_m\triangleleft\tau_m=:\tau_\rho
 \end{align}
 such that $\tau_i\geq\sigma_{i+1}$ for all $i$.
-We will write $P(\Sigma)$ to denote the set of all paths of $\Sigma$.
+We will write $P(\Sigma)$ to denote the set of all paths of $\Sigma$
+and $|\rho|:= m$.
 A partial matching $\Sigma$ is said to be acyclic
 if there exists no path $\rho\in P(\Sigma)$ such that
 $\sigma_\rho\triangleleft\tau_\rho\not\in\Sigma$ but
@@ -876,7 +877,7 @@ we define the vector space of critical chains to be
   whose $\mathscr C^i(\tau)\to\mathscr C^i(\sigma)$ component is
   \begin{align}\label{eq:morse_boundary_component}
     \partial_{\sigma,\tau} +
-    \sum_{\rho\in C(\Sigma)} (-1)^{|\rho|} \partial_{\sigma,\tau_\rho}\circ \partial_\rho \circ \partial_{\sigma_\rho,\tau}.
+    \sum_{\rho\in P(\Sigma)} (-1)^{|\rho|} \partial_{\sigma,\tau_\rho}\circ \partial_\rho \circ \partial_{\sigma_\rho,\tau}.
   \end{align}
 \end{definition}
 
@@ -888,11 +889,12 @@ that these boundary operators do indeed yield a chain complex.
 \begin{lemma}
   $\left({\partial^\Sigma}\right)^2=0$.
   \begin{proof}
+    Let $\Sigma=\left\lbrace{\sigma_{\rho}\triangleleft\tau_{\rho}}\right\rbrace$.
     Consider a component
     $\mathscr C^i(\tau)\to\mathscr C^i(\sigma)$ for $\dim\tau=\dim\sigma+2$.
     This must be of the form
     \begin{align*}
-      \sum_{\delta}
+      \sum_{\delta\in C(\Sigma)}
       \left(
         \partial_{\sigma,\delta} +
         \sum_{\rho\in C(\Sigma)} (-1)^{|\rho|} \partial_{\sigma,\tau_\rho}\circ \partial_\rho \circ \partial_{\sigma_\rho,\delta}
@@ -902,39 +904,32 @@ that these boundary operators do indeed yield a chain complex.
         \sum_{\rho\in C(\Sigma)} (-1)^{|\rho|} \partial_{\delta,\tau_\rho}\circ \partial_\rho \circ \partial_{\sigma_\rho,\tau}
       \right)\\
       =
-      \sum_{\rho,{\rho'}\in C(\Sigma)}
-      (-1)^{|\rho|+|{\rho'}|}
-      \sum_{\delta}
+      \sum_{\delta\in C(\Sigma)}
       \left(
-        \partial_{\sigma,\delta} +
-        \partial_{\sigma,\tau_\rho}\circ \partial_\rho \circ \partial_{\sigma_\rho,\delta}
+        \partial_{\sigma,\delta} - \partial_{\sigma,\tau_\rho}\circ \partial_\rho \circ \partial_{\sigma_\rho,\delta}
       \right) \circ
       \left(
-        \partial_{\delta,\tau} +
-        \partial_{\delta,\tau_{\rho'}}\circ \partial_{\rho'} \circ \partial_{\sigma_{\rho'},\tau}
+        \partial_{\delta,\tau} - \partial_{\delta,\tau_\rho}\circ \partial_\rho \circ \partial_{\sigma_\rho,\tau}
       \right)
     \end{align*}
-    Let us consider the inner sum. Isolating the parts that
-    depend on $\delta$, this splits into four components
+    By expecting dimensions we find that not both negative
+    terms can be non-zero for any given $\delta$, hence we have
     \begin{align*}
-      &\sum_{\delta} \partial_{\sigma,\delta}\circ\partial_{\delta,\tau},
-      \hspace{1cm}
-      &&\left(\sum_\delta \partial_{\sigma,\delta} \circ  \partial_{\delta,\tau_{\rho'}}\right)\circ \partial_{\rho'} \circ \partial_{\sigma_{\rho'},\tau},
-      \\
-      &
-      \partial_{\sigma,\tau_\rho}\circ \partial_\rho \circ
-      \left(\sum_\delta \partial_{\sigma_\rho,\delta} \circ \partial_{\delta,\tau}\right),
-      \hspace{1cm}
-      &&
-      \partial_{\sigma,\tau_\rho}\circ \partial_\rho \circ
+      \sum_{\delta\in C(\Sigma)}
       \left(
-        \sum_\delta \partial_{\sigma_\rho,\delta} \circ
-        \partial_{\delta,\tau_{\rho'}}
+        \partial_{\sigma,\delta}\circ \partial_{\delta,\tau}
+        - \partial_{\sigma,\tau_\rho}
+        \circ {\partial^{-1}_{\sigma_\rho,\tau_\rho}}
+        \circ \partial_{\sigma_\rho,\delta}
+        \circ \partial_{\delta,\tau}
+        - \partial_{\sigma,\delta}
+        \circ \partial_{\delta,\tau_\rho}
+        \circ {\partial^{-1}_{\sigma_\rho,\tau_\rho}}
+        \circ \partial_{\sigma_\rho,\tau}
       \right)
-      \circ \partial_{\rho'} \circ \partial_{\sigma_{\rho'},\tau}.
     \end{align*}
-    By \ref{thm:cosheaf_chain_complex} we know that each of these
-    sums must yield the zero map, hence the claim follows.
+    Observing $C(\Sigma)=\left\lbrace{\sigma_\rho,\tau_\rho}\right\rbrace$ it is now straightforward to check that all terms cancel. By
+    induction the claim follows for general $\Sigma$.
   \end{proof}
 \end{lemma}
 
@@ -1015,35 +1010,181 @@ It is of course no coincidence that the persistent homologies
 in \ref{ex:persistent_morse_homology} agree with \ref{ex:acyclic_partial_matching_s1}. We constructed the Morse complex with the explicit
 intention to obtain an alternative way of calculating the persistent
 homology groups. The goal of this section is showing that we have
-achieved our goal. We do this by constructing appropriate chain
-homotopies.
+achieved our goal. We do this by constructing appropriate chain maps
+and show that they are homotopic to the identity.
+
+Consider the linear maps $\phi_d : C_d(K;\mathscr C)\to C_d^\Sigma(K;\mathscr C)$ whose component $\mathscr C(\alpha)\to\mathscr C(\omega)$ is the identity whenever $\alpha=\omega$ and
+\begin{align*}
+  \restrict{\phi_d}{\alpha,\omega} := \sum_{\rho\in P(\Sigma),\sigma_\rho = \alpha} (-1)^{|\rho|}\partial_{\omega,\tau_\rho}\circ\partial_\rho
+\end{align*}
+otherwise.
 
 \begin{lemma}
-  If $\Sigma=\left\lbrace{\sigma\triangleleft\tau}\right\rbrace$
-  is compatible with $\mathscr C\in\Cosh(K)$ then the complexes
-  $(C_\bullet(K;\mathscr C),\partial)$ and
-  $(C^\Sigma_\bullet(K;\mathscr C),\partial^\Sigma)$ are chain homotopic.
+  $\phi_\bullet : C_\bullet(K;\mathscr C) \to C^\Sigma_\bullet (K;\mathscr C)$ is a chain map.
   \begin{proof}
-    Consider the linear maps $\phi_d : C_d(K;\mathscr C)\to C_d^\Sigma(K;\mathscr C)$ whose component $\mathscr C(\alpha)\to\mathscr C(\omega)$ is the identity whenever $\alpha=\omega$ and
+    We need to show $\partial^\Sigma \circ \phi_d = \phi_{d-1} \circ
+    \partial$. Once again we consider $\Sigma=\left\lbrace{\sigma_\rho\triangleleft\tau_\rho}\right\rbrace$ and deduce the
+    claim by induction.
+    If $\alpha\not\in C(\Sigma)$ then
     \begin{align*}
-      \restrict{\phi_d}{\alpha,\omega} = \sum_{\rho\in P(\Sigma),\sigma_\rho = \alpha} \partial_{\omega,\tau_\rho}\circ\partial_\rho
+      \restrict{(\partial^\Sigma\circ\phi_d)}{\alpha,\omega'}
+      &= \sum_{\omega\in C(\Sigma)\cap K_d} \restrict{\partial^\Sigma}{\omega,\omega'}\circ \restrict{\phi_d}{\alpha,\omega}\\
+      &=
+      \sum_{\omega\in C(\Sigma)\cap K_d}
+      \left({
+          {\partial}_{\omega',\omega}
+          + \sum_{\rho\in P(\Sigma)} (-1)^{|\rho|} \partial_{\omega',\tau_\rho} \circ \partial_\rho \circ \partial_{\sigma_\rho,\omega}
+      }\right)
+      \circ
+      \left({
+          \sum_{\rho\in P(\Sigma),\sigma_\rho = \alpha} (-1)^{|\rho|}\partial_{\omega,\tau_\rho}\circ\partial_\rho
+      }\right).
     \end{align*}
-    otherwise. In the other direction, we have the linear map
-    $\psi_d : C^\Sigma_d(K;\mathscr C)\to C_d(K;\mathscr C)$
-    whose component $\mathscr C(\omega)\to\mathscr C(\alpha)$
-    also is the identity if $\alpha=\omega$ and
+    Using $P(\Sigma) = \left\lbrace{\sigma_\rho\triangleleft\tau_\rho}\right\rbrace$, we simplify this to
     \begin{align*}
-      \restrict{\psi_d}{\omega,\alpha}=\sum_{\rho\in P(\Sigma),\tau_\rho=\alpha} \partial_\rho \circ \partial_{\sigma_\rho,\omega}
+      \sum_{\omega\in C(\Sigma)\cap K_d}
+      \left({
+          {\partial}_{\omega',\omega}
+          - \partial_{\omega',\tau_\rho} \circ \partial^{-1}_{\sigma_\rho,\tau_\rho} \circ \partial_{\sigma_\rho,\omega}
+      }\right)
+      \circ
+      \left({
+          -\partial_{\omega,\tau_\rho}\circ{\partial}^{-1}_{\sigma_\rho,\tau_\rho}
+      }\right).
     \end{align*}
-    otherwise.
+    whenever $\sigma_\rho = \alpha$. For the term on the right to be non-zero we require
+    $\dim\omega = \dim\sigma_\rho$. Hence
+    $\partial_{\sigma_\rho,\omega}=0$ so we obtain
+    \begin{align*}
+      \sum_{\omega\in C(\Sigma)\cap K_d}
+      - {\partial}_{\omega',\omega}
+      \circ
+      \partial_{\omega,\tau_\rho}\circ{\partial}^{-1}_{\sigma_\rho,\tau_\rho}
+      =
+      \left(
+        \partial_{\omega',\sigma_\rho}\circ\partial_{\sigma_\rho,\tau_\rho}
+        -
+        \sum_{\omega\in K_d}
+        {\partial}_{\omega',\omega}
+        \circ
+        \partial_{\omega,\tau_\rho}
+      \right)
+      \circ{\partial}^{-1}_{\sigma_\rho,\tau_\rho}
+      = \partial_{\omega',\alpha}
+    \end{align*}
+    when $\alpha=\sigma_\rho$. If $\alpha=\tau_\rho$ we simply
+    have the zero map. For $\alpha\in C(\Sigma)$, we must have
+    $\restrict{\phi_d}{\alpha,\omega}=0$ whenever $\alpha\neq\omega$
+    so
+    \begin{align*}
+      \restrict{(\partial^\Sigma\circ\phi_d)}{\alpha,\omega'}
+      = \restrict{\partial^\Sigma}{\alpha,\omega'}
+      = {\partial}_{\omega',\alpha}
+      - \partial_{\omega',\tau_\rho} \circ \partial^{-1}_{\sigma_\rho,\tau_\rho} \circ \partial_{\sigma_\rho,\alpha}
+      .
+    \end{align*}
+    We summarise
+    \begin{align}\label{eq:phi_chain_cases}
+      \restrict{(\partial^\Sigma\circ\phi_d)}{\alpha,\omega'}
+      = \begin{cases}
+        \partial_{\omega',\alpha} & \alpha=\sigma_\rho, \\
+        0 & \alpha=\tau_\rho, \\
+        {\partial}_{\omega',\alpha}
+        - \partial_{\omega',\tau_\rho} \circ \partial^{-1}_{\sigma_\rho,\tau_\rho} \circ \partial_{\sigma_\rho,\alpha} & \text{otherwise}.
+      \end{cases}
+    \end{align}
 
-    Let us verify that we have thus defined chain maps. \missingproof
+    On the other side we have
+    \begin{align*}
+      \restrict{(\phi_{d-1}\circ \partial)}{\alpha,\omega'}
+      &= \sum_{\alpha'\in K_{d-1}} \restrict{\phi_{d-1}}{\alpha',\omega'}\circ \restrict{\partial}{\alpha,\alpha'}\\
+      &=
+      \partial_{\omega',\alpha}
+      + \sum_{\alpha'\neq\omega'\in K_{d-1}}
+      \sum_{\rho\in P(\Sigma),\sigma_\rho = \alpha'}
+      (-1)^{|\rho|}
+      \partial_{\omega',\tau_\rho}\circ\partial_\rho\circ\partial_{\alpha',\alpha}
+    \end{align*}
+    Using $\rho = \sigma_\rho\triangleleft\tau_\rho$ this simplifies
+    to
+    \begin{align*}
+      \restrict{(\phi_{d-1}\circ \partial)}{\alpha,\omega'}
+      = \partial_{\omega',\alpha} - \partial_{\omega',\tau_\rho}\circ\partial_{\sigma_\rho,\tau_\rho}^{-1}\circ\partial_{\sigma_\rho,\alpha}.
+    \end{align*}
+    This is easily verified to equal (\ref{eq:phi_chain_cases})
+    as $\partial_{\sigma_\rho,\sigma_\rho} = 0$ and
+    $\partial_{\omega',\alpha}\circ\partial^{-1}_{\sigma_\rho,\alpha}\circ\partial_{\sigma_\rho,\alpha} = \partial_{\omega',\alpha}$.
+  \end{proof}
+\end{lemma}
 
-    Consider $\phi_d\circ\psi_d$. We have the component
-    $\mathscr C(\omega)\to\mathscr C(\omega')$ which is the identity when $\omega=\omega'$ and otherwise is given by
+In the other direction, we have the linear maps
+$\psi_d : C^\Sigma_d(K;\mathscr C)\to C_d(K;\mathscr C)$
+whose components $\mathscr C(\omega)\to\mathscr C(\alpha)$
+are also the identity if $\alpha=\omega$ and
+\begin{align*}
+  \restrict{\psi_d}{\omega,\alpha}:=\sum_{\rho\in P(\Sigma),\tau_\rho=\alpha} (-1)^{|\rho|}\partial_\rho \circ \partial_{\sigma_\rho,\omega}
+\end{align*}
+otherwise.
+\begin{lemma}
+  $\psi_\bullet:C^\Sigma_\bullet(K;\mathscr C)\to C_\bullet(K;\mathscr C)$ is a chain map.
+  \begin{proof}
+    In analogy to $\phi_d$ we assume
+    $\Sigma = \left\lbrace{\sigma_\rho\triangleleft\tau_\rho}\right\rbrace$ and compute both sides of the equation $\partial\circ\psi = \psi_{d-1}\circ\partial^\Sigma$. Thus we find
+    \begin{align}\label{eq:psi_chain_case}
+      \restrict{(\partial\circ\psi_d)}{\omega,\alpha'}
+      = \sum_{\alpha\in K_d} \restrict{\partial}{\alpha,\alpha'} \circ \restrict{\psi_d}{\omega,\alpha}
+      = \partial_{\alpha',\omega}
+      -
+      {
+        \partial_{\alpha',\tau_\rho}
+        \circ \partial^{-1}_{\sigma_\rho,\tau_\rho}
+        \circ \partial_{\sigma_\rho,\omega}
+      }.
+    \end{align}
+    On the other side we once again need to consider some
+    cases. If $\alpha'\in C(\Sigma)$ then
+    \begin{align*}
+      \restrict{(\psi_{d-1} \circ \partial^\Sigma)}{\omega,\alpha'}
+      &= \sum_{\omega'\in C(\Sigma)\cap K_{d-1}}
+      \restrict{\psi_{d-1}}{\omega',\alpha'}\circ\restrict{\partial^\Sigma}{\omega,\omega'} \\
+      &= \partial_{\alpha',\omega}
+      + \sum_{\alpha'\neq\omega'\in C(\Sigma)\cap K_{d-1}}
+      \restrict{\psi_{d-1}}{\omega',\alpha'}\circ\restrict{\partial^\Sigma}{\omega,\omega'} \\
+      &= \partial_{\alpha',\omega}.
+    \end{align*}
+    If $\alpha'=\tau_\rho$ we find
+    \begin{align*}
+      \restrict{(\psi_{d-1} \circ \partial^\Sigma)}{\omega,\alpha'}
+      &= \sum_{\omega'\in C(\Sigma)\cap K_{d-1}}
+      \restrict{\psi_{d-1}}{\omega',\alpha'}\circ\restrict{\partial^\Sigma}{\omega,\omega'} \\
+      &= \sum_{\omega'\in C(\Sigma)\cap K_{d-1}}
+      (\partial^{-1}_{\sigma_\rho,\alpha'}\circ\partial_{\sigma_\rho,\omega'})
+      \circ
+      \partial_{\omega',\omega}\\
+      &= \partial_{\alpha',\omega}
+    \end{align*}
+    Finally, if $\alpha'=\sigma_\rho$ then
+    \begin{align*}
+      \restrict{(\psi_{d-1} \circ \partial^\Sigma)}{\omega,\alpha'}
+      = \sum_{\omega'\in C(\Sigma)\cap K_{d-1}}
+      \restrict{\psi_{d-1}}{\omega',\alpha'}\circ\restrict{\partial^\Sigma}{\omega,\omega'} = 0.
+    \end{align*}
+    Once again it is straightforward to verify that
+    this agrees with (\ref{eq:psi_chain_case}) and hence the
+    claim follows by induction.
+  \end{proof}
+\end{lemma}
+
+\begin{theorem}
+  The complexes $(C_\bullet(K;\mathscr C),\partial)$ and
+  $(C^\Sigma_\bullet(K;\mathscr C),\partial^\Sigma)$ are chain homotopy equivalent.
+  \begin{proof}
+    Consider $\phi_d\circ\psi_d$.
+    We have $\restrict{\phi_d\circ\psi_d}{\omega,\omega}=\identity$
+    and, for $\omega\neq\omega'$,
     \begin{align*}
       \restrict{(\phi_d \circ \psi_d)}{\omega,\omega'}
-      = \restrict{\phi_d}{\omega,\omega'}\circ\restrict{\psi_d}{\omega',\omega'}+\restrict{\phi_d}{\omega,\omega}\circ\restrict{\psi_d}{\omega,\omega'}
+      &= \restrict{\phi_d}{\omega,\omega'}\circ\restrict{\psi_d}{\omega',\omega'}+\restrict{\phi_d}{\omega,\omega}\circ\restrict{\psi_d}{\omega,\omega'}
     \end{align*}
     where we used the fact that we cannot have $\tau_\rho \triangleleft \alpha \triangleleft \sigma_{\rho'}$. Hence
     \begin{align*}
@@ -1058,80 +1199,109 @@ homotopies.
     $\rho\in P(\Sigma)$ and similarly for the sum on the right.
     Thus $\phi_d\circ\psi_d-\identity = 0$.
 
-    In the other direction, we may calculate
+    In the other direction we assume $\Sigma=\left\lbrace{\sigma_\rho
+    \triangleleft\tau_\rho}\right\rbrace$ and proceed by induction.
+    We see that
     \begin{align*}
       \restrict{(\psi_d\circ\phi_d)}{\alpha,\alpha'}
-      &= \sum_{\omega\in C(\Sigma)\cap K_d}
-      \restrict{\psi_d}{\omega,\alpha'}\circ\restrict{\phi_d}{\alpha,\omega}\\
-      &= \sum_{\omega\in C(\Sigma)\cap K_d}
-      \left({
-          \sum_{\rho\in P(\Sigma),\tau_\rho=\alpha'} \partial_\rho \circ \partial_{\sigma_\rho,\omega}
-      }\right)
-      \circ
-      \left({
-          \sum_{\rho\in P(\Sigma),\sigma_\rho = \alpha} \partial_{\omega,\tau_\rho}\circ\partial_\rho
-      }\right)
+      = \sum_{\omega\in C(\Sigma)\cap K_d}
+      \restrict{\psi_d}{\omega,\alpha'}\circ\restrict{\phi_d}{\alpha,\omega}
     \end{align*}
-    %   Now define
-    %   $\theta_d : C_d(K;\mathscr C)\to C_{d+1}(K;\mathscr C)$
-    %   by \todo{probably no $-1$ here so things cancel below}
-    %   \begin{align*}
-    %     \restrict{\theta_d}{\sigma,\tau}
-    %     = \sum_{\rho\in P(\Sigma),\sigma_\rho = \sigma,\tau_\rho=\tau}
-    %     (-1)^{\left\vert{\rho}\right\vert} \partial_\rho.
-    %   \end{align*}
-    %   It is now straightforward to calculate
-    %   \begin{align*}
-    %     \restrict{(\partial^\Sigma\circ\theta_d)}{\omega,\omega'}
-    %     &= \sum_{\tau\in C(\Sigma)\cap K_{d+1}} \restrict{\partial^\Sigma}{\tau,\omega'} \circ \restrict{\theta}{\omega,\tau}\\
-    %     &= \sum_{\tau\in C(\Sigma)\cap K_{d+1}}
-    %     \left({
-    %         \partial_{\omega',\tau} + \sum_{\rho\in P(\Sigma)} (-1)^{\left\vert{\rho}\right\vert}\partial_{\omega',\tau_\rho}\circ\partial_\rho\circ\partial_{\sigma_\rho,\tau}
-    %     }\right)
-    %     \circ
-    %     \left({
-    %         \sum_{\rho\in P(\Sigma),\sigma_\rho = \omega,\tau_\rho=\tau}(-1)^{\left\vert{\rho}\right\vert}\partial_\rho
-    %     }\right)\\
-    %     &= \sum_{\tau\in C(\Sigma)\cap K_{d+1}}
-    %     \left({
-    %         \sum_{\rho\in P(\Sigma),\sigma_\rho = \omega,\tau_\rho=\tau}(-1)^{|\rho|}\partial_{\omega',\tau}\circ\partial_\rho + \sum_{\rho\in P(\Sigma),\sigma_\rho=\omega} (-1)^{\left\vert{\rho}\right\vert}\partial_{\omega',\tau_\rho}\circ\partial_\rho
-    %     }\right)\\
-    %     &=
-    %     \sum_{\rho\in P(\Sigma),\sigma_\rho = \omega}(-1)^{|\rho|}\partial_{\omega',\tau_\rho}\circ\partial_\rho + \sum_{\rho\in P(\Sigma),\sigma_\rho=\omega} (-1)^{\left\vert{\rho}\right\vert}\partial_{\omega',\tau_\rho}\circ\partial_\rho
-    % \end{align*}
-    % and
-    % \begin{align*}
-    % \restrict{(\theta_{d-1}\circ\partial^\Sigma)}{\omega,\omega'}
-    %     &= \sum_{\tau\in C(\Sigma)\cap K_{d-1}}
-    %     \restrict{\theta}{\tau,\omega'}\circ\restrict{\partial^\Sigma}{\omega,\tau}\\
-    %     &= \sum_{\tau\in C(\Sigma)\cap K_{d-1}}
-    %     \left({
-    %         \sum_{\rho\in P(\Sigma),\sigma_\rho=\tau,\tau_\rho=\omega'}
-    %         (-1)^{\left\vert{\rho}\right\vert}\partial_\rho
-    %     }\right)
-    %     \circ
-    %     \left({
-    %         \partial_{\tau,\omega} +
-    %         \sum_{\rho\in P(\Sigma)} (-1)^{\left\vert{\rho}\right\vert}
-    %         \partial_{\tau,\tau_\rho}\circ\partial_\rho\circ\partial_{\sigma_\rho,\omega}
-    %     }\right)
-    %   \end{align*}
-    \missingproof
-  \end{proof}
-\end{lemma}
-
-\begin{theorem}
-  For each $i$, the complexes $(C_\bullet(K;\mathscr C^i),\partial)$
-  and $(C_\bullet^\Sigma(K;\mathscr C^i),\partial^\Sigma)$ are
-  chain-homotopic.
-  \begin{proof}
-    \missingproof
+    is zero unless $\alpha=\alpha'$, $\alpha\neq\tau_\rho=\alpha'$,
+    or $\alpha=\sigma_\rho\neq\alpha'$. Computation in each
+    case is straightforward and we find
+    \begin{align*}
+      \restrict{(\psi_d\circ\phi_d)}{\alpha,\alpha'}
+      = \begin{cases}
+        \identity & \alpha=\alpha', \\
+        -\partial_{\alpha',\tau_\rho}\circ\partial^{-1}_{\alpha,\tau_\rho}
+                  & \alpha = \sigma_\rho \neq \alpha', \\
+                  -\partial^{-1}_{\sigma_\rho,\alpha'} \circ \partial_{\sigma_\rho,\alpha}
+                  & \alpha \neq \tau_\rho = \alpha', \\
+        0         & \text{otherwise}.
+      \end{cases}
+    \end{align*}
+    We define $\theta_d : C_d(K;\mathscr C)\to C_{d+1}(K;\mathscr C)$ by
+    \begin{align*}
+      \restrict{\theta_d}{\alpha,\alpha'} = \begin{cases}
+        {\partial}^{-1}_{\sigma_\rho,\tau_\rho} & \alpha=\sigma_\rho,\alpha'=\tau_\rho \\
+        0 &\text{otherwise}
+      \end{cases}
+    \end{align*}
+    It is straightforward to check that we have
+    \begin{align*}
+      \psi_d\circ\phi_d - \identity = \partial\circ\theta_d + \theta_{d-1}\circ\partial,
+    \end{align*}
+    hence we have constructed a chain homotopy for the
+    case $|\Sigma|=1$. While induction still works, we remind
+    the reader that, analogous to the non-cosheaf case,
+    this depends on acylicity of $\Sigma$. This is because
+    a boundary component $\restrict{\partial^\Sigma}{\sigma,\tau}$
+    does not depend on any other pair $\sigma'\triangleleft\tau'$.
+    Hence we may add pairs to $\Sigma$ one by one, in any
+    order.
   \end{proof}
 \end{theorem}
 
+If we now consider a filtration $\mathscr C^\bullet$ it is
+immediate that the homologies agree.
+
 \begin{corollary}
-  $PH^\Sigma_{k,i\to j}(K;\mathscr C^\bullet) = PH_{k,i\to j}(K;\mathscr C^\bullet)$
+  For each $i$, the complexes $(C_\bullet(K;\mathscr C^i),\partial)$
+  and $(C_\bullet^\Sigma(K;\mathscr C^i),\partial^\Sigma)$ are
+  chain-homotopic. Hence
+  \begin{align*}
+    H_\bullet (K;\mathscr C^i) \cong H_\bullet^\Sigma (K;\mathscr C^i).
+  \end{align*}
 \end{corollary}
+
+While in the elementary case without cosheaves this was the
+end of the story, we still require that the maps
+$H_k(K;\mathscr C^i)\hookrightarrow H_k(K;\mathscr C^{i+1})$ and
+$H^\Sigma_k(K;\mathscr C^i)\hookrightarrow H^\Sigma_k(K;\mathscr C^{i+1})$
+agree. This will then apply that the persistent homologies
+are the same.
+
+We show that the induced inclusions are chain homotopic under the
+chain homotopy equivalence. Precisely:
+
+\begin{lemma}
+  The induced map $C^\Sigma_\bullet(K;\mathscr C^i)\longinc C^\Sigma_\bullet(K;\mathscr C^{i+1})$ is chain homotopic to
+  \begin{align*}
+    C^\Sigma_\bullet(K;\mathscr C^i)
+    \xlongrightarrow{\psi_\bullet} C_\bullet(K;\mathscr C^i)
+    \longinc C_\bullet(K;\mathscr C^{i+1})
+    \xlongrightarrow{\phi_\bullet} C^\Sigma_\bullet(K;\mathscr C^{i+1})
+  \end{align*}
+  \begin{proof}
+    Fix $d$ and consider the diagram
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsNCxbMCwwLCJDXlxcU2lnbWFfZChLO1xcbWF0aHNjciBDXmkpIl0sWzIsMCwiQ15cXFNpZ21hX2QoSztcXG1hdGhzY3IgQ157aSsxfSkiXSxbMCwxLCJDX2QoSztcXG1hdGhzY3IgQ15pKSJdLFsyLDEsIkNfZChLO1xcbWF0aHNjciBDXntpKzF9KSJdLFswLDIsIlxccHNpIiwyXSxbMywxLCJcXHBoaSIsMl0sWzAsMSwiXFxpb3RhXlxcU2lnbWEiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsyLDMsIlxcaW90YSIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d
+      \begin{tikzcd}
+        {C^\Sigma_d(K;\mathscr C^i)} && {C^\Sigma_d(K;\mathscr C^{i+1})} \\
+        {C_d(K;\mathscr C^i)} && {C_d(K;\mathscr C^{i+1})}
+        \arrow["\psi"', from=1-1, to=2-1]
+        \arrow["\phi"', from=2-3, to=1-3]
+        \arrow["{\iota^\Sigma}", hook, from=1-1, to=1-3]
+        \arrow["\iota"', hook, from=2-1, to=2-3]
+      \end{tikzcd}
+    \end{equation*}
+    But now observe that $\phi$ and $\psi$ are sums of
+    scalar multiples of boundary components. As $\iota$
+    and $\iota^\Sigma$ are chain maps, we are free to
+    interchange them with boundary components. As
+    $\psi$ and $\phi$ form a chain homotopy equivalence,
+    the claim follows.
+  \end{proof}
+\end{lemma}
+
+Note that we could have chosen the vertical maps to go in any
+direction and the claim would have remained true. However, only
+one such homotopy is required to establish our main theorem:
+
+\begin{theorem}
+  $PH^\Sigma_{k,i\to j}(K;\mathscr C^\bullet) = PH_{k,i\to j}(K;\mathscr C^\bullet)$
+\end{theorem}
 
 \section{Linear duality}
 
