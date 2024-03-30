@@ -1,10 +1,17 @@
 \documentclass{article}
 \usepackage{assignment}
 \begin{document}
-\title{Monoids and bicategories}
+\title{Bicategories and Formal Monads}
 \author{Franz Miltz}
 \date{\today}
 \maketitle
+
+In \cite{pawel2017} three mathematical equivalences are described.
+We aim to formalise this. Before we can start in earnest, we need
+to establish some mathematical background. In particular, we aim
+to familiarise ourselves with monoidal categories and bicategories.
+We then encounter a non-obvious example of a bicategory which
+we will require later on.
 
 \section{Bicategories and monoidal categories}
 
@@ -114,7 +121,7 @@ may be thought of as such a generalisation of monoidal categories.
 
 
 With this knowledge fresh in our memories, we are ready to follow
-the definition of a bicategory:
+the definition of a bicategory (see e.g. \cite{leinster1998}):
 
 \begin{definition}\label{def:bicategory}
   A \emph{bicategory} $\mathbf C$ consists of
@@ -551,7 +558,7 @@ a commuting diagram
   \end{tikzcd}
 \end{equation*}
 the map $P\to A$ factors through $S$ and hence there is a unique
-map of spans $P\to A$. Thus we obtain canonical isomorphisms
+map of spans $P\to S$. Thus we obtain canonical isomorphisms
 \begin{align}\label{eq:pullback_unitors}
   \lambda_S : A\times_A S \cong S,\hspace{1cm}
   \rho_S : S\times_A A \cong S
@@ -593,7 +600,7 @@ thing we need to check is the second coherence condition:
 \begin{definition}\label{def:span_bicategory}
   $\Span(\mathcal C)$ is the bicategory where
   \begin{itemize}
-    \item the same as in $\mathcal C$;
+    \item objects the same as in $\mathcal C$;
     \item hom-categories are $\Hom[A,B]:=\Span(A,B)$;
     \item the identity functors takes $A$ to the trivial span
       $A\leftarrow A \rightarrow A$;
@@ -854,6 +861,15 @@ satisfy this condition:
 
 \section{Monads are monoids}
 
+In this section we divert slightly from \cite{pawel2017}. There
+monads are first generalised to bicategories and then shown to be
+equivalent to monoid objects in the hom-categories. We reverse
+the order because it allows us to more intuitively define
+the category of monads on a category, it simplifies
+the definition of a monad in a bicategory, and it leaves the
+least obvious result for last. Note that this change does
+not really save us much work, if any.
+
 We have seen that categories are one generalisation of monoids. However,
 one may go in a different direction. Observe that an element $e\in M$
 may be identified with a map $e : 1 \to M$ where $1=\left\lbrace{*}\right\rbrace$ is a singleton set and we abuse notation to write $e(*) = e$.
@@ -864,7 +880,7 @@ replace the cartesian structure with an arbitrary monoidal structure:
 
 \begin{definition}
   Let $(\mathcal C,I,\otimes)$ be a monoidal category. A
-  $\mathcal C$-monoid $(M,e,m)$ consists of
+  \emph{monoid object} $(M,e,m)$ in $\mathcal C$ consists of
   an object $M\in\mathcal C$ and maps
   $e:I\to M$ and $m:M\otimes M\to M$ in $\mathcal C$
   such that the following commute:
@@ -895,15 +911,15 @@ replace the cartesian structure with an arbitrary monoidal structure:
 \end{definition}
 
 Consider the monoidal structure on $\Set$ given by the cartesian structure.
-Then a $\Set$-monoid is just a monoid in the usual sense: We have a
+Then a monoid object in $\Set$ is just a monoid in the usual sense: We have a
 set $M$, a map $e:1\to M$, i.e. an element $e\in M$, and a multiplication
 $m:M\times M\to M$. The conditions \ref{eq:monoid_axioms} are just
 unitality and associativity, respectively.
 
 \begin{definition}
-  A \emph{map of $(\mathcal C,I,\otimes)$-monoids}
-  $f:(M,e,m)\to(M',e',m')$ is a map $f:M\to M'$ in $\mathcal C$
-  such that the following commute:
+  A \emph{map of monoid objects} $f:(M,e,m)\to(M',e',m')$ in
+  a monoidal category $(\mathcal C, I,\otimes)$
+  is a map $f:M\to M'$ in $\mathcal C$ such that the following commute:
   \begin{equation}\label{eq:monoid_map_axioms}
     % https://q.uiver.app/#q=WzAsNCxbMCwwLCJNXFxvdGltZXMgTSJdLFsyLDAsIk0nXFxvdGltZXMgTSciXSxbMCwxLCJNIl0sWzIsMSwiTSciXSxbMCwxLCJmXFxvdGltZXMgZiJdLFsxLDMsIm0nIl0sWzAsMiwibSIsMl0sWzIsMywiZiIsMl1d
     \begin{tikzcd}
@@ -946,21 +962,24 @@ is itself a monoid map as
   \end{tikzcd}
 \end{equation*}
 commutes by functoriality of $\otimes:\mathcal C\times\mathcal C\to\mathcal C$. If $f=\identity$, $M=M'$, $e=e'$, and $m=m'$ then the conditions
-are trivially satisfied. Hence we have a category of $(\mathcal C,I,\otimes)$-monoids $\textbf{Mon}(\mathcal C,I,\otimes)$.
+are trivially satisfied. Hence we have a category
+$\textbf{Mon}(\mathcal C,I,\otimes)$ of monoid objects in
+a monoidal category $(\mathcal C,I,\otimes)$.
 
 Other than generalisation for the sake of generalisation, it is not
 immediately obvious what we have achieved. However, one need only
 consider the category of $k$-vector spaces $\textbf{Vect}_k$ with
 its monoidal structure given by the tensor product. A
-$\textbf{Vect}_k$-monoid is a $k$-algebra! In particular, we do
-not require any additional compatibility conditions between the
-monoid multiplication and the scalar product of a vector space.
+monoid object in $\textbf{Vect}_k$ is a $k$-algebra! In particular, we do
+not require any additional compatibility conditions between the monoid
+multiplication and the scalar product of a vector space.
 
 A less obvious example of monoid objects are monads. Recall
 the definition:
 \begin{definition}
-  Let $\mathcal C$ be a category. A \emph{$\mathcal C$-monad} consists of
-  a functor $T:\mathcal C\to\mathcal C$ and natural transformations
+  Let $\mathcal C$ be a category. A \emph{monad} on $\mathcal C$
+  consists of a functor $T:\mathcal C\to\mathcal C$ and natural
+  transformations
   $\eta:\text{Id}\to T$ and $\mu:T^2\to T$
   such that the following commute:
   \begin{equation}\label{eq:monad_laws}
@@ -998,8 +1017,9 @@ As usual, a map of monads is a map of underlying objects that plays
 well with the additional structure:
 
 \begin{definition}
-  A \emph{map of $\mathcal C$-monads} $\phi:(T,\eta,\mu)\to(T',\eta',\mu')$
-  is a natural transformation $\phi:T\to T'$ such that
+  A \emph{map of monads} $\phi:(T,\eta,\mu)\to(T',\eta',\mu')$
+  on $\mathcal C$ is a natural transformation $\phi:T\to T'$
+  such that
   \begin{equation}\label{eq:monad_map_laws}
     % https://q.uiver.app/#q=WzAsNyxbMCwwLCJUXjIiXSxbMCwxLCJUIl0sWzIsMSwiVCciXSxbMiwwLCIoVCcpXjIiXSxbNSwwLCJcXHRleHR7SWR9Il0sWzQsMSwiVCJdLFs2LDEsIlQnIl0sWzAsMywiXFxwaGleMiJdLFsxLDIsIlxccGhpIl0sWzAsMSwiXFxtdSIsMl0sWzMsMiwiXFxtdSciXSxbNCw1LCJcXGV0YSIsMl0sWzUsNiwiXFxwaGkiLDJdLFs0LDYsIlxcZXRhJyJdXQ==
     \begin{tikzcd}
@@ -1058,8 +1078,8 @@ as monoid objects and thus obtain an equivalence of categories.
 
     It is now even more straightforward to see straighforward to see
     that (\ref{eq:monoid_map_axioms}) and (\ref{eq:monad_map_laws})
-    for $(\Hom[\mathcal C,\mathcal C],\text{Id},\circ)$-monoids
-    and $\mathcal C$-monads.
+    are identical for monoid objects in $(\Hom[\mathcal C,\mathcal
+    C],\text{Id},\circ)$ and monads on $\mathcal C$, respectively.
   \end{proof}
 \end{proposition}
 

@@ -1,15 +1,29 @@
 \documentclass{article}
 \usepackage{assignment}
+\renewcommand{\phi}{\varphi}
 \begin{document}
 \title{C3.9 Mini Project: Cosheaf Homology}
 \author{Franz Miltz}
 \date{\today}
 \maketitle
 
+We have seen sheaves on simplicial complexes and the corresponding
+sheaf cohomology. We have also seen the persistent homology
+arising from a filtration of a chain complex. We aim to unify
+these ideas by dualising sheaves to cosheaves and defining
+the persistent homology with values in a filtration of cosheaves.
+It will then be possible to contemplate corresponding Morse
+complexes whose persistent homology will agree with the previous
+definition.
+
 \section{Cosheaves and homology}
 
+We begin by defining cosheaves. As sheaves on simplicial
+complexes are simply functors, so are cosheaves. Throughout
+this document, fix a simplicial complex $K$.
+
 \begin{definition}
-  A \emph{cosheaf} on a simplicial complex $K$ is a functor
+  A \emph{cosheaf} on $K$ is a functor
   $\mathscr C:(K,\geq)\to\FVect_{\mathbb{R}}$.
 \end{definition}
 Let us familiarise ourselves with the notion of a cosheaf by looking
@@ -44,34 +58,56 @@ at some examples:
   \end{itemize}
 \end{example}
 
+Throught fix a cosheaf $\mathscr C$ on $K$. The chain complex
+associated to a cosheaf over a simplicial complex
+is analogous to sheaves and sheaf cohomology:
+
 \begin{definition}
-  Let $\mathscr C$ be a cosheaf on a simplicial complex $K$. Then, for $k\geq 0$,
-  define the \emph{vector space of $k$-chains of $K$ with coefficients
+  For $d\geq 0$,
+  define the \emph{vector space of $d$-chains of $K$ with coefficients
   in $\mathscr C$} by
   \begin{align*}
-    C_k(K;\mathscr C) = \bigoplus_{\tau\in K_k} \mathscr C(\tau).
+    C_d(K;\mathscr C) = \bigoplus_{\tau\in K_d} \mathscr C(\tau).
   \end{align*}
-  where $K_k = \left\lbrace{\sigma \in K : \dim \sigma = k}\right\rbrace$.
+  where $K_d = \left\lbrace{\sigma \in K : \dim \sigma = d}\right\rbrace$.
 \end{definition}
 
 Observe that this is a direct generalisation of the usual chain vector
 spaces as the case $\mathscr C = \underline{\mathbb{R}}_K$ yields the
-equality $C_k(K;\underline{\mathbb{R}}_K)=C_k(K)$. Of
+equality $C_d(K;\underline{\mathbb{R}}_K)=C_d(K)$. Of
 course we are not truly interested in the chains but rather in the
-chain complex that they are part of. It is thus natural to define
-the corresponding boundary operator:
+chain complex that they are part of.
+
+Before we define the boundary operator, a word of caution. We are
+used to thinking of maps $C_d(K)\to C_{d-1}(K)$ as matrices
+with coefficients in $\mathbb{R}$. It will be fruitful to
+generalise this approach to maps $f : C_d(K;\mathscr C)\to C_{d-1}(K;\mathscr C)$. However, the component
+$\restrict{f}{\sigma,\tau}:\mathscr C(\tau)\to\mathscr C(\sigma)$ is no longer a scalar, which may be thought of as a linear
+map $\mathbb{R}\to\mathbb{R}$, but a linear map between more
+general vector spaces. Components of the composition behave
+exactly in the way one would expect them to: If we have
+\begin{align*}
+  \bigoplus_i U_i
+  \xlongrightarrow{f} \bigoplus_j V_j
+  \xlongrightarrow{g} \bigoplus_k W_k
+\end{align*}
+then the component $U_i\to W_k$ is
+\begin{align*}
+  \restrict{(g\circ f)}{k,i} = \sum_j \restrict{g}{k,j}\circ\restrict{f}{j,i}.
+\end{align*}
 
 \begin{definition}
-  Let $\sigma,\tau\in K$. Then the \emph{boundary component}
-  is the map
+  Let $\sigma,\tau\in K$. Then the $(\sigma,\tau)$
+  \emph{boundary component} is the map
   \begin{align*}
     \partial_{\sigma,\tau} = [\sigma:\tau]\mathscr C(\tau\geq\sigma) : \mathscr C(\tau) \to \mathscr C(\sigma).
   \end{align*}
   The \emph{boundary map}
   \begin{align*}
-    \partial : C_k(K;\mathscr C) \to C_{k-1}(K;\mathscr C)
+    \partial : C_d(K;\mathscr C) \to C_{d-1}(K;\mathscr C)
   \end{align*}
-  is the unique linear map whose components are $\partial_{\sigma,\tau}$.
+  is the unique linear map whose components are
+  $\restrict{\partial}{\sigma,\tau}:=\partial_{\sigma,\tau}$.
 \end{definition}
 
 Observe that the component $\partial_{\sigma,\tau}$ makes sense even if $\sigma\not\leq\tau$because
@@ -84,7 +120,7 @@ this does indeed deserve to be called a boundary map:
     We have the $\mathscr C(\tau)\to\mathscr C(\sigma)$ component
     of $\partial^2$:
     \begin{align*}
-      \sum_{\delta\in K_{k-1}} \partial_{\sigma,\delta}\circ \partial_{\delta,\tau} = \left(\sum_{\delta\in K_{k-1}}[\sigma:\delta][\delta:\tau]\right)\mathscr C(\tau\geq\sigma).
+      \sum_{\delta\in K_{d-1}} \partial_{\sigma,\delta}\circ \partial_{\delta,\tau} = \left(\sum_{\delta\in K_{d-1}}[\sigma:\delta][\delta:\tau]\right)\mathscr C(\tau\geq\sigma).
     \end{align*}
     Write $\tau = \left\lbrace{v_1,\ldots,v_n}\right\rbrace$. And assume
     $\sigma = \tau \setminus \left\lbrace{v_i,v_j}\right\rbrace$ with $i<j$.
@@ -106,22 +142,22 @@ this does indeed deserve to be called a boundary map:
   The \emph{cosheaf homology of $K$ with $\mathscr C$-coefficients} is the
   homology of the complex
   \begin{align*}
-    \cdots\xlongrightarrow{\partial} C_k(K;\mathscr C)
-    \xlongrightarrow{\partial}C_{k-1}(K;\mathscr C)
+    \cdots\xlongrightarrow{\partial} C_d(K;\mathscr C)
+    \xlongrightarrow{\partial}C_{d-1}(K;\mathscr C)
     \xlongrightarrow{\partial}\cdots.
   \end{align*}
   Explicitly,
   \begin{align*}
-    H_k(K;\mathscr C) = \frac{\ker(C_k(K;\mathscr C) \to C_{k-1}(K;\mathscr C))}{\im(C_{k+1}(K;\mathscr C) \to C_k(K;\mathscr C))}
+    H_d(K;\mathscr C) = \frac{\ker(C_d(K;\mathscr C) \to C_{d-1}(K;\mathscr C))}{\im(C_{d+1}(K;\mathscr C) \to C_d(K;\mathscr C))}
   \end{align*}
 \end{definition}
 
 Once again this is a direct generalisation of singular homology as
-$\partial : C_k(K;\underline{\mathbb{R}}_K)
-\to C_{k-1}(K;\underline{\mathbb R}_K)$ agrees with the usual
-boundary map $\partial : C_k(K)\to C_{k-1}(K)$ and thus
+$\partial : C_d(K;\underline{\mathbb{R}}_K)
+\to C_{d-1}(K;\underline{\mathbb R}_K)$ agrees with the usual
+boundary map $\partial : C_d(K)\to C_{d-1}(K)$ and thus
 \begin{align*}
-  H_k(K;\underline{\mathbb{R}}_K) = H_k(K).
+  H_d(K;\underline{\mathbb{R}}_K) = H_d(K).
 \end{align*}
 
 We finish this section by considering some examples:
@@ -136,7 +172,7 @@ We finish this section by considering some examples:
     \end{tikzcd}
   \end{equation*}
   Note that this is contractible, hence $H_0(K)=\mathbb{R}$ and
-  $H_i(K) = 0$ for $i>0$.
+  $H_d(K) = 0$ for $d>0$.
   Define the chosheaf $\mathscr C\in\Cosh(K)$ by
   \begin{equation*}
     % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhiYiBSIl0sWzQsMCwiMCJdLFsyLDAsIlxcbWF0aGJiIFJeMiJdLFsyLDAsIih4LHkpXFxtYXBzdG8geCIsMl0sWzIsMV1d
@@ -148,8 +184,8 @@ We finish this section by considering some examples:
   \end{equation*}
   It is then straightforward to calculate the homologies
   $H_0(K;\mathscr C)=0$ and $H_1(K;\mathscr C)=\mathbb{R}$.
-  Thus even though $K$ is contractible its higher homologies need
-  not be trivial!
+  Thus even though $K$ is contractible its higher homologies are not
+  trivial!
 \end{example}
 
 \begin{example}
@@ -166,8 +202,8 @@ We finish this section by considering some examples:
   \end{equation*}
   Note that the homology in the first dimension is $H_1(K) = \mathbb{R}$,
   i.e. non-trivial. However, if we consider
-  $\mathscr C=\underline{0}_K$ then $H_i(K;\underline{0}_K)=0$
-  for all $i$. This is an instance of a simplicial complex with non-trivial
+  $\mathscr C=\underline{0}_K$ then $H_d(K;\underline{0}_K)=0$
+  for all $d$. This is an instance of a simplicial complex with non-trivial
   $\mathbb{R}$-homology but trivial $\mathscr C$-homology.
 \end{example}
 
@@ -183,7 +219,8 @@ As cosheaves are functors, it is unsurprising that maps of cosheaves
 are natural transformations:
 
 \begin{definition}
-  A \emph{map of cosheaves} $\varphi:\mathscr C\to\mathscr D$ is
+  A \emph{map of cosheaves} $\varphi:\mathscr C\to\mathscr D$ on $K$
+  is
   just a natural transformation, i.e. it consists of maps
   $\varphi_\tau:\mathscr C(\tau)\to\mathscr D(\tau)$ for every simplex
   $\tau\in K$ such that, for all $\sigma\leq\tau$, the following commutes:
@@ -297,7 +334,7 @@ observation to generalise the notion of filtration.
 Let us now fix a map of cosheaves
 $\varphi : \mathscr C \to \mathscr D$ on $K$. We then have an induced
 linear map on $k$-chains
-$\varphi_* : C_k(K;\mathscr C) \to C_k(K;\mathscr D)$
+$\varphi_* : C_d(K;\mathscr C) \to C_d(K;\mathscr D)$
 whose components are $\varphi_\sigma : \mathscr C(\sigma) \to \mathscr D(\sigma)$.
 It is unsurprising that this is the component of a chain map:
 \begin{proposition}\label{thm:chain_map}
@@ -305,8 +342,8 @@ It is unsurprising that this is the component of a chain map:
   \begin{equation*}
     % https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX2soSztcXG1hdGhzY3IgQykiXSxbMiwwLCJDX3trKzF9KEs7XFxtYXRoc2NyIEMpIl0sWzAsMSwiQ19rKEs7XFxtYXRoc2NyIEQpIl0sWzIsMSwiQ197aysxfShLO1xcbWF0aHNjciBEKSJdLFswLDEsImQiXSxbMiwzLCJkIl0sWzAsMiwiXFxwaGlfKiIsMl0sWzEsMywiXFxwaGlfKiJdXQ==
     \begin{tikzcd}
-      {C_k(K;\mathscr C)} && {C_{k+1}(K;\mathscr C)} \\
-      {C_k(K;\mathscr D)} && {C_{k+1}(K;\mathscr D)}
+      {C_d(K;\mathscr C)} && {C_{d+1}(K;\mathscr C)} \\
+      {C_d(K;\mathscr D)} && {C_{d+1}(K;\mathscr D)}
       \arrow["\partial", from=1-1, to=1-3]
       \arrow["\partial", from=2-1, to=2-3]
       \arrow["{\varphi_*}"', from=1-1, to=2-1]
@@ -318,10 +355,10 @@ It is unsurprising that this is the component of a chain map:
     \begin{equation*}
       % https://q.uiver.app/#q=WzAsOCxbMCwwLCJcXGJpZ29wbHVzX3tcXGRpbSBcXHNpZ21hID0ga30gXFxtYXRoc2NyIEMoXFxzaWdtYSkiXSxbMywwLCJcXGJpZ29wbHVzX3tcXGRpbSBcXHRhdSA9IGstMX0gXFxtYXRoc2NyIEMoXFx0YXUpIl0sWzAsMywiXFxiaWdvcGx1c197XFxkaW0gXFxzaWdtYSA9IGt9IFxcbWF0aHNjciBEKFxcc2lnbWEpIl0sWzMsMywiXFxiaWdvcGx1c197XFxkaW0gXFx0YXUgPSBrLTF9IFxcbWF0aHNjciBEKFxcdGF1KSJdLFsxLDEsIlxcbWF0aHNjciBDKFxcc2lnbWEpIl0sWzEsMiwiXFxtYXRoc2NyIEQoXFxzaWdtYSkiXSxbMiwxLCJcXG1hdGhzY3IgQyhcXHRhdSkiXSxbMiwyLCJcXG1hdGhzY3IgRChcXHRhdSkiXSxbMCwxLCJkIl0sWzIsMywiZCJdLFswLDIsIlxccGhpXyoiLDJdLFsxLDMsIlxccGhpXyoiXSxbMyw3XSxbMiw1XSxbMCw0XSxbNCw1XSxbMSw2XSxbNiw3XSxbNSw3XSxbNCw2XV0=
       \begin{tikzcd}
-        {\bigoplus_{\sigma\in K_k} \mathscr C({\sigma})} &&& {\bigoplus_{\tau\in K_{k-1}} \mathscr C({\tau})} \\
+        {\bigoplus_{\sigma\in K_d} \mathscr C({\sigma})} &&& {\bigoplus_{\tau\in K_{d-1}} \mathscr C({\tau})} \\
                                                          & {\mathscr C({\sigma})} & {\mathscr C({\tau})} \\
                                                          & {\mathscr D(\sigma)} & {\mathscr D(\tau)} \\
-        {\bigoplus_{\sigma\in K_k} \mathscr D(\sigma)} &&& {\bigoplus_{\tau\in K_{k-1}} \mathscr D(\tau)}
+        {\bigoplus_{\sigma\in K_d} \mathscr D(\sigma)} &&& {\bigoplus_{\tau\in K_{d-1}} \mathscr D(\tau)}
         \arrow["\partial", from=1-1, to=1-4]
         \arrow["\partial", from=4-1, to=4-4]
         \arrow["{\varphi_*}"', from=1-1, to=4-1]
@@ -344,7 +381,7 @@ It is unsurprising that this is the component of a chain map:
 Thus $\varphi : \mathscr C \to \mathscr D$ induces a
 chain map $\varphi_* : C(K;\mathscr C)\to C(K;\mathscr D)$
 and therefore maps between homologies
-$\varphi_* : H_k(K;\mathscr C)\to H_k(K;\mathscr D)$.
+$\varphi_* : H_d(K;\mathscr C)\to H_d(K;\mathscr D)$.
 
 \begin{example}
   Consider the map $\underline{\mathbb{R}}_K\to\mathscr C$ in $\Cosh(S^1)$
@@ -375,7 +412,7 @@ $\varphi_* : H_k(K;\mathscr C)\to H_k(K;\mathscr D)$.
       \arrow["{(x,0,y)}", from=1-3, to=2-3]
     \end{tikzcd}
   \end{equation*}
-  Clearly homology is non-zero at $k=0$ only. We now see that
+  Clearly homology is non-zero at $d=0$ only. We now see that
   the induced map on homology is the unique map that makes the
   following commute:
   \begin{equation*}
@@ -559,16 +596,16 @@ arise as a filtration of the underlying complex.
 \end{example}
 
 Note that a filtration $\mathscr C^\bullet$ of a cosheaf
-induces a persistence module of homologies for every $k\geq 0$:
+induces a persistence module of homologies for every $d\geq 0$:
 \begin{align}\label{eq:cosheaf_persistence_module}
-  H_k(K;\mathscr C^0) \longinc
-  H_k(K;\mathscr C^1) \longinc
+  H_d(K;\mathscr C^0) \longinc
+  H_d(K;\mathscr C^1) \longinc
   \cdots \longinc
-  H_k(K;\mathscr C^n)
+  H_d(K;\mathscr C^n)
 \end{align}
 
-Now the $k$-th persistent homology of the filtration is just the
-homology of the persistence module corresponding to the $k$-th
+Now the $d$-th persistent homology of the filtration is just the
+homology of the persistence module corresponding to the $d$-th
 homology:
 \begin{definition}\label{def:persistent_homology}
   The \emph{persistent homology} of a simplicial complex $K$
@@ -576,10 +613,10 @@ homology:
   is the persistent homology of the persistence module
   (\ref{eq:cosheaf_persistence_module}), i.e.
   \begin{align*}
-    PH_{k,i\to j}(K;\mathscr C^\bullet) := \im\left(
-      H_k(K;\mathscr C^i) \longinc
+    PH_{d,i\to j}(K;\mathscr C^\bullet) := \im\left(
+      H_d(K;\mathscr C^i) \longinc
       \cdots \longinc
-      H_k(K;\mathscr C^j)
+      H_d(K;\mathscr C^j)
     \right).
   \end{align*}
 \end{definition}
@@ -843,9 +880,11 @@ and non-examples.
 Recall also that the critical points of a matching are those simplices
 that do not show up in any of the pairs. That is,
 \begin{align*}
-  C(\Sigma) = K_0 \setminus \bigcup_{\sigma\triangleleft\tau\in\Sigma} \left\lbrace{\sigma,\tau}\right\rbrace
+  \Sigma(K) = K \setminus \bigcup_{\sigma\triangleleft\tau\in\Sigma} \left\lbrace{\sigma,\tau}\right\rbrace
 \end{align*}
-Such simplices are important for homology with field coefficients
+This notation extends to $\Sigma(K_d) := K_d \cap \Sigma(K)$.
+Critical simplices
+are important for homology with field coefficients
 because they give rise to a new chain complex whose homology agrees
 with the usual homology. In particular, this means that the computation
 of homology groups may be sped up by finding a good acyclic partial
@@ -855,24 +894,24 @@ We would like to take this idea and extend it to persistent homology with
 cosheaf filtration coefficients. That is, we wish to construct
 vector spaces $C^\Sigma_k(K;\mathscr C^i)$ and maps
 \begin{align*}
-  \partial^\Sigma_{k,i} : C^\Sigma_k(K;\mathscr C^i)\to C^\Sigma_{k-1}(K;\mathscr C^i)
+  \partial^\Sigma_{d,i} : C^\Sigma_d(K;\mathscr C^i)\to C^\Sigma_{d-1}(K;\mathscr C^i)
 \end{align*}
 whose persistent homologies
 \begin{align*}
-  PH^\Sigma_{k,i\to j}(K;\mathscr C^\bullet)
-  = \im(H^\Sigma_k(K;\mathscr C^i)\longinc\cdots\longinc H_k^\Sigma(K;\mathscr C^j))
+  PH^\Sigma_{d,i\to j}(K;\mathscr C^\bullet)
+  = \im(H^\Sigma_d(K;\mathscr C^i)\longinc\cdots\longinc H_d^\Sigma(K;\mathscr C^j))
 \end{align*}
 agree with those defined in \ref{def:persistent_homology}. Recalling that
 we may regard $\mathbb{R}$-homology as $\underline{\mathbb{R}}_K$-homology,
 we define the vector space of critical chains to be
 \begin{align*}
-  C_k^\Sigma(K;\mathscr C^i) := \bigoplus_{\sigma\in C(\Sigma)\cap K_k} \mathscr C^i(\sigma).
+  C_d^\Sigma(K;\mathscr C^i) := \bigoplus_{\sigma\in \Sigma(K_d)} \mathscr C^i(\sigma).
 \end{align*}
 
 \begin{definition}
-  The \emph{$(k,i)$-Morse boundary operator} is the linear map
+  The \emph{$(d,i)$-Morse boundary operator} is the linear map
   \begin{align*}
-    \partial_{k,i}^\Sigma : C_k^\Sigma(K;\mathscr C^i) \to C_{k-1}^\Sigma(K;\mathscr C^i)
+    \partial_{d,i}^\Sigma : C_d^\Sigma(K;\mathscr C^i) \to C_{d-1}^\Sigma(K;\mathscr C^i)
   \end{align*}
   whose $\mathscr C^i(\tau)\to\mathscr C^i(\sigma)$ component is
   \begin{align}\label{eq:morse_boundary_component}
@@ -894,17 +933,17 @@ that these boundary operators do indeed yield a chain complex.
     $\mathscr C^i(\tau)\to\mathscr C^i(\sigma)$ for $\dim\tau=\dim\sigma+2$.
     This must be of the form
     \begin{align*}
-      \sum_{\delta\in C(\Sigma)}
+      \sum_{\delta\in \Sigma(K)}
       \left(
         \partial_{\sigma,\delta} +
-        \sum_{\rho\in C(\Sigma)} (-1)^{|\rho|} \partial_{\sigma,\tau_\rho}\circ \partial_\rho \circ \partial_{\sigma_\rho,\delta}
+        \sum_{\rho\in \Sigma(K)} (-1)^{|\rho|} \partial_{\sigma,\tau_\rho}\circ \partial_\rho \circ \partial_{\sigma_\rho,\delta}
       \right) \circ
       \left(
         \partial_{\delta,\tau} +
-        \sum_{\rho\in C(\Sigma)} (-1)^{|\rho|} \partial_{\delta,\tau_\rho}\circ \partial_\rho \circ \partial_{\sigma_\rho,\tau}
+        \sum_{\rho\in \Sigma(K)} (-1)^{|\rho|} \partial_{\delta,\tau_\rho}\circ \partial_\rho \circ \partial_{\sigma_\rho,\tau}
       \right)\\
       =
-      \sum_{\delta\in C(\Sigma)}
+      \sum_{\delta\in \Sigma(K)}
       \left(
         \partial_{\sigma,\delta} - \partial_{\sigma,\tau_\rho}\circ \partial_\rho \circ \partial_{\sigma_\rho,\delta}
       \right) \circ
@@ -915,7 +954,7 @@ that these boundary operators do indeed yield a chain complex.
     By expecting dimensions we find that not both negative
     terms can be non-zero for any given $\delta$, hence we have
     \begin{align*}
-      \sum_{\delta\in C(\Sigma)}
+      \sum_{\delta\in \Sigma(K)}
       \left(
         \partial_{\sigma,\delta}\circ \partial_{\delta,\tau}
         - \partial_{\sigma,\tau_\rho}
@@ -928,17 +967,17 @@ that these boundary operators do indeed yield a chain complex.
         \circ \partial_{\sigma_\rho,\tau}
       \right)
     \end{align*}
-    Observing $C(\Sigma)=\left\lbrace{\sigma_\rho,\tau_\rho}\right\rbrace$ it is now straightforward to check that all terms cancel. By
+    Observing $\Sigma(K)=\left\lbrace{\sigma_\rho,\tau_\rho}\right\rbrace$ it is now straightforward to check that all terms cancel. By
     induction the claim follows for general $\Sigma$.
   \end{proof}
 \end{lemma}
 
 We are now justified in considering the Morse homology of
-$\mathscr C^\bullet$ and $\Sigma$. We write $H^\Sigma_k(K;\mathscr C^i)$
-for the $k$-th homology group of the complex
+$\mathscr C^\bullet$ and $\Sigma$. We write $H^\Sigma_d(K;\mathscr C^i)$
+for the $d$-th homology group of the complex
 \begin{align*}
-  \cdots\xlongrightarrow{\partial^\Sigma} C^\Sigma_k(K;\mathscr C^i)
-  \xlongrightarrow{\partial^\Sigma}C^\Sigma_{k-1}(K;\mathscr C^i)
+  \cdots\xlongrightarrow{\partial^\Sigma} C^\Sigma_d(K;\mathscr C^i)
+  \xlongrightarrow{\partial^\Sigma}C^\Sigma_{d-1}(K;\mathscr C^i)
   \xlongrightarrow{\partial^\Sigma}\cdots.
 \end{align*}
 
@@ -946,17 +985,17 @@ for the $k$-th homology group of the complex
 Now note that the inclusions $\mathscr C^i\hookrightarrow\mathscr C^{i+1}$
 induce maps
 \begin{align*}
-  C^\Sigma_k(K;\mathscr C^i) \longinc C^\Sigma_k(K;\mathscr C^{i+1}).
+  C^\Sigma_d(K;\mathscr C^i) \longinc C^\Sigma_d(K;\mathscr C^{i+1}).
 \end{align*}
 Once again we find that these are components of a chain map:
 
 \begin{lemma}
-  For all $k$ and $i$, the following commutes:
+  For all $d$ and $i$, the following commutes:
   \begin{equation*}
     % https://q.uiver.app/#q=WzAsNCxbMCwwLCJDXlxcU2lnbWFfayhLO1xcbWF0aHNjciBDXmkpIl0sWzIsMCwiQ15cXFNpZ21hX3trLTF9KEs7XFxtYXRoc2NyIENeaSkiXSxbMCwxLCJDXlxcU2lnbWFfayhLO1xcbWF0aHNjciBDXntpKzF9KSJdLFsyLDEsIkNeXFxTaWdtYV97ay0xfShLO1xcbWF0aHNjciBDXntpKzF9KSJdLFswLDEsIlxccGFydGlhbF5cXFNpZ21hIl0sWzAsMiwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMSwzLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsyLDMsIlxccGFydGlhbF5cXFNpZ21hIiwyXV0=
     \begin{tikzcd}
-      {C^\Sigma_k(K;\mathscr C^i)} && {C^\Sigma_{k-1}(K;\mathscr C^i)} \\
-      {C^\Sigma_k(K;\mathscr C^{i+1})} && {C^\Sigma_{k-1}(K;\mathscr C^{i+1})}
+      {C^\Sigma_d(K;\mathscr C^i)} && {C^\Sigma_{d-1}(K;\mathscr C^i)} \\
+      {C^\Sigma_d(K;\mathscr C^{i+1})} && {C^\Sigma_{d-1}(K;\mathscr C^{i+1})}
       \arrow["{\partial^\Sigma}", from=1-1, to=1-3]
       \arrow[hook, from=1-1, to=2-1]
       \arrow[hook, from=1-3, to=2-3]
@@ -971,23 +1010,23 @@ Once again we find that these are components of a chain map:
 \end{lemma}
 Thus we have inclusions of Morse homologies
 \begin{align*}
-  H^\Sigma_k(K;\mathscr C^i) \longinc H^\Sigma_k(K;\mathscr C^{i+1}).
+  H^\Sigma_d(K;\mathscr C^i) \longinc H^\Sigma_d(K;\mathscr C^{i+1}).
 \end{align*}
 Therefore, we have persistence modules of Morse homologies and hence
 may define the corresponding persistent Morse homologies:
 \begin{definition}
-  The \emph{$k$-th persistent homology of $\Sigma$ with $\mathscr C^\bullet$-coefficients} is
+  The \emph{$d$-th persistent homology of $\Sigma$ with $\mathscr C^\bullet$-coefficients} is
   \begin{align*}
-    PH^\Sigma_{k,i\to j}
+    PH^\Sigma_{d,i\to j}
     = \im\left({
-        H^\Sigma_k(K;\mathscr C^i) \longinc \cdots \longinc H^\Sigma_k(K;\mathscr C^j)
+        H^\Sigma_d(K;\mathscr C^i) \longinc \cdots \longinc H^\Sigma_d(K;\mathscr C^j)
     }\right)
   \end{align*}
 \end{definition}
 
 \begin{example}\label{ex:persistent_morse_homology}
   Let us now revisit \ref{ex:acyclic_partial_matching_s1}.
-  Note that $C(\Sigma)=\left\lbrace{\sigma_2,\tau_3}\right\rbrace$.
+  Note that $\Sigma(K)=\left\lbrace{\sigma_2,\tau_3}\right\rbrace$.
   Thus we have the chain groups
   $C^\Sigma_0(K;\mathscr C^i) = \mathscr C^i(\sigma_2)$
   and
@@ -1015,7 +1054,7 @@ and show that they are homotopic to the identity.
 
 Consider the linear maps $\phi_d : C_d(K;\mathscr C)\to C_d^\Sigma(K;\mathscr C)$ whose component $\mathscr C(\alpha)\to\mathscr C(\omega)$ is the identity whenever $\alpha=\omega$ and
 \begin{align*}
-  \restrict{\phi_d}{\alpha,\omega} := \sum_{\rho\in P(\Sigma),\sigma_\rho = \alpha} (-1)^{|\rho|}\partial_{\omega,\tau_\rho}\circ\partial_\rho
+  \restrict{\phi_d}{\omega,\alpha} := \sum_{\rho\in P(\Sigma),\sigma_\rho = \alpha} (-1)^{|\rho|}\partial_{\omega,\tau_\rho}\circ\partial_\rho
 \end{align*}
 otherwise.
 
@@ -1025,12 +1064,12 @@ otherwise.
     We need to show $\partial^\Sigma \circ \phi_d = \phi_{d-1} \circ
     \partial$. Once again we consider $\Sigma=\left\lbrace{\sigma_\rho\triangleleft\tau_\rho}\right\rbrace$ and deduce the
     claim by induction.
-    If $\alpha\not\in C(\Sigma)$ then
+    If $\alpha\not\in \Sigma(K)$ then
     \begin{align*}
-      \restrict{(\partial^\Sigma\circ\phi_d)}{\alpha,\omega'}
-      &= \sum_{\omega\in C(\Sigma)\cap K_d} \restrict{\partial^\Sigma}{\omega,\omega'}\circ \restrict{\phi_d}{\alpha,\omega}\\
+      \restrict{(\partial^\Sigma\circ\phi_d)}{\omega',\alpha}
+      &= \sum_{\omega\in \Sigma(K_d)} \restrict{\partial^\Sigma}{\omega',\omega}\circ \restrict{\phi_d}{\omega,\alpha}\\
       &=
-      \sum_{\omega\in C(\Sigma)\cap K_d}
+      \sum_{\omega\in \Sigma(K_d)}
       \left({
           {\partial}_{\omega',\omega}
           + \sum_{\rho\in P(\Sigma)} (-1)^{|\rho|} \partial_{\omega',\tau_\rho} \circ \partial_\rho \circ \partial_{\sigma_\rho,\omega}
@@ -1042,7 +1081,7 @@ otherwise.
     \end{align*}
     Using $P(\Sigma) = \left\lbrace{\sigma_\rho\triangleleft\tau_\rho}\right\rbrace$, we simplify this to
     \begin{align*}
-      \sum_{\omega\in C(\Sigma)\cap K_d}
+      \sum_{\omega\in \Sigma(K_d)}
       \left({
           {\partial}_{\omega',\omega}
           - \partial_{\omega',\tau_\rho} \circ \partial^{-1}_{\sigma_\rho,\tau_\rho} \circ \partial_{\sigma_\rho,\omega}
@@ -1056,7 +1095,7 @@ otherwise.
     $\dim\omega = \dim\sigma_\rho$. Hence
     $\partial_{\sigma_\rho,\omega}=0$ so we obtain
     \begin{align*}
-      \sum_{\omega\in C(\Sigma)\cap K_d}
+      \sum_{\omega\in \Sigma(K_d)}
       - {\partial}_{\omega',\omega}
       \circ
       \partial_{\omega,\tau_\rho}\circ{\partial}^{-1}_{\sigma_\rho,\tau_\rho}
@@ -1073,19 +1112,19 @@ otherwise.
       = \partial_{\omega',\alpha}
     \end{align*}
     when $\alpha=\sigma_\rho$. If $\alpha=\tau_\rho$ we simply
-    have the zero map. For $\alpha\in C(\Sigma)$, we must have
-    $\restrict{\phi_d}{\alpha,\omega}=0$ whenever $\alpha\neq\omega$
+    have the zero map. For $\alpha\in \Sigma(K)$, we must have
+    $\restrict{\phi_d}{\omega,\alpha}=0$ whenever $\alpha\neq\omega$
     so
     \begin{align*}
-      \restrict{(\partial^\Sigma\circ\phi_d)}{\alpha,\omega'}
-      = \restrict{\partial^\Sigma}{\alpha,\omega'}
+      \restrict{(\partial^\Sigma\circ\phi_d)}{\omega',\alpha}
+      = \restrict{\partial^\Sigma}{\omega',\alpha}
       = {\partial}_{\omega',\alpha}
       - \partial_{\omega',\tau_\rho} \circ \partial^{-1}_{\sigma_\rho,\tau_\rho} \circ \partial_{\sigma_\rho,\alpha}
       .
     \end{align*}
     We summarise
     \begin{align}\label{eq:phi_chain_cases}
-      \restrict{(\partial^\Sigma\circ\phi_d)}{\alpha,\omega'}
+      \restrict{(\partial^\Sigma\circ\phi_d)}{\omega',\alpha}
       = \begin{cases}
         \partial_{\omega',\alpha} & \alpha=\sigma_\rho, \\
         0 & \alpha=\tau_\rho, \\
@@ -1096,8 +1135,8 @@ otherwise.
 
     On the other side we have
     \begin{align*}
-      \restrict{(\phi_{d-1}\circ \partial)}{\alpha,\omega'}
-      &= \sum_{\alpha'\in K_{d-1}} \restrict{\phi_{d-1}}{\alpha',\omega'}\circ \restrict{\partial}{\alpha,\alpha'}\\
+      \restrict{(\phi_{d-1}\circ \partial)}{\omega',\alpha}
+      &= \sum_{\alpha'\in K_{d-1}} \restrict{\phi_{d-1}}{\omega',\alpha'}\circ \restrict{\partial}{\alpha',\alpha}\\
       &=
       \partial_{\omega',\alpha}
       + \sum_{\alpha'\neq\omega'\in K_{d-1}}
@@ -1108,7 +1147,7 @@ otherwise.
     Using $\rho = \sigma_\rho\triangleleft\tau_\rho$ this simplifies
     to
     \begin{align*}
-      \restrict{(\phi_{d-1}\circ \partial)}{\alpha,\omega'}
+      \restrict{(\phi_{d-1}\circ \partial)}{\omega',\alpha}
       = \partial_{\omega',\alpha} - \partial_{\omega',\tau_\rho}\circ\partial_{\sigma_\rho,\tau_\rho}^{-1}\circ\partial_{\sigma_\rho,\alpha}.
     \end{align*}
     This is easily verified to equal (\ref{eq:phi_chain_cases})
@@ -1122,7 +1161,7 @@ $\psi_d : C^\Sigma_d(K;\mathscr C)\to C_d(K;\mathscr C)$
 whose components $\mathscr C(\omega)\to\mathscr C(\alpha)$
 are also the identity if $\alpha=\omega$ and
 \begin{align*}
-  \restrict{\psi_d}{\omega,\alpha}:=\sum_{\rho\in P(\Sigma),\tau_\rho=\alpha} (-1)^{|\rho|}\partial_\rho \circ \partial_{\sigma_\rho,\omega}
+  \restrict{\psi_d}{\alpha,\omega}:=\sum_{\rho\in P(\Sigma),\tau_\rho=\alpha} (-1)^{|\rho|}\partial_\rho \circ \partial_{\sigma_\rho,\omega}
 \end{align*}
 otherwise.
 \begin{lemma}
@@ -1131,8 +1170,8 @@ otherwise.
     In analogy to $\phi_d$ we assume
     $\Sigma = \left\lbrace{\sigma_\rho\triangleleft\tau_\rho}\right\rbrace$ and compute both sides of the equation $\partial\circ\psi = \psi_{d-1}\circ\partial^\Sigma$. Thus we find
     \begin{align}\label{eq:psi_chain_case}
-      \restrict{(\partial\circ\psi_d)}{\omega,\alpha'}
-      = \sum_{\alpha\in K_d} \restrict{\partial}{\alpha,\alpha'} \circ \restrict{\psi_d}{\omega,\alpha}
+      \restrict{(\partial\circ\psi_d)}{\alpha,\omega}
+      = \sum_{\alpha\in K_d} \restrict{\partial}{\alpha',\alpha} \circ \restrict{\psi_d}{\alpha,\omega}
       = \partial_{\alpha',\omega}
       -
       {
@@ -1142,22 +1181,22 @@ otherwise.
       }.
     \end{align}
     On the other side we once again need to consider some
-    cases. If $\alpha'\in C(\Sigma)$ then
+    cases. If $\alpha'\in \Sigma(K)$ then
     \begin{align*}
-      \restrict{(\psi_{d-1} \circ \partial^\Sigma)}{\omega,\alpha'}
-      &= \sum_{\omega'\in C(\Sigma)\cap K_{d-1}}
-      \restrict{\psi_{d-1}}{\omega',\alpha'}\circ\restrict{\partial^\Sigma}{\omega,\omega'} \\
+      \restrict{(\psi_{d-1} \circ \partial^\Sigma)}{\alpha,\omega}
+      &= \sum_{\omega'\in \Sigma(K_{d-1})}
+      \restrict{\psi_{d-1}}{\alpha',\omega'}\circ\restrict{\partial^\Sigma}{\omega',\omega} \\
       &= \partial_{\alpha',\omega}
-      + \sum_{\alpha'\neq\omega'\in C(\Sigma)\cap K_{d-1}}
-      \restrict{\psi_{d-1}}{\omega',\alpha'}\circ\restrict{\partial^\Sigma}{\omega,\omega'} \\
+      + \sum_{\alpha'\neq\omega'\in \Sigma(K_{d-1})}
+      \restrict{\psi_{d-1}}{\alpha',\omega'}\circ\restrict{\partial^\Sigma}{\omega',\omega} \\
       &= \partial_{\alpha',\omega}.
     \end{align*}
     If $\alpha'=\tau_\rho$ we find
     \begin{align*}
-      \restrict{(\psi_{d-1} \circ \partial^\Sigma)}{\omega,\alpha'}
-      &= \sum_{\omega'\in C(\Sigma)\cap K_{d-1}}
-      \restrict{\psi_{d-1}}{\omega',\alpha'}\circ\restrict{\partial^\Sigma}{\omega,\omega'} \\
-      &= \sum_{\omega'\in C(\Sigma)\cap K_{d-1}}
+      \restrict{(\psi_{d-1} \circ \partial^\Sigma)}{\alpha',\omega}
+      &= \sum_{\omega'\in \Sigma(K_{d-1})}
+      \restrict{\psi_{d-1}}{\alpha',\omega'}\circ\restrict{\partial^\Sigma}{\omega',\omega} \\
+      &= \sum_{\omega'\in \Sigma(K_{d-1})}
       (\partial^{-1}_{\sigma_\rho,\alpha'}\circ\partial_{\sigma_\rho,\omega'})
       \circ
       \partial_{\omega',\omega}\\
@@ -1165,9 +1204,9 @@ otherwise.
     \end{align*}
     Finally, if $\alpha'=\sigma_\rho$ then
     \begin{align*}
-      \restrict{(\psi_{d-1} \circ \partial^\Sigma)}{\omega,\alpha'}
-      = \sum_{\omega'\in C(\Sigma)\cap K_{d-1}}
-      \restrict{\psi_{d-1}}{\omega',\alpha'}\circ\restrict{\partial^\Sigma}{\omega,\omega'} = 0.
+      \restrict{(\psi_{d-1} \circ \partial^\Sigma)}{\alpha',\omega}
+      = \sum_{\omega'\in \Sigma(K_{d-1})}
+      \restrict{\psi_{d-1}}{\alpha',\omega'}\circ\restrict{\partial^\Sigma}{\omega',\omega} = 0.
     \end{align*}
     Once again it is straightforward to verify that
     this agrees with (\ref{eq:psi_chain_case}) and hence the
@@ -1183,19 +1222,19 @@ otherwise.
     We have $\restrict{\phi_d\circ\psi_d}{\omega,\omega}=\identity$
     and, for $\omega\neq\omega'$,
     \begin{align*}
-      \restrict{(\phi_d \circ \psi_d)}{\omega,\omega'}
-      &= \restrict{\phi_d}{\omega,\omega'}\circ\restrict{\psi_d}{\omega',\omega'}+\restrict{\phi_d}{\omega,\omega}\circ\restrict{\psi_d}{\omega,\omega'}
+      \restrict{(\phi_d \circ \psi_d)}{\omega',\omega}
+      &= \restrict{\phi_d}{\omega',\omega}\circ\restrict{\psi_d}{\omega,\omega}+\restrict{\phi_d}{\omega',\omega'}\circ\restrict{\psi_d}{\omega',\omega}
     \end{align*}
     where we used the fact that we cannot have $\tau_\rho \triangleleft \alpha \triangleleft \sigma_{\rho'}$. Hence
     \begin{align*}
-      \restrict{(\phi_d \circ \psi_d-\identity)}{\omega,\omega'}
+      \restrict{(\phi_d \circ \psi_d-\identity)}{\omega',\omega}
       =
       \sum_{\rho\in P(\Sigma),\sigma_\rho = \omega} \partial_{\omega',\tau_\rho}\circ\partial_\rho
       +
       \sum_{\rho\in P(\Sigma),\tau_\rho=\omega'} \partial_\rho \circ \partial_{\sigma_\rho,\omega}
     \end{align*}
-    for all $\omega,\omega'\in C(\Sigma)$. But now note if
-    $\omega\in C(\Sigma)$ then $\sigma_\rho\neq\omega$ for all
+    for all $\omega,\omega'\in \Sigma(K)$. But now note if
+    $\omega\in \Sigma(K)$ then $\sigma_\rho\neq\omega$ for all
     $\rho\in P(\Sigma)$ and similarly for the sum on the right.
     Thus $\phi_d\circ\psi_d-\identity = 0$.
 
@@ -1203,15 +1242,15 @@ otherwise.
     \triangleleft\tau_\rho}\right\rbrace$ and proceed by induction.
     We see that
     \begin{align*}
-      \restrict{(\psi_d\circ\phi_d)}{\alpha,\alpha'}
-      = \sum_{\omega\in C(\Sigma)\cap K_d}
-      \restrict{\psi_d}{\omega,\alpha'}\circ\restrict{\phi_d}{\alpha,\omega}
+      \restrict{(\psi_d\circ\phi_d)}{\alpha',\alpha}
+      = \sum_{\omega\in \Sigma(K_d)}
+      \restrict{\psi_d}{\alpha',\omega}\circ\restrict{\phi_d}{\omega,\alpha}
     \end{align*}
     is zero unless $\alpha=\alpha'$, $\alpha\neq\tau_\rho=\alpha'$,
     or $\alpha=\sigma_\rho\neq\alpha'$. Computation in each
     case is straightforward and we find
     \begin{align*}
-      \restrict{(\psi_d\circ\phi_d)}{\alpha,\alpha'}
+      \restrict{(\psi_d\circ\phi_d)}{\alpha',\alpha}
       = \begin{cases}
         \identity & \alpha=\alpha', \\
         -\partial_{\alpha',\tau_\rho}\circ\partial^{-1}_{\alpha,\tau_\rho}
@@ -1223,7 +1262,7 @@ otherwise.
     \end{align*}
     We define $\theta_d : C_d(K;\mathscr C)\to C_{d+1}(K;\mathscr C)$ by
     \begin{align*}
-      \restrict{\theta_d}{\alpha,\alpha'} = \begin{cases}
+      \restrict{\theta_d}{\alpha',\alpha} = \begin{cases}
         {\partial}^{-1}_{\sigma_\rho,\tau_\rho} & \alpha=\sigma_\rho,\alpha'=\tau_\rho \\
         0 &\text{otherwise}
       \end{cases}
@@ -1236,7 +1275,7 @@ otherwise.
     case $|\Sigma|=1$. While induction still works, we remind
     the reader that, analogous to the non-cosheaf case,
     this depends on acylicity of $\Sigma$. This is because
-    a boundary component $\restrict{\partial^\Sigma}{\sigma,\tau}$
+    a boundary component $\restrict{\partial^\Sigma}{\tau,\sigma}$
     does not depend on any other pair $\sigma'\triangleleft\tau'$.
     Hence we may add pairs to $\Sigma$ one by one, in any
     order.
@@ -1257,8 +1296,8 @@ immediate that the homologies agree.
 
 While in the elementary case without cosheaves this was the
 end of the story, we still require that the maps
-$H_k(K;\mathscr C^i)\hookrightarrow H_k(K;\mathscr C^{i+1})$ and
-$H^\Sigma_k(K;\mathscr C^i)\hookrightarrow H^\Sigma_k(K;\mathscr C^{i+1})$
+$H_d(K;\mathscr C^i)\hookrightarrow H_d(K;\mathscr C^{i+1})$ and
+$H^\Sigma_d(K;\mathscr C^i)\hookrightarrow H^\Sigma_d(K;\mathscr C^{i+1})$
 agree. This will then apply that the persistent homologies
 are the same.
 
@@ -1300,13 +1339,62 @@ direction and the claim would have remained true. However, only
 one such homotopy is required to establish our main theorem:
 
 \begin{theorem}
-  $PH^\Sigma_{k,i\to j}(K;\mathscr C^\bullet) = PH_{k,i\to j}(K;\mathscr C^\bullet)$
+  $PH^\Sigma_{d,i\to j}(K;\mathscr C^\bullet) = PH_{d,i\to j}(K;\mathscr C^\bullet)$
 \end{theorem}
 
-\section{Linear duality}
+\section{Duality between sheaves and cosheaves}
 
-\todo{write about the equivalence $\op{\Sh(K)}\cong\Cosh(K)$, if
-there is time}
+We have taken great care to introduce and study cosheaves
+on finite dimensional vector spaces to generalise persistent
+homology. This raises two questions: Could we just have used
+sheaves instead? What about infinite dimensional vector spaces?
+
+To answer the first question, it is possible to define sheaf
+cohomology in quite the same way to what we have done in this
+report. For more general settings, this is indeed the usual
+approach. It is then also possible to obtain a notion of
+cohomology with values in a sheaf by dualising in the usual way.
+
+Morover, for sheaves and cosheaves taking values in finite
+dimensional vector spaces it truly does not matter which
+one we deal with:
+
+\begin{theorem}[{\cite[Definition 7.11]{curry2014}}]
+  For every field $k$ and every simplicial complex $K$, there is a
+  contravariant equivalence of categories
+  \begin{align*}
+    \hat V: \Sh(K;\FVect_k)^{\text{op}} \cong \Cosh(K;\FVect_k)
+  \end{align*}
+  between the categories of sheaves and cosheaves of finite
+  dimensional vector spaces over $k$ on $K$, respectively.,
+\end{theorem}
+
+Moreover, this equivalence plays nicely with homology and
+cohomology:
+
+\begin{lemma}[{\cite[Lemma 7.12]{curry2014}}]
+  For all $\mathscr F\in\Sh(K;\FVect_k)$,
+  \begin{align*}
+    H_\bullet(K; \hat V(\mathscr F)) \cong H^\bullet(K;\mathscr F).
+  \end{align*}
+\end{lemma}
+
+Note that this duality has some significant limitations: It only
+works on simplicial complexes which correspond to a very restricted
+class of topological spaces and we only allow values to be
+finite dimensional vector spaces.
+The problem with generalising this duality to all topological
+spaces lies in the fact while there is a canonical way to turn
+a general presheaf into a sheaf, called sheafification,
+such a process does, in general, not exist for precosheaves
+and cosheaves. Unfortunately, sheafification is used to define
+sheaf cohomology and hence general cosheaf homology seems
+unfeasible. \cite{kishimoto2022}
+
+Moreover, the categories of sheaves and cosheaves are not equivalent
+if we allow values to be general vector spaces. This however
+should hardly be a problem in a computational setting.
+
 
 \printbibliography
 

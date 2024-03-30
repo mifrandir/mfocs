@@ -41,7 +41,7 @@ additional structure:
 \begin{definition}
   Let $\Gamma$ be a monoid.
   A ring $S$ is $\Gamma$-graded if there exists a decomposition
-  $S = \bigoplus_{d\in M} S_d$
+  $S = \bigoplus_{d\in \Gamma} S_d$
   such that $S_d S_{d'} \subseteq S_{d+d'}$.
   A map of rings $\phi : S\to S'$ is graded if it
   respects the grading, i.e. $\phi(S_d) \subseteq S'_d$.
@@ -56,6 +56,13 @@ we will simply say graded.
   homogeneous polynomials of degree $d$ and the inclusion
   $R[X_1,\ldots,X_n] \hookrightarrow R[X_1,\ldots,X_{n+1}]$
   is a map of graded rings.
+\end{example}
+
+\begin{example}
+  If we have graded rings $S$ and $S'$ then $S\otimes S'$ has an
+  obvious grading with $\deg (f \otimes g) = \deg f + \deg g$.
+  We obtain similar gradings for general tensor products
+  $S\otimes_R S'$.
 \end{example}
 
 In light of the motivating example, we call an element
@@ -196,7 +203,7 @@ $S = R[x_0,\ldots,x_n]$ and $A=(x_i)$. We then have
 \begin{align*}
   S_{(x_i)} = \left\lbrace{f / x_i^d : f\in R[x_0,\ldots,x_n]_d}\right\rbrace.
 \end{align*}
-Hence we may think of $S_{(x_i)}$ as
+Hence we may think of $S_{(x_i)}$ as homogeneous
 polynomials in $R[x_1/x_i,\ldots,x_n/x_i]$.
 
 It turns out that this notion of localisation is precisely what is
@@ -423,13 +430,13 @@ this fails spectacularly:
 
 Fortunately, it is possible to work around the problem in
 \ref{ex:no_induced_map}. The key idea is to restrict the
-map induced by $\phi : R\to R'$ to an open subscheme
+map induced by $\phi : S\to S'$ to an open subscheme
 \begin{align*}
   G(\phi)
   = \bigcup_{f \in R_{d\geq 1}} D(\phi(f))
   = \left\lbrace{q \in \Proj S' : S_+ \not\subseteq {\phi}^{-1}(q) }\right\rbrace.
 \end{align*}
-One may then define $\Proj \phi : G(\phi) \to \Proj S$ on
+One may then define $\Proj \phi : G(\phi) \subseteq\Proj S' \to \Proj S$ on
 $D_+(\phi(f))$ by $p\mapsto {\phi}^{-1}p$ and
 $g/f^d \mapsto \phi(g)/\phi(f)^d$. See \cite[p. 371]{gortz2010} or
 \cite[p. 139]{ellingsrud2023} for details.
@@ -520,9 +527,9 @@ is straightforward to check.
 \subsection{Over graded algebras}
 
 We are going to be particularly interested in the case
-$S = k[x_0,\ldots,x_n]$. Noting that such $S$ have a $k$-algebra
-structure, we are interested in projective schemes $\Proj S$
-where $S$ is an algebra over a ring $R$.
+$S = k[x_0,\ldots,x_n]$ for fields $k$. Noting that such $S$
+have a $k$-algebra structure, it is worth investigating projective
+schemes $\Proj S$ where $S$ is an algebra over a ring $R$.
 
 Fix a graded $R$-algebra $S$. We immediately
 see that the map $R\to S$ induces a map $\Spec S\to\Spec R$ and
@@ -594,9 +601,8 @@ This comes down to the following:
     is locally of finite type. In particular, we have the open affine
     cover by $D_+(f)$ and $\mathcal O(D_+(f)) = S_{(f)}$.
 
-    Note that there is an isomorphism $S_f \cong S[x]/(xf - 1)$,
-    e.g. constructed in the answer of \cite{hm2020}.
-    Thus $S_f$ is a finitely generated $S$ algebra. One may
+    Note that there is an isomorphism $S_f \cong S[x]/(xf - 1)$.
+    Thus $S_f$ is a finitely generated $S$-algebra. One may
     now consider the maps
     \begin{align*}
       R\longrightarrow S
@@ -613,7 +619,7 @@ This comes down to the following:
 \subsection{Noetherianitude}
 
 Finally, let us study when $\Proj S$ is Noetherian. It is not
-difficult that $S$ being Noetherian will certainly do
+difficult to see that $S$ being Noetherian will certainly do
 the trick:
 
 \begin{proposition}
@@ -718,17 +724,95 @@ We ought to verify that both notions agree.
   \end{proof}
 \end{lemma}
 
+\subsection{Over general rings}
+
 More generally, we may define projective space over any ring and
 indeed any field. This is achieved as usual through base change.
 
 \begin{definition}
-  Let $n\geq 0$ and $T$ a scheme. Then $n$-dimensional
-  \emph{projective space over $T$} is the base change
+  Then $n$-dimensional \emph{projective space over $T$} is the
+  base change
   \begin{align*}
     \projective{n}{T} := (\projective{n}{})_T = \projective{n}{}\times T.
   \end{align*}
-  If $T=\Spec R$ we write $\projective{n}{R}=\projective{n}{T}$.
+  Here the product on the right is the fibre product over
+  $\Spec\mathbb{Z}$. We simplify notation by writing
+  $\projective{n}{R}:=\projective{n}{\Spec R}$ for any ring $R$.
 \end{definition}
+
+One may think that a more intuitive definition of
+$\projective{n}{S}$ would be $\Proj S[X_0,\ldots,X_n]$. Indeed,
+some authors adopt this. Let us make sure that both definitions
+are equivalent:
+
+\begin{lemma}
+  Let $S$ be a graded ring. Every map of rings $S_0\to R$
+  induces a canonical isomorphism
+  \begin{align*}
+    \Proj S\times_{S_0} \Spec R \cong \Proj S\otimes_{S_0} R.
+  \end{align*}
+  \begin{proof}
+    Following \cite[Proposition 9.22]{ellingsrud2023}. Observe
+    the identity $x/f^d\otimes g = (x\otimes g)/(f\otimes 1)^d$
+    in $S_f\otimes_{S_0} R$. This gives us a canonical isomorphism
+    \begin{align}\label{eq:base_change_ring_iso}
+      S_f\otimes_{S_0} R \cong (S\otimes_{S_0} R)_{f\otimes 1}.
+    \end{align}
+    that commutes with the localisations:
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsMyxbMCwxLCJTX2ZcXG90aW1lc197U18wfSBSIl0sWzIsMSwiKFNcXG90aW1lc197U18wfSBSKV97Zlxcb3RpbWVzIDF9Il0sWzEsMCwiU1xcb3RpbWVzX3tTXzB9IFIiXSxbMiwwXSxbMiwxXSxbMCwxLCJcXGNvbmciXV0=
+      \begin{tikzcd}
+  & {S\otimes_{S_0} R} \\
+        {S_f\otimes_{S_0} R} && {(S\otimes_{S_0} R)_{f\otimes 1}}
+        \arrow[from=1-2, to=2-1]
+        \arrow[from=1-2, to=2-3]
+        \arrow["\cong", from=2-1, to=2-3]
+      \end{tikzcd}
+    \end{equation*}
+    Further, this isomorphism restricts to homogeneous elements of
+    degree zero. Thus we have an isomorphism of rings
+    \begin{align*}
+      (S_f\otimes_{S_0} R)_0 \cong ((S\otimes_{S_0} R)_{f\otimes 1})_0
+    \end{align*}
+    which yields an isomorphism of schemes
+    \begin{align}\label{eq:base_change_scheme_iso}
+      D_+(f) \times_{S_0} \Spec R \cong D_+(f\otimes 1).
+    \end{align}
+    Here the left-hand side forms an open cover of
+    $\Proj S\times_{S_0}\Spec B$. Now
+    $(S\otimes_{S_0} R)_+ = S_+\otimes_{S_0} R$ is generated
+    by $f\otimes 1$ for $f\in S_+$. This tells us that the
+    $D_+(f\otimes 1)$ form an affine open cover of
+    $\Proj S\otimes_{S_0} R$. We now note that the
+    diagram
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsNSxbMCwxLCJTX2ZcXG90aW1lc197U18wfSBSIl0sWzIsMSwiKFNcXG90aW1lc197U18wfSBSKV97Zlxcb3RpbWVzIDF9Il0sWzEsMCwiU1xcb3RpbWVzX3tTXzB9IFIiXSxbMCwyLCJTX3tmZid9XFxvdGltZXNfe1NfMH0gUiJdLFsyLDIsIihTXFxvdGltZXNfe1NfMH0gUilfeyhmZidcXG90aW1lcyAxKX0iXSxbMiwwXSxbMiwxXSxbMCwxLCJcXGNvbmciXSxbMyw0LCJcXGNvbmciXSxbMSw0XSxbMCwzXV0=
+      \begin{tikzcd}
+  & {S\otimes_{S_0} R} \\
+        {S_f\otimes_{S_0} R} && {(S\otimes_{S_0} R)_{f\otimes 1}} \\
+        {S_{ff'}\otimes_{S_0} R} && {(S\otimes_{S_0} R)_{(ff'\otimes 1)}}
+        \arrow[from=1-2, to=2-1]
+        \arrow[from=1-2, to=2-3]
+        \arrow["\cong", from=2-1, to=2-3]
+        \arrow["\cong", from=3-1, to=3-3]
+        \arrow[from=2-3, to=3-3]
+        \arrow[from=2-1, to=3-1]
+      \end{tikzcd}
+    \end{equation*}
+    commutes. Thus (\ref{eq:base_change_scheme_iso}) must agree
+    on intersections $D_+(f)\cap D_+(f')\cong D_+(ff')$ and hence
+    yields the required global isomorphism.
+  \end{proof}
+\end{lemma}
+
+\begin{corollary}
+  $\projective{n}{R} \cong \Proj R[X_0,\ldots,X_n]$.
+  \begin{proof}
+    $\projective{n}{R} = \Proj\mathbb{Z}[X_0,\ldots,X_n]\times\Spec R
+    \cong\Proj\mathbb{Z}[X_0,\ldots,X_n]\otimes R
+    = \Proj R[X_0,\ldots,X_n]$.
+  \end{proof}
+\end{corollary}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Homogeneous coordinates}
@@ -854,7 +938,7 @@ are going to make the proof of properness quite elegant.
 We could have taken the more general approach of
 \cite[\href{https://stacks.math.columbia.edu/tag/01MF}{Tag 01MF}]{stacks-project} but this is more cumbersome. Of course the elegance
 of the presented proof relies on homogeneous coordinates whose
-introduction requires work. However, homogeneous coordinates a
+introduction requires work. However, homogeneous coordinates are a
 useful tool in and of themselves and hence worth introducing.
 
 \subsection{Integrality}
@@ -864,64 +948,52 @@ projective space is a variety which, by the previous section,
 is complete. The key property that we are missing is integrality.
 We are going to show that $\projective{n}{k}$ is reduced and irreducible.
 
-
-Fix $k$ and $n$. Now observe
-that the inclusion
-$\affine{n}{}\cong D_+(x_i) \hookrightarrow \projective{n}{}$
-induces an inclusion
-\begin{align*}
-  \affine{n}{}\times\Spec k \hookrightarrow \projective{n}{k}
-\end{align*}
-under base change. Now
-$\affine{n}{}\times\Spec k \cong \Spec k[x_1,\ldots,x_n]$
-so we obtain a cover of affine opens. It is now not difficult to
-compute the transition maps and use the gluing of schemes
-to conclude $\projective{n}{k}=\Proj k[x_0,\ldots,x_n]$,
-which is what some authors use as the definition.
-
-It is then rather straightforward to see that $X=\projective{n}{k}$
+Fix $k$ and $n$.
+It is then rather straightforward to see that $\projective{n}{k}$
 is indeed reduced.
 \begin{lemma}\label{thm:reduced}
-  $X$ is reduced.
+  $\projective{n}{k}$ is reduced.
   \begin{proof}
-    By~\ref{thm:stalks} we have
-    $\mathcal O_{X,x} = k[x_0,\ldots,x_n]_{(p_x)}$. Now note
-    that $S=k[x_0,\ldots,x_n]$ is reduced. Thus the localisation
-    $S_{p_x}$ is reduced and so is its subring $S_{(p_x)}$.
+    Consider $x\in \projective{n}{k}$. By~\ref{thm:stalks} we have
+    $\mathcal O_{\projective{n}{k},x} = k[X_0,\ldots,X_n]_{(p_x)}$.
+    Now note
+    that $S=k[X_0,\ldots,X_n]$ is reduced. Thus the localisation
+    $S_{p_x}$ is reduced and so is the subring $S_{(p_x)}$.
   \end{proof}
 \end{lemma}
 
 We also have irreducibility, however this is not quite as obvious.
 
 \begin{theorem}\label{thm:irreducible}
-  $X$ is irreducible.
+  $\projective{n}{k}$ is irreducible.
   \begin{proof}
     We follow the proof of \cite[\href{https://stacks.math.columbia.edu/tag/01OL}{Tag 01OL}]{stacks-project}.
-    We have shown that $X$ may be covered by $U_1,\ldots,U_n$ with
+    We have shown that $\projective{n}{k}$ may be covered by $U_1,\ldots,U_n$ with
     $U_i \cong \affine{n}{k}$ and $U_i\cap U_j\neq\emptyset$. Now write
-    $X=X_1 \cup X_2$ for some closed $X_1,X_2\subseteq X$.
+    $\projective{n}{k}=X_1 \cup X_2$ for some closed
+    $X_1,X_2\subseteq \projective{n}{k}$.
     Fix $i$. As $U_i$ is irreducible we must have
     $U_i\subseteq X_1$ or $U_i\subseteq X_2$. Assume without loss
-    of generality $U_i\subseteq Z_1$. Now, for all $j$,
+    of generality $U_i\subseteq X_1$. Now, for all $j$,
     we observe
     \begin{align*}
-      U_j = \overline{U_i\cap U_j}\cup U_j\cap(X\setminus U_i)
+      U_j = \overline{U_i\cap U_j}\cup U_j\cap(\projective{n}{k}\setminus U_i)
     \end{align*}
     where both sides are closed and the set on the right is a proper
     subset because $U_i\cap U_j$ is non-empty. As $U_j$ is irreducible,
     $U_i\cap U_j$ is dense in $U_j$. Moreover, $U_i \cap U_j$ is
     contained in the closed subset $X_1$. Thus $U_j\subseteq X_1$
-    for all $j$ and hence $X=X_1$.
+    for all $j$ and hence $\projective{n}{k}=X_1$.
   \end{proof}
 \end{theorem}
 
 \begin{corollary}
-  $\projective{n}{k}$ is a complete variety.
+  $\projective{n}{k}$ is a complete variety over $k$.
   \begin{proof}
-    From \ref{thm:proper} we have properness which means separated,
-    universally closed, and of finite type. By \ref{thm:reduced}
-    and \ref{thm:irreducible} $X$ is reduced and irreducible, i.e.
-    integral.
+    From \ref{thm:proper} we have properness which, by definition,
+    means separated, universally closed, and of finite type. By
+    \ref{thm:reduced} and \ref{thm:irreducible} $\projective{n}{k}$
+    is reduced and irreducible which is equivalent to integral.
   \end{proof}
 \end{corollary}
 
