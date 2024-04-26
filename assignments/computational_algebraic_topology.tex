@@ -781,7 +781,7 @@ and non-examples.
   \end{align*}
   is compatible with the cosheaf $\underline{\mathbb{R}}^3_K$ but
   not with the filtration (\ref{eq:s1_filtration}). In fact, no
-  non-empty partial matching on $S^1$ can every be compatible with
+  non-empty partial matching on $S^1$ can ever be compatible with
   this filtration as, for no $\sigma\leq\tau$, is
   $\mathscr C^i(\sigma\leq\tau)$ an isomorphism for all $i$.
 \end{example}
@@ -924,6 +924,15 @@ We once again remind the reader that the expression (\ref{eq:morse_boundary_comp
 $\sigma$ is not a face of $\tau_\rho$ or $\sigma_\rho$ is not a face of
 $\tau$ as then the boundary components are simply zero. Let us verify
 that these boundary operators do indeed yield a chain complex.
+
+To do so, we are going to follow the approach taken in \cite{curry2015}.
+The idea is that the Morse chain complex is obtained by adding pairs
+individually to the partial ordering, i.e. removing them from the set of
+critical vertices. Due to the partial ordering being acyclic, it does not
+matter in which order the pairs are considered. This allows us to treat
+the pairs independently and hence it suffices to prove statements about the
+special case
+$\Sigma=\left\lbrace{\sigma_\rho\triangleleft\tau_\rho}\right\rbrace$.
 
 \begin{lemma}
   $\left({\partial^\Sigma}\right)^2=0$.

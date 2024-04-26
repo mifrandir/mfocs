@@ -56,7 +56,7 @@ We will denote this by $F\times\mathcal D$.
     \rho_A : A\otimes I\to A
   \end{align*}
   such that
-  \begin{equation*}
+  \begin{equation}\label{eq:monoidal_pentagon}
     % https://q.uiver.app/#q=WzAsNSxbMCwwLCIoKEFcXG90aW1lcyBCKVxcb3RpbWVzIEMpXFxvdGltZXMgRCJdLFswLDIsIihBXFxvdGltZXMoQlxcb3RpbWVzIEMpKVxcb3RpbWVzIEQiXSxbNCwyLCJBXFxvdGltZXMoKEJcXG90aW1lcyBDKVxcb3RpbWVzIEQpIl0sWzQsMCwiQVxcb3RpbWVzKEJcXG90aW1lcyhDXFxvdGltZXMgRCkpIl0sWzIsMCwiKEFcXG90aW1lcyBCKVxcb3RpbWVzKENcXG90aW1lcyBEKSJdLFswLDEsIlxcYWxwaGFfe0EsQixDfVxcb3RpbWVzIEQiLDJdLFsxLDIsIlxcYWxwaGFfe0EsQlxcb3RpbWVzIEMsRH0iLDJdLFsyLDMsIkFcXG90aW1lcyBcXGFscGhhX3tCLEMsRH0iLDJdLFswLDQsIlxcYWxwaGFfe0FcXG90aW1lcyBCLEMsRH0iXSxbNCwzLCJcXGFscGhhX3tBLEIsQ1xcb3RpbWVzIER9Il1d
     \begin{tikzcd}
       {((A\otimes B)\otimes C)\otimes D} && {(A\otimes B)\otimes(C\otimes D)} && {A\otimes(B\otimes(C\otimes D))} \\
@@ -68,9 +68,9 @@ We will denote this by $F\times\mathcal D$.
       \arrow["{\alpha_{A\otimes B,C,D}}", from=1-1, to=1-3]
       \arrow["{\alpha_{A,B,C\otimes D}}", from=1-3, to=1-5]
     \end{tikzcd}
-  \end{equation*}
+  \end{equation}
   and
-  \begin{equation*}
+  \begin{equation}\label{eq:monoidal_triangle}
     % https://q.uiver.app/#q=WzAsMyxbMCwwLCIoQVxcb3RpbWVzIEkpXFxvdGltZXMgQiJdLFsxLDEsIkFcXG90aW1lcyBCIl0sWzIsMCwiQVxcb3RpbWVzKElcXG90aW1lcyBCKSJdLFswLDEsIlxccmhvX3tBfVxcb3RpbWVzIEIiLDJdLFsyLDEsIkFcXG90aW1lc1xcbGFtYmRhX0IiXSxbMCwyLCJcXGFscGhhX3tBLEksQn0iXV0=
     \begin{tikzcd}
       {(A\otimes I)\otimes B} && {A\otimes(I\otimes B)} \\
@@ -79,7 +79,7 @@ We will denote this by $F\times\mathcal D$.
                               \arrow["{A\otimes\lambda_B}", from=1-3, to=2-2]
                               \arrow["{\alpha_{A,I,B}}", from=1-1, to=1-3]
     \end{tikzcd}
-  \end{equation*}
+  \end{equation}
   commute.
 \end{definition}
 
@@ -129,12 +129,11 @@ the definition of a bicategory (see e.g. \cite{leinster1998}):
     \item a class of objects $\text{Obj}_{\mathbf{C}}$ where
       we will write $A\in\mathbf C$ to mean $A\in\text{Obj}_{\mathbf C}$;
     \item for all $A,B\in\mathbf C$, a 1-category
-      $\Hom_{\mathbf C}[A,B]$ with
-      composition $\bullet$ whose objects $f:A\to B$ are called 1-cells and
-      whose morphisms $\mathbf u:f\Rightarrow g$ are called 2-cells;
+      $\Hom_{\mathbf C}[A,B]$ whose objects $f:A\to B$ are
+      called 1-cells and whose morphisms are called 2-cells;
     \item for all $A\in\mathbf{C}$, a functor
       $\identity_A:\mathbf 1\to \Hom_{\mathbf C}[A,A]$ which we identify
-      with a 1-cell $\identity_A : A\to A$;
+      with its unique value $\identity_A  : A\to A$;
     \item for all $A,B,C\in\mathbf{C}$, a composition functor
       \begin{align*}
         \circ_{A,B,C} : \Hom_{\mathbf C}[B,C]\times\Hom_{\mathbf C}[A,B] \to \Hom_{\mathbf C}[A,C]
@@ -142,89 +141,42 @@ the definition of a bicategory (see e.g. \cite{leinster1998}):
       whose value on 1-cells $f\in\Hom_{\mathbf C}[A,B]$ and
       $g\in\Hom_{\mathbf C}[B,C]$ we will denote by
       $g\circ f := \circ_{A,B,C}(g,f)$;
-    \item for all $A,B,C,D\in\mathbf C$, a natural transformation
-      \begin{equation*}
-        % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQyxEXVxcdGltZXNcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQixDXVxcdGltZXNcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxCXSJdLFswLDIsIlxcdGV4dHtIb219X3tcXG1hdGhiZiBDfVtCLERdXFx0aW1lc1xcdGV4dHtIb219X3tcXG1hdGhiZiBDfVtBLEJdIl0sWzMsMCwiXFx0ZXh0e0hvbX1fe1xcbWF0aGJmIEN9W0MsRF1cXHRpbWVzXFx0ZXh0e0hvbX1fe1xcbWF0aGJmIEN9W0EsQ10iXSxbMywyLCJcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxEXSJdLFsyLDMsIlxcY2lyY197QSxDLER9Il0sWzEsMywiXFxjaXJjX3tBLEIsRH0iLDJdLFswLDEsIlxcY2lyY197QixDLER9XFx0aW1lc3tcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxCXX0iLDJdLFswLDIsIntcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQyxEXX1cXHRpbWVzXFxjaXJjX3tBLEIsQ30iXSxbNiw0LCJcXGFscGhhX3tBLEIsQyxEfSIsMCx7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH19XV0=
-        \begin{tikzcd}
-          {\text{Hom}_{\mathbf C}[C,D]\times\text{Hom}_{\mathbf C}[B,C]\times\text{Hom}_{\mathbf C}[A,B]} &&& {\text{Hom}_{\mathbf C}[C,D]\times\text{Hom}_{\mathbf C}[A,C]} \\
-          \\
-          {\text{Hom}_{\mathbf C}[B,D]\times\text{Hom}_{\mathbf C}[A,B]} &&& {\text{Hom}_{\mathbf C}[A,D]}
-          \arrow[""{name=0, anchor=center, inner sep=0}, "{\circ_{A,C,D}}", from=1-4, to=3-4]
-          \arrow["{\circ_{A,B,D}}"', from=3-1, to=3-4]
-          \arrow[""{name=1, anchor=center, inner sep=0}, "{\circ_{B,C,D}\times{\text{Hom}_{\mathbf C}[A,B]}}"', from=1-1, to=3-1]
-          \arrow["{{\text{Hom}_{\mathbf C}[C,D]}\times\circ_{A,B,C}}", from=1-1, to=1-4]
-          \arrow["{\alpha_{A,B,C,D}}", shorten <=40pt, shorten >=40pt, Rightarrow, from=1, to=0]
-        \end{tikzcd}
-      \end{equation*}
-      whose components at $f\in\Hom_{\mathbf C}[A,B]$,
-      $g\in\Hom_{\mathbf C}[B,C]$, and $h\in\Hom_{\mathbf C}[C,D]$
-      we denote by
+    \item for all $A,B,C,D\in\mathbf C$, a natural isomorphism
+      with components
       \begin{align*}
-        \alpha_{f,g,h} : (h\circ g) \circ f \Rightarrow h\circ(g\circ f)
+        \alpha_{f,g,h} : (h\circ g) \circ f \to h\circ(g\circ f), \hspace{1cm}
+        \rho_f : f \circ \identity_A \to f, \hspace{1cm}
+        \lambda_f : \identity_B\circ f \to f
       \end{align*}
-    \item for all $A,B\in\mathbf C$, a natural transformation
-      \begin{equation*}
-        % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxCXVxcdGltZXNcXG1hdGhiZiAxIl0sWzAsMiwiXFx0ZXh0e0hvbX1fe1xcbWF0aGJmIEN9W0EsQl1cXHRpbWVzXFx0ZXh0e0hvbX1fe1xcbWF0aGJmIEN9W0EsQV0iXSxbMiwyLCJcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxCXSJdLFswLDEsIlxcdGV4dHtIb219X3tcXG1hdGhiZiBDfVtBLEJdXFx0aW1lcyBJX0EiLDJdLFsxLDIsIlxcY2lyY197QSxBLEJ9IiwyXSxbMCwyLCJcXGNvbmciLDFdLFszLDUsIlxccmhvX3tBLEJ9IiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dXQ==
-        \begin{tikzcd}
-          {\text{Hom}_{\mathbf C}[A,B]\times\mathbf 1} \\
-          \\
-          {\text{Hom}_{\mathbf C}[A,B]\times\text{Hom}_{\mathbf C}[A,A]} && {\text{Hom}_{\mathbf C}[A,B]}
-          \arrow[""{name=0, anchor=center, inner sep=0}, "{\text{Hom}_{\mathbf C}[A,B]\times \identity_A}"', from=1-1, to=3-1]
-          \arrow["{\circ_{A,A,B}}"', from=3-1, to=3-3]
-          \arrow[""{name=1, anchor=center, inner sep=0}, "\cong"{description}, from=1-1, to=3-3]
-          \arrow["{\rho_{A,B}}"', shorten <=11pt, shorten >=11pt, Rightarrow, from=0, to=1]
-        \end{tikzcd}
-      \end{equation*}
-      whose component at $f\in\Hom_{\mathbf C}[A,B]$ we will denote by
-      \begin{align*}
-        \rho_f : f \circ \identity_A \Rightarrow f;
-      \end{align*}
-    \item for all $A,B\in\mathbf C$, a natural transformation
-      \begin{equation*}
-        % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhiZiAxXFx0aW1lc1xcdGV4dHtIb219X3tcXG1hdGhiZiBDfVtBLEJdIl0sWzAsMiwiXFx0ZXh0e0hvbX1fe1xcbWF0aGJmIEN9W0IsQl1cXHRpbWVzXFx0ZXh0e0hvbX1fe1xcbWF0aGJmIEN9W0EsQl0iXSxbMiwyLCJcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxCXSJdLFswLDEsIklfQlxcdGltZXNcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxCXSIsMl0sWzEsMiwiXFxjaXJjX3tBLEIsQn0iLDJdLFswLDIsIlxcY29uZyIsMV0sWzMsNSwiXFxsYW1iZGFfe0EsQn0iLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9fV1d
-        \begin{tikzcd}
-          {\mathbf 1\times\text{Hom}_{\mathbf C}[A,B]} \\
-          \\
-          {\text{Hom}_{\mathbf C}[B,B]\times\text{Hom}_{\mathbf C}[A,B]} && {\text{Hom}_{\mathbf C}[A,B]}
-          \arrow[""{name=0, anchor=center, inner sep=0}, "{\identity_B\times\text{Hom}_{\mathbf C}[A,B]}"', from=1-1, to=3-1]
-          \arrow["{\circ_{A,B,B}}"', from=3-1, to=3-3]
-          \arrow[""{name=1, anchor=center, inner sep=0}, "\cong"{description}, from=1-1, to=3-3]
-          \arrow["{\lambda_{A,B}}"', shorten <=12pt, shorten >=12pt, Rightarrow, from=0, to=1]
-        \end{tikzcd}
-      \end{equation*}
-      whose component at $f\in\Hom_{\mathbf C}[A,B]$ we will denote by
-      \begin{align*}
-        \lambda_f : \identity_B\circ f \Rightarrow f;
-      \end{align*}
+      at $f\in\Hom_{\mathbf C}[A,B]$, $g\in\Hom_{\mathbf C}[B,C]$, and
+      $h\in\Hom_{\mathbf C}[C,D]$;
   \end{itemize}
   such that
   \begin{itemize}
-    \item for all 1-cells
-      $ A \xlongrightarrow{f} B \xlongrightarrow{g} C \xlongrightarrow{h} D \xlongrightarrow{k} E $
-      the following commutes
+    \item for suitable 1-cells $f,g,h,k$, the following commutes
       \begin{equation}\label{eq:pentagon}
-        % https://q.uiver.app/#q=WzAsNSxbMCwwLCIoKGtcXGNpcmMgaClcXGNpcmMgZylcXGNpcmMgZiJdLFswLDIsIihrXFxjaXJjIGgpXFxjaXJjKGdcXGNpcmMgZikiXSxbNCwyLCJrXFxjaXJjKGhcXGNpcmMoZ1xcY2lyYyBmKSkiXSxbMiwwLCIoa1xcY2lyYyhoXFxjaXJjIGcpKVxcY2lyYyBmIl0sWzQsMCwia1xcY2lyYyAoKGhcXGNpcmMgZylcXGNpcmMgZikiXSxbMCwxLCJcXGFscGhhX3tmLGcsa1xcY2lyYyBofSIsMix7ImxldmVsIjoyfV0sWzEsMiwiXFxhbHBoYV97Z1xcY2lyYyBmLGgsa30iLDIseyJsZXZlbCI6Mn1dLFs0LDIsImtcXGNpcmMgXFxhbHBoYV97ZixnLGh9IiwwLHsibGV2ZWwiOjJ9XSxbMCwzLCJcXGFscGhhX3tnLGgsa31cXGNpcmMgZiIsMCx7ImxldmVsIjoyfV0sWzMsNCwiXFxhbHBoYV97ZixnXFxjaXJjIGgsa30iLDAseyJsZXZlbCI6Mn1dXQ==
+        % https://q.uiver.app/#q=WzAsNSxbMCwwLCIoKGtcXGNpcmMgaClcXGNpcmMgZylcXGNpcmMgZiJdLFswLDIsIihrXFxjaXJjIGgpXFxjaXJjKGdcXGNpcmMgZikiXSxbNCwyLCJrXFxjaXJjKGhcXGNpcmMoZ1xcY2lyYyBmKSkiXSxbMiwwLCIoa1xcY2lyYyhoXFxjaXJjIGcpKVxcY2lyYyBmIl0sWzQsMCwia1xcY2lyYyAoKGhcXGNpcmMgZylcXGNpcmMgZikiXSxbMCwxLCJcXGFscGhhX3tmLGcsa1xcY2lyYyBofSIsMl0sWzEsMiwiXFxhbHBoYV97Z1xcY2lyYyBmLGgsa30iLDJdLFs0LDIsImtcXGNpcmMgXFxhbHBoYV97ZixnLGh9Il0sWzAsMywiXFxhbHBoYV97ZyxoLGt9XFxjaXJjIGYiXSxbMyw0LCJcXGFscGhhX3tmLGdcXGNpcmMgaCxrfSJdXQ==
         \begin{tikzcd}
           {((k\circ h)\circ g)\circ f} && {(k\circ(h\circ g))\circ f} && {k\circ ((h\circ g)\circ f)} \\
           \\
           {(k\circ h)\circ(g\circ f)} &&&& {k\circ(h\circ(g\circ f))}
-          \arrow["{\alpha_{f,g,k\circ h}}"', Rightarrow, from=1-1, to=3-1]
-          \arrow["{\alpha_{g\circ f,h,k}}"', Rightarrow, from=3-1, to=3-5]
-          \arrow["{k\circ \alpha_{f,g,h}}", Rightarrow, from=1-5, to=3-5]
-          \arrow["{\alpha_{g,h,k}\circ f}", Rightarrow, from=1-1, to=1-3]
-          \arrow["{\alpha_{f,g\circ h,k}}", Rightarrow, from=1-3, to=1-5]
+          \arrow["{\alpha_{f,g,k\circ h}}"', from=1-1, to=3-1]
+          \arrow["{\alpha_{g\circ f,h,k}}"', from=3-1, to=3-5]
+          \arrow["{k\circ \alpha_{f,g,h}}", from=1-5, to=3-5]
+          \arrow["{\alpha_{g,h,k}\circ f}", from=1-1, to=1-3]
+          \arrow["{\alpha_{f,g\circ h,k}}", from=1-3, to=1-5]
         \end{tikzcd}
       \end{equation}
     \item for all 1-cells $A\xlongrightarrow{f}B\xlongrightarrow{g} C$
       the following commutes:
       \begin{equation}\label{eq:triangle}
-        % https://q.uiver.app/#q=WzAsMyxbMCwwLCIoZ1xcY2lyYyBcXHRleHR7aWR9X0IpXFxjaXJjIGYiXSxbMiwwLCJnXFxjaXJjKFxcdGV4dHtpZH1fQlxcY2lyYyBmKSJdLFsxLDEsImdcXGNpcmMgZiJdLFswLDIsIlxccmhvX2cgXFxjaXJjIGYiLDIseyJsZXZlbCI6Mn1dLFsxLDIsImdcXGNpcmMgXFxsYW1iZGFfZiIsMCx7ImxldmVsIjoyfV0sWzAsMSwiXFxhbHBoYV97ZixcXHRleHR7aWR9X0IsZ30iLDAseyJsZXZlbCI6Mn1dXQ==
+        % https://q.uiver.app/#q=WzAsMyxbMCwwLCIoZ1xcY2lyYyBcXHRleHR7aWR9X0IpXFxjaXJjIGYiXSxbMiwwLCJnXFxjaXJjKFxcdGV4dHtpZH1fQlxcY2lyYyBmKSJdLFsxLDEsImdcXGNpcmMgZiJdLFswLDIsIlxccmhvX2cgXFxjaXJjIGYiLDJdLFsxLDIsImdcXGNpcmMgXFxsYW1iZGFfZiJdLFswLDEsIlxcYWxwaGFfe2YsXFx0ZXh0e2lkfV9CLGd9Il1d
         \begin{tikzcd}
           {(g\circ \text{id}_B)\circ f} && {g\circ(\text{id}_B\circ f)} \\
                                         & {g\circ f}
-                                        \arrow["{\rho_g \circ f}"', Rightarrow, from=1-1, to=2-2]
-                                        \arrow["{g\circ \lambda_f}", Rightarrow, from=1-3, to=2-2]
-                                        \arrow["{\alpha_{f,\text{id}_B,g}}", Rightarrow, from=1-1, to=1-3]
+                                        \arrow["{\rho_g \circ f}"', from=1-1, to=2-2]
+                                        \arrow["{g\circ \lambda_f}", from=1-3, to=2-2]
+                                        \arrow["{\alpha_{f,\text{id}_B,g}}", from=1-1, to=1-3]
         \end{tikzcd}
       \end{equation}
   \end{itemize}
@@ -236,8 +188,47 @@ of detail is usually unnecessary and, moreover, tends to obscure
 interesting details. For this reason, we will drop subscripts whenever
 it is possible to infer them from context.
 
+Next, we ought to make clear what the natural isomorphisms
+$\alpha$, $\rho$, and $\lambda$ actually are. We know that their
+components are 2-cells, i.e. maps in some hom-category. But what
+are the corresponding functors? Fix $A,B,C,D$, then the
+corresponding $\alpha$ fits into the diagram
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQyxEXVxcdGltZXNcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQixDXVxcdGltZXNcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxCXSJdLFswLDEsIlxcdGV4dHtIb219X3tcXG1hdGhiZiBDfVtCLERdXFx0aW1lc1xcdGV4dHtIb219X3tcXG1hdGhiZiBDfVtBLEJdIl0sWzMsMCwiXFx0ZXh0e0hvbX1fe1xcbWF0aGJmIEN9W0MsRF1cXHRpbWVzXFx0ZXh0e0hvbX1fe1xcbWF0aGJmIEN9W0EsQ10iXSxbMywxLCJcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxEXSJdLFsyLDMsIlxcY2lyY197QSxDLER9Il0sWzEsMywiXFxjaXJjX3tBLEIsRH0iLDJdLFswLDEsIlxcY2lyY197QixDLER9XFx0aW1lc3tcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQSxCXX0iLDJdLFswLDIsIntcXHRleHR7SG9tfV97XFxtYXRoYmYgQ31bQyxEXX1cXHRpbWVzXFxjaXJjX3tBLEIsQ30iXSxbNiw0LCJcXGFscGhhIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dXQ==
+  \begin{tikzcd}
+    {\text{Hom}_{\mathbf C}[C,D]\times\text{Hom}_{\mathbf C}[B,C]\times\text{Hom}_{\mathbf C}[A,B]} &&& {\text{Hom}_{\mathbf C}[C,D]\times\text{Hom}_{\mathbf C}[A,C]} \\
+    {\text{Hom}_{\mathbf C}[B,D]\times\text{Hom}_{\mathbf C}[A,B]} &&& {\text{Hom}_{\mathbf C}[A,D]}
+    \arrow[""{name=0, anchor=center, inner sep=0}, "{\circ_{A,C,D}}", from=1-4, to=2-4]
+    \arrow["{\circ_{A,B,D}}"', from=2-1, to=2-4]
+    \arrow[""{name=1, anchor=center, inner sep=0}, "{\circ_{B,C,D}\times{\text{Hom}_{\mathbf C}[A,B]}}"', from=1-1, to=2-1]
+    \arrow["{{\text{Hom}_{\mathbf C}[C,D]}\times\circ_{A,B,C}}", from=1-1, to=1-4]
+    \arrow["\alpha", shorten <=40pt, shorten >=40pt, Rightarrow, from=1, to=0]
+  \end{tikzcd}
+\end{equation*}
+One may similarly write diagrams for $\lambda$ and $\rho$, but
+it will suffice to consider the components and their naturality
+in their arguments. See \cite{leinster1998} for details. Naturality
+of $\alpha$ then means that, for any suitable 2-cells, the following
+commutes:
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCIoaFxcY2lyYyBnKVxcY2lyYyBmIl0sWzIsMCwiaFxcY2lyYyhnXFxjaXJjIGYpIl0sWzAsMSwiKGgnXFxjaXJjIGcnKVxcY2lyYyBmJyJdLFsyLDEsImgnXFxjaXJjKGcnXFxjaXJjIGYnKSJdLFswLDEsIlxcYWxwaGEiXSxbMiwzLCJcXGFscGhhIl0sWzAsMiwiKFxccGhpXFxjaXJjXFxwc2kpXFxjaXJjIFxcdGhldGEiLDJdLFsxLDMsIlxccGhpXFxjaXJjKFxccHNpXFxjaXJjXFx0aGV0YSkiXV0=
+  \begin{tikzcd}
+    {(h\circ g)\circ f} && {h\circ(g\circ f)} \\
+    {(h'\circ g')\circ f'} && {h'\circ(g'\circ f')}
+    \arrow["\alpha", from=1-1, to=1-3]
+    \arrow["\alpha", from=2-1, to=2-3]
+    \arrow["{(\phi\circ\psi)\circ \theta}"', from=1-1, to=2-1]
+    \arrow["{\phi\circ(\psi\circ\theta)}", from=1-3, to=2-3]
+  \end{tikzcd}
+\end{equation*}
+It will suffice that this holds for $\phi$, $\psi$, and $\theta$
+individually, taking the other 2-cells to be identities. This is
+the approach that we are going to take.
+
 Let us now see how one might define $\textbf{CAT}$, the bicategory with
-objects all categories. For categories $\mathcal C$ and
+objects all categories (as always, up to some suitable notion of
+universe to avoid set theoretic problems). For categories
+$\mathcal C$ and
 $\mathcal D$, the hom-category $\Hom[\mathbb C,\mathbb D]$ is just
 the functor category $\text{Fun}(\mathbb C,\mathbb D)$ and the functor
 $\identity_{\mathbb C} : \mathbf 1 \to [\mathbb C,\mathbb C]$
@@ -259,7 +250,7 @@ well-known that limits are not unique, but whenever one has two limits
 of the same diagram then there exists a unique isomorphism. This makes
 them perfect candidates for constructing bicategories whose structural
 isomorphisms are not identities.
-We will follow \cite{rebro} to construct such an example.
+We will, in part, follow \cite{rebro} to construct such an example.
 
 Fix a category $\mathcal C$ which we assume to have all limits, although
 this is not strictly required.
@@ -289,6 +280,12 @@ this is not strictly required.
 
 The bicategory that we are about to construct will have the same
 objects as $\mathcal C$ and $\Span(A,B)$ as its hom-categories.
+This is the main difference between our construction and the one
+presented in \cite{rebro} where the 2-cells are are also spans,
+up to isomorphism. This suggests that it is possible to repeat
+this indefinitely, defining $n$-cells to be spans between
+$(n-1)$-cells. We will not pursue this idea futher.
+
 What we require now is a way to compose spans. We will use pullbacks:
 
 \begin{definition}
@@ -623,51 +620,30 @@ As promised, we are now going to see that it is possible to make
 the resemblance between monoidal categories and bicategories precise.
 In particular, monoidal categories are single-object bicatgories.
 
-Consider a monoidal
-category $(\mathcal C,\otimes, I,\alpha,\lambda,\rho)$.
-Then the corresponding bicategory $\mathbf C$ consists of
-\begin{itemize}
-  \item a single object $*$;
-  \item the unique hom-category $\Hom[*,*]=\mathcal C$;
-  \item the identity functor $\identity_*$ mapping to $I$;
-  \item the composition functor
-    \begin{align*}
-      \circ_{*,*,*} : \Hom[*,*]\times\Hom[*,*]\to\Hom[*,*]
-    \end{align*}
-    given by $\otimes : \mathcal C\times\mathcal C\to\mathcal C$;
-  \item the natural transformations $\alpha_{*,*,*}=\alpha$,
-    $\rho_{*,*}=\rho$ and $\lambda_{*,*}=\lambda$.
-\end{itemize}
-Thus the 1-cells of $\mathbf C$ are the objects of $\mathcal C$ and
-their composition is the monoidal product. Thus, for $A,B,C,D\in\mathcal C$, the conditions (\ref{eq:pentagon}) and (\ref{eq:triangle}) become
+\begin{definition}
+  The \emph{bicategory $\mathbf C$ induced by a monoidal category
+  $(\mathcal C,\otimes, I,\alpha,\lambda,\rho)$} consists of
+  a single object $*$, the unique hom-category $\Hom[*,*]:=\mathcal C$,
+  the identity functor $\identity_*$ mapping to $I$, the composition functor
+  \begin{align*}
+    \circ_{*,*,*} : \Hom[*,*]\times\Hom[*,*]\to\Hom[*,*]
+  \end{align*}
+  given by $\otimes : \mathcal C\times\mathcal C\to\mathcal C$,
+  and the natural isomorphism corresponding to the unique triple
+  of objects $*,*,*$ are $\alpha$, $\rho$ and $\lambda$.
+\end{definition}
 
-\begin{equation*}
-  % https://q.uiver.app/#q=WzAsNSxbMCwwLCIoKGtcXGNpcmMgaClcXGNpcmMgZylcXGNpcmMgZiJdLFswLDIsIihrXFxjaXJjIGgpXFxjaXJjKGdcXGNpcmMgZikiXSxbNCwyLCJrXFxjaXJjKGhcXGNpcmMoZ1xcY2lyYyBmKSkiXSxbMiwwLCIoa1xcY2lyYyhoXFxjaXJjIGcpKVxcY2lyYyBmIl0sWzQsMCwia1xcY2lyYyAoKGhcXGNpcmMgZylcXGNpcmMgZikiXSxbMCwxLCJcXGFscGhhX3tmLGcsa1xcY2lyYyBofSIsMix7ImxldmVsIjoyfV0sWzEsMiwiXFxhbHBoYV97Z1xcY2lyYyBmLGgsa30iLDIseyJsZXZlbCI6Mn1dLFs0LDIsImtcXGNpcmMgXFxhbHBoYV97ZixnLGh9IiwwLHsibGV2ZWwiOjJ9XSxbMCwzLCJcXGFscGhhX3tnLGgsa31cXGNpcmMgZiIsMCx7ImxldmVsIjoyfV0sWzMsNCwiXFxhbHBoYV97ZixnXFxjaXJjIGgsa30iLDAseyJsZXZlbCI6Mn1dXQ==
-  \begin{tikzcd}
-    {((A\otimes B)\otimes C)\otimes D} && {(A\otimes(B\otimes C))\otimes D} && {A\otimes ((B\otimes C)\otimes D)} \\
-    \\
-    {(A\otimes B)\otimes(C\otimes D)} &&&& {A\otimes(B\otimes(C\otimes D))}
-    \arrow["{\alpha}"', Rightarrow, from=1-1, to=3-1]
-    \arrow["{\alpha}"', Rightarrow, from=3-1, to=3-5]
-    \arrow["{A\otimes \alpha}", Rightarrow, from=1-5, to=3-5]
-    \arrow["{\alpha\otimes D}", Rightarrow, from=1-1, to=1-3]
-    \arrow["{\alpha}", Rightarrow, from=1-3, to=1-5]
-  \end{tikzcd}
-\end{equation*}
-and
-\begin{equation*}
-  % https://q.uiver.app/#q=WzAsMyxbMCwwLCIoZ1xcY2lyYyBcXHRleHR7aWR9X0IpXFxjaXJjIGYiXSxbMiwwLCJnXFxjaXJjKFxcdGV4dHtpZH1fQlxcY2lyYyBmKSJdLFsxLDEsImdcXGNpcmMgZiJdLFswLDIsIlxccmhvX2cgXFxjaXJjIGYiLDIseyJsZXZlbCI6Mn1dLFsxLDIsImdcXGNpcmMgXFxsYW1iZGFfZiIsMCx7ImxldmVsIjoyfV0sWzAsMSwiXFxhbHBoYV97ZixcXHRleHR7aWR9X0IsZ30iLDAseyJsZXZlbCI6Mn1dXQ==
-  \begin{tikzcd}
-    {(A\otimes I)\otimes B} && {A\otimes(I\otimes B)} \\
-                            & {A\otimes B}
-                            \arrow["{\rho \otimes B}"', Rightarrow, from=1-1, to=2-2]
-                            \arrow["{A\otimes \lambda}", Rightarrow, from=1-3, to=2-2]
-                            \arrow["{\alpha}", Rightarrow, from=1-1, to=1-3]
-  \end{tikzcd}
-\end{equation*}
-But these are exactly the coherence conditions of monoidal categories! Thus they are obviously satisfied. It is not hard to see that it is easy to
+Thus the 1-cells of $\mathbf C$ are the objects of $\mathcal C$ and
+their composition is the monoidal product. Thus, for $A,B,C,D\in\mathcal
+C$, the conditions (\ref{eq:pentagon}) and (\ref{eq:triangle}) become
+exactly the coherence conditions (\ref{eq:monoidal_pentagon}) and
+(\ref{eq:monoidal_triangle}) of monoidal categories! Thus they are
+obviously satisfied. It is not hard to see that it is easy to
 go in the other direction, i.e. if $\mathbf C$ is a bicategory with a single object $*$ then $\Hom[*,*]$ has a monoidal structure given
-by composition and the identity 1-cell.
+by composition and the identity 1-cell. This is a partial inverse
+in the sense that, given a monoidal category, turning it into
+a bicategory, and then turning it into a monoidal category takes us
+back to where we started.
 
 There is more to be said on this subject: One may define pseudofunctors,
 i.e. maps of bicategories, and hence a category of bicategories
@@ -714,7 +690,7 @@ identities and multiplication:
 
 It is easy to check that composition of monoid maps yields another
 monoid map. Hence we have a category of monoids which we will
-denote by $\textbf{Mon}$.
+denote by $\textbf{Monoid}$.
 On the other hand, we have the full subcategory
 $\textbf{1Cat}\hookrightarrow\textbf{Cat}$ of small categories with
 a unique object. That is, $\textbf{1Cat}$ contains all small single-object
@@ -753,7 +729,7 @@ and, for $x,y\in\Hom(*,*)$,
 Our notation suggests that we have defined a functor from
 monoids to single object categories. This is indeed the case.
 \begin{lemma}
-  $I:\textbf{Mon}\to\textbf{1Cat}$ is a functor.
+  $I:\textbf{Monoid}\to\textbf{1Cat}$ is a functor.
   \begin{proof}
     Consider a monoid map $f:(M,e,m)\to(M',e',m')$. We then
     have $If(\identity_*) = f(e) = e' = \identity_*$, i.e. $I$
@@ -793,7 +769,7 @@ We may also go the other way:
 Once again, this is a functor:
 
 \begin{lemma}
-  $J:\textbf{1Cat}\to\textbf{Mon}$ is a functor.
+  $J:\textbf{1Cat}\to\textbf{Monoid}$ is a functor.
   \begin{proof}
     If $\text{Id}:\mathbb C\to\mathbb C$ is the identity functor
     then $J(\text{Id})$ must be the identity map which is the
@@ -842,10 +818,10 @@ if they are inverses up to isomorphism. Our functors $I$ and $J$
 satisfy this condition:
 
 \begin{proposition}
-  There is an equivalence of categories $\textbf{Mon}\cong\textbf{1Cat}$.
+  There is an equivalence of categories $\textbf{Monoid}\cong\textbf{1Cat}$.
   \begin{proof}
     It is straightforward to verify
-    $JI=\text{Id}:\textbf{Mon}\to\textbf{Mon}$. We need
+    $JI=\text{Id}:\textbf{Monoid}\to\textbf{Monoid}$. We need
     to define a natural isormophism $\epsilon:IJ\to\text{Id}$.
     Consider $X\in\mathbb C\in\textbf{1Cat}$. Define
     $\epsilon_{\mathbb{C}}(*)=X$ and $\epsilon_{\mathbb{C}}(x) = x$ for
@@ -879,7 +855,8 @@ any cartesian category. We are going to go one step further and
 replace the cartesian structure with an arbitrary monoidal structure:
 
 \begin{definition}
-  Let $(\mathcal C,I,\otimes)$ be a monoidal category. A
+  Let $(\mathcal C,I,\otimes,\alpha,\lambda,\rho)$ be a monoidal
+  category. A
   \emph{monoid object} $(M,e,m)$ in $\mathcal C$ consists of
   an object $M\in\mathcal C$ and maps
   $e:I\to M$ and $m:M\otimes M\to M$ in $\mathcal C$
@@ -963,8 +940,9 @@ is itself a monoid map as
 \end{equation*}
 commutes by functoriality of $\otimes:\mathcal C\times\mathcal C\to\mathcal C$. If $f=\identity$, $M=M'$, $e=e'$, and $m=m'$ then the conditions
 are trivially satisfied. Hence we have a category
-$\textbf{Mon}(\mathcal C,I,\otimes)$ of monoid objects in
-a monoidal category $(\mathcal C,I,\otimes)$.
+$\textbf{Monoid}(\mathcal C,I,\otimes)$ of monoid objects in
+a monoidal category $(\mathcal C,I,\otimes)$ where we surpress
+the structural isomorphisms $\alpha$, $\lambda$, and $\rho$.
 
 Other than generalisation for the sake of generalisation, it is not
 immediately obvious what we have achieved. However, one need only
@@ -1061,7 +1039,7 @@ as monoid objects and thus obtain an equivalence of categories.
 \begin{proposition}
   There is an equivalence of categories
   \begin{align*}
-    \textbf{Mon}(\Hom[\mathcal C,\mathcal C],\text{Id},\circ)
+    \textbf{Monoid}(\Hom[\mathcal C,\mathcal C],\text{Id},\circ)
     \cong \textbf{Monad}(\mathcal C).
   \end{align*}
   \begin{proof}
@@ -1074,12 +1052,13 @@ as monoid objects and thus obtain an equivalence of categories.
     laws (\ref{eq:monad_laws}). Note that we have not changed
     anything about the triple $(T,\eta,\mu)$, hence we have a bijection
     of objects between $\textbf{Monad}(\mathcal C)$ and
-    $\textbf{Mon}(\Hom[\mathcal C,\mathcal C],\text{Id},\circ)$.
+    $\textbf{Monoid}(\Hom[\mathcal C,\mathcal C],\text{Id},\circ)$.
 
-    It is now even more straightforward to see straighforward to see
-    that (\ref{eq:monoid_map_axioms}) and (\ref{eq:monad_map_laws})
-    are identical for monoid objects in $(\Hom[\mathcal C,\mathcal
-    C],\text{Id},\circ)$ and monads on $\mathcal C$, respectively.
+    It is now even more straightforward to see that
+    (\ref{eq:monoid_map_axioms}) and (\ref{eq:monad_map_laws})
+    are identical for monoid object maps in $(\Hom[\mathcal C,\mathcal
+    C],\text{Id},\circ)$ and maps of monads on $\mathcal C$,
+    respectively.
   \end{proof}
 \end{proposition}
 
@@ -1126,11 +1105,12 @@ We now rectify this:
 \end{definition}
 
 Note that this is only one of two possible definitions: We could
-have chosen the 2-cell to go the other way. This would have resulted
+just as easily have chosen the 2-cell to go the other way.
+This would have resulted
 in a fundamentally different notion. Our definition of a
 monad map is sometimes referred to as \emph{colax} whereas the
 version with the reversed 2-cell $\psi : T'\circ H\to H\circ T$
-is referred to as lax. \cite{clarke2019}
+is referred to as \emph{lax}. \cite{clarke2019}
 
 We omit the proofs that composition of formal monad maps yields
 a formal monad map. We thus have a category of formal monads
@@ -1195,7 +1175,7 @@ of categories. However, we have the next best thing:
 
     Somewhat less obvious is the behaviour of maps under this
     inclusion.
-    Now consider a functor $F:\mathbb C\to\mathbb D$. We want
+    Consider a functor $F:\mathbb C\to\mathbb D$. We want
     to construct a map of formal monads
     $M(F) : M(\mathbb C)\to M(\mathbb D)$. Write $F_0$ for the map
     on objects and $F_1$ for the map on maps. We then define
@@ -1237,14 +1217,20 @@ of categories. However, we have the next best thing:
     Finally, we need to verify that $M(F)$ is a map of formal monads.
     The conditions reduce to $\identity_{F_0 A} = F_1(\identity_A)$
     and $F_1(g\circ f) = F_1(g)\circ F_1(f)$, i.e. functoriality.
+
+    In the interest of space, we leave it to the reader to verify
+    that $M$ is a functor. Once that is done, it is rather
+    straightforward to see that $M$ is injective on both objects
+    and maps.
   \end{proof}
 \end{proposition}
 
 So which formal monad map correspond to functors? In other words,
-what subcategory of $\textbf{Monad}(\Span(\Set))$ is $\textbf{Cat}$
+what is the largest subcategory of
+$\textbf{Monad}(\Span(\Set))$ is $\textbf{Cat}$
 equivalent to? The necessary and sufficient condition on $(H,\phi)$
 is that the span $H$ needs to be of the form $(f,g)$ for some
-bijection. More generally, this means that $H$ is a left-adjoint
+bijection $f$. More generally, this means that $H$ is a left-adjoint
 in $\Span(\Set)$. \cite{lack2010} Similarly, the equivalence then
 extends extends to the study of internal categories.
 \cite{clarke2019}

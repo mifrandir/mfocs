@@ -99,22 +99,6 @@ tangent bundle:
     \end{align*}
 \end{itemize}
 
-\section{Moduli spaces in algebraic geometry}
-
-While classifying geometric objects of a certain types, one often
-finds that the space of such objects has a rich geometric structure.
-For example, the space of all lines in $k^{n+1}$ is
-$\mathbb{P}^n_k$. The space of all objects of a certain type is referred
-to as a moduli space. \cite{bejleri2020}
-
-\begin{definition}
-  Let $F:\op{\Sch}_S\to\Set$ be a presheaf on $S$-schemes.
-  A \emph{fine moduli space} of $F$ is an $S$-scheme $M$ that
-  represents $F$, i.e. there exists a natural isomorphism
-  \begin{align*}
-    F \cong \Hom\left({-,M}\right).
-  \end{align*}
-\end{definition}
 
 \section{Geometric invariant theory}
 
@@ -258,7 +242,7 @@ $T'\to X_T$.
   is
 \end{definition}
 
-\section{Stable bundles}
+\section{Symplectic quotients}
 
 We aim to classify vector bundles on a Riemannian surface $\Sigma_g$
 of genus $g$. In light of \ref{thm:dim_rank_vector_bundles},
@@ -392,7 +376,286 @@ is Hausdorff. Hence make the following definition:
   \end{align*}
 \end{definition}
 
+\section{Moduli problem}
+
+While classifying geometric objects of a certain types, one often
+finds that the space of such objects has a rich geometric structure.
+For example, the space of all lines in $k^{n+1}$ is
+$\mathbb{P}^n_k$. The space of all objects of a certain type is
+referred to as a moduli space. \cite{bejleri2020}
+
+More precisely, a moduli problem on $S$-schemes is a presheaf
+\begin{align*}
+  \mathcal M : {(\Sch / S)}^{\text{op}} \to \Set.
+\end{align*}
+There are various objects that one may consider to be a moduli
+space for such a moduli problem.
+
+\subsection{Fine moduli spaces}
+
+The best case scenario arises when a moduli problem $\mathcal M$
+is representable. In this case, the moduli problem $\mathcal M$
+may itself be thought of as a scheme.
+
+\begin{definition}
+  Consider a moduli problem $\mathcal M$ on $\Sch/S$.
+  A \emph{fine moduli space} of $\mathcal M$ is a scheme $M\in\Sch/S$
+  together with a natural isomorphism
+  \begin{align*}
+    \eta : \mathcal M \cong \Hom\left({-,M}\right).
+  \end{align*}
+\end{definition}
+It is standard to write $M(T) := \Hom(T,M)$ and hence identify
+$M$ with its functor of points. We may then surpress the natural
+isomorphism to identify $\mathcal M$ with its fine moduli space $M$.
+
+Before we adopt this abuse of notation, let us consider the
+isomorphism $\eta$ a little further. Note we may think of
+$F\in \mathcal M(T)$ as the morphism $f : T \to M$.
+Moreover, we obtain a pullback map $f^* : \Hom(M,M) \to \Hom(T,M)$
+which induces a pullback map $f^* : \mathcal M(M)\to\mathcal M(T)$.
+We then observe that $U := {\eta}^{-1}_M(\identity)$
+is universal in the sense that every $F$ is obtained
+by pulling back $U$ along $f$.
+
+\subsection{Grassmannians}
+
+While we are unlikely to actually need Grasmannians, they provide
+us with a lot of intuition going forward. Moreover, they were used
+by Grothendieck to prove the representability of the Quot scheme
+and hence are worth knowing about. Let us recall the elementary
+notion first:
+
+\begin{definition}
+  Let $V$ be a finite dimensional $k$-vector space. Then
+  $G(m,V)$ denotes the set of $n$-dimensional subspaces of $V$.
+\end{definition}
+
+For now, this is just a set. However, for suitable choices of
+$k$, it has the structure of a differentiable manifold as well as
+that of an algebraic variety.
+Now note that subspaces $W\in G(m,V)$ give rise to quotients
+$V/W$ and we may recover $W=\ker(V\surj V/W)$. Thus subspaces
+of $V$ may be identified with isomorphism classes of quotients.
+In particular, any isomorphism $V/W \cong V/W$ will make the following
+commute:
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJWIl0sWzIsMCwiVi9XIl0sWzIsMSwiVi9XIl0sWzAsMiwiIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzAsMSwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzEsMiwiXFxjb25nIl1d
+  \begin{tikzcd}
+    V && {V/W} \\
+      && {V/W}
+      \arrow[two heads, from=1-1, to=1-3]
+      \arrow[two heads, from=1-1, to=2-3]
+      \arrow["\cong", from=1-3, to=2-3]
+  \end{tikzcd}
+\end{equation*}
+Thus we may identify $G(m,V)$ with the set of isomorphism
+classes of $k$-linear surjections $V\surj W$ with $\dim V-\dim W=m$.
+This allows us to generalise from vector spaces to free sheaves
+of modules.~\cite[\href{https://stacks.math.columbia.edu/tag/089R}{Tag 089R}]{stacks-project}. \todo{maybe we want to think and talk about
+quotients of sheaves of modules a little more ...}
+
+\begin{definition}
+  The functor $G(m,n) : \Sch \to \Set$ associates to
+  each scheme $T\in\Sch$ the set $G(m,n)(T)$ of isomorphism
+  classes of surjections
+  \begin{align*}
+    q : \mathcal O^{\oplus n}_T \surj \mathcal F
+  \end{align*}
+  where $\mathcal F$ is a finite, locally free $\mathcal O_T$-module
+  of rank $n-m$ and for each morphism $f:T\to T'$ the map
+  $G(m,n)(f)$ sends the isomorphism class of $q$ to that
+  of $f^*q$.
+\end{definition}
+
+We begin by noting that this does indeed generalise the previous
+notion. In particular, there is a canonical bijection
+\begin{align*}
+  G(m,n)(\Spec k) \cong G(m,k^n)
+\end{align*}
+as quotients of $\mathcal O^{\oplus n}_{\Spec k}$ are just quotients
+of of $k^n$. \question{what does canonical mean here? also, we would want this to be at least an isomorphism of varieties in some sense but i haven't seen anyone talk about this...}
+
+This is a functor and, crucially, representable. Thus we
+have a scheme $\mathbf G(m,n)$ with
+\begin{align*}
+  \mathbf G(m,n)(T) := \Hom(T,\mathbf G(m,n)) = G(m,n)(T).
+\end{align*}
+Base change gives us the usual $\mathbf G(m,n)_S\in\Sch_S$ and
+$\mathbf G(m,n)_R\in\Sch_R$.
+Moreover, we are justified in thinking of $\mathbf G(m,n)_S$ as
+parametrising $m$-dimensional subspaces of $\affine{n}{S}$ in the
+sense that we think of projective $n$-space as parametrising
+$n$-dimensional subspaces of $(n+1)$-dimensional affine space.
+
+\begin{proposition}
+  Let $n\geq 1$ and $S\in\Sch$. Then there is a canonical isomorphism
+  \begin{align*}
+    \mathbf G(n,n+1)_S \cong \projective{n}{S}.
+  \end{align*}
+  \begin{proof}
+    It suffices to consider $S=\Spec\mathbb{Z}$.
+    See \cite[\href{https://stacks.math.columbia.edu/tag/089V}{Tag 089V}]{stacks-project}.
+  \end{proof}
+\end{proposition}
+
 \subsection{Quot schemes}
+
+Fix a Noetherian base scheme $S$, a scheme $X/S$ of finite type,
+a coherent sheaf $\mathcal E$ on $X$, and another scheme $T/S$.
+
+\begin{definition}
+  A \emph{family of quotients of $\mathcal E$ parameterised by $T$} consists of
+  \begin{enumerate}
+    \item a coherent sheaf $\mathcal F$ on $X_T$
+      such that the schematic support of $\mathcal F$ is proper
+      over $T$ and $\mathcal F$ is flat over $T$, and
+    \item a surjective $\mathcal O_{X_T}$-linear
+      homorphism of sheaves $q:\mathcal E_T\to \mathcal F$.
+  \end{enumerate}
+  A morphism $f:(\mathcal F,q)\to(\mathcal F',q')$ of such families
+  is a morphism $f:\mathcal F\to\mathcal F'$ that makes the following
+  commute:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsMyxbMiwwLCJcXG1hdGhjYWwgRiJdLFsyLDIsIlxcbWF0aGNhbCBGJyJdLFswLDAsIkVfVCJdLFsyLDAsInEiXSxbMiwxLCJxJyIsMl0sWzAsMSwiZiJdXQ==
+    \begin{tikzcd}
+      {\mathcal E_T} && {\mathcal F} \\
+      \\
+                     && {\mathcal F'}
+                     \arrow["q", from=1-1, to=1-3]
+                     \arrow["{q'}"', from=1-1, to=3-3]
+                     \arrow["f", from=1-3, to=3-3]
+    \end{tikzcd}
+  \end{equation*}
+\end{definition}
+
+\begin{example}
+  If $S=\Spec\mathbb C$, $X=\Sigma_g$, and
+  $\mathcal E=\mathcal O^{\oplus k}_X$.
+  Then a family of quotients $q:\mathcal E_T\surj\mathcal F$
+  is a quotient
+  \begin{align*}
+    (\mathcal O^{\oplus k}_X)_T \cong \mathcal O^{\oplus k}_{X\times_S T} \surj \mathcal F
+  \end{align*}
+  in $\Coh(X\times_S T)$.
+  The kernel of such a quotient turns out to be locally-free
+  and of finite-rank \cite[Lemma 4.21]{bertram1993}, i.e. a
+  vector bundle on $X\times_S T$.
+\end{example}
+
+\begin{lemma}
+  If $\mathcal F\in\Coh(X_T)$ is flat over $T$ and
+  $q:\mathcal O_{X_T}^{\oplus k} \surj F$ is surjective and
+  $\mathcal O_{X_T}$-linear then $\Ker(q)\in\Coh(X_T)$ is
+  finite locally free.
+  \begin{proof}
+    We want to show that there is
+
+    Recall that flatness of $\mathcal F$ over $T$ means that,
+    for all $x\in X_T$, the stalk $\mathcal F_x$ is a flat
+    $\mathcal O_{T,\pi(x)}$-module where
+    $\pi : X_T \to T$.
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+\begin{lemma}
+  Families $(\mathcal F,q)$ and $(\mathcal F',q')$ are isomorphic if, and only if,
+  $\ker(q) = \ker(q')$.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+Write $\langle\mathcal F,q\rangle$ for equivalence classes
+of such families and define the corresponding quot functor
+as follows:
+\begin{definition}
+  The quot functor $\Sch_S^{\text{op}} \to \Set$ is given by
+  \begin{align*}
+    \mathfrak{Quot}_{\mathcal E,X/S} (T)
+    := \left\lbrace{\text{all $\langle\mathcal F,q\rangle$
+    parametrised by $T$}}\right\rbrace
+  \end{align*}
+\end{definition}
+
+The map on morphsims $f:T'\to T$ is as follows.
+We may pull back $\text{Coh}(X_T)$ to $\text{Coh}(X_{T'})$
+along $\identity\times_S f:X_{T'}\to X_T$. In particular,
+note that the following commutes:
+
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsMyxbMiwwLCJcXHRleHR7Q29ofShYX1QpIl0sWzIsMSwiXFx0ZXh0e0NvaH0oWF97VCd9KSJdLFswLDAsIlxcdGV4dHtDb2h9KFgpIl0sWzAsMSwiKFxcdGV4dHtpZH1cXHRpbWVzIGYpXioiXSxbMiwwLCJcXHBpXioiXSxbMiwxLCJcXHBpXioiLDJdXQ==
+  \begin{tikzcd}
+    {\text{Coh}(X)} && {\text{Coh}(X_T)} \\
+                    && {\text{Coh}(X_{T'})}
+                    \arrow["{(\text{id}\times f)^*}", from=1-3, to=2-3]
+                    \arrow["{\pi^*}", from=1-1, to=1-3]
+                    \arrow["{\pi^*}"', from=1-1, to=2-3]
+  \end{tikzcd}
+\end{equation*}
+by functoriality of $(-)^*$. Hence, given a family
+$\langle\mathcal F,q\rangle$, we obtain a diagram
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJFX3tUJ30iXSxbMSwwLCIoXFx0ZXh0e2lkfVxcdGltZXNfU2YpXiogXFxtYXRoY2FsIEVfVCJdLFszLDAsIihcXHRleHR7aWR9XFx0aW1lc19TZileKlxcbWF0aGNhbCBGIl0sWzEsMiwiKFxcdGV4dHtpZH1cXHRpbWVzX1NmKV4qcSJdLFswLDEsIiIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+  \begin{tikzcd}
+    {\mathcal E_{T'}} & {(\text{id}\times_Sf)^* \mathcal \mathcal E_T} && {(\text{id}\times_Sf)^*\mathcal F}
+    \arrow["{(\text{id}\times_Sf)^*q}", from=1-2, to=1-4]
+    \arrow[Rightarrow, no head, from=1-1, to=1-2]
+  \end{tikzcd}
+\end{equation*}
+in $\Coh(X_{T'})$, i.e. a family of quotients parametrised by
+$T'$. This respects isomorphisms of such families and
+hence we have defined a map
+\begin{align*}
+  \mathfrak{Quot}_{\mathcal E,X/S}(T) \to \mathfrak{Quot}_{\mathcal E,X/S}(T').
+\end{align*}
+
+\begin{theorem}
+  There is a scheme
+  \begin{align*}
+    \text{Quot}_{\mathcal E,X/S} \in \Sch_S
+  \end{align*}
+  that represents $\mathfrak{Quot}_{\mathcal E,X/S}$.
+\end{theorem}
+
+\subsection{Moduli space of stable bundles}
+
+We aim to define the moduli space of (semi)stable bundles on a
+suitable curve. We will do so without justification. For details
+see \cite[section 8.8]{hoskins}.
+
+Fix a connected smooth projective curve $C$ of $g\geq 2$,
+$n\geq 1$, and $d > n(2g - 1)$. Define
+$N:=d+n(1-g)$ and denote by
+\begin{align*}
+  Q^s \subset Q := \Quot_C^{n,d}(\mathcal O_C^N).
+\end{align*}
+the open subscheme of quotients $q:\mathcal O^N_X\surj\mathcal F$
+such that $\mathcal F$ is (semi)stable and locally free and
+$H^0(q)$ is an isomorphism.
+
+As $Q$ is a fine moduli space, we have a universal quotient
+$q:\mathcal O_{Q\times X}^N\surj \mathcal U$
+and its restriction to $Q$:
+\begin{align*}
+  q^s : \mathcal O_{Q^s\times X}^N\surj \restrict{\mathcal U}{Q^s} =: \mathcal U^s.
+\end{align*}
+
+Now define the action
+\begin{align*}
+  \rho : GL_N \times Q \to Q
+\end{align*}
+under the isomorphism $Q(GL_N\times Q) \cong \Hom(GL_N\times Q,Q)$
+by the quotient family
+\begin{align*}
+  \mathcal O^N_{GL_N\times Q\times X}
+  = k^N \otimes \mathcal O_{GL_N\times Q\times X}
+  \xlongrightarrow{\pi^*_{GL_N}\tau}
+  k^N \otimes \mathcal O_{GL_N\times Q\times X}
+  \xlongrightarrow{\pi^*_{Q\times X} q}
+  \pi^*_{Q\times X}\mathcal U
+\end{align*}
 
 \section{Higgs bundles}
 
