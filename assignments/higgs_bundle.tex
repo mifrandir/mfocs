@@ -2,29 +2,15 @@
 \usepackage{assignment}
 \addbibresource{higgs.bib}
 \begin{document}
-\title{Higgs bundle}
+\title{Moduli Spaces of Holomorphic Bundles}
+\author{Franz Miltz}
 \date{\today}
 \maketitle
 
-\section{Complex geometry}
+\tableofcontents
+\pagebreak
 
-\subsection{Holomorphic functions}
-
-\subsection{Holomorphic 1-forms}
-
-\subsection{Complex vector bundles}
-
-\missingdefinition{trivial rank 1 bundle $1_M$}
-
-\begin{theorem}[\cite{mccarthy2020}]\label{thm:dim_rank_vector_bundles}
-  Let $E\to M$ be a real vector bundle on a smooth manifold. If $\rank E > \dim M$ then there is a real vector bundle $E'$ of rank $\rank E' = \dim M$
-  such that
-  \begin{align*}
-    E \cong E' \oplus \bigoplus_{\rank E - \dim M} 1_M.
-  \end{align*}
-\end{theorem}
-
-\subsection{Holomorphic connection}
+\section{Complex vector bundles}
 
 \subsection{Complex manifolds}
 
@@ -69,36 +55,345 @@ tangent bundle:
     for $T^{1,0}_x X$ and $T^{0,1}_x X$, respectively.
   \item Analogously, we obtain the splitting
     \begin{align*}
-      T^*_x X = \Lambda^{1,0}_x X \oplus \Lambda^{0,1}_x X
+      T^* X = T^*_{1,0} X \oplus T^*_{0,1} X
     \end{align*}
-    and hence bundles $\Lambda^{1,0}X$ and $\Lambda^{0,1}X$. This
-    splitting extends to exterior powers of the cotangent bundle:
+    This splitting extends to exterior powers of the cotangent bundle:
     \begin{align*}
-      \Lambda^k X
-      = \bigoplus_{p+q = k} \Lambda^{p,q} X
-      = \bigoplus_{p+q=k}\left({\exterior{p}{\Lambda^{1,0} X}}\right)\wedge
-      \left({\exterior{q}{\Lambda^{0,1} X}}\right).
+      \Lambda^k T^*X
+      = \bigoplus_{p+q = k} T^*_{p,q} X
+      = \bigoplus_{p+q=k}\left({\exterior{p}{T^*_{1,0} X}}\right)\wedge
+      \left({\exterior{q}{T^*_{0,1} X}}\right).
     \end{align*}
     We call sections of $\Lambda^{p,q} X$ $(p,q)$-forms and write
-    $\Omega^{p,q}(X)=\Gamma(\Lambda^{p,q}X)$.
+    $\Omega^{p,q}(X)=\Gamma(T^*_{p,q}X)$.
 \end{itemize}
 
 \begin{example}[{\cite[Section 5.2]{neitzke2021}}]
-  Let $E\to\Sigma_g$ be a complex rank $k$ vector bundle
-  on a Riemannian surface with $d=\deg E$. Then $\End E$ is
-  a complex manifold whose structure is induced by the
-  homeomorphism $\End E \cong E\otimes E^*$.
-
-  Then $\Omega^{0,1}(\End E)$ is the
+  Let $E\to X$ be a smooth rank $k$ vector bundle
+  with $d=\deg E$. Then $\End E$ is a complex manifold whose
+  structure is induced by the identification
+  $\End E = E\otimes E^*$.
+  Moreover, we have a projection map $\End(E)\to X$ induced by
+  the same argument.
+  If $E$ is holomorphic then so is $\End(E)$.
 \end{example}
 
-\begin{itemize}
-  \item Using the projections, the exterior derivative $d:\Omega^k(X)\to\Omega^{k+1}(X)$ splits into maps $d^{0,k+1},\ldots,d^{k+1,0}$ with
-    \begin{align*}
-      d^{p,q} : \Omega^k(X) \to \Omega^{p,q}(X).
-    \end{align*}
-\end{itemize}
+\subsection{Dolbeault operator}
 
+\begin{definition}
+  A \emph{Dolbeault operator} on a smooth vector bundle
+  $E$ on a complex manifold $X$ is a $\mathbb{C}$-linear operator
+  \begin{align*}
+    \dol_E : \Gamma(X,E) \to \Omega^{0,1}(E)
+  \end{align*}
+  such that
+  \begin{enumerate}
+    \item $\dol_E^2 = 0$,
+    \item $\dol_E(fs) = \dol f \otimes s + f\dol_E s$
+      for $s\in\Gamma(X,E)$ and $f\in\Omega^0(X)$.
+  \end{enumerate}
+
+  A morphism $\dol\to\dol'$ of Dolbeaut operators
+  on vector bundles $E$ and $E'$, respectively, is a smooth morphism
+  of vector bundles $E\to E'$ such that the following commutes:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEdhbW1hKFgsRSkiXSxbMiwwLCJcXE9tZWdhXnswLDF9KEUpIl0sWzAsMSwiXFxHYW1tYShYLEYpIl0sWzIsMSwiXFxPbWVnYV57MCwxfShGKSJdLFsyLDMsIlxcYmFyXFxwYXJ0aWFsXzIiXSxbMCwxLCJcXGJhclxccGFydGlhbF8xIl0sWzAsMiwiXFxHYW1tYShYLFxccGhpKSIsMl0sWzEsMywiXFxPbWVnYV57MCwxfShcXHBoaSkiXV0=
+    \begin{tikzcd}
+      {\Gamma(X,E)} && {\Omega^{0,1}(E)} \\
+      {\Gamma(X,F)} && {\Omega^{0,1}(F)}
+      \arrow["{\dol_1}", from=1-1, to=1-3]
+      \arrow["{\Gamma(X,\phi)}"', from=1-1, to=2-1]
+      \arrow["{\Omega^{0,1}(\phi)}", from=1-3, to=2-3]
+      \arrow["{\dol_2}", from=2-1, to=2-3]
+    \end{tikzcd}
+  \end{equation*}
+  Thus we have a category $\textbf{Dol}(X)$ of smooth vector bundles
+  and Dolbeault operators on a complex vector manifold $X$
+  with a full subcategory $\textbf{Dol}(E)$ for each smooth vector
+  bundle $E$ on $X$.
+\end{definition}
+
+\begin{lemma}
+  Let $E\to X$ be a smooth vector bundle on a complex manifold $X$.
+  Then there is an equivalence of categories
+  \begin{align}\label{eq:equivalence_dolbeault_operators}
+    \textbf{Dol}(E) \cong \textbf{HolBun}(E)
+  \end{align}
+  where $\textbf{HolBun}(E)$ is the category of holomorphic vector
+  bundles with underlying smooth vector bundle $E$.
+  \begin{proof}
+    \question{do we need to make assumptions about $X$ here? it is certainly true for $X$ a curve.}
+    \missingproof
+  \end{proof}
+\end{lemma}
+Hence we are justified in denoting a holomorphic vector bundle
+on $X$ by $(E,\dol)$ where $E$ is a smooth bundle and
+$\dol$ is a corresponding Dolbeault operator.
+
+\begin{remark}
+  What we want to be true is that the functor
+  \begin{align*}
+    \textbf{Dol}:\textbf{Bun}\to\textbf{CAT}
+  \end{align*}
+  is an full and faithful. At least we want it to be the case
+  that an equivalence $\textbf{Dol}(E)\cong\textbf{Dol}(F)$
+  yields an isomorphism $E\cong F$. But this is not obvious
+  and probably not true. For instance, if there is a smooth
+  vector bundle $E$ that does not admit a complex structure then
+  $\textbf{Dol}(E)$ is empty. It does not seem likely that such
+  bundles exist but there is at most one such bundle, up to iso,
+  for any given manifold. (This actually smells quite stacky,
+  as we are considering the category $\textbf{Dol}(X)$
+  with the forgetful functor to $\textbf{Bun}$ whose fibres
+  over $E\in\textbf{Bun}$ is exactly $\textbf{Dol}(E)$.)
+\end{remark}
+
+Thus, in order to study holomorphic bundles on $X$, it suffices
+to fix a real vector bundle $E$ of rank $n$ and degree $d$, and study
+the holomorphic structures on it, which is the same as studying
+Dolbeault operators on $E$. As we are interested in equivalence
+classes of complex structures, we need to consider equivalence
+classes in $\textbf{HolBun}(E)$. Such equivalence classes correspond
+under (\ref{eq:equivalence_dolbeault_operators}) to equivalence
+classes of Dolbeault operators on $E$. That is, we are interested
+in the quotient of the set of Dolbeault operators $\text{Dol}(E)$
+by the group $\Aut(E)$ acting by
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEdhbW1hKEUpIl0sWzIsMCwiXFxPbWVnYV57MCwxfShFKSJdLFswLDEsIlxcR2FtbWEoRSkiXSxbMiwxLCJcXE9tZWdhXnswLDF9KEUpIl0sWzIsMywiXFxiYXJcXHBhcnRpYWwiXSxbMCwxLCJcXHBoaVxcY2RvdFxcYmFyXFxwYXJ0aWFsIl0sWzAsMiwiXFxHYW1tYShcXHBoaSkiLDJdLFszLDEsIlxcT21lZ2FeezAsMX0oXFxwaGleey0xfSkiLDJdXQ==
+  \begin{tikzcd}
+    {\Gamma(X,E)} && {\Omega^{0,1}(E)} \\
+    {\Gamma(X,E)} && {\Omega^{0,1}(E)}
+    \arrow["\dol", from=2-1, to=2-3]
+    \arrow["\phi\cdot\dol", from=1-1, to=1-3]
+    \arrow["{\Gamma(\phi)}"', from=1-1, to=2-1]
+    \arrow["{\Omega^{0,1}(\phi^{-1})}"', from=2-3, to=1-3]
+  \end{tikzcd}
+\end{equation*}
+
+Noting that $\Dol(E)$ is an affine space modelled on
+$\Omega^{0,1}(\End(E))$ \cite{mccarthy2020} the quotient
+is a topological space. However, this space need not be Hausdorff.
+
+Write $\mu(E) = \deg(E)/\rank(E)$. We thus introduce the notion of
+stability:
+
+\begin{definition}
+  A holomorphic bundle $E\to X$ is \emph{stable} if,
+  for all proper non-zero holomorphic subbundles $F\subset E$,
+  \begin{align*}
+    \mu(F) < \mu(E).
+  \end{align*}
+\end{definition}
+
+Now let $\Dol(E)^s$ denote the set of Dolbeault operators corresponding
+to stable holomorphic structures on $E$. Then $\Dol(E)^s/\Aut(E)$
+is Hausdorff. Hence make the following definition:
+
+\begin{definition}
+  The moduli space of stable holomorphic vector bundles of rank $n$
+  and degree $d$ over a Riemannian surface $X$ is
+  \begin{align*}
+    \mathcal{N}^s_{n,d}(X,E) = \Dol(E)^s / \Aut(E).
+  \end{align*}
+\end{definition}
+
+\subsection{Holomorphic tangent bundle}
+
+A complex manifold $X$ of dimension $n$ may be regarded as a
+real manifold of dimension $2n$. Hence we have the real tangent bundle
+$TX$ on $X$ which we may complexify as $TX\otimes\mathbb{C}$.
+The complex structure $J:TX\to TX$ extends to this complexification
+by $J(u + iv) = J(u) + iJ(v)$. We have $J^2=-\text{Id}$ and hence
+eigenvalues $i$ and $-i$ which yield the decomposition
+\begin{align*}
+  TX\otimes\mathbb{C} = T^{1,0}X \oplus T^{0,1}X.
+\end{align*}
+The bundle $T^{1,0}X$ is holomorphic and referred to as the
+\emph{holomorphic tangent bundle}. As real vector bundles this
+is isomorphic to $TX$ via
+\begin{align*}
+  TX \longinc TX \otimes C \xlongrightarrow{\pi} T^{1,0}X.
+\end{align*}
+
+\subsection{Harmonic forms}
+
+\begin{lemma}
+  For every smooth vector bundle $E$ on a complex manifold $X$, there
+  is a canonical isomorphism
+  \begin{equation}
+    (E\otimes\bar E)^* \cong E^* \otimes \bar{E}^*.
+  \end{equation}
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+\begin{definition}
+  Let $E$ be a smooth vector bundle on a complex manifold $X$.
+  A \emph{hermitian metric} $h$ is a section of the bundle
+  $(E\otimes\bar E)^*$ such that, for every $p\in X$ and
+  $e,f\in E_p$,
+  \begin{itemize}
+    \item $h_p (e,\bar f) = \overline{h_p(f,\bar e)}$, and
+    \item if $e\neq 0$ then $h_p(e,\bar e)>0$.
+  \end{itemize}
+\end{definition}
+
+That is, there is a positive definite hermitian form
+$h_p: E_p\otimes \bar{E_p}\to\mathbb{C}$ at every point $p\in X$
+that varies smoothly. Note that the expression $h_p(e,\bar e) > 0$
+makes sense as $h_p(e,\bar e) = \overline{h_p(e,\bar e)}$,
+i.e. $h_p(e,\bar e)\in\mathbb{R}$.
+
+\begin{definition}
+  A \emph{hermitian manifold} $(X,h)$ is a complex manifold $X$
+  with a hermitian metric $h$ on the holomorphic tangent bundle.
+\end{definition}
+
+We are not going to care about any particular hermitian metric,
+but rather about their existence. Fortunately, our underlying
+manifold is a compact Riemann surface. This allows us to make use
+of the following:
+
+\begin{theorem}
+  Every smooth vector bundle on a compact complex manifold admits
+  a hermitian metric. In particular, every compact complex manifold admits
+  a hermitian metric.
+\end{theorem}
+
+Recall that the exterior derivative
+\begin{align*}
+  d : \Omega^k(X) \to \Omega^{k+1}(X)
+\end{align*}
+splits into maps
+\begin{align*}
+  \partial : \Omega^{p,q}(X) \to \Omega^{p+1,q}(X),\hspace{1cm}
+  \dol : \Omega^{p,q} \to \Omega^{p,q+1}(X).
+\end{align*}
+A hermitian metric on $X$ defines a pairing \question{how is this
+defined and what is its type?} on $\Omega^*(X)$. With respect to this
+pairing we have the adjoints
+\begin{align*}
+  \partial^* : \Omega^{p,q}(X) \to \Omega^{p-1,q}(X),\hspace{1cm}
+  \dol^* : \Omega^{p,q} \to \Omega^{p,q-1}(X).
+\end{align*}
+
+This lets us define harmonic forms, i.e. forms that vanish
+under the Laplacian:
+
+\begin{definition}
+  Let $X$ be a compact manifold with a choice of hermitian metric.
+  The \emph{harmonic} $(p,q)$-forms are \question{do we need a
+  K\"ahler structure for this to make sense?}
+  \begin{align*}
+    \mathcal H^{p,q}(X) = \ker(\dol) \cap\ker(\dol^*) \subseteq \Omega^{p,q}(X).
+  \end{align*}
+\end{definition}
+
+One may think of the spaces of harmonic forms as cohomology groups.
+For example, we have the following:
+
+\begin{theorem}[Poincar\'e duality]
+  Let $X$ be a K\"ahler manifold of dimension $n$. There is an
+  isomorphism
+  \begin{align*}
+    \mathcal H^{p,q}(X) \cong \mathcal H^{n-q,n-p}(X)^*
+  \end{align*}
+  given by the pairing
+  \begin{align*}
+    (\alpha,\beta)\mapsto \int_X \alpha\wedge\beta.
+  \end{align*}
+\end{theorem}
+
+Moreover, it is possible to use Dolbeault operators to define complexes
+and corresponding cohomologies:
+\begin{definition}
+  Let $X$ be a K\"ahler manifold. Then define the \emph{$(p,q)$-Dolbeault
+  cohomology group} by
+  \begin{align*}
+    H^{p,q}_{\dol}(X) := \frac{\ker(\dol:\Omega^{p,q}(X)\to\Omega^{p,q+1}(X))}{\im(\dol:\Omega^{p,q-1}(X)\to\Omega^{p,q}(X))}
+  \end{align*}
+  More generally, if $E$ is a holomorphic vector bundle then we have
+  cohomology with $E$-coefficients:
+  \begin{align*}
+    H^{p,q}(X,E) := \frac{\ker(\dol_E:\Omega^{p,q}(E)\to\Omega^{p,q+1}(E))}{\im(\dol_E:\Omega^{p,q-1}(E)\to\Omega^{p,q}(E))}.
+  \end{align*}
+\end{definition}
+
+This definition agrees with sheaf cohomology:
+
+\begin{theorem}[Dolbeault]
+  For $X$ K\"ahler and $E$ holomorphic,
+  \begin{align*}
+    H^{p,q}(X,E) \cong H^q(X,\Omega^p\otimes E).
+  \end{align*}
+\end{theorem}
+
+Moreover, this allows us to make precise the sense in which harmonic
+forms and cohomology are related:
+
+\begin{theorem}[Hodge]
+  Let $X$ be a compact K\"ahler manifold.
+  For any $[\alpha]\in H^{p,q}_{\dol}(X)$, there exists a unique
+  harmonic representative $\alpha'\in[\alpha]\cap\mathcal H^{p,q}(X)$.
+\end{theorem}
+
+
+\subsection{Classification}
+
+We aim to classify vector bundles on a Riemannian surface $\Sigma_g$
+of genus $g$. In light of \ref{thm:dim_rank_vector_bundles},
+a complex vector bundle $E\to\Sigma_g$ is classified by
+$\rank E$ and $\deg E$ where \question{what's $c_1$ here?}
+\begin{align*}
+  \deg E = c_1(E)[\Sigma_g].
+\end{align*}
+
+If $\rank E = 1$, $\deg E = 1$ then the complex vector bundles
+$E\to\Sigma_g$ corresponds to the complex torus of complex dimension
+$g$, i.e. $\Jac_0(\Sigma_g)=\mathbb{C}^g / \mathbb{Z}^{2g}$.
+
+If $\rank E = 1$ then the complex vector bundles $E\to\Sigma_g$
+correspond to the sheaf cohomology \question{what's sheaf cohomology?} group
+\begin{align*}
+  H^1(\Sigma_g,\mathcal O^*) \cong \mathbb{Z}\times\Jac_0(\Sigma_g).
+\end{align*}
+
+If $\rank E>1$ then things get hairy. For some reason \question{What is reallly happening here?}
+things stop being discrete (i.e. we don't get a distinct classification
+for each combination of rank and dimension). Instead we consider
+moduli spaces.
+
+\subsection{Bundles vs sections}
+
+\begin{lemma}
+  Let $X$ be a real manifold and $E$ and $F$ vector bundles on $X$.
+  Then bundle maps $E\to F$ are in one-to-one correspondence with
+  linear maps on global sections. That is, the map
+  \begin{align*}
+    \Hom(E,F) &\to \Hom(\Gamma(-,E),\Gamma(-,F))\\
+    f &\mapsto \Gamma(-,f)
+  \end{align*}
+  is a bijection.
+  \begin{proof}
+    \cite[Theorem 2.1]{conrad}
+  \end{proof}
+\end{lemma}
+
+\begin{lemma}
+  Let $X$ be a complex manifold and $E$ and $F$ be complex vector
+  bundles on $X$. Then there is a $\mathbb{C}$-linear isomorphism
+  \begin{align*}
+    \phi : \Gamma(X,E)\otimes\Gamma(X,F)\to \Gamma(X,E\otimes F).
+  \end{align*}
+  \begin{proof}
+    We may define $\phi$ by
+    \begin{align*}
+      \phi(s\otimes t)(x) = s(x)\otimes t(x).
+    \end{align*}
+    \missingproof
+  \end{proof}
+\end{lemma}
 
 \section{Geometric invariant theory}
 
@@ -108,7 +403,7 @@ Consider the action of $\mathbb{G}_m$ on $\affine{n}{}$.
 
 \todo{story}
 
-\subsection{Group schemes and actions}
+\subsection{Group schemes}
 
 \begin{definition}
   A \emph{group scheme} $G/S$ is a group object in $\Sch_S$.
@@ -119,7 +414,7 @@ In particular, a group scheme comes equipped with three maps:
   e:S\to G,\hspace{1cm} i:G\to G,\hspace{1cm} m:G\times G\to G.
 \end{align*}
 
-\begin{example}
+\begin{example}\label{ex:affine_algebraic_groups}
   In the affine case $G = \Spec R$ we may specify the multiplication
   and inverse maps in terms of $k$-algebra homomorphisms
   $m^* : R \to R\otimes R$ and $i^* : R\to R$.
@@ -138,6 +433,8 @@ In particular, a group scheme comes equipped with three maps:
       \end{align*}
   \end{enumerate}
 \end{example}
+
+\todo{maybe we should say a bit more about $GL_n$...}
 
 Note that the functor of points $G=\Hom(-,G):\op{\Sch}_S\to\Set$ induces a
 group structure on $G(T)$ for all schemes $T/S$. The induced multiplication
@@ -197,6 +494,8 @@ scheme $G_T/T$.
   groups. \missingproof
 \end{example}
 
+\subsection{Actions}
+
 \begin{definition}
   A \emph{action} of $G/S$ on $X/S$ is a morphism
   $\rho : G\times X\to X$ satisfying the usual laws with respect
@@ -235,6 +534,35 @@ $T'$-point of $X$. Finally, by universality of the pullback
 $X_T$ the maps $x:T'\to X$ and $T'\to T$ induce a unique map
 $T'\to X_T$.
 
+\begin{definition}
+  Let $G/S$ be a group scheme that acts on $X,Y/S$, respectively.
+  A morphism $f:X\to Y$ is \emph{$G$-equivariant} if it commutes
+  with the actions of $G$ on $X$ and $Y$ respectively, i.e.
+  the following commutes:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJHXFx0aW1lcyBYIl0sWzIsMSwiWSJdLFswLDEsIlgiXSxbMiwwLCJHXFx0aW1lcyBZIl0sWzIsMSwiZiIsMV0sWzAsMl0sWzAsMywiXFx0ZXh0e2lkfVxcdGltZXMgZiIsMV0sWzMsMV1d
+    \begin{tikzcd}
+      {G\times X} && {G\times Y} \\
+      X && Y
+      \arrow["{\text{id}\times f}"{description}, from=1-1, to=1-3]
+      \arrow[from=1-1, to=2-1]
+      \arrow[from=1-3, to=2-3]
+      \arrow["f"{description}, from=2-1, to=2-3]
+    \end{tikzcd}
+  \end{equation*}
+  A morphism $f:X\to Y$ is \emph{$G$-invariant} if the following
+  commutes:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJHXFx0aW1lcyBYIl0sWzIsMCwiWCJdLFs0LDAsIlkiXSxbMCwxLCJcXHJobyIsMSx7ImN1cnZlIjotMn1dLFswLDEsIlxccGkiLDEseyJjdXJ2ZSI6Mn1dLFsxLDIsImYiLDFdXQ==
+    \begin{tikzcd}
+      {G\times X} && X && Y
+      \arrow["\rho"{description}, curve={height=-12pt}, from=1-1, to=1-3]
+      \arrow["\pi"{description}, curve={height=12pt}, from=1-1, to=1-3]
+      \arrow["f"{description}, from=1-3, to=1-5]
+    \end{tikzcd}
+  \end{equation*}
+\end{definition}
+
 \subsection{Quotients}
 
 \begin{definition}
@@ -242,139 +570,169 @@ $T'\to X_T$.
   is
 \end{definition}
 
-\section{Symplectic quotients}
+\subsection{Linear representation}
 
-We aim to classify vector bundles on a Riemannian surface $\Sigma_g$
-of genus $g$. In light of \ref{thm:dim_rank_vector_bundles},
-a complex vector bundle $E\to\Sigma_g$ is classified by
-$\rank E$ and $\deg E$ where \question{what's $c_1$ here?}
-\begin{align*}
-  \deg E = c_1(E)[\Sigma_g].
-\end{align*}
-
-If $\rank E = 1$, $\deg E = 1$ then the complex vector bundles
-$E\to\Sigma_g$ corresponds to the complex torus of complex dimension
-$g$, i.e. $\Jac_0(\Sigma_g)=\mathbb{C}^g / \mathbb{Z}^{2g}$.
-
-If $\rank E = 1$ then the complex vector bundles $E\to\Sigma_g$
-correspond to the sheaf cohomology \question{what's sheaf cohomology?} group
-\begin{align*}
-  H^1(\Sigma_g,\mathcal O^*) \cong \mathbb{Z}\times\Jac_0(\Sigma_g).
-\end{align*}
-
-If $\rank E>1$ then things get hairy. For some reason \question{What is reallly happening here?}
-things stop being discrete (i.e. we don't get a distinct classification
-for each combination of rank and dimension). Instead we consider
-moduli spaces.
-
-\subsection{Dolbeault operator}
-
-\begin{lemma}
-  Let $E\to X$ be a smooth complex vector bundle $E\to X$ on a complex
-  manifold. Then
-  \begin{align*}
-    \Omega^{0,1}(E) = \Omega^{0,1}(X)\otimes\Gamma(E).
-  \end{align*}
-  \begin{proof}
-    Let $\omega\in\Omega^{0,1}(X)$ and $s\in\Gamma(E)$. Define
-    $t(s,\omega)\in\Omega^{0,1}=\Gamma({\left({T^{0,1}}\right)^* E})$
-    by
-    \begin{equation*}
-      % https://q.uiver.app/#q=WzAsNCxbMCwwLCJFIl0sWzIsMCwiWCJdLFs0LDAsIihUXnswLDF9KV4qIFgiXSxbNiwwLCIoVF57MCwxfSleKkUiXSxbMCwxLCJcXHBpIl0sWzEsMiwiXFxvbWVnYSJdLFsyLDMsIihUXnswLDF9KV4qIHMiXV0=
-      \begin{tikzcd}
-        E && X && {(T^{0,1})^* X} && {(T^{0,1})^*E}
-        \arrow["\pi", from=1-1, to=1-3]
-        \arrow["\omega", from=1-3, to=1-5]
-        \arrow["{(T^{0,1})^* s}", from=1-5, to=1-7]
-      \end{tikzcd}
-    \end{equation*}
-    This defines a bilinear map
-    \begin{align*}
-      t : \Omega^{0,1} X \times \Gamma(E) \to \Omega^{0,1}(E).
-    \end{align*}
-    yadda yadda
-    \missingproof
-  \end{proof}
-\end{lemma}
+Fix a $k$-vector space $V$ and an algebraic group $G$ over $k$,
+i.e. a group scheme $G/\Spec k$. Then the algebraic group
+$GL(V)$ then the corresponding functor of points sends a $k$-algebra
+$R$ to $GL(V)(R) = \Aut_R(V\otimes_k R)$.
 
 \begin{definition}
-  A \emph{Dolbeault operator} on a smooth complex vector bundle
-  $E\to X$ on a complex manifold is a $\mathbb{C}$-linear operator
-  \begin{align*}
-    \bar\partial_E : \Gamma(E) \to \Omega^{0,1}(E)
-  \end{align*}
-  such that
-  \begin{enumerate}
-    \item $\bar\partial_E^2 = 0$,
-    \item $\bar\partial_E(fs) = \bar\partial f \otimes s + f\bar\partial_E s$
-      for $s\in\Gamma(E)$ and $f\in\Omega^0(X)$.
-  \end{enumerate}
+  A \emph{linear representation} of $G$ on $V$ is a homomorphism
+  of group-valued functors $G\to GL(V)$.
 \end{definition}
 
-Two Dolbeault operators $\bar\partial_1$ and $\bar\partial_2$ on
-$E\to X$ are equivalent if there exists $\phi\in\Aut(E)$ such that
-the following commutes:
+If $V$ is finite-dimensional then $GL(V)$ is
+affine~\cite[Example 3.3 (4)]{hoskins} and a linear
+representation is equivalent to a homomorphism of algebraic groups
+$G\to GL(V)$.
+
+If $G$ is affine, then the identity in $G(\mathcal O(G))$
+corresponds to a $\mathcal O(G)$-linear automorphism
+of $V\otimes_k\mathcal O(G)$. Note that such an endomorphism
+is uniquely determined by its restriction to $V$, i.e. by
+a $\mathcal O(G)$-linear morphism
+\begin{align*}
+  \rho^* : V\to V\otimes_k \mathcal O(G)
+\end{align*}
+which is referred to as a \emph{co-module structure on $V$}. In
+fact such co-module structures are equivalent to linear
+representations of affine algebraic
+groups.~\cite[Section 3.1]{hoskins}
+
+\begin{definition}
+  Let $\rho : G\to GL(V)$ be a linear representation. A
+  subspace $V'\subseteq V$ is \emph{$G$-invariant} if
+  $\rho^*(V') \subseteq V'\otimes_k\mathcal O(G)$
+  and a vector $v\in V$ is \emph{$G$-invariant} if
+  $\rho^*(v) = v\otimes 1$.
+
+  Denote by $V^G\subseteq V$ the subspace of $G$-invariant vectors.
+\end{definition}
+
+\subsection{Reductive groups}
+
+\begin{definition}
+  An affine algebraic group is \emph{unipotent} if every non-trivial
+  linear representation $\rho:G\to GL(V)$ has a non-zero $G$-invariant
+  vector.
+\end{definition}
+
+\begin{definition}
+  An affine algebraic group is is \emph{reductive} if it is smooth
+  and there are no non-trivial smooth normal unipotent algebraic
+  subgroups.
+\end{definition}
+
+That is, an affine algebraic group $G$ is reductive if, for every
+non-trivial smooth normal algebraic subgroup $H\triangleleft G$
+and every linear representation $\rho : H\to GL(V)$,
+$\rho^*(v) = v\otimes 1$ if, and only if, $v=0$.
+
+\subsection{Projective quotients}
+
+\begin{definition}
+  Let $G$ be an affine algebraic group acting on a scheme $X$
+  via $\rho : G\times X\to X$. A \emph{linearisation} of the
+  action of $G$ on $X$ on a line bundle $\mathcal L$ is
+  an isormorphism
+  \begin{align*}
+    \Phi : \rho^* \mathcal L  \to \pi^*_X\mathcal L
+  \end{align*}
+  satisfying the cocycle condition
+  \question{maybe it would be good to talk about this condition a
+    bit more? \cite{hoskins} does it using geometric bundles but
+    i think sheaves are nicer; the question is how to present
+  things in terms of sheaves in the nicest possible way?}
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNixbMiwwLCIoXFx0ZXh0e2lkfVxcdGltZXNcXHJobyleKlxccGleKl9YXFxtYXRoY2FsIEwiXSxbMCwwLCIoXFx0ZXh0e2lkfVxcdGltZXNcXHJobyleKlxccmhvXipcXG1hdGhjYWwgTCJdLFs0LDEsIlxccGleKl97MjN9XFxwaV9YXipcXG1hdGhjYWwgTCJdLFsyLDEsIlxccGlfezIzfV4qXFxyaG9eKlxcbWF0aGNhbCBMIl0sWzAsMiwiKFxcbXVcXHRpbWVzXFx0ZXh0e2lkfSleKlxccmhvXipcXG1hdGhjYWwgTCJdLFs0LDIsIihcXG11XFx0aW1lc1xcdGV4dHtpZH0pXipcXHBpX1heKlxcbWF0aGNhbCBMIl0sWzEsMCwiKFxcdGV4dHtpZH1cXHRpbWVzXFxyaG8pXipcXFBoaSJdLFszLDIsIlxccGleKl97MjN9XFxQaGkiXSxbNCwxLCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDAsIiIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzQsNSwiKFxcbXVcXHRpbWVzXFx0ZXh0e2lkfSleKlxcUGhpIiwyXSxbNSwyLCIiLDEseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+    \begin{tikzcd}
+      {(\text{id}\times\rho)^*\rho^*\mathcal L} && {(\text{id}\times\rho)^*\pi^*_X\mathcal L} \\
+                                                && {\pi_{23}^*\rho^*\mathcal L} && {\pi^*_{23}\pi_X^*\mathcal L} \\
+      {(\mu\times\text{id})^*\rho^*\mathcal L} &&&& {(\mu\times\text{id})^*\pi_X^*\mathcal L}
+      \arrow["{(\text{id}\times\rho)^*\Phi}", from=1-1, to=1-3]
+      \arrow[Rightarrow, no head, from=2-3, to=1-3]
+      \arrow["{\pi^*_{23}\Phi}", from=2-3, to=2-5]
+      \arrow[Rightarrow, no head, from=3-1, to=1-1]
+      \arrow["{(\mu\times\text{id})^*\Phi}"', from=3-1, to=3-5]
+      \arrow[Rightarrow, no head, from=3-5, to=2-5]
+    \end{tikzcd}
+  \end{equation*}
+\end{definition}
+
+If we have an affine algebraic group $G$ and an action
+$\rho : G\times X\to X$ then the map
+\question{what's sheaf cohomology}
+\begin{align*}
+  H^0(X,\mathcal L)
+  \xlongrightarrow{\rho^*}
+  H^0(G\times X,\rho^*\mathcal L)
+  \cong
+  H^0(G\times X,\pi_X^*\mathcal L)
+  \cong
+  H^0(G,\mathcal O_G)
+  \otimes
+  H^0(X,\mathcal L)
+\end{align*}
+defines a co-module structure
+\begin{align*}
+  H^0(X,\mathcal L)\to H^0(X,\mathcal L)\otimes \mathcal O(G).
+\end{align*}
+That is, we have a natural linear representation
+$G\to GL(H^0(X,\mathcal L))$ induced by the linearisation.
+\cite[Lemma 5.19]{hoskins}
+
+Now there is an evaluation map
+\begin{align}\label{eq:evaluation_map}
+  H^0(X,\mathcal L) \otimes_k \mathcal O_X \to \mathcal L
+\end{align}
+which, for each open $U\subseteq X$, is given by given by
+$f\otimes_k \lambda \mapsto \lambda\restrict{f}{U}$.
+This is $G$-equivariant \cite[Remark 5.20]{hoskins},
+which I understand to mean that the following commutes:
+\question{what are the actions here, exactly?}
 \begin{equation*}
-  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEdhbW1hKEUpIl0sWzIsMCwiXFxPbWVnYV57MCwxfShFKSJdLFswLDEsIlxcR2FtbWEoRSkiXSxbMiwxLCJcXE9tZWdhXnswLDF9KEUpIl0sWzIsMywiXFxiYXJcXHBhcnRpYWxfMiJdLFswLDEsIlxcYmFyXFxwYXJ0aWFsXzEiXSxbMCwyLCJcXEdhbW1hKFxccGhpKSIsMl0sWzEsMywiXFxPbWVnYV57MCwxfShcXHBoaSkiXV0=
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJHXFx0aW1lc1xcbWF0aGJmIFYoSF4wKFgsXFxtYXRoY2FsIEwpXFxvdGltZXNfa1xcbWF0aGNhbCBPX1gpIl0sWzIsMCwiR1xcdGltZXNcXG1hdGhiZiBWKFxcbWF0aGNhbCBMKSJdLFswLDEsIlxcbWF0aGJmIFYoSF4wKFgsXFxtYXRoY2FsIEwpXFxvdGltZXNfa1xcbWF0aGNhbCBPX1gpIl0sWzIsMSwiXFxtYXRoYmYgVihcXG1hdGhjYWwgTCkiXSxbMCwxXSxbMiwzXSxbMCwyXSxbMSwzXV0=
   \begin{tikzcd}
-    {\Gamma(E)} && {\Omega^{0,1}(E)} \\
-    {\Gamma(E)} && {\Omega^{0,1}(E)}
-    \arrow["{\bar\partial_2}", from=2-1, to=2-3]
-    \arrow["{\bar\partial_1}", from=1-1, to=1-3]
-    \arrow["{\Gamma(\phi)}"', from=1-1, to=2-1]
-    \arrow["{\Omega^{0,1}(\phi)}", from=1-3, to=2-3]
+    {G\times\mathbf V(H^0(X,\mathcal L)\otimes_k\mathcal O_X)} && {G\times\mathbf V(\mathcal L)} \\
+    {\mathbf V(H^0(X,\mathcal L)\otimes_k\mathcal O_X)} && {\mathbf V(\mathcal L)}
+    \arrow[from=1-1, to=1-3]
+    \arrow[from=1-1, to=2-1]
+    \arrow[from=1-3, to=2-3]
+    \arrow[from=2-1, to=2-3]
   \end{tikzcd}
 \end{equation*}
-It turns out that there is a one-to-one correspondence between
-holomorphic structures on a smooth complex vector bundle $E\to\Sigma_g$
-and Dolbeault operators on $E$ up to equivalence.
+Here $\mathbf V = \Spec(\Sym(-))$ is the contravariant functor
+$\QCoh(X)^{\text{op}}\to\Sch/X$ which yields an equivalence
+between locally free $\mathcal O_X$-modules of rank $n$ and
+geometric vector bundles of rank $n$ over $X$.
+\cite[Proposition 11.7]{gortz2010}
 
-More precisely, fix a smooth complex vector bundle $E\to\Sigma_G$
-and let $\Dol(E)$ denote the set of all Dolbeault operators on $E$.
-Now $\Aut(E)$ acts on $\Dol(E)$ by
-\begin{equation*}
-  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEdhbW1hKEUpIl0sWzIsMCwiXFxPbWVnYV57MCwxfShFKSJdLFswLDEsIlxcR2FtbWEoRSkiXSxbMiwxLCJcXE9tZWdhXnswLDF9KEUpIl0sWzIsMywiXFxiYXJcXHBhcnRpYWwiXSxbMCwxLCJcXHBoaVxcY2RvdFxcYmFyXFxwYXJ0aWFsIl0sWzAsMiwiXFxHYW1tYShcXHBoaSkiLDJdLFszLDEsIlxcT21lZ2FeezAsMX0oXFxwaGleey0xfSkiLDJdXQ==
-  \begin{tikzcd}
-    {\Gamma(E)} && {\Omega^{0,1}(E)} \\
-    {\Gamma(E)} && {\Omega^{0,1}(E)}
-    \arrow["\bar\partial", from=2-1, to=2-3]
-    \arrow["\phi\cdot\bar\partial", from=1-1, to=1-3]
-    \arrow["{\Gamma(\phi)}"', from=1-1, to=2-1]
-    \arrow["{\Omega^{0,1}(\phi^{-1})}"', from=2-3, to=1-3]
-  \end{tikzcd}
-\end{equation*}
-
-Now the holomorphic structures on $E$ up to isomorphism correspond to
-elements of \question{what's the map?}
-\begin{align*}
-  \Dol(E)/\Aut(E).
-\end{align*}
-Noting that $\Dol(E)$ is an affine space modelled on $\Omega^{0,1}(\End(E))$
-\cite{mccarthy2020} \question{what does this mean?} the quotient
-is a topological space. However, this space need not be Hausdorff.
-
-Write $\mu(E) = \deg(E)/\rank(E)$. We thus introduce the notion of
-stability:
-
-\begin{definition}
-  A holomorphic bundle $E\to\Sigma_g$ is \emph{stable} if,
-  for all proper non-zero holomorphic subbundles $F\subset E$,
-  \begin{align*}
-    \mu(F) < \mu(E).
-  \end{align*}
+\begin{definition}[{\cite[Definition 5.1]{hoskins}}]
+  Let $G$ be a reductive \cite[{Definition 4.8}]{hoskins}
+  algebraic group that acts on a projective
+  scheme $X$. A \emph{linear $G$-equivariant projective
+  embedding of $X$} consists of a group homomorphism
+  $G \to GL_{n+1}$ and a $G$-equivariant embedding
+  $X\inc\projective{n}{S}$, i.e. we have the following
+  diagram:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNSxbMCwxLCJYIl0sWzQsMSwiXFxtYXRoYmYgUF5uIl0sWzAsMCwiR1xcdGltZXMgWCJdLFsyLDAsIkdcXHRpbWVzXFxtYXRoYmYgUF5uIl0sWzQsMCwiR0xfblxcdGltZXNcXG1hdGhiZiBQXm4iXSxbMCwxLCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsyLDBdLFsyLDMsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzMsNF0sWzQsMV1d
+    \begin{tikzcd}
+      {G\times X} && {G\times\mathbf P^n_S} && {GL_{n+1}\times\mathbf P^n_S} \\
+      X &&&& {\mathbf P^n}
+      \arrow[hook, from=1-1, to=1-3]
+      \arrow[from=1-1, to=2-1]
+      \arrow[from=1-3, to=1-5]
+      \arrow[from=1-5, to=2-5]
+      \arrow[hook, from=2-1, to=2-5]
+    \end{tikzcd}
+  \end{equation*}
 \end{definition}
 
-Now let $\Dol(E)^s$ denote the set of Dolbeault operators corresponding
-to stable holomorphic structures on $E$. Then $\Dol(E)^s/\Aut(E)$
-is Hausdorff. Hence make the following definition:
+\todo{make precise the action of $GL_n$ on $\mathbf P^n$}
 
-\begin{definition}
-  The moduli space of stable holomorphic vector bundles of rank $n$
-  and degree $d$ over a Riemannian surface $\Sigma_g$ is
-  \begin{align*}
-    \mathcal N^g_{n,d} = \Dol(E)^s / \Aut(E).
-  \end{align*}
-\end{definition}
+
 
 \section{Moduli problem}
 
@@ -545,7 +903,7 @@ a coherent sheaf $\mathcal E$ on $X$, and another scheme $T/S$.
 
 \begin{lemma}
   If $\mathcal F\in\Coh(X_T)$ is flat over $T$ and
-  $q:\mathcal O_{X_T}^{\oplus k} \surj F$ is surjective and
+  $q:\mathcal O_{X_T}^{\oplus k} \surj\mathcal F$ is surjective and
   $\mathcal O_{X_T}$-linear then $\Ker(q)\in\Coh(X_T)$ is
   finite locally free.
   \begin{proof}
@@ -599,7 +957,7 @@ $\langle\mathcal F,q\rangle$, we obtain a diagram
 \begin{equation*}
   % https://q.uiver.app/#q=WzAsMyxbMCwwLCJFX3tUJ30iXSxbMSwwLCIoXFx0ZXh0e2lkfVxcdGltZXNfU2YpXiogXFxtYXRoY2FsIEVfVCJdLFszLDAsIihcXHRleHR7aWR9XFx0aW1lc19TZileKlxcbWF0aGNhbCBGIl0sWzEsMiwiKFxcdGV4dHtpZH1cXHRpbWVzX1NmKV4qcSJdLFswLDEsIiIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
   \begin{tikzcd}
-    {\mathcal E_{T'}} & {(\text{id}\times_Sf)^* \mathcal \mathcal E_T} && {(\text{id}\times_Sf)^*\mathcal F}
+    {\mathcal E_{T'}} & {(\text{id}\times_Sf)^* \mathcal E_T} && {(\text{id}\times_Sf)^*\mathcal F}
     \arrow["{(\text{id}\times_Sf)^*q}", from=1-2, to=1-4]
     \arrow[Rightarrow, no head, from=1-1, to=1-2]
   \end{tikzcd}
@@ -625,7 +983,7 @@ We aim to define the moduli space of (semi)stable bundles on a
 suitable curve. We will do so without justification. For details
 see \cite[section 8.8]{hoskins}.
 
-Fix a connected smooth projective curve $C$ of $g\geq 2$,
+Fix a connected smooth projective curve $C$ of genus $g\geq 2$,
 $n\geq 1$, and $d > n(2g - 1)$. Define
 $N:=d+n(1-g)$ and denote by
 \begin{align*}
@@ -633,7 +991,7 @@ $N:=d+n(1-g)$ and denote by
 \end{align*}
 the open subscheme of quotients $q:\mathcal O^N_X\surj\mathcal F$
 such that $\mathcal F$ is (semi)stable and locally free and
-$H^0(q)$ is an isomorphism.
+$H^0(q)$ is an isomorphism. \question{why do we need this condition?}
 
 As $Q$ is a fine moduli space, we have a universal quotient
 $q:\mathcal O_{Q\times X}^N\surj \mathcal U$
@@ -641,45 +999,114 @@ and its restriction to $Q$:
 \begin{align*}
   q^s : \mathcal O_{Q^s\times X}^N\surj \restrict{\mathcal U}{Q^s} =: \mathcal U^s.
 \end{align*}
-
-Now define the action
+A group action
 \begin{align*}
   \rho : GL_N \times Q \to Q
 \end{align*}
-under the isomorphism $Q(GL_N\times Q) \cong \Hom(GL_N\times Q,Q)$
-by the quotient family
-\begin{align*}
-  \mathcal O^N_{GL_N\times Q\times X}
-  = k^N \otimes \mathcal O_{GL_N\times Q\times X}
+is an element of $\Hom(GL_N\times Q,Q)$ and hence corresponds to a
+quotient of $\mathcal O_{GL_N\times Q\times X}$ which we construct
+as:
+\begin{align}
+  \label{eq:stable_quot_gln_action}
+  \mathcal O^n_{GL_N\times Q\times X}
   \xlongrightarrow{\pi^*_{GL_N}\tau}
-  k^N \otimes \mathcal O_{GL_N\times Q\times X}
+  \mathcal O^N_{GL_N\times Q\times X}
   \xlongrightarrow{\pi^*_{Q\times X} q}
   \pi^*_{Q\times X}\mathcal U
+\end{align}
+where $\pi_{GL_N}$ and $\pi_{Q\times X}$ are the obvious projections
+and the sheaf isomorphism
+\begin{align*}
+  \tau : \mathcal O_{GL_N}^N \to \mathcal O_{GL_N}^N
 \end{align*}
+arises from the inverse map $i : GL_N \to GL_N$. On $k$-points this
+action is given by $g\cdot q := q\circ {g}^{-1}$.
+
+\begin{lemma}[{\cite[Lemma 8.49]{hoskins}}]
+  The orbits in $R^s\subseteq Q$ under the action \ref{eq:stable_quot_gln_action} are in bijective correspondence with isomorphism
+  classes of (semi)stable locally free sheaves on $X$ with invariants
+  $(n,d)$.
+\end{lemma}
+
+\begin{itemize}
+  \item restrict to $SL_N$ action
+  \item linearise $SL_N$ action
+  \item construct coarse moduli space
+  \item write down conditions for when it is fine moduli space and
+    non-existence result otherwise
+\end{itemize}
+
+\begin{remark}
+  It is worth investigating how we have captured holomorphic bundles
+  in general. In particular, how does an isomorphism class of
+  quotients
+  \begin{align*}
+    q : \mathcal O^N_{X\times T} \to \mathcal F
+  \end{align*}
+  in $\Coh(X\times T)$ constitute a bundle on $X$? Firstly,
+  we observed that the kernel of such a quotient is a locally
+  free sheaf of rank $N$, \todo{actually this is more involved because we used $n$ and $d$} hence a geometric vector bundle on
+  $X\times T$. Secondly, note if we choose $T=\Spec\mathbb{C}$ then
+  $Q^s(T)$ does indeed consist of holomorphic bundles on
+  $X\times\Spec\mathbb{C}=X$. Thus $\mathbb{C}$-points of
+  $Q^s$ are holomorphic bundles on $X$.
+\end{remark}
 
 \section{Higgs bundles}
 
 \subsection{Definition}
 
 \begin{definition}
-  A \emph{Higgs bundle} consists of
-  \begin{itemize}
-    \item a holomorphic vector bundle $E\to\Sigma_g$,
-    \item
-  \end{itemize}
+  A \emph{Higgs bundle $(E,\phi)$} on a Riemann surface
+  $X$ consists of a holomorphic vector bundle $E$ on $X$
+  and a holomorphic bundle map $\phi : E \to E \otimes K$ where
+  $K:=\Lambda^n T^*_{0,1} X$ is the canonical line bundle on $X$.
 \end{definition}
 
-\subsection{Stability}
+Note that the holomorphic bundle map is the same as a section
+in $\Gamma(X,\End E \otimes K)$. To see this, note that
+$\End E = E^* \otimes E$ so $\phi$ induces a bundle map
+\begin{align*}
+  \mathbb{C}\times X \to \End E \otimes K.
+\end{align*}
+This induces a map of $\mathbb{C}$-algebras
+\begin{align*}
+  \Gamma(X,\mathbb{C}\times X) \to \Gamma(X,\End(E)\otimes K)
+\end{align*}
+which is uniquely determined by the image of the constant function
+$x\mapsto 1$.
 
-A Higgs bundle is said to be stable if its subbundles statisfy certain
-properties. Before we can make this precise, we need to define
-vector subbundles and their invariance with respect to the Higgs field.
+\subsection{Higgs bundles as cotangent vectors of holomorphic bundles}
 
-\subsection{$\mathcal M$ vs $\mathcal N$}
+Fix a smooth bundle $E$ on a compact Riemann surface $X$. Write
+$\mathcal N = \mathcal N^s(X,E)$ and consider a holomorphic structure
+$\dol\in\mathcal N$. Then the cotangent space of $\mathcal N$ at
+$\dol$ is
+\begin{align}\label{eq:tangent_space_of_n}
+  T^*_{\dol} \mathcal N = I_{\dol} / I^2_{\dol}
+\end{align}
+where $I_{\dol}\subseteq \mathcal O(\mathcal N)$ is the ideal
+of holomorphic functions on $\mathcal N$ vanishing at $\dol$.
+Note that we have a map \todo{actually we don't really... the RHS is
+\emph{linear} maps}
+\begin{align*}
+  I_{\dol} \to (E^*(X)\otimes E(X)\otimes\Omega^{0,1}(X))^*.
+\end{align*}
+Via the isomorphism of bundles
+\begin{align*}
+  (E^* \otimes E \otimes \Omega^{0,1})^*
+  \cong E^* \otimes E \otimes \Omega^{1,0}
+  \cong \End E \otimes K
+\end{align*}
+this yields a map
+\begin{align}
+  I_{\dol} \to H^0(X,\End E\otimes K).
+\end{align}
+Note that $I_{\dol}$ has a complex vector space structure
+with respect to which this map is $\mathbb{C}$-linear.
+Let us verify that this gives a well-defined map on the quotient
+(\ref{eq:tangent_space_of_n}).
 
-\begin{proposition}
-  $T^*\mathcal N^g_{n,d}$ is an open dense subset of $\mathcal M^g_{n,d}$.
-\end{proposition}
 
 \section{Non-abelian Hodge theory}
 

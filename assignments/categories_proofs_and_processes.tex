@@ -659,7 +659,7 @@ morphisms agree. Unfortunately,
 rigorous pursuit of this idea is beyond the scope of this
 report.
 
-\section{Monoids are categories}
+\section{Monoids are categories}\label{sec:monoids_are_categories}
 
 We have seen that one may generalise monoidal categories to bicategories.
 Let us now turn our attention to a simpler example. It turns out that
@@ -862,17 +862,17 @@ replace the cartesian structure with an arbitrary monoidal structure:
   $e:I\to M$ and $m:M\otimes M\to M$ in $\mathcal C$
   such that the following commute:
   \begin{equation}\label{eq:monoid_axioms}
-    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJJXFxvdGltZXMgTSJdLFsyLDAsIk1cXG90aW1lcyBNIl0sWzIsMiwiTSJdLFs0LDAsIk1cXG90aW1lcyBJIl0sWzAsMSwiZVxcb3RpbWVzIE0iXSxbMSwyLCJtIl0sWzAsMiwiXFxsYW1iZGEiLDJdLFszLDEsIk1cXG90aW1lcyBlIiwyXSxbMywyLCJcXHJobyJdXQ==
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJJXFxvdGltZXMgTSJdLFsxLDAsIk1cXG90aW1lcyBNIl0sWzEsMSwiTSJdLFsyLDAsIk1cXG90aW1lcyBJIl0sWzAsMSwiZVxcb3RpbWVzIE0iXSxbMSwyLCJtIl0sWzAsMiwiXFxsYW1iZGEiLDJdLFszLDEsIk1cXG90aW1lcyBlIiwyXSxbMywyLCJcXHJobyJdXQ==
     \begin{tikzcd}
-      {I\otimes M} && {M\otimes M} && {M\otimes I} \\
-      \\
-                   && M
-                   \arrow["{e\otimes M}", from=1-1, to=1-3]
-                   \arrow["m", from=1-3, to=3-3]
-                   \arrow["\lambda"', from=1-1, to=3-3]
-                   \arrow["{M\otimes e}"', from=1-5, to=1-3]
-                   \arrow["\rho", from=1-5, to=3-3]
-    \end{tikzcd}, \hspace{1cm}
+      {I\otimes M} & {M\otimes M} & {M\otimes I} \\
+                   & M
+                   \arrow["{e\otimes M}", from=1-1, to=1-2]
+                   \arrow["\lambda"', from=1-1, to=2-2]
+                   \arrow["m", from=1-2, to=2-2]
+                   \arrow["{M\otimes e}"', from=1-3, to=1-2]
+                   \arrow["\rho", from=1-3, to=2-2]
+    \end{tikzcd}
+    , \hspace{1cm}
     % https://q.uiver.app/#q=WzAsNSxbMCwwLCIoTVxcb3RpbWVzIE0pXFxvdGltZXMgTSJdLFswLDEsIk1cXG90aW1lcyBNIl0sWzEsMiwiTSJdLFsyLDEsIk1cXG90aW1lcyBNIl0sWzIsMCwiTVxcb3RpbWVzKE1cXG90aW1lcyBNKSJdLFswLDEsIm1cXG90aW1lcyBNIiwyXSxbMSwyLCJtIiwyXSxbMywyLCJtIl0sWzAsNCwiXFxhbHBoYSJdLFs0LDMsIk1cXG90aW1lcyBtIl1d
     \begin{tikzcd}
       {(M\otimes M)\otimes M} && {M\otimes(M\otimes M)} \\
@@ -1001,9 +1001,9 @@ well with the additional structure:
   \begin{equation}\label{eq:monad_map_laws}
     % https://q.uiver.app/#q=WzAsNyxbMCwwLCJUXjIiXSxbMCwxLCJUIl0sWzIsMSwiVCciXSxbMiwwLCIoVCcpXjIiXSxbNSwwLCJcXHRleHR7SWR9Il0sWzQsMSwiVCJdLFs2LDEsIlQnIl0sWzAsMywiXFxwaGleMiJdLFsxLDIsIlxccGhpIl0sWzAsMSwiXFxtdSIsMl0sWzMsMiwiXFxtdSciXSxbNCw1LCJcXGV0YSIsMl0sWzUsNiwiXFxwaGkiLDJdLFs0LDYsIlxcZXRhJyJdXQ==
     \begin{tikzcd}
-      {T^2} && {(T')^2} &&& {\text{Id}} \\
+      {T\circ T} && {T'\circ T'} &&& {\text{Id}} \\
       T && {T'} && T && {T'}
-      \arrow["{\phi^2}", from=1-1, to=1-3]
+      \arrow["{\phi\circ\phi}", from=1-1, to=1-3]
       \arrow["\phi", from=2-1, to=2-3]
       \arrow["\mu"', from=1-1, to=2-1]
       \arrow["{\mu'}", from=1-3, to=2-3]
@@ -1014,12 +1014,12 @@ well with the additional structure:
   \end{equation}
 \end{definition}
 
-Here the natural transformation $\phi^2 : T^2 \to (T')^2$ has
-components
+Here the natural transformation $\phi\circ\phi : T\circ T\to T'\circ T'$
+has components
 \begin{align*}
-  T^2 X = T(TX)
+  T(TX)
   \xlongrightarrow{\phi_{TX}} T'(TX)
-  \xlongrightarrow{T'\phi_X} T'(T'X) = (T')^2 X.
+  \xlongrightarrow{T'\phi_X} T'(T'X)
 \end{align*}
 It is straightforward to verify that the composition of monad
 maps yields a monad map. Hence we have a category $\textbf{Monad}(\mathcal C)$.
