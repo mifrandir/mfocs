@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass{report}
 \usepackage{assignment}
 \addbibresource{higgs.bib}
 \begin{document}
@@ -9,6 +9,42 @@
 
 \tableofcontents
 \pagebreak
+
+\chapter*{Open questions}
+
+\begin{enumerate}
+  \item Are the analytic spaces $\mathcal N^{an}$
+    and $\mathcal N$ isomorphic?
+    \begin{itemize}
+      \item What is a basis of $\mathcal N$? Maybe a suitable way
+        to obtain the complex manifold structure on
+        $\mathcal N = \Dol(E)^s / \Aut(E)$ is to observe that
+        $\Dol(E)$ is an affine space modelled on
+        $\Omega^{0,1}(\End E)$, the same is true for $\Dol(E)^s$,
+        and $g\cdot \dol_E = \dol_E + \alpha$ if, and only if,
+        $g = e$ and $\alpha = 0$.
+      \item Is the map
+        \begin{align*}
+          f : \mathcal N^{an} &\to \mathcal N \\
+          (q : \mathcal O^r_X \surj \mathcal F) &\mapsto \mathbf V(\Ker(q))
+        \end{align*}
+        continuous?
+      \item What values does $f_*\mathcal O_{\mathcal N}^{an}$ take on
+        basis elements?
+      \item What are the stalks of $\mathcal O_{\mathcal N}$ and
+        $\mathcal O_{\mathcal N}^{an}$, respectively?
+      \item What is a suitable map
+        \begin{align*}
+          f^\sharp : \mathcal O_N \to f_*\mathcal O_N^{an}?
+        \end{align*}
+        Is it a map of locally ringed spaces?
+      \item Does the map induce an isomorphism of stalks?
+    \end{itemize}
+\end{enumerate}
+
+\setcounter{chapter}{-1}
+
+\chapter{Prerequisites}
 
 \section{Complex vector bundles}
 
@@ -78,13 +114,13 @@ tangent bundle:
   If $E$ is holomorphic then so is $\End(E)$.
 \end{example}
 
-\subsection{Dolbeault operator}
+\subsection{Dolbeault operator}\label{sec:dolbeault_operator}
 
 \begin{definition}
   A \emph{Dolbeault operator} on a smooth vector bundle
   $E$ on a complex manifold $X$ is a $\mathbb{C}$-linear operator
   \begin{align*}
-    \dol_E : \Gamma(X,E) \to \Omega^{0,1}(E)
+    \dol_E : \Gamma(X,E) \to \Omega^{0,1}(X,E)
   \end{align*}
   such that
   \begin{enumerate}
@@ -99,11 +135,11 @@ tangent bundle:
   \begin{equation*}
     % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEdhbW1hKFgsRSkiXSxbMiwwLCJcXE9tZWdhXnswLDF9KEUpIl0sWzAsMSwiXFxHYW1tYShYLEYpIl0sWzIsMSwiXFxPbWVnYV57MCwxfShGKSJdLFsyLDMsIlxcYmFyXFxwYXJ0aWFsXzIiXSxbMCwxLCJcXGJhclxccGFydGlhbF8xIl0sWzAsMiwiXFxHYW1tYShYLFxccGhpKSIsMl0sWzEsMywiXFxPbWVnYV57MCwxfShcXHBoaSkiXV0=
     \begin{tikzcd}
-      {\Gamma(X,E)} && {\Omega^{0,1}(E)} \\
-      {\Gamma(X,F)} && {\Omega^{0,1}(F)}
+      {\Gamma(X,E)} && {\Omega^{0,1}(X,E)} \\
+      {\Gamma(X,F)} && {\Omega^{0,1}(X,F)}
       \arrow["{\dol_1}", from=1-1, to=1-3]
-      \arrow["{\Gamma(X,\phi)}"', from=1-1, to=2-1]
-      \arrow["{\Omega^{0,1}(\phi)}", from=1-3, to=2-3]
+      \arrow["{\Gamma(X,\varphi)}"', from=1-1, to=2-1]
+      \arrow["{\Omega^{0,1}(\varphi)}", from=1-3, to=2-3]
       \arrow["{\dol_2}", from=2-1, to=2-3]
     \end{tikzcd}
   \end{equation*}
@@ -161,12 +197,12 @@ by the group $\Aut(E)$ acting by
 \begin{equation*}
   % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEdhbW1hKEUpIl0sWzIsMCwiXFxPbWVnYV57MCwxfShFKSJdLFswLDEsIlxcR2FtbWEoRSkiXSxbMiwxLCJcXE9tZWdhXnswLDF9KEUpIl0sWzIsMywiXFxiYXJcXHBhcnRpYWwiXSxbMCwxLCJcXHBoaVxcY2RvdFxcYmFyXFxwYXJ0aWFsIl0sWzAsMiwiXFxHYW1tYShcXHBoaSkiLDJdLFszLDEsIlxcT21lZ2FeezAsMX0oXFxwaGleey0xfSkiLDJdXQ==
   \begin{tikzcd}
-    {\Gamma(X,E)} && {\Omega^{0,1}(E)} \\
-    {\Gamma(X,E)} && {\Omega^{0,1}(E)}
+    {\Gamma(X,E)} && {\Omega^{0,1}(X,E)} \\
+    {\Gamma(X,E)} && {\Omega^{0,1}(X,E)}
     \arrow["\dol", from=2-1, to=2-3]
-    \arrow["\phi\cdot\dol", from=1-1, to=1-3]
-    \arrow["{\Gamma(\phi)}"', from=1-1, to=2-1]
-    \arrow["{\Omega^{0,1}(\phi^{-1})}"', from=2-3, to=1-3]
+    \arrow["\varphi\cdot\dol", from=1-1, to=1-3]
+    \arrow["{\Gamma(\varphi)}"', from=1-1, to=2-1]
+    \arrow["{\Omega^{0,1}(\varphi^{-1})}"', from=2-3, to=1-3]
   \end{tikzcd}
 \end{equation*}
 
@@ -174,28 +210,6 @@ Noting that $\Dol(E)$ is an affine space modelled on
 $\Omega^{0,1}(\End(E))$ \cite{mccarthy2020} the quotient
 is a topological space. However, this space need not be Hausdorff.
 
-Write $\mu(E) = \deg(E)/\rank(E)$. We thus introduce the notion of
-stability:
-
-\begin{definition}
-  A holomorphic bundle $E\to X$ is \emph{stable} if,
-  for all proper non-zero holomorphic subbundles $F\subset E$,
-  \begin{align*}
-    \mu(F) < \mu(E).
-  \end{align*}
-\end{definition}
-
-Now let $\Dol(E)^s$ denote the set of Dolbeault operators corresponding
-to stable holomorphic structures on $E$. Then $\Dol(E)^s/\Aut(E)$
-is Hausdorff. Hence make the following definition:
-
-\begin{definition}
-  The moduli space of stable holomorphic vector bundles of rank $n$
-  and degree $d$ over a Riemannian surface $X$ is
-  \begin{align*}
-    \mathcal{N}^s_{n,d}(X,E) = \Dol(E)^s / \Aut(E).
-  \end{align*}
-\end{definition}
 
 \subsection{Holomorphic tangent bundle}
 
@@ -229,26 +243,24 @@ is isomorphic to $TX$ via
 \end{lemma}
 
 \begin{definition}
-  Let $E$ be a smooth vector bundle on a complex manifold $X$.
-  A \emph{hermitian metric} $h$ is a section of the bundle
-  $(E\otimes\bar E)^*$ such that, for every $p\in X$ and
-  $e,f\in E_p$,
+  Consider a complex manifold $X$.
+  A \emph{hermitian metric} is a section
+  \begin{align*}
+    h\in\Gamma(X,(T^{1,0}X\otimes T^{0,1})^*)
+  \end{align*}
+  such that, for every
+  $p\in X$ and tangent vectors $u_p,v_p\in T^{1,0}_p X$,
   \begin{itemize}
-    \item $h_p (e,\bar f) = \overline{h_p(f,\bar e)}$, and
-    \item if $e\neq 0$ then $h_p(e,\bar e)>0$.
+    \item $h_p (u_p,\bar v_p) = \overline{h_p(v_p,\bar u_p)}$, and
+    \item if $v_p\neq 0$ then $h_p(v_p,\bar v_p)>0$.
   \end{itemize}
 \end{definition}
 
 That is, there is a positive definite hermitian form
-$h_p: E_p\otimes \bar{E_p}\to\mathbb{C}$ at every point $p\in X$
+$h_p: T^{1,0}_p\otimes T^{0,1}_p\to\mathbb{C}$ at every point $p\in X$
 that varies smoothly. Note that the expression $h_p(e,\bar e) > 0$
 makes sense as $h_p(e,\bar e) = \overline{h_p(e,\bar e)}$,
 i.e. $h_p(e,\bar e)\in\mathbb{R}$.
-
-\begin{definition}
-  A \emph{hermitian manifold} $(X,h)$ is a complex manifold $X$
-  with a hermitian metric $h$ on the holomorphic tangent bundle.
-\end{definition}
 
 We are not going to care about any particular hermitian metric,
 but rather about their existence. Fortunately, our underlying
@@ -338,64 +350,65 @@ forms and cohomology are related:
   harmonic representative $\alpha'\in[\alpha]\cap\mathcal H^{p,q}(X)$.
 \end{theorem}
 
+\subsection{Chern connections}
 
-\subsection{Classification}
-
-We aim to classify vector bundles on a Riemannian surface $\Sigma_g$
-of genus $g$. In light of \ref{thm:dim_rank_vector_bundles},
-a complex vector bundle $E\to\Sigma_g$ is classified by
-$\rank E$ and $\deg E$ where \question{what's $c_1$ here?}
+Recall a connection on $E$ is an $\mathbb{R}$-linear map
 \begin{align*}
-  \deg E = c_1(E)[\Sigma_g].
+  \nabla : \Gamma(X,E)\to \Gamma(X,E\otimes T^* X)
 \end{align*}
-
-If $\rank E = 1$, $\deg E = 1$ then the complex vector bundles
-$E\to\Sigma_g$ corresponds to the complex torus of complex dimension
-$g$, i.e. $\Jac_0(\Sigma_g)=\mathbb{C}^g / \mathbb{Z}^{2g}$.
-
-If $\rank E = 1$ then the complex vector bundles $E\to\Sigma_g$
-correspond to the sheaf cohomology \question{what's sheaf cohomology?} group
+such that
 \begin{align*}
-  H^1(\Sigma_g,\mathcal O^*) \cong \mathbb{Z}\times\Jac_0(\Sigma_g).
+  \nabla(fs) = df \otimes s + f\nabla s
 \end{align*}
+for all $f\in C^\infty(X)$ and $s\in\Gamma(X,E)$. If we have a
+holomorphic structure $\dol_E$ then we may require that connections
+respect this structure.
 
-If $\rank E>1$ then things get hairy. For some reason \question{What is reallly happening here?}
-things stop being discrete (i.e. we don't get a distinct classification
-for each combination of rank and dimension). Instead we consider
-moduli spaces.
+\begin{definition}
+  A connection $\nabla$ in $E$ is \emph{compatible with a
+  holomorphic structure $\dol_E$} if the following commutes:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEdhbW1hKFgsRSkiXSxbMCwxLCJcXEdhbW1hKFgsRVxcb3RpbWVzIFReKlgpIl0sWzIsMCwiXFxHYW1tYShYLEUpXFxvdGltZXNcXE9tZWdhXnswLDF9KFgpIl0sWzIsMSwiXFxHYW1tYShYLEUpXFxvdGltZXNcXE9tZWdhXjEoWCkiXSxbMCwxLCJcXG5hYmxhIiwyXSxbMCwyLCJcXGJhclxccGFydGlhbF9FIl0sWzEsMywiXFxjb25nIl0sWzMsMiwiXFxHYW1tYShYLEUpXFxvdGltZXNcXHBpIiwyXV0=
+    \begin{tikzcd}
+      {\Gamma(X,E)} && {\Gamma(X,E)\otimes\Omega^{0,1}(X)} \\
+      {\Gamma(X,E\otimes T^*X)} && {\Gamma(X,E)\otimes\Omega^1(X)}
+      \arrow["{\bar\partial_E}", from=1-1, to=1-3]
+      \arrow["\nabla"', from=1-1, to=2-1]
+      \arrow["\cong", from=2-1, to=2-3]
+      \arrow["{\Gamma(X,E)\otimes\pi}"', from=2-3, to=1-3]
+    \end{tikzcd}
+  \end{equation*}
+\end{definition}
 
-\subsection{Bundles vs sections}
+Moreover, if $E$ is hermitian then we may reasonably require
+connections to respect this structure too. To make this precise,
+recall that a connection is equivalently a map
+\begin{align*}
+  \nabla : \Gamma(X,E)\otimes\Gamma(X,TX)\to\Gamma(X,E)
+\end{align*}
+which we may write as $(s,v)\mapsto \nabla_v s$.
 
-\begin{lemma}
-  Let $X$ be a real manifold and $E$ and $F$ vector bundles on $X$.
-  Then bundle maps $E\to F$ are in one-to-one correspondence with
-  linear maps on global sections. That is, the map
+
+\begin{definition}
+  A connection $\nabla$ in $E$ is \emph{compatible with
+  a hermitian metric $h$ on $E$} if, for all
+  $s,t\in\Gamma(X,E)$ and $v\in\Gamma(X,TX)$,
   \begin{align*}
-    \Hom(E,F) &\to \Hom(\Gamma(-,E),\Gamma(-,F))\\
-    f &\mapsto \Gamma(-,f)
+    v(h(s,\bar t)) = h(\nabla_v s,\bar t) + h(s,\overline{\nabla_v t}).
   \end{align*}
-  is a bijection.
-  \begin{proof}
-    \cite[Theorem 2.1]{conrad}
-  \end{proof}
-\end{lemma}
+\end{definition}
 
-\begin{lemma}
-  Let $X$ be a complex manifold and $E$ and $F$ be complex vector
-  bundles on $X$. Then there is a $\mathbb{C}$-linear isomorphism
-  \begin{align*}
-    \phi : \Gamma(X,E)\otimes\Gamma(X,F)\to \Gamma(X,E\otimes F).
-  \end{align*}
-  \begin{proof}
-    We may define $\phi$ by
-    \begin{align*}
-      \phi(s\otimes t)(x) = s(x)\otimes t(x).
-    \end{align*}
-    \missingproof
-  \end{proof}
-\end{lemma}
+It turns out that fixing both a hermitian metric as well as a
+holomorphic structure determines the connection:
 
-\section{Geometric invariant theory}
+\begin{proposition}
+  Let $h$ be a hermitian metric on a holomorphic bundle $(E,\dol_E)$.
+  Then there exists a unique connection $F_h$ in $E$ that is
+  compatible with both the hermitian and the holomorphic structure.
+  It is called the \emph{Chern connection}.
+\end{proposition}
+
+\section{Affine GIT}
 
 Consider $X=\Spec R$ and a group $G$ acting on $X$. We want to construct
 an affine scheme $X \sslash G$. The usual quotient does not work:
@@ -498,19 +511,19 @@ scheme $G_T/T$.
 
 \begin{definition}
   A \emph{action} of $G/S$ on $X/S$ is a morphism
-  $\rho : G\times X\to X$ satisfying the usual laws with respect
+  $\sigma : G\times X\to X$ satisfying the usual laws with respect
   to $\mu:G\times G\to G$.
 
 \end{definition}
 
-Note that an action $\rho : G\times X\to X$ induces an action of
+Note that an action $\sigma : G\times X\to X$ induces an action of
 $G(T)$ on $X(T)$ by
 \begin{equation*}
-  T \xlongrightarrow{(g,x)} G\times X \xlongrightarrow{\rho} X.
+  T \xlongrightarrow{(g,x)} G\times X \xlongrightarrow{\sigma} X.
 \end{equation*}
 Similarly, $G_T$ acts on $X_T$ by
 \begin{align*}
-  G_T \times_T X_T = (G \times X)_T \xlongrightarrow{\rho_T} X_T.
+  G_T \times_T X_T = (G \times X)_T \xlongrightarrow{\sigma_T} X_T.
 \end{align*}
 
 Thus, given a $T$-scheme $T'$, we obtain an action of
@@ -556,21 +569,37 @@ $T'\to X_T$.
     % https://q.uiver.app/#q=WzAsMyxbMCwwLCJHXFx0aW1lcyBYIl0sWzIsMCwiWCJdLFs0LDAsIlkiXSxbMCwxLCJcXHJobyIsMSx7ImN1cnZlIjotMn1dLFswLDEsIlxccGkiLDEseyJjdXJ2ZSI6Mn1dLFsxLDIsImYiLDFdXQ==
     \begin{tikzcd}
       {G\times X} && X && Y
-      \arrow["\rho"{description}, curve={height=-12pt}, from=1-1, to=1-3]
+      \arrow["\sigma"{description}, curve={height=-12pt}, from=1-1, to=1-3]
       \arrow["\pi"{description}, curve={height=12pt}, from=1-1, to=1-3]
       \arrow["f"{description}, from=1-3, to=1-5]
     \end{tikzcd}
   \end{equation*}
 \end{definition}
 
-\subsection{Quotients}
+\subsection{Invariants}
 
 \begin{definition}
-  A \emph{categorical quotient} of a group $G$ acting on $X$
-  is
+  Let $\sigma : G\times X \to X$ be an action of a group scheme
+  $G/S$ on a scheme $X/S$. The \emph{ring of invariants} is the
+  subring of $\mathcal O(X)$ given by
+  \begin{align*}
+    \mathcal O(X)^G :=
+    \left\lbrace{f \in \mathcal O(X) : \sigma^\sharp(f) = 1 \otimes f}\right\rbrace.
+  \end{align*}
 \end{definition}
 
-\subsection{Linear representation}
+If $\varphi : X\to Y$ is a $G$-invariant morphism then
+the image of $\varphi^\sharp : \mathcal O(Y) \to \mathcal O(X)$ is
+contained in $\mathcal O(X)^G$. We would like it to be the
+case that this ring of invariants is finitely generated. However,
+this may fail even under the best conditions:
+
+\begin{lemma}
+  There exists an affine algebraic group $G$ and a $k$-algebra $A$
+  such that $G$ acts on $\Spec A$ but $A^G$ is not finitely generated.
+\end{lemma}
+
+\subsection{Reductive groups}
 
 Fix a $k$-vector space $V$ and an algebraic group $G$ over $k$,
 i.e. a group scheme $G/\Spec k$. Then the algebraic group
@@ -593,7 +622,7 @@ of $V\otimes_k\mathcal O(G)$. Note that such an endomorphism
 is uniquely determined by its restriction to $V$, i.e. by
 a $\mathcal O(G)$-linear morphism
 \begin{align*}
-  \rho^* : V\to V\otimes_k \mathcal O(G)
+  \sigma^* : V\to V\otimes_k \mathcal O(G)
 \end{align*}
 which is referred to as a \emph{co-module structure on $V$}. In
 fact such co-module structures are equivalent to linear
@@ -601,72 +630,230 @@ representations of affine algebraic
 groups.~\cite[Section 3.1]{hoskins}
 
 \begin{definition}
-  Let $\rho : G\to GL(V)$ be a linear representation. A
+  Let $\sigma : G\to GL(V)$ be a linear representation. A
   subspace $V'\subseteq V$ is \emph{$G$-invariant} if
-  $\rho^*(V') \subseteq V'\otimes_k\mathcal O(G)$
+  $\sigma^*(V') \subseteq V'\otimes_k\mathcal O(G)$
   and a vector $v\in V$ is \emph{$G$-invariant} if
-  $\rho^*(v) = v\otimes 1$.
+  $\sigma^*(v) = v\otimes 1$.
 
   Denote by $V^G\subseteq V$ the subspace of $G$-invariant vectors.
 \end{definition}
 
-\subsection{Reductive groups}
-
 \begin{definition}
   An affine algebraic group is \emph{unipotent} if every non-trivial
-  linear representation $\rho:G\to GL(V)$ has a non-zero $G$-invariant
+  linear representation $\sigma:G\to GL(V)$ has a non-zero $G$-invariant
   vector.
 \end{definition}
 
 \begin{definition}
-  An affine algebraic group is is \emph{reductive} if it is smooth
-  and there are no non-trivial smooth normal unipotent algebraic
-  subgroups.
+  An affine algebraic group $G$ is
+  \begin{enumerate}
+    \item \emph{linearly reductive} if every finite dimensional
+      linear representation $G\to GL(V)$ is completely reducible,
+      i.e. decomposes into a sum of irreducibles;
+    \item \emph{geometrically reductive} if for every finite
+      dimensional linear representation $G\to GL(V)$ and every
+      non-zero $G$-invariant $v\in V$, there is a $G$-invariant
+      non-constant homogeneous $f\in\mathcal O(V)$ such that
+      $f(v)\neq 0$;
+    \item \emph{reductive} if it is smooth and there are no
+      non-trivial smooth normal unipotent algebraic subgroups.
+  \end{enumerate}
 \end{definition}
 
 That is, an affine algebraic group $G$ is reductive if, for every
 non-trivial smooth normal algebraic subgroup $H\triangleleft G$
-and every linear representation $\rho : H\to GL(V)$,
-$\rho^*(v) = v\otimes 1$ if, and only if, $v=0$.
+and every linear representation $\sigma : H\to GL(V)$,
+$\sigma^*(v) = v\otimes 1$ if, and only if, $v=0$.
 
-\subsection{Projective quotients}
+Given that we are interested in $\mathbb{C}$-schemes, the following
+will come in handy:
+
+\begin{proposition}
+  For smooth algebraic groups over $\mathbb{C}$, the three
+  notions of reductivity coincide.
+\end{proposition}
+
+\begin{theorem}[Nagata]\label{thm:nagata}
+  Let $G$ be a geometrically reductive group and $A$ a finitely
+  generated $k$-algebra such that $G$ acts rationally on $\Spec A$.
+  The $A^G$ is finitely generated.
+\end{theorem}
+
+\begin{theorem}[Hilbert, Munford]
+  Let $G$ be a linearly reductive group and $A$ a finitely
+  generated $k$-algebra such that $G$ acts rationally on $\Spec A$.
+  The $A^G$ is finitely generated.
+\end{theorem}
+
+\subsection{Quotients}
 
 \begin{definition}
-  Let $G$ be an affine algebraic group acting on a scheme $X$
-  via $\rho : G\times X\to X$. A \emph{linearisation} of the
-  action of $G$ on $X$ on a line bundle $\mathcal L$ is
-  an isormorphism
+  A \emph{categorical quotient} of a group $G$ acting on $X$
+  is
+\end{definition}
+
+\begin{definition}
+  Let $G$ be a reductive group acting on an affine scheme $X$.
+  The \emph{affine GIT quotient} is the morphism
   \begin{align*}
-    \Phi : \rho^* \mathcal L  \to \pi^*_X\mathcal L
+    \varphi : X \to X \sslash G := \Spec\mathcal O(X)^G
+  \end{align*}
+  arising from the inclusion $\mathcal O(X)^G \inc \mathcal O(X)$.
+\end{definition}
+
+\section{Projective GIT}
+
+We have seen how it is possible to quotient an affine scheme
+by a group action. In general, the schemes we are going to be working
+with are not going to be affine. However, it will be sufficient to
+consider the slightly more general case of projective schemes.
+\question{does GIT generalise to arbitrary (non-projective) schemes?}
+In order to construct a corresponding GIT quotient, we need to
+require a linear structure on the group action. It turns
+out that this is not going to be a restriction as we will also
+describe how to linearise the group actions that we care about.
+
+Fix a reductive affine algebraic group $G$ that acts on a projective
+scheme $X$ via $\sigma : G \times X \to X$.
+
+\subsection{Linear actions}
+
+Let us begin by making what it is that we want from the $G$-action
+in order to construct a well-behaved quotient. Observe that a
+representation $\rho : G\to GL(V)$ defines an action
+$G\times V\to V$ that is linear in $V$ via $g\cdot v := \rho(g)(v)$.
+
+More generally, if we have an embedding $X\inc\projective{n}{}$
+and the natural action of $GL_{n+1}$ on $\projective{n}{}$ fixes
+$X$, then we may think of an action of a group $G$ on $X$ as linear
+if it arises from the action of $GL_{n+1}$ on $\projective{n}{}$.
+
+\begin{definition}[{\cite[Definition 5.1]{hoskins}}]
+  A \emph{linear action} of $G$ on $X$ consists of
+  an action $\sigma : G\times X\to X$, a group homomorphism
+  $G \to GL_{n+1}$, and a $G$-equivariant embedding
+  $X\inc\projective{n}{S}$, i.e. we have the following
+  diagram:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNSxbMCwxLCJYIl0sWzQsMSwiXFxtYXRoYmYgUF5uIl0sWzAsMCwiR1xcdGltZXMgWCJdLFsyLDAsIkdcXHRpbWVzXFxtYXRoYmYgUF5uIl0sWzQsMCwiR0xfblxcdGltZXNcXG1hdGhiZiBQXm4iXSxbMCwxLCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsyLDBdLFsyLDMsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzMsNF0sWzQsMV1d
+    \begin{tikzcd}
+      {G\times X} && {G\times\mathbf P^n_S} && {GL_{n+1}\times\mathbf P^n_S} \\
+      X &&&& {\mathbf P^n}
+      \arrow[hook, from=1-1, to=1-3]
+      \arrow[from=1-1, to=2-1]
+      \arrow[from=1-3, to=1-5]
+      \arrow[from=1-5, to=2-5]
+      \arrow[hook, from=2-1, to=2-5]
+    \end{tikzcd}
+  \end{equation*}
+\end{definition}
+
+\todo{make precise the action of $GL_{n+1}$ on $\mathbf P^n$}
+
+\subsection{Quotient with resepct to linear action}
+
+Fix a linear action $\sigma : G\times X\to X$ of a reductive group $G$
+on a projective scheme $X\subseteq\projective{n}{}$. Write
+$X=\Proj R(X)$ for some graded $k$-algebra $R(X)$. Then
+linearity of the action ensures that the algebra of invariants
+inherits a grading:
+\begin{align*}
+  R(X)^G = \bigoplus_{d\geq 0} R(X)^G_d.
+\end{align*}
+Now we have the homogeneous ideal $R(X)^G_+\subseteq R(X)^G$.
+
+\begin{definition}
+  The \emph{semistable set} of $X$ is the open subscheme
+  \begin{align*}
+    X^{ss} := X - \Proj R(X)/R(X)_+^G.
+  \end{align*}
+  The \emph{projective GIT quotient} is the map
+  \begin{align*}
+    \pi : X^{ss} \to \Proj R(X)^G =: X^{ss}\sslash G
+  \end{align*}
+  given by the inclusion of finitely generated $k$-algebras
+  $R(X)^G \inc R(X)$.
+\end{definition}
+
+\begin{theorem}[{\cite[Theorem 5.3]{hoskins}}]
+  The projective GIT quotient is a good quotient for the action
+  on the subset of semistable points and, moreover,
+  $X^{ss}\sslash G$ is a projective scheme.
+\end{theorem}
+
+\begin{definition}
+  The \emph{stable set} of $X$ is the subscheme $X^s$ of points
+  $x\in X$ such that $\dim G_x = 0$ and there is a $G$-invariant
+  homogeneous $f\in R(X)^G_+$ such that $x\in X_f$ and the
+  action of $G$ on $X_f$ is closed.
+\end{definition}
+
+\begin{lemma}[{\cite[Lemma 5.5]{hoskins}}]
+  $X^s$ and $X^{ss}$ are open in $X$.
+\end{lemma}
+
+\begin{theorem}
+  The good quotient $X^{ss}\to X^{ss}\sslash G$ restricts to a
+  geometric quotient $X^s \to X^s\sslash G$ such that
+  $X^s\sslash G$ is open in $X^{ss}\sslash G$.
+\end{theorem}
+
+\begin{proposition}
+  There is a bijection between $k$-points of $X^{ss}\sslash G$
+  and points in $X^{ss}$ with closed orbit.
+\end{proposition}
+
+\subsection{Linearisation}
+
+The projective GIT quotient is well-defined for linear action
+on projective schemes. Let us see how we can linearise more general
+group actions in order to obtain a quotient.
+
+\begin{definition}
+  A \emph{linearisation} of the action of $G$ on $X$ on a line
+  bundle $\mathcal L$ is an isormorphism
+  \begin{align*}
+    \Phi : \sigma^* \mathcal L  \to \pi^*_X\mathcal L
   \end{align*}
   satisfying the cocycle condition
   \question{maybe it would be good to talk about this condition a
     bit more? \cite{hoskins} does it using geometric bundles but
     i think sheaves are nicer; the question is how to present
   things in terms of sheaves in the nicest possible way?}
-  \begin{equation*}
+  \begin{equation}\label{eq:linearisation_cocyle}
     % https://q.uiver.app/#q=WzAsNixbMiwwLCIoXFx0ZXh0e2lkfVxcdGltZXNcXHJobyleKlxccGleKl9YXFxtYXRoY2FsIEwiXSxbMCwwLCIoXFx0ZXh0e2lkfVxcdGltZXNcXHJobyleKlxccmhvXipcXG1hdGhjYWwgTCJdLFs0LDEsIlxccGleKl97MjN9XFxwaV9YXipcXG1hdGhjYWwgTCJdLFsyLDEsIlxccGlfezIzfV4qXFxyaG9eKlxcbWF0aGNhbCBMIl0sWzAsMiwiKFxcbXVcXHRpbWVzXFx0ZXh0e2lkfSleKlxccmhvXipcXG1hdGhjYWwgTCJdLFs0LDIsIihcXG11XFx0aW1lc1xcdGV4dHtpZH0pXipcXHBpX1heKlxcbWF0aGNhbCBMIl0sWzEsMCwiKFxcdGV4dHtpZH1cXHRpbWVzXFxyaG8pXipcXFBoaSJdLFszLDIsIlxccGleKl97MjN9XFxQaGkiXSxbNCwxLCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDAsIiIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzQsNSwiKFxcbXVcXHRpbWVzXFx0ZXh0e2lkfSleKlxcUGhpIiwyXSxbNSwyLCIiLDEseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
     \begin{tikzcd}
-      {(\text{id}\times\rho)^*\rho^*\mathcal L} && {(\text{id}\times\rho)^*\pi^*_X\mathcal L} \\
-                                                && {\pi_{23}^*\rho^*\mathcal L} && {\pi^*_{23}\pi_X^*\mathcal L} \\
-      {(\mu\times\text{id})^*\rho^*\mathcal L} &&&& {(\mu\times\text{id})^*\pi_X^*\mathcal L}
-      \arrow["{(\text{id}\times\rho)^*\Phi}", from=1-1, to=1-3]
+      {(\text{id}\times\sigma)^*\sigma^*\mathcal L} && {(\text{id}\times\sigma)^*\pi^*_X\mathcal L} \\
+                                                    && {\pi_{23}^*\sigma^*\mathcal L} && {\pi^*_{23}\pi_X^*\mathcal L} \\
+      {(\mu\times\text{id})^*\sigma^*\mathcal L} &&&& {(\mu\times\text{id})^*\pi_X^*\mathcal L}
+      \arrow["{(\text{id}\times\sigma)^*\Phi}", from=1-1, to=1-3]
       \arrow[Rightarrow, no head, from=2-3, to=1-3]
       \arrow["{\pi^*_{23}\Phi}", from=2-3, to=2-5]
       \arrow[Rightarrow, no head, from=3-1, to=1-1]
       \arrow["{(\mu\times\text{id})^*\Phi}"', from=3-1, to=3-5]
       \arrow[Rightarrow, no head, from=3-5, to=2-5]
     \end{tikzcd}
-  \end{equation*}
+  \end{equation}
 \end{definition}
 
+In terms of geometric bundles, this means that a linearisation
+is a line bundle $L\to X$ with an isomorphism of bundles
+\begin{align*}
+  \varphi : G\times L \to \sigma^* L
+\end{align*}
+such that the map
+\begin{align*}
+  G\times L \xlongrightarrow{\varphi} \sigma^* L \longrightarrow L
+\end{align*}
+is an action.
+
 If we have an affine algebraic group $G$ and an action
-$\rho : G\times X\to X$ then the map
-\question{what's sheaf cohomology}
+$\sigma : G\times X\to X$ then the map
 \begin{align*}
   H^0(X,\mathcal L)
-  \xlongrightarrow{\rho^*}
-  H^0(G\times X,\rho^*\mathcal L)
+  \xlongrightarrow{\sigma^*}
+  H^0(G\times X,\sigma^*\mathcal L)
   \cong
   H^0(G\times X,\pi_X^*\mathcal L)
   \cong
@@ -682,14 +869,14 @@ That is, we have a natural linear representation
 $G\to GL(H^0(X,\mathcal L))$ induced by the linearisation.
 \cite[Lemma 5.19]{hoskins}
 
-Now there is an evaluation map
+If $\mathcal L$ is very ample then the evaluation map
 \begin{align}\label{eq:evaluation_map}
   H^0(X,\mathcal L) \otimes_k \mathcal O_X \to \mathcal L
 \end{align}
 which, for each open $U\subseteq X$, is given by given by
-$f\otimes_k \lambda \mapsto \lambda\restrict{f}{U}$.
-This is $G$-equivariant \cite[Remark 5.20]{hoskins},
-which I understand to mean that the following commutes:
+$f\otimes_k \lambda \mapsto \lambda\restrict{f}{U}$,
+is $G$-equivariant \cite[Remark 5.20]{hoskins}.
+I.e. the following commutes
 \question{what are the actions here, exactly?}
 \begin{equation*}
   % https://q.uiver.app/#q=WzAsNCxbMCwwLCJHXFx0aW1lc1xcbWF0aGJmIFYoSF4wKFgsXFxtYXRoY2FsIEwpXFxvdGltZXNfa1xcbWF0aGNhbCBPX1gpIl0sWzIsMCwiR1xcdGltZXNcXG1hdGhiZiBWKFxcbWF0aGNhbCBMKSJdLFswLDEsIlxcbWF0aGJmIFYoSF4wKFgsXFxtYXRoY2FsIEwpXFxvdGltZXNfa1xcbWF0aGNhbCBPX1gpIl0sWzIsMSwiXFxtYXRoYmYgVihcXG1hdGhjYWwgTCkiXSxbMCwxXSxbMiwzXSxbMCwyXSxbMSwzXV0=
@@ -708,33 +895,457 @@ between locally free $\mathcal O_X$-modules of rank $n$ and
 geometric vector bundles of rank $n$ over $X$.
 \cite[Proposition 11.7]{gortz2010}
 
-\begin{definition}[{\cite[Definition 5.1]{hoskins}}]
-  Let $G$ be a reductive \cite[{Definition 4.8}]{hoskins}
-  algebraic group that acts on a projective
-  scheme $X$. A \emph{linear $G$-equivariant projective
-  embedding of $X$} consists of a group homomorphism
-  $G \to GL_{n+1}$ and a $G$-equivariant embedding
-  $X\inc\projective{n}{S}$, i.e. we have the following
-  diagram:
-  \begin{equation*}
-    % https://q.uiver.app/#q=WzAsNSxbMCwxLCJYIl0sWzQsMSwiXFxtYXRoYmYgUF5uIl0sWzAsMCwiR1xcdGltZXMgWCJdLFsyLDAsIkdcXHRpbWVzXFxtYXRoYmYgUF5uIl0sWzQsMCwiR0xfblxcdGltZXNcXG1hdGhiZiBQXm4iXSxbMCwxLCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsyLDBdLFsyLDMsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzMsNF0sWzQsMV1d
-    \begin{tikzcd}
-      {G\times X} && {G\times\mathbf P^n_S} && {GL_{n+1}\times\mathbf P^n_S} \\
-      X &&&& {\mathbf P^n}
-      \arrow[hook, from=1-1, to=1-3]
-      \arrow[from=1-1, to=2-1]
-      \arrow[from=1-3, to=1-5]
-      \arrow[from=1-5, to=2-5]
-      \arrow[hook, from=2-1, to=2-5]
-    \end{tikzcd}
-  \end{equation*}
+Consider a linearisation $\mathcal L$ and write $V:=H^0(X,\mathcal L)^*$. Then there is an induced closed embedding
+$X\inc\projective{}{}(H^0(X,\mathcal L)^*)$ such that the action of
+$G$ on $X$ arises from a linear action of $G$ on $V$. In this sense
+a linearisation is a direct generalisation of linear actions
+in the sense we have discussed so far.
+
+\subsection{Quotient with respect to linearisation}
+
+Fix an ample linearisation $\mathcal L = \Gamma(-,L)$ of the action
+of $G$ on $X$. Consider the graded finitely generated $k$-algebra
+\begin{align*}
+  R(X,\mathcal L) := \bigoplus_{m\geq 0} H^0(X,\mathcal L^m).
+\end{align*}
+Now $G$ acts on $H^0(X,\mathcal L^m)$ for each $m$ so we may
+consider the invariants
+\begin{align*}
+  R(X,\mathcal L)^G := \bigoplus_{m\geq 0} H^0(X,\mathcal L^m)^G.
+\end{align*}
+This is finitely generated.
+
+\begin{definition}
+  A point $x\in X$ is \emph{semistable} with respect to $\mathcal L$
+  if there is a homoegeneous $s\in R(X,\mathcal L)^G_+$ such that
+  $s(x) \neq 0$. Denote by $X^{ss}(\mathcal L)$ the set of all such
+  semistable points.
+
+  A point $x\in X$ is \emph{stable} with respect to $\mathcal L$
+  if $\dim Gx = \dim G$ and there is a homoegeneous
+  $s\in R(X,\mathcal L)^G_+$ such that
+  \begin{align*}
+    x \in X_\sigma := \left\lbrace{x'\in X : \sigma(x') \neq 0}\right\rbrace
+  \end{align*}
+  and the action of $G$ on $X_\sigma$ is closed. Denote by
+  $X^s(\mathcal L)$ the set of all such stable points.
 \end{definition}
 
-\todo{make precise the action of $GL_n$ on $\mathbf P^n$}
+\begin{definition}
+  The \emph{projective GIT quotient} with respect to $\mathcal L$
+  is the morphism
+  \begin{align*}
+    X^{ss}(\mathcal L) \to \Proj R(X,\mathcal L)^G
+    =: X^{ss}(\mathcal L)\sslash G
+  \end{align*}
+  arising from the inclusion $R(X,\mathcal L)^G \inc R(X,\mathcal L)$.
+\end{definition}
 
+\begin{theorem}
+  The projective GIT quotient with respect to $\mathcal L$ is a good
+  quotient and $X^{ss}(\mathcal L)\sslash G$ is a projective scheme.
+  Moreover, the projective GIT quotient restricts to a geometric
+  quotient $X^s(\mathcal L)\to X^s(\mathcal L)\sslash G$ where
+  $X^s(\mathcal L)\sslash G$ is open in $X^{ss}(\mathcal L)\sslash G$
+  and hence quasi-projective.
+\end{theorem}
 
+\begin{proposition}
+  There is a bijection between $X^{ss}(\mathcal L)\sslash G$
+  and closed orbits in $X^{ss}(\mathcal L)$.
+\end{proposition}
 
-\section{Moduli problem}
+\subsection{Points of the projective quotient}
+
+\section{Analytification}
+
+\subsection{Complex projective space}
+
+Consider projective space
+$\projective{n}{} := \Proj \mathbb{C}[X_0,\ldots,X_n]$.
+The corresponding set of $\mathbb{C}$-points is projective space
+in the classical sense: $\projective{n}{}(\mathbb{C}) \cong \mathbf{CP}^n$. It is well-known that complex projective space not only
+has the structure of a variety, but also of a manifold. In particular,every affine chart $\affine{n}{}\subseteq\projective{n}{}$
+gives rise to a chart
+$\mathbb{C}^n\cong\affine{n}{}(\mathbb{C})\subseteq\projective{n}{}(\mathbb{C})$.
+
+\chapter{Analytic moduli space}
+
+\section{Holomorphic bundles}
+
+Fix a smooth vector bundle $E$ on a compact Riemann surface $X$
+of genus $g\geq 2$. We would now like to define a space that has
+as points holomorphic bundles $(E,\dol_E)$ whose underlying smooth
+structure agrees with $E$. While we could consider the set of all
+such holomorphic structures and possibly even equip it with a
+topology, the result is not going to be satisfying. Fortunately,
+it is possible to restrict our attention to the reasonable subset
+of stable holomorphic bundles which yields a moduli space that
+has the structure of a complex manifold.
+
+\subsection{Degree}
+
+If two holomorphic bundles are isomorphic then so are their
+underlying smooth bundles. Moreover, if two smooth bundles
+are isomorphic then there are certainly of the same rank
+but also of the same degree. Let us define the latter.
+
+For every smooth bundle $E$ on $X$ of rank $n$ there are elements
+$c_j(E) \in H^{2j}(X,\mathbb{Z})$ for $j\geq 0$. These are
+called the Chern classes. There are various ways to construct these
+classes. One way is the Chern-Weil approach using connections
+
+and curvature \cite{fine2013}. Another involves the exact sequence
+of sheaves
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsNSxbMCwwLCIwIl0sWzEsMCwiXFxaIl0sWzIsMCwiXFxtYXRoY2FsIE9fWCJdLFszLDAsIlxcbWF0aGNhbCBPXipfWCJdLFs0LDAsIjAiXSxbMCwxXSxbMSwyXSxbMiwzLCJcXHRleHR7ZXhwfSJdLFszLDRdXQ==
+  \begin{tikzcd}
+    0 & \mathbb{Z} & {\mathcal O_X} & {\mathcal O^*_X} & 0
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow["{\text{exp}}", from=1-3, to=1-4]
+    \arrow[from=1-4, to=1-5]
+  \end{tikzcd}
+\end{equation*}
+which gives rise to a map
+\begin{align*}
+  c_1 : \Pic(X) \cong H^1(X,\mathcal O^*_X)\longrightarrow H^2(X,\mathbb{Z})
+\end{align*}
+which allows us to define the first Chern class of any rank $r$
+bundle by
+\begin{align*}
+  c_1(E) := c_1(\exterior{r}{E}) \in H^2(X,\mathbb{Z}).
+\end{align*}
+See \cite{griffiths1994}. We are not going to be interested in how
+Chern classes are constructed but rather about what they tell us
+about the classification of holomorphic bundles. To this end,
+we note the following properties of chern classes:
+
+\begin{lemma}
+  For each smooth rank $r$ vector bundle $E$ on $X$,
+  $c_j(E) = 0$ whenever $j<1$ or $j>r$.
+\end{lemma}
+
+\begin{theorem}\label{thm:chern_exact_sequence}
+  If
+  \begin{align*}
+    0\to E\to E'\to E''\to 0
+  \end{align*}
+  is an exact sequence of vector bundles then
+  \begin{align*}
+    c(E') = c(E)c(E'')
+  \end{align*}
+  where
+  \begin{align*}
+    c(E) := \sum_j c_j(E) \in H^*(X,\mathbb{Z})
+  \end{align*}
+  is the total Chern class.
+\end{theorem}
+
+A very useful consequence of (\ref{thm:chern_exact_sequence})
+is the fact that, for all smooth vector bundles $E$ and $F$,
+\begin{align}\label{eq:chern_sum}
+  c_1(E\oplus F) = c_1(E) + c_1(F)
+\end{align}
+in $H^2(X,\mathbb{Z})$.
+
+While Chern classes are useful in their own right, we will
+only use the case $j=1$ to define the degree of a vector bundle.
+
+\begin{definition}
+  The \emph{degree} of a smooth bundle $E$ on a compact connected
+  orientable complex manifold $X$ of dimension $n$ is the integer
+  \begin{align*}
+    \deg E := c_1(E) [X]
+  \end{align*}
+  where $[X]\in H^n(X,\mathbb{Z})\cong\mathbb{Z}$.
+\end{definition}
+
+In particular, (\ref{eq:chern_sum}) implies
+\begin{align}\label{eq:degree_sum}
+  \deg (E\oplus F) = \deg E + \deg F
+\end{align}
+for smooth bundles $E$ and $F$ on $X$.
+
+\subsection{Stability}
+
+The naive moduli space of holomorphic bundles, constructed
+as the set of holomorphic bundles up to isomorphism,
+i.e. as a quotient of $\Dol E/\Aut E$ as in \ref{sec:dolbeault_operator}, is not Hausdorff and hence not a manifold.
+Geometric invariant theory tells us that one way to rectify
+this is by identifying a certain subset of \emph{stable}
+holomorphic structures and discard the others. This allows us
+to obtain a more well-behaved group action and hence a more
+desirable quotient.
+
+While it is possible to construct a moduli space of holomorphic
+bundles using GIT and the corresponding notion of stability directly,
+we are going to use a more analytical, yet equivalent formulation.
+Consider the following invariant of a smooth bundle:
+
+\begin{definition}
+  The \emph{slope} of a smooth bundle $E$ on $X$ is
+  \begin{align*}
+    \mu (E) := \deg(E) / \rank(E).
+  \end{align*}
+\end{definition}
+
+Note that smooth bundles are classified by their rank and
+degree. Hence the slope is indeed a fixed invariant of the underlying
+smooth structure. How does this help us classify holomorphic bundles?
+By looking at the underlying smooth structures of holomorphic
+subbundles. In this way we do indeed obtain an invariant of
+equivalence classes of holomorphic bundles, as equivalent holomorphic
+bundles admit equivalent subbundles. Here is the condition:
+
+\begin{definition}
+  A holomorphic bundle $(E,\dol_E)$ is \emph{slope stable} if,
+  for all proper non-zero holomorphic subbundles
+  $(F,\dol_F)\subset(E,\dol_E)$,
+  \begin{align*}
+    \mu(F) < \mu(E).
+  \end{align*}
+  Denote by $\Dol(E)^s$ the subset of $\Dol(E)$ containing only
+  stable bundles.
+\end{definition}
+
+\subsection{Complex manifold structure on $\Dol(E)$}
+
+We claim that $\Dol(E)^s$ naturally has a complex sturcture,
+induced by the complex structure on $\Dol(E)$. Let us
+recall the complex struture on the latter first. Consider an
+operator $\dol_E\in\Dol(E)$ and another complex linear map
+\begin{align*}
+  \alpha : \Gamma(X,E) \to \Omega^{0,1}(X)\otimes\Gamma(X,E),
+\end{align*}
+not necessarily in $\Dol(E)$. We then obtain another map
+\begin{align*}
+  \dol_E + \alpha : \Gamma(X,E) \to \Omega^{0,1}(X)\otimes \Gamma(X,E).
+\end{align*}
+Moreover,
+\begin{align*}
+  (\dol_E + \alpha)(fs) = f\dol_E(s) + f\alpha(s) + \dol f \otimes s
+  = f(\dol_E+\alpha)(s) + \dol f \otimes s
+\end{align*}
+so $\dol_E + \alpha \in \Dol(E)$. Thus $\Dol(E)$ has the structure
+of a complex affine space modelled on the infinite dimensional
+complex vector space
+\begin{align*}
+  \Omega^{0,1}(X,\End E) = \Omega^{0,1}(X) \otimes \Gamma(X,E^*) \otimes \Gamma(X,E).
+\end{align*}
+Therefore, we have a homeomorphism of topological spaces
+\begin{align*}
+  \Dol(E) \simeq \Omega^{0,1}(X,\End E).
+\end{align*}
+As we believe in the axiom of choice, we are happy to denote by
+$A$ a chosen basis of $\Omega^{0,1}(X,\End E)$.
+In particular, we have a basis of $\Dol(E)$ whose elements are
+of the form
+\begin{align*}
+  B(\dol_E,\lambda)
+  = \left\lbrace{\dol_E + \sum_{\alpha\in A} \lambda_\alpha \alpha
+  : \lambda = \sum_\alpha |\lambda_\alpha|, \#\left\lbrace{\alpha\in A : \lambda_\alpha\neq 0}\right\rbrace < \infty }\right\rbrace
+\end{align*}
+for $\dol_E\in\Dol(E)$ and $0\neq\lambda\in\mathbb{C}$. That is,
+we define a norm on $\Omega^{0,1}(X,\End E)$ by choosing a basis
+and then take the opens of $\Dol(E)$ to be generated by open
+balls around each point.
+
+\subsection{Complex manifold structure on $\Dol(E)^s$}
+
+Let us make sure that the structure on $\Dol(E)$ induces a
+similar structure on $\Dol(E)^s$. That is, we would like
+it to be the case that $\Dol(E)^s$ is also an affine space modelled
+on $\Omega^{0,1}(X,\End E)$. However, quick observation shows
+that this is unlikely: For any two $\dol_E,\dol_E'\in\Dol(E)$
+are elements of $\Omega^{0,1}(X,\End E)$ and hence their difference
+is too. This means that there exists $\alpha\in\Omega^{0,1}(X,\End E)$
+such that $\dol_E' = \dol_E + \alpha$. Now if $\dol_E$ is stable
+and $\dol_E'$ is not then this shows that $\Dol(E)^s$ cannot
+be modelled on $\Omega^{0,1}(X,\End E)$.
+
+A smooth subbundule $F\subseteq E$ affects slope stability is
+relevant for slope stability of $(E,\dol_E)$ if, and only if,
+there is a holomorphic structure $\dol_F$ that agrees with
+$\dol_E$, i.e. such that the following commutes:
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXEdhbW1hKFgsRSkiXSxbMCwwLCJcXEdhbW1hKFgsRikiXSxbMiwxLCJcXE9tZWdhXnswLDF9KEUpIl0sWzIsMCwiXFxPbWVnYV57MCwxfShGKSJdLFszLDIsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzEsMywiXFxiYXJcXHBhcnRpYWxfRiJdLFsxLDAsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMiwiXFxiYXJcXHBhcnRpYWxfRSIsMl1d
+  \begin{tikzcd}
+    {\Gamma(X,F)} && {\Omega^{0,1}(X,F)} \\
+    {\Gamma(X,E)} && {\Omega^{0,1}(X,E)}
+    \arrow["{\bar\partial_F}", from=1-1, to=1-3]
+    \arrow[hook, from=1-1, to=2-1]
+    \arrow[hook, from=1-3, to=2-3]
+    \arrow["{\bar\partial_E}"', from=2-1, to=2-3]
+  \end{tikzcd}
+\end{equation*}
+This is equivalent to saying that the restrction of $\dol_E$ to
+$F$ induces a holomorphic structure on $F$, i.e. its image is
+contained in $\Omega^{0,1}(X,F)$. In order for $\Dol(E)^s$ to be
+an affine subspace of $\Dol(E)$, we require there to be a
+subspace $V\subseteq\Omega^{0,1}(X,\End E)$ such that
+$\dol_E$ restricts to $F$ if, and only if, $\dol_E + \alpha$
+restricts to $F$, for all $\alpha \in V$.
+
+Of course, for a fixed $F\subseteq E$, this is the same as saying
+that $\alpha$ restricts to a map $\Gamma(X,F)\to\Omega^{0,1}(X,F)$.
+For general $F$, this certainly works if the
+$\Gamma(X,E)\to\Gamma(X,E)$ component of $\alpha$ respects all
+subspaces, i.e. is scalar multiplication. That is, if
+$\alpha_0\in\Omega^{0,1}(X)$ and $(E,\dol_E)$ is stable then
+$(E,\dol_E + \alpha)$ is
+stable too, where we write $\alpha(s) := \alpha_0 \otimes s$.
+In this sense, $\Dol(E)^s$ is an affine space modelled on
+$\Omega^{0,1}(X)$.
+
+It remains to contemplate the other direction. Is it the case that,
+if $(E,\dol_E)$ and $(E,\dol_E + \alpha)$ are stable then
+$\alpha$ is of the form $\alpha_0\otimes\identity$ for some
+$(0,1)$-form $\alpha_0$? For now, this seems unlikely. In particular,
+if two holomorphic structures are related by a non-trivial
+automorphism of $E$ then we do not expect their difference to
+be trivial along the $\Gamma(X,E)\to\Gamma(X,E)$ component.
+
+\todo{complex structure on $\Dol(E)^s\subseteq\Dol(E)$ as a
+submanifold}
+
+\subsection{Quotient}
+
+Now let $\Dol(E)^s$ denote the set of Dolbeault operators corresponding
+to stable holomorphic structures on $E$. Then $\Dol(E)^s/\Aut(E)$
+is Hausdorff. Hence make the following definition:
+
+\begin{definition}
+  The moduli space of stable holomorphic bundles of rank $n$
+  and degree $d$ over a Riemannian surface $X$ is
+  \begin{align*}
+    \mathcal{N}^s(X,E) = \Dol(E)^s / \Aut(E).
+  \end{align*}
+\end{definition}
+
+\question{what is the complex structure on the group? the quotient?}
+
+It is not hard to see that, for any isomorphic smooth bundles
+$E\cong F$ on $X$, the moduli spaces $\mathcal N^s(X,E)$
+and $\mathcal N^s(X,F)$ are biholomorphic. \question{is this true?}
+Hence, up to biholomorphism, the following is well-defined:
+\begin{align*}
+  \mathcal N^s_{r,d}(X) := \mathcal N^s(X,E)
+\end{align*}
+where $E$ is any smooth bundle of rank $r$ and degree $d$ on $X$.
+
+\section{Higgs bundles}
+
+\subsection{Definition}
+
+\begin{definition}
+  A \emph{Higgs bundle $(E,\dol_E,\varphi)$} on a Riemann surface
+  $X$ consists of a holomorphic vector bundle $(E,\dol_E)$ on $X$
+  and a holomorphic bundle map $\varphi : E \to E \otimes K$ where
+  $K:=\Lambda^n T^*_{0,1} X$ is the canonical line bundle on $X$.
+\end{definition}
+
+Note that the holomorphic bundle map is the same as a section
+in $H^0(X,\End E \otimes K)$. To see this, note that
+$\End E = E^* \otimes E$ so $\varphi$ induces a bundle map
+\begin{align*}
+  \mathbb{C}\times X \to \End E \otimes K.
+\end{align*}
+This induces a map of $\mathbb{C}$-algebras
+\begin{align*}
+  H^0(X,\mathbb{C}\times X) \to H^0(X,\End(E)\otimes K)
+\end{align*}
+which is uniquely determined by the image of the constant function
+$x\mapsto 1$.
+
+\subsection{Stability}
+
+\begin{definition}
+  A Higgs bundle $(E,\dol_E,\varphi)$ is \emph{slope stable}
+  if, and only if, for every proper Higgs subbundle
+  $(F,\dol_F,\varphi) \subset (E,\dol_E,\varphi)$, $\mu(F) < \mu(E)$.
+\end{definition}
+
+\begin{example}
+  Every holomorphic bundle $(E,\dol_E)$ gives rise to a trivial
+  Higgs bundle $(E,\dol_E,\varphi)$ where $\varphi = 0$ is the zero
+  Higgs field. Such a Higgs bundle is stable if, and only if,
+  $(E,\dol_E)$ is a stable holomorphic bundle.
+\end{example}
+
+It is clear that every Higgs subbundle is a holomorphic subbundle
+and hence every Higgs bundle whose underlying holomorphic bundle
+is stable must itself be stable. The converse is not true: It
+need not be the case that the holomorphic bundle underlying a
+stable Higgs bundle is stable.
+
+\subsection{Higgs bundles as cotangent vectors of holomorphic bundles}
+
+Fix a smooth bundle $E$ on a compact Riemann surface $X$. Write
+$\mathcal N = \mathcal N^s(X,E)$ and consider a holomorphic structure
+$\dol_E\in\mathcal N$. Then the cotangent space of $\mathcal N$ at
+$\dol_E$ is
+\begin{align}\label{eq:tangent_space_of_n}
+  T^*_{\dol_E} \mathcal N = I_{\dol} / I^2_{\dol}
+\end{align}
+where $I_{\dol}\subseteq \mathcal O(\mathcal N)$ is the ideal
+of holomorphic functions on $\mathcal N$ vanishing at $\dol$.
+Note that we have a map \todo{actually we don't really... the RHS is
+\emph{linear} maps}
+\begin{align*}
+  I_{\dol} \to (E^*(X)\otimes E(X)\otimes\Omega^{0,1}(X))^*.
+\end{align*}
+Via the isomorphism of bundles
+\begin{align*}
+  (E^* \otimes E \otimes \Omega^{0,1})^*
+  \cong E^* \otimes E \otimes \Omega^{1,0}
+  \cong \End E \otimes K
+\end{align*}
+this yields a map
+\begin{align}
+  I_{\dol} \to H^0(X,\End E\otimes K).
+\end{align}
+Note that $I_{\dol}$ has a complex vector space structure
+with respect to which this map is $\mathbb{C}$-linear.
+Let us verify that this gives a well-defined map on the quotient
+(\ref{eq:tangent_space_of_n}).
+
+\begin{lemma}
+  \begin{align*}
+    T_{\dol}^*\mathcal N = H^0(X,\End E\otimes K)
+  \end{align*}
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+\begin{lemma}\label{lem:analytic_tangent_open_at_point}
+  $T^*_{\dol}\mathcal N$ is open in $\mathcal M$.
+\end{lemma}
+
+\begin{itemize}
+  \item compute $\overline{T^*_{\dol}\mathcal N}$
+\end{itemize}
+
+\begin{theorem}
+  $T^*\mathcal N \subseteq\mathcal M$ is open and dense.
+  \begin{proof}
+    The open embeddings $T_{\dol}^*\mathcal N\inc\mathcal M$
+    from (\ref{lem:analytic_tangent_open_at_point}) lets us
+    define an embedding
+    \begin{align*}
+      T^*\mathcal N = \bigsqcup_{\dol} T_{\dol}^*\mathcal N
+      \longinc \mathcal M
+    \end{align*}
+    which, moreover, is open as its image is a union of opens
+    in $\mathcal M$.
+    \missingproof
+  \end{proof}
+\end{theorem}
+
+\chapter{Algebraic moduli space}
+
+\section{Moduli problems}
 
 While classifying geometric objects of a certain types, one often
 finds that the space of such objects has a rich geometric structure.
@@ -775,6 +1386,8 @@ which induces a pullback map $f^* : \mathcal M(M)\to\mathcal M(T)$.
 We then observe that $U := {\eta}^{-1}_M(\identity)$
 is universal in the sense that every $F$ is obtained
 by pulling back $U$ along $f$.
+
+\subsection{Coarse moduli spaces}
 
 \subsection{Grassmannians}
 
@@ -818,7 +1431,7 @@ quotients of sheaves of modules a little more ...}
   each scheme $T\in\Sch$ the set $G(m,n)(T)$ of isomorphism
   classes of surjections
   \begin{align*}
-    q : \mathcal O^{\oplus n}_T \surj \mathcal F
+    q : \mathcal O^n_T \surj \mathcal F
   \end{align*}
   where $\mathcal F$ is a finite, locally free $\mathcal O_T$-module
   of rank $n-m$ and for each morphism $f:T\to T'$ the map
@@ -927,7 +1540,8 @@ a coherent sheaf $\mathcal E$ on $X$, and another scheme $T/S$.
 
 Write $\langle\mathcal F,q\rangle$ for equivalence classes
 of such families and define the corresponding quot functor
-as follows:
+as follows: \todo{the construction with respect to arbitrary
+base schemes $S$ may be a bit flawed here, but in the case where $S=\Spec\mathbb{C}$ everything is going to work out so we are not particularly worried.}
 \begin{definition}
   The quot functor $\Sch_S^{\text{op}} \to \Set$ is given by
   \begin{align*}
@@ -972,43 +1586,143 @@ hence we have defined a map
 \begin{theorem}
   There is a scheme
   \begin{align*}
-    \text{Quot}_{\mathcal E,X/S} \in \Sch_S
+    \Quot_{X/S}(\mathcal E) \in \Sch_S
   \end{align*}
   that represents $\mathfrak{Quot}_{\mathcal E,X/S}$.
 \end{theorem}
 
-\subsection{Moduli space of stable bundles}
+\subsection{Splitting of the Quot scheme}
 
-We aim to define the moduli space of (semi)stable bundles on a
-suitable curve. We will do so without justification. For details
-see \cite[section 8.8]{hoskins}.
+Fix a coherent sheaf $\mathcal E$ and an ample line bundle
+$\mathcal L=\Gamma(-,L)$ on a complex projective scheme $X$.
+
+\begin{definition}
+  The \emph{Euler characteristic} of $X$ with respect to a
+  coherent sheaf $\mathcal E$ is
+  \begin{align*}
+    \chi(X,\mathcal E) := \sum_{j\geq 0} (-1)^j \dim_k H^j(X,\mathcal E).
+  \end{align*}
+\end{definition}
+
+\begin{example}\label{ex:euler_char}
+  Consider the case where $X$ is a smooth projective curve of
+  genus $g$ and $\mathcal E$ is a vector bundle of rank $r$ and
+  degree $d$. If $\mathcal L$ has degree $1$ then, for $m$
+  sufficiently large,
+  \begin{align*}
+    \chi(X,\mathcal E\otimes\mathcal L^m) = d + mr + r(1-g).
+  \end{align*}
+\end{example}
+
+\begin{proposition}
+  There exists a polynomial $P(\mathcal E,\mathcal L)\in\mathbb{Q}[t]$
+  such that, for $m\in\mathbb{N}$ sufficiently large,
+  \begin{align*}
+    P(\mathcal E,\mathcal L)(m) = \chi(X,\mathcal E\otimes\mathcal L^m).
+  \end{align*}
+  This is called the \emph{Hilbert polynomial} of $\mathcal E$
+  with respect to $\mathcal L$.
+\end{proposition}
+
+\begin{example}\label{ex:hilbert_polynomial}
+  In the setting of \ref{ex:euler_char}, we have
+  \begin{align*}
+    P(\mathcal E,\mathcal L)(t) = rt + d + r(1-g).
+  \end{align*}
+\end{example}
+
+In particular, using Serre's vanishing theorem, for $m$ sufficiently
+large,
+\begin{align*}
+  P(\mathcal E,\mathcal L)(m) = \dim_k H^0(X,\mathcal E\otimes\mathcal L^{m}).
+\end{align*}
+
+\begin{proposition}
+  The Quot scheme of $\mathcal E$ decomposes into subschemes of quotients with fixed Hilbert polynomial. That is,
+  \begin{align*}
+    \Quot_{X}(\mathcal E) = \bigsqcup_{P\in\mathbb{Q}[t]} \Quot_X^{P,\mathcal L}(\mathcal E)
+  \end{align*}
+  where
+  $\Quot_X^{P,\mathcal L}$ is the subscheme of quotients
+  $q:\mathcal E_T \surj F$ such that $P(\mathcal F,\mathcal L)=P$.
+\end{proposition}
+
+We established that, in the setting of \ref{ex:euler_char},
+two quotients $\mathcal F$ and $\mathcal F'$ have the same
+Hilbert polynomial with respect to $\mathcal L$ if, and only if,
+they have the same rank and degree. Noticing that such an
+$\mathcal L$ always exists, we obtain a decomposition
+\begin{align*}
+  \Quot_{X}(\mathcal E) = \bigsqcup_{r,d} \Quot_X^{r,d}(\mathcal E)
+\end{align*}
+which does not depend on $\mathcal L$.
+
+\section{Holomorphic bundles}
+
+\subsection{Degree}
+
+Holomorphic bundles in the analytic sense are grouped into classes
+of equal rank and degree. It is clear what it means for a locally
+free sheaf to have a certain rank but it is not obvious how we
+ought to think about rank. We follow \cite[\href{https://stacks.math.columbia.edu/tag/0AYQ}{Tag 0AYQ}]{stacks-project}.
+
+\todo{figure out what this is for a line bundle}
+
+This allows us to define the degree of a finite rank locally free
+sheaf in the case where $X$ is a curve:
+\begin{definition}
+  Let $X$ be a proper scheme over $k$ with $\dim X = 1$
+  and let $\mathcal E$ be a locally free sheaf of rank $n$.
+  The \emph{degree of $\mathcal E$} is the integer
+  \begin{align*}
+    \deg(\mathcal E) := \chi(X,\mathcal E)-n\chi(X,\mathcal O_X).
+  \end{align*}
+\end{definition}
+
+\begin{example}
+  $\deg \mathcal O_X = 0$.
+\end{example}
+
+\question{what about $\mathcal O_X^N$?}
+
+\subsection{The moduli space as a scheme}
+
+We aim to define the moduli space of (semi)stable holomorphic
+bundles on a suitable curve. We will do so without justification.
+For details see \cite[section 8.8]{hoskins}.
 
 Fix a connected smooth projective curve $C$ of genus $g\geq 2$,
-$n\geq 1$, and $d > n(2g - 1)$. Define
-$N:=d+n(1-g)$ and denote by
+$n\geq 1$, and $d > n(2g - 1)$. Write $N:=d+n(1-g)$ and
 \begin{align*}
-  Q^s \subset Q := \Quot_C^{n,d}(\mathcal O_C^N).
+  Q := \Quot^{n,d}_X(\mathcal O^N_X).
 \end{align*}
-the open subscheme of quotients $q:\mathcal O^N_X\surj\mathcal F$
-such that $\mathcal F$ is (semi)stable and locally free and
-$H^0(q)$ is an isomorphism. \question{why do we need this condition?}
+
+\begin{remark}
+  We claim that this captures holomorphic bundles on $X$. Let us see
+  how. In particular, how does an isomorphism class of quotients
+  \begin{align*}
+    q : \mathcal O^N_{X\times T} \to \mathcal F
+  \end{align*}
+  in $\Coh(X\times T)$ constitute a bundle on $X$? Firstly,
+  we observed that the kernel of such a quotient is a locally
+  free sheaf of rank $N$, \todo{actually this is more involved because we used $n$ and $d$} hence a geometric vector bundle on
+  $X\times T$. Secondly, note if we choose $T=\Spec\mathbb{C}$ then
+  $Q^s(T)$ does indeed consist of holomorphic bundles on
+  $X\times\Spec\mathbb{C}=X$. Thus $\mathbb{C}$-points of
+  $Q^s$ are holomorphic bundles on $X$.
+\end{remark}
 
 As $Q$ is a fine moduli space, we have a universal quotient
-$q:\mathcal O_{Q\times X}^N\surj \mathcal U$
-and its restriction to $Q$:
+$q:\mathcal O_{Q\times X}^N\surj \mathcal U$. A group action
 \begin{align*}
-  q^s : \mathcal O_{Q^s\times X}^N\surj \restrict{\mathcal U}{Q^s} =: \mathcal U^s.
-\end{align*}
-A group action
-\begin{align*}
-  \rho : GL_N \times Q \to Q
+  \sigma : GL_N \times Q \to Q
 \end{align*}
 is an element of $\Hom(GL_N\times Q,Q)$ and hence corresponds to a
 quotient of $\mathcal O_{GL_N\times Q\times X}$ which we construct
 as:
 \begin{align}
   \label{eq:stable_quot_gln_action}
-  \mathcal O^n_{GL_N\times Q\times X}
+  \mathcal O^N_{GL_N\times Q\times X}
   \xlongrightarrow{\pi^*_{GL_N}\tau}
   \mathcal O^N_{GL_N\times Q\times X}
   \xlongrightarrow{\pi^*_{Q\times X} q}
@@ -1022,99 +1736,233 @@ and the sheaf isomorphism
 arises from the inverse map $i : GL_N \to GL_N$. On $k$-points this
 action is given by $g\cdot q := q\circ {g}^{-1}$.
 
-\begin{lemma}[{\cite[Lemma 8.49]{hoskins}}]
-  The orbits in $R^s\subseteq Q$ under the action \ref{eq:stable_quot_gln_action} are in bijective correspondence with isomorphism
-  classes of (semi)stable locally free sheaves on $X$ with invariants
-  $(n,d)$.
+We now linearise this action. We define
+\begin{align*}
+  \mathcal L := \det(\pi_{Q*}(\mathcal U\otimes \pi^*_X\mathcal O_X(m)))
+\end{align*}
+\begin{lemma}
+  For $m$ sufficiently large, $\mathcal L$ is an ample line bundle on $Q$.
+  \begin{proof}
+    \missingproof
+  \end{proof}
 \end{lemma}
 
-\begin{itemize}
-  \item restrict to $SL_N$ action
-  \item linearise $SL_N$ action
-  \item construct coarse moduli space
-  \item write down conditions for when it is fine moduli space and
-    non-existence result otherwise
-\end{itemize}
+We are looking to define an
+isomorphism
+\begin{align}\label{eq:linearisation_iso}
+  \Phi : \sigma^*\mathcal L \to \pi_Q^*\mathcal L
+\end{align}
+that satisfies the cocyle condition. We begin by considering the
+families
+\begin{align*}
+  k^N \otimes \mathcal O_{GL_N\times Q\times X}
+  \xlongrightarrow{(\sigma\times\identity)^* q_Q}
+  (\sigma\times\identity)^*\mathcal U
+\end{align*}
+and
+\begin{align*}
+  k^N \otimes \mathcal O_{GL_N\times Q\times X}
+  \xlongrightarrow{\pi_{GL_N}^*\tau}
+  k^N \otimes \mathcal O_{GL_N\times Q\times X}
+  \xlongrightarrow{\pi^*_{Q\times X} q_Q}
+  \pi^*_{Q\times X} \mathcal U
+\end{align*}
+of quotients on $GL_N\times Q\times X$. By construction of the
+action of $GL_N$ on $Q$, these are equivalent. Hence we have
+an isomorphism
+\begin{align}\label{eq:universal_linearisation}
+  \Phi : (\sigma \times \identity)^*\mathcal U
+  \to \pi^*_{Q\times X}\mathcal U
+\end{align}
+\begin{lemma}
+  The isomorphism (\ref{eq:universal_linearisation}) satisfies
+  the cocyle condition (\ref{eq:linearisation_cocyle}).
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
+Hence we have a linearisation of the $GL_N$-action on $Q\times X$
+via $\mathcal U$. This extends to a linearisation of the action
+on $Q$ via $\mathcal L$ for $m$ sufficiently large. \todo{make precise}
 
-\begin{remark}
-  It is worth investigating how we have captured holomorphic bundles
-  in general. In particular, how does an isomorphism class of
-  quotients
+
+
+\begin{definition}
   \begin{align*}
-    q : \mathcal O^N_{X\times T} \to \mathcal F
+    \pi^s : R^s = Q^s(\mathcal L_m) \to Q\sslash_{\mathcal L_m}^s SL_N =: M^s(n,d).
   \end{align*}
-  in $\Coh(X\times T)$ constitute a bundle on $X$? Firstly,
-  we observed that the kernel of such a quotient is a locally
-  free sheaf of rank $N$, \todo{actually this is more involved because we used $n$ and $d$} hence a geometric vector bundle on
-  $X\times T$. Secondly, note if we choose $T=\Spec\mathbb{C}$ then
-  $Q^s(T)$ does indeed consist of holomorphic bundles on
-  $X\times\Spec\mathbb{C}=X$. Thus $\mathbb{C}$-points of
-  $Q^s$ are holomorphic bundles on $X$.
-\end{remark}
+\end{definition}
+
+\todo{say in what sense this actually is a moduli space}
+
+\subsection{Analytification}
+
+We will primarily be concerned with the $\mathbb{C}$-points of our
+moduli space which, by construction, correspond to holomorphic
+bundles on $X$. Hence it will be fruitful to understand what it
+means for a $\mathbb{C}$-point to be stable. It turns out that
+the necessary and sufficient condition is quite reminscent of
+slope stability in the analytic case.
+
+\begin{proposition}
+  For $m$ sufficiently large and
+  $q:\mathcal O_X^N\surj\mathcal F\in Q(k)$,
+  the following are equivalent:
+  \begin{enumerate}
+    \item $q\in Q^s(\mathcal L)$;
+    \item for all subsheaves $\mathcal F'\subseteq \mathcal F$ with
+      $V' := H^0(X,q)^{-1}H^0(X,\mathcal F') \neq 0$,
+      $\rank\mathcal F'>0$ and
+      \begin{align*}
+        \frac{\dim V'}{\rank \mathcal F'}
+        <\frac{\dim k^N}{\rank\mathcal F}.
+      \end{align*}
+  \end{enumerate}
+\end{proposition}
+Here the picture one has in mind is the following:
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJIXjAoWCxrXk5cXG90aW1lc1xcbWF0aGNhbCBPX1gpIl0sWzIsMCwiSF4wKFgsXFxtYXRoY2FsIEYpIl0sWzIsMSwiSF4wKFgsXFxtYXRoY2FsIEYnKSJdLFswLDEsIkheMChxKV57LTF9SF4wKFgsXFxtYXRoY2FsIEYnKSJdLFswLDEsIkheMChYLHEpIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzIsMSwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMywyLCJIXjAoWCxxKSIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFszLDAsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d
+  \begin{tikzcd}
+    {H^0(X,k^N\otimes\mathcal O_X)} && {H^0(X,\mathcal F)} \\
+    {H^0(X,q)^{-1}H^0(X,\mathcal F')} && {H^0(X,\mathcal F')}
+    \arrow["{H^0(X,q)}", two heads, from=1-1, to=1-3]
+    \arrow[hook, from=2-1, to=1-1]
+    \arrow["{H^0(X,q)}"', two heads, from=2-1, to=2-3]
+    \arrow[hook, from=2-3, to=1-3]
+  \end{tikzcd}
+\end{equation*}
+We know that we have a bijection
+\begin{align*}
+  Q^s(\mathcal L) \sslash GL_N(\mathbb{C}) \cong Q^s(\mathcal L)(\mathbb{C}) / GL_N(\mathbb{C}).
+\end{align*}
+Moreover, we know that the action of $g\in GL_N(\mathbb{C})$ on
+$q : \mathcal O_X^N \surj \mathcal F \in Q(\mathbb{C})$
+is given by
+\begin{align*}
+  g\cdot q : \mathbb{C}^N \otimes \mathcal O_X
+  \xlongrightarrow{{g}^{-1}}
+  \mathbb{C}^N\otimes\mathcal O_X
+  \xlongrightarrow{q}
+  \mathcal F.
+\end{align*}
+Now we observe the following:
+\begin{lemma}
+  Let $q,q':\mathcal O^N_X\surj\mathcal F\in Q^s(\mathbb{C})$.
+  Then $q' = g \cdot q$ for some $g$ if, and only if,
+  $\Ker(q)\cong\Ker(q')$.
+  \begin{proof}
+    By contemplating the following diagram:
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsMTAsWzUsMCwiXFxtYXRoY2FsIEYiXSxbMywwLCJcXG1hdGhjYWwgT15OX1giXSxbMSwwLCJcXHRleHR7S2VyfShxKSJdLFszLDEsIlxcbWF0aGNhbCBPX1heTiJdLFsxLDEsIlxcdGV4dHtLZXJ9KHEnKSJdLFs1LDEsIlxcbWF0aGNhbCBGIl0sWzAsMCwiMCJdLFswLDEsIjAiXSxbNiwwLCIwIl0sWzYsMSwiMCJdLFsyLDFdLFsxLDAsInEiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbNCwzXSxbMiw0LCJcXGNvbmciLDJdLFszLDUsInEnIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzAsNSwiIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNiwyXSxbNyw0XSxbMCw4XSxbNSw5XSxbMSwzLCJnIl1d
+      \begin{tikzcd}
+        0 & {\text{Ker}(q)} && {\mathcal O^N_X} && {\mathcal F} & 0 \\
+        0 & {\text{Ker}(q')} && {\mathcal O_X^N} && {\mathcal F} & 0
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-2, to=1-4]
+        \arrow["\cong"', from=1-2, to=2-2]
+        \arrow["q", two heads, from=1-4, to=1-6]
+        \arrow["g", from=1-4, to=2-4]
+        \arrow[from=1-6, to=1-7]
+        \arrow[Rightarrow, no head, from=1-6, to=2-6]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-2, to=2-4]
+        \arrow["{q'}"', two heads, from=2-4, to=2-6]
+        \arrow[from=2-6, to=2-7]
+      \end{tikzcd}
+    \end{equation*}
+  \end{proof}
+\end{lemma}
+Hence the $\mathbb{C}$-points of $M^s(n,d)$ are exactly
+isomorphism classes of holomorphic bundles. Moreover, $M^s(n,d)$
+is quasi-projective and hence there is an inclusion
+\begin{align*}
+  M^s(n,d)(\mathbb{C}) \longinc \projective{}{}
+\end{align*}
+
+\subsection{Tangent space}
+
+\begin{theorem}
+
+\end{theorem}
+
+\begin{theorem}\label{thm:holomorphic_zariski_tangent}
+  \begin{align*}
+    T_{\mathcal E} M^s(n,d) = H^1(X,\Hom(\mathcal E,\mathcal E))
+  \end{align*}
+  \begin{proof}
+    In \cite[Remark 8.66]{hoskins} it is claimed that
+    \begin{align*}
+      T_{\mathcal E} M^s(n,d) = \Ext^1(\mathcal E,\mathcal E).
+    \end{align*}
+    Now the claim follows from
+    $\Ext^1(\mathcal E,\mathcal F) = H^1(X,\Hom(\mathcal E,\mathcal F))$.
+    \missingproof
+  \end{proof}
+\end{theorem}
+
+Note elements of $\Ext^1$ are equivalence classes of extensions
+\begin{align*}
+  0 \longrightarrow \mathcal E \longrightarrow \mathcal F\longrightarrow \mathcal E\longrightarrow 0.
+\end{align*}
+We are looking to construct an $\mathcal O_X$-linear map
+\begin{align*}
+  \phi : \mathcal E \to \mathcal E \otimes_{\mathcal O_X} \Omega^1_X.
+\end{align*}
+Have
+\begin{align*}
+  \Ext^1(\mathcal E,\mathcal E) = R^1\Hom(\mathcal E,-)(\mathcal E)
+\end{align*}
+want
+\begin{align*}
+  \Hom(\mathcal E,\mathcal E\otimes_{\mathcal O_X}\Omega^1_X).
+\end{align*}
 
 \section{Higgs bundles}
 
-\subsection{Definition}
+In complete analogy to the analytic case, Higgs bundles have a
+sheaf theoretic definition:
 
 \begin{definition}
-  A \emph{Higgs bundle $(E,\phi)$} on a Riemann surface
-  $X$ consists of a holomorphic vector bundle $E$ on $X$
-  and a holomorphic bundle map $\phi : E \to E \otimes K$ where
-  $K:=\Lambda^n T^*_{0,1} X$ is the canonical line bundle on $X$.
+  A \emph{Higgs field} on a locally free sheaf $\mathcal E$
+  on a complex scheme $X$ is an $\mathcal O_X$-linear map
+  \begin{align*}
+    \phi : \mathcal E \to \mathcal E \otimes \mathcal K_X
+  \end{align*}
+  where $\mathcal K_X := \Omega^1_X = \det T^* X$ is the canonical locally free sheaf on $X$.
+  Hence a \emph{Higgs sheaf} is a locally free sheaf equipped
+  with a Higgs field.
 \end{definition}
 
-Note that the holomorphic bundle map is the same as a section
-in $\Gamma(X,\End E \otimes K)$. To see this, note that
-$\End E = E^* \otimes E$ so $\phi$ induces a bundle map
+\subsection{As cotangent vectors of holomorphic bundles}
+
+Recall the following property of locally free sheaves:
+
+% https://math.stackexchange.com/questions/3912257/global-section-of-a-locally-free-sheaf
+\begin{lemma}[{\cite[Appendix A.3.C6]{hartshorne1977}}]\label{lem:global_sections_of_locally_free_sheaves}
+  Consider a locally free sheaf $\mathcal E$ on $X$. There is an
+  $\mathcal O(X)$-linear bijection
+  \begin{align*}
+    H^0(X,\mathcal E) \cong \Hom(\mathcal O_X,\mathcal E).
+  \end{align*}
+\end{lemma}
+
+Hence the space of Higgs fields of a fixed locally free sheaf
+$\mathcal E$ is
 \begin{align*}
-  \mathbb{C}\times X \to \End E \otimes K.
+  \Hom(\mathcal E,\mathcal E\otimes\mathcal K_X)
+  &\cong \Hom(\mathcal O_X,\mathcal E^*\otimes\mathcal E\otimes\mathcal K_X) \\
+  &\cong H^0(X,\mathcal E^*\otimes\mathcal E\otimes\mathcal K_X)
+  &\text{(Lemma \ref{lem:global_sections_of_locally_free_sheaves})} \\
+  &\cong H^0(X,\Hom(\mathcal E^*\otimes\mathcal E,\mathcal K_X)) \\
+  &\cong H^1(X,\mathcal E^*\otimes\mathcal E)^* &\text{(Serre duality)} \\
+  &\cong T^*_{\mathcal E}\mathcal N^s(n,d)
+  &\text{(Theorem \ref{thm:holomorphic_zariski_tangent})}
 \end{align*}
-This induces a map of $\mathbb{C}$-algebras
-\begin{align*}
-  \Gamma(X,\mathbb{C}\times X) \to \Gamma(X,\End(E)\otimes K)
-\end{align*}
-which is uniquely determined by the image of the constant function
-$x\mapsto 1$.
+where $\mathcal E^* := \Hom(\mathcal E,\mathcal O_X)$
+is the dual $\mathcal O_X$-module.
 
-\subsection{Higgs bundles as cotangent vectors of holomorphic bundles}
+\chapter{Comparing the analytic and algebraic spaces}
 
-Fix a smooth bundle $E$ on a compact Riemann surface $X$. Write
-$\mathcal N = \mathcal N^s(X,E)$ and consider a holomorphic structure
-$\dol\in\mathcal N$. Then the cotangent space of $\mathcal N$ at
-$\dol$ is
-\begin{align}\label{eq:tangent_space_of_n}
-  T^*_{\dol} \mathcal N = I_{\dol} / I^2_{\dol}
-\end{align}
-where $I_{\dol}\subseteq \mathcal O(\mathcal N)$ is the ideal
-of holomorphic functions on $\mathcal N$ vanishing at $\dol$.
-Note that we have a map \todo{actually we don't really... the RHS is
-\emph{linear} maps}
-\begin{align*}
-  I_{\dol} \to (E^*(X)\otimes E(X)\otimes\Omega^{0,1}(X))^*.
-\end{align*}
-Via the isomorphism of bundles
-\begin{align*}
-  (E^* \otimes E \otimes \Omega^{0,1})^*
-  \cong E^* \otimes E \otimes \Omega^{1,0}
-  \cong \End E \otimes K
-\end{align*}
-this yields a map
-\begin{align}
-  I_{\dol} \to H^0(X,\End E\otimes K).
-\end{align}
-Note that $I_{\dol}$ has a complex vector space structure
-with respect to which this map is $\mathbb{C}$-linear.
-Let us verify that this gives a well-defined map on the quotient
-(\ref{eq:tangent_space_of_n}).
-
-
-\section{Non-abelian Hodge theory}
-
-\begin{theorem}
-  Let $X$ be a compact K\"ahler manifold. Then there is an equivalence
-  of categories between irreducible flat vector bundles on $X$
-  and stable Higgs bundles
-\end{theorem}
 
 \printbibliography
 
