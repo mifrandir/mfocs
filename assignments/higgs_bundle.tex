@@ -957,9 +957,44 @@ This is finitely generated.
 
 \subsection{Points of the projective quotient}
 
-\section{Analytification}
+\section{Moving between analytic and algebraic spaces}
 
-\subsection{Complex projective space}
+\subsection{Projectivisation}
+
+\begin{definition}
+  Let $V$ be an $n$-dimensional complex vector space. Then
+  the \emph{projectivisation} is the scheme
+  \begin{align*}
+    \projective{}{}(V) := \Proj\left({
+        \bigoplus_{d=0}^\infty \Sym^d(V^\vee)
+    }\right)
+  \end{align*}
+\end{definition}
+
+Observe that closed points in $\projective{}{}(V)$ correspond
+to lines in $V$. In particular, a closed point of $\projective{}{}(V)$
+is a maximal homogeneous ideal
+
+\subsection{Line bundles and maps to projective space}
+
+Consider an invertible sheaf $\mathcal L$ on a manifold $X$ and
+suppose $V\subseteq H^0(X,\mathcal L)$ is a subspace such
+that the natural $\mathcal O_X$-linear map
+\begin{align*}
+  V \otimes \mathcal O_X \to \mathcal L
+\end{align*}
+given by $f \otimes \lambda \mapsto \lambda \restrict{f}{U}$
+is a surjection. Then the map on stalks
+\begin{align*}
+  V \otimes \mathcal O_{X,x} \surj \mathcal L_x
+\end{align*}
+gives a quotient $V\surj\mathcal L_x$ as
+$\mathcal O_{X,x}\cong\mathbb{C}$. Now note that
+$\dim\mathcal L_x=\rank\mathcal L=1$ so
+$\ker (V\surj\mathcal L_x)$ is a subspace of codimension
+1 of $V$.
+
+\subsection{Analytification}
 
 Consider projective space
 $\projective{n}{} := \Proj \mathbb{C}[X_0,\ldots,X_n]$.
