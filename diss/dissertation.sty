@@ -1,0 +1,135 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Package information                     %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{dissertation}
+[2023/10/04 mfocs dissertation]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Page setup                          %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage[a4paper]{geometry}
+\geometry{tmargin=3cm, bmargin=3cm, lmargin=2.5cm, rmargin=3cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Required packages                                             %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage[british]{babel}
+\RequirePackage{biblatex}
+\RequirePackage{pseudo}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{nicefrac}
+\RequirePackage{siunitx}
+\RequirePackage{mathtools}
+\RequirePackage{todonotes}
+\RequirePackage{hyperref}
+\RequirePackage{listings}
+\RequirePackage{proof}
+\RequirePackage{varioref}
+\RequirePackage{quiver}
+\RequirePackage{authoraftertitle}
+\RequirePackage{fancyhdr}
+\RequirePackage{csquotes}
+\RequirePackage{mathrsfs}
+\RequirePackage{stmaryrd}
+
+\pagestyle{fancy}
+\fancyhead[L]{\MyTitle}
+\fancyhead[R]{Franz Miltz}
+\renewcommand{\headrulewidth}{0.5pt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Theorems                            %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheoremstyle{sltheorem} {}                % Space above
+{}                % Space below
+{\upshape}        % Theorem body font % (default is "\upshape")
+{}                % Indent amount
+{\bfseries}       % Theorem head font % (default is \mdseries)
+{.}               % Punctuation after theorem head % default: no punctuation
+{ }               % Space after theorem head
+{}                % Theorem head spec
+\theoremstyle{sltheorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+\DeclareMathOperator{\identity}{id}
+\DeclareMathOperator{\Identity}{Id}
+\DeclareMathOperator{\Hom}{Hom}
+\newcommand{\res}[2]{\left.{#1}\right\vert_{#2}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator*{\Motimes}{\text{\raisebox{0.25ex}{\scalebox{0.8}{$\bigotimes$}}}}
+\newcommand{\tensor}[3]{\Motimes\nolimits_{#1}^{#2}\!#3}
+\DeclareMathOperator*{\Mwedge}{\text{\raisebox{0.3ex}{\scalebox{0.75}{$\bigwedge$}}}}
+\newcommand{\exterior}[2]{\Mwedge\nolimits^{#1}\!#2}
+\newcommand{\prc}[2]{\Pr\left({{#1}\:|\:#2}\right)}
+\newcommand{\op}[1]{{#1}^\text{op}}
+\renewcommand{\sslash}{/\!/}
+\newcommand{\affine}[2]{\mathbf{A}^{#1}_{#2}}
+\newcommand{\projective}[2]{\mathbf{P}^{#1}_{#2}}
+
+\setlength{\parskip}{5pt plus 1pt minus 1pt}
+
+% TODOS
+
+\newcommand{\doublecheck}{\todo[color=blue]{check this}}
+\newcommand{\question}[1]{\todo[color=green]{\textbf{QUESTION:} #1}}
+\newcommand{\missingsection}{\todo[color=yellow]{\textbf{MISSING SECTION}}}
+\newcommand{\missingexample}{\todo[color=cyan]{\textbf{MISSING} example}}
+\newcommand{\missingdefinition}[1]{\todo[color=orange]{\textbf{MISSING} definition of #1}}
+\newcommand{\missingproof}{\todo[color=red]{\textbf{MISSING} proof!}}
+\newcommand{\missingcitation}{\todo[color=pink]{\textbf{MISSING CITATION}}}
+
+\DeclareMathOperator*{\supp}{supp}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Hol}{Hol}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\FVect}{FVect}
+\DeclareMathOperator{\Open}{Open}
+\DeclareMathOperator{\Jac}{Jac}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Sh}{Sh}
+\DeclareMathOperator{\Cosh}{Cosh}
+\DeclareMathOperator{\Sch}{Sch}
+\DeclareMathOperator{\AffSch}{AffSch}
+\DeclareMathOperator{\Ring}{Ring}
+\DeclareMathOperator{\Set}{Set}
+\DeclareMathOperator{\Dol}{Dol}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\Fil}{Fil}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\Coh}{Coh}
+\DeclareMathOperator{\QCoh}{QCoh}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Quot}{Quot}
+\DeclareMathOperator{\Pic}{Pic}
+\DeclareMathOperator{\Ext}{Ext}
+
+\DeclareMathOperator{\colim@}{colim}
+\newcommand{\colim}{\colim@\nmlimits@}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\inc}{\hookrightarrow}
+
+\newcommand{\dol}{\bar{\partial}}
+\newcommand{\longinc}{\lhook\joinrel\longrightarrow}
+\newcommand{\longleftinc}{\longleftarrow\joinrel\rhook}
+\newcommand{\restrict}[2]{\left.{#1}\right\vert_{#2}}

@@ -1,0 +1,255 @@
+\documentclass[12pt]{ociamthesis}  % default square logo
+%\documentclass[12pt,beltcrest]{ociamthesis} % use old belt crest logo
+%\documentclass[12pt,shieldcrest]{ociamthesis} % use older shield crest logo
+
+\usepackage{dissertation}
+
+%input macros (i.e. write your own macros file called mymacros.tex
+%and uncomment the next line)
+%\include{mymacros}
+
+\title{Moduli Spaces of Holomorphic Bundles}   %note \\[1ex] is a line break in the title
+
+\author{Franz Miltz}             %your name
+\college{Lady Margaret Hall}  %your college
+
+%\renewcommand{\submittedtext}{change the default text here if needed}
+\degree{Master of Science}     %the degree
+\degreedate{2024}         %the degree date
+
+%end the preamble and start the document
+\begin{document}
+
+%this baselineskip gives sufficient line spacing for an examiner to easily
+%markup the thesis with comments
+\baselineskip=18pt plus1pt
+
+%set the number of sectioning levels that get number and appear in the contents
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+
+\maketitle                  % create a title page from the preamble info
+\begin{dedication}
+  To somebody
+\end{dedication}
+\begin{acknowledgements}
+
+\end{acknowledgements}
+\begin{abstract}
+
+\end{abstract}
+
+\begin{romanpages}          % start roman page numbering
+  \tableofcontents            % generate and include a table of contents
+\end{romanpages}            % end roman page numbering
+
+\chapter{Introduction}
+
+\chapter{As Manifolds}
+
+\chapter{As Schemes}
+
+The moduli space of holomorphic bundles on a compact Riemann
+surface maybe constructed as a complex manifold exclusively
+using analytic methods. Since this space was first constructed
+in \missingcitation
+the theory of moduli spaces has come a long way.
+The goal of this section is to formally define moduli spaces
+as schemes representing functors, explain how such schemes
+are constructed, and hence formally define the schemes whose
+points correspond to holomorphic bundles and Higgs bundles
+on a compact Riemann surface, respectively.
+
+We begin by translating fundmental notions such as compact
+Riemann surfaces, holomorphic bundles, and Higgs bundles into
+the language of algebraic geometry. This allows us to state
+precisely the moduli problems that we aim to solve. The construction
+of the related moduli spaces is achieved in multiple steps which
+mirror the analytic approach: Firstly, we observe that the
+holomorphic bundles we are interested in may be thought of as
+points of certain Quot schemes. Secondly, we define group
+actions on these schemes whose orbits correspond to the
+equivalence classes we are after. Finally, we use geometric
+invariant theory (GIT) to take the quotients by these group
+actions. While it is going to require a significant amount of
+work to motivate and define the appropriate GIT quotients,
+we will see that the same machinery can be used to solve
+a plethora of similar problems without much extra work.
+
+Once constructed, we will take some time to study the moduli
+spaces which we have thus obtained. It turns out that the GIT
+quotients have several desriable properties such as the being
+quasi-projective varieties. Moreover, we will use deformation
+theory to show that holomorphic bundles may still be thought
+of as cotangent vectors of holomorphic bundles.
+
+\paragraph*{Notation}
+
+Before we begin, let us establish some notation. All schemes
+will be over $\mathbb{C}$, i.e. elements of the slice category
+$\Sch := \Sch_{\mathbb{Z}}/\Spec\mathbb{C}$. Unless otherwise
+indicated, products of schemes are fibre products
+$X\times Y := X\times_{\Spec\mathbb{C}} Y$, and
+tensor products are taken with respect to $\mathbb{C}$.
+By a sheaf on a scheme $X$ we mean a sheaf of $\mathcal O_X$-modules.
+
+\section{Vector Bundles as Points of Quot Schemes}
+
+\missingsection
+
+\subsection{Compact Riemann Surfaces as Algebraic Curves}
+
+We are going to view moduli spaces of holomorphic bundles
+as schemes. The first step towards this is translating the
+base space. While it is not in general possible to view
+every manifold as a scheme \missingcitation, it is a well
+known fact that compact Riemann surfaces correspond to smooth
+algebraic curves.
+This fact is proven in various places, see \cite[215]{griffiths1994}
+for the general idea and \cite[5-16]{harris2011}
+for a comprehensive treatment.
+
+It is worth recalling what the algebraic structure on a compact
+Riemann surface $C$ of genus $g\geq 2$ is. The easiest way to obtain
+this structure is by constructing an embedding
+$X\inc\projective{N}{}$ for some $N$. To do this, recall
+the projectivisation of an $n$-dimensional complex vector
+space $V$ is given by
+\begin{align*}
+  \projective{}{}(V) := \Proj\left({
+      \bigoplus_{d=0}^\infty \Sym^d(V^\vee)
+  }\right)
+\end{align*}
+Complex points in $\projective{}{}(V)$ are commonly identified
+with one-dimensional subspaces of $V$. Now if $\mathcal L$ is
+an invertible sheaf on $C$ then there is a natural map
+\begin{align}\label{eq:natural_line_bundle_map}
+  H^0(C,\mathcal L)\otimes\mathcal O_C \to \mathcal L
+\end{align}
+given by $s\otimes f \mapsto f\restrict{s}{U}$. If this map
+(\ref{eq:natural_line_bundle_map}) is a surjection then,
+for every $x\in C$, it induces a surjection on stalks
+$H^0(C,\mathcal L) \surj \mathcal L_x$ whose kernel is a
+subspace of codimension 1, i.e. an element of
+$\projective{}{}(H^0(C,\mathcal L)^\vee)$. Now one may choose an
+isomorphism $\projective{}{}(H^0(C,\mathcal L)^\vee)\cong\projective{N}{}$ where $N = \dim H^0(C,\mathcal L)$ to get a map
+$C\to\projective{N}{}$. It turns out that this map is an embedding
+whenever $\deg\mathcal L > 2g$. \cite[Proposition 2.14]{harris2011}
+All that is left to do is to find invertible sheaves with large
+degree. Fortunately, for any invertible sheaf $\mathcal L$,
+$\deg\mathcal L^{\otimes m} = m\deg\mathcal L$. Hence any line
+bundle of positive degree will do. Fortunately, the degree of
+the canonical bundle $\Omega_C$ is $2g-2$. As we have restricted
+our attention to the case $g\geq 2$, we can choose
+$\mathcal L = \Omega_C^{\otimes m}$ for $m \geq 2$ to obtain
+an embedding $C\inc\projective{}{}(H^0(C,\mathcal L))$ as required.
+By Chow's theorem, this makes $C$ an algebraic subvariety
+and hence an algebraic curve.
+
+We will not be moving in the other direction, but it is worth
+mentioning that this is indeed possible. In particular, there
+is an embedding $C\inc\projective{3}{}$ and
+
+\missingsection
+
+\subsection{Vector Bundles on Schemes}
+
+As we are now able to regard our base space, a compact Riemann
+surface, as a scheme, it makes sense to translate vector bundles
+into this setting. It is not very difficult to come up with a
+sensible definition based on the usual setting of manifolds:
+
+\begin{definition}[{\cite[Definition 11.5]{gortz2010}}]
+  \label{def:vector_bundle}
+  A \emph{vector bundle} of rank $r$ on a scheme $X$ is
+  a map of schemes $\pi : E \to X$ such that there is an open
+  cover $X = \bigcup_i U_i$ and isomorphisms
+  \begin{align}\label{eq:trivialisation}
+    \phi_i : {\pi}^{-1}U_i \cong \affine{r}{}\times U_i
+  \end{align}
+  such that, for every affine $U = \Spec R \subseteq U_i \cap U_j$,
+  the automorphism $\phi_i \circ \phi^{-1}_j$
+  of $\affine{r}{}\times U = \Spec R[T_1,\ldots,T_r]$
+  corresponds to an $R$-linear map.
+\end{definition}
+
+\begin{example}
+  \begin{itemize}
+    \item trivial bundle
+    \item bundle on curve from previous section, e.g. $T^1$ or
+      $T^1 \# T^1$.
+  \end{itemize}
+\end{example}
+
+\missingsection
+
+\subsection{Locally Free Sheaves}
+
+While it was easy to translate vector bundles from manifolds
+to sheaves, the resulting notion may not always be the most
+useful. It is much more natural to talk about sheaves. We know
+that to each vector bundle $E\to X$ comes a sheaf of sections
+$\mathcal E := \Gamma(-,E)$. This has a natural $\mathcal O_X$-module structure.
+
+\begin{lemma}
+  The sheaf $\mathcal E$ corresponding to a vector bundle $E\to X$
+  is locally free.
+  \begin{proof}
+    If $E=\affine{r}{}\times X$ is
+    trivial then the sections $s\in\mathcal E(U)$ are just maps
+    $s:U\to \affine{r}{}$. If, moreover, $U$ is affine,
+    $\mathcal E(U)$ corresponds to maps of $\mathbb{C}$-algebras
+    $\mathbb{C}[T_1,\ldots,T_n]\to\mathcal O_X(U)$ so
+    $\mathcal E(U)\cong \mathcal O^r_X(U)$, i.e. $\mathcal E$
+    is free.
+    More generally, for each element $U_i$ of the cover in
+    \ref{def:vector_bundle}, we have
+    $\restrict{E}{U_i}\cong \restrict{\mathcal O_X^r}{U_i}$, as
+    required.
+  \end{proof}
+\end{lemma}
+
+\missingsection
+
+\subsection{The Quot Scheme}
+
+\missingsection
+
+\section{GIT Quotients}
+
+\missingsection
+
+\subsection{Group Schemes}
+
+\missingsection
+
+\subsection{Reductive Groups}
+
+\missingsection
+
+\subsection{Of Affine Schemes}
+
+\missingsection
+
+\subsection{By Linear Actions}
+
+\missingsection
+
+\subsection{By Linearised Actions}
+
+\missingsection
+
+\chapter{Analytification}
+
+\missingsection
+
+\chapter{Future Work}
+
+\missingsection
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\renewcommand{\bibname}{References}
+\printbibliography
+
+\end{document}
