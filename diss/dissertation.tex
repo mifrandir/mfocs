@@ -8,7 +8,7 @@
 %and uncomment the next line)
 %\include{mymacros}
 
-\title{Moduli Spaces of Holomorphic Bundles}   %note \\[1ex] is a line break in the title
+\title{Moduli Spaces of\\[1ex]Holomorphic Bundles}   %note \\[1ex] is a line break in the title
 
 \author{Franz Miltz}             %your name
 \college{Lady Margaret Hall}  %your college
@@ -16,6 +16,8 @@
 %\renewcommand{\submittedtext}{change the default text here if needed}
 \degree{Master of Science}     %the degree
 \degreedate{2024}         %the degree date
+
+\addbibresource{references.bib}
 
 %end the preamble and start the document
 \begin{document}
@@ -86,19 +88,30 @@ of as cotangent vectors of holomorphic bundles.
 
 \paragraph*{Notation}
 
-Before we begin, let us establish some notation. All schemes
-will be over $\mathbb{C}$, i.e. elements of the slice category
-$\Sch := \Sch_{\mathbb{Z}}/\Spec\mathbb{C}$. Unless otherwise
-indicated, products of schemes are fibre products
-$X\times Y := X\times_{\Spec\mathbb{C}} Y$, and
-tensor products are taken with respect to $\mathbb{C}$.
-By a sheaf on a scheme $X$ we mean a sheaf of $\mathcal O_X$-modules.
+Before we begin, let us establish some notation. Unless otherwise
+indicated,
+\begin{itemize}
+  \item all schemes, maps, and products are taken over $\mathbb{C}$,
+    i.e.~in the slice category
+    $\Sch := \Sch_{\mathbb{Z}}/\Spec\mathbb{C}$;
+  \item a projective scheme is a projective scheme over $\mathbb{C}$
+    in the sense of \cite{hartshorne1977} - that is, $X$ is projective
+    if there exists a closed immersion $X\inc\projective{n}{}$ for
+    some $n$;
+  \item all vector spaces are complex, maps of vector spaces are
+    $\mathbb{C}$-linear, and tensor products of vector spaces are
+    over $\mathbb{C}$;
+  \item sheaves on a scheme $X$ are sheaves of $\mathcal O_X$-modules,
+    maps of sheaves are $\mathcal O_X$-linear, and tensor products
+    of sheaves are taken over $\mathcal O_X$.
+\end{itemize}
 
-\section{Vector Bundles as Points of Quot Schemes}
+\section{Holomorphic Bundles as Locally Free Sheaves}
 
 \missingsection
 
 \subsection{Compact Riemann Surfaces as Algebraic Curves}
+\label{sec:surfaces_as_curves}
 
 We are going to view moduli spaces of holomorphic bundles
 as schemes. The first step towards this is translating the
@@ -112,46 +125,51 @@ for a comprehensive treatment.
 
 It is worth recalling what the algebraic structure on a compact
 Riemann surface $C$ of genus $g\geq 2$ is. The easiest way to obtain
-this structure is by constructing an embedding
-$X\inc\projective{N}{}$ for some $N$. To do this, recall
-the projectivisation of an $n$-dimensional complex vector
-space $V$ is given by
+this structure is by constructing an embedding into an ambient
+scheme. The correct scheme to consider will be the projectivisation
+of an $n$-dimensional complex vector space $V$ which is given
+by
 \begin{align*}
   \projective{}{}(V) := \Proj\left({
       \bigoplus_{d=0}^\infty \Sym^d(V^\vee)
   }\right)
 \end{align*}
-Complex points in $\projective{}{}(V)$ are commonly identified
-with one-dimensional subspaces of $V$. Now if $\mathcal L$ is
+Complex points in $\projective{}{}(V)$ may be identified
+with one-dimensional subspaces of $V$. \missingcitation
+Now if $\mathcal L$ is
 an invertible sheaf on $C$ then there is a natural map
 \begin{align}\label{eq:natural_line_bundle_map}
   H^0(C,\mathcal L)\otimes\mathcal O_C \to \mathcal L
 \end{align}
-given by $s\otimes f \mapsto f\restrict{s}{U}$. If this map
-(\ref{eq:natural_line_bundle_map}) is a surjection then,
+given by $s\otimes f \mapsto f\restrict{s}{U}$. We will be
+particularly interested in the case where $\mathcal L$ is a
+quotient of the free sheaf $H^0(C,\mathcal L)\otimes\mathcal O_C$.
+
+\begin{definition}
+  A sheaf $\mathcal F$ on a ringed space $X$ is
+  \emph{globally generated} if the induced map
+  $H^0(X,\mathcal F) \otimes \mathcal O_X \to \mathcal F$
+  is a surjection.
+\end{definition}
+
+In particular, if $\mathcal L$ is globally generated then,
 for every $x\in C$, it induces a surjection on stalks
 $H^0(C,\mathcal L) \surj \mathcal L_x$ whose kernel is a
-subspace of codimension 1, i.e. an element of
-$\projective{}{}(H^0(C,\mathcal L)^\vee)$. Now one may choose an
-isomorphism $\projective{}{}(H^0(C,\mathcal L)^\vee)\cong\projective{N}{}$ where $N = \dim H^0(C,\mathcal L)$ to get a map
-$C\to\projective{N}{}$. It turns out that this map is an embedding
+subspace of codimension 1, i.e. a closed point of
+$\projective{}{}(H^0(C,\mathcal L)^\vee)$. It turns out that this map is an embedding
 whenever $\deg\mathcal L > 2g$. \cite[Proposition 2.14]{harris2011}
 All that is left to do is to find invertible sheaves with large
 degree. Fortunately, for any invertible sheaf $\mathcal L$,
-$\deg\mathcal L^{\otimes m} = m\deg\mathcal L$. Hence any line
-bundle of positive degree will do. Fortunately, the degree of
-the canonical bundle $\Omega_C$ is $2g-2$. As we have restricted
-our attention to the case $g\geq 2$, we can choose
-$\mathcal L = \Omega_C^{\otimes m}$ for $m \geq 2$ to obtain
-an embedding $C\inc\projective{}{}(H^0(C,\mathcal L))$ as required.
+the tensor powers $\mathcal L^{\otimes m}$ are invertible and
+$\deg\mathcal L^{\otimes m} = m\deg\mathcal L$. Hence any invertible
+sheaf of positive degree will do. Fortunately, the degree of
+the canonical sheaf $\Omega_C$ is $2g-2$. As we have restricted
+our attention to the case $g\geq 2$, we are free to choose
+$m\geq 2$ and hence $\mathcal L = \Omega_C^{\otimes m}$ to obtain
+an embedding $C\inc\projective{}{}(H^0(C,\mathcal L)^\vee)$, as
+required.
 By Chow's theorem, this makes $C$ an algebraic subvariety
 and hence an algebraic curve.
-
-We will not be moving in the other direction, but it is worth
-mentioning that this is indeed possible. In particular, there
-is an embedding $C\inc\projective{3}{}$ and
-
-\missingsection
 
 \subsection{Vector Bundles on Schemes}
 
@@ -182,47 +200,900 @@ sensible definition based on the usual setting of manifolds:
   \end{itemize}
 \end{example}
 
+\begin{itemize}
+  \item show that holomorphic bundles on a compact Riemann surface $C$
+    are the same thing as vector bundles on $C$, regarded as a smooth algebraic curve and hence a scheme
+\end{itemize}
+
 \missingsection
 
 \subsection{Locally Free Sheaves}
 
 While it was easy to translate vector bundles from manifolds
-to sheaves, the resulting notion may not always be the most
+to schemes, the resulting notion may not always be the most
 useful. It is much more natural to talk about sheaves. We know
-that to each vector bundle $E\to X$ comes a sheaf of sections
-$\mathcal E := \Gamma(-,E)$. This has a natural $\mathcal O_X$-module structure.
+that with each vector bundle $E\to X$ comes a sheaf of sections
+$\Gamma(-,E)$. This has a natural $\mathcal O_X$-module structure.
 
 \begin{lemma}
-  The sheaf $\mathcal E$ corresponding to a vector bundle $E\to X$
-  is locally free.
+  The sheaf of sections of a vector bundle $E$ on a scheme $X$ is
+  locally free.
   \begin{proof}
     If $E=\affine{r}{}\times X$ is
-    trivial then the sections $s\in\mathcal E(U)$ are just maps
+    trivial then the sections $s\in\Gamma(U,E)$ are just maps
     $s:U\to \affine{r}{}$. If, moreover, $U$ is affine,
-    $\mathcal E(U)$ corresponds to maps of $\mathbb{C}$-algebras
+    $\Gamma(U,E)$ corresponds to maps of
+    $\mathbb{C}$-algebras
     $\mathbb{C}[T_1,\ldots,T_n]\to\mathcal O_X(U)$ so
-    $\mathcal E(U)\cong \mathcal O^r_X(U)$, i.e. $\mathcal E$
+    $\Gamma(U,E)\cong \mathcal O^r_X(U)$, i.e. $\Gamma(-,E)$
     is free.
     More generally, for each element $U_i$ of the cover in
-    \ref{def:vector_bundle}, we have
-    $\restrict{E}{U_i}\cong \restrict{\mathcal O_X^r}{U_i}$, as
-    required.
+    \ref{def:vector_bundle}, we can consider affines $U\subseteq U_i$
+    to find $\restrict{\Gamma(-,E)}{U_i}\cong \restrict{\mathcal O_X^r}{U_i}$,
+    as required.
   \end{proof}
 \end{lemma}
 
+However, much more is true. It turns out that on a scheme $X$
+a vector bundle of rank $n$ is the same thing as a locally
+free sheaf of rank $n$. That is, there is an equivalence
+of categories given by $E \mapsto \Gamma(-,E)^\vee$.~\cite[128-129]{hartshorne1977}
+We will say that a sheaf $\mathcal E$ corresponds to a vector bundle
+$E$ and write $\mathcal E=\mathscr V(E)$ to mean
+$\mathcal E\cong\Gamma(-,E)^\vee$.
+
+\subsection{Higgs Sheaves}
+
 \missingsection
 
-\subsection{The Quot Scheme}
+\subsection{Moduli Problems}
+
+We have shown that holomorphic bundles on a compact Riemann surface
+correspond to locally free sheaves on a certain smooth algebraic
+curve. Now we would like to construct schemes whose points are
+holomorphic bundles. By points of a scheme $M$ one usually means the
+closed points. In the case where $M$ is locally of finite type,
+closed points are $\mathbb{C}$-points, i.e. maps
+$\Spec\mathbb{C}\to M$. \cite[Corollary 3.36]{gortz2010} As we
+are hoping for our moduli spaces to be geometrically well-behaved,
+this is a reasonable approximation to make. We are now justified in
+thinking of a moduli problem as sending a scheme $T$ to the
+$T$-points of a hypothetical moduli space.
+
+\begin{definition}
+  A \emph{moduli problem} is a functor $\mathscr M:\Sch^{op}\to\Set$.
+\end{definition}
+
+\begin{example}
+  \missingexample
+  \begin{itemize}
+    \item lines in a vector space
+    \item holomorphic bundles up to isomorphism
+    \item Higgs bundles up to isomorphism
+    \item some coarse example
+  \end{itemize}
+\end{example}
+
+Now the obvious notion of a moduli space is a scheme whose functor
+of points is precisely the moduli problem. This is called a fine
+moduli space:
+
+\begin{definition}
+  A \emph{fine moduli space} of a moduli problem $\mathscr M$
+  is a scheme $M$ with a natural isomorphism
+  $\eta : \mathscr M \cong \Hom(-,M)$.
+\end{definition}
+
+Slightly abusing notation, we may simply write
+$\eta : \mathscr M \cong M$. We are often going to surpress the
+isomorphism $\eta$ and call $M$ the fine moduli space.
+
+\begin{example}
+  \begin{itemize}
+    \item projectivisation/projective space
+  \end{itemize}
+\end{example}
+
+Beyond the fact that a fine moduli spaces represent the moduli
+problem and thus are the best possible solution, there are some
+pleasant properties to observe. Consider an element
+$F\in\mathscr M(T)$, for some $T$. Observe that under $\eta$,
+this corresponds to a map $f:T\to M$ which induces pullback maps
+$f^* : \Hom(M,M)\to\Hom(T,M)$ and hence
+$F^* : \mathscr M(M)\to \mathscr M(T)$.
+Now note that there is an element $U\in\mathscr M(M)$ that
+corresponds to the identity on $M$. Thus $F^* U = F$, so every
+element $\mathscr M(T)$ is given by pulling back $U$. Hence
+we make the following definition:
+
+\begin{definition}
+  Let $\mathscr M$ be a moduli problem and $M$ a fine moduli space.
+  The \emph{universal element} $U\in\mathscr M(M)$ is
+  $U:=\eta^{-1}_M (\identity)$.
+\end{definition}
+
+\begin{example}
+  \missingexample
+\end{example}
+
+However, it turns out that this is often too much to ask. Indeed,
+we really care about the $\mathbb{C}$-points and hence
+we are otherwise ready accept some deviation so long as it is not
+possible to do better:
+
+\begin{definition}\missingcitation
+  A \emph{coarse moduli space} of a moduli problem $\mathscr M$
+  is a scheme $M$ together with a natural transformation
+  $\eta : \mathscr M \to \Hom(-,M)$ such that
+  \begin{itemize}
+    \item $\eta : \mathscr M(\Spec\mathbb{C})\to M(\Spec\mathbb{C})$ is a bijection;
+    \item for every scheme $N$, every natural transformation
+      $\nu : M \to \Hom(-,N)$ factors through $\eta$ as in the diagram
+      \missingdefinition{universal property}
+  \end{itemize}
+\end{definition}
+
+\begin{example}
+  \missingexample
+\end{example}
+
+Unfortunately, even coarse moduli spaces may not exist. Here is
+one property that prevents a moduli space from existing. We will
+see an example of this later. \todo{add reference to problem of all
+locally free sheaves}
+
+\begin{lemma}\label{lem:no_coarse_condition}
+  Let $\mathscr M$ be a moduli problem and
+  $x,y\in \affine{1}{}(\mathbb{C})$. If there is an
+  $F\in\mathscr M(\affine{1}{})$ such that
+  $\mathscr M(x)(F) = \mathscr M(y)(F)$ if, and only if,
+  $x,y\neq 0$ or $x=y=0$ then there is no coarse moduli space
+  for $\mathscr M$.
+  \begin{proof}
+    Following \cite[Lemma 2.27]{hoskins2016}.
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+By construction, both kinds of moduli spaces are unique up to
+isomorphism and every fine moduli space is a coarse moduli
+space. Hence solving moduli problems usually proceeds in
+three steps:
+
+\begin{enumerate}
+  \item Formulate the problem by defining the desired functor of
+    points.
+  \item Construct a coarse moduli space.
+  \item Check under which conditions the moduli space is fine.
+\end{enumerate}
+
+\section{Sheaf Cohomology}
+
+Vector bundles correspond to locally free sheaves. Hence it is worth
+taking some time to study locally free sheaves and, more generally,
+sheaves on schemes. This is of course a very wide field
+so we are going to highlight only a few key properties.
+
+The main goal of this section is to establish some topological
+invariants of coherent sheaves, generalising the grouping of
+vector bundles by rank and degree. The obvious tool for studying
+the topology of sheaves is cohomology. While we will have little
+to do with sheaf cohomology in its raw form, we are going to
+observe several properties of sheaves on curves and, more generally,
+projective schemes that are going to prove useful.
+
+\subsection{Twisting}
+
+We begin by revisiting one of the most important family of sheaves
+on projective schemes. See e.g. \cite{gortz2010} or
+\cite{hartshorne1977} for detailed treatments.
+
+Consider a projective scheme $X$ Recall that we may write
+$X=\Proj R$ for some $R=\mathbb{C}[T_0,\ldots,T_n]/I$ \cite[II Corollary 5.16]{hartshorne1977}. Such a scheme comes
+equipped with a particularly important family of invertible sheaves
+called Serre's twisting sheaves. To define them, recall that each
+graded $R$-module $M$ defines a unique sheaf $\tilde M$ on $X$
+that satisfies $\tilde M (D_+(f)) = M_{(f)}$ where $M_{(f)}$
+denotes the homogeneous localisation $M$ at $f\in R$. This
+correspondence between modules and sheaves allows the following
+definition:
+
+\begin{definition}[{\cite[13.4]{gortz2010}}]
+  For $m\in\mathbb{Z}$, define the graded $R$-module $R(m)$ by
+  $R(d)_d := R_{m+d}$ for all $d\in\mathbb{Z}$. \emph{Serre's
+  twisting sheaf} is
+  \begin{align*}
+    \mathcal O_X(m) := \widetilde{R(m)}.
+  \end{align*}
+  More generally, for a sheaf $\mathcal F$ on $X$, define
+  $\mathcal F(m) := \mathcal F \otimes \mathcal O_X(m)$.
+\end{definition}
+The notation $\mathcal O_X(m)$ is justified by the observation
+$\mathcal O_X(m) \cong \mathcal O_X \otimes \mathcal O_X(m)$.
+Of course, the main case of interest for us is
+$R=\mathbb{C}[T_0,\ldots,T_n]$, i.e. $X=\projective{n}{}$.
+In this case, the twisting sheaf corresponds to a line bundle,
+i.e. is invertible. That is, it has rank 1.
+
+\begin{proposition}[{\cite[Proposition 13.15]{gortz2010}}]
+  \label{thm:twisiting_sheaf_invertible}
+  If $R$ is finitely generated as a $R_0$-algebra, then each
+  $\mathcal O_X(m)$ is an invertible sheaf.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{proposition}
+
+Why are the twisting sheaves important to us? They are well-behaved
+with respect to the parameters. In particular,
+under the assumption of \ref{thm:twisiting_sheaf_invertible},
+$(\mathcal F,m)\mapsto \mathcal \mathcal F(m)$ defines an action of
+the integers on the group of sheaves on $X$:
+
+\begin{lemma}\label{lem:additivity_twisting_sheaf}
+  Let $R$ be finitely generated as a $R_0$-algebra and $m,n\in\mathbb{Z}$.
+  Then $\mathcal O_X(m) \otimes \mathcal O_X(n) \cong \mathcal O_X(m + n)$. Hence
+  $\mathcal F(m) \otimes \mathcal O_X(n) \cong \mathcal F(m+n)$.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+We will see that topological properties of sheaves behave well
+with respect to taking direct sums and tensor products and hence
+with respect to twisting, too. Moreover, for suitable $R$ and
+sufficiently large $m$, $\mathcal F(m)$ is globally generated. In this
+case, for $m\geq 1$, the sheaves $\mathcal O_X(m)$ are ample.
+
+\subsection{Ample sheaves}
+
+Recall the definition of an ample sheaf:
+
+\begin{definition}
+  An invertible sheaf $\mathcal L$ on a quasi-compact quasi-separated
+  scheme $X$ is \emph{ample} if, for all quasi-coherent sheaves of
+  finite type $\mathcal F$, for $m$ sufficiently large,
+  $\mathcal F\otimes \mathcal L^{\otimes m}$ is
+  globally generated.
+\end{definition}
+
+On general schemes, ample sheaves need not exist. However, on
+projective space the twisting sheaves serve as an example:
+
+\begin{proposition}
+  Let $R$ be a finitely generated $R_0$-algebra,
+  write $X=\Proj R$ and let $m,n\geq 1$. Then
+  $\mathcal O_X(m)$ is ample.
+  \begin{proof}
+    See \cite[Example 13.45]{gortz2010}.
+  \end{proof}
+\end{proposition}
+
+More generally, any quasi-projective quasi-compact scheme has
+an ample sheaf given by pulling back a twisted sheaf:
+
+\begin{proposition}
+  Let $X$ be projective, $U\subseteq X$ quasi-compact, and
+  $j : U \inc X$ an open immersion then. Then, for some $m\geq 1$,
+  $j^*\mathcal O_X(m)$ is ample.
+  \begin{proof}
+    See \cite[\href{https://stacks.math.columbia.edu/tag/01Q2}{Tag 01Q2}]{stacks-project}.
+  \end{proof}
+\end{proposition}
+
+\begin{corollary}
+  Every quasi-projective scheme has an ample sheaf.
+\end{corollary}
+
+\todo{motivate all this a little bit more}
+
+\subsection{Euler Characteristic}
+
+The fundamental topological invariant of sheaves that we are going
+to be interested in is the Euler characteristic. This is defined
+in the obvious way, replacing regular cohomology with sheaf
+cohomology:
+
+\begin{definition}
+  The \emph{Euler characteristic} of a coherent sheaf $\mathcal F$
+  on a projective scheme $X$ is
+  \begin{align*}
+    \chi (X,\mathcal F) := \sum_{j=0}^\infty (-1)^j \dim H^j (X,\mathcal F).
+  \end{align*}
+\end{definition}
+
+Note that, by finite-dimensionality of cohomology
+(e.g. \cite[\href{https://stacks.math.columbia.edu/tag/02O6}{Tag 02O6}]{stacks-project}) and Grothendieck's vanishing theorem (e.g.
+\cite[III Theorem 2.7]{hartshorne1977}), this is sum is finite for
+all $\mathcal F$.
+
+\begin{example}
+  Our primary interest will be in the case where
+  $\dim X = 1$, so $H^j(X,\mathcal F)=0$ for $j\geq 2$ and
+  \begin{align*}
+    \chi (X,\mathcal F) = \dim H^0(X,\mathcal F)-\dim H^1(X,\mathcal F).
+  \end{align*}
+  If we moreoever take $\mathcal F=\mathcal O_X$ then
+  $\chi (X,\mathcal O_X) = 1 - g$. \todo{justify}
+\end{example}
+
+\begin{example}
+  Consider the case $X=\projective{n}{}$.
+  From \missingcitation we know that
+  % https://swc-math.github.io/notes/files/06StillmanNotes.pdf
+  % https://achinger.impan.pl/fac/fac.pdf
+  \begin{align*}
+    \dim H^j(\projective{n}{},\mathcal O_{\projective{n}{}}(m)) =
+    \begin{cases}
+      (n+1)^m & \text{if }j = 0 \\
+      0 &\text{if }0<j<n \\
+      \binom{-n-1}{m} &\text{if }j=n
+    \end{cases}
+  \end{align*}
+  Hence \todo{doublecheck}
+  \begin{align*}
+    \chi(\projective{n}{},\mathcal O_{\projective{n}{}}(m))
+    = (n+1)^m + \binom{-n-1}{m}.
+  \end{align*}
+\end{example}
+
+\begin{lemma}
+  \todo{additivity on short exact sequences}
+\end{lemma}
+
+\begin{lemma}
+  \todo{invariance under base change}
+\end{lemma}
+
+\subsection{Hilbert Polynomials}
+
+While the Euler characteristic certainly is a topological invariant,
+it is rather limiting. Rather than focusing on a single integer,
+the Euler characteristic,
+we are going to keep track of all the Euler characteristics of all
+the twists of a sheaf. This turns out to be described by a polynomial.
+
+Consider a projective scheme $X$ with an ample sheaf $\mathcal L$
+and a coherent sheaf $\mathcal F$.
+
+\begin{definition}
+  The \emph{Hilbert polynomial} of $\mathcal F$ at $m\in\mathbb{Z}$
+  is
+  \begin{align*}
+    P(\mathcal F,\mathcal L)(m) := \chi(X,\mathcal F \otimes \mathcal L^{\otimes m}).
+  \end{align*}
+\end{definition}
+
+A priori, the Hilbert polynomial is a function taking integers to
+integers. The fact that it is described by a polynomial is
+surprising and non-trivial.
+
+\begin{lemma}
+  There exists a unique polynomial $p\in\mathbb{Q}[t]$ such that,
+  for all $m$, $P(\mathcal F,\mathcal L)(m) = p(m)$.
+  \begin{proof}
+    See \cite[Lemma 1.2.1]{huybrechts2010}.
+  \end{proof}
+\end{lemma}
+
+\begin{example}
+  \missingexample
+\end{example}
+
+Serre's vanishing theorem \missingcitation states that,
+for $m$ sufficiently large and $j>0$,
+$H^j(X,\mathcal F\otimes\mathcal L^{\otimes m})=0$. Hence,
+eventually,
+$P(\mathcal F,\mathcal L)(m) = \dim H^0(X,\mathcal F\otimes \mathcal L^{\otimes m})$.
+
+\begin{lemma}
+  \todo{invariance under base change}
+\end{lemma}
+
+\subsection{Degree}
+
+While the Hilbert polynomial of a coherent sheaf is in general the
+correct invariant to consider, we are working with locally free
+sheaves on a curve. Hence some simplifications are in order.
+Recall that for vector bundles on a curve we defined the degree.
+A similar definition is possible for locally free sheaves:
+
+\begin{definition}[{\cite[\href{https://stacks.math.columbia.edu/tag/0AYQ}{Tag 0AYQ}]{stacks-project}}]
+  The \emph{degree} of a locally free sheaf $\mathcal F$ of rank $r$
+  on $C$ is $\deg \mathcal F := \chi (C,\mathcal F) - r\chi(C,\mathcal O_C)$.
+\end{definition}
+
+\begin{example}
+  As the rank of $\mathcal O_C$ is $1$ its degree must be $0$.
+\end{example}
+
+\begin{lemma}\label{lem:degree_of_tensor}
+  If $\mathcal E$ and $\mathcal F$ are locally free on $C$ then
+  \begin{align*}
+    \deg(\mathcal E\otimes\mathcal F) = \rank\mathcal E\deg\mathcal F + \rank\mathcal F\deg\mathcal E.
+  \end{align*}
+  \begin{proof}
+    \cite[Exercise 8.24]{hoskins2016}.
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+\begin{example}
+  Using~\ref{lem:degree_of_tensor}, we find \todo{make sure $\mathcal O_X(1)$ has degree 1}
+  \begin{align*}
+    \deg \mathcal E(m) = \deg\mathcal E + m\rank\mathcal E.
+  \end{align*}
+\end{example}
 
 \missingsection
 
-\section{GIT Quotients}
+\section{Locally Free Sheaves as Points of Quot Schemes}
+
+The first step in constructing the analytic moduli spaces of
+holomorphic bundles was to consider the slightly larger space of
+all bundles bundles of a certain rank and degree, including repeated
+occurences of isomorphic instances. While this preliminary space
+did not serve as a true
+classification,
+it provided us with a good starting point for future analysis. As the
+algebraic construction follows a similar procedure, it is now
+time to construct an analogous scheme.
+
+We define a much more general moduli problem called
+the Quot functor which was shown to have a fine moduli space by
+Grothendieck. This is the first piece of machinery which will do a
+lot of the work for us and for many other moduli problems of vector
+bundles. We will show that there is a Quot scheme whose points
+may be thought of as locally free sheaves of a certain rank and
+degree.
+
+\subsection{All Locally Free Sheaves}
+
+Our approach to constructing moduli spaces of equivalence classes of
+sheaves is to consider a larger space and then quotient by a suitable
+group action. In the analytic case, we started with the affine space of
+all holomorphic bundles. On the algebraic side, this does not quite work.
+Let us see why that is.
+
+The first step is to define the correct moduli problem. The key idea
+is to associate to a scheme $T$ a family of locally free sheaves
+$\mathcal E_t$. We may view a sheaf $\mathcal E$ on $C_T := C\times T$
+as a family of sheaves on $C$ indexed by $T$. If we have a point $t\in T$
+then we have the fibre $C_t := \Spec k(t) \times C$ and the sheaf
+$\mathcal E_t := \restrict{\mathcal E}{C_t}$. In the case where
+$t$ is a $\mathbb{C}$-point, $C_t \cong C$ so $\mathcal E_t$ is indeed
+a sheaf on $C$. Moreover, if $\mathcal E$ is flat over $T$ then
+each $\mathcal E_t$ has the same Hilbert polynomial.
+
+To truly view locally free sheaves $\mathcal E,\mathcal F$ on
+$C_T$ flat over $T$ as a family, we need to adjust our notion of
+equivalence. In particular, we require all the fibres to be isomorphic.
+
+\begin{lemma}
+  Let $\mathcal E$ and $\mathcal F$ be locally free sheaves on $C_T$
+  flat over $T$. Then $\mathcal E_t\cong\mathcal F_t$ for all $t\in T$
+  if, and only if, there exists an invertible sheaf $\mathcal L$ on
+  $T$ such that $\mathcal E \cong \mathcal F \otimes \pi^*\mathcal L$
+  where $\pi : C_T \to C$ is the base change.
+  \begin{proof}
+    \todo{not sure this is true; if it isn't then we need to find a
+    different explanation}
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+Hence we make the following definition:
+
+\begin{definition}
+  Define the moduli problem $\mathscr A : \Sch^{\text{op}} \to \Set$
+  bysending a scheme $T$ to
+  \begin{align*}
+    \mathscr A(T) := \left\lbrace{\text{locally free sheaves $\mathcal E$ on $C_T$ flat over $T$}}\right\rbrace/\sim
+  \end{align*}
+  where $\mathcal E\sim\mathcal F$ if, and only if, there is a line bundle
+  $\mathcal L$ on $T$ such that
+  $\mathcal E \cong \mathcal F\otimes\pi^* \mathcal L$. Maps
+  $f: T'\to T$ get sent to the pullback map
+  $\mathcal E\mapsto f^*\mathcal E$.
+\end{definition}
+
+However, this fails to have any moduli space at all:
+
+\begin{lemma}\label{lem:no_coarse_moduli_space}
+  The moduli problem $\mathscr A$ of locally free sheaves on $C$
+  does not admit a coarse moduli space.
+  \begin{proof}
+    Follwing \cite[Example 2.2]{hoskins2016}. We aim to construct
+    an $\mathcal E\in\mathscr A(\affine{1}{})$ that satisfies the
+    condition in \ref{lem:no_coarse_condition}.
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+Let us think about the case of Higgs sheaves. Consider the moduli problem
+given by \todo{add new equivalence; make sure the canonical sheaf restricts to a canonical sheaf}
+\begin{align*}
+  \mathscr A_H(T) = \left\lbrace{\text{Higgs sheaves $(\mathcal E,\phi)$
+  on $X_T$}}\right\rbrace/\sim.
+\end{align*}
+where $(\mathcal E,\phi)\sim(\mathcal E',\phi')$ if, and only if,
+there is an isomorphism $\mathcal E\cong\mathcal E'$ that makes the
+following commute:
+\begin{equation*}
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWwgRSJdLFswLDEsIlxcbWF0aGNhbCBFJyJdLFsyLDEsIlxcbWF0aGNhbCBFJ1xcb3RpbWVzXFxPbWVnYV4xX3tDXFx0aW1lcyBUfSJdLFsyLDAsIlxcbWF0aGNhbCBFXFxvdGltZXMgXFxPbWVnYV4xX3tDXFx0aW1lcyBUfSJdLFswLDMsIlxccGhpIl0sWzEsMiwiXFxwaGknIl0sWzAsMSwiXFxjb25nIiwyXSxbMywyLCJcXGNvbmciXV0=
+  \begin{tikzcd}
+    {\mathcal E} && {\mathcal E\otimes \Omega^1_{C\times T}} \\
+    {\mathcal E'} && {\mathcal E'\otimes\Omega^1_{C\times T}}
+    \arrow["\phi", from=1-1, to=1-3]
+    \arrow["\cong"', from=1-1, to=2-1]
+    \arrow["\cong", from=1-3, to=2-3]
+    \arrow["{\phi'}", from=2-1, to=2-3]
+  \end{tikzcd}
+\end{equation*}
+Once again, by restricting to fibres over $t\in T(\mathbb{C})$
+a family of Higgs sheaves $(\mathcal E,\phi)$ on $X_T$ yields
+a Higgs field
+\begin{align*}
+  \phi_t : \mathcal E_t \to \mathcal E_t \otimes \Omega^1_C.
+\end{align*}
+Unfortunately, we find ourselves in a similar position.
+\begin{corollary}
+  The moduli problem $\mathscr A_H$ of Higgs sheaves on $C$ does not admit
+  a coarse moduli space.
+  \begin{proof}
+    Consider the natural transformation $\mathscr A\to\mathscr A_H$
+    given by $\mathcal E \mapsto (\mathcal E,0)$. Now the sheaf
+    $\mathcal E\in\mathscr A(\affine{1}{})$ from the proof of
+    \ref{lem:no_coarse_moduli_space} pushes forward to a Higgs field
+    $(E,0)\in\mathscr A_H(\affine{1}{})$ which, moreoever, satisfies the
+    same property.
+  \end{proof}
+\end{corollary}
+Thus it is not possible to construct the moduli spaces we desire
+in the naive way. There are essentially two ways to get around this.
+One option is to deal with
+moduli stacks instead. This has the advantage of solving the problem
+without discarding any information. However, it involves dealing with
+algebraic stacks which are unwieldy, even more so than schemes.
+See \cite{cm2017} for this point of view. We will instead take an
+approach that is much in line with the analytic construction by narrowing
+our attention to a subclass of locally free sheaves. Indeed, we are
+going to end up with those sheaves corresponding to (semi-)stable
+bundles.
+
+\subsection{Quotients}
+
+If a sheaf $\mathcal F$ is globally generated and
+$\dim H^0(X,\mathcal F) = N$ then $\mathcal F$ may be thought
+of as a quotient of the free sheaf $\mathcal O_X^{\oplus N}$
+by choosing an isomorphism
+\begin{align*}
+  H^0(X,\mathcal F) \otimes \mathcal O_X \cong \mathbb{C}^N \otimes \mathcal O_X \cong \mathcal O_X^{\oplus N}.
+\end{align*}
+It will turn out that being globally generated will be a reasonable
+condition in the sense that we are not missing too many vector
+bundles. Thus it is sensible to study quotients of coherent sheaves.
+
+\begin{definition}
+  Let $\mathcal E$ be a coherent sheaf on a scheme $X$.
+  A \emph{family of quotients} of $\mathcal E$ over a scheme $T$
+  consists of a sheaf $\mathcal F$ on $X_T$ flat over $T$ and a
+  surjection $q:\pi^*\mathcal E\surj\mathcal F$ where
+  $\pi : X_T \to X$ is the base change.
+\end{definition}
+
+Note the condition that the quotient be flat. Recall that a sheaf
+$\mathcal F$ on $X_T$ is flat over $T$ if each of the functors
+$M \mapsto \mathcal F_{(x,t)} \otimes_{\mathcal O_{T,t}} M$ is exact.
+In light of \cite[III Theorem 9.9]{hartshorne1977} this is a
+particularly useful condition for us as it ensures that the fibres
+$\mathcal F_t$ all have the same Hilbert polynomial. Hence we may
+refer to the Hilbert polynomial $P(q,\mathcal L)$ of the family
+$q:\pi^*\mathcal E\surj\mathcal F$.
+
+\begin{example}
+  We saw earlier that a globally generated locally free sheaf
+  $\mathcal F$ of rank $r$ and degree $d$ on $C$ together with
+  a choice of isomorphism $\mathbb{C}^N \cong H^0(C,\mathcal F)$
+  give rise to a family of quotients
+  \begin{align*}
+    H^0(C,\mathcal F)\otimes\mathcal O_C \cong \mathcal O^{\oplus N}_C
+    \surj \mathcal F
+  \end{align*}
+  over $\mathbb{C}$ where $N := \dim H^0(X,\mathcal F)$.
+\end{example}
+
+Consider two quotients $\mathcal F$ and $\mathcal F'$ of a
+sheaf $\mathcal E$.
+Such quotients are equivalent if there is an isomorphism
+$\mathcal F\cong\mathcal F'$ such that the following commutes
+\begin{equation}\label{eq:quotient_equivalence}
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWwgRSJdLFsyLDAsIlxcbWF0aGNhbCBGIl0sWzIsMSwiXFxtYXRoY2FsIEYnIl0sWzEsMiwiXFxjb25nIl0sWzAsMSwicSIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFswLDIsInEnIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV1d
+  \begin{tikzcd}
+    {\mathcal E} && {\mathcal F} \\
+                 && {\mathcal F'}
+                 \arrow["q", two heads, from=1-1, to=1-3]
+                 \arrow["{q'}"', two heads, from=1-1, to=2-3]
+                 \arrow["\cong", from=1-3, to=2-3]
+  \end{tikzcd}
+\end{equation}
+
+We would now like to consider the moduli problem of equivalence
+classes of quotients of a coherent sheaf $\mathcal E$ on $X$.
+We note that base change preserves quotients. In particular,
+if $q : \mathcal E \surj \mathcal F$ is a quotient and
+$f : Y \to X$ is a base change then
+$f^*q : f^*\mathcal E \surj f^*\mathcal F$ is a quotient
+by \cite[\href{https://stacks.math.columbia.edu/tag/01U9}{Tag 01U9}]{stacks-project}.
+
+\subsection{Quot functors}
+
+Thus we may consider the moduli problem of equivalence classes of
+quotients of a given sheaf:
+
+\begin{definition}\missingcitation
+  Let $\mathcal E$ be a coherent sheaf on a projective scheme $X$.
+  The corresponding \emph{Quot functor} is given by sending each
+  scheme $T$ to
+  \begin{align*}
+    \mathscr Q(\mathcal E)(T) = \left\lbrace{
+        \text{quotients $q : \pi^*\mathcal E \surj \mathcal F$
+        over $T$}
+    }\right\rbrace / \sim
+  \end{align*}
+  and $f : T' \to T$ to
+  $\mathscr Q(\mathcal E)(f) = (\identity \times f)^*$ where
+  $\pi^*\mathcal E$ is the pullback of $\mathcal E$ along
+  the base change $\pi:X_T\to X$.
+\end{definition}
+
+Now note that this functor splits
+\begin{align*}
+  \mathscr Q(\mathcal E)
+  = \bigsqcup_{P\in\mathbb{Q}[t]} \mathscr Q(\mathcal E)^{P,\mathcal L}.
+\end{align*}
+where each $\mathscr Q(\mathcal E)^{P,\mathcal L}$ contains families
+with Hilbert polynomial $P$.
+
+\begin{example}
+  Recall on $C$, we have
+  \begin{align*}
+    P(\mathcal F,\mathcal O_C(1))(t) = rt + d + r(1-g)
+  \end{align*}
+  for any locally free sheaf $\mathcal F$ of rank $r$ and degree $d$.
+  Thus, for any coherent sheaf $\mathcal E$, we have a splitting
+  \begin{align*}
+    \mathscr Q(\mathcal E) = \bigsqcup_{r,d} \mathscr Q(\mathcal E)^{r,d}.
+  \end{align*}
+  \missingexample
+\end{example}
+
+\subsection{Quot schemes}
+
+One of the reasons the Quot functor is of interest to us is because
+Grothendieck constructed a moduli space for it. \missingcitation
+
+\begin{theorem}
+  Let $X$ be a projective scheme with an ample sheaf $\mathcal L$,
+  let $\mathcal E$ be a coherent sheaf on $X$, and let
+  $p\in\mathbb{Q}[t]$. Then the Quot functor
+  $\mathscr Q(\mathcal E)^{p,\mathcal L}$ has a fine moduli space
+  $Q(\mathcal E)$ called the \emph{Quot scheme}.
+  \begin{proof}
+    For an extensive overview see \cite{hoskins2016}.
+  \end{proof}
+\end{theorem}
+
+\begin{example}
+  Once again, in the case $X=C$ we have schemes
+  $Q(\mathcal E)^{r,d}$.
+  \missingexample
+\end{example}
 
 \missingsection
+
+\section{Geometric Invariant Theory}
+
+The second major step in constructing moduli spaces of holomorphic
+bundles, algebraic or analytic, is to take a quotient by an automorphism
+group. In particular, we noticed that different choices of isomorphism
+$H^0(X,\mathcal F)\cong\mathbb{C}^N$ give rise to different quotients.
+The goal of this section is to eliminate these redundancies.
+
+The first step is defining group actions in the setting of schemes.
+This allows us to make precise what we mean by a quotient with
+respect to such an action and what properties we would like such
+quotients to satisfy. To construct such quotients we are going to
+use a very powerful tool called geometric invariant theory (GIT).
+In the affine case, the GIT quotients will not be very difficult
+to obtain. However, a lot of work will be required to generalise the
+construction sufficiently to suit our needs. We will find that
+GIT naturally gives rise to a notion of stability which coincides
+with the stability of vector bundles.
 
 \subsection{Group Schemes}
 
-\missingsection
+\begin{definition}
+  A \emph{group scheme} is a group object in $\Sch$.
+\end{definition}
+In particular, a group scheme consists of a scheme $G$ and three maps
+\begin{align}\label{eq:group_maps}
+  e:\Spec\mathbb{C}\to G,\hspace{1cm}
+  i:G\to G,\hspace{1cm}
+  m:G\times G\to G
+\end{align}
+satisfying the usual conditions of unitality, inverses, and associativity.
+As usual with classical groups, we are going to leave the maps
+$e$, $i$, and $m$ implicit.
+
+\begin{example}\label{ex:group_schemes}
+  In the affine case $G = \Spec R$ we may specify the multiplication
+  and inverse maps in terms of $\mathbb{C}$-algebra homomorphisms
+  $m^* : R \to R\otimes R$ and $i^* : R\to R$.
+  There are several affine group schemes that we are already
+  intuitively familiar with:
+  \begin{enumerate}
+    \item The additive group $\mathbf{G}_a := \Spec k[t]$ with
+      comulitiplication $t\mapsto t\otimes 1 + 1\otimes t$,
+    \item The multiplicative group $\mathbf{G}_m := \Spec k[t^\pm]$
+      with comultiplication $t\mapsto t\otimes t$,
+    \item The general linear group
+      \begin{align*}
+        GL_n := \Spec k[x_{ij} : 1\leq i,j\leq n][1/\det(x_{ij})]
+      \end{align*}
+      where $(x_{ij})$ is the $n\times n$ matrix with entries $x_{ij}$
+      with comultiplication
+      \begin{align*}
+        x_{ij} \mapsto \sum_{k=1}^n x_{ik}\otimes x_{kj}.
+      \end{align*}
+      See e.g. \cite[\href{https://stacks.math.columbia.edu/tag/022W}{Tag 022W}]{stacks-project} for details.
+    \item The sepcial linear group $SL_N$ analogous to the above by
+      quotienting by $\det(x_{ij})^2 - 1$.
+  \end{enumerate}
+\end{example}
+But what do these group schemes have to do with their well-known
+counterparts. For example, how does the scheme $GL_n$ relate to the
+group $GL_n(\mathbb{C})$? The notation is no coincidence.
+Group schemes induce group structures on their points:
+\begin{lemma}
+  Let $G$ be a scheme with maps (\ref{eq:group_maps}). The following
+  are equivalent:
+  \begin{enumerate}
+    \item $G$ is a group scheme.
+    \item For every scheme $T$, $G(T)$ is a group.
+  \end{enumerate}
+  \begin{proof}
+
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+\begin{example}
+  The induced grous of the affine group schemes behave as expected:
+  For a $\mathbb{C}$-algebra $R$, $\mathbf{G}_a(R) = (R,+)$,
+  $\mathbf{G}_m(R) = (R^\times,\times)$, and
+  $GL_n(R)$ is the usual group of invertible $n\times n$ matrices
+  with coefficients in $R$.
+
+  In more detail, consider $x\in\mathbf{G}_a(R)$ where $R$ is
+  a $\mathbb{C}$-algebra. Such an $x$ is given by algebra homomorphsims
+  $x^\sharp:\mathbb{C}[t] \to R$. That is, we may identify
+  $\mathbf{G}_a(R)$ with $R$ using the map $x \mapsto x^\sharp(t)$. Now,
+  for $x,y\in\mathbf{G}_a(R)$ and $f\in \mathbb{C}[t]$, we have the
+  induced group multiplication given by
+  \begin{align*}
+    (xy)^\sharp(f)
+    = x^\sharp(f) \cdot 1 + 1 \cdot y^\sharp(f)
+    = x^\sharp(f) + y^\sharp(f).
+  \end{align*}
+  Thus the induced group structure on $\mathbf{G}_a(R)$ is just $(R,+)$.
+\end{example}
+
+\begin{definition}
+  A group scheme is \emph{algebraic} if it is smooth and separated
+  over $\mathbb{C}$.
+\end{definition}
+
+\begin{example}
+  All the group schemes in \ref{ex:group_schemes} are affine algebraic
+  groups.
+\end{example}
+
+\subsection{Actions}
+
+For this section, fix a scheme $X$ and a group scheme $G$.
+
+\begin{definition}
+  An \emph{action} of $G$ on $X$ is a morphism
+  $\sigma : G\times X\to X$ satisfying the usual laws with respect
+  to $m:G\times G\to G$.
+\end{definition}
+
+Note that an action $\sigma : G\times X\to X$ induces an action of
+$G(T)$ on $X(T)$ by
+\begin{equation*}
+  T \xlongrightarrow{(g,x)} G\times X \xlongrightarrow{\sigma} X.
+\end{equation*}
+
+\begin{example}
+  \missingexample
+\end{example}
+
+\begin{definition}
+  Let $G$ be a group scheme that acts on $X,Y$, respectively.
+  A morphism $f:X\to Y$ is \emph{$G$-equivariant} if it commutes
+  with the actions of $G$ on $X$ and $Y$ respectively, i.e.
+  the following commutes:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJHXFx0aW1lcyBYIl0sWzIsMSwiWSJdLFswLDEsIlgiXSxbMiwwLCJHXFx0aW1lcyBZIl0sWzIsMSwiZiIsMV0sWzAsMl0sWzAsMywiXFx0ZXh0e2lkfVxcdGltZXMgZiIsMV0sWzMsMV1d
+    \begin{tikzcd}
+      {G\times X} && {G\times Y} \\
+      X && Y
+      \arrow["{\text{id}\times f}"{description}, from=1-1, to=1-3]
+      \arrow[from=1-1, to=2-1]
+      \arrow[from=1-3, to=2-3]
+      \arrow["f"{description}, from=2-1, to=2-3]
+    \end{tikzcd}
+  \end{equation*}
+  A morphism $f:X\to Y$ is \emph{$G$-invariant} if the following
+  commutes:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJHXFx0aW1lcyBYIl0sWzIsMCwiWCJdLFs0LDAsIlkiXSxbMCwxLCJcXHJobyIsMSx7ImN1cnZlIjotMn1dLFswLDEsIlxccGkiLDEseyJjdXJ2ZSI6Mn1dLFsxLDIsImYiLDFdXQ==
+    \begin{tikzcd}
+      {G\times X} && X && Y
+      \arrow["\sigma"{description}, curve={height=-12pt}, from=1-1, to=1-3]
+      \arrow["\pi"{description}, curve={height=12pt}, from=1-1, to=1-3]
+      \arrow["f"{description}, from=1-3, to=1-5]
+    \end{tikzcd}
+  \end{equation*}
+\end{definition}
+
+\subsection{Invariants}
+
+\begin{definition}
+  Let $\sigma : G\times X \to X$ be an action of a group scheme
+  $G$ on an affine scheme $X$. The \emph{ring of invariants} is the
+  subring of $\mathcal O(X)$ given by
+  \begin{align*}
+    \mathcal O(X)^G :=
+    \left\lbrace{f \in \mathcal O(X) : \sigma^\sharp(f) = 1 \otimes f}\right\rbrace.
+  \end{align*}
+\end{definition}
+
+\subsection{Quotients}
+
+Consider a group scheme $G$ acting on $X$. What do we mean by a
+quotient of $X$ by the $G$-action? A quotient of $X$ will certainly
+be given by a surjective map $f : X\to Y$. To be a quotient by $G$-action
+is to be $G$-invariant. So far, the map $f : X\to\Spec\mathbb{C}$
+provides us with a quotient. To avoid this, we are going to require
+that $f$ separates orbits, i.e. disjoint orbits get mapped to
+disjoint subsets of the quotient.
+
+\todo{explain better why these conditions are relevant}
+
+\begin{definition}
+  A \emph{good quotient} of $X$ by $G$-action is a map
+  $f : X\to Y$ such that the following hold:
+  \begin{enumerate}
+    \item $f$ is surjective.
+    \item $f$ is $G$-invariant.
+    \item For every open $U\subseteq Y$, the map
+      \begin{align*}
+        \mathcal O_Y(U)\to \mathcal O_X({f}^{-1}(U))
+      \end{align*}
+      is an isomorphism
+      onto $\mathcal O_X({f}^{-1}(U))^G$.
+    \item For every closed $G$-invariant $V\subseteq X$,
+      $f(V)$ is closed in $Y$.
+    \item For all disjoint closed $G$-invariant $V,V'\subseteq X$,
+      $f(V)$ and $f(V')$ are disjoint.
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  geometric quotient
+\end{definition}
 
 \subsection{Reductive Groups}
 
@@ -248,8 +1119,9 @@ $\mathcal E := \Gamma(-,E)$. This has a natural $\mathcal O_X$-module structure.
 
 \missingsection
 
-\addcontentsline{toc}{chapter}{Bibliography}
+\pagebreak
 \renewcommand{\bibname}{References}
+\addcontentsline{toc}{chapter}{References}
 \printbibliography
 
 \end{document}
