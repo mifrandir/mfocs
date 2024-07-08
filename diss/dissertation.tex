@@ -166,12 +166,12 @@ structure.
   complex bundle $T_{1,0} X$ of rank $n$ is called the
   \emph{holomorphic tangent bundle} of $X$. Indeed, if we regard $TX$
   as a complex vector bundle via $J$ then the map
-  \begin{align*}
+  \begin{align}\label{eq:holomorphic_tangent_bundle}
     TX
     \longrightarrow T_{\mathbb{C}} X
     = T_{1,0}X \oplus T_{0,1}X
     \longrightarrow T_{1,0}X
-  \end{align*}
+  \end{align}
   is a $\mathbb{C}$-linear isomorphism and hence induces a holomorphic
   structure on $TX$, justifying the name.
 \end{example}
@@ -182,26 +182,19 @@ of the fact that a vector bundle is uniquely determined by its sections.
 In the complex case, there are a few definitions:
 
 \begin{definition}
-  Consider a complex vector bundle $\pi : E \to X$. A section of $E$
-  on an open $U\subseteq X$ is a map $s : U \to E$ such that
-  $\pi \circ s = \identity_U$.
   \begin{itemize}
-    \item If $E$ is smooth then $\Gamma(U,E)$ denotes the vector space
-      of smooth sections on $U$.
-    \item If $E$ is holomorphic then $H^0(U,E)$ denotes the vector space
-      of holomorphic sections on $U$.
+    \item If $E\to X$ is a smooth vector bundle then $\Gamma^\infty(U,E)$
+      denotes the vector space of smooth sections on $U$.
+    \item If $\mathcal E\to X$ is holomorphic then $\Gamma(U,\mathcal E)$
+      denotes the vector space of holomorphic sections on $U$.
   \end{itemize}
 \end{definition}
 
-The notation $H^0(U,E)$ for holomorphic sections comes from sheaf
-cohomology. The bundle $E$ corresponds to a locally free sheaf
-whose cohomology in degree $0$ when restricted to $U$ is precisely
-$H^0(U,E)$. More on this in the case of schemes in
-\ref{sec:locally_free_sheaves}.
-
-Note that there are some important differences between $\Gamma(U,E)$
-and $H^0(U,E)$. While both are complex vector spaces $\Gamma(U,E)$ is
-typically infinite dimensional while $H^0(U,E)$ is always finite
+Note that if $\mathcal E$ is holomoprhic then it is also smooth.
+However, there are some important differences between
+$\Gamma^\infty(U,\mathcal E)$ and $\Gamma(U,\mathcal E)$. While both are
+complex vector spaces $\Gamma^\infty(U,E)$ is typically infinite
+dimensional while $\Gamma(U,E)$ is always finite
 dimensional.~\cite[Theorem 1.4.1]{ma2007}
 
 \subsection{Dolbeault Cohomology}
@@ -211,33 +204,43 @@ Consider a complex manifold $X$ of dimension $n$. Recall the de Rahm
 complex
 \begin{align*}
   \cdots \xlongrightarrow{d}
-  \Omega^{k-1}(X)\xlongrightarrow{d}
-  \Omega^{k}(X)\xlongrightarrow{d}
-  \Omega^{k+1}(X)\xlongrightarrow{d}
+  \Omega_{\mathbb{R}}^{k-1}(X)\xlongrightarrow{d}
+  \Omega_{\mathbb{R}}^{k}(X)\xlongrightarrow{d}
+  \Omega_{\mathbb{R}}^{k+1}(X)\xlongrightarrow{d}
   \cdots
 \end{align*}
-where $\Omega^0(X) = C^\infty(X)$ and, for $k > 0$,
+of the underlying real manifold where
+$\Omega^0_{\mathbb{R}}(X) = C^\infty(X,\mathbb{R})$ and,
+for $k > 0$,
 \begin{align*}
-  \Omega^k(X) := \Gamma(X,\Lambda^k T^*X).
+  \Omega^k_{\mathbb{R}}(X) := \Gamma^\infty(X,\Lambda^k T^*X).
 \end{align*}
+We may complexify this to obtain
+$\Omega^k(X) := \Omega^k(X)\otimes_{\mathbb{R}} \mathbb{C}$.
 The splitting $T^*_\mathbb{C} X = T^*_{1,0}X \oplus T^*_{0,1}X$
 leads us to define
 \begin{align*}
   \Omega^{p,q}(X)
-  := \Gamma(X,\Lambda^p T^*_{1,0}X \wedge\Lambda^q T^*_{0,1}X)
+  := \Gamma^\infty(X,\Lambda^p T^*_{1,0}X \wedge\Lambda^q T^*_{0,1}X)
 \end{align*}
-and hence induces a splitting
+and hence we have
 \begin{align*}
-  \Omega^k_{\mathbb{C}}(X) = \bigoplus_{p+q=k} \Omega^{p,q}(X).
+  \Omega^k(X) = \bigoplus_{p+q=k} \Omega^{p,q}(X).
 \end{align*}
-Moreover, the operator $d : \Omega^{p,q}(X) \to \Omega^{p+q+1}_{\mathbb{C}}(X)$ splits into operators $d = \partial + \dol$ where
+Moreover, the operator $d : \Omega^{p,q}(X) \to \Omega^{p+q+1}(X)$
+splits into $d = \partial + \dol$ where
 \begin{align*}
   \partial : \Omega^{p,q}(X) \to \Omega^{p+1,q}(X),\hspace{1cm}
   \dol : \Omega^{p,q}(X) \to \Omega^{p,q+1}(X).
 \end{align*}
+Locally, these are given by
+\begin{align*}
+  \partial (f dz_I \wedge d\bar z_J) = \sum_{i=1}^n \frac{\partial f}{\partial z_i} dz_i\wedge dz_I \wedge d\bar z_J,\\
+  \dol (f dz_I \wedge d\bar z_J) = \sum_{j=1}^n \frac{\partial f}{\partial \bar z_j} d\bar z_j\wedge dz_I \wedge d\bar z_J.
+\end{align*}
 In particular, we now have a family of complexes
 \begin{align}\label{eq:dolbeault_complex}
-  \cdots \xlongrightarrow{d}
+  \cdots \xlongrightarrow{\dol}
   \Omega^{p,q-1}(X)\xlongrightarrow{\dol}
   \Omega^{p,q}(X)\xlongrightarrow{\dol}
   \Omega^{p,q+1}(X)\xlongrightarrow{\dol}
@@ -259,37 +262,46 @@ In particular, we now have a family of complexes
 \subsection{Dolbeault Cohomology of Holomorphic Bundles}
 
 \todo{explain how holomorphic bundles give rise to $\dol$-operators}
-Now consider a holomorphic bundle $E$ of rank $r$ and the space of
-$E$-valued holomorphic $(p,q)$-forms
+For a smooth bundle $E$ of rank $r$, consider the spaces of
+$E$-valued $k$-forms and $(p,q)$-forms, respectively,
 \begin{align*}
-  \Omega^{p,q}(X,E) := \Omega^{p,q}(X)\otimes\Gamma(X,E).
+  \Omega^k(X,E) := \Omega^k(X)\otimes\Gamma^\infty(X,E),\hspace{1cm}
+  \Omega^{p,q}(X,E) := \Omega^{p,q}(X)\otimes\Gamma^\infty(X,E).
 \end{align*}
-It is straightforward to verify that the operator $\dol$ extends
+If we are given a holomorphic bundle $\mathcal E$ with underlying
+smooth bundle $E$
+it is straightforward to verify that the operator $\dol$ extends
 to an operator
 \begin{align}\label{eq:general_dolbeault_operator}
   \dol_E : \Omega^{p,q}(X,E) \to \Omega^{p,q+1}(X,E)
 \end{align}
 by considering local trivialisations where we have
 \begin{align*}
-  \dol_E \left({\sum_{i=1}^k \alpha_i \otimes e_i}\right)
-  = \sum_{i=1}^k \dol \alpha_i \otimes e_i.
+  \dol_E \left({\sum_{i=1}^k \xi_i \otimes s_i}\right)
+  = \sum_{i=1}^k \dol \xi_i \otimes s_i.
 \end{align*}
 Moreover, the operator $\dol_E$ satisfies
 \begin{align*}
-  \dol_E(\alpha \otimes s) = \dol\alpha \otimes s + (-1)^{p+q} \alpha \wedge \dol_E s.
+  \dol_E(\xi \otimes s) = \dol\xi \otimes s + (-1)^{p+q} \xi \wedge \dol_E s.
 \end{align*}
 Hence it is uniquely determined by the component
-$\Gamma(X,E) \to \Omega^{0,1}(X,E)$. This leads us to the following
-definition:
+$\Omega^0(X,\mathcal E) \to \Omega^{0,1}(X,\mathcal E)$. Indeed,
+any linear map $\alpha : \Omega^0(X,E) \to \Omega^{0,1}(X,E)$ may be
+extended to a map $\Omega^{p,q}(X,E) \to \Omega^{p,q+1}(X,E)$
+via
+\begin{align*}
+  \alpha(\xi \otimes s) = \dol\xi \otimes s + (-1)^{p+q}\xi\wedge \alpha(s).
+\end{align*}
+This leads us to the following definition:
 
 \begin{definition}
   A \emph{Dolbeault operator} on a smooth bundle $E$ on a complex
   manifold $X$ is a linear operator
   \begin{align*}
-    \dol_E : \Gamma(X,E) \to \Omega^{0,1}(X,E)
+    \dol_E : \Omega^0(X,E) \to \Omega^{0,1}(X,E)
   \end{align*}
-  such that $\dol_E^2 = 0$ and, for all $s\in\Gamma(X,E)$ and
-  $f\in C^\infty(X)$,
+  such that $\dol_E^2 = 0$ and, for all $s\in\Omega^0(X,E)$ and
+  $f\in \Omega^0(X)$,
   \begin{align*}
     \dol_E (fs) = \dol f\otimes s + f \dol_E s.
   \end{align*}
@@ -299,7 +311,8 @@ The process outlined above is reversible. That is, a holomorphic
 bundle is just a smooth bundle with a Dolbeault operator. To make
 this precise, we need to say what morphisms of such operators are.
 Consider a map $f : E \to F$ of smooth bundles on a fixed complex
-manifold $X$. This induces a map $\Gamma(X,E)\to\Gamma(X,F)$
+manifold $X$. This induces a map
+$f_*:\Gamma^\infty(X,E)\to\Gamma^\infty(X,F)$
 given by $s \mapsto f\circ s$. Hence $f$ is a map of Dolbeault operators
 if, and only if, it commutes with the operators:
 
@@ -307,13 +320,13 @@ if, and only if, it commutes with the operators:
   A \emph{morphism of Dolbeault operators} $f : \dol_E \to \dol_F$
   is a map of smooth bundles $f : E\to F$ such that the following commutes:
   \begin{equation*}
-    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEdhbW1hKFgsRSkiXSxbMCwxLCJcXEdhbW1hKFgsRikiXSxbMiwxLCJcXE9tZWdhXnswLDF9KFgpXFxvdGltZXMgXFxHYW1tYShYLEYpIl0sWzIsMCwiXFxPbWVnYV57MCwxfShYKVxcb3RpbWVzIFxcR2FtbWEoWCxFKSJdLFswLDMsIlxcYmFyXFxwYXJ0aWFsX0UiXSxbMSwyLCJcXGJhclxccGFydGlhbF9GIl0sWzAsMSwiXFxHYW1tYShYLGYpIiwyXSxbMywyLCJcXHRleHR7aWR9XFwsXFxvdGltZXMgXFxHYW1tYShYLGYpIl1d
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXE9tZWdhXjAoWCxFKSJdLFswLDEsIlxcT21lZ2FeMChYLEYpIl0sWzIsMSwiXFxPbWVnYV57MCwxfShYLEYpIl0sWzIsMCwiXFxPbWVnYV57MCwxfShYLEUpIl0sWzAsMywiXFxiYXJcXHBhcnRpYWxfRSJdLFsxLDIsIlxcYmFyXFxwYXJ0aWFsX0YiXSxbMCwxLCJmXyoiLDJdLFszLDIsImZfKiIsMl1d
     \begin{tikzcd}
-      {\Gamma(X,E)} && {\Omega^{0,1}(X)\otimes \Gamma(X,E)} \\
-      {\Gamma(X,F)} && {\Omega^{0,1}(X)\otimes \Gamma(X,F)}
+      {\Omega^0(X,E)} && {\Omega^{0,1}(X,E)} \\
+      {\Omega^0(X,F)} && {\Omega^{0,1}(X,F)}
       \arrow["{\bar\partial_E}", from=1-1, to=1-3]
-      \arrow["{\Gamma(X,f)}"', from=1-1, to=2-1]
-      \arrow["{\identity\,\otimes \Gamma(X,f)}", from=1-3, to=2-3]
+      \arrow["{f_*}"', from=1-1, to=2-1]
+      \arrow["{f_*}"', from=1-3, to=2-3]
       \arrow["{\bar\partial_F}", from=2-1, to=2-3]
     \end{tikzcd}
   \end{equation*}
@@ -331,16 +344,19 @@ if, and only if, it commutes with the operators:
   \end{proof}
 \end{theorem}
 
-Note that the operator $\dol_E$ on a holomorphic bundle $E$ is
+Thus we are justified in referring to a pair $(E,\dol_E)$ as a
+holomorphic vector bundle.
+Note that the Dolbeault operator induced by a holomorphic bundle is
 unique only up to isomorphism. Fortunately, taking cohomologies
 is functorial and thus we obtain the Dolbeault cohomology of
 holomorphic vector bundles:
 
 \begin{definition}
-  Let $E$ be a holomorphic vector bundle on $X$. The \emph{$(p,q)$
-  Dolbeault cohomology group of $X$ with coefficients in $E$} is
+  Let $(E,\dol_E)$ be a holomorphic vector bundle on $X$. The
+  \emph{$(p,q)$ Dolbeault cohomology group of $X$ with coefficients in
+  $E$} is
   \begin{align*}
-    H^{p,q}(X,E) := \frac{
+    H^{p,q}(X,(E,\dol_E)) := \frac{
       \ker(\dol_E : \Omega^{p,q}(X,E) \to \Omega^{p,q+1}(X,E))
     }{
       \im(\dol_E : \Omega^{p,q-1}(X,E) \to \Omega^{p,q}(X,E))
@@ -354,10 +370,10 @@ holomorphic vector bundles:
 yadda}
 
 \begin{definition}
-  The \emph{canonical bundle} $K_X$ on a complex manifold $X$
+  The \emph{canonical bundle} $\mathcal K_X$ on a complex manifold $X$
   of dimension $n$ is the holomorphic vector bundle defined as
   \begin{align*}
-    K_X := \det T^*_{0,1} X := \wedge^n T^*_{0,1} X.
+    \mathcal K_X := \det T^*_{1,0} X := \wedge^n T^*_{1,0} X.
   \end{align*}
 \end{definition}
 
@@ -365,55 +381,39 @@ Note that the canonical bundle is a line bundle on every $X$.
 \todo{explain / cite}
 
 \begin{definition}
-  Let $E$ be a holomorphic bundle on a complex manifold $X$
-  of dimension $n$.
-  A \emph{Higgs field} on $E$ is a map of holomorphic bundles
-  \begin{align*}
-    \phi : E \to E \otimes K_X.
-  \end{align*}
+  Let $(E,\dol_E)$ be a holomorphic bundle on a complex manifold $X$.
+  A \emph{Higgs field} on $(E,\dol_E)$ is a holomorphic section
+  $\phi \in \Omega^{1,0}(X,\End E)$ satisfying $\phi\wedge\phi = 0$.
   A \emph{Higgs bundle} is a holomorphic bundle equipped with
   a Higgs field.
 \end{definition}
+We immediately observe that, in the case where $X=C$ is a compact
+Riemann surface, the condition $\phi\wedge\phi=0$ is trivially
+satisfied. However, if one is to consider moduli spaces of Higgs bundles
+over more general base spaces then this condition is quite important.
 
-Consider Higgs bundles $(E,\phi)$ and $(E',\phi')$ and a map
-$f:E\to E'$ of holomorphic bundles. We say $f$ is a map of
-Higgs bundles if it respects the Higgs fields, i.e. the following
-commutes:
-\begin{equation*}
-  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJFIl0sWzIsMCwiRVxcb3RpbWVzIEtfWCJdLFswLDEsIkYiXSxbMiwxLCJGXFxvdGltZXMgS19YIl0sWzEsMywiZlxcb3RpbWVzIFxcdGV4dHtpZH0iXSxbMCwyLCJmIiwyXSxbMiwzLCJcXHBoaSciLDJdLFswLDEsIlxccGhpIl1d
-  \begin{tikzcd}
-    E && {E\otimes K_X} \\
-    F && {F\otimes K_X}
-    \arrow["\phi", from=1-1, to=1-3]
-    \arrow["f"', from=1-1, to=2-1]
-    \arrow["{f\otimes \identity}", from=1-3, to=2-3]
-    \arrow["{\phi'}"', from=2-1, to=2-3]
-  \end{tikzcd}
-\end{equation*}
-This means in particular that, if $(E,\phi)\cong(E',\phi')$ are
-isomorphic Higgs bundles then we have isomorphic holomorphic bundles
-$E\cong E'$. This must then mean that $E$ and $E'$ are isomorphic
-as smooth bundles.
+Consider Higgs bundles $(E,\dol_E,\phi_E)$ and $(F,\dol_F,\phi_F)$
+and a map of smooth bundles $f:E\to F$. We say $f$ is a map of Higgs
+bundles if, and only if, it is a map of holomorphic bundles
+$f:(E,\dol_E)\to (F,\dol_F)$ and $\phi_E = f^*\phi_F$.
+This means in particular that, if
+$(E,\dol_E,\phi_E)\cong(F,\dol_F,\phi_F)$
+are isomorphic Higgs bundles then we have isomorphic holomorphic bundles
+$(E,\dol_E)\cong(F,\dol_F)$ and hence isomorphic smooth bundles
+$E\cong F$.
 
-Note that a Higgs field may be thought of as a holomorphic section
-of $\End E \otimes K_X$ where $\End E := E^\vee \otimes E$.
-In particular, if we fix a holomorphic bundle $E$ then each section
-$\phi$ defines a unique Higgs bundle $(E,\phi)$ so the space of Higgs
-bundles with underlying holomorphic bundle $E$ is
-$H^0(X,\End E \otimes K_X)$.
+\section{Spaces of Holomorphic Bundles}
 
-\section{Topology of Holomorphic Bundles}
+After a brief introduction to holomorphic bundles on Riemann surfaces,
+we are now ready to contemplate the spaces that such bundles might
+form. The first observation we are going to make is that the case of
+smooth bundles is very straightforward. To do this, we are going to
+introduce some topological invariants of smooth bundles.
 
-Our main goal is gain an understanding of the geometry of
-holomorphic bundles on compact Riemann surfaces. Topology underlies
-geometry and so we must understand the topology before we can study
-the geometry. There are going to be two main takeaways from this
-section. Firstly, we are going to observe that smooth vector
-bundles on a compact Riemann surface are characterised by their
-rank and a topological invariant called the degree. Secondly, we
-will introduce sheaf cohomology, a powerful tool that is going to
-play a large role in the next chapter where we take a more
-algebraic approach.
+This allows us to construct a topological space of holomorphic structures
+on a fixed smooth bundle. Unfortunately, after taking the quotient
+of said space by isomorphism of holomorphic structures, we obtain a
+non-Hausdorff topological space.
 
 \subsection{Chern Classes}
 
@@ -475,7 +475,9 @@ fundamental class $[C]$.
 
 \missingsection
 
-\section{Spaces of Holomorphic Bundles}
+
+
+\subsection{The Naive Quotients}
 
 Having established holomorphic bundles on compact Riemann surfaces,
 we are ready to contemplate the spaces that they form. While it is
@@ -484,39 +486,366 @@ classes of holomorphic bundles, it turns out that neither is Hausdorff.
 
 In light of previous results, fix a smooth bundle $E$ of rank $r$
 and degree $d$ on a compact Riemann surface $C$.
-
-\subsection{The Naive Quotients}
-
 Recall that a holomorphic bundle with underlying smooth structure $E$
 is given by a Dolbeault operator $\dol_E$. Hence we have a set of
 \begin{align*}
-  \Dol(E) := \left\lbrace{
-      \text{Dolbeault operators $\dol_E : \Gamma(C,E) \to \Omega^{0,1}(C,E)$}
+  A^{\dol} := \left\lbrace{
+      \text{Dolbeault operators $\dol_E : \Omega^0(C,E) \to \Omega^{0,1}(C,E)$}
   }\right\rbrace.
 \end{align*}
 This has an obvious topology given by the following observations:
 \begin{lemma}
   Consider linear maps
   \begin{align*}
-    \dol_E,\alpha : \Gamma(C,E) \to \Omega^{0,1}(C,E).
+    \dol_E,\alpha : \Omega^0(C,E) \to \Omega^{0,1}(C,E).
   \end{align*}
-  Then $\dol_E\in\Dol(E)$ if, and only if, $\dol_E+\alpha\in\Dol(E)$.
+  Then $\dol_E\in A^{\dol}$ if, and only if, $\dol_E+\alpha\in A^{\dol}$.
   \begin{proof}
-    Consider a trivialisation ${\pi}^{-1}U \cong \mathbb{C}^r \times U$.
-    Then, for all $s\in\Gamma(U,E)\cong C^\infty(U,\mathbb{C}^r)$,
+    We calculate in local coordinates:
     \begin{align*}
-      (\dol_E + \alpha)^2(s)
-      = \alpha(\dol_E s) + \dol_E(\alpha s) + \alpha^2 s.
+      (\dol_E + \alpha)^2(s_i)
+      &= \sum_{j,k} (\dol_{ijk} + \alpha_{ijk})(\dol_E + \alpha)( d\bar z_j\otimes s_k) \\
+      &= \sum_{j,k} (\dol_{ijk} + \alpha_{ijk})(\dol(d\bar z_j) \otimes s_k -  d\bar z_j \wedge \sum_{j',k'}(\dol_{k,j',k'} + \alpha_{k,j',k'}) d\bar z_{j'}\otimes s_{k'}) \\
+      &= - \sum_{j,j',k,k'} (\dol_{ijk} + \alpha_{ijk})(\dol_{k,j',k'} + \alpha_{k,j',k'}) d\bar z_j \wedge d\bar z_{j'}\otimes s_{k'} \\
+      &= - \sum_{j,j'}
+      d\bar z_j \wedge d\bar z_{j'}\otimes \left(
+      \sum_{k,k'} (\dol_{ijk} + \alpha_{ijk})(\dol_{k,j',k'} + \alpha_{k,j',k'}) s_{k}\right)\\
+      &= 0
     \end{align*}
+    Moreover, for $f\in C^\infty(C)$ and $s\in\Omega^0(C,E)$,
+    \begin{align*}
+      (\dol_E + \alpha)(fs) = f\dol_E(s) + f\alpha(s) + \dol f \otimes s
+      = f(\dol_E+\alpha)(s) + \dol f \otimes s.
+    \end{align*}
+    Hence $\dol_E + \alpha$ satisfies both properties of Dolbeault
+    operators.
+  \end{proof}
+\end{lemma}
+
+Thus we may write $A^{\dol} = \dol_E + \Omega^{0,1}(C,\End E)$
+for some fixed $\dol_E$. This induces a topology on $A^{\dol}$.
+In particular, $A^{\dol}$ is an affine space modelled on
+$\Omega^{0,1}(C,\End E)$.
+
+This allows us to define the space of all Higgs bundles
+\begin{align*}
+  A^\phi := \bigsqcup_{\dol_E \in A^{\dol}} \Gamma(C,\End(E,\dol_E)\otimes K_C)
+\end{align*}
+whose topology is induced by the topologies on
+$\Gamma(C,\End(E,\dol_E)\otimes K_C)$ and $A^{\dol}$.
+All that is left to do is take a quotient by equivalence of holomorphic
+bundles, respectively Higgs bundles. One of the major topics of this
+paper is to explore various ways in which we may take quotients by
+group actions. Thus we better start phrasing everything in this language.
+In this instance we are interested in taking the action of $f\in\Aut(E)$
+on $\dol_E$ via
+\begin{equation}
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXE9tZWdhXjAoWCxFKSJdLFswLDEsIlxcT21lZ2FeMChYLEUpIl0sWzIsMCwiXFxPbWVnYV57MCwxfShYLEUpIl0sWzIsMSwiXFxPbWVnYV57MCwxfShYLEUpIl0sWzEsMywiXFxiYXJcXHBhcnRpYWxfRSIsMl0sWzAsMSwiZl8qXnstMX0iLDJdLFswLDIsImZcXGNkb3RcXGJhclxccGFydGlhbF9FIl0sWzMsMiwiZl8qIiwyXV0=
+  \begin{tikzcd}
+    {\Omega^0(X,E)} && {\Omega^{0,1}(X,E)} \\
+    {\Omega^0(X,E)} && {\Omega^{0,1}(X,E)}
+    \arrow["{f\cdot\bar\partial_E}", from=1-1, to=1-3]
+    \arrow["{f_*^{-1}}"', from=1-1, to=2-1]
+    \arrow["{\bar\partial_E}"', from=2-1, to=2-3]
+    \arrow["{f_*}"', from=2-3, to=1-3]
+  \end{tikzcd}
+\end{equation}
+\begin{lemma}
+  The topological space $A^{\dol}/\Aut(E)$ of isomorphism classes of
+  Dolbeault operators is not Hausdorff. In particular, it does not
+  admit a manifold structure.
+  \begin{proof}
     \missingproof
   \end{proof}
 \end{lemma}
 
+Note that we have a similar action of $\Aut(E)$ on $A^\phi$ and
+indeed many other topological spaces of holomorphic bundles. However,
+it is quite clear that any space that arises as a disjoint union
+over $A^{\dol}$ must also be non-Hausdorff. Therefore we need
+to use more sophisticated techniques to construct any moduli
+space of holomorphic bundles.
+
+\section{K\"ahler Quotients}
+
+To construct a manifolds whose points are equivalence classes of
+holomorphic bundles, we need to take quotients of manifolds by
+group actions. To be precise, we are going to take a K\"ahler
+quotients of a Banach manifolds by actions of Banach Lie groups.
+
+There are a few things to take care of before this can be made
+precise. Firstly, we need to define what it means to be an infinite
+dimensional manifold and make sure our topological spaces satisfy
+the requirements. Secondly, we ought to define and obtain K\"ahler
+structures on the manifolds. Finally, we observe how to take quotients
+in this setting.
+
+Once again fix a smooth bundle $E$ of rank $r$ on a compact
+Riemann surface $C$.
+
+\subsection{Connections}
+
+Connections are needed for two reasons: Firstly, they are going to
+be equivalent to Dolbeault operators and hence lead to an
+alternative way of looking at spaces of holomorphic bundles.
+Secondly, they are going to allow us to define the Sobolev norm and
+hence provide us with a suitable Banach manifold structure on
+the moduli spaces.
+
+Recall a connection $\nabla$ in $E$ is a linear map
+\begin{align*}
+  \nabla : \Omega^0(X,E) \to \Omega^1(X,E)
+\end{align*}
+such that, for all $f\in \Omega^0(X)$ and $s\in\Omega^0(X,E)$,
+\begin{align*}
+  \nabla (fs) = df \otimes s + f\nabla s.
+\end{align*}
+
+Note that connections look very similar to Dolbeault operators.
+Indeed, via projections to the $(1,0)$ and $(0,1)$ parts, respectively,
+we obtain a splitting $\nabla = \nabla_{1,0} + \nabla_{0,1}$
+where
+\begin{align*}
+  \nabla_{0,1} : \Omega^0(X,E) \to \Omega^{0,1}(X,E).
+\end{align*}
+We may ask whether this is the same as a holomorphic structure on $E$:
+
+\begin{definition}
+  Let $\dol_E$ be a Dolbeault operator on $E$.
+  A connection $\nabla$ in $E$ is \emph{compatible with $\dol_E$}
+  if, and only if, $\nabla_{0,1} = \dol_E$. In general, we say
+  $\nabla$ is \emph{holomorphic} if it is compatible with some
+  $\dol_E$.
+\end{definition}
+
+Note that all connections $\nabla$ satisfy the Leibnitz rule. It is
+straightforward to check that
+\begin{align*}
+  \nabla_{0,1} (fs) = \dol f\otimes s + f \nabla_{0,1} s.
+\end{align*}
+Hence $\nabla$ is holomorphic if, and only if, $\nabla_{0,1}^2 = 0$.
+
+\subsection{Unitary Connections}
+
+While connections are very closely related to Dolbeault operators,
+they are not quite the same. To map one to the other, we are going
+to require some additional information. The correct geometric
+structure to consider is a metric:
+
+\begin{definition}
+  A \emph{hermitian metric} on $E$ is a smooth section $h$ of
+  $(E\otimes\bar E)^\vee$ that is sesquilinear and positive definite.
+\end{definition}
+
+While such metrics are interesting in their own right, we have no
+intention to study them more than absolutely necessary. Indeed, it will
+become apparent that the mere presence of a metric is sufficient.
+Fortunately for us, it will always be possible to choose a metric:
+
+\begin{theorem}\missingcitation
+  Every smooth vector bundle on a compact complex manifold admits a
+  hermitian metric.
+\end{theorem}
+
+Fix such a metric $h$ on $E$. The main thing we gain by having a
+metric is the ability to refer to adjoints and hence unitary
+endomorphisms of $E$. In particular, there is a principal $U(r)$-bundle
+$U(E)$ whose fibre over $x\in C$ is the group of $h$-unitary
+endomorphisms of $E_x$. Noting that $U(n)$ is a real Lie group,
+we obtain a real smooth vector bundle $\mathfrak u(E)$ on $C$.
+In particular, we have a sequence of inclusions
+\begin{align*}
+  \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))
+  \subseteq \Omega^1_{\mathbb{R}}(C,\mathfrak{gl}(E))
+  \subseteq \Omega^1(C,\mathfrak{gl}(E))
+\end{align*}
+where $\mathfrak{gl}(E)$ is the smooth complex vector bundle obtained
+by taking Lie algebras of the principal $GL_r(\mathbb{C})$-bundle $GL(E)$.
+Now note that a connection is equivalently a section in
+$\Omega^1(C,\End E)$. We may regard $\End E$ as $\mathfrak gl(E)$,
+and hence define what it means for a connection to be unitary:
+\begin{definition}
+  A connection $\nabla$ in $E$ is \emph{$h$-unitary}
+  if, and only if, $\nabla\in\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
+\end{definition}
+
+Note that there is a different notion of compatibility with the metric.
+Often one requires that, for all $s,t\in\Omega^0(X,E)$,
+\begin{align*}
+  dh(s,\bar t) = h(\nabla s,\bar t) + h(s,\overline{\nabla t}).
+\end{align*}
+It turns out that this condition is satisfied if, and only if, $\nabla$
+is $h$-unitary. \cite[10-11]{kobayashi1987} For our purposes,
+thinking of unitary connections as $\mathfrak u(E)$-valued $1$-forms
+makes more sense. This is because are going to think of the space
+$A^\nabla$ of such $h$-unitary connections as an affine space modelled on
+$\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
+
+\begin{lemma}\label{lem:real_vector_space_iso}
+  As real vector spaces,
+  $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))\cong\Omega^{0,1}(C,\mathfrak gl(E))$.
+  \begin{proof}
+    Now recall the isomorphism (\ref{eq:holomorphic_tangent_bundle}) of
+    smooth vector bundles $T^* X \cong T^*_{1,0} X$. Composing with
+    complex conjugation yields an isomorphism of real vector bundles
+    $T^*X \cong T^*_{0,1}$. Hence we have an $\mathbb{R}$-linear
+    isomorphism
+    \begin{align*}
+      \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))
+      \cong \Gamma^\infty(C,T^*_{0,1}C \otimes_{\mathbb{R}}\mathfrak u(E))
+    \end{align*}
+    Noticing that $T_{0,1}^* C$ is a complex vector bundle
+    we find
+    \begin{align*}
+      \Gamma^\infty(C,T^*_{0,1}C \otimes_{\mathbb{R}}\mathfrak u(E))
+      \cong\Gamma^\infty(C,T^*_{0,1}C \otimes\mathfrak u(E)_{\mathbb{C}}).
+    \end{align*}
+    Now the claim follows from the isomorphism of Lie algebras
+    $\mathfrak u(n)_{\mathbb{C}}\cong\mathfrak{gl}_n(\mathbb{C})$.
+  \end{proof}
+\end{lemma}
+
+The fact that $A^{\dol}$ and $A^\nabla$ both are affine spaces modelled
+on the same underlying real vector space is not a coincidence. Indeed,
+in the presence of $h$, every Dolbeault operator has a compatible
+connection:
+
+\begin{theorem}\label{thm:chern_connection}
+  If $h$ is a hermitian metric on $E$ and $\dol_E$ is a Dolbeault
+  operator then there exists a unique connection $\nabla^h(\dol_E)$
+  that is compatible with both $h$ and $\dol_E$.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
+
+In particular, this gives us a bijection
+$\nabla^h : A^{\dol} \to A^\nabla$ whose inverse is the restriction
+$\nabla \mapsto \nabla_{0,1}$. It is not difficult to verify that this
+is a homeomorphism of affine spaces which is locally given by
+the $\mathbb{R}$-linear isomorphism in \ref{lem:real_vector_space_iso}.
+\todo{complex structure on the affine space}
+
+\subsection{Doubled Connections}
+
+We have successfully viewed the space of holomorphic bundles $A^{\dol}$
+as an affine space modelled on
+$\Omega^1_{\mathbb{R}}(C,\mathfrak{u}(E))$. This is eventually going
+to help us introduce a K\"ahler structure on $A^{\dol}$ and hence
+take a K\"ahler quotient. Let us do the same for the space of Higgs
+bundles $A^\phi$. We are going to identify $A^{\phi}$ with an affine
+space modelled on $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))^{\oplus 2}$.
+This will lead to a Hyperk\"ahler structure and corresponding
+quotient. Once again fix a hermitian metric $h$ on $E$.
+
+Just as holomorphic bundles correspond to connections, Higgs bundles
+correspond to doubled connections.
+
+\begin{definition}
+  A \emph{doubled connection} in $E$ is a pair $(\nabla,\Phi)$
+  where $\nabla$ is a $h$-unitary connection in $E$ and
+  $\Phi\in\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
+\end{definition}
+
+Hence we have the space
+\begin{align*}
+  A^{\Phi} := A^\nabla \times \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))
+\end{align*}
+which naturally has the structure of an affine space modelled on
+the real vector space
+$\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))\oplus\Omega_{\mathbb{R}}^1(C,\mathfrak u(E))$. Using the isomorphism (\ref{lem:real_vector_space_iso})
+and the map given by (\ref{thm:chern_connection}) we have an inclusion
+of topological spaces
+\begin{align*}
+  A^\phi \subseteq A^{\dol} \times \Omega^{1,0}(\End E) \cong A^\Phi.
+\end{align*}
+Note that in general $A^\phi$ and $A^\Phi$ are not isomorphic. In
+particular, a doubled connection $(\nabla,\Phi)$ corresponds to
+a pair $(\dol_E,\phi)$ where $\dol_E$ is a Dolbeault operator and
+$\phi$ is a section in $\Omega^{1,0}(C,\End E)$, not necessarily
+holomorphic. We will have to deal with this at a later stage.
+
+\subsection{Sobolev Spaces}
+
+Our next goal is to equip the affine spaces of connections $A^\nabla$
+and $A^\Phi$ with manifold structures. Of course, both are affine
+spaces modelled on infinite dimensional vector spaces. In the next
+section we are going to require our infinite dimensional manifolds to
+be locally isomorphic to Banach spaces, rather than arbitrary
+vector spaces. While we are going to profit from this in the long run,
+it means that we have to turn $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$
+into a Banach space. We are going to do this by using a completion of
+the space of smooth sections.
+
+Consider the following, more general setting. Let $X$ be a compact
+Riemannian manifold $X$ of dimension $n$, let $E$ be a smooth complex
+bundle on $X$ with hermitian metric $h$, let $\nabla$ be a $h$-unitary
+connection in $E$, and let $k\geq 0$ and $1<p<\infty$ be integers.
+Here we are going to think of $\nabla$ as a derivative of sections and
+define a space $L^p_k(X,E)$ which may be thought of as the space of
+functions $X\to E$ with $k$ derivatives, all of which in $L^p$. As
+is the case with many of the concepts we encounter throughout this paper,
+these Sobolev spaces are interesting geometric objects to
+contemplate but we are going to use them as a tool. The main
+benefit we are going to get from using this particular Banach space
+completion is the theory of elliptic regularity. \missingcitation
+
+Note that the metrics on $E$ and $X$ define norms on smooth sections
+of $E$ and $T^*X$, respectively, and hence on all $\Omega^k(X,E)$.
+Moreover, the metric on $X$ induces a volume form $d\text{vol}_X$.
+With this in mind, we are ready to define the Sobolev norm on
+$\Omega^0(X,E)$:
+
+\begin{definition}
+  Define the
+  \emph{$(p,k)$-Sobolev norm} on $\Omega^0(X,E)$ by
+  \begin{align*}
+    \Vert s\Vert_{p,k} := \left(
+      \sum_{i=0}^k \int_X \Vert \nabla^i s \Vert d\text{vol}_X
+    \right)^{1/p}.
+  \end{align*}
+\end{definition}
+
+\subsection{Banach Manifolds}
+
+Smooth and complex manifolds are often defined using charts and
+atlases. However, once the necessary theory has been established,
+it is far easier to say that a complex manifold
+of dimension $n$ is a locally ringed space locally isomorphic to
+$(\mathbb{C}^n,\mathcal O_{\mathbb{C}^n})$ where
+$\mathcal O_{\mathbb{C}^n}$ is the sheaf of holomorphic functions on
+$\mathbb{C}^n$.
+
+To define infinite dimensional manifolds, we are going to replace
+$\mathbb{C}^n$ with infinite dimensional vector spaces. Of course,
+the point of the usual manifold definition is to facilitate analysis
+on a wider range of topological spaces. To this end, we are going to
+restrict our attention to the case of Banach spaces:
+
+\begin{definition}
+  A \emph{Banach manifold} over a Banach space $V$ is a locally ringed
+  space locally isomorphic to $(V,C^\infty_V)$ where $C^\infty_V$ is the
+  sheaf of smooth functions on $V$.
+\end{definition}
+
+\begin{example}
+  Every smooth manifold is locally isomorphic to
+  $(\mathbb{R}^n,C^\infty_{\mathbb{R}^n})$ and hence is a Banach manifold.
+  In particular, every complex manifold has an underlying Banach manifold.
+\end{example}
+
+\begin{example}
+  Our main application will be the following.
+\end{example}
+
+Of course Banach manifold come with all the bells and whistles that
+we know and love. In particular, we have smooth maps of Banach manifolds,
+vector bundles, tangent and cotangent spaces, derivatives, and
+differential forms. \todo{doublecheck which of these we really need
+and which we need to define in more detail}
+
 \missingsection
 
-\section{Quotients and Banach Manifolds}
-
-\missingsection
 \section{Properties of the Analytic Moduli Spaces}
 
 \missingsection
@@ -568,9 +897,9 @@ otherwise indicated,
     in the sense of \cite{hartshorne1977} - that is, $X$ is projective
     if there exists a closed immersion $X\inc\projective{n}{}$ for
     some $n$;
-  \item sheaves on a scheme $X$ are sheaves of $\mathcal O_X$-modules,
-    maps of sheaves are $\mathcal O_X$-linear, and tensor products
-    of sheaves are taken over $\mathcal O_X$.
+  \item sheaves on a scheme $X$ are sheaves of $\mathscr O_X$-modules,
+    maps of sheaves are $\mathscr O_X$-linear, and tensor products
+    of sheaves are taken over $\mathscr O_X$.
 \end{itemize}
 
 \section{Holomorphic Bundles as Locally Free Sheaves}
@@ -603,38 +932,38 @@ by
 \end{align*}
 Complex points in $\projective{}{}(V)$ may be identified
 with one-dimensional subspaces of $V$. \missingcitation
-Now if $\mathcal L$ is
+Now if $\mathscr L$ is
 an invertible sheaf on $C$ then there is a natural map
 \begin{align}\label{eq:natural_line_bundle_map}
-  H^0(C,\mathcal L)\otimes\mathcal O_C \to \mathcal L
+  H^0(C,\mathscr L)\otimes\mathscr O_C \to \mathscr L
 \end{align}
 given by $s\otimes f \mapsto f\restrict{s}{U}$. We will be
-particularly interested in the case where $\mathcal L$ is a
-quotient of the free sheaf $H^0(C,\mathcal L)\otimes\mathcal O_C$.
+particularly interested in the case where $\mathscr L$ is a
+quotient of the free sheaf $H^0(C,\mathscr L)\otimes\mathscr O_C$.
 
 \begin{definition}
-  A sheaf $\mathcal F$ on a ringed space $X$ is
+  A sheaf $\mathscr F$ on a ringed space $X$ is
   \emph{globally generated} if the induced map
-  $H^0(X,\mathcal F) \otimes \mathcal O_X \to \mathcal F$
+  $H^0(X,\mathscr F) \otimes \mathscr O_X \to \mathscr F$
   is a surjection.
 \end{definition}
 
 \todo{check notation here}
-In particular, if $\mathcal L$ is globally generated then,
+In particular, if $\mathscr L$ is globally generated then,
 for every $x\in C$, it induces a surjection on stalks
-$H^0(C,\mathcal L) \surj \mathcal L_x$ whose kernel is a
+$H^0(C,\mathscr L) \surj \mathscr L_x$ whose kernel is a
 subspace of codimension 1, i.e. a closed point of
-$\projective{}{}(H^0(C,\mathcal L)^\vee)$. It turns out that this map is an embedding
-whenever $\deg\mathcal L > 2g$. \cite[Proposition 2.14]{harris2011}
+$\projective{}{}(H^0(C,\mathscr L)^\vee)$. It turns out that this map is an embedding
+whenever $\deg\mathscr L > 2g$. \cite[Proposition 2.14]{harris2011}
 All that is left to do is to find invertible sheaves with large
-degree. Fortunately, for any invertible sheaf $\mathcal L$,
-the tensor powers $\mathcal L^{\otimes m}$ are invertible and
-$\deg\mathcal L^{\otimes m} = m\deg\mathcal L$. Hence any invertible
+degree. Fortunately, for any invertible sheaf $\mathscr L$,
+the tensor powers $\mathscr L^{\otimes m}$ are invertible and
+$\deg\mathscr L^{\otimes m} = m\deg\mathscr L$. Hence any invertible
 sheaf of positive degree will do. Fortunately, the degree of
 the canonical sheaf $\Omega_C$ is $2g-2$. As we have restricted
 our attention to the case $g\geq 2$, we are free to choose
-$m\geq 2$ and hence $\mathcal L = \Omega_C^{\otimes m}$ to obtain
-an embedding $C\inc\projective{}{}(H^0(C,\mathcal L)^\vee)$, as
+$m\geq 2$ and hence $\mathscr L = \Omega_C^{\otimes m}$ to obtain
+an embedding $C\inc\projective{}{}(H^0(C,\mathscr L)^\vee)$, as
 required.
 By Chow's theorem, this makes $C$ an algebraic subvariety
 and hence an algebraic curve.
@@ -680,7 +1009,7 @@ While it was easy to translate vector bundles from manifolds
 to schemes, the resulting notion may not always be the most
 useful. It is much more natural to talk about sheaves. We know
 that with each vector bundle $E\to X$ comes a sheaf of sections
-$\Gamma(-,E)$. This has a natural $\mathcal O_X$-module structure.
+$\Gamma(-,E)$. This has a natural $\mathscr O_X$-module structure.
 
 \begin{lemma}
   The sheaf of sections of a vector bundle $E$ on a scheme $X$ is
@@ -691,12 +1020,12 @@ $\Gamma(-,E)$. This has a natural $\mathcal O_X$-module structure.
     $s:U\to \affine{r}{}$. If, moreover, $U$ is affine,
     $\Gamma(U,E)$ corresponds to maps of
     $\mathbb{C}$-algebras
-    $\mathbb{C}[T_1,\ldots,T_n]\to\mathcal O_X(U)$ so
-    $\Gamma(U,E)\cong \mathcal O^r_X(U)$, i.e. $\Gamma(-,E)$
+    $\mathbb{C}[T_1,\ldots,T_n]\to\mathscr O_X(U)$ so
+    $\Gamma(U,E)\cong \mathscr O^r_X(U)$, i.e. $\Gamma(-,E)$
     is free.
     More generally, for each element $U_i$ of the cover in
     \ref{def:vector_bundle}, we can consider affines $U\subseteq U_i$
-    to find $\restrict{\Gamma(-,E)}{U_i}\cong \restrict{\mathcal O_X^r}{U_i}$,
+    to find $\restrict{\Gamma(-,E)}{U_i}\cong \restrict{\mathscr O_X^r}{U_i}$,
     as required.
   \end{proof}
 \end{lemma}
@@ -705,9 +1034,9 @@ However, much more is true. It turns out that on a scheme $X$
 a vector bundle of rank $n$ is the same thing as a locally
 free sheaf of rank $n$. That is, there is an equivalence
 of categories given by $E \mapsto \Gamma(-,E)^\vee$.~\cite[128-129]{hartshorne1977}
-We will say that a sheaf $\mathcal E$ corresponds to a vector bundle
-$E$ and write $\mathcal E=\mathscr V(E)$ to mean
-$\mathcal E\cong\Gamma(-,E)^\vee$.
+We will say that a sheaf $\mathscr E$ corresponds to a vector bundle
+$E$ and write $\mathscr E=\mathcal V(E)$ to mean
+$\mathscr E\cong\Gamma(-,E)^\vee$.
 
 \subsection{Higgs Sheaves}
 
@@ -728,7 +1057,7 @@ thinking of a moduli problem as sending a scheme $T$ to the
 $T$-points of a hypothetical moduli space.
 
 \begin{definition}
-  A \emph{moduli problem} is a functor $\mathscr M:\Sch^{op}\to\Set$.
+  A \emph{moduli problem} is a functor $\mathcal M:\Sch^{op}\to\Set$.
 \end{definition}
 
 \begin{example}
@@ -746,13 +1075,13 @@ of points is precisely the moduli problem. This is called a fine
 moduli space:
 
 \begin{definition}
-  A \emph{fine moduli space} of a moduli problem $\mathscr M$
+  A \emph{fine moduli space} of a moduli problem $\mathcal M$
   is a scheme $M$ with a natural isomorphism
-  $\eta : \mathscr M \cong \Hom(-,M)$.
+  $\eta : \mathcal M \cong \Hom(-,M)$.
 \end{definition}
 
 Slightly abusing notation, we may simply write
-$\eta : \mathscr M \cong M$. We are often going to surpress the
+$\eta : \mathcal M \cong M$. We are often going to surpress the
 isomorphism $\eta$ and call $M$ the fine moduli space.
 
 \begin{example}
@@ -764,18 +1093,18 @@ isomorphism $\eta$ and call $M$ the fine moduli space.
 Beyond the fact that a fine moduli spaces represent the moduli
 problem and thus are the best possible solution, there are some
 pleasant properties to observe. Consider an element
-$F\in\mathscr M(T)$, for some $T$. Observe that under $\eta$,
+$F\in\mathcal M(T)$, for some $T$. Observe that under $\eta$,
 this corresponds to a map $f:T\to M$ which induces pullback maps
 $f^* : \Hom(M,M)\to\Hom(T,M)$ and hence
-$F^* : \mathscr M(M)\to \mathscr M(T)$.
-Now note that there is an element $U\in\mathscr M(M)$ that
+$F^* : \mathcal M(M)\to \mathcal M(T)$.
+Now note that there is an element $U\in\mathcal M(M)$ that
 corresponds to the identity on $M$. Thus $F^* U = F$, so every
-element $\mathscr M(T)$ is given by pulling back $U$. Hence
+element $\mathcal M(T)$ is given by pulling back $U$. Hence
 we make the following definition:
 
 \begin{definition}
-  Let $\mathscr M$ be a moduli problem and $M$ a fine moduli space.
-  The \emph{universal element} $U\in\mathscr M(M)$ is
+  Let $\mathcal M$ be a moduli problem and $M$ a fine moduli space.
+  The \emph{universal element} $U\in\mathcal M(M)$ is
   $U:=\eta^{-1}_M (\identity)$.
 \end{definition}
 
@@ -789,11 +1118,11 @@ we are otherwise ready accept some deviation so long as it is not
 possible to do better:
 
 \begin{definition}\missingcitation
-  A \emph{coarse moduli space} of a moduli problem $\mathscr M$
+  A \emph{coarse moduli space} of a moduli problem $\mathcal M$
   is a scheme $M$ together with a natural transformation
-  $\eta : \mathscr M \to \Hom(-,M)$ such that
+  $\eta : \mathcal M \to \Hom(-,M)$ such that
   \begin{itemize}
-    \item $\eta : \mathscr M(\Spec\mathbb{C})\to M(\Spec\mathbb{C})$ is a bijection;
+    \item $\eta : \mathcal M(\Spec\mathbb{C})\to M(\Spec\mathbb{C})$ is a bijection;
     \item for every scheme $N$, every natural transformation
       $\nu : M \to \Hom(-,N)$ factors through $\eta$ as in the diagram
       \missingdefinition{universal property}
@@ -810,12 +1139,12 @@ see an example of this later. \todo{add reference to problem of all
 locally free sheaves}
 
 \begin{lemma}\label{lem:no_coarse_condition}
-  Let $\mathscr M$ be a moduli problem and
+  Let $\mathcal M$ be a moduli problem and
   $x,y\in \affine{1}{}(\mathbb{C})$. If there is an
-  $F\in\mathscr M(\affine{1}{})$ such that
-  $\mathscr M(x)(F) = \mathscr M(y)(F)$ if, and only if,
+  $F\in\mathcal M(\affine{1}{})$ such that
+  $\mathcal M(x)(F) = \mathcal M(y)(F)$ if, and only if,
   $x,y\neq 0$ or $x=y=0$ then there is no coarse moduli space
-  for $\mathscr M$.
+  for $\mathcal M$.
   \begin{proof}
     Following \cite[Lemma 2.27]{hoskins2016}.
     \missingproof
@@ -870,13 +1199,13 @@ definition:
   $R(d)_d := R_{m+d}$ for all $d\in\mathbb{Z}$. \emph{Serre's
   twisting sheaf} is
   \begin{align*}
-    \mathcal O_X(m) := \widetilde{R(m)}.
+    \mathscr O_X(m) := \widetilde{R(m)}.
   \end{align*}
-  More generally, for a sheaf $\mathcal F$ on $X$, define
-  $\mathcal F(m) := \mathcal F \otimes \mathcal O_X(m)$.
+  More generally, for a sheaf $\mathscr F$ on $X$, define
+  $\mathscr F(m) := \mathscr F \otimes \mathscr O_X(m)$.
 \end{definition}
-The notation $\mathcal O_X(m)$ is justified by the observation
-$\mathcal O_X(m) \cong \mathcal O_X \otimes \mathcal O_X(m)$.
+The notation $\mathscr O_X(m)$ is justified by the observation
+$\mathscr O_X(m) \cong \mathscr O_X \otimes \mathscr O_X(m)$.
 Of course, the main case of interest for us is
 $R=\mathbb{C}[T_0,\ldots,T_n]$, i.e. $X=\projective{n}{}$.
 In this case, the twisting sheaf corresponds to a line bundle,
@@ -885,7 +1214,7 @@ i.e. is invertible. That is, it has rank 1.
 \begin{proposition}[{\cite[Proposition 13.15]{gortz2010}}]
   \label{thm:twisiting_sheaf_invertible}
   If $R$ is finitely generated as a $R_0$-algebra, then each
-  $\mathcal O_X(m)$ is an invertible sheaf.
+  $\mathscr O_X(m)$ is an invertible sheaf.
   \begin{proof}
     \missingproof
   \end{proof}
@@ -894,13 +1223,13 @@ i.e. is invertible. That is, it has rank 1.
 Why are the twisting sheaves important to us? They are well-behaved
 with respect to the parameters. In particular,
 under the assumption of \ref{thm:twisiting_sheaf_invertible},
-$(\mathcal F,m)\mapsto \mathcal \mathcal F(m)$ defines an action of
+$(\mathscr F,m)\mapsto \mathscr \mathscr F(m)$ defines an action of
 the integers on the group of sheaves on $X$:
 
 \begin{lemma}\label{lem:additivity_twisting_sheaf}
   Let $R$ be finitely generated as a $R_0$-algebra and $m,n\in\mathbb{Z}$.
-  Then $\mathcal O_X(m) \otimes \mathcal O_X(n) \cong \mathcal O_X(m + n)$. Hence
-  $\mathcal F(m) \otimes \mathcal O_X(n) \cong \mathcal F(m+n)$.
+  Then $\mathscr O_X(m) \otimes \mathscr O_X(n) \cong \mathscr O_X(m + n)$. Hence
+  $\mathscr F(m) \otimes \mathscr O_X(n) \cong \mathscr F(m+n)$.
   \begin{proof}
     \missingproof
   \end{proof}
@@ -909,18 +1238,18 @@ the integers on the group of sheaves on $X$:
 We will see that topological properties of sheaves behave well
 with respect to taking direct sums and tensor products and hence
 with respect to twisting, too. Moreover, for suitable $R$ and
-sufficiently large $m$, $\mathcal F(m)$ is globally generated. In this
-case, for $m\geq 1$, the sheaves $\mathcal O_X(m)$ are ample.
+sufficiently large $m$, $\mathscr F(m)$ is globally generated. In this
+case, for $m\geq 1$, the sheaves $\mathscr O_X(m)$ are ample.
 
 \subsection{Ample sheaves}
 
 Recall the definition of an ample sheaf:
 
 \begin{definition}
-  An invertible sheaf $\mathcal L$ on a quasi-compact quasi-separated
+  An invertible sheaf $\mathscr L$ on a quasi-compact quasi-separated
   scheme $X$ is \emph{ample} if, for all quasi-coherent sheaves of
-  finite type $\mathcal F$, for $m$ sufficiently large,
-  $\mathcal F\otimes \mathcal L^{\otimes m}$ is
+  finite type $\mathscr F$, for $m$ sufficiently large,
+  $\mathscr F\otimes \mathscr L^{\otimes m}$ is
   globally generated.
 \end{definition}
 
@@ -930,7 +1259,7 @@ projective space the twisting sheaves serve as an example:
 \begin{proposition}
   Let $R$ be a finitely generated $R_0$-algebra,
   write $X=\Proj R$ and let $m,n\geq 1$. Then
-  $\mathcal O_X(m)$ is ample.
+  $\mathscr O_X(m)$ is ample.
   \begin{proof}
     See \cite[Example 13.45]{gortz2010}.
   \end{proof}
@@ -942,7 +1271,7 @@ an ample sheaf given by pulling back a twisted sheaf:
 \begin{proposition}
   Let $X$ be projective, $U\subseteq X$ quasi-compact, and
   $j : U \inc X$ an open immersion then. Then, for some $m\geq 1$,
-  $j^*\mathcal O_X(m)$ is ample.
+  $j^*\mathscr O_X(m)$ is ample.
   \begin{proof}
     See \cite[\href{https://stacks.math.columbia.edu/tag/01Q2}{Tag 01Q2}]{stacks-project}.
   \end{proof}
@@ -962,26 +1291,26 @@ in the obvious way, replacing regular cohomology with sheaf
 cohomology:
 
 \begin{definition}
-  The \emph{Euler characteristic} of a coherent sheaf $\mathcal F$
+  The \emph{Euler characteristic} of a coherent sheaf $\mathscr F$
   on a projective scheme $X$ is
   \begin{align*}
-    \chi (X,\mathcal F) := \sum_{j=0}^\infty (-1)^j \dim H^j (X,\mathcal F).
+    \chi (X,\mathscr F) := \sum_{j=0}^\infty (-1)^j \dim H^j (X,\mathscr F).
   \end{align*}
 \end{definition}
 
 Note that, by finite-dimensionality of coherent cohomology
 (e.g. \cite[\href{https://stacks.math.columbia.edu/tag/02O6}{Tag 02O6}]{stacks-project}) and Grothendieck's vanishing theorem (e.g.
 \cite[III Theorem 2.7]{hartshorne1977}), this is sum is finite for
-all $\mathcal F$.
+all $\mathscr F$.
 
 \begin{example}
   Our primary interest will be in the case where
-  $\dim X = 1$, so $H^j(X,\mathcal F)=0$ for $j\geq 2$ and
+  $\dim X = 1$, so $H^j(X,\mathscr F)=0$ for $j\geq 2$ and
   \begin{align*}
-    \chi (X,\mathcal F) = \dim H^0(X,\mathcal F)-\dim H^1(X,\mathcal F).
+    \chi (X,\mathscr F) = \dim H^0(X,\mathscr F)-\dim H^1(X,\mathscr F).
   \end{align*}
-  If we moreoever take $\mathcal F=\mathcal O_X$ then
-  $\chi (X,\mathcal O_X) = 1 - g$. \todo{justify}
+  If we moreover take $\mathscr F=\mathscr O_X$ then
+  $\chi (X,\mathscr O_X) = 1 - g$. \todo{justify}
 \end{example}
 
 \begin{example}
@@ -990,7 +1319,7 @@ all $\mathcal F$.
   % https://swc-math.github.io/notes/files/06StillmanNotes.pdf
   % https://achinger.impan.pl/fac/fac.pdf
   \begin{align*}
-    \dim H^j(\projective{n}{},\mathcal O_{\projective{n}{}}(m)) =
+    \dim H^j(\projective{n}{},\mathscr O_{\projective{n}{}}(m)) =
     \begin{cases}
       (n+1)^m & \text{if }j = 0 \\
       0 &\text{if }0<j<n \\
@@ -999,7 +1328,7 @@ all $\mathcal F$.
   \end{align*}
   Hence \todo{doublecheck}
   \begin{align*}
-    \chi(\projective{n}{},\mathcal O_{\projective{n}{}}(m))
+    \chi(\projective{n}{},\mathscr O_{\projective{n}{}}(m))
     = (n+1)^m + \binom{-n-1}{m}.
   \end{align*}
 \end{example}
@@ -1020,14 +1349,14 @@ the Euler characteristic,
 we are going to keep track of all the Euler characteristics of all
 the twists of a sheaf. This turns out to be described by a polynomial.
 
-Consider a projective scheme $X$ with an ample sheaf $\mathcal L$
-and a coherent sheaf $\mathcal F$.
+Consider a projective scheme $X$ with an ample sheaf $\mathscr L$
+and a coherent sheaf $\mathscr F$.
 
 \begin{definition}
-  The \emph{Hilbert polynomial} of $\mathcal F$ at $m\in\mathbb{Z}$
+  The \emph{Hilbert polynomial} of $\mathscr F$ at $m\in\mathbb{Z}$
   is
   \begin{align*}
-    P(\mathcal F,\mathcal L)(m) := \chi(X,\mathcal F \otimes \mathcal L^{\otimes m}).
+    P(\mathscr F,\mathscr L)(m) := \chi(X,\mathscr F \otimes \mathscr L^{\otimes m}).
   \end{align*}
 \end{definition}
 
@@ -1037,7 +1366,7 @@ surprising and non-trivial.
 
 \begin{lemma}
   There exists a unique polynomial $p\in\mathbb{Q}[t]$ such that,
-  for all $m$, $P(\mathcal F,\mathcal L)(m) = p(m)$.
+  for all $m$, $P(\mathscr F,\mathscr L)(m) = p(m)$.
   \begin{proof}
     See \cite[Lemma 1.2.1]{huybrechts2010}.
   \end{proof}
@@ -1049,9 +1378,9 @@ surprising and non-trivial.
 
 Serre's vanishing theorem \missingcitation states that,
 for $m$ sufficiently large and $j>0$,
-$H^j(X,\mathcal F\otimes\mathcal L^{\otimes m})=0$. Hence,
+$H^j(X,\mathscr F\otimes\mathscr L^{\otimes m})=0$. Hence,
 eventually,
-$P(\mathcal F,\mathcal L)(m) = \dim H^0(X,\mathcal F\otimes \mathcal L^{\otimes m})$.
+$P(\mathscr F,\mathscr L)(m) = \dim H^0(X,\mathscr F\otimes \mathscr L^{\otimes m})$.
 
 \begin{lemma}
   \todo{invariance under base change}
@@ -1066,18 +1395,18 @@ Recall that for vector bundles on a curve we defined the degree.
 A similar definition is possible for locally free sheaves:
 
 \begin{definition}[{\cite[\href{https://stacks.math.columbia.edu/tag/0AYQ}{Tag 0AYQ}]{stacks-project}}]
-  The \emph{degree} of a locally free sheaf $\mathcal F$ of rank $r$
-  on $C$ is $\deg \mathcal F := \chi (C,\mathcal F) - r\chi(C,\mathcal O_C)$.
+  The \emph{degree} of a locally free sheaf $\mathscr F$ of rank $r$
+  on $C$ is $\deg \mathscr F := \chi (C,\mathscr F) - r\chi(C,\mathscr O_C)$.
 \end{definition}
 
 \begin{example}
-  As the rank of $\mathcal O_C$ is $1$ its degree must be $0$.
+  As the rank of $\mathscr O_C$ is $1$ its degree must be $0$.
 \end{example}
 
 \begin{lemma}\label{lem:degree_of_tensor}
-  If $\mathcal E$ and $\mathcal F$ are locally free on $C$ then
+  If $\mathscr E$ and $\mathscr F$ are locally free on $C$ then
   \begin{align*}
-    \deg(\mathcal E\otimes\mathcal F) = \rank\mathcal E\deg\mathcal F + \rank\mathcal F\deg\mathcal E.
+    \deg(\mathscr E\otimes\mathscr F) = \rank\mathscr E\deg\mathscr F + \rank\mathscr F\deg\mathscr E.
   \end{align*}
   \begin{proof}
     \cite[Exercise 8.24]{hoskins2016}.
@@ -1086,9 +1415,9 @@ A similar definition is possible for locally free sheaves:
 \end{lemma}
 
 \begin{example}
-  Using~\ref{lem:degree_of_tensor}, we find \todo{make sure $\mathcal O_X(1)$ has degree 1}
+  Using~\ref{lem:degree_of_tensor}, we find \todo{make sure $\mathscr O_X(1)$ has degree 1}
   \begin{align*}
-    \deg \mathcal E(m) = \deg\mathcal E + m\rank\mathcal E.
+    \deg \mathscr E(m) = \deg\mathscr E + m\rank\mathscr E.
   \end{align*}
 \end{example}
 
@@ -1124,23 +1453,23 @@ Let us see why that is.
 
 The first step is to define the correct moduli problem. The key idea
 is to associate to a scheme $T$ a family of locally free sheaves
-$\mathcal E_t$. We may view a sheaf $\mathcal E$ on $C_T := C\times T$
+$\mathscr E_t$. We may view a sheaf $\mathscr E$ on $C_T := C\times T$
 as a family of sheaves on $C$ indexed by $T$. If we have a point $t\in T$
 then we have the fibre $C_t := \Spec k(t) \times C$ and the sheaf
-$\mathcal E_t := \restrict{\mathcal E}{C_t}$. In the case where
-$t$ is a $\mathbb{C}$-point, $C_t \cong C$ so $\mathcal E_t$ is indeed
-a sheaf on $C$. Moreover, if $\mathcal E$ is flat over $T$ then
-each $\mathcal E_t$ has the same Hilbert polynomial.
+$\mathscr E_t := \restrict{\mathscr E}{C_t}$. In the case where
+$t$ is a $\mathbb{C}$-point, $C_t \cong C$ so $\mathscr E_t$ is indeed
+a sheaf on $C$. Moreover, if $\mathscr E$ is flat over $T$ then
+each $\mathscr E_t$ has the same Hilbert polynomial.
 
-To truly view locally free sheaves $\mathcal E,\mathcal F$ on
+To truly view locally free sheaves $\mathscr E,\mathscr F$ on
 $C_T$ flat over $T$ as a family, we need to adjust our notion of
 equivalence. In particular, we require all the fibres to be isomorphic.
 
 \begin{lemma}
-  Let $\mathcal E$ and $\mathcal F$ be locally free sheaves on $C_T$
-  flat over $T$. Then $\mathcal E_t\cong\mathcal F_t$ for all $t\in T$
-  if, and only if, there exists an invertible sheaf $\mathcal L$ on
-  $T$ such that $\mathcal E \cong \mathcal F \otimes \pi^*\mathcal L$
+  Let $\mathscr E$ and $\mathscr F$ be locally free sheaves on $C_T$
+  flat over $T$. Then $\mathscr E_t\cong\mathscr F_t$ for all $t\in T$
+  if, and only if, there exists an invertible sheaf $\mathscr L$ on
+  $T$ such that $\mathscr E \cong \mathscr F \otimes \pi^*\mathscr L$
   where $\pi : C_T \to C$ is the base change.
   \begin{proof}
     \todo{not sure this is true; if it isn't then we need to find a
@@ -1152,26 +1481,26 @@ equivalence. In particular, we require all the fibres to be isomorphic.
 Hence we make the following definition:
 
 \begin{definition}
-  Define the moduli problem $\mathscr A : \Sch^{\text{op}} \to \Set$
+  Define the moduli problem $\mathcal A : \Sch^{\text{op}} \to \Set$
   bysending a scheme $T$ to
   \begin{align*}
-    \mathscr A(T) := \left\lbrace{\text{locally free sheaves $\mathcal E$ on $C_T$ flat over $T$}}\right\rbrace/\sim
+    \mathcal A(T) := \left\lbrace{\text{locally free sheaves $\mathscr E$ on $C_T$ flat over $T$}}\right\rbrace/\sim
   \end{align*}
-  where $\mathcal E\sim\mathcal F$ if, and only if, there is a line bundle
-  $\mathcal L$ on $T$ such that
-  $\mathcal E \cong \mathcal F\otimes\pi^* \mathcal L$. Maps
+  where $\mathscr E\sim\mathscr F$ if, and only if, there is a line bundle
+  $\mathscr L$ on $T$ such that
+  $\mathscr E \cong \mathscr F\otimes\pi^* \mathscr L$. Maps
   $f: T'\to T$ get sent to the pullback map
-  $\mathcal E\mapsto f^*\mathcal E$.
+  $\mathscr E\mapsto f^*\mathscr E$.
 \end{definition}
 
 However, this fails to have any moduli space at all:
 
 \begin{lemma}\label{lem:no_coarse_moduli_space}
-  The moduli problem $\mathscr A$ of locally free sheaves on $C$
+  The moduli problem $\mathcal A$ of locally free sheaves on $C$
   does not admit a coarse moduli space.
   \begin{proof}
     Follwing \cite[Example 2.2]{hoskins2016}. We aim to construct
-    an $\mathcal E\in\mathscr A(\affine{1}{})$ that satisfies the
+    an $\mathscr E\in\mathcal A(\affine{1}{})$ that satisfies the
     condition in \ref{lem:no_coarse_condition}.
     \missingproof
   \end{proof}
@@ -1180,17 +1509,17 @@ However, this fails to have any moduli space at all:
 Let us think about the case of Higgs sheaves. Consider the moduli problem
 given by \todo{add new equivalence; make sure the canonical sheaf restricts to a canonical sheaf}
 \begin{align*}
-  \mathscr A_H(T) = \left\lbrace{\text{Higgs sheaves $(\mathcal E,\phi)$
+  \mathcal A_H(T) = \left\lbrace{\text{Higgs sheaves $(\mathscr E,\phi)$
   on $X_T$}}\right\rbrace/\sim.
 \end{align*}
-where $(\mathcal E,\phi)\sim(\mathcal E',\phi')$ if, and only if,
-there is an isomorphism $\mathcal E\cong\mathcal E'$ that makes the
+where $(\mathscr E,\phi)\sim(\mathscr E',\phi')$ if, and only if,
+there is an isomorphism $\mathscr E\cong\mathscr E'$ that makes the
 following commute:
 \begin{equation*}
   % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWwgRSJdLFswLDEsIlxcbWF0aGNhbCBFJyJdLFsyLDEsIlxcbWF0aGNhbCBFJ1xcb3RpbWVzXFxPbWVnYV4xX3tDXFx0aW1lcyBUfSJdLFsyLDAsIlxcbWF0aGNhbCBFXFxvdGltZXMgXFxPbWVnYV4xX3tDXFx0aW1lcyBUfSJdLFswLDMsIlxccGhpIl0sWzEsMiwiXFxwaGknIl0sWzAsMSwiXFxjb25nIiwyXSxbMywyLCJcXGNvbmciXV0=
   \begin{tikzcd}
-    {\mathcal E} && {\mathcal E\otimes \Omega^1_{C\times T}} \\
-    {\mathcal E'} && {\mathcal E'\otimes\Omega^1_{C\times T}}
+    {\mathscr E} && {\mathscr E\otimes \Omega^1_{C\times T}} \\
+    {\mathscr E'} && {\mathscr E'\otimes\Omega^1_{C\times T}}
     \arrow["\phi", from=1-1, to=1-3]
     \arrow["\cong"', from=1-1, to=2-1]
     \arrow["\cong", from=1-3, to=2-3]
@@ -1198,22 +1527,22 @@ following commute:
   \end{tikzcd}
 \end{equation*}
 Once again, by restricting to fibres over $t\in T(\mathbb{C})$
-a family of Higgs sheaves $(\mathcal E,\phi)$ on $X_T$ yields
+a family of Higgs sheaves $(\mathscr E,\phi)$ on $X_T$ yields
 a Higgs field
 \begin{align*}
-  \phi_t : \mathcal E_t \to \mathcal E_t \otimes \Omega^1_C.
+  \phi_t : \mathscr E_t \to \mathscr E_t \otimes \Omega^1_C.
 \end{align*}
 Unfortunately, we find ourselves in a similar position.
 \begin{corollary}
-  The moduli problem $\mathscr A_H$ of Higgs sheaves on $C$ does not admit
+  The moduli problem $\mathcal A_H$ of Higgs sheaves on $C$ does not admit
   a coarse moduli space.
   \begin{proof}
-    Consider the natural transformation $\mathscr A\to\mathscr A_H$
-    given by $\mathcal E \mapsto (\mathcal E,0)$. Now the sheaf
-    $\mathcal E\in\mathscr A(\affine{1}{})$ from the proof of
+    Consider the natural transformation $\mathcal A\to\mathcal A_H$
+    given by $\mathscr E \mapsto (\mathscr E,0)$. Now the sheaf
+    $\mathscr E\in\mathcal A(\affine{1}{})$ from the proof of
     \ref{lem:no_coarse_moduli_space} pushes forward to a Higgs field
-    $(E,0)\in\mathscr A_H(\affine{1}{})$ which, moreoever, satisfies the
-    same property.
+    $(\mathscr E,0)\in\mathcal A_H(\affine{1}{})$ which, moreover,
+    satisfies the same property.
   \end{proof}
 \end{corollary}
 Thus it is not possible to construct the moduli spaces we desire
@@ -1230,55 +1559,55 @@ bundles.
 
 \subsection{Quotients}
 
-If a sheaf $\mathcal F$ is globally generated and
-$\dim H^0(X,\mathcal F) = N$ then $\mathcal F$ may be thought
-of as a quotient of the free sheaf $\mathcal O_X^{\oplus N}$
+If a sheaf $\mathscr F$ is globally generated and
+$\dim H^0(X,\mathscr F) = N$ then $\mathscr F$ may be thought
+of as a quotient of the free sheaf $\mathscr O_X^{\oplus N}$
 by choosing an isomorphism
 \begin{align*}
-  H^0(X,\mathcal F) \otimes \mathcal O_X \cong \mathbb{C}^N \otimes \mathcal O_X \cong \mathcal O_X^{\oplus N}.
+  H^0(X,\mathscr F) \otimes \mathscr O_X \cong \mathbb{C}^N \otimes \mathscr O_X \cong \mathscr O_X^{\oplus N}.
 \end{align*}
 It will turn out that being globally generated will be a reasonable
 condition in the sense that we are not missing too many vector
 bundles. Thus it is sensible to study quotients of coherent sheaves.
 
 \begin{definition}
-  Let $\mathcal E$ be a coherent sheaf on a scheme $X$.
-  A \emph{family of quotients} of $\mathcal E$ over a scheme $T$
-  consists of a sheaf $\mathcal F$ on $X_T$ flat over $T$ and a
-  surjection $q:\pi^*\mathcal E\surj\mathcal F$ where
+  Let $\mathscr E$ be a coherent sheaf on a scheme $X$.
+  A \emph{family of quotients} of $\mathscr E$ over a scheme $T$
+  consists of a sheaf $\mathscr F$ on $X_T$ flat over $T$ and a
+  surjection $q:\pi^*\mathscr E\surj\mathscr F$ where
   $\pi : X_T \to X$ is the base change.
 \end{definition}
 
 Note the condition that the quotient be flat. Recall that a sheaf
-$\mathcal F$ on $X_T$ is flat over $T$ if each of the functors
-$M \mapsto \mathcal F_{(x,t)} \otimes_{\mathcal O_{T,t}} M$ is exact.
+$\mathscr F$ on $X_T$ is flat over $T$ if each of the functors
+$M \mapsto \mathscr F_{(x,t)} \otimes_{\mathscr O_{T,t}} M$ is exact.
 In light of \cite[III Theorem 9.9]{hartshorne1977} this is a
 particularly useful condition for us as it ensures that the fibres
-$\mathcal F_t$ all have the same Hilbert polynomial. Hence we may
-refer to the Hilbert polynomial $P(q,\mathcal L)$ of the family
-$q:\pi^*\mathcal E\surj\mathcal F$.
+$\mathscr F_t$ all have the same Hilbert polynomial. Hence we may
+refer to the Hilbert polynomial $P(q,\mathscr L)$ of the family
+$q:\pi^*\mathscr E\surj\mathscr F$.
 
 \begin{example}
   We saw earlier that a globally generated locally free sheaf
-  $\mathcal F$ of rank $r$ and degree $d$ on $C$ together with
-  a choice of isomorphism $\mathbb{C}^N \cong H^0(C,\mathcal F)$
+  $\mathscr F$ of rank $r$ and degree $d$ on $C$ together with
+  a choice of isomorphism $\mathbb{C}^N \cong H^0(C,\mathscr F)$
   give rise to a family of quotients
   \begin{align*}
-    H^0(C,\mathcal F)\otimes\mathcal O_C \cong \mathcal O^{\oplus N}_C
-    \surj \mathcal F
+    H^0(C,\mathscr F)\otimes\mathscr O_C \cong \mathscr O^{\oplus N}_C
+    \surj \mathscr F
   \end{align*}
-  over $\mathbb{C}$ where $N := \dim H^0(X,\mathcal F)$.
+  over $\mathbb{C}$ where $N := \dim H^0(X,\mathscr F)$.
 \end{example}
 
-Consider two quotients $\mathcal F$ and $\mathcal F'$ of a
-sheaf $\mathcal E$.
+Consider two quotients $\mathscr F$ and $\mathscr F'$ of a
+sheaf $\mathscr E$.
 Such quotients are equivalent if there is an isomorphism
-$\mathcal F\cong\mathcal F'$ such that the following commutes
+$\mathscr F\cong\mathscr F'$ such that the following commutes
 \begin{equation}\label{eq:quotient_equivalence}
   % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWwgRSJdLFsyLDAsIlxcbWF0aGNhbCBGIl0sWzIsMSwiXFxtYXRoY2FsIEYnIl0sWzEsMiwiXFxjb25nIl0sWzAsMSwicSIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFswLDIsInEnIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV1d
   \begin{tikzcd}
-    {\mathcal E} && {\mathcal F} \\
-                 && {\mathcal F'}
+    {\mathscr E} && {\mathscr F} \\
+                 && {\mathscr F'}
                  \arrow["q", two heads, from=1-1, to=1-3]
                  \arrow["{q'}"', two heads, from=1-1, to=2-3]
                  \arrow["\cong", from=1-3, to=2-3]
@@ -1286,11 +1615,11 @@ $\mathcal F\cong\mathcal F'$ such that the following commutes
 \end{equation}
 
 We would now like to consider the moduli problem of equivalence
-classes of quotients of a coherent sheaf $\mathcal E$ on $X$.
+classes of quotients of a coherent sheaf $\mathscr E$ on $X$.
 We note that base change preserves quotients. In particular,
-if $q : \mathcal E \surj \mathcal F$ is a quotient and
+if $q : \mathscr E \surj \mathscr F$ is a quotient and
 $f : Y \to X$ is a base change then
-$f^*q : f^*\mathcal E \surj f^*\mathcal F$ is a quotient
+$f^*q : f^*\mathscr E \surj f^*\mathscr F$ is a quotient
 by \cite[\href{https://stacks.math.columbia.edu/tag/01U9}{Tag 01U9}]{stacks-project}.
 
 \subsection{Quot functors}
@@ -1299,38 +1628,38 @@ Thus we may consider the moduli problem of equivalence classes of
 quotients of a given sheaf:
 
 \begin{definition}\missingcitation
-  Let $\mathcal E$ be a coherent sheaf on a projective scheme $X$.
+  Let $\mathscr E$ be a coherent sheaf on a projective scheme $X$.
   The corresponding \emph{Quot functor} is given by sending each
   scheme $T$ to
   \begin{align*}
-    \mathscr Q(\mathcal E)(T) = \left\lbrace{
-        \text{quotients $q : \pi^*\mathcal E \surj \mathcal F$
+    \mathcal Q(\mathscr E)(T) = \left\lbrace{
+        \text{quotients $q : \pi^*\mathscr E \surj \mathscr F$
         over $T$}
     }\right\rbrace / \sim
   \end{align*}
   and $f : T' \to T$ to
-  $\mathscr Q(\mathcal E)(f) = (\identity \times f)^*$ where
-  $\pi^*\mathcal E$ is the pullback of $\mathcal E$ along
+  $\mathcal Q(\mathscr E)(f) = (\identity \times f)^*$ where
+  $\pi^*\mathscr E$ is the pullback of $\mathscr E$ along
   the base change $\pi:X_T\to X$.
 \end{definition}
 
 Now note that this functor splits
 \begin{align*}
-  \mathscr Q(\mathcal E)
-  = \bigsqcup_{P\in\mathbb{Q}[t]} \mathscr Q(\mathcal E)^{P,\mathcal L}.
+  \mathcal Q(\mathscr E)
+  = \bigsqcup_{P\in\mathbb{Q}[t]} \mathcal Q(\mathscr E)^{P,\mathscr L}.
 \end{align*}
-where each $\mathscr Q(\mathcal E)^{P,\mathcal L}$ contains families
+where each $\mathcal Q(\mathscr E)^{P,\mathscr L}$ contains families
 with Hilbert polynomial $P$.
 
 \begin{example}
   Recall on $C$, we have
   \begin{align*}
-    P(\mathcal F,\mathcal O_C(1))(t) = rt + d + r(1-g)
+    P(\mathscr F,\mathscr O_C(1))(t) = rt + d + r(1-g)
   \end{align*}
-  for any locally free sheaf $\mathcal F$ of rank $r$ and degree $d$.
-  Thus, for any coherent sheaf $\mathcal E$, we have a splitting
+  for any locally free sheaf $\mathscr F$ of rank $r$ and degree $d$.
+  Thus, for any coherent sheaf $\mathscr E$, we have a splitting
   \begin{align*}
-    \mathscr Q(\mathcal E) = \bigsqcup_{r,d} \mathscr Q(\mathcal E)^{r,d}.
+    \mathcal Q(\mathscr E) = \bigsqcup_{r,d} \mathcal Q(\mathscr E)^{r,d}.
   \end{align*}
   \missingexample
 \end{example}
@@ -1341,11 +1670,11 @@ One of the reasons the Quot functor is of interest to us is because
 Grothendieck constructed a moduli space for it. \missingcitation
 
 \begin{theorem}
-  Let $X$ be a projective scheme with an ample sheaf $\mathcal L$,
-  let $\mathcal E$ be a coherent sheaf on $X$, and let
+  Let $X$ be a projective scheme with an ample sheaf $\mathscr L$,
+  let $\mathscr E$ be a coherent sheaf on $X$, and let
   $p\in\mathbb{Q}[t]$. Then the Quot functor
-  $\mathscr Q(\mathcal E)^{p,\mathcal L}$ has a fine moduli space
-  $Q(\mathcal E)$ called the \emph{Quot scheme}.
+  $\mathcal Q(\mathscr E)^{p,\mathscr L}$ has a fine moduli space
+  $Q(\mathscr E)$ called the \emph{Quot scheme}.
   \begin{proof}
     For an extensive overview see \cite{hoskins2016}.
   \end{proof}
@@ -1353,7 +1682,7 @@ Grothendieck constructed a moduli space for it. \missingcitation
 
 \begin{example}
   Once again, in the case $X=C$ we have schemes
-  $Q(\mathcal E)^{r,d}$.
+  $Q(\mathscr E)^{r,d}$.
   \missingexample
 \end{example}
 
@@ -1364,7 +1693,7 @@ Grothendieck constructed a moduli space for it. \missingcitation
 The second major step in constructing moduli spaces of holomorphic
 bundles, algebraic or analytic, is to take a quotient by an automorphism
 group. In particular, we noticed that different choices of isomorphism
-$H^0(X,\mathcal F)\cong\mathbb{C}^N$ give rise to different quotients.
+$H^0(X,\mathscr F)\cong\mathbb{C}^N$ give rise to different quotients.
 The goal of this section is to eliminate these redundancies.
 
 The first step is defining group actions in the setting of schemes.
@@ -1539,8 +1868,8 @@ Considering structure sheaves, we get the following picture:
 \begin{equation*}
   % https://q.uiver.app/#q=WzAsNCxbMiwwLCJcXG1hdGhjYWwgT19YIl0sWzQsMCwiXFxtYXRoY2FsIE9fe1gvR30iXSxbNCwxLCJcXG1hdGhjYWwgT19aIl0sWzAsMCwiXFxtYXRoY2FsIE9fR1xcb3RpbWVzXFxtYXRoY2FsIE9fWCJdLFsxLDAsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoiYm90dG9tIn19fV0sWzIsMF0sWzIsMSwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzAsMywiXFxzaWdtYV5cXHNoYXJwIiwyLHsiY3VydmUiOjJ9XSxbMCwzLCJcXHBpXlxcc2hhcnAiLDAseyJjdXJ2ZSI6LTJ9XV0=
   \begin{tikzcd}
-    {\mathcal O_G\otimes\mathcal O_X} && {\mathcal O_X} && {\mathcal O_{X/G}} \\
-                                      &&&& {\mathcal O_Z}
+    {\mathscr O_G\otimes\mathscr O_X} && {\mathscr O_X} && {\mathscr O_{X/G}} \\
+                                      &&&& {\mathscr O_Z}
                                       \arrow["{\sigma^\sharp}"', curve={height=12pt}, from=1-3, to=1-1]
                                       \arrow["{\pi^\sharp}", curve={height=-12pt}, from=1-3, to=1-1]
                                       \arrow[hook', from=1-5, to=1-3]
@@ -1550,17 +1879,17 @@ Considering structure sheaves, we get the following picture:
 \end{equation*}
 
 Now we have a good idea what the subsheaf
-$\mathcal O_{X/G}\inc\mathcal O_X$ should be:
+$\mathscr O_{X/G}\inc\mathscr O_X$ should be:
 \begin{definition}
   Let $\sigma : G\times X \to X$ be an action of an affine algebraic
   $G$ on a scheme $X$. The \emph{ring of invariants}
-  on an affine open $U\subseteq X$ is the subring of $\mathcal O_X(U)$
+  on an affine open $U\subseteq X$ is the subring of $\mathscr O_X(U)$
   given by
   \begin{align*}
-    \mathcal O_X^G(U) :=
-    \left\lbrace{f \in \mathcal O_X(U) : \sigma^\sharp(f) = 1 \otimes f}\right\rbrace.
+    \mathscr O_X^G(U) :=
+    \left\lbrace{f \in \mathscr O_X(U) : \sigma^\sharp(f) = 1 \otimes f}\right\rbrace.
   \end{align*}
-  Thus we have a sheaf $\mathcal O_X^G$ on $X$.
+  Thus we have a sheaf $\mathscr O_X^G$ on $X$.
 \end{definition}
 
 \begin{example}
@@ -1583,8 +1912,8 @@ geometrical information of $X$ as possible.
   \begin{enumerate}
     \item $f$ is affine.
     \item $f$ is surjective and $Y$ has the quotient topology.
-    \item The map $f^\sharp : \mathcal O_Y \to \mathcal O_X$
-      is an isomorphism $\mathcal O_Y \cong \mathcal O_X^G$.
+    \item The map $f^\sharp : \mathscr O_Y \to \mathscr O_X$
+      is an isomorphism $\mathscr O_Y \cong \mathscr O_X^G$.
     \item For every closed $G$-invariant $V\subseteq X$,
       $f(V)$ is closed in $Y$.
     \item For all disjoint closed $G$-invariant $V,V'\subseteq X$,
