@@ -225,7 +225,7 @@ leads us to define
 \end{align*}
 and hence we have
 \begin{align*}
-  \Omega^k(X) = \bigoplus_{p+q=k} \Omega^{p,q}(X).
+  \Omega^j(X) = \bigoplus_{p+q=k} \Omega^{p,q}(X).
 \end{align*}
 Moreover, the operator $d : \Omega^{p,q}(X) \to \Omega^{p+q+1}(X)$
 splits into $d = \partial + \dol$ where
@@ -494,7 +494,7 @@ is given by a Dolbeault operator $\dol_E$. Hence we have a set of
   }\right\rbrace.
 \end{align*}
 This has an obvious topology given by the following observations:
-\begin{lemma}
+\begin{lemma}\label{lem:affine_space_of_dolbeault_operators}
   Consider linear maps
   \begin{align*}
     \dol_E,\alpha : \Omega^0(C,E) \to \Omega^{0,1}(C,E).
@@ -566,7 +566,7 @@ over $A^{\dol}$ must also be non-Hausdorff. Therefore we need
 to use more sophisticated techniques to construct any moduli
 space of holomorphic bundles.
 
-\section{K\"ahler Quotients}
+\section{Gauge Theory}
 
 To construct a manifolds whose points are equivalence classes of
 holomorphic bundles, we need to take quotients of manifolds by
@@ -592,28 +592,34 @@ Secondly, they are going to allow us to define the Sobolev norm and
 hence provide us with a suitable Banach manifold structure on
 the moduli spaces.
 
-Recall a connection $\nabla$ in $E$ is a linear map
-\begin{align*}
-  \nabla : \Omega^0(X,E) \to \Omega^1(X,E)
-\end{align*}
-such that, for all $f\in \Omega^0(X)$ and $s\in\Omega^0(X,E)$,
-\begin{align*}
-  \nabla (fs) = df \otimes s + f\nabla s.
-\end{align*}
+Recall that connections enable us to differentiate sections of
+vector bundles:
+
+\begin{definition}
+  A \emph{connection} in a smooth complex bundle $E$ on
+  a complex manifold $X$ is a linear map
+  \begin{align*}
+    \nabla : \Omega^0(X,E) \to \Omega^1(X,E)
+  \end{align*}
+  such that, for all $f\in \Omega^0(X)$ and $s\in\Omega^0(X,E)$,
+  \begin{align*}
+    \nabla (fs) = df \otimes s + f\nabla s.
+  \end{align*}
+\end{definition}
 
 Note that connections look very similar to Dolbeault operators.
 Indeed, via projections to the $(1,0)$ and $(0,1)$ parts, respectively,
-we obtain a splitting $\nabla = \nabla_{1,0} + \nabla_{0,1}$
+we obtain a splitting $\nabla = \nabla^{1,0} + \nabla^{0,1}$
 where
 \begin{align*}
-  \nabla_{0,1} : \Omega^0(X,E) \to \Omega^{0,1}(X,E).
+  \nabla^{0,1} : \Omega^0(X,E) \to \Omega^{0,1}(X,E).
 \end{align*}
 We may ask whether this is the same as a holomorphic structure on $E$:
 
 \begin{definition}
   Let $\dol_E$ be a Dolbeault operator on $E$.
   A connection $\nabla$ in $E$ is \emph{compatible with $\dol_E$}
-  if, and only if, $\nabla_{0,1} = \dol_E$. In general, we say
+  if, and only if, $\nabla^{0,1} = \dol_E$. In general, we say
   $\nabla$ is \emph{holomorphic} if it is compatible with some
   $\dol_E$.
 \end{definition}
@@ -623,7 +629,7 @@ straightforward to check that
 \begin{align*}
   \nabla_{0,1} (fs) = \dol f\otimes s + f \nabla_{0,1} s.
 \end{align*}
-Hence $\nabla$ is holomorphic if, and only if, $\nabla_{0,1}^2 = 0$.
+Hence $\nabla$ is holomorphic if, and only if, $(\nabla^{0,1})^2 = 0$.
 
 \subsection{Unitary Connections}
 
@@ -632,9 +638,11 @@ they are not quite the same. To map one to the other, we are going
 to require some additional information. The correct geometric
 structure to consider is a metric:
 
-\begin{definition}
+\begin{definition}\todo{fix the dual notation}
   A \emph{hermitian metric} on $E$ is a smooth section $h$ of
   $(E\otimes\bar E)^\vee$ that is sesquilinear and positive definite.
+  That is, $h(s,\bar t) = \overline{h(t,\bar s)}$ and $h(s,\bar s) > 0$
+  if $s \neq 0$.
 \end{definition}
 
 While such metrics are interesting in their own right, we have no
@@ -664,26 +672,49 @@ by taking Lie algebras of the principal $GL_r(\mathbb{C})$-bundle $GL(E)$.
 Now note that a connection is equivalently a section in
 $\Omega^1(C,\End E)$. We may regard $\End E$ as $\mathfrak gl(E)$,
 and hence define what it means for a connection to be unitary:
+\todo{needs rewriting}
+
 \begin{definition}
   A connection $\nabla$ in $E$ is \emph{$h$-unitary}
-  if, and only if, $\nabla\in\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
+  if, and only if, for all $s,t\in\Omega^0(X,E)$,
+  $dh(s,\bar t) = h(\nabla s,\bar t) + h(s,\overline{\nabla t})$.
 \end{definition}
 
-Note that there is a different notion of compatibility with the metric.
-Often one requires that, for all $s,t\in\Omega^0(X,E)$,
+Now consider the set of all connections that respect $h$ and induce
+some Dolbeault operator:
 \begin{align*}
-  dh(s,\bar t) = h(\nabla s,\bar t) + h(s,\overline{\nabla t}).
+  A^\nabla(E,h) := \left\lbrace{\text{$h$-unitary holomorphic connections $\nabla$ in $E$}}\right\rbrace.
 \end{align*}
-It turns out that this condition is satisfied if, and only if, $\nabla$
-is $h$-unitary. \cite[10-11]{kobayashi1987} For our purposes,
-thinking of unitary connections as $\mathfrak u(E)$-valued $1$-forms
-makes more sense. This is because are going to think of the space
-$A^\nabla$ of such $h$-unitary connections as an affine space modelled on
-$\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
+Analogous to $A^{\dol}$, we have the following property:
+
+\begin{lemma}
+  $A^\nabla(E,h)$ is an affine space modelled on
+  $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
+  \begin{proof}
+    The operations are induced by $\Omega^1(C,\mathfrak gl(E))$.
+    Verifying that general $\nabla + \xi$ for
+    $\xi\in\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$
+    satsify the Leibnitz rule and the integrability
+    condition $(\nabla^{0,1})^2=0$ is analogous to
+    \ref{lem:affine_space_of_dolbeault_operators}. Hence $\nabla + \xi$
+    is a holomorphic connection.
+
+    To see that $\nabla + \xi$ is $h$-unitary we notice
+    \begin{align*}
+      h((\nabla + \xi)s, \bar t) + h(s,\overline{(\nabla + \xi)t})
+      =  h(\nabla s, \bar t) + h(s,\overline{\nabla t})
+    \end{align*}
+    as $\xi$ is skew-hermitian.
+  \end{proof}
+\end{lemma}
+
+Combining what we have seen so far with the next result, the
+similarities between $A^{\dol}$ and $A^\nabla(E,h)$ grow even more
+striking:
 
 \begin{lemma}\label{lem:real_vector_space_iso}
   As real vector spaces,
-  $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))\cong\Omega^{0,1}(C,\mathfrak gl(E))$.
+  $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))\cong\Omega^{0,1}(C,\mathfrak{gl}(E))$.
   \begin{proof}
     Now recall the isomorphism (\ref{eq:holomorphic_tangent_bundle}) of
     smooth vector bundles $T^* X \cong T^*_{1,0} X$. Composing with
@@ -701,14 +732,15 @@ $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
       \cong\Gamma^\infty(C,T^*_{0,1}C \otimes\mathfrak u(E)_{\mathbb{C}}).
     \end{align*}
     Now the claim follows from the isomorphism of Lie algebras
-    $\mathfrak u(n)_{\mathbb{C}}\cong\mathfrak{gl}_n(\mathbb{C})$.
+    $\mathfrak{gl}_n(\mathbb{C})\cong\mathfrak u(n)_{\mathbb{C}}$
+    given by $A \mapsto A-A^\dagger$.
   \end{proof}
 \end{lemma}
 
-The fact that $A^{\dol}$ and $A^\nabla$ both are affine spaces modelled
-on the same underlying real vector space is not a coincidence. Indeed,
-in the presence of $h$, every Dolbeault operator has a compatible
-connection:
+It is not a coincidence that $A^{\dol}$ and $A^\nabla(E,h)$ both are
+affine spaces modelled on the same underlying real vector space.
+Indeed, in the presence of $h$, every Dolbeault operator has a unique
+compatible connection:
 
 \begin{theorem}\label{thm:chern_connection}
   If $h$ is a hermitian metric on $E$ and $\dol_E$ is a Dolbeault
@@ -724,6 +756,30 @@ $\nabla^h : A^{\dol} \to A^\nabla$ whose inverse is the restriction
 $\nabla \mapsto \nabla_{0,1}$. It is not difficult to verify that this
 is a homeomorphism of affine spaces which is locally given by
 the $\mathbb{R}$-linear isomorphism in \ref{lem:real_vector_space_iso}.
+
+Now we have an action of $\Gamma^\infty(C,U(E))$ on
+$A^\nabla(E,h)$ via conjugation. That is,
+for $g\in\Gamma^\infty(C,U(E))$ and
+$\nabla\in A^\nabla(E,h)$, $g\cdot\nabla$ is the map
+\begin{align*}
+  \Omega^0(X,E) \xlongrightarrow{\Omega^0(X,{g}^{-1})}
+  \Omega^0(X,E) \xlongrightarrow{\nabla}
+  \Omega^1(X,E) \xlongrightarrow{\Omega^1(X,g)}
+  \Omega^1(X,E).
+\end{align*}
+It is not difficult to verify that this is indeed an action.
+In fact, $g\cdot\nabla$ is almost immediately a holomorphic connection.
+One then sees that $g\cdot\nabla$ is unitary because
+$g$ and $\nabla$ are.
+
+However, note that there is some redundancy because scalar multiplication
+commutes with the connection. That is, if $g:E\to E$ is multiplication
+by a scalar then $g\cdot\nabla = \nabla$. Hence we also have an action of
+\begin{align*}
+  G(E,h) := \Gamma^\infty(C,U(E)) / U(1)
+\end{align*}
+on $A^\nabla(E,h)$.
+
 \todo{complex structure on the affine space}
 
 \subsection{Doubled Connections}
@@ -731,12 +787,11 @@ the $\mathbb{R}$-linear isomorphism in \ref{lem:real_vector_space_iso}.
 We have successfully viewed the space of holomorphic bundles $A^{\dol}$
 as an affine space modelled on
 $\Omega^1_{\mathbb{R}}(C,\mathfrak{u}(E))$. This is eventually going
-to help us introduce a K\"ahler structure on $A^{\dol}$ and hence
-take a K\"ahler quotient. Let us do the same for the space of Higgs
+to help us introduce a symplectic structure on $A^{\dol}$ and hence
+take a symplectic quotient. Let us do the same for the space of Higgs
 bundles $A^\phi$. We are going to identify $A^{\phi}$ with an affine
 space modelled on $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))^{\oplus 2}$.
-This will lead to a Hyperk\"ahler structure and corresponding
-quotient. Once again fix a hermitian metric $h$ on $E$.
+Once again fix a hermitian metric $h$ on $E$.
 
 Just as holomorphic bundles correspond to connections, Higgs bundles
 correspond to doubled connections.
@@ -765,6 +820,64 @@ a pair $(\dol_E,\phi)$ where $\dol_E$ is a Dolbeault operator and
 $\phi$ is a section in $\Omega^{1,0}(C,\End E)$, not necessarily
 holomorphic. We will have to deal with this at a later stage.
 
+For now, observe that the group $G(E,h)$ also acts on $A^\Phi(E,h)$
+by conjugation:
+\begin{align*}
+  G(E,h) \times A^\Phi(E,h) & \to A^\Phi(E,h)\\
+  (g,\nabla,\Phi) &\mapsto (g\nabla{g}^{-1},g\Phi{g}^{-1})
+\end{align*}
+
+\subsection{Group actions}
+
+Before we move into the realm of infinite dimensional Banach spaces,
+let us study the group actions a bit more closely. Later we are going to
+require our actions to be free and proper. Let us recall what that
+means.
+
+Properness is a topological property. That is, it applies only to
+topological groups:
+
+\begin{definition}
+  An action $\rho : G\times X\to X$ of a topological group $G$
+  on a topological space $X$ is \emph{proper} if the map
+  \begin{align}\label{eq:proper_map}
+    (\rho,\pi) : G\times X \to X\times X
+  \end{align}
+  is proper, i.e. the preimage of every compact set in $X\times X$
+  is compact.
+\end{definition}
+
+\begin{example}
+  One easily sees if $G$ is compact then every $G$-action is proper.
+  In particular, the action of $U(1)$ on $\Gamma^\infty(C,U(E))$ is
+  proper.
+\end{example}
+
+\begin{example}\label{ex:h_proper_action}
+  The action of $U(E)$ on $A^\nabla$ is proper.
+  \begin{proof}
+    We sketch the proof given in
+    \cite[{Proposition 7.1.14}]{kobayashi1987}.
+    The goal is to show that, if we have a sequence $(g_j,\nabla_j)$
+    such that $\nabla_j\to\nabla$ and $g_j\cdot\nabla_j\to\nabla'$
+    then $g_j\to g$ such that $g\cdot\nabla = \nabla'$. To do this
+    one moves to the principal $U(n)$-bundle $P$ associated to $(E,h)$
+    where each $g_j$ commutes with the action of the structure
+    group. The next step is to fix a point $x_0\in X$ and
+    $p_0\in P_{x_0}$ and consider curves $c$ starting at $x_0$ in $X$.
+    Considering $\nabla$ and $\nabla'$ yields lifts $\tilde c$ and
+    $\tilde c'$ of $c$ in $P$. Now the limit $g$ of $(g_j)$ must satisfy
+    $g(\tilde c) = \tilde c'$. This condition on $g$, together with
+    commutativity with the action of the structure group, identifies it
+    uniquely.
+  \end{proof}
+\end{example}
+
+\begin{example}\label{ex:higgs_proper_action}
+  the action of $G_{\ell+1}(E,h)$ on $A_\ell^\Phi$ is proper.
+  \missingexample
+\end{example}
+
 \subsection{Sobolev Spaces}
 
 Our next goal is to equip the affine spaces of connections $A^\nabla$
@@ -780,10 +893,10 @@ the space of smooth sections.
 Consider the following, more general setting. Let $X$ be a compact
 Riemannian manifold $X$ of dimension $n$, let $E$ be a smooth complex
 bundle on $X$ with hermitian metric $h$, let $\nabla$ be a $h$-unitary
-connection in $E$, and let $k\geq 0$ and $1<p<\infty$ be integers.
+connection in $E$, and let $\ell\geq 0$ and $1<p<\infty$ be integers.
 Here we are going to think of $\nabla$ as a derivative of sections and
-define a space $L^p_k(X,E)$ which may be thought of as the space of
-functions $X\to E$ with $k$ derivatives, all of which in $L^p$. As
+define a space $W_{p,\ell}(X,E)$ which may be thought of as the space of
+sections $X\to E$ with $k$ derivatives, all of which in $L^p$. As
 is the case with many of the concepts we encounter throughout this paper,
 these Sobolev spaces are interesting geometric objects to
 contemplate but we are going to use them as a tool. The main
@@ -791,20 +904,113 @@ benefit we are going to get from using this particular Banach space
 completion is the theory of elliptic regularity. \missingcitation
 
 Note that the metrics on $E$ and $X$ define norms on smooth sections
-of $E$ and $T^*X$, respectively, and hence on all $\Omega^k(X,E)$.
+of $E$ and $T^*X$, respectively, and hence on all
+$\Omega^k_{\mathbb{R}}(X,E)$.
 Moreover, the metric on $X$ induces a volume form $d\text{vol}_X$.
 With this in mind, we are ready to define the Sobolev norm on
-$\Omega^0(X,E)$:
+$\Gamma^\infty(X,E)$:
 
 \begin{definition}
-  Define the
-  \emph{$(p,k)$-Sobolev norm} on $\Omega^0(X,E)$ by
+  Let $\nabla$ be a $h$-unitary connection in $E$.
+  The \emph{$(p,k)$-Sobolev norm} with respect to $\nabla$ on
+  $\Gamma^\infty(X,E)$ by
   \begin{align*}
-    \Vert s\Vert_{p,k} := \left(
-      \sum_{i=0}^k \int_X \Vert \nabla^i s \Vert d\text{vol}_X
+    \Vert s\Vert_{p,\ell}^\nabla := \left(
+      \sum_{i=0}^\ell \int_X \Vert \nabla^i s \Vert^p d\text{vol}_X
     \right)^{1/p}.
   \end{align*}
 \end{definition}
+\begin{example}
+  Observe that Sobolev norms generalise $L^p$ norms. In particular,
+  we have $\Vert\cdot\Vert^\nabla_{p,0} = \Vert\cdot\Vert_{L^p}$.
+\end{example}
+Note that the norm depends on the choice of connection $\nabla$. Of
+course, we do not want moduli spaces to have the same dependency. Hence
+we establish the following:
+\begin{lemma}
+  Let $\nabla$ and $\nabla'$ be $h$-unitary connections in $E$. Then the
+  norms $\Vert\cdot\Vert_{p,\ell}^\nabla$ and
+  $\Vert\cdot\Vert_{p,\ell}^{\nabla'}$ are equivalent.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+Hence we are justified in defining a completion that does not depend
+on the connection:
+
+\begin{definition}
+  The \emph{Sobolev space} $W_{p,k}(X,E)$ is the Banach completion of
+  $\Gamma^\infty(X,E)$ with respect to the norm
+  $\Vert\cdot\Vert_{p,\ell}^\nabla$ for any $h$-unitary connection
+  $\nabla$ in $E$.
+\end{definition}
+
+Observe that we immediately have a sequence of inclusions
+\begin{align*}
+  L^2(X,E) =
+  W_{2,0}(X,E) \supseteq
+  \cdots \supseteq
+  W_{2,\ell}(X,E) \supseteq
+  \cdots
+  \supseteq
+  C^\infty(X,E)
+\end{align*}
+where the last inclusion intuitively follows from the fact
+$C^\infty \subseteq L^2$ and the observation that each derivative
+$\nabla^i s$ is $C^\infty$. For a more rigorous argument, see
+\cite[Corollary 3.8.3]{bc2009}.
+Moreover, $C^\infty$ is dense in $L^2$ so it must be dense in each
+$W^{2,\ell}$, too. Thus we will be able to regard $\Gamma^\infty(X,E)$
+as a Banach space by expanding it slightly.
+
+As usual, we are going to think of the elements of $W_{2,\ell}(X,E)$ as
+sections in $\Gamma^\infty(X,E)$. However, it is worth remembering that
+sections that differ on a set of measure zero are identified in the
+completion.
+
+\begin{example}
+  Note that the metric on $X$ is a metric on $T^*X$. Hence we have
+  a metric on $E\otimes (T^*X)^{\wedge k}$ for all $k$. This allows
+  us to define
+  \begin{align*}
+    \Omega_{\mathbb{R},\ell}^k(X,E) := W_{2,\ell}(X,E\otimes(T^*X)^{\wedge k}).
+  \end{align*}
+\end{example}
+
+The last feature we require our Banach space completions to have is
+that it applies to maps of the underlying spaces, too. Of course,
+it will not in general be true that every map
+$\Gamma^\infty(X,E)\to\Gamma^\infty(X,F)$ extends to a map on
+Sobolev spaces. Fortunately, there are some reasonable assumptions
+we can make. Consider the following class of such operators:
+
+\begin{definition}
+  Let $E$ and $F$ be smooth bundles on $X$. A \emph{differential
+  operator of order $m$} is a $C^\infty(X)$-linear map
+  \begin{align*}
+    P : \Gamma^\infty(X,E) \to \Gamma^\infty(X,F)
+  \end{align*}
+  such that, for each $x\in X$, there is a chart $U\ni x$ with
+  local coordinates $(x_1,\ldots,x_n)$ trivialising $E$ and $F$ such that
+  \begin{align*}
+    P(\Gamma^\infty(U,E))\subseteq \Gamma^\infty(U,F),
+  \end{align*}
+  and
+  \begin{align*}
+    \restrict{P}{U}(s) = \sum_{|I|\leq m} f_I \partial^I
+  \end{align*}
+  where, for each multi-index
+  $I=\left\lbrace{i_1,\ldots,i_n}\right\rbrace$,
+  $f_I \in \Gamma^\infty(U,\Hom(E,F))$ and
+\end{definition}
+
+\begin{theorem}
+  Let $P:E\to F$ be a map of smooth bundles on $X$ such that, for
+  each chart $U\subseteq X$ with trivialisation
+  \todo{make this precise}
+  See \cite[{Proposition 3.8.4}]{bc2009}.
+\end{theorem}
 
 \subsection{Banach Manifolds}
 
@@ -828,6 +1034,12 @@ restrict our attention to the case of Banach spaces:
   sheaf of smooth functions on $V$.
 \end{definition}
 
+Of course Banach manifolds come with all the bells and whistles that
+we know and love. In particular, we have smooth maps of Banach manifolds,
+vector bundles, tangent and cotangent spaces, derivatives, and
+differential forms. \todo{doublecheck which of these we really need
+and which we need to define in more detail}
+
 \begin{example}
   Every smooth manifold is locally isomorphic to
   $(\mathbb{R}^n,C^\infty_{\mathbb{R}^n})$ and hence is a Banach manifold.
@@ -835,20 +1047,242 @@ restrict our attention to the case of Banach spaces:
 \end{example}
 
 \begin{example}
-  Our main application will be the following.
+  Let us consider our main applications. We have the affine space
+  $A^\nabla$ modelled on $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
+  For each $\ell \geq 0$, we have the corresponding Sobolev completion
+  \begin{align*}
+    A^\nabla_\ell(E,h) = A^\nabla(E,h) + \Omega^1_{\mathbb{R},\ell}(C,\mathfrak u(E)).
+  \end{align*}
+  In particular, for each $\nabla\in A^\nabla_\ell$,
+  \begin{align*}
+    T^*_\nabla A^\nabla_\ell
+    = \Omega^1_{\mathbb{R},\ell}(C,\mathfrak u(E)).
+  \end{align*}
 \end{example}
 
-Of course Banach manifold come with all the bells and whistles that
-we know and love. In particular, we have smooth maps of Banach manifolds,
-vector bundles, tangent and cotangent spaces, derivatives, and
-differential forms. \todo{doublecheck which of these we really need
-and which we need to define in more detail}
+\begin{example}\todo{be a bit more careful with base space and metrics}
+  Consider the group $\Gamma^\infty(C,U(E))$ of unitary
+  sections of $\End E$. The Sobolev norms on $\Gamma^\infty(C,\End E)$
+  restrict to norms on the subset $\Gamma^\infty(C,U(E))$ and hence we
+  may consider the completions $W_{2,\ell}(C,U(E))$.
+  One may show that this is a Banach manifold by applying the
+  analogue of the regular value theorem. In particular, for all
+  $A\in W_{2,\ell}(C,U(E))$, we have
+  \todo{neitzke says it's $\mathfrak{gl}(E)$ but i'm not a fan}
+  \begin{align*}
+    T_A W_{2,\ell}(C,U(E)) = W_{2,\ell}(C,\mathfrak u(E)).
+  \end{align*}
+\end{example}
 
 \missingsection
+
+\subsection{Banach Lie Groups}
+
+In particular, there is a natural notion of a Banach Lie group and
+corresponding actions on Banach manifolds.
+
+\begin{example}
+  The Banach manifold $W_{2,\ell}(C,U(E))$ is a Banach Lie group.
+  Use Sobolev multiplication. \missingexample
+\end{example}
+
+In complete analogy to the finite dimensional case, the tangent space
+at the identity of a Banach Lie group may be equipped with a Lie bracket
+and hence is called the Lie algebra of the group.
+
+\begin{example}
+  The Lie algebra of $W_{2,{\ell}}(C,U(E))$ is
+  $W_{2,\ell}(C,\mathfrak u(E))$.
+\end{example}
+
+Similarly, a action of a Banach Lie group on a Banach manifold
+is a Banach Lie group action if, and only if, it is given by a
+smooth map. Here we use the fact that the product of Banach manifolds
+has a natural Banach manifold structure.
+
+\begin{example}
+  As a primitive example, the finite-dimensional Banach Lie group
+  $U(1)$ acts on the Banach Lie group $W_{2,\ell}(C,U(E))$ by
+  multiplication: $\lambda \cdot A = \lambda A$.
+\end{example}
+
+Perhaps more interestingly, Sobolev completions allow us to lift group
+actions:
+
+\begin{example}
+  Consider the action of $\Gamma^\infty(C,U(E))$ on $A^\nabla$
+  by conjugation. This extends to an action of $W_{2,\ell+1}(C,U(E))$
+  on $A^\nabla_\ell$.
+  \missingproof
+  Analogously we have a Banach Lie group action of $W_{2,\ell+1}(C,U(E))$
+  on $A^\Phi_\ell$.
+\end{example}
+
+
+\begin{definition}
+  An action $\rho : G\times X\to X$ is \emph{free} if, for all
+  $g\in G$ and $x\in X$, $g\cdot x = x$ implies $g = e$.
+\end{definition}
+
+\begin{example}
+  the action of $G_{\ell+1}(E,h)$ on $A_\ell^\nabla$ is not free.
+  \missingexample
+\end{example}
+
+\begin{example}
+  the action of $G_{\ell+1}(E,h)$ on $A_\ell^\Phi$ is not free.
+  \missingexample
+\end{example}
+
+\begin{theorem}\label{thm:banach_quotient}
+  Consider a proper free action $\rho : G\times X\to X$ of a Banach
+  Lie group $G$ on a Banach manifold $X$. If each tangent space
+  $T_x(Gx) \subseteq T_x X$ is closed and complemented then
+  $X/G$ is a Banach manifold and $TX/\rho(\mathfrak g) \cong T(X/G)$.
+  \todo{doublecheck}
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
+
+
+\todo{infinitesimal action}
+
+\missingsection
+
+\section{Symplectic Quotients}
+
+\subsection{Symplectic Manifolds}
+
+\begin{definition}
+  A \emph{symplectic form} on a Banach manifold $X$ is a 2-form
+  $\omega\in\Omega_{\mathbb{R}}^2(X)$ such that $d\omega = 0$
+  and, for every $x\in X$, there is an injection $T_x X\inc T_x^* X$
+  given by $v \mapsto \omega(v,-)$.
+\end{definition}
+
+Note if $X$ is finite dimensional then $T_x X \cong T_x^*X$ so the
+map $v \mapsto \omega(v,-)$ must be an isomorphism.
+
+\begin{example}
+  symplectic form on $A^\nabla$
+  \missingexample
+\end{example}
+
+\begin{example}
+  symplectic form on $A^\Phi$
+  \missingexample
+\end{example}
+
+\subsection{Moment Maps}
+
+\begin{definition}
+  Consider a symplectic form $\omega$ on a Banach manifold $X$
+  and an action $\rho : G\times X\to X$ of a Banach Lie group.
+  A \emph{moment map} for $\rho$ is a map
+  \begin{align*}
+    \mu : X \to \mathfrak{g}^*
+  \end{align*}
+  such that, for all $Z\in\mathfrak g$, the function
+  $\mu_Z$ given by $x \mapsto\langle\mu(x),Z\rangle$ satisfies
+  \begin{align*}
+    d\mu_Z = \iota_{\rho(Z)}\omega.
+  \end{align*}
+\end{definition}
+
+\begin{example}\todo{define curvature}
+  A moment map for the action of $G_{\ell+1}(E,h)$ on $A^\nabla_\ell$
+  is the map
+  \begin{align*}
+    \mu : A^\nabla_\ell \to \Omega^0_{\mathbb{R},\ell+1}(\End E)^*
+  \end{align*}
+  given by
+  \begin{align*}
+    \mu_Z(D) = - \int_C \Tr(ZF_D) - 2\pi i\frac{d}{K}\int_C \omega_C\Tr(Z).
+  \end{align*}
+  Here the map
+  \begin{align*}
+    \Tr : \Omega^k_{\mathbb{R}}(C,\End E) \to \Omega^k_{\mathbb{R}}(C)
+  \end{align*}
+  is induced by the map $E^*_x \otimes_{\mathbb{R}} E_x \to \mathbb{R}$
+  given by $\xi\otimes v \mapsto \xi(v)$. Moreover,
+  $\omega_C\in\Omega^2_{\mathbb{R}}(C)$ is the symplectic form on $C$
+  and $F_D = D\circ D\in\Omega^2_{\mathbb{R}}(\End E)$ is the curvature of
+  $D$.
+\end{example}
+
+\begin{example}
+  moment map for $A^\Phi$
+  \missingexample
+\end{example}
+
+\subsection{Sympletic Quotients}
+
+Consider a moment map $\mu$ for a proper action of a Banach Lie group
+$G$ on a symplectic Banach manifold $(X,\omega)$. We are finally ready
+to define what it means to be a quotient in this setting:
+
+\begin{definition}
+  The \emph{symplectic quotient} of $X$ by $G$ is
+  \begin{align*}
+    X\sslash G :=  {\mu}^{-1}(0)/G.
+  \end{align*}
+\end{definition}
+
+Of course, a the moment we have gained little to nothing from this
+definition. The quotient makes sense as a topological space, but nothing
+else. Firstly, we want this quotient to be a Banach manifold. The obvious
+result to use is \ref{thm:banach_quotient}. Let us make sure that
+the conditions are satisfied.
+
+\begin{example}
+  Consider the action of $G_{\ell+1}(E,h)$ on $A^\nabla_\ell$.
+  We already know from \ref{ex:h_proper_action} that this action
+  is proper.
+\end{example}
+
+\begin{theorem}\label{thm:symplectic_quotient}
+  If
+  \begin{enumerate}
+    \item $Y:={\mu}^{-1}(0)$ is a Banach submanifold of $X$,
+    \item $G$ acts freely on $Y$,
+    \item each tangent space $T_x(Gx)$ to $G$-orbits is closed,
+      complemented, and obeys
+      \begin{align*}
+        T_x(Gx) = (T_x(Gx)^{\bot})^\bot
+      \end{align*}
+  \end{enumerate}
+  then $Y/G$ is a Banach manifold with a symplectic form
+  $\omega_{Y/G}$ satisfying
+  \begin{align*}
+    q^*\omega_{Y/G} = \iota^*\omega
+  \end{align*}
+  where $q : Y\surj Y/G$ is the quotient map
+  and $\iota : Y\inc X$ is the inclusion.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
+
+
+\begin{example}
+  We are now ready
+  \begin{align*}
+    N^\omega(E) := A^\nabla_{\ell} \sslash G_{\ell + 1}(E,h).
+  \end{align*}
+\end{example}
+\begin{example}
+  On the other hand, the analytic moduli space of Higgs bundles on
+  $C$ with underlying smooth bundle $E$ is
+  \begin{align*}
+    M^\omega(E) := A^\Phi_\ell \sslash G_{\ell + 1}(E,h).
+  \end{align*}
+\end{example}
 
 \section{Properties of the Analytic Moduli Spaces}
 
 \missingsection
+
 \chapter{As Schemes}
 
 The moduli space of holomorphic bundles on a compact Riemann
