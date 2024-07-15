@@ -566,7 +566,7 @@ over $A^{\dol} (E)$ must also be non-Hausdorff. Therefore we need
 to use more sophisticated techniques to construct any moduli
 space of holomorphic bundles.
 
-\section{Gauge Theory}
+\section{Gauge Theory}\todo{motivate or improve this name}
 
 To construct a manifolds whose points are equivalence classes of
 holomorphic bundles, we need to take quotients of manifolds by
@@ -817,84 +817,6 @@ by conjugation:
   (g,\nabla,\Phi)           & \mapsto (g\nabla{g}^{-1},g\Phi{g}^{-1})
 \end{align*}
 
-\subsection{Group actions}
-
-Before we move into the realm of infinite dimensional Banach spaces,
-let us study the group actions a bit more closely. Later we are going to
-require our actions to be free and proper. Let us recall what that
-means.
-
-Properness is a topological property. That is, it applies only to
-topological groups:
-
-\begin{definition}
-  An action $\rho : G\times X\to X$ of a topological group $G$
-  on a topological space $X$ is \emph{proper} if the map
-  \begin{align}\label{eq:proper_map}
-    (\rho,\pi) : G\times X \to X\times X
-  \end{align}
-  is proper, i.e. the preimage of every compact set in $X\times X$
-  is compact.
-\end{definition}
-
-\begin{example}
-  One easily sees if $G$ is compact then every $G$-action is proper.
-  In particular, the action of $U(1)$ on $U(E,h)$ is
-  proper.
-\end{example}
-
-\begin{example}\label{ex:h_proper_action}
-  The action of $U(E,h)$ on $A^\nabla(E,h)$ is proper.
-  \begin{proof}
-    We sketch the proof given in
-    \cite[{Proposition 7.1.14}]{kobayashi1987}.
-    The goal is to show that, if we have a sequence $(g_j,\nabla_j)$
-    such that $\nabla_j\to\nabla$ and $g_j\cdot\nabla_j\to\nabla'$
-    then $g_j\to g$ such that $g\cdot\nabla = \nabla'$. To do this
-    one moves to the principal $U(n)$-bundle $P$ associated to $(E,h)$
-    where each $g_j$ commutes with the action of the structure
-    group. The next step is to fix a point $x_0\in X$ and
-    $p_0\in P_{x_0}$ and consider curves $c$ starting at $x_0$ in $X$.
-    Considering $\nabla$ and $\nabla'$ yields lifts $\tilde c$ and
-    $\tilde c'$ of $c$ in $P$. Now the limit $g$ of $(g_j)$ must satisfy
-    $g(\tilde c) = \tilde c'$. This condition on $g$, together with
-    commutativity with the action of the structure group, identifies it
-    uniquely.
-  \end{proof}
-\end{example}
-
-\begin{example}\label{ex:higgs_proper_action}
-  the action of $U(E,h)$ on $A^\Phi (E,h)$ is proper.
-  \missingexample
-\end{example}
-
-Although the action of any group on any set may be free, it is a particularly
-important property in a geometric setting. In particular, it ensures that the
-orbits are homogeneous and hence
-all points in the quotient are locally indistinguishable, as one expects from
-manifolds.
-
-\begin{definition}
-  An action $\rho : G\times X\to X$ is \emph{free} if, for all
-  $g\in G$ and $x\in X$, $g\cdot x = x$ implies $g = e$.
-\end{definition}
-
-\begin{example}
-  Consider the action of $U(E,h)$ on $A^\nabla(E)$. This is not a free action
-  because scalar multiplication commutes with the connection. That is,
-  for all $\lambda\in U(1)$, $g\in U(E)$, and $\nabla\in A^\nabla(E,h)$,
-  it holds that $\lambda g\cdot \nabla = \nabla$. This flaw is easily fixed,
-  however. In fact, we immediately have an action of
-  \begin{align*}
-    G(E,h) := U(E,h) / U(1)
-  \end{align*}
-  on $A^\nabla(E,h)$. Unfortunately, this action is not free either. In particular,
-  if there is a non-trivial proper subbundle $E'\subseteq E$ that is preserved
-  by $\nabla$ then non-trivial automorphisms of $E'$ act trivially on $\nabla$.
-
-  In complete analogy, there is an action of $G(E,h)$ on $A^\Phi(E,h)$ which
-  is not free either.
-\end{example}
 
 \subsection{Sobolev Spaces}
 
@@ -1111,6 +1033,93 @@ differential forms. \todo{doublecheck which of these we really need
 
 \missingsection
 
+\section{Quotients of Banach Manifolds}
+
+Having obtained a manifold structure on the affine spaces and the groups
+that act on them, we are in a great position to take quotients to construct
+the analytic moduli spaces of holomorphic bundles that we are after. To do this,
+one needs to ensure that the group actions are sufficiently well-behaved. Moreover,
+we need to ensure that the actions on affine spaces extend to a Banach Lie group
+action on Banach manifolds.
+
+\subsection{Proper and Free Group Actions}
+
+Before we extend groups and actions to the realm of infinite dimensional
+Banach spaces, let us study the group actions that we have thus
+far encountered a little more closely. Later we are going to require our
+actions to be free and proper. Let us recall what that means.
+
+Properness is a topological property. That is, it applies only to
+topological groups:
+
+\begin{definition}
+  An action $\rho : G\times X\to X$ of a topological group $G$
+  on a topological space $X$ is \emph{proper} if the map
+  \begin{align}\label{eq:proper_map}
+    (\rho,\pi) : G\times X \to X\times X
+  \end{align}
+  is proper, i.e. the preimage of every compact set in $X\times X$
+  is compact.
+\end{definition}
+
+\begin{example}
+  One easily sees if $G$ is compact then every $G$-action is proper.
+  In particular, the action of $U(1)$ on $U(E,h)$ is
+  proper.
+\end{example}
+
+\begin{example}\label{ex:h_proper_action}
+  The action of $U(E,h)$ on $A^\nabla(E,h)$ is proper.
+  \begin{proof}
+    We sketch the proof given in
+    \cite[{Proposition 7.1.14}]{kobayashi1987}.
+    The goal is to show that, if we have a sequence $(g_j,\nabla_j)$
+    such that $\nabla_j\to\nabla$ and $g_j\cdot\nabla_j\to\nabla'$
+    then $g_j\to g$ such that $g\cdot\nabla = \nabla'$. To do this
+    one moves to the principal $U(n)$-bundle $P$ associated to $(E,h)$
+    where each $g_j$ commutes with the action of the structure
+    group. The next step is to fix a point $x_0\in X$ and
+    $p_0\in P_{x_0}$ and consider curves $c$ starting at $x_0$ in $X$.
+    Considering $\nabla$ and $\nabla'$ yields lifts $\tilde c$ and
+    $\tilde c'$ of $c$ in $P$. Now the limit $g$ of $(g_j)$ must satisfy
+    $g(\tilde c) = \tilde c'$. This condition on $g$, together with
+    commutativity with the action of the structure group, identifies it
+    uniquely.
+  \end{proof}
+\end{example}
+
+\begin{example}\label{ex:higgs_proper_action}
+  the action of $U(E,h)$ on $A^\Phi (E,h)$ is proper.
+  \missingexample
+\end{example}
+
+Being free is not a topological property, i.e. any action of any group on any
+set may be free. Nonetheless, it is particularly important in a geometric
+setting as it ensures that the orbits are homogeneous and hence all points in
+the quotient are locally indistinguishable, as one expects from manifolds.
+
+\begin{definition}
+  An action $\rho : G\times X\to X$ is \emph{free} if, for all
+  $g\in G$ and $x\in X$, $g\cdot x = x$ implies $g = e$.
+\end{definition}
+
+\begin{example}\label{ex:not_free}
+  Consider the action of $U(E,h)$ on $A^\nabla(E)$. This is not a free action
+  because scalar multiplication commutes with the connection. That is,
+  for all $\lambda\in U(1)$, $g\in U(E)$, and $\nabla\in A^\nabla(E,h)$,
+  it holds that $\lambda g\cdot \nabla = \nabla$. This flaw is easily fixed,
+  however. In fact, we immediately have an action of
+  \begin{align*}
+    G(E,h) := U(E,h) / U(1)
+  \end{align*}
+  on $A^\nabla(E,h)$. Unfortunately, this action is not free either. In particular,
+  if there is a non-trivial proper subbundle $E'\subseteq E$ that is preserved
+  by $\nabla$ then non-trivial automorphisms of $E'$ act trivially on $\nabla$.
+
+  In complete analogy, there is an action of $G(E,h)$ on $A^\Phi(E,h)$ which
+  is not free either.
+\end{example}
+
 \subsection{Banach Lie Groups}
 
 In particular, there is a natural notion of a Banach Lie group and
@@ -1153,6 +1162,8 @@ actions:
   on $A^\Phi (E,h)_\ell$.
 \end{example}
 
+\todo{infinitesimal action}
+
 All of our recent discussions about proper and free actions, Sobolev
 completions, and Banach manifolds are motivated by the next theorem. 
 In particular, it will allow us to construct moduli spaces as, possibly
@@ -1169,139 +1180,16 @@ infinite dimensional, Banach manifolds:
   \end{proof}
 \end{theorem}
 
+Unfortunately, we are not yet ready to apply this theorem as
+the actions of $G(E,h)_{\ell+1}$ on $A^\nabla(E,h)_\ell$ and
+$A^\Phi(E,h)_\ell$ are not free. In the next section we are
+going to rectify this by restricting the spaces sufficiently.
+Indeed, our argument in (\ref{ex:not_free}) already tells us what
+a correct subsets to consider will be.
 
-\todo{infinitesimal action}
-
-\missingsection
-
-\section{Symplectic Quotients}
-
-\subsection{Symplectic Manifolds}
-
-\begin{definition}
-  A \emph{symplectic form} on a Banach manifold $X$ is a 2-form
-  $\omega\in\Omega_{\mathbb{R}}^2(X)$ such that $d\omega = 0$
-  and, for every $x\in X$, there is an injection $T_x X\inc T_x^* X$
-  given by $v \mapsto \omega(v,-)$.
-\end{definition}
-
-Note if $X$ is finite dimensional then $T_x X \cong T_x^*X$ so the
-map $v \mapsto \omega(v,-)$ must be an isomorphism.
-
-\begin{example}
-  symplectic form on $A^\nabla(E,h)$
-  \missingexample
-\end{example}
-
-\begin{example}
-  symplectic form on $A^\Phi (E,h)$
-  \missingexample
-\end{example}
-
-\subsection{Moment Maps}
-
-\begin{definition}
-  Consider a symplectic form $\omega$ on a Banach manifold $X$
-  and an action $\rho : G\times X\to X$ of a Banach Lie group.
-  A \emph{moment map} for $\rho$ is a map
-  \begin{align*}
-    \mu : X \to \mathfrak{g}^*
-  \end{align*}
-  such that, for all $Z\in\mathfrak g$, the function
-  $\mu_Z$ given by $x \mapsto\langle\mu(x),Z\rangle$ satisfies
-  \begin{align*}
-    d\mu_Z = \iota_{\rho(Z)}\omega.
-  \end{align*}
-\end{definition}
-
-\begin{example}\todo{define curvature}
-  A moment map for the action of $G_{\ell+1}(E,h)$ on $A^\nabla(E,h)_\ell$
-  is the map
-  \begin{align*}
-    \mu : A^\nabla(E,h)_\ell \to \Omega^0_{\mathbb{R}}(\End E)_{\ell+1}^*
-  \end{align*}
-  given by
-  \begin{align*}
-    \mu_Z(D) = - \int_C \Tr(ZF_D) - 2\pi i\frac{d}{K}\int_C \omega_C\Tr(Z).
-  \end{align*}
-  Here the map
-  \begin{align*}
-    \Tr : \Omega^k_{\mathbb{R}}(C,\End E) \to \Omega^k_{\mathbb{R}}(C)
-  \end{align*}
-  is induced by the map $E^*_x \otimes_{\mathbb{R}} E_x \to \mathbb{R}$
-  given by $\xi\otimes v \mapsto \xi(v)$. Moreover,
-  $\omega_C\in\Omega^2_{\mathbb{R}}(C)$ is the symplectic form on $C$
-  and $F_D = D\circ D\in\Omega^2_{\mathbb{R}}(\End E)$ is the curvature of
-  $D$.
-\end{example}
-
-\begin{example}
-  moment map for $A^\Phi (E,h)$
-  \missingexample
-\end{example}
-
-\subsection{Sympletic Quotients}
-
-Consider a moment map $\mu$ for a proper action of a Banach Lie group
-$G$ on a symplectic Banach manifold $(X,\omega)$. We are finally ready
-to define what it means to be a quotient in this setting:
-
-\begin{definition}
-  The \emph{symplectic quotient} of $X$ by $G$ is
-  \begin{align*}
-    X\sslash G :=  {\mu}^{-1}(0)/G.
-  \end{align*}
-\end{definition}
-
-Of course, a the moment we have gained little to nothing from this
-definition. The quotient makes sense as a topological space, but nothing
-else. Firstly, we want this quotient to be a Banach manifold. The obvious
-result to use is \ref{thm:banach_quotient}. Let us make sure that
-the conditions are satisfied.
-
-\begin{example}
-  Consider the action of $G_{\ell+1}(E,h)$ on $A^\nabla(E,h)_\ell$.
-  We already know from \ref{ex:h_proper_action} that this action
-  is proper.
-\end{example}
-
-\begin{theorem}\label{thm:symplectic_quotient}
-  If
-  \begin{enumerate}
-    \item $Y:={\mu}^{-1}(0)$ is a Banach submanifold of $X$,
-    \item $G$ acts freely on $Y$,
-    \item each tangent space $T_x(Gx)$ to $G$-orbits is closed,
-          complemented, and obeys
-          \begin{align*}
-            T_x(Gx) = (T_x(Gx)^{\bot})^\bot
-          \end{align*}
-  \end{enumerate}
-  then $Y/G$ is a Banach manifold with a symplectic form
-  $\omega_{Y/G}$ satisfying
-  \begin{align*}
-    q^*\omega_{Y/G} = \iota^*\omega
-  \end{align*}
-  where $q : Y\surj Y/G$ is the quotient map
-  and $\iota : Y\inc X$ is the inclusion.
-  \begin{proof}
-    \missingproof
-  \end{proof}
-\end{theorem}
+\subsection{Irreducible connections}
 
 
-\begin{example}
-  We are now ready
-  \begin{align*}
-    N^\omega(E) := A^\nabla_{\ell} \sslash G_{\ell + 1}(E,h).
-  \end{align*}
-\end{example}
-\begin{example}
-  On the other hand, the analytic moduli space of Higgs bundles on
-  $C$ with underlying smooth bundle $E$ is
-  \begin{align*}
-    M^\omega(E) := A^\Phi (E,h)_\ell \sslash G_{\ell + 1}(E,h).
-  \end{align*}
-\end{example}
 
 \section{Properties of the Analytic Moduli Spaces}
 
