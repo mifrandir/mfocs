@@ -1144,13 +1144,7 @@ is a Banach Lie group action if, and only if, it is given by a
 smooth map. Here we use the fact that the product of Banach manifolds
 has a natural Banach manifold structure.
 
-\begin{example}
-  As a primitive example, the finite-dimensional Banach Lie group
-  $U(1)$ acts on the Banach Lie group $U(E,h)_\ell$ by
-  multiplication: $\lambda \cdot A = \lambda A$.
-\end{example}
-
-Perhaps more interestingly, Sobolev completions allow us to lift group
+We observe that Sobolev completions allow us to lift group
 actions:
 
 \begin{example}
@@ -1180,12 +1174,31 @@ infinite dimensional, Banach manifolds:
   \end{proof}
 \end{theorem}
 
-Unfortunately, we are not yet ready to apply this theorem as
+\begin{example}
+  Observe that the Banach Lie subgroup $U(1)\subseteq U(E,h)$ acts freely and properly
+  on $U(E,h)$ via $(\lambda,g)\mapsto \lambda g$. Moreover, each tangent space 
+  \begin{align*}
+    T_g(U(1)g) =
+      i\mathbb{R} \subseteq W_{2,\ell}(C,\mathfrak u(E))
+  \end{align*}
+  is complemented as $W_{2,\ell}(C,\mathfrak u(E,h))$ is in fact a Hilbert space.
+  Thus the quotient
+  \begin{align*}
+    G(E,h)_{\ell} := U(E,h)_\ell / U(1)
+  \end{align*}
+  is a Banach manifold. Now the infinitesimal action is 
+  \begin{align*}
+    \rho : \mathfrak u(1) &\to \Gamma^\infty (TU(E,h)) \\
+    iy &\mapsto g \mapsto i y g
+  \end{align*}
+\end{example}
+
+Unfortunately, we are not yet ready to apply this theorem to
 the actions of $G(E,h)_{\ell+1}$ on $A^\nabla(E,h)_\ell$ and
-$A^\Phi(E,h)_\ell$ are not free. In the next section we are
+$A^\Phi(E,h)_\ell$ as they are not free. In the next section we are
 going to rectify this by restricting the spaces sufficiently.
 Indeed, our argument in (\ref{ex:not_free}) already tells us what
-a correct subsets to consider will be.
+the correct subsets to consider will be.
 
 \subsection{Irreducible connections}
 
