@@ -94,8 +94,8 @@ indicated,
 
 \begin{itemize}
   \item all vector spaces are complex, maps of vector spaces are
-    $\mathbb{C}$-linear, and tensor products of vector spaces are
-    over $\mathbb{C}$;
+        $\mathbb{C}$-linear, and tensor products of vector spaces are
+        over $\mathbb{C}$;
   \item all manifolds are smooth;
   \item dimensions are taken over $\mathbb{C}$;
   \item the word `bundle' refers to a vector bundle.
@@ -184,9 +184,9 @@ In the complex case, there are a few definitions:
 \begin{definition}
   \begin{itemize}
     \item If $E\to X$ is a smooth vector bundle then $\Gamma^\infty(U,E)$
-      denotes the vector space of smooth sections on $U$.
+          denotes the vector space of smooth sections on $U$.
     \item If $\mathcal E\to X$ is holomorphic then $\Gamma(U,\mathcal E)$
-      denotes the vector space of holomorphic sections on $U$.
+          denotes the vector space of holomorphic sections on $U$.
   \end{itemize}
 \end{definition}
 
@@ -235,7 +235,7 @@ splits into $d = \partial + \dol$ where
 \end{align*}
 Locally, these are given by
 \begin{align*}
-  \partial (f dz_I \wedge d\bar z_J) = \sum_{i=1}^n \frac{\partial f}{\partial z_i} dz_i\wedge dz_I \wedge d\bar z_J,\\
+  \partial (f dz_I \wedge d\bar z_J) = \sum_{i=1}^n \frac{\partial f}{\partial z_i} dz_i\wedge dz_I \wedge d\bar z_J, \\
   \dol (f dz_I \wedge d\bar z_J) = \sum_{j=1}^n \frac{\partial f}{\partial \bar z_j} d\bar z_j\wedge dz_I \wedge d\bar z_J.
 \end{align*}
 In particular, we now have a family of complexes
@@ -354,7 +354,7 @@ holomorphic vector bundles:
 \begin{definition}
   Let $(E,\dol_E)$ be a holomorphic vector bundle on $X$. The
   \emph{$(p,q)$ Dolbeault cohomology group of $X$ with coefficients in
-  $E$} is
+    $E$} is
   \begin{align*}
     H^{p,q}(X,(E,\dol_E)) := \frac{
       \ker(\dol_E : \Omega^{p,q}(X,E) \to \Omega^{p,q+1}(X,E))
@@ -367,7 +367,7 @@ holomorphic vector bundles:
 \subsection{Higgs Bundles}
 
 \todo{write about why Higgs bundles exist, what they're good for, yadda
-yadda}
+  yadda}
 
 \begin{definition}
   The \emph{canonical bundle} $\mathcal K_X$ on a complex manifold $X$
@@ -440,11 +440,11 @@ it is sufficient to know a few key properties:
   \begin{enumerate}
     \item $c_j(E) = 0$ whenever $j<1$ or $j>r$.
     \item If $F$ is a smooth bundle on $X$ such that $E\cong F$
-      then $c_i(E) = c_i(F)$ for all $i$.
+          then $c_i(E) = c_i(F)$ for all $i$.
     \item For every other smooth bundle $F$ on $X$,
-      \begin{align*}
-        c_i(E\oplus F) = \bigoplus_{j=0}^{i} c_j(E)\cup c_{i-j}(F).
-      \end{align*}
+          \begin{align*}
+            c_i(E\oplus F) = \bigoplus_{j=0}^{i} c_j(E)\cup c_{i-j}(F).
+          \end{align*}
   \end{enumerate}
 \end{lemma}
 
@@ -489,8 +489,8 @@ and degree $d$ on a compact Riemann surface $C$.
 Recall that a holomorphic bundle with underlying smooth structure $E$
 is given by a Dolbeault operator $\dol_E$. Hence we have a set of
 \begin{align*}
-  A^{\dol} := \left\lbrace{
-      \text{Dolbeault operators $\dol_E : \Omega^0(C,E) \to \Omega^{0,1}(C,E)$}
+  A^{\dol} (E) := \left\lbrace{
+    \text{Dolbeault operators $\dol_E : \Omega^0(C,E) \to \Omega^{0,1}(C,E)$}
   }\right\rbrace.
 \end{align*}
 This has an obvious topology given by the following observations:
@@ -499,18 +499,18 @@ This has an obvious topology given by the following observations:
   \begin{align*}
     \dol_E,\alpha : \Omega^0(C,E) \to \Omega^{0,1}(C,E).
   \end{align*}
-  Then $\dol_E\in A^{\dol}$ if, and only if, $\dol_E+\alpha\in A^{\dol}$.
+  Then $\dol_E\in A^{\dol} (E)$ if, and only if, $\dol_E+\alpha\in A^{\dol} (E)$.
   \begin{proof}
     We calculate in local coordinates:
     \begin{align*}
       (\dol_E + \alpha)^2(s_i)
-      &= \sum_{j,k} (\dol_{ijk} + \alpha_{ijk})(\dol_E + \alpha)( d\bar z_j\otimes s_k) \\
-      &= \sum_{j,k} (\dol_{ijk} + \alpha_{ijk})(\dol(d\bar z_j) \otimes s_k -  d\bar z_j \wedge \sum_{j',k'}(\dol_{k,j',k'} + \alpha_{k,j',k'}) d\bar z_{j'}\otimes s_{k'}) \\
-      &= - \sum_{j,j',k,k'} (\dol_{ijk} + \alpha_{ijk})(\dol_{k,j',k'} + \alpha_{k,j',k'}) d\bar z_j \wedge d\bar z_{j'}\otimes s_{k'} \\
-      &= - \sum_{j,j'}
+       & = \sum_{j,k} (\dol_{ijk} + \alpha_{ijk})(\dol_E + \alpha)( d\bar z_j\otimes s_k)                                                                                     \\
+       & = \sum_{j,k} (\dol_{ijk} + \alpha_{ijk})(\dol(d\bar z_j) \otimes s_k -  d\bar z_j \wedge \sum_{j',k'}(\dol_{k,j',k'} + \alpha_{k,j',k'}) d\bar z_{j'}\otimes s_{k'}) \\
+       & = - \sum_{j,j',k,k'} (\dol_{ijk} + \alpha_{ijk})(\dol_{k,j',k'} + \alpha_{k,j',k'}) d\bar z_j \wedge d\bar z_{j'}\otimes s_{k'}                                      \\
+       & = - \sum_{j,j'}
       d\bar z_j \wedge d\bar z_{j'}\otimes \left(
-      \sum_{k,k'} (\dol_{ijk} + \alpha_{ijk})(\dol_{k,j',k'} + \alpha_{k,j',k'}) s_{k}\right)\\
-      &= 0
+      \sum_{k,k'} (\dol_{ijk} + \alpha_{ijk})(\dol_{k,j',k'} + \alpha_{k,j',k'}) s_{k}\right)                                                                                 \\
+       & = 0
     \end{align*}
     Moreover, for $f\in C^\infty(C)$ and $s\in\Omega^0(C,E)$,
     \begin{align*}
@@ -522,17 +522,17 @@ This has an obvious topology given by the following observations:
   \end{proof}
 \end{lemma}
 
-Thus we may write $A^{\dol} = \dol_E + \Omega^{0,1}(C,\End E)$
-for some fixed $\dol_E$. This induces a topology on $A^{\dol}$.
-In particular, $A^{\dol}$ is an affine space modelled on
+Thus we may write $A^{\dol} (E) = \dol_E + \Omega^{0,1}(C,\End E)$
+for some fixed $\dol_E$. This induces a topology on $A^{\dol} (E)$.
+In particular, $A^{\dol} (E)$ is an affine space modelled on
 $\Omega^{0,1}(C,\End E)$.
 
 This allows us to define the space of all Higgs bundles
 \begin{align*}
-  A^\phi := \bigsqcup_{\dol_E \in A^{\dol}} \Gamma(C,\End(E,\dol_E)\otimes K_C)
+  A^\phi(E) := \bigsqcup_{\dol_E \in A^{\dol} (E)} \Gamma(C,\End(E,\dol_E)\otimes K_C)
 \end{align*}
 whose topology is induced by the topologies on
-$\Gamma(C,\End(E,\dol_E)\otimes K_C)$ and $A^{\dol}$.
+$\Gamma(C,\End(E,\dol_E)\otimes K_C)$ and $A^{\dol} (E)$.
 All that is left to do is take a quotient by equivalence of holomorphic
 bundles, respectively Higgs bundles. One of the major topics of this
 paper is to explore various ways in which we may take quotients by
@@ -551,7 +551,7 @@ on $\dol_E$ via
   \end{tikzcd}
 \end{equation}
 \begin{lemma}
-  The topological space $A^{\dol}/\Aut(E)$ of isomorphism classes of
+  The topological space $A^{\dol} (E)/\Aut(E)$ of isomorphism classes of
   Dolbeault operators is not Hausdorff. In particular, it does not
   admit a manifold structure.
   \begin{proof}
@@ -559,10 +559,10 @@ on $\dol_E$ via
   \end{proof}
 \end{lemma}
 
-Note that we have a similar action of $\Aut(E)$ on $A^\phi$ and
+Note that we have a similar action of $\Aut(E)$ on $A^\phi(E)$ and
 indeed many other topological spaces of holomorphic bundles. However,
 it is quite clear that any space that arises as a disjoint union
-over $A^{\dol}$ must also be non-Hausdorff. Therefore we need
+over $A^{\dol} (E)$ must also be non-Hausdorff. Therefore we need
 to use more sophisticated techniques to construct any moduli
 space of holomorphic bundles.
 
@@ -585,9 +585,9 @@ Riemann surface $C$.
 
 \subsection{Connections}
 
-Connections are needed for two reasons: Firstly, they are going to
-be equivalent to Dolbeault operators and hence lead to an
-alternative way of looking at spaces of holomorphic bundles.
+Connections are going to help us in two ways: Firstly, they are going to
+be to correspond to Dolbeault operators and hence lead to an
+alternative point of view on spaces of holomorphic bundles.
 Secondly, they are going to allow us to define the Sobolev norm and
 hence provide us with a suitable Banach manifold structure on
 the moduli spaces.
@@ -633,8 +633,8 @@ Hence $\nabla$ is holomorphic if, and only if, $(\nabla^{0,1})^2 = 0$.
 
 \subsection{Unitary Connections}
 
-While connections are very closely related to Dolbeault operators,
-they are not quite the same. To map one to the other, we are going
+Holomorphic connections are very closely related to Dolbeault operators,
+but they are not quite the same. To map one to the other, we are going
 to require some additional information. The correct geometric
 structure to consider is a metric:
 
@@ -655,24 +655,8 @@ Fortunately for us, it will always be possible to choose a metric:
   hermitian metric.
 \end{theorem}
 
-Fix such a metric $h$ on $E$. The main thing we gain by having a
-metric is the ability to refer to adjoints and hence unitary
-endomorphisms of $E$. In particular, there is a principal $U(r)$-bundle
-$U(E)$ whose fibre over $x\in C$ is the group of $h$-unitary
-endomorphisms of $E_x$. Noting that $U(n)$ is a real Lie group,
-we obtain a real smooth vector bundle $\mathfrak u(E)$ on $C$.
-In particular, we have a sequence of inclusions
-\begin{align*}
-  \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))
-  \subseteq \Omega^1_{\mathbb{R}}(C,\mathfrak{gl}(E))
-  \subseteq \Omega^1(C,\mathfrak{gl}(E))
-\end{align*}
-where $\mathfrak{gl}(E)$ is the smooth complex vector bundle obtained
-by taking Lie algebras of the principal $GL_r(\mathbb{C})$-bundle $GL(E)$.
-Now note that a connection is equivalently a section in
-$\Omega^1(C,\End E)$. We may regard $\End E$ as $\mathfrak gl(E)$,
-and hence define what it means for a connection to be unitary:
-\todo{needs rewriting}
+Fix such a metric $h$ on $E$. We are going to restrict our attention to
+connections that are compatible with this metric:
 
 \begin{definition}
   A connection $\nabla$ in $E$ is \emph{$h$-unitary}
@@ -685,13 +669,27 @@ some Dolbeault operator:
 \begin{align*}
   A^\nabla(E,h) := \left\lbrace{\text{$h$-unitary holomorphic connections $\nabla$ in $E$}}\right\rbrace.
 \end{align*}
-Analogous to $A^{\dol}$, we have the following property:
+Analogous to $A^{\dol} (E)$, this is an affine space. To see what it is
+modelled on, consider the principal $GL_r(\mathbb{C})$-bundle whose fibres
+are the automorphisms of the fibres of $E$. We may denote this bundle by $GL(E)$.
+We then have a principal $U(r)$-bundle $U(E,h)$ of $h$-unitary automorphisms
+of $E$. By taking Lie algebras we obtain vector bundles $\mathfrak{gl}(E)$
+and $\mathfrak u(E)$. In particular, we have a sequence of inclusions
+\begin{align*}
+  \Omega^0_{\mathbb{R}}(C,\mathfrak u(E)) 
+  \subseteq \Omega^0_{\mathbb{R}}(C,\mathfrak{gl}(E))
+  \subseteq \Omega^0(C,\mathfrak{gl}(E)).
+\end{align*}
+The reader who is unfamiliar with principal bundles
+ought not to be discouraged: $\mathfrak{gl}(E)$ is simply the smooth complex
+vector bundle $\End E$ and $\mathfrak{u}(E)$ is the real vector subbundle
+of skew-hermitian endomorphisms of $E$.
 
 \begin{lemma}
   $A^\nabla(E,h)$ is an affine space modelled on
   $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
   \begin{proof}
-    The operations are induced by $\Omega^1(C,\mathfrak gl(E))$.
+    The operations are induced by $\Omega^1(C,\mathfrak{gl}(E))$.
     Verifying that general $\nabla + \xi$ for
     $\xi\in\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$
     satsify the Leibnitz rule and the integrability
@@ -709,7 +707,7 @@ Analogous to $A^{\dol}$, we have the following property:
 \end{lemma}
 
 Combining what we have seen so far with the next result, the
-similarities between $A^{\dol}$ and $A^\nabla(E,h)$ grow even more
+similarities between $A^{\dol} (E)$ and $A^\nabla(E,h)$ grow even more
 striking:
 
 \begin{lemma}\label{lem:real_vector_space_iso}
@@ -737,7 +735,7 @@ striking:
   \end{proof}
 \end{lemma}
 
-It is not a coincidence that $A^{\dol}$ and $A^\nabla(E,h)$ both are
+It is not a coincidence that $A^{\dol} (E)$ and $A^\nabla(E,h)$ both are
 affine spaces modelled on the same underlying real vector space.
 Indeed, in the presence of $h$, every Dolbeault operator has a unique
 compatible connection:
@@ -752,15 +750,15 @@ compatible connection:
 \end{theorem}
 
 In particular, this gives us a bijection
-$\nabla^h : A^{\dol} \to A^\nabla$ whose inverse is the restriction
+$\nabla^h : A^{\dol} (E) \to A^\nabla(E,h)$ whose inverse is the restriction
 $\nabla \mapsto \nabla_{0,1}$. It is not difficult to verify that this
 is a homeomorphism of affine spaces which is locally given by
 the $\mathbb{R}$-linear isomorphism in \ref{lem:real_vector_space_iso}.
 
-Now we have an action of $\Gamma^\infty(C,U(E))$ on
-$A^\nabla(E,h)$ via conjugation. That is,
-for $g\in\Gamma^\infty(C,U(E))$ and
-$\nabla\in A^\nabla(E,h)$, $g\cdot\nabla$ is the map
+Let us abuse notation slightly and denote by $U(E,h)$ the group of smooth
+$h$-unitary sections of $\End E$. That is, $U(E,h) := \Gamma^\infty(C,U(E,h))$.
+We have an action of $U(E,h)$ on $A^\nabla(E,h)$ via conjugation. That is,
+for $g\in U(E,h)$ and $\nabla\in A^\nabla(E,h)$, $g\cdot\nabla$ is the map
 \begin{align*}
   \Omega^0(X,E) \xlongrightarrow{\Omega^0(X,{g}^{-1})}
   \Omega^0(X,E) \xlongrightarrow{\nabla}
@@ -772,24 +770,16 @@ In fact, $g\cdot\nabla$ is almost immediately a holomorphic connection.
 One then sees that $g\cdot\nabla$ is unitary because
 $g$ and $\nabla$ are.
 
-However, note that there is some redundancy because scalar multiplication
-commutes with the connection. That is, if $g:E\to E$ is multiplication
-by a scalar then $g\cdot\nabla = \nabla$. Hence we also have an action of
-\begin{align*}
-  G(E,h) := \Gamma^\infty(C,U(E)) / U(1)
-\end{align*}
-on $A^\nabla(E,h)$.
-
 \todo{complex structure on the affine space}
 
 \subsection{Doubled Connections}
 
-We have successfully viewed the space of holomorphic bundles $A^{\dol}$
+We have successfully viewed the space of holomorphic bundles $A^{\dol} (E)$
 as an affine space modelled on
 $\Omega^1_{\mathbb{R}}(C,\mathfrak{u}(E))$. This is eventually going
-to help us introduce a symplectic structure on $A^{\dol}$ and hence
+to help us introduce a symplectic structure on $A^{\dol} (E)$ and hence
 take a symplectic quotient. Let us do the same for the space of Higgs
-bundles $A^\phi$. We are going to identify $A^{\phi}$ with an affine
+bundles $A^\phi(E)$. We are going to identify $A^{\phi}$ with an affine
 space modelled on $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))^{\oplus 2}$.
 Once again fix a hermitian metric $h$ on $E$.
 
@@ -803,28 +793,28 @@ correspond to doubled connections.
 \end{definition}
 
 Hence we have the space
-\begin{align*}
+\begin{align}\label{eq:doubled_connections_space}
   A^{\Phi} := A^\nabla \times \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))
-\end{align*}
+\end{align}
 which naturally has the structure of an affine space modelled on
 the real vector space
 $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))\oplus\Omega_{\mathbb{R}}^1(C,\mathfrak u(E))$. Using the isomorphism (\ref{lem:real_vector_space_iso})
 and the map given by (\ref{thm:chern_connection}) we have an inclusion
 of topological spaces
 \begin{align*}
-  A^\phi \subseteq A^{\dol} \times \Omega^{1,0}(\End E) \cong A^\Phi.
+  A^\phi(E) \subseteq A^{\dol} (E) \times \Omega^{1,0}(\End E) \cong A^\Phi (E,h).
 \end{align*}
-Note that in general $A^\phi$ and $A^\Phi$ are not isomorphic. In
+Note that in general $A^\phi(E)$ and $A^\Phi (E,h)$ are not isomorphic. In
 particular, a doubled connection $(\nabla,\Phi)$ corresponds to
 a pair $(\dol_E,\phi)$ where $\dol_E$ is a Dolbeault operator and
 $\phi$ is a section in $\Omega^{1,0}(C,\End E)$, not necessarily
 holomorphic. We will have to deal with this at a later stage.
 
-For now, observe that the group $G(E,h)$ also acts on $A^\Phi(E,h)$
+For now, observe that the group $G(E,h)$ also acts on $A^\Phi (E,h)$
 by conjugation:
 \begin{align*}
-  G(E,h) \times A^\Phi(E,h) & \to A^\Phi(E,h)\\
-  (g,\nabla,\Phi) &\mapsto (g\nabla{g}^{-1},g\Phi{g}^{-1})
+  G(E,h) \times A^\Phi (E,h) & \to A^\Phi (E,h)                         \\
+  (g,\nabla,\Phi)           & \mapsto (g\nabla{g}^{-1},g\Phi{g}^{-1})
 \end{align*}
 
 \subsection{Group actions}
@@ -849,12 +839,12 @@ topological groups:
 
 \begin{example}
   One easily sees if $G$ is compact then every $G$-action is proper.
-  In particular, the action of $U(1)$ on $\Gamma^\infty(C,U(E))$ is
+  In particular, the action of $U(1)$ on $U(E,h)$ is
   proper.
 \end{example}
 
 \begin{example}\label{ex:h_proper_action}
-  The action of $U(E)$ on $A^\nabla$ is proper.
+  The action of $U(E,h)$ on $A^\nabla(E,h)$ is proper.
   \begin{proof}
     We sketch the proof given in
     \cite[{Proposition 7.1.14}]{kobayashi1987}.
@@ -874,14 +864,42 @@ topological groups:
 \end{example}
 
 \begin{example}\label{ex:higgs_proper_action}
-  the action of $G_{\ell+1}(E,h)$ on $A_\ell^\Phi$ is proper.
+  the action of $U(E,h)$ on $A^\Phi (E,h)$ is proper.
   \missingexample
+\end{example}
+
+Although the action of any group on any set may be free, it is a particularly
+important property in a geometric setting. In particular, it ensures that the
+orbits are homogeneous and hence
+all points in the quotient are locally indistinguishable, as one expects from
+manifolds.
+
+\begin{definition}
+  An action $\rho : G\times X\to X$ is \emph{free} if, for all
+  $g\in G$ and $x\in X$, $g\cdot x = x$ implies $g = e$.
+\end{definition}
+
+\begin{example}
+  Consider the action of $U(E,h)$ on $A^\nabla(E)$. This is not a free action
+  because scalar multiplication commutes with the connection. That is,
+  for all $\lambda\in U(1)$, $g\in U(E)$, and $\nabla\in A^\nabla(E,h)$,
+  it holds that $\lambda g\cdot \nabla = \nabla$. This flaw is easily fixed,
+  however. In fact, we immediately have an action of
+  \begin{align*}
+    G(E,h) := U(E,h) / U(1)
+  \end{align*}
+  on $A^\nabla(E,h)$. Unfortunately, this action is not free either. In particular,
+  if there is a non-trivial proper subbundle $E'\subseteq E$ that is preserved
+  by $\nabla$ then non-trivial automorphisms of $E'$ act trivially on $\nabla$.
+
+  In complete analogy, there is an action of $G(E,h)$ on $A^\Phi(E,h)$ which
+  is not free either.
 \end{example}
 
 \subsection{Sobolev Spaces}
 
-Our next goal is to equip the affine spaces of connections $A^\nabla$
-and $A^\Phi$ with manifold structures. Of course, both are affine
+Our next goal is to equip the affine spaces of connections $A^\nabla(E,h)$
+and $A^\Phi (E,h)$ with manifold structures. Of course, both are affine
 spaces modelled on infinite dimensional vector spaces. In the next
 section we are going to require our infinite dimensional manifolds to
 be locally isomorphic to Banach spaces, rather than arbitrary
@@ -916,7 +934,7 @@ $\Gamma^\infty(X,E)$:
   $\Gamma^\infty(X,E)$ by
   \begin{align*}
     \Vert s\Vert_{p,\ell}^\nabla := \left(
-      \sum_{i=0}^\ell \int_X \Vert \nabla^i s \Vert^p d\text{vol}_X
+    \sum_{i=0}^\ell \int_X \Vert \nabla^i s \Vert^p d\text{vol}_X
     \right)^{1/p}.
   \end{align*}
 \end{definition}
@@ -974,7 +992,7 @@ completion.
   a metric on $E\otimes (T^*X)^{\wedge k}$ for all $k$. This allows
   us to define
   \begin{align*}
-    \Omega_{\mathbb{R},\ell}^k(X,E) := W_{2,\ell}(X,E\otimes(T^*X)^{\wedge k}).
+    \Omega_{\mathbb{R}}^k(X,E)_\ell := W_{2,\ell}(X,E\otimes(T^*X)^{\wedge k}).
   \end{align*}
 \end{example}
 
@@ -987,7 +1005,7 @@ we can make. Consider the following class of such operators:
 
 \begin{definition}
   Let $E$ and $F$ be smooth bundles on $X$. A \emph{differential
-  operator of order $m$} is a $C^\infty(X)$-linear map
+    operator of order $m$} is a $C^\infty(X)$-linear map
   \begin{align*}
     P : \Gamma^\infty(X,E) \to \Gamma^\infty(X,F)
   \end{align*}
@@ -1038,7 +1056,7 @@ Of course Banach manifolds come with all the bells and whistles that
 we know and love. In particular, we have smooth maps of Banach manifolds,
 vector bundles, tangent and cotangent spaces, derivatives, and
 differential forms. \todo{doublecheck which of these we really need
-and which we need to define in more detail}
+  and which we need to define in more detail}
 
 \begin{example}
   Every smooth manifold is locally isomorphic to
@@ -1048,29 +1066,46 @@ and which we need to define in more detail}
 
 \begin{example}
   Let us consider our main applications. We have the affine space
-  $A^\nabla$ modelled on $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
+  $A^\nabla(E,h)$ modelled on $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
   For each $\ell \geq 0$, we have the corresponding Sobolev completion
   \begin{align*}
-    A^\nabla_\ell(E,h) = A^\nabla(E,h) + \Omega^1_{\mathbb{R},\ell}(C,\mathfrak u(E)).
+    A^\nabla(E,h)_\ell := A^\nabla(E,h) + \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell
   \end{align*}
-  In particular, for each $\nabla\in A^\nabla_\ell$,
+  which are naturally Banach manifolds.
+  In particular, for each $\nabla\in A^\nabla(E,h)_\ell$, we have the
+  cotangent space
   \begin{align*}
-    T^*_\nabla A^\nabla_\ell
-    = \Omega^1_{\mathbb{R},\ell}(C,\mathfrak u(E)).
+    T^*_\nabla A^\nabla(E,h)_\ell
+    = \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell.
+  \end{align*}
+  Noticing that the direct sum of Banach spaces remains a Banach space,
+  the affine space (\ref{eq:doubled_connections_space}) of doubled connections also
+  extends to a Banach manifold
+  \begin{align*}
+    A^\Phi(E,h)_\ell := A^\Phi(E,h) + \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell
+    \oplus \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell
+  \end{align*}
+  with the obvious cotangent space at $(\nabla,\Phi)$:
+  \begin{align*}
+    T^*_{\nabla,\Phi} A^\Phi(E,h)_\ell 
+    = \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell
+    \oplus \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell
   \end{align*}
 \end{example}
 
-\begin{example}\todo{be a bit more careful with base space and metrics}
-  Consider the group $\Gamma^\infty(C,U(E))$ of unitary
+\begin{example}
+  Consider the group $U(E,h)$ of unitary
   sections of $\End E$. The Sobolev norms on $\Gamma^\infty(C,\End E)$
-  restrict to norms on the subset $\Gamma^\infty(C,U(E))$ and hence we
-  may consider the completions $W_{2,\ell}(C,U(E))$.
-  One may show that this is a Banach manifold by applying the
-  analogue of the regular value theorem. In particular, for all
-  $A\in W_{2,\ell}(C,U(E))$, we have
-  \todo{neitzke says it's $\mathfrak{gl}(E)$ but i'm not a fan}
+  restrict to norms on the subset $U(E,h)$ and hence we
+  may consider the completions
   \begin{align*}
-    T_A W_{2,\ell}(C,U(E)) = W_{2,\ell}(C,\mathfrak u(E)).
+    U(E,h)_\ell := W_{2,\ell}(C,U(E,h)) \subset W_{2,\ell}(C,\End E).
+  \end{align*}
+  One may show that this is a Banach manifold by applying the
+  analogue of the regular value theorem. In particular,
+  the tangent space at $g\in U(E,h)_\ell$
+  \begin{align*}
+    T_g U(E,h)_\ell = W_{2,\ell}(C,\mathfrak u(E)).
   \end{align*}
 \end{example}
 
@@ -1082,7 +1117,7 @@ In particular, there is a natural notion of a Banach Lie group and
 corresponding actions on Banach manifolds.
 
 \begin{example}
-  The Banach manifold $W_{2,\ell}(C,U(E))$ is a Banach Lie group.
+  The Banach manifold $U(E,h)_\ell$ is a Banach Lie group.
   Use Sobolev multiplication. \missingexample
 \end{example}
 
@@ -1091,7 +1126,7 @@ at the identity of a Banach Lie group may be equipped with a Lie bracket
 and hence is called the Lie algebra of the group.
 
 \begin{example}
-  The Lie algebra of $W_{2,{\ell}}(C,U(E))$ is
+  The Lie algebra of $W_{2,{\ell}}(C,U(E,h))$ is
   $W_{2,\ell}(C,\mathfrak u(E))$.
 \end{example}
 
@@ -1102,7 +1137,7 @@ has a natural Banach manifold structure.
 
 \begin{example}
   As a primitive example, the finite-dimensional Banach Lie group
-  $U(1)$ acts on the Banach Lie group $W_{2,\ell}(C,U(E))$ by
+  $U(1)$ acts on the Banach Lie group $U(E,h)_\ell$ by
   multiplication: $\lambda \cdot A = \lambda A$.
 \end{example}
 
@@ -1110,29 +1145,18 @@ Perhaps more interestingly, Sobolev completions allow us to lift group
 actions:
 
 \begin{example}
-  Consider the action of $\Gamma^\infty(C,U(E))$ on $A^\nabla$
-  by conjugation. This extends to an action of $W_{2,\ell+1}(C,U(E))$
-  on $A^\nabla_\ell$.
+  Consider the action of $U(E,h)$ on $A^\nabla(E,h)$
+  by conjugation. This extends to an action of $U(E,h)_{\ell+1}$
+  on $A^\nabla(E,h)_\ell$.
   \missingproof
-  Analogously we have a Banach Lie group action of $W_{2,\ell+1}(C,U(E))$
-  on $A^\Phi_\ell$.
+  Analogously we have a Banach Lie group action of $U(E,h)_{\ell+1}$
+  on $A^\Phi (E,h)_\ell$.
 \end{example}
 
-
-\begin{definition}
-  An action $\rho : G\times X\to X$ is \emph{free} if, for all
-  $g\in G$ and $x\in X$, $g\cdot x = x$ implies $g = e$.
-\end{definition}
-
-\begin{example}
-  the action of $G_{\ell+1}(E,h)$ on $A_\ell^\nabla$ is not free.
-  \missingexample
-\end{example}
-
-\begin{example}
-  the action of $G_{\ell+1}(E,h)$ on $A_\ell^\Phi$ is not free.
-  \missingexample
-\end{example}
+All of our recent discussions about proper and free actions, Sobolev
+completions, and Banach manifolds are motivated by the next theorem. 
+In particular, it will allow us to construct moduli spaces as, possibly
+infinite dimensional, Banach manifolds:
 
 \begin{theorem}\label{thm:banach_quotient}
   Consider a proper free action $\rho : G\times X\to X$ of a Banach
@@ -1165,12 +1189,12 @@ Note if $X$ is finite dimensional then $T_x X \cong T_x^*X$ so the
 map $v \mapsto \omega(v,-)$ must be an isomorphism.
 
 \begin{example}
-  symplectic form on $A^\nabla$
+  symplectic form on $A^\nabla(E,h)$
   \missingexample
 \end{example}
 
 \begin{example}
-  symplectic form on $A^\Phi$
+  symplectic form on $A^\Phi (E,h)$
   \missingexample
 \end{example}
 
@@ -1191,10 +1215,10 @@ map $v \mapsto \omega(v,-)$ must be an isomorphism.
 \end{definition}
 
 \begin{example}\todo{define curvature}
-  A moment map for the action of $G_{\ell+1}(E,h)$ on $A^\nabla_\ell$
+  A moment map for the action of $G_{\ell+1}(E,h)$ on $A^\nabla(E,h)_\ell$
   is the map
   \begin{align*}
-    \mu : A^\nabla_\ell \to \Omega^0_{\mathbb{R},\ell+1}(\End E)^*
+    \mu : A^\nabla(E,h)_\ell \to \Omega^0_{\mathbb{R}}(\End E)_{\ell+1}^*
   \end{align*}
   given by
   \begin{align*}
@@ -1212,7 +1236,7 @@ map $v \mapsto \omega(v,-)$ must be an isomorphism.
 \end{example}
 
 \begin{example}
-  moment map for $A^\Phi$
+  moment map for $A^\Phi (E,h)$
   \missingexample
 \end{example}
 
@@ -1236,7 +1260,7 @@ result to use is \ref{thm:banach_quotient}. Let us make sure that
 the conditions are satisfied.
 
 \begin{example}
-  Consider the action of $G_{\ell+1}(E,h)$ on $A^\nabla_\ell$.
+  Consider the action of $G_{\ell+1}(E,h)$ on $A^\nabla(E,h)_\ell$.
   We already know from \ref{ex:h_proper_action} that this action
   is proper.
 \end{example}
@@ -1247,10 +1271,10 @@ the conditions are satisfied.
     \item $Y:={\mu}^{-1}(0)$ is a Banach submanifold of $X$,
     \item $G$ acts freely on $Y$,
     \item each tangent space $T_x(Gx)$ to $G$-orbits is closed,
-      complemented, and obeys
-      \begin{align*}
-        T_x(Gx) = (T_x(Gx)^{\bot})^\bot
-      \end{align*}
+          complemented, and obeys
+          \begin{align*}
+            T_x(Gx) = (T_x(Gx)^{\bot})^\bot
+          \end{align*}
   \end{enumerate}
   then $Y/G$ is a Banach manifold with a symplectic form
   $\omega_{Y/G}$ satisfying
@@ -1275,7 +1299,7 @@ the conditions are satisfied.
   On the other hand, the analytic moduli space of Higgs bundles on
   $C$ with underlying smooth bundle $E$ is
   \begin{align*}
-    M^\omega(E) := A^\Phi_\ell \sslash G_{\ell + 1}(E,h).
+    M^\omega(E) := A^\Phi (E,h)_\ell \sslash G_{\ell + 1}(E,h).
   \end{align*}
 \end{example}
 
@@ -1325,15 +1349,15 @@ In addtion to the notation used in the previous chapters, unless
 otherwise indicated,
 \begin{itemize}
   \item all schemes, maps, and products are taken over $\mathbb{C}$,
-    i.e.~in the slice category
-    $\Sch := \Sch_{\mathbb{Z}}/\Spec\mathbb{C}$;
+        i.e.~in the slice category
+        $\Sch := \Sch_{\mathbb{Z}}/\Spec\mathbb{C}$;
   \item a projective scheme is a projective scheme over $\mathbb{C}$
-    in the sense of \cite{hartshorne1977} - that is, $X$ is projective
-    if there exists a closed immersion $X\inc\projective{n}{}$ for
-    some $n$;
+        in the sense of \cite{hartshorne1977} - that is, $X$ is projective
+        if there exists a closed immersion $X\inc\projective{n}{}$ for
+        some $n$;
   \item sheaves on a scheme $X$ are sheaves of $\mathscr O_X$-modules,
-    maps of sheaves are $\mathscr O_X$-linear, and tensor products
-    of sheaves are taken over $\mathscr O_X$.
+        maps of sheaves are $\mathscr O_X$-linear, and tensor products
+        of sheaves are taken over $\mathscr O_X$.
 \end{itemize}
 
 \section{Holomorphic Bundles as Locally Free Sheaves}
@@ -1361,8 +1385,8 @@ of an $n$-dimensional complex vector space $V$ which is given
 by
 \begin{align*}
   \projective{}{}(V) := \Proj\left({
-      \bigoplus_{d=0}^\infty \Sym^d(V^\vee)
-  }\right)
+        \bigoplus_{d=0}^\infty \Sym^d(V^\vee)
+      }\right)
 \end{align*}
 Complex points in $\projective{}{}(V)$ may be identified
 with one-dimensional subspaces of $V$. \missingcitation
@@ -1426,13 +1450,13 @@ sensible definition based on the usual setting of manifolds:
   \begin{itemize}
     \item trivial bundle
     \item bundle on curve from previous section, e.g. $T^1$ or
-      $T^1 \# T^1$.
+          $T^1 \# T^1$.
   \end{itemize}
 \end{example}
 
 \begin{itemize}
   \item show that holomorphic bundles on a compact Riemann surface $C$
-    are the same thing as vector bundles on $C$, regarded as a smooth algebraic curve and hence a scheme
+        are the same thing as vector bundles on $C$, regarded as a smooth algebraic curve and hence a scheme
 \end{itemize}
 
 \missingsection
@@ -1558,8 +1582,8 @@ possible to do better:
   \begin{itemize}
     \item $\eta : \mathcal M(\Spec\mathbb{C})\to M(\Spec\mathbb{C})$ is a bijection;
     \item for every scheme $N$, every natural transformation
-      $\nu : M \to \Hom(-,N)$ factors through $\eta$ as in the diagram
-      \missingdefinition{universal property}
+          $\nu : M \to \Hom(-,N)$ factors through $\eta$ as in the diagram
+          \missingdefinition{universal property}
   \end{itemize}
 \end{definition}
 
@@ -1570,7 +1594,7 @@ possible to do better:
 Unfortunately, even coarse moduli spaces may not exist. Here is
 one property that prevents a moduli space from existing. We will
 see an example of this later. \todo{add reference to problem of all
-locally free sheaves}
+  locally free sheaves}
 
 \begin{lemma}\label{lem:no_coarse_condition}
   Let $\mathcal M$ be a moduli problem and
@@ -1592,7 +1616,7 @@ three steps:
 
 \begin{enumerate}
   \item Formulate the problem by defining the desired functor of
-    points.
+        points.
   \item Construct a coarse moduli space.
   \item Check under which conditions the moduli space is fine.
 \end{enumerate}
@@ -1631,7 +1655,7 @@ definition:
 \begin{definition}[{\cite[13.4]{gortz2010}}]
   For $m\in\mathbb{Z}$, define the graded $R$-module $R(m)$ by
   $R(d)_d := R_{m+d}$ for all $d\in\mathbb{Z}$. \emph{Serre's
-  twisting sheaf} is
+    twisting sheaf} is
   \begin{align*}
     \mathscr O_X(m) := \widetilde{R(m)}.
   \end{align*}
@@ -1755,9 +1779,9 @@ all $\mathscr F$.
   \begin{align*}
     \dim H^j(\projective{n}{},\mathscr O_{\projective{n}{}}(m)) =
     \begin{cases}
-      (n+1)^m & \text{if }j = 0 \\
-      0 &\text{if }0<j<n \\
-      \binom{-n-1}{m} &\text{if }j=n
+      (n+1)^m         & \text{if }j = 0 \\
+      0               & \text{if }0<j<n \\
+      \binom{-n-1}{m} & \text{if }j=n
     \end{cases}
   \end{align*}
   Hence \todo{doublecheck}
@@ -1907,7 +1931,7 @@ equivalence. In particular, we require all the fibres to be isomorphic.
   where $\pi : C_T \to C$ is the base change.
   \begin{proof}
     \todo{not sure this is true; if it isn't then we need to find a
-    different explanation}
+      different explanation}
     \missingproof
   \end{proof}
 \end{lemma}
@@ -1944,7 +1968,7 @@ Let us think about the case of Higgs sheaves. Consider the moduli problem
 given by \todo{add new equivalence; make sure the canonical sheaf restricts to a canonical sheaf}
 \begin{align*}
   \mathcal A_H(T) = \left\lbrace{\text{Higgs sheaves $(\mathscr E,\phi)$
-  on $X_T$}}\right\rbrace/\sim.
+      on $X_T$}}\right\rbrace/\sim.
 \end{align*}
 where $(\mathscr E,\phi)\sim(\mathscr E',\phi')$ if, and only if,
 there is an isomorphism $\mathscr E\cong\mathscr E'$ that makes the
@@ -2041,10 +2065,10 @@ $\mathscr F\cong\mathscr F'$ such that the following commutes
   % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWwgRSJdLFsyLDAsIlxcbWF0aGNhbCBGIl0sWzIsMSwiXFxtYXRoY2FsIEYnIl0sWzEsMiwiXFxjb25nIl0sWzAsMSwicSIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFswLDIsInEnIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV1d
   \begin{tikzcd}
     {\mathscr E} && {\mathscr F} \\
-                 && {\mathscr F'}
-                 \arrow["q", two heads, from=1-1, to=1-3]
-                 \arrow["{q'}"', two heads, from=1-1, to=2-3]
-                 \arrow["\cong", from=1-3, to=2-3]
+    && {\mathscr F'}
+    \arrow["q", two heads, from=1-1, to=1-3]
+    \arrow["{q'}"', two heads, from=1-1, to=2-3]
+    \arrow["\cong", from=1-3, to=2-3]
   \end{tikzcd}
 \end{equation}
 
@@ -2067,7 +2091,7 @@ quotients of a given sheaf:
   scheme $T$ to
   \begin{align*}
     \mathcal Q(\mathscr E)(T) = \left\lbrace{
-        \text{quotients $q : \pi^*\mathscr E \surj \mathscr F$
+      \text{quotients $q : \pi^*\mathscr E \surj \mathscr F$
         over $T$}
     }\right\rbrace / \sim
   \end{align*}
@@ -2164,21 +2188,21 @@ $e$, $i$, and $m$ implicit.
   intuitively familiar with:
   \begin{enumerate}
     \item The additive group $\mathbf{G}_a := \Spec k[t]$ with
-      comulitiplication $t\mapsto t\otimes 1 + 1\otimes t$,
+          comulitiplication $t\mapsto t\otimes 1 + 1\otimes t$,
     \item The multiplicative group $\mathbf{G}_m := \Spec k[t^\pm]$
-      with comultiplication $t\mapsto t\otimes t$,
+          with comultiplication $t\mapsto t\otimes t$,
     \item The general linear group
-      \begin{align*}
-        GL_n := \Spec k[x_{ij} : 1\leq i,j\leq n][1/\det(x_{ij})]
-      \end{align*}
-      where $(x_{ij})$ is the $n\times n$ matrix with entries $x_{ij}$
-      with comultiplication
-      \begin{align*}
-        x_{ij} \mapsto \sum_{k=1}^n x_{ik}\otimes x_{kj}.
-      \end{align*}
-      See e.g. \cite[\href{https://stacks.math.columbia.edu/tag/022W}{Tag 022W}]{stacks-project} for details.
+          \begin{align*}
+            GL_n := \Spec k[x_{ij} : 1\leq i,j\leq n][1/\det(x_{ij})]
+          \end{align*}
+          where $(x_{ij})$ is the $n\times n$ matrix with entries $x_{ij}$
+          with comultiplication
+          \begin{align*}
+            x_{ij} \mapsto \sum_{k=1}^n x_{ik}\otimes x_{kj}.
+          \end{align*}
+          See e.g. \cite[\href{https://stacks.math.columbia.edu/tag/022W}{Tag 022W}]{stacks-project} for details.
     \item The sepcial linear group $SL_N$ analogous to the above by
-      quotienting by $\det(x_{ij})^2 - 1$.
+          quotienting by $\det(x_{ij})^2 - 1$.
   \end{enumerate}
 \end{example}
 But what do these group schemes have to do with their well-known
@@ -2290,12 +2314,12 @@ $X\surj X/G$:
   % https://q.uiver.app/#q=WzAsNCxbMiwwLCJYIl0sWzQsMCwiWC9HIl0sWzQsMSwiWiJdLFswLDAsIkdcXHRpbWVzIFgiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMCwyXSxbMSwyLCJcXGV4aXN0cyEiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMywwLCJcXHNpZ21hIiwwLHsiY3VydmUiOi0yfV0sWzMsMCwiXFxwaSIsMix7ImN1cnZlIjoyfV1d
   \begin{tikzcd}
     {G\times X} && X && {X/G} \\
-                &&&& Z
-                \arrow["\sigma", curve={height=-12pt}, from=1-1, to=1-3]
-                \arrow["\pi"', curve={height=12pt}, from=1-1, to=1-3]
-                \arrow[two heads, from=1-3, to=1-5]
-                \arrow[from=1-3, to=2-5]
-                \arrow["{\exists!}", dashed, from=1-5, to=2-5]
+    &&&& Z
+    \arrow["\sigma", curve={height=-12pt}, from=1-1, to=1-3]
+    \arrow["\pi"', curve={height=12pt}, from=1-1, to=1-3]
+    \arrow[two heads, from=1-3, to=1-5]
+    \arrow[from=1-3, to=2-5]
+    \arrow["{\exists!}", dashed, from=1-5, to=2-5]
   \end{tikzcd}
 \end{equation*}
 Considering structure sheaves, we get the following picture:
@@ -2303,12 +2327,12 @@ Considering structure sheaves, we get the following picture:
   % https://q.uiver.app/#q=WzAsNCxbMiwwLCJcXG1hdGhjYWwgT19YIl0sWzQsMCwiXFxtYXRoY2FsIE9fe1gvR30iXSxbNCwxLCJcXG1hdGhjYWwgT19aIl0sWzAsMCwiXFxtYXRoY2FsIE9fR1xcb3RpbWVzXFxtYXRoY2FsIE9fWCJdLFsxLDAsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoiYm90dG9tIn19fV0sWzIsMF0sWzIsMSwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzAsMywiXFxzaWdtYV5cXHNoYXJwIiwyLHsiY3VydmUiOjJ9XSxbMCwzLCJcXHBpXlxcc2hhcnAiLDAseyJjdXJ2ZSI6LTJ9XV0=
   \begin{tikzcd}
     {\mathscr O_G\otimes\mathscr O_X} && {\mathscr O_X} && {\mathscr O_{X/G}} \\
-                                      &&&& {\mathscr O_Z}
-                                      \arrow["{\sigma^\sharp}"', curve={height=12pt}, from=1-3, to=1-1]
-                                      \arrow["{\pi^\sharp}", curve={height=-12pt}, from=1-3, to=1-1]
-                                      \arrow[hook', from=1-5, to=1-3]
-                                      \arrow[from=2-5, to=1-3]
-                                      \arrow[dashed, from=2-5, to=1-5]
+    &&&& {\mathscr O_Z}
+    \arrow["{\sigma^\sharp}"', curve={height=12pt}, from=1-3, to=1-1]
+    \arrow["{\pi^\sharp}", curve={height=-12pt}, from=1-3, to=1-1]
+    \arrow[hook', from=1-5, to=1-3]
+    \arrow[from=2-5, to=1-3]
+    \arrow[dashed, from=2-5, to=1-5]
   \end{tikzcd}
 \end{equation*}
 
@@ -2347,11 +2371,11 @@ geometrical information of $X$ as possible.
     \item $f$ is affine.
     \item $f$ is surjective and $Y$ has the quotient topology.
     \item The map $f^\sharp : \mathscr O_Y \to \mathscr O_X$
-      is an isomorphism $\mathscr O_Y \cong \mathscr O_X^G$.
+          is an isomorphism $\mathscr O_Y \cong \mathscr O_X^G$.
     \item For every closed $G$-invariant $V\subseteq X$,
-      $f(V)$ is closed in $Y$.
+          $f(V)$ is closed in $Y$.
     \item For all disjoint closed $G$-invariant $V,V'\subseteq X$,
-      $f(V)$ and $f(V')$ are disjoint.
+          $f(V)$ and $f(V')$ are disjoint.
   \end{enumerate}
 \end{definition}
 
