@@ -1078,9 +1078,9 @@ topological groups:
     then $g_j\to g$ such that $g\cdot\nabla = \nabla'$. To do this
     one moves to the principal $U(n)$-bundle $P$ associated to $(E,h)$
     where each $g_j$ commutes with the action of the structure
-    group. The next step is to fix a point $x_0\in X$ and
-    $p_0\in P_{x_0}$ and consider curves $c$ starting at $x_0$ in $X$.
-    Considering $\nabla$ and $\nabla'$ yields lifts $\tilde c$ and
+    group. The next step is to focus on a single fibre by fixing $x_0\in X$ and
+    $p_0\in P_{x_0}$ and considering curves $c$ starting at $x_0$ in $X$.
+    One then uses $\nabla$ and $\nabla'$ to obtain lifts $\tilde c$ and
     $\tilde c'$ of $c$ in $P$. Now the limit $g$ of $(g_j)$ must satisfy
     $g(\tilde c) = \tilde c'$. This condition on $g$, together with
     commutativity with the action of the structure group, identifies it
@@ -1115,10 +1115,32 @@ the quotient are locally indistinguishable, as one expects from manifolds.
   on $A^\nabla(E,h)$. Unfortunately, this action is not free either. In particular,
   if there is a non-trivial proper subbundle $E'\subseteq E$ that is preserved
   by $\nabla$ then non-trivial automorphisms of $E'$ act trivially on $\nabla$.
-
-  In complete analogy, there is an action of $G(E,h)$ on $A^\Phi(E,h)$ which
-  is not free either.
 \end{example}
+
+\begin{example}\label{ex:not_free_double}
+  The fact that the $G(E,h)$ action on $A^\nabla(E,h)$ is not free does not
+  immediately imply that the action on $A^\Phi(E,h)$ is not either. However,
+  similar reasoning shows why it cannot be free: If there is a non-trivial 
+  proper subbundle $E'\subseteq E$ that is preserved by $\nabla$ and $\Phi$,
+  respectively, then an automorphism $g\in G(E,h)$ need only be trivial
+  outside of $E'$ to act trivially on $(\nabla,\Phi)$.
+\end{example}
+
+\subsection{Reducible Connections}
+
+It is crucial that the actions used to construct quotients of Banach manifolds
+are proper and free. We are now going to restrict $A^\nabla$ and $A^\Phi$ to
+ensure that this is the case. Of course we will have to deal with the loss of
+information that this entails at a later stage.
+
+In light of our observations in \ref{ex:not_free} and \ref{ex:not_free_double}
+we make the following definitions:
+
+\begin{definition}
+  A connection $\nabla\in A^\nabla(E,h)$ is \emph{reducible} if there exists
+  a non-trivial proper subbundle $E'\subseteq E$ such that $\nabla$ restricts
+  to a connection on $E'$. 
+\end{definition}
 
 \subsection{Banach Lie Groups}
 
@@ -1135,8 +1157,7 @@ at the identity of a Banach Lie group may be equipped with a Lie bracket
 and hence is called the Lie algebra of the group.
 
 \begin{example}
-  The Lie algebra of $W_{2,{\ell}}(C,U(E,h))$ is
-  $W_{2,\ell}(C,\mathfrak u(E))$.
+  The Lie algebra of $U(E,h)_\ell$ is $W_{2,\ell}(C,\mathfrak u(E))$.
 \end{example}
 
 Similarly, a action of a Banach Lie group on a Banach manifold
@@ -1154,6 +1175,7 @@ actions:
   \missingproof
   Analogously we have a Banach Lie group action of $U(E,h)_{\ell+1}$
   on $A^\Phi (E,h)_\ell$.
+  \todo{mention that they're free and proper}
 \end{example}
 
 \todo{infinitesimal action}
@@ -1186,25 +1208,44 @@ infinite dimensional, Banach manifolds:
   \begin{align*}
     G(E,h)_{\ell} := U(E,h)_\ell / U(1)
   \end{align*}
-  is a Banach manifold. Now the infinitesimal action is 
+  is a Banach manifold whose tangent space at $g\in G(E,h)_\ell$ is
   \begin{align*}
-    \rho : \mathfrak u(1) &\to \Gamma^\infty (TU(E,h)) \\
-    iy &\mapsto g \mapsto i y g
+    T_g G(E,h)_\ell = W_{2,\ell}(C,\mathfrak u(E,h))/i\mathbb{R}.
   \end{align*}
 \end{example}
 
-Unfortunately, we are not yet ready to apply this theorem to
+Unfortunately, we are not yet ready to apply the theorem \ref{thm:banach_quotient} to
 the actions of $G(E,h)_{\ell+1}$ on $A^\nabla(E,h)_\ell$ and
 $A^\Phi(E,h)_\ell$ as they are not free. In the next section we are
 going to rectify this by restricting the spaces sufficiently.
-Indeed, our argument in (\ref{ex:not_free}) already tells us what
+Indeed, our argument in (\ref{ex:not_free}) already partly tells us what
 the correct subsets to consider will be.
 
-\subsection{Irreducible connections}
+\subsection{Symplectic Forms}
 
+\subsection{Moment Maps}
 
+\subsection{Symplectic Quotient}
 
 \section{Properties of the Analytic Moduli Spaces}
+
+\subsection{Tangent Space and Dimension}
+
+\begin{theorem}
+  \begin{align*}
+    T_{\dol_E}\mathcal M^{\dol}(E) = H^{0,1}(C,\End(E,\dol_E)). 
+  \end{align*}
+\end{theorem}
+
+\section{To Do}
+
+\begin{itemize}
+  \item motivate Einstein connections
+  \item show that action on Einstein connections yields closed and complemented orbits
+  \item show that irreducible Einstein connections form submanifold
+  \item show that tangent spaces to orbits are closed
+  \item show that the moduli spaces do not depend on $\ell$
+\end{itemize}
 
 \missingsection
 
