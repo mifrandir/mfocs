@@ -680,7 +680,7 @@ connections that are compatible with this metric:
 Now consider the set of all connections that respect $h$ and induce
 some Dolbeault operator:
 \begin{align*}
-  A^\nabla(E,h) := \left\lbrace{\text{$h$-unitary holomorphic connections $\nabla$ in $E$}}\right\rbrace.
+  A_\nabla(E,h) := \left\lbrace{\text{$h$-unitary holomorphic connections $\nabla$ in $E$}}\right\rbrace.
 \end{align*}
 Analogous to $A^{\dol} (E)$, this is an affine space. To see what it is
 modelled on, consider the principal $GL_r(\mathbb{C})$-bundle whose fibres \todo{this is
@@ -700,7 +700,7 @@ vector bundle $\End E$ and $\mathfrak{u}(E)$ is the real vector subbundle
 of skew-hermitian endomorphisms of $E$.
 
 \begin{lemma}
-  $A^\nabla(E,h)$ is an affine space modelled on
+  $A_\nabla(E,h)$ is an affine space modelled on
   $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
   \begin{proof}
     The operations are induced by $\Omega^1(C,\mathfrak{gl}(E))$.
@@ -721,7 +721,7 @@ of skew-hermitian endomorphisms of $E$.
 \end{lemma}
 
 Combining what we have seen so far with the next result, the
-similarities between $A^{\dol} (E)$ and $A^\nabla(E,h)$ grow even more
+similarities between $A^{\dol} (E)$ and $A_\nabla(E,h)$ grow even more
 striking:
 
 \begin{lemma}\label{lem:real_vector_space_iso}
@@ -749,7 +749,7 @@ striking:
   \end{proof}
 \end{lemma}
 
-It is not a coincidence that $A^{\dol} (E)$ and $A^\nabla(E,h)$ both are
+It is not a coincidence that $A^{\dol} (E)$ and $A_\nabla(E,h)$ both are
 affine spaces modelled on the same underlying real vector space.
 Indeed, in the presence of $h$, every Dolbeault operator has a unique
 compatible connection:
@@ -764,15 +764,15 @@ compatible connection:
 \end{theorem}
 
 In particular, this gives us a bijection
-$\nabla^h : A^{\dol} (E) \to A^\nabla(E,h)$ whose inverse is the restriction
+$\nabla^h : A^{\dol} (E) \to A_\nabla(E,h)$ whose inverse is the restriction
 $\nabla \mapsto \nabla_{0,1}$. It is not difficult to verify that this
 is a homeomorphism of affine spaces which is locally given by
 the $\mathbb{R}$-linear isomorphism in \ref{lem:real_vector_space_iso}.
 
 Let us abuse notation slightly and denote by $U(E,h)$ the group of smooth
 $h$-unitary sections of $\End E$. That is, $U(E,h) := \Gamma^\infty(C,U(E,h))$.
-We have an action of $U(E,h)$ on $A^\nabla(E,h)$ via conjugation. That is,
-for $g\in U(E,h)$ and $\nabla\in A^\nabla(E,h)$, $g\cdot\nabla$ is the map
+We have an action of $U(E,h)$ on $A_\nabla(E,h)$ via conjugation. That is,
+for $g\in U(E,h)$ and $\nabla\in A_\nabla(E,h)$, $g\cdot\nabla$ is the map
 \begin{align*}
   \Omega^0(X,E) \xlongrightarrow{\Omega^0(X,{g}^{-1})}
   \Omega^0(X,E) \xlongrightarrow{\nabla}
@@ -808,7 +808,7 @@ correspond to doubled connections.
 
 Hence we have the space
 \begin{align}\label{eq:doubled_connections_space}
-  A^{\Phi} := A^\nabla \times \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))
+  A^{\Phi} := A_\nabla \times \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))
 \end{align}
 which naturally has the structure of an affine space modelled on
 the real vector space
@@ -834,7 +834,7 @@ by conjugation:
 
 \subsection{Sobolev Spaces}
 
-Our next goal is to equip the affine spaces of connections $A^\nabla(E,h)$
+Our next goal is to equip the affine spaces of connections $A_\nabla(E,h)$
 and $A^\Phi (E,h)$ with manifold structures. Of course, both are affine
 spaces modelled on infinite dimensional vector spaces. In the next
 section we are going to require our infinite dimensional manifolds to
@@ -1002,16 +1002,16 @@ differential forms. \todo{doublecheck which of these we really need
 
 \begin{example}
   Let us consider our main applications. We have the affine space
-  $A^\nabla(E,h)$ modelled on $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
+  $A_\nabla(E,h)$ modelled on $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
   For each $\ell \geq 0$, we have the corresponding Sobolev completion
   \begin{align*}
-    A^\nabla(E,h)_\ell := A^\nabla(E,h) + \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell
+    A_\nabla(E,h)_\ell := A_\nabla(E,h) + \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell
   \end{align*}
   which are naturally Banach manifolds.
-  In particular, for each $\nabla\in A^\nabla(E,h)_\ell$, we have the
+  In particular, for each $\nabla\in A_\nabla(E,h)_\ell$, we have the
   cotangent space
   \begin{align*}
-    T^*_\nabla A^\nabla(E,h)_\ell
+    T^*_\nabla A_\nabla(E,h)_\ell
     = \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell.
   \end{align*}
   Noticing that the direct sum of Banach spaces remains a Banach space,
@@ -1083,7 +1083,7 @@ topological groups:
 \end{example}
 
 \begin{example}\label{ex:h_proper_action}
-  The action of $U(E,h)$ on $A^\nabla(E,h)$ is proper.
+  The action of $U(E,h)$ on $A_\nabla(E,h)$ is proper.
   \begin{proof}
     We sketch the proof given in
     \cite[{Proposition 7.1.14}]{kobayashi1987}.
@@ -1118,21 +1118,21 @@ the quotient are locally indistinguishable, as one expects from manifolds.
 \end{definition}
 
 \begin{example}\label{ex:not_free}
-  Consider the action of $U(E,h)$ on $A^\nabla(E)$. This is not a free action
+  Consider the action of $U(E,h)$ on $A_\nabla(E)$. This is not a free action
   because scalar multiplication commutes with the connection. That is,
-  for all $\lambda\in U(1)$, $g\in U(E)$, and $\nabla\in A^\nabla(E,h)$,
+  for all $\lambda\in U(1)$, $g\in U(E)$, and $\nabla\in A_\nabla(E,h)$,
   it holds that $\lambda g\cdot \nabla = \nabla$. This flaw is easily fixed,
   however. In fact, we immediately have an action of
   \begin{align*}
     G(E,h) := U(E,h) / U(1)
   \end{align*}
-  on $A^\nabla(E,h)$. Unfortunately, this action is not free either. In particular,
+  on $A_\nabla(E,h)$. Unfortunately, this action is not free either. In particular,
   if there is a non-trivial proper subbundle $E'\subseteq E$ that is preserved
   by $\nabla$ then non-trivial automorphisms of $E'$ act trivially on $\nabla$.
 \end{example}
 
 \begin{example}\label{ex:not_free_double}
-  The fact that the $G(E,h)$ action on $A^\nabla(E,h)$ is not free does not
+  The fact that the $G(E,h)$ action on $A_\nabla(E,h)$ is not free does not
   immediately imply that the action on $A^\Phi(E,h)$ is not either. However,
   similar reasoning shows why it cannot be free: If there is a non-trivial
   proper subbundle $E'\subseteq E$ that is preserved by $\nabla$ and $\Phi$,
@@ -1140,21 +1140,6 @@ the quotient are locally indistinguishable, as one expects from manifolds.
   outside of $E'$ to act trivially on $(\nabla,\Phi)$.
 \end{example}
 
-\subsection{Reducible Connections}
-
-It is crucial that the actions used to construct quotients of Banach manifolds
-are proper and free. We are now going to restrict $A^\nabla$ and $A^\Phi$ to
-ensure that this is the case. Of course we will have to deal with the loss of
-information that this entails at a later stage.
-
-In light of our observations in \ref{ex:not_free} and \ref{ex:not_free_double}
-we make the following definitions:
-
-\begin{definition}
-  A connection $\nabla\in A^\nabla(E,h)$ is \emph{reducible} if there exists
-  a non-trivial proper subbundle $E'\subseteq E$ such that $\nabla$ restricts
-  to a connection on $E'$.
-\end{definition}
 
 \subsection{Banach Lie Groups}
 
@@ -1185,9 +1170,9 @@ We observe that Sobolev completions allow us to lift group
 actions:
 
 \begin{example}
-  Consider the action of $U(E,h)$ on $A^\nabla(E,h)$
+  Consider the action of $U(E,h)$ on $A_\nabla(E,h)$
   by conjugation. This extends to an action of $U(E,h)_{\ell+1}$
-  on $A^\nabla(E,h)_\ell$ via
+  on $A_\nabla(E,h)_\ell$ via
   \begin{align*}
     (g,\nabla) & \mapsto g\nabla g^{-1}.
   \end{align*}
@@ -1198,7 +1183,7 @@ actions:
     g\nabla g^{-1}(s) = g\nabla(g^{-1}s) = g(g^{-1}(\nabla s) + (\nabla g^{-1})s)
     = \nabla s + g(\nabla g^{-1})s.
   \end{align*}
-  Hence we require $g\in U(E,h)_{\ell + 1}$ to make sure that $g\cdot\nabla\in A^\nabla(E,h)_\ell$.
+  Hence we require $g\in U(E,h)_{\ell + 1}$ to make sure that $g\cdot\nabla\in A_\nabla(E,h)_\ell$.
   Analogously we have a Banach Lie group action of $U(E,h)_{\ell+1}$
   on $A^\Phi (E,h)_\ell$.
   \todo{mention that they're free and proper}
@@ -1230,9 +1215,9 @@ infinite dimensional, Banach manifolds:
     such that $\pi : X \to X/G$ gives a homeomorphism onto $\pi(U)$. Doing this
     at every $x\in X$ gives us the manifold structure on $X/G$. Now the tangent space
     to $X/G$ at the equivalence class of $x$ is
-    \begin{align*}
+    \begin{align}\label{eq:banach_quotient_tangent}
       T_x S_x = T_x X / T_x (G\cdot x) = T_x X/\rho_*(\mathfrak g)_x.
-    \end{align*}
+    \end{align}
     The difficult part is making sure that a slice exists at every $x\in X$. One may use
     one of the established theorems such as \cite[Theorem 3.28]{diez2019}
     or \cite[Theorem 5.2.6]{palais1992}. The latter applies particularly well
@@ -1260,7 +1245,7 @@ infinite dimensional, Banach manifolds:
 \end{example}
 
 Unfortunately, we are not yet ready to apply the theorem \ref{thm:banach_quotient} to
-the actions of $G(E,h)_{\ell+1}$ on $A^\nabla(E,h)_\ell$ and
+the actions of $G(E,h)_{\ell+1}$ on $A_\nabla(E,h)_\ell$ and
 $A^\Phi(E,h)_\ell$ as they are not free. Moreover, the tangent spaces fail to
 be closed:
 
@@ -1271,6 +1256,50 @@ be closed:
 In the next section we are going to rectify both issues by restricting the spaces
 sufficiently. Indeed, our argument in (\ref{ex:not_free}) already partly tells us
 what the correct subsets to consider will be.
+
+\subsection{Harmonic Connections}
+
+In some sense, failure of the tangent space space to be closed is a bigger issue than
+a non-free group action. Indeed, if the action is not free we simply cannot assume that
+there is a diffeomorphism $G\cdot x \cong G$. This means in particular that the calculation 
+(\ref{eq:banach_quotient_tangent}) fails. However, slices still exist so there are ways to
+locally identify the quotient with a slice. In particular, we obtain a quotient that is
+locally a manifold, although the tangent spaces may not be uniform.
+
+On the other hand, if the tangent space is not closed then it may not be complemented and
+hence there may not be a slice to identify the quotient with. Hence we address this issue first.
+There are multiple ways of restricting the affine spaces we are thinking about to
+ensure orbits with closed tangent spaces. The one we choose is the following:
+
+\begin{definition}
+  A connection $\nabla\in A_\nabla(E,h)$ is \emph{Yang-Mills} if
+  there exists a harmonic form $\alpha\in\Omega^2(C)$ such that
+  $F_\nabla = i\alpha\otimes I$ in $\Omega^2(C,\End E)$.
+\end{definition}
+
+\begin{definition}
+  A doubled connection $(\nabla,\Phi=\phi-\phi^\dagger)\in A_\Phi(E,h)$ is \emph{Hitchin}
+  if $\nabla_{0,1}\phi = 0$ and $[\phi,\phi^\dagger]$ is Einstein.
+\end{definition}
+
+Note in particular if $\Phi = 0$ then $\phi = \phi^\dagger$ and hence
+$[\phi,\phi^\dagger] = 0$ so $\nabla$ is Einstein.
+
+\subsection{Reducible Connections}
+
+It is crucial that the actions used to construct quotients of Banach manifolds
+are proper and free. We are now going to restrict $A_\nabla$ and $A^\Phi$ to
+ensure that this is the case. Of course we will have to deal with the loss of
+information that this entails at a later stage.
+
+In light of our observations in \ref{ex:not_free} and \ref{ex:not_free_double}
+we make the following definitions:
+
+\begin{definition}
+  A connection $\nabla\in A_\nabla (E,h)$ is \emph{reducible} if there exists
+  a non-trivial proper subbundle $E'\subseteq E$ such that $\nabla$ restricts
+  to a connection on $E'$.
+\end{definition}
 
 \subsection{On Symplectic Quotients}
 
