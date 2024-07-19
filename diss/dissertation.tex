@@ -597,15 +597,28 @@ vector bundles:
 
 \begin{definition}
   A \emph{connection} in a smooth complex bundle $E$ on
-  a complex manifold $X$ is a linear map
+  a complex manifold $X$ is a linear map $\nabla : \Omega^0(X,E) \to \Omega^1(X,E)$
+  such that
   \begin{align*}
-    \nabla : \Omega^0(X,E) \to \Omega^1(X,E)
+    \nabla (fs) = df \otimes s + f\nabla s,
   \end{align*}
-  such that, for all $f\in \Omega^0(X)$ and $s\in\Omega^0(X,E)$,
-  \begin{align*}
-    \nabla (fs) = df \otimes s + f\nabla s.
-  \end{align*}
+  for all $f\in \Omega^0(X)$ and $s\in\Omega^0(X,E)$.
 \end{definition}
+
+\begin{example}
+  If we are given connections $\nabla$ and $\nabla'$ in bundles $E$ and $E'$ on $X$,
+  respectively, then we obtain a connection in the bundle $E\otimes E'$ via
+  \begin{align*}
+    \nabla \otimes I + I \otimes \nabla'.
+  \end{align*}
+  Similarly, there is a connection $\nabla^*$ in the dual bundle $E^*$ given by
+  \begin{align*}
+    d\langle \xi,s\rangle
+    = \langle \nabla^*\xi, s \rangle + \langle \xi,\nabla s\rangle
+  \end{align*}
+  where $\langle\cdot,\cdot\rangle$ denotes the natural pairing $E^*\times E\to\mathbb{C}$.
+  In particular, we obtain a connection $\End\nabla$ in $\End E = E^* \otimes E$.
+\end{example}
 
 Note that connections look very similar to Dolbeault operators.
 Indeed, via projections to the $(1,0)$ and $(0,1)$ parts, respectively,
@@ -670,7 +683,8 @@ some Dolbeault operator:
   A^\nabla(E,h) := \left\lbrace{\text{$h$-unitary holomorphic connections $\nabla$ in $E$}}\right\rbrace.
 \end{align*}
 Analogous to $A^{\dol} (E)$, this is an affine space. To see what it is
-modelled on, consider the principal $GL_r(\mathbb{C})$-bundle whose fibres
+modelled on, consider the principal $GL_r(\mathbb{C})$-bundle whose fibres \todo{this is
+not correct!}
 are the automorphisms of the fibres of $E$. We may denote this bundle by $GL(E)$.
 We then have a principal $U(r)$-bundle $U(E,h)$ of $h$-unitary automorphisms
 of $E$. By taking Lie algebras we obtain vector bundles $\mathfrak{gl}(E)$
@@ -1148,8 +1162,10 @@ In particular, there is a natural notion of a Banach Lie group and
 corresponding actions on Banach manifolds.
 
 \begin{example}
-  The Banach manifold $U(E,h)_\ell$ is a Banach Lie group.
-  Use Sobolev multiplication. \missingexample
+  The Banach manifold $U(E,h)_\ell$ is a Banach Lie group with the usual
+  multiplication. One need only check that $\Vert\cdot\Vert_{2,\ell}$-Cauchy
+  sequences $(g_i)$ and $(h_j)$ in $U(E,h)$ yield a Cauchy sequence
+  $(g_ih_i)$.
 \end{example}
 
 In complete analogy to the finite dimensional case, the tangent space
@@ -1171,14 +1187,29 @@ actions:
 \begin{example}
   Consider the action of $U(E,h)$ on $A^\nabla(E,h)$
   by conjugation. This extends to an action of $U(E,h)_{\ell+1}$
-  on $A^\nabla(E,h)_\ell$.
-  \missingproof
+  on $A^\nabla(E,h)_\ell$ via
+  \begin{align*}
+    (g,\nabla) & \mapsto g\nabla g^{-1}.
+  \end{align*}
+  Note that, if we fix $\nabla_0\in\Omega^1(C,\mathfrak u(E,h))$ and write
+  $\nabla = \nabla_0 + $
+  for $s\in\Omega^0_{\mathbb{R}}(C,E)$ we have
+  \begin{align*}
+    g\nabla g^{-1}(s) = g\nabla(g^{-1}s) = g(g^{-1}(\nabla s) + (\nabla g^{-1})s)
+    = \nabla s + g(\nabla g^{-1})s.
+  \end{align*}
+  Hence we require $g\in U(E,h)_{\ell + 1}$ to make sure that $g\cdot\nabla\in A^\nabla(E,h)_\ell$.
   Analogously we have a Banach Lie group action of $U(E,h)_{\ell+1}$
   on $A^\Phi (E,h)_\ell$.
   \todo{mention that they're free and proper}
 \end{example}
 
-\todo{infinitesimal action}
+Recall the infinitesimal action
+$\rho_* : \mathfrak g \to \Gamma^\infty(X,TX)$ given by
+\begin{align*}
+  \rho_*(\xi)_x := \restrict{\frac{d}{dt}}{t=0} \exp(t\xi)\cdot x
+\end{align*}
+at $x\in X$.
 
 All of our recent discussions about proper and free actions, Sobolev
 completions, and Banach manifolds are motivated by the next theorem.
@@ -1188,14 +1219,25 @@ infinite dimensional, Banach manifolds:
 \begin{theorem}\label{thm:banach_quotient}
   Consider a proper free action $\rho : G\times X\to X$ of a Banach
   Lie group $G$ on a Banach manifold $X$. If each tangent space
-  $T_x(Gx) \subseteq T_x X$ is closed and complemented then
-  $X/G$ is a Banach manifold and $TX/\rho(\mathfrak g) \cong T(X/G)$.
+  $T_x(G\cdot x) \subseteq T_x X$ is closed and complemented then
+  $X/G$ is a Banach manifold and $TX/\rho_*(\mathfrak g) \cong T(X/G)$.
   \todo{doublecheck}
   \begin{proof}
-    This is a little harder than I thought initially\dots
-    We need a suitable slice theorem. Candidates are \cite[Theorem 3.28]{diez2019}
-    and \cite[Theorem 5.2.6]{palais1992}.
-    \missingproof
+    The idea is to construct a slice at each point $x\in X$, i.e. a submanifold
+    $x\in S_x\subseteq X$ such that $T_x X = T_xS_x \oplus T_x(G\cdot x)$. A slice is
+    what induces the manifold structure of $X/G$ at $x$. More preciesley, if a slice
+    exists at $x\in X$ then we may choose a sufficiently small chart $U\ni x$
+    such that $\pi : X \to X/G$ gives a homeomorphism onto $\pi(U)$. Doing this
+    at every $x\in X$ gives us the manifold structure on $X/G$. Now the tangent space
+    to $X/G$ at the equivalence class of $x$ is
+    \begin{align*}
+      T_x S_x = T_x X / T_x (G\cdot x) = T_x X/\rho_*(\mathfrak g)_x.
+    \end{align*}
+    The difficult part is making sure that a slice exists at every $x\in X$. One may use
+    one of the established theorems such as \cite[Theorem 3.28]{diez2019}
+    or \cite[Theorem 5.2.6]{palais1992}. The latter applies particularly well
+    as the group action is Fredholm by our assumption that it be free and satisfy
+    $T_x(G\cdot x)\subseteq T_x X$.
   \end{proof}
 \end{theorem}
 
@@ -1219,122 +1261,74 @@ infinite dimensional, Banach manifolds:
 
 Unfortunately, we are not yet ready to apply the theorem \ref{thm:banach_quotient} to
 the actions of $G(E,h)_{\ell+1}$ on $A^\nabla(E,h)_\ell$ and
-$A^\Phi(E,h)_\ell$ as they are not free. In the next section we are
-going to rectify this by restricting the spaces sufficiently.
-Indeed, our argument in (\ref{ex:not_free}) already partly tells us what
-the correct subsets to consider will be.
-
-\subsection{Symplectic Forms}
-
-\begin{definition}
-  A \emph{symplectic form} on a Banach manifold $X$ is a closed form
-  $\omega\in\Omega^2_{\mathbb{R}}(X)$ such that, for all $x\in X$, the map
-  \begin{align*}
-    T_x X & \to T^*_x X         \\
-    v     & \mapsto \omega(v,-)
-  \end{align*}
-  is injective. A \emph{symplectic Banach manifold} is a Banach manifold
-  equipped with a symplectic form.
-\end{definition}
+$A^\Phi(E,h)_\ell$ as they are not free. Moreover, the tangent spaces fail to
+be closed:
 
 \begin{example}
-  on compact Riemann surface \missingexample
+  \missingexample
 \end{example}
 
-\begin{example}
-  If $(X,\omega)$ is a finite-dimensional symplectic manifold then $\omega$
-  gives an isomorphism $TX\to T^*X$.
-\end{example}
+In the next section we are going to rectify both issues by restricting the spaces
+sufficiently. Indeed, our argument in (\ref{ex:not_free}) already partly tells us
+what the correct subsets to consider will be.
 
-\subsection{Moment Maps}
-
-Consider a Banach Lie group $G$ with Lie algebra $\mathfrak g$ acting on a symplectic
-Banach manifold $X$. Recall the infinitesimal action
-$\rho_* : \mathfrak g \to \Omega^0_{\mathbb{R}}(X,TX)$ given by
-\begin{align*}
-  \rho_*(\xi)_x := \restrict{\frac{d}{dt}}{t=0} \exp(t\xi)\cdot x
-\end{align*}
-at $x\in X$. Now if we have a symplectic form $\omega\in\Omega^2_{\mathbb{R}}(X)$ then
-we may contract $\omega$ with $\rho(\xi)$ to obtain a 1-form
-$\iota_{\rho(\xi)}\omega\in\Omega^1_{\mathbb{R}}(X)$. A moment map
-allows us to factor this map $\mathfrak g \to \Omega^1_{\mathbb{R}}(X)$ through
-$d : \Omega^0_{\mathbb{R}}(X)\to \Omega^1_{\mathbb{R}}(X)$:
-
-\begin{definition}
-  A \emph{moment map} for the action is a $G$-equivariant map
-  \begin{align*}
-    \mu : X \to \mathfrak g^*
-  \end{align*}
-  satisfying $d(\langle\mu,\xi\rangle)=\iota_{\rho(\xi)}\omega$ for all
-  $\xi\in\mathfrak g$.
-\end{definition}
-
-Here the action of $G$ on $\mathfrak g^*$ is the coadjoint action
-$\text{Ad}^*$ which is the adjoint with respect to the pairing
-$\mathfrak g^*\times\mathfrak g\to\mathbb{R}$ of the adjoint action.
-For $\mu$ to be equivariant means that the following commutes:
-\begin{equation*}
-  % https://q.uiver.app/#q=WzAsNCxbMCwxLCJYIl0sWzAsMCwiR1xcdGltZXMgWCJdLFsyLDAsIkdcXHRpbWVzXFxtYXRoZnJhayBnXioiXSxbMiwxLCJcXG1hdGhmcmFrIGdeKiJdLFsxLDAsIlxccmhvIl0sWzIsMywiXFx0ZXh0e0FkfV4qIl0sWzEsMiwiXFx0ZXh0e2lkfVxcdGltZXNcXG11Il0sWzAsMywiXFxtdSJdXQ==
-  \begin{tikzcd}
-    {G\times X} && {G\times\mathfrak g^*} \\
-    X && {\mathfrak g^*}
-    \arrow["{\text{id}\times\mu}", from=1-1, to=1-3]
-    \arrow["\rho", from=1-1, to=2-1]
-    \arrow["{\text{Ad}^*}", from=1-3, to=2-3]
-    \arrow["\mu", from=2-1, to=2-3]
-  \end{tikzcd}
-\end{equation*}
-Notice that all moment maps for a given action must have the same derivative and hence
-agree up to an additive constant.
-
-\begin{example}
-  The action of $U(E,h)_{\ell+1}$ on $A^\nabla(E,h)_\ell$ admits a moment map
-  \begin{align*}
-    \mu : A^\nabla(E,h)_\ell \to \Omega^0_{\mathbb{R}}(C,\mathfrak u(E))_{\ell+1}
-  \end{align*}
-  for each $\nabla\in A^\nabla(E,h)_\ell$ defined by the 2-form in
-  $\Omega^2_{\mathbb{R}}(C,\End E)$
-  \begin{align*}
-    \mu(\nabla) = - F_\nabla - 2\pi i \frac{d}{r} \omega_C\otimes I
-  \end{align*}
-  which we think of as a smooth function via
-  \begin{align*}
-   \Omega^2_{\mathbb{R}}(C,\End E) \xlongrightarrow{\Tr}
-   \Omega^2_{\mathbb{R}}(C) \xlongrightarrow{\int}
-   \Omega^0_{\mathbb{R}}(C).
-  \end{align*}
-  \todo{verify that this is a moment map}
-\end{example}
-
-\begin{example}
-  Similarly, the action of $U(E,h)_{\ell+1}$ on $A^\Phi(E,h)_\ell$ admits a moment
-  map 
-  \begin{align*}
-    \mu : A^\Phi(E,h)_\ell \to \Omega^0_{\mathbb{R}}(C,\mathfrak u(E))_{\ell+1}
-  \end{align*}
-  given by
-  \begin{align*}
-    \mu(\nabla,\Phi) = 
-  \end{align*}
-\end{example}
-
-\subsection{Symplectic Quotient}
+\subsection{On Symplectic Quotients}
 
 \section{Properties of the Analytic Moduli Spaces}
+
+\subsection{Independence of the Choice of Sobolev Completion}
 
 \subsection{Tangent Space and Dimension}
 
 \begin{theorem}
+  Let $[\dol_E]\in M^{\dol}(E)$. Then the tangent space at $[\dol_E]$ is
   \begin{align*}
-    T_{\dol_E}\mathcal M^{\dol}(E) = H^{0,1}(C,\End(E,\dol_E)).
+    T_{[\dol_E]}\mathcal M^{\dol}(E) = H^{0,1}(C,\End(E,\dol_E)).
   \end{align*}
-  \begin{proof}
+  \begin{proof}[Proof sketch]
     A full proof is given in \cite[223-225]{kobayashi1987}. The key idea is to look
-    at curves in $M^{\dol}(E)$ to obtain the tangent space as a set of equivalence
-    classes in $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell$
-    \missingproof
+    at curves in $M^{\dol}(E)$ to obtain the tangent space at $\nabla$ as a set of
+    equivalence classes in $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell$. One then
+    identifies this space with $H^{0,1}(C,\End(E,\dol_E))$ via a sequence of calculations
+    involving harmonic forms.
   \end{proof}
 \end{theorem}
+
+It is worth noting that the proof does not rely on $M^{\dol_E}(E)$ being a manifold
+at all. Indeed, a similar calculation is done for a moduli space that is not
+in general a manifold, yet it makes sense to classify curves passing through a point.
+
+Having calculated the tangent space, we may be relieved and observe that the moduli
+space is indeed a complex manifold in the usual sense:
+
+\begin{corollary}
+  $M^{\dol}(E)$ is a complex manifold of finite dimension.
+  \begin{proof}
+    By Dolbeault's theorem we may express the tangent space in terms of holomorphic
+    sections as
+    \begin{align*}
+      T_{[\dol_E]}\mathcal M^{\dol}(E) = \Gamma(C,\End(E,\dol_E) \otimes T_{1,0}^*C).
+    \end{align*}
+    The space of holomorphic sections of a holomorphic vector bundle is finite dimensional,
+    hence so is $M^{\dol}$. Moreover, the tangent space naturally is a complex vector
+    space and hence we have a natural complex structure on $M^{\dol}(E)$.
+  \end{proof}
+\end{corollary}
+
+Knowing the tangent space also allows us to calculate the dimension:
+
+\begin{corollary}
+  $\dim_{\mathbb{C}} M^{\dol}(E) = (g-1)r^2 + 1$.
+  \begin{proof}
+    By Dolbeault's theorem we may express the tangent space in terms of holomorphic
+    sections as
+    \begin{align*}
+      T_{[\dol_E]}\mathcal M^{\dol}(E) = \Gamma(C,\End(E,\dol_E) \otimes T_{1,0}^*C).
+    \end{align*}
+    Hence, using sheaf cohomology,
+    \missingproof
+  \end{proof}
+\end{corollary}
 
 \section{To Do}
 
