@@ -622,27 +622,27 @@ vector bundles:
 
 Note that connections look very similar to Dolbeault operators.
 Indeed, via projections to the $(1,0)$ and $(0,1)$ parts, respectively,
-we obtain a splitting $\nabla = \nabla^{1,0} + \nabla^{0,1}$
+we obtain a splitting $\nabla = \nabla_{1,0} + \nabla_{0,1}$
 where
 \begin{align*}
-  \nabla^{0,1} : \Omega^0(X,E) \to \Omega^{0,1}(X,E).
+  \nabla_{0,1} : \Omega^0(X,E) \to \Omega^{0,1}(X,E).
 \end{align*}
 We may ask whether this is the same as a holomorphic structure on $E$:
 
 \begin{definition}
   Let $\dol_E$ be a Dolbeault operator on $E$.
   A connection $\nabla$ in $E$ is \emph{compatible with $\dol_E$}
-  if, and only if, $\nabla^{0,1} = \dol_E$. In general, we say
+  if, and only if, $\nabla_{0,1} = \dol_E$. In general, we say
   $\nabla$ is \emph{holomorphic} if it is compatible with some
   $\dol_E$.
 \end{definition}
 
-Note that all connections $\nabla$ satisfy the Leibnitz rule. It is
+Note that all connections $\nabla$ satisfy the Leibniz rule. It is
 straightforward to check that
 \begin{align*}
   \nabla_{0,1} (fs) = \dol f\otimes s + f \nabla_{0,1} s.
 \end{align*}
-Hence $\nabla$ is holomorphic if, and only if, $(\nabla^{0,1})^2 = 0$.
+Hence $\nabla$ is holomorphic if, and only if, $(\nabla_{0,1})^2 = 0$.
 
 \subsection{Unitary Connections}
 
@@ -663,7 +663,7 @@ intention to study them more than absolutely necessary. Indeed, it will
 become apparent that the mere presence of a metric is sufficient.
 Fortunately for us, it will always be possible to choose a metric:
 
-\begin{theorem}\missingcitation
+\begin{theorem}\label{thm:hermitian_structures_exist}\missingcitation
   Every smooth vector bundle on a compact complex manifold admits a
   hermitian metric.
 \end{theorem}
@@ -706,8 +706,8 @@ of skew-hermitian endomorphisms of $E$.
     The operations are induced by $\Omega^1(C,\mathfrak{gl}(E))$.
     Verifying that general $\nabla + \xi$ for
     $\xi\in\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$
-    satsify the Leibnitz rule and the integrability
-    condition $(\nabla^{0,1})^2=0$ is analogous to
+    satsify the Leibniz rule and the integrability
+    condition $(\nabla_{0,1})^2=0$ is analogous to
     \ref{lem:affine_space_of_dolbeault_operators}. Hence $\nabla + \xi$
     is a holomorphic connection.
 
@@ -1261,7 +1261,8 @@ what the correct subsets to consider will be.
 
 In some sense, failure of the tangent space space to be closed is a bigger issue than
 a non-free group action. Indeed, if the action is not free we simply cannot assume that
-there is a diffeomorphism $G\cdot x \cong G$. This means in particular that the calculation 
+the map $g\mapsto g\cdot x$ is a diffeomorphism $G\cong G\cdot x$. This means in particular
+that the calculation 
 (\ref{eq:banach_quotient_tangent}) fails. However, slices still exist so there are ways to
 locally identify the quotient with a slice. In particular, we obtain a quotient that is
 locally a manifold, although the tangent spaces may not be uniform.
@@ -1269,13 +1270,34 @@ locally a manifold, although the tangent spaces may not be uniform.
 On the other hand, if the tangent space is not closed then it may not be complemented and
 hence there may not be a slice to identify the quotient with. Hence we address this issue first.
 There are multiple ways of restricting the affine spaces we are thinking about to
-ensure orbits with closed tangent spaces. The one we choose is the following:
+ensure orbits with closed tangent spaces. We do this by introducing harmonicity.
+
+Observe that if we have a compact Hermitian manifold $X$ may refer to the adjoints \todo{hermitian or Hermitian?}
+\begin{align*}
+  \dol^* : \Omega^{p,q}(X)\to \Omega^{p,q-1}(X)
+\end{align*}
+of the operator $\dol : \Omega^{p,q}(X)\to\Omega^{p,q+1}(X)$. This allows us to define
+what it means for a form on $X$ to be harmonic:
+
+\begin{definition}
+  A $(p,q)$-form $\alpha$ on a compact Hermitian manifold $X$ is \emph{harmonic} if
+  $\dol \alpha = \dol^* \alpha = 0$.
+\end{definition}
 
 \begin{definition}
   A connection $\nabla\in A_\nabla(E,h)$ is \emph{Yang-Mills} if
   there exists a harmonic form $\alpha\in\Omega^2(C)$ such that
   $F_\nabla = i\alpha\otimes I$ in $\Omega^2(C,\End E)$.
 \end{definition}
+
+\begin{example}
+  Consider the space $A_\nabla^{ss}(E,h)$ of Yang-Mills connections.  
+  We observe that gauge transformations map $I\in\End E$ to itself.
+  Hence $A_\nabla^{ss}(E,h)\subseteq A_\nabla(E,h)$ is $U(E,h)$-invariant.
+  Thus we have a proper free $G(E,h)$-action on $A_\nabla(E,h)$. Moreover,
+  that extends to a proper free action of $G(E,h)_{\ell+1}$ on
+  $A_\nabla^{ss}(E,h)_\ell$.
+\end{example}
 
 \begin{definition}
   A doubled connection $(\nabla,\Phi=\phi-\phi^\dagger)\in A_\Phi(E,h)$ is \emph{Hitchin}
