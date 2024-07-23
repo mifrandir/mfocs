@@ -193,8 +193,8 @@ In the complex case, there are a few definitions:
 Note that if $\mathcal E$ is holomoprhic then it is also smooth.
 However, there are some important differences between
 $\Gamma^\infty(U,\mathcal E)$ and $\Gamma(U,\mathcal E)$. While both are
-complex vector spaces $\Gamma^\infty(U,E)$ is typically infinite
-dimensional while $\Gamma(U,E)$ is always finite
+complex vector spaces $\Gamma^\infty(U,\mathcal E)$ is typically infinite
+dimensional while $\Gamma(U,\mathcal E)$ is always finite
 dimensional.~\cite[Theorem 1.4.1]{ma2007}
 
 \subsection{Dolbeault Cohomology}
@@ -605,7 +605,7 @@ vector bundles:
   for all $f\in \Omega^0(X)$ and $s\in\Omega^0(X,E)$.
 \end{definition}
 
-\begin{example}
+\begin{example}\label{ex:connection_on_end}
   If we are given connections $\nabla$ and $\nabla'$ in bundles $E$ and $E'$ on $X$,
   respectively, then we obtain a connection in the bundle $E\otimes E'$ via
   \begin{align*}
@@ -674,7 +674,9 @@ connections that are compatible with this metric:
 \begin{definition}
   A connection $\nabla$ in $E$ is \emph{$h$-unitary}
   if, and only if, for all $s,t\in\Omega^0(X,E)$,
-  $dh(s,\bar t) = h(\nabla s,\bar t) + h(s,\overline{\nabla t})$.
+  \begin{align*}
+    dh(s,\bar t) = h(\nabla s,\bar t) + h(s,\overline{\nabla t}).
+  \end{align*}
 \end{definition}
 
 Now consider the set of all connections that respect $h$ and induce
@@ -786,7 +788,7 @@ $g$ and $\nabla$ are.
 
 \todo{complex structure on the affine space}
 
-\subsection{Doubled Connections}
+\subsection{Higgs Connections}
 
 We have successfully viewed the space of holomorphic bundles $A^{\dol} (E)$
 as an affine space modelled on
@@ -798,16 +800,16 @@ space modelled on $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))^{\oplus 2}$.
 Once again fix a hermitian metric $h$ on $E$.
 
 Just as holomorphic bundles correspond to connections, Higgs bundles
-correspond to doubled connections.
+correspond to Higgs connections.
 
 \begin{definition}
-  A \emph{doubled connection} in $E$ is a pair $(\nabla,\Phi)$
+  A \emph{Higgs connection} in $E$ is a pair $(\nabla,\Phi)$
   where $\nabla$ is a $h$-unitary connection in $E$ and
   $\Phi\in\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
 \end{definition}
 
 Hence we have the space
-\begin{align}\label{eq:doubled_connections_space}
+\begin{align}\label{eq:Higgs_connections_space}
   A^{\Phi} := A_\nabla \times \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))
 \end{align}
 which naturally has the structure of an affine space modelled on
@@ -819,7 +821,7 @@ of topological spaces
   A^\phi(E) \subseteq A^{\dol} (E) \times \Omega^{1,0}(\End E) \cong A^\Phi (E,h).
 \end{align*}
 Note that in general $A^\phi(E)$ and $A^\Phi (E,h)$ are not isomorphic. In
-particular, a doubled connection $(\nabla,\Phi)$ corresponds to
+particular, a Higgs connection $(\nabla,\Phi)$ corresponds to
 a pair $(\dol_E,\phi)$ where $\dol_E$ is a Dolbeault operator and
 $\phi$ is a section in $\Omega^{1,0}(C,\End E)$, not necessarily
 holomorphic. We will have to deal with this at a later stage.
@@ -1015,7 +1017,7 @@ differential forms. \todo{doublecheck which of these we really need
     = \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell.
   \end{align*}
   Noticing that the direct sum of Banach spaces remains a Banach space,
-  the affine space (\ref{eq:doubled_connections_space}) of doubled connections also
+  the affine space (\ref{eq:Higgs_connections_space}) of Higgs connections also
   extends to a Banach manifold
   \begin{align*}
     A^\Phi(E,h)_\ell := A^\Phi(E,h) + \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell
@@ -1264,6 +1266,8 @@ In the next section we are going to rectify both issues by restricting the space
 sufficiently. Indeed, our argument in (\ref{ex:not_free}) already partly tells us
 what the correct subsets to consider will be.
 
+\subsection{Elliptic Regularity}
+
 \subsection{Harmonic Connections}
 
 In some sense, failure of the tangent space space to be closed is a bigger issue than
@@ -1301,9 +1305,11 @@ restrict the Banach spaces we are studying:
 
 \begin{definition}
   A connection $\nabla\in A_\nabla(E,h)$ is \emph{Yang-Mills} if
-  $K(\nabla) \in i\mathcal H^2(C)\otimes I$. I.e. there exists a harmonic form
-  $\alpha\in\mathcal H^2(C)$ such that $K(\nabla) = i\alpha\otimes I$ in
-  $\Omega^2(C,\End E)$.
+  \begin{align}\label{eq:yang_mills_condition}
+   K(\nabla) \in i\mathcal H^2(C)\otimes I 
+  \end{align}
+  I.e. there exists a harmonic form $\alpha\in\mathcal H^2(C)$ such
+  that $K(\nabla) = i\alpha\otimes I$ in $\Omega^2(C,\End E)$.
 \end{definition}
 
 Consider the space $A_\nabla^{ss}(E,h)$ of Yang-Mills connections.
@@ -1316,12 +1322,20 @@ that $I\in\End E$ is gauge-invariant. Thus, for $\nabla\in A_\nabla^{ss}(E,h)$,
   = i\alpha\otimes I,
 \end{align*}
 i.e. $A_\nabla^{ss}(E,h)\subseteq A_\nabla(E,h)$ is $U(E,h)$-invariant.
-Thus we have a proper $G(E,h)$-action on $A_\nabla(E,h)$. Moreover,
-we have the Banach manifold
-\begin{align*}
-  A^{ss}_{\nabla}(E,h)_\ell := A^{ss}_\nabla(E,h) + i\mathcal H^2(C)_\ell\otimes I
-\end{align*}
-with a proper action of $G(E,h)_{\ell+1}$ on $A_\nabla^{ss}(E,h)_\ell$.
+Thus we have a proper $G(E,h)$-action on $A_\nabla(E,h)$.
+
+\begin{lemma}
+  The Sobolev completion $A^{ss}_\nabla(E,h)_\ell$ is a
+  Banach submanifold of $A_\nabla(E,h)_\ell$.
+  \begin{proof}
+    This is a rather straightforward argument using an analogue
+    of the regular value theorem for Banach manifolds. The map
+    to consider is the moment map for the $G(E,h)$-action on
+    $A_\nabla(E,h)_\ell$ considered as a symplectic Banach manifold.
+  \end{proof}
+\end{lemma}
+Just as in the finite dimensional case, the proper $G(E,h)_{\ell+1}$
+action restricts to $A^{ss}_\nabla(E,h)_\ell$.
 Most importantly, we have the following:
 \begin{lemma}
   Let $\nabla\in A^{ss}_\nabla(E,h)_{\ell}$. Then the tangent space
@@ -1330,22 +1344,77 @@ Most importantly, we have the following:
   \end{align*} 
   is a closed subspace.
   \begin{proof}
+    Write $\Omega^k = \Omega^k_{\mathbb R}(\mathfrak u(E,h))$.
+    We consider the operator
+    \begin{align*}
+      \hat\nabla := \nabla \oplus \nabla^\dagger : 
+      \Omega^1 \to
+      \Omega^2 \oplus
+      \Omega^0
+    \end{align*}
+    where we have extended the connection in $\nabla$ to a connection
+    in $\End E$ using (\ref{ex:connection_on_end}) which
+    one easily sees to restrict to $\mathfrak u(E,h)$.
+    This is an elliptic differential operator. \todo{justify}
+    By elliptic regularity \missingcitation, the adjoint
+    \begin{align*}
+      \hat\nabla^\dagger := \nabla^\dagger + \nabla : 
+      \Omega^2 \oplus
+      \Omega^0 \to
+      \Omega^1
+    \end{align*}
+    is also elliptic and hence extends to a Fredholm operator
+    \begin{align*}
+      \hat\nabla^\dagger : 
+      \Omega^2_\ell \oplus
+      \Omega^0_\ell \to
+      \Omega^1_\ell.
+    \end{align*}
+    In particular,
+    \begin{align*}
+      \hat\nabla^\dagger(
+      \Omega^2_\ell \oplus
+      \Omega^0_\ell)
+      =
+      \nabla^\dagger\Omega^2_\ell \oplus
+      \nabla\Omega^0_\ell.
+    \end{align*}
+    Is the image of a Fredholm operator, hence closed.
     \missingproof
   \end{proof}
 \end{lemma}
 
+Of course, we have to find a similar harmonicity condition for
+Higgs bundles. 
+
 \begin{definition}
-  A doubled connection $(\nabla,\Phi=\phi-\phi^\dagger)\in A_\Phi(E,h)$ is \emph{Hitchin}
-  if $\nabla_{0,1}\phi = 0$ and $[\phi,\phi^\dagger]$ is Einstein.
+  A Higgs connection $(\nabla,\Phi)\in A_\Phi(E,h)$
+  is \emph{Hitchin} if
+  \begin{align}\label{eq:Hitchin_equations}
+    \nabla_{0,1}\phi = 0,\hspace{1cm}
+    K(\nabla) + [\phi,\phi^\dagger] \in i\mathcal H^2(X)\otimes I
+  \end{align}
+  for some $\alpha\in\mathcal H^2(C)$ where we write
+  $\Phi = \phi - \phi^\dagger$ as in \ref{lem:real_vector_space_iso}.
 \end{definition}
 
-Note in particular if $\Phi = 0$ then $\phi = \phi^\dagger$ and hence
-$[\phi,\phi^\dagger] = 0$ so $\nabla$ is Einstein.
+Here the first equation in (\ref{eq:Hitchin_equations}) merely says that $\Phi$
+correspond to a holomorphic Higgs field on the holomorphic bundle
+$(E,\nabla_{0,1})$.  The second equation is a harmonicity condition generalising
+\ref{eq:yang_mills_condition}. In particular, if $\Phi = 0$ the $\phi =
+\phi^\dagger$ so $(\nabla,0)$ is Hitchin if, and only if, $\nabla$ is
+Yang-Mills.
+
+Now consider the space $A_\Phi^{ss}(E,h)$ of Hitchin connections.
+We once again have a Banach manifold
+\begin{align*}
+  A_\Phi^{ss}(E,h)_\ell := A_\Phi^{ss}(E,h) + 
+\end{align*}
 
 \subsection{Reducible Connections}
 
 It is crucial that the actions used to construct quotients of Banach manifolds
-are proper and free. We are now going to restrict $A_\nabla$ and $A^\Phi$ to
+are proper and free. We are now going to restrict $A_\nabla$ and $A_\Phi$ to
 ensure that this is the case. Of course we will have to deal with the loss of
 information that this entails at a later stage.
 
