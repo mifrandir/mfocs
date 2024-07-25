@@ -964,8 +964,8 @@ $f_I\in\Gamma^\infty(U,\Hom(E,F))$, $|I| := m'$, and we write
 \begin{align*}
   \partial^I = \frac{\partial^n}{\partial x_{i_1} \cdots \partial x_{i_{m'}}}.
 \end{align*}
-If it is possible to express $P$ in this way for every $x$, then we
-say that $P$ is a differential operator:
+If it is possible to express $P$ in this way for every everywhere,
+the we say that $P$ is a differential operator:
 
 \begin{definition}
   Let $E$ and $F$ be smooth bundles on $X$. A \emph{differential
@@ -973,13 +973,65 @@ say that $P$ is a differential operator:
   \begin{align*}
     P : \Gamma^\infty(X,E) \to \Gamma^\infty(X,F)
   \end{align*}
-  such that, for each $x\in X$, there is a chart $U\ni x$ with
-  local coordinates $(x_1,\ldots,x_n)$ trivialising $E$ and $F$ such that
-  $\restrict{P}{U}$ may be expressed as (\ref{eq:local_diff_operator}).
+  such that, for each $x\in X$, there is a chart $U\ni x$ trivialising $E$ and
+  $F$ such that $\restrict{P}{U}$ may be expressed as
+  (\ref{eq:local_diff_operator}).
 \end{definition}
 
-We want the matrix defined by the $f_I$ in (\ref{eq:local_diff_operator})
-to be invertible. To make this precise in a way that respects
+\begin{example}
+  Consider the operator 
+  \begin{align*}
+    d + d^* : \Omega^1_{\mathbb R}(C) \to \Omega^2_{\mathbb R}(C) \oplus \Omega^0_{\mathbb R}(C).
+  \end{align*}
+  Locally, in local coordinates $(x_1,x_2)$ around $x$ we may write
+  \begin{align*}
+    f_1 dx^1 + f_2 dx^2 \mapsto
+    (\partial_1 f_1 - \partial_2 f_2)dx^1\wedge dx^2
+    + \partial_1 f_1 + \partial_2 f_2 .
+  \end{align*}
+  Hence $d + d^*$ is a differential operator of order 1.
+\end{example}
+
+\begin{example}
+  Let $\nabla\in A_\nabla(E,h)$ be a connection.  Consider the operator
+  \begin{align}\label{eq:nabla_hat}
+    \hat\nabla := \nabla + \nabla^\dagger :
+    \Omega^1_{\mathbb R}(\mathfrak u(E,h)) \to
+    \Omega^2_{\mathbb R}(\mathfrak u(E,h)) \oplus
+    \Omega^0_{\mathbb R}(\mathfrak u(E,h))
+  \end{align}
+  where we have extended the connection in $\nabla$ to a connection
+  in $\End E$ using (\ref{ex:connection_on_end}) which
+  one may verify restricts to $\mathfrak u(E,h)$. This is a
+  differential operator of order 1.
+ \begin{proof}
+  If we have a trivialisation of $E$ around $x$ with coordinates orthonormal
+  $(x_1,x_2)$ we may choose an orthonormal basis $A^1,\ldots,A^{r^2}$ for
+  $\mathfrak u(r)$ and write
+  \begin{align}\label{eq:nabla_diff_operator}
+    \nabla\left(fdx^i\otimes A^j\right)
+    = \sum_k \partial_k f dx^k\wedge dx^i \otimes A^j 
+    - dx^i\wedge\sum_{i\ell m} f\nabla_{im\ell}dx^m\otimes A^\ell
+  \end{align}
+  and
+  \begin{align}\label{eq:nabla_adjoint}
+    \nabla^\dagger\left(fdx^i \otimes A^j\right)
+    = \sum_k \partial_k fdx^k\wedge dx^i\otimes A^j
+    - fdx^i \wedge \sum_{mn} \nabla_{jmn}dx^m\otimes A^n
+  \end{align}
+  where $\nabla_{jk}\in C^\infty(X)$ such that
+  $\nabla A^i = \sum_{jk}\nabla_{ijk}dx^j\otimes A^k$. Both 
+  $\nabla$ (\ref{eq:nabla_diff_operator}) and $\nabla^\dagger$
+  (\ref{eq:nabla_adjoint}) are differential operators of order 1 hence
+  $\hat\nabla$ (\ref{eq:nabla_hat}) is, too.
+ \end{proof} 
+\end{example}
+
+We will only care about top-order terms. It is going to turn out that
+requiring the matrix thus defined by the $f_I$ in (\ref{eq:local_diff_operator})
+to be invertible is a sufficient condition for the operator to be
+very well-behaved with respect to Sobolev completions. To make this precise
+in a way that respects
 change of coordinates, one usually refers only to the top-order terms.
 However, it is also possible to express this in a coordinate free way:
 
@@ -990,6 +1042,9 @@ However, it is also possible to express this in a coordinate free way:
   it holds that $P(f^m s)(x) \neq 0$.
 \end{definition}
 
+\begin{example}
+  
+\end{example}
 
 \begin{theorem}
   Let $P:E\to F$ be a map of smooth bundles on $X$ such that, for
@@ -1372,17 +1427,6 @@ Most importantly, we have the following:
   \end{align*}
   is a closed subspace.
   \begin{proof}
-    Write $\Omega^k = \Omega^k_{\mathbb R}(\mathfrak u(E,h))$.
-    We consider the operator
-    \begin{align*}
-      \hat\nabla := \nabla \oplus \nabla^\dagger :
-      \Omega^1 \to
-      \Omega^2 \oplus
-      \Omega^0
-    \end{align*}
-    where we have extended the connection in $\nabla$ to a connection
-    in $\End E$ using (\ref{ex:connection_on_end}) which
-    one easily sees to restrict to $\mathfrak u(E,h)$.
     This is an elliptic differential operator. \todo{justify}
     By elliptic regularity \missingcitation, the adjoint
     \begin{align*}
@@ -1489,7 +1533,7 @@ Indeed, this suffices to make the $G(E,h)_{\ell+1}$ action free.
   The action of $G(E,h)_{\ell+1}$ on $\mathcal A_\Phi(E,h)_\ell$
   restricts to a free action on $\mathcal A^{ss}_\nabla(E,h)_\ell$.
   \begin{proof}
-    Analogous to \ref{lem:free_action}.
+    See \ref{lem:free_action}.
   \end{proof}
 \end{lemma}
 
