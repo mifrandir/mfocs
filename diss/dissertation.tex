@@ -216,7 +216,7 @@ for $k > 0$,
   \Omega^k_{\mathbb{R}}(X) := \Gamma^\infty(X,\Lambda^k T^*X).
 \end{align*}
 We may complexify this to obtain
-$\Omega^k(X) := \Omega^k(X)\otimes_{\mathbb{R}} \mathbb{C}$.
+$\Omega^k_{\mathbb C}(X) := \Omega^k_{\mathbb R}(X)\otimes_{\mathbb{R}} \mathbb{C}$.
 The splitting $T^*_\mathbb{C} X = T^*_{1,0}X \oplus T^*_{0,1}X$
 leads us to define
 \begin{align*}
@@ -225,7 +225,7 @@ leads us to define
 \end{align*}
 and hence we have
 \begin{align*}
-  \Omega^j(X) = \bigoplus_{p+q=k} \Omega^{p,q}(X).
+  \Omega^j_{\mathbb C}(X) = \bigoplus_{p+q=k} \Omega^{p,q}(X).
 \end{align*}
 Moreover, the operator $d : \Omega^{p,q}(X) \to \Omega^{p+q+1}(X)$
 splits into $d = \partial + \dol$ where
@@ -261,12 +261,11 @@ In particular, we now have a family of complexes
 
 \subsection{Dolbeault Cohomology of Holomorphic Bundles}
 
-\todo{explain how holomorphic bundles give rise to $\dol$-operators}
 For a smooth bundle $E$ of rank $r$, consider the spaces of
 $E$-valued $k$-forms and $(p,q)$-forms, respectively,
 \begin{align*}
-  \Omega^k(X,E) := \Omega^k(X)\otimes\Gamma^\infty(X,E),\hspace{1cm}
-  \Omega^{p,q}(X,E) := \Omega^{p,q}(X)\otimes\Gamma^\infty(X,E).
+  \Omega^k(X,E)     & := \Omega^k_{\mathbb C}(X)\otimes_{C^\infty(X,\mathbb C)}\Gamma^\infty(X,E), \\
+  \Omega^{p,q}(X,E) & := \Omega^{p,q}(X)\otimes_{C^\infty(X,\mathbb C)}\Gamma^\infty(X,E).
 \end{align*}
 If we are given a holomorphic bundle $\mathcal E$ with underlying
 smooth bundle $E$
@@ -301,7 +300,7 @@ This leads us to the following definition:
     \dol_E : \Omega^0(X,E) \to \Omega^{0,1}(X,E)
   \end{align*}
   such that $\dol_E^2 = 0$ and, for all $s\in\Omega^0(X,E)$ and
-  $f\in \Omega^0(X)$,
+  $f\in \Omega^0_{\mathbb C}(X)$,
   \begin{align*}
     \dol_E (fs) = \dol f\otimes s + f \dol_E s.
   \end{align*}
@@ -368,17 +367,6 @@ holomorphic vector bundles:
 
 \todo{write about why Higgs bundles exist, what they're good for, yadda
   yadda}
-
-\begin{definition}
-  The \emph{canonical bundle} $\mathcal K_X$ on a complex manifold $X$
-  of dimension $n$ is the holomorphic vector bundle defined as
-  \begin{align*}
-    \mathcal K_X := \det T^*_{1,0} X := \wedge^n T^*_{1,0} X.
-  \end{align*}
-\end{definition}
-
-Note that the canonical bundle is a line bundle on every $X$.
-\todo{explain / cite}
 
 \begin{definition}
   Let $(E,\dol_E)$ be a holomorphic bundle on a complex manifold $X$.
@@ -570,15 +558,14 @@ space of holomorphic bundles.
 
 To construct a manifolds whose points are equivalence classes of
 holomorphic bundles, we need to take quotients of manifolds by
-group actions. To be precise, we are going to take a K\"ahler
-quotients of a Banach manifolds by actions of Banach Lie groups.
+group actions. To be precise, we are going to take quotients of
+Banach manifolds by actions of Banach Lie groups.
 
 There are a few things to take care of before this can be made
-precise. Firstly, we need to define what it means to be an infinite
-dimensional manifold and make sure our topological spaces satisfy
-the requirements. Secondly, we ought to define and obtain K\"ahler
-structures on the manifolds. Finally, we observe how to take quotients
-in this setting.
+precise. In this section we define what it means to be an infinite
+dimensional manifold. We will have to alter our topological spaces
+to satisfy the requirements. We are also going to see how maps
+lift to this new setting.
 
 Once again fix a smooth bundle $E$ of rank $r$ on a compact
 Riemann surface $C$.
@@ -602,7 +589,7 @@ vector bundles:
   \begin{align*}
     \nabla (fs) = df \otimes s + f\nabla s,
   \end{align*}
-  for all $f\in \Omega^0(X)$ and $s\in\Omega^0(X,E)$.
+  for all $f\in \Omega^0_{\mathbb C}(X)$ and $s\in\Omega^0(X,E)$.
 \end{definition}
 
 \begin{example}\label{ex:connection_on_end}
@@ -651,9 +638,9 @@ but they are not quite the same. To map one to the other, we are going
 to require some additional information. The correct geometric
 structure to consider is a metric:
 
-\begin{definition}\todo{fix the dual notation}
+\begin{definition}
   A \emph{hermitian metric} on $E$ is a smooth section $h$ of
-  $(E\otimes\bar E)^\vee$ that is sesquilinear and positive definite.
+  $(E\otimes\bar E)^*$ that is sesquilinear and positive definite.
   That is, $h(s,\bar t) = \overline{h(t,\bar s)}$ and $h(s,\bar s) > 0$
   if $s \neq 0$.
 \end{definition}
@@ -669,45 +656,47 @@ Fortunately for us, it will always be possible to choose a metric:
 \end{theorem}
 
 Fix such a metric $h$ on $E$. We are going to restrict our attention to
-connections that are compatible with this metric:
+connections that are compatible with this metric. We call such
+connections unitary because they correspond to connections
+of the unitary principal bundle corresponding to $(E,h)$.
 
 \begin{definition}
   A connection $\nabla$ in $E$ is \emph{$h$-unitary}
   if, and only if, for all $s,t\in\Omega^0(X,E)$,
-  \begin{align*}
+  \begin{align}\label{eq:unitary_connection}
     dh(s,\bar t) = h(\nabla s,\bar t) + h(s,\overline{\nabla t}).
-  \end{align*}
+  \end{align}
 \end{definition}
+
+\begin{lemma}
+  Every hermitian bundle $(E,h)$ admits a $h$-unitary connection.
+  \begin{proof}
+    Choose any connection $\nabla$ and take
+    $\nabla' := \frac{1}{2}(\nabla + \nabla^\dagger)$
+    where the adjoint is taken in the sense of 
+    (\ref{eq:unitary_connection}).
+  \end{proof}
+\end{lemma}
 
 Now consider the set of all connections that respect $h$ and induce
 some Dolbeault operator:
 \begin{align*}
   \mathcal A_\nabla(E,h) := \left\lbrace{\text{$h$-unitary holomorphic connections $\nabla$ in $E$}}\right\rbrace.
 \end{align*}
-Analogous to $\mathcal A_{\dol} (E)$, this is an affine space. To see what it is
-modelled on, consider the principal $GL_r(\mathbb{C})$-bundle whose fibres \todo{this is
-  not correct!}
-are the automorphisms of the fibres of $E$. We may denote this bundle by $GL(E)$.
-We then have a principal $U(r)$-bundle $U(E,h)$ of $h$-unitary automorphisms
-of $E$. By taking Lie algebras we obtain vector bundles $\mathfrak{gl}(E)$
-and $\mathfrak u(E)$. In particular, we have a sequence of inclusions
-\begin{align*}
-  \Omega^0_{\mathbb{R}}(C,\mathfrak u(E))
-  \subseteq \Omega^0_{\mathbb{R}}(C,\mathfrak{gl}(E))
-  \subseteq \Omega^0(C,\mathfrak{gl}(E)).
-\end{align*}
-The reader who is unfamiliar with principal bundles
-ought not to be discouraged: $\mathfrak{gl}(E)$ is simply the smooth complex
-vector bundle $\End E$ and $\mathfrak{u}(E)$ is the real vector subbundle
-of skew-hermitian endomorphisms of $E$.
+Analogous to $\mathcal A_{\dol} (E)$, this is an affine space.
+As the connections are required to be unitary, their differences
+are given by sections of the real smooth bundle $\End(E,h)$ of
+skew-hermitian endomorphisms. Just as the fibres of $\End(E)$
+are Lie algebras of the automorphism group $\Aut(E_x)\cong GL_r(\mathbb C)$,
+the fibres of $\End(E,h)$ are Lie algebras of $\Aut(E_x,h)\cong U(r)$.
 
 \begin{lemma}
   $\mathcal A_\nabla(E,h)$ is an affine space modelled on
-  $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
+  $\Omega^1_{\mathbb{R}}(C,\End(E,h))$.
   \begin{proof}
-    The operations are induced by $\Omega^1(C,\mathfrak{gl}(E))$.
+    The operations are induced by $\Omega^1(C,\End(E))$.
     Verifying that general $\nabla + \xi$ for
-    $\xi\in\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$
+    $\xi\in\Omega^1_{\mathbb{R}}(C,\End(E,h))$
     satsify the Leibniz rule and the integrability
     condition $(\nabla_{0,1})^2=0$ is analogous to
     \ref{lem:affine_space_of_dolbeault_operators}. Hence $\nabla + \xi$
@@ -728,7 +717,7 @@ striking:
 
 \begin{lemma}\label{lem:real_vector_space_iso}
   As real vector spaces,
-  $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))\cong\Omega^{0,1}(C,\mathfrak{gl}(E))$.
+  $\Omega^1_{\mathbb{R}}(C,\End(E,h))\cong\Omega^{0,1}(C,\End(E))$.
   \begin{proof}
     Now recall the isomorphism (\ref{eq:holomorphic_tangent_bundle}) of
     smooth vector bundles $T^* X \cong T^*_{1,0} X$. Composing with
@@ -736,18 +725,23 @@ striking:
     $T^*X \cong T^*_{0,1}$. Hence we have an $\mathbb{R}$-linear
     isomorphism
     \begin{align*}
-      \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))
-      \cong \Gamma^\infty(C,T^*_{0,1}C \otimes_{\mathbb{R}}\mathfrak u(E))
+      \Omega^1_{\mathbb{R}}(C,\End(E,h))
+      \cong \Gamma^\infty(C,T^*_{0,1}C \otimes_{\mathbb{R}}\End(E,h))
     \end{align*}
     Noticing that $T_{0,1}^* C$ is a complex vector bundle
     we find
     \begin{align*}
-      \Gamma^\infty(C,T^*_{0,1}C \otimes_{\mathbb{R}}\mathfrak u(E))
-      \cong\Gamma^\infty(C,T^*_{0,1}C \otimes\mathfrak u(E)_{\mathbb{C}}).
+      \Gamma^\infty(C,T^*_{0,1}C \otimes_{\mathbb{R}}\End(E,h))
+      \cong\Gamma^\infty(C,T^*_{0,1}C \otimes\End(E,h)_{\mathbb{C}}).
     \end{align*}
     Now the claim follows from the isomorphism of Lie algebras
-    $\mathfrak{gl}_n(\mathbb{C})\cong\mathfrak u(n)_{\mathbb{C}}$
-    given by $A \mapsto A-\mathcal A^\dagger$.
+    \begin{align*}
+      \End(E)
+      =\mathfrak{gl}_n(\mathbb{C})
+      \cong\mathfrak u(n)_{\mathbb{C}}
+      =\End(E,h)_{\mathbb C}
+    \end{align*}
+    given by $A \mapsto A-A^\dagger$.
   \end{proof}
 \end{lemma}
 
@@ -796,7 +790,7 @@ $\Omega^1_{\mathbb{R}}(C,\mathfrak{u}(E))$. This is eventually going
 to help us introduce a symplectic structure on $\mathcal A_{\dol} (E)$ and hence
 take a symplectic quotient. Let us do the same for the space of Higgs
 bundles $\mathcal A_\phi(E)$. We are going to identify $\mathcal A_\phi$ with an affine
-space modelled on $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))^{\oplus 2}$.
+space modelled on $\Omega^1_{\mathbb{R}}(C,\End(E,h))^{\oplus 2}$.
 Once again fix a hermitian metric $h$ on $E$.
 
 Just as holomorphic bundles correspond to connections, Higgs bundles
@@ -805,16 +799,16 @@ correspond to Higgs connections.
 \begin{definition}
   A \emph{Higgs connection} in $E$ is a pair $(\nabla,\Phi)$
   where $\nabla$ is a $h$-unitary connection in $E$ and
-  $\Phi\in\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
+  $\Phi\in\Omega^1_{\mathbb{R}}(C,\End(E,h))$.
 \end{definition}
 
 Hence we have the space
 \begin{align}\label{eq:Higgs_connections_space}
-  \mathcal A^{\Phi} := \mathcal A_\nabla \times \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))
+  \mathcal A^{\Phi} := \mathcal A_\nabla \times \Omega^1_{\mathbb{R}}(C,\End(E,h))
 \end{align}
 which naturally has the structure of an affine space modelled on
 the real vector space
-$\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))\oplus\Omega_{\mathbb{R}}^1(C,\mathfrak u(E))$. Using the isomorphism (\ref{lem:real_vector_space_iso})
+$\Omega^1_{\mathbb{R}}(C,\End(E,h))\oplus\Omega_{\mathbb{R}}^1(C,\End(E,h))$. Using the isomorphism (\ref{lem:real_vector_space_iso})
 and the map given by (\ref{thm:chern_connection}) we have an inclusion
 of topological spaces
 \begin{align*}
@@ -842,7 +836,7 @@ spaces modelled on infinite dimensional vector spaces. In the next
 section we are going to require our infinite dimensional manifolds to
 be locally isomorphic to Banach spaces, rather than arbitrary
 vector spaces. While we are going to profit from this in the long run,
-it means that we have to turn $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$
+it means that we have to turn $\Omega^1_{\mathbb{R}}(C,\End(E,h))$
 into a Banach space. We are going to do this by using a completion of
 the space of smooth sections.
 
@@ -857,12 +851,13 @@ is the case with many of the concepts we encounter throughout this paper,
 these Sobolev spaces are interesting geometric objects to
 contemplate but we are going to use them as a tool. The main
 benefit we are going to get from using this particular Banach space
-completion is the theory of elliptic regularity. \missingcitation
+completion is the theory of elliptic regularity as presented in
+\ref{sec:elliptic_regularity}.
 
 Note that the metrics on $E$ and $X$ define norms on smooth sections
 of $E$ and $T^*X$, respectively, and hence on all
 $\Omega^k_{\mathbb{R}}(X,E)$.
-Moreover, the metric on $X$ induces a volume form $d\text{vol}_X$.
+Moreover, the metric on $X$ induces a volume form $\text{vol}_X$.
 With this in mind, we are ready to define the Sobolev norm on
 $\Gamma^\infty(X,E)$:
 
@@ -872,15 +867,14 @@ $\Gamma^\infty(X,E)$:
   $\Gamma^\infty(X,E)$ by
   \begin{align*}
     \Vert s\Vert_{p,\ell}^\nabla := \left(
-    \sum_{i=0}^\ell \int_X \Vert \nabla^i s \Vert^p d\text{vol}_X
+    \sum_{i=0}^\ell \int_X \Vert \nabla^i s \Vert^p\:\text{vol}_X
     \right)^{1/p}.
   \end{align*}
 \end{definition}
-\begin{example}
-  Observe that Sobolev norms generalise $L^p$ norms. In particular,
-  we have $\Vert\cdot\Vert^\nabla_{p,0} = \Vert\cdot\Vert_{L^p}$.
-\end{example}
-Note that the norm depends on the choice of connection $\nabla$. Of
+
+Observe that Sobolev norms generalise $L^p$ norms. In particular,
+we have $\Vert\cdot\Vert^\nabla_{p,0} = \Vert\cdot\Vert_{L^p}$.
+Further, the norm depends on the choice of connection $\nabla$. Of
 course, we do not want moduli spaces to have the same dependency. Hence
 we establish the following:
 \begin{lemma}
@@ -892,7 +886,7 @@ we establish the following:
   \end{proof}
 \end{lemma}
 
-Hence we are justified in defining a completion that does not depend
+Therefore we are justified in defining a completion that does not depend
 on the connection:
 
 \begin{definition}
@@ -990,13 +984,13 @@ the we say that $P$ is a differential operator:
   example slightly, consider the operator
   \begin{align}\label{eq:nabla_hat}
     \hat\nabla := \nabla + \nabla^\dagger :
-    \Omega^1_{\mathbb R}(\mathfrak u(E,h)) \to
-    \Omega^2_{\mathbb R}(\mathfrak u(E,h)) \oplus
-    \Omega^0_{\mathbb R}(\mathfrak u(E,h))
+    \Omega^1_{\mathbb R}(\End(E,h)) \to
+    \Omega^2_{\mathbb R}(\End(E,h)) \oplus
+    \Omega^0_{\mathbb R}(\End(E,h))
   \end{align}
   where we have extended the connection in $\nabla$ to a connection
   in $\End E$ using (\ref{ex:connection_on_end}) which
-  one may verify restricts to $\mathfrak u(E,h)$. This is a
+  one may verify restricts to $\End(E,h)$. This is a
   differential operator of order 1.
   \begin{proof}
     If we have a trivialisation of $E$ around $x$ with coordinates orthonormal
@@ -1051,19 +1045,12 @@ To define infinite dimensional manifolds, we are going to replace
 $\mathbb{C}^n$ with infinite dimensional vector spaces. Of course,
 the point of the usual manifold definition is to facilitate analysis
 on a wider range of topological spaces. To this end, we are going to
-restrict our attention to the case of Banach spaces:
-
-\begin{definition}
-  A \emph{Banach manifold} over a Banach space $V$ is a locally ringed
-  space locally isomorphic to $(V,C^\infty_V)$ where $C^\infty_V$ is the
-  sheaf of smooth functions on $V$.
-\end{definition}
-
-Of course Banach manifolds come with all the bells and whistles that
-we know and love. In particular, we have smooth maps of Banach manifolds,
-vector bundles, tangent and cotangent spaces, derivatives, and
-differential forms. \todo{doublecheck which of these we really need
-  and which we need to define in more detail}
+restrict our attention to the case of Banach spaces. While a brief
+definition in the sense of the paragraph above would be correct,
+it would also be unhelpful. Instead we are going to consider some
+examples. The reader interested in a more holistic
+introduction may consult any text on global analysis such
+as \cite[Chapter 7]{kahn1982} or \cite{bc2009}.
 
 \begin{example}
   Every smooth manifold is locally isomorphic to
@@ -1073,30 +1060,30 @@ differential forms. \todo{doublecheck which of these we really need
 
 \begin{example}
   Let us consider our main applications. We have the affine space
-  $\mathcal A_\nabla(E,h)$ modelled on $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))$.
+  $\mathcal A_\nabla(E,h)$ modelled on $\Omega^1_{\mathbb{R}}(C,\End(E,h))$.
   For each $\ell \geq 0$, we have the corresponding Sobolev completion
   \begin{align*}
-    \mathcal A_\nabla(E,h)_\ell := \mathcal A_\nabla(E,h) + \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell
+    \mathcal A_\nabla(E,h)_\ell := \mathcal A_\nabla(E,h) + \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell
   \end{align*}
   which are naturally Banach manifolds.
   In particular, for each $\nabla\in \mathcal A_\nabla(E,h)_\ell$, we have the
-  cotangent space
+  tangent space
   \begin{align*}
     T^*_\nabla \mathcal A_\nabla(E,h)_\ell
-    = \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell.
+    = \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell.
   \end{align*}
   Noticing that the direct sum of Banach spaces remains a Banach space,
   the affine space (\ref{eq:Higgs_connections_space}) of Higgs connections also
   extends to a Banach manifold
   \begin{align*}
-    \mathcal A_\Phi(E,h)_\ell := \mathcal A_\Phi(E,h) + \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell
-    \oplus \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell
+    \mathcal A_\Phi(E,h)_\ell := \mathcal A_\Phi(E,h) + \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell
+    \oplus \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell
   \end{align*}
   with the obvious cotangent space at $(\nabla,\Phi)$:
   \begin{align*}
     T^*_{\nabla,\Phi} \mathcal A_\Phi(E,h)_\ell
-    = \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell
-    \oplus \Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell
+    = \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell
+    \oplus \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell
   \end{align*}
 \end{example}
 
@@ -1112,7 +1099,7 @@ differential forms. \todo{doublecheck which of these we really need
   analogue of the regular value theorem. In particular,
   the tangent space at $g\in U(E,h)_\ell$
   \begin{align*}
-    T_g U(E,h)_\ell = W_{2,\ell}(C,\mathfrak u(E)).
+    T_g U(E,h)_\ell = W_{2,\ell}(C,\End(E,h)).
   \end{align*}
 \end{example}
 
@@ -1126,6 +1113,12 @@ the analytic moduli spaces of holomorphic bundles that we are after. To do this,
 one needs to ensure that the group actions are sufficiently well-behaved. Moreover,
 we need to ensure that the actions on affine spaces extend to a Banach Lie group
 action on Banach manifolds.
+
+We will make see which of properties of our actions are necessary to
+obtain a geometrically well-behaved quotient. A lot of work will go into justifying why
+these properties are attained. In some cases we will have to
+restrict our moduli spaces to avoid some special cases while in others
+the theory of elliptic operators is going to help us out.
 
 \subsection{Proper and Free Group Actions}
 
@@ -1191,7 +1184,7 @@ the quotient are locally indistinguishable, as one expects from manifolds.
 \begin{example}\label{ex:not_free}
   Consider the action of $U(E,h)$ on $\mathcal A_\nabla(E)$. This is not a free action
   because scalar multiplication commutes with the connection. That is,
-  for all $\lambda\in U(1)$, $g\in U(E)$, and $\nabla\in \mathcal A_\nabla(E,h)$,
+  for all $\lambda\in U(1)$, $g\in U(E,h)$, and $\nabla\in \mathcal A_\nabla(E,h)$,
   it holds that $\lambda g\cdot \nabla = \nabla$. This flaw is easily fixed,
   however. In fact, we immediately have an action of
   \begin{align*}
@@ -1229,7 +1222,7 @@ at the identity of a Banach Lie group may be equipped with a Lie bracket
 and hence is called the Lie algebra of the group.
 
 \begin{example}
-  The Lie algebra of $U(E,h)_\ell$ is $W_{2,\ell}(C,\mathfrak u(E))$.
+  The Lie algebra of $U(E,h)_\ell$ is $W_{2,\ell}(C,\End(E,h))$.
 \end{example}
 
 Similarly, a action of a Banach Lie group on a Banach manifold
@@ -1247,7 +1240,7 @@ actions:
   \begin{align*}
     (g,\nabla) & \mapsto g\nabla g^{-1}.
   \end{align*}
-  Note that, if we fix $\nabla_0\in\Omega^1(C,\mathfrak u(E,h))$ and write
+  Note that, if we fix $\nabla_0\in\Omega^1(C,\End(E,h))$ and write
   $\nabla = \nabla_0 + $
   for $s\in\Omega^0_{\mathbb{R}}(C,E)$ we have
   \begin{align*}
@@ -1260,13 +1253,6 @@ actions:
   \todo{mention that they're free and proper}
 \end{example}
 
-Recall the infinitesimal action
-$\rho_* : \mathfrak g \to \Gamma^\infty(X,TX)$ given by
-\begin{align*}
-  \rho_*(\xi)_x := \restrict{\frac{d}{dt}}{t=0} \exp(t\xi)\cdot x
-\end{align*}
-at $x\in X$.
-
 All of our recent discussions about proper and free actions, Sobolev
 completions, and Banach manifolds are motivated by the next theorem.
 In particular, it will allow us to construct moduli spaces as, possibly
@@ -1276,7 +1262,8 @@ infinite dimensional, Banach manifolds:
   Consider a proper free action $\rho : G\times X\to X$ of a Banach
   Lie group $G$ on a Banach manifold $X$. If each tangent space
   $T_x(G\cdot x) \subseteq T_x X$ is closed and complemented then
-  $X/G$ is a Banach manifold and $TX/\rho_*(\mathfrak g) \cong T(X/G)$.
+  $X/G$ is a Banach manifold and $T_x X/T_x (G\cdot x) \cong T_x(X/G)$
+  for all $x\in X$.
   \todo{doublecheck}
   \begin{proof}
     The idea is to construct a slice at each point $x\in X$, i.e. a submanifold
@@ -1287,7 +1274,7 @@ infinite dimensional, Banach manifolds:
     at every $x\in X$ gives us the manifold structure on $X/G$. Now the tangent space
     to $X/G$ at the equivalence class of $x$ is
     \begin{align}\label{eq:banach_quotient_tangent}
-      T_x S_x = T_x X / T_x (G\cdot x) = T_x X/\rho_*(\mathfrak g)_x.
+      T_x S_x = T_x X / T_x (G\cdot x).
     \end{align}
     The difficult part is making sure that a slice exists at every $x\in X$. One may use
     one of the established theorems such as \cite[Theorem 3.28]{diez2019}
@@ -1310,7 +1297,7 @@ Hilbert spaces, all closed subspaces in our examples will automatically be compl
   on $U(E,h)$ via $(\lambda,g)\mapsto \lambda g$. Moreover, each tangent space
   \begin{align*}
     T_g(U(1)g) =
-    i\mathbb{R} \subseteq W_{2,\ell}(C,\mathfrak u(E))
+    i\mathbb{R} \subseteq W_{2,\ell}(C,\End(E,h))
   \end{align*}
   is finite-dimensional and hence closed and complemented.  Thus the quotient
   \begin{align*}
@@ -1318,7 +1305,7 @@ Hilbert spaces, all closed subspaces in our examples will automatically be compl
   \end{align*}
   is a Banach manifold whose tangent space at $g\in G(E,h)_\ell$ is
   \begin{align*}
-    T_g G(E,h)_\ell = W_{2,\ell}(C,\mathfrak u(E,h))/i\mathbb{R}.
+    T_g G(E,h)_\ell = W_{2,\ell}(C,\End(E,h))/i\mathbb{R}.
   \end{align*}
 \end{example}
 
@@ -1335,7 +1322,7 @@ In the next sections we are going to rectify both issues by restricting the spac
 sufficiently. Indeed, our argument in (\ref{ex:not_free}) already partly tells us
 what the correct subsets to consider will be.
 
-\subsection{Elliptic Regularity}
+\subsection{Elliptic Regularity}\label{sec:elliptic_regularity}
 
 Passing to Sobolev spaces has allowed us to use the language of
 Banach manifolds and Banach Lie groups but it has come with two
@@ -1364,7 +1351,7 @@ The following is a more algebraic condition:
 
 \begin{definition}\label{def:elliptic_operator}
   A differential operator $P:E\to F$ is \emph{elliptic} if
-  $\rank E = \rank F$ and, for all $x\in X$, all $s\in\Omega^0(E)$,
+  $\rank E = \rank F$ and, for all $x\in X$, all $s\in\Omega^0_{\mathbb C}(E)$,
   and all $f\in C^\infty(X,\mathbb R)$ such that $s(x) \neq 0$,
   $f(x) = 0$, and $df(x) \neq 0$, it holds that $P(f^m s)(x) \neq 0$.
 \end{definition}
@@ -1415,13 +1402,13 @@ of orbits are closed and hence complemented.
   \end{proof}
 \end{theorem}
 
-\begin{example}
+\begin{example}\label{ex:nabla_hat_elliptic}
   Using \ref{lem:elliptic_adjoints} we have an elliptic operator
   \begin{align*}
     \hat\nabla = \nabla + \nabla^\dagger :
-    \Omega^0_{\mathbb R}(\mathfrak u(E,h)) \oplus
-    \Omega^2_{\mathbb R}(\mathfrak u(E,h)) \to
-    \Omega^1_{\mathbb R}(\mathfrak u(E,h)).
+    \Omega^0_{\mathbb R}(\End(E,h)) \oplus
+    \Omega^2_{\mathbb R}(\End(E,h)) \to
+    \Omega^1_{\mathbb R}(\End(E,h)).
   \end{align*}
   In particular,
   \begin{align*}
@@ -1431,7 +1418,7 @@ of orbits are closed and hence complemented.
   \begin{equation*}
     % https://q.uiver.app/#q=WzAsNSxbMCwwLCIwIl0sWzEsMCwiXFxPbWVnYV4wX3tcXG1hdGhiYiBSfShcXG1hdGhmcmFrIHUoRSxoKSkiXSxbMiwwLCJcXE9tZWdhXjFfe1xcbWF0aGJiIFJ9KFxcbWF0aGZyYWsgdShFLGgpKSJdLFszLDAsIlxcT21lZ2FeMl97XFxtYXRoYmIgUn0oXFxtYXRoZnJhayB1KEUsaCkpIl0sWzQsMCwiMCJdLFswLDFdLFsxLDIsIlxcbmFibGEiXSxbMiwzLCJcXG5hYmxhIl0sWzMsNF1d
     \begin{tikzcd}
-      0 & {\Omega^0_{\mathbb R}(\mathfrak u(E,h))} & {\Omega^1_{\mathbb R}(\mathfrak u(E,h))} & {\Omega^2_{\mathbb R}(\mathfrak u(E,h))} & 0
+      0 & {\Omega^0_{\mathbb R}(\End(E,h))} & {\Omega^1_{\mathbb R}(\End(E,h))} & {\Omega^2_{\mathbb R}(\End(E,h))} & 0
       \arrow[from=1-1, to=1-2]
       \arrow["\nabla", from=1-2, to=1-3]
       \arrow["\nabla", from=1-3, to=1-4]
@@ -1440,7 +1427,7 @@ of orbits are closed and hence complemented.
   \end{equation*}
   which extends to Sobolev spaces.  Noting $\im\nabla_\ell^\dagger$
   naturally is $W_{2,\ell}$-orthogonal to $\ker\nabla_{\ell}=\im\nabla_{\ell+1}$
-  in $\Omega^1_{\mathbb R}(\mathfrak u(E,h))_\ell$, we find that
+  in $\Omega^1_{\mathbb R}(\End(E,h))_\ell$, we find that
   $\im\nabla_\ell$ and $\im\nabla_\ell^\dagger$ must be individually
   closed. \todo{doublecheck the $\ell$s here.}
 \end{example}
@@ -1523,13 +1510,15 @@ Thus we have a proper $G(E,h)$-action on $\mathcal A_\nabla(E,h)$.
   \begin{proof}
     This is a rather straightforward argument using an analogue
     of the regular value theorem for Banach manifolds. The map
-    to consider is the moment map for the $G(E,h)$-action on
-    $\mathcal A_\nabla(E,h)_\ell$ considered as a symplectic Banach manifold.
+    to consider is the moment map for the $G(E,h)_{\ell+1}$-action
+    on $\mathcal A_\nabla(E,h)_\ell$ considered as a symplectic
+    Banach manifold, which we have not introduced for brevity.
+    \missingcitation
   \end{proof}
 \end{lemma}
 Just as in the finite dimensional case, the proper $G(E,h)_{\ell+1}$
 action restricts to $\mathcal A^{ss}_\nabla(E,h)_\ell$.
-Most importantly, we have the following:
+More importantly, we have the following:
 \begin{lemma}
   Let $\nabla\in \mathcal A^{ss}_\nabla(E,h)_{\ell}$. Then the tangent space
   \begin{align*}
@@ -1537,32 +1526,40 @@ Most importantly, we have the following:
   \end{align*}
   is a closed subspace.
   \begin{proof}
-    This is an elliptic differential operator. \todo{justify}
-    By elliptic regularity \missingcitation, the adjoint
+    The key observation is that, as a subspace of
+    $\Omega^1(C,\End(E,h))$,
     \begin{align*}
-      \hat\nabla^\dagger := \nabla^\dagger + \nabla :
-      \Omega^2 \oplus
-      \Omega^0 \to
-      \Omega^1
+      T_\nabla (G(E,h)\cdot\nabla) = \nabla\Omega^0(C,\End(E,h)).
     \end{align*}
-    is also elliptic and hence extends to a Fredholm operator
+    To see this, recall the infinitesimal action
     \begin{align*}
-      \hat\nabla^\dagger :
-      \Omega^2_\ell \oplus
-      \Omega^0_\ell \to
-      \Omega^1_\ell.
+      \rho_\nabla(A) := \restrict{\frac{d}{dt}}{t=0} \exp(tA)\cdot\nabla.
     \end{align*}
+    This linearises the action and determines the embedding
+    $T_\nabla G(E,h)_{\ell+1}\subseteq T_\nabla \mathcal A(E,h)_\ell$.
+    Direct calculation shows $\rho_\nabla(A) = \nabla A$
+    and hence we have the diagram \todo{the $\ell$'s here
+      are a little troublesome still, but there certainly is some
+      Fredholm operator that $\nabla$ gives rise to whose image is what we
+      are looking for so nothing's going to break}
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsNSxbMSwxLCJcXE9tZWdhXjAoXFxtYXRoZnJhayB1KEUsaCkpX1xcZWxsIl0sWzQsMSwiXFxPbWVnYV4xKFxcbWF0aGZyYWsgdShFLGgpKV9cXGVsbCJdLFswLDEsIlRfXFxuYWJsYShHKEUsaClfe1xcZWxsKzF9XFxjZG90IFxcbmFibGEpIl0sWzAsMCwiVF9lIEcoRSxoKV97XFxlbGwrMX0iXSxbNCwwLCJUX1xcbmFibGFcXG1hdGhjYWwgQV9cXG5hYmxhKEUsaClfXFxlbGwiXSxbMCwxLCJcXG5hYmxhX1xcZWxsIl0sWzQsMSwiXFxjb25nIiwyXSxbMiwwLCJcXGNvbmciXSxbMywyLCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMyw0LCJcXHJob19cXG5hYmxhIl1d
+      \begin{tikzcd}
+        {T_e G(E,h)_{\ell+1}} &&&& {T_\nabla\mathcal A_\nabla(E,h)_\ell} \\
+        {T_\nabla(G(E,h)_{\ell+1}\cdot \nabla)} & {\Omega^0(\End(E,h))_\ell} &&& {\Omega^1(\End(E,h))_\ell}
+        \arrow["{\rho_\nabla}", from=1-1, to=1-5]
+        \arrow[two heads, from=1-1, to=2-1]
+        \arrow["\cong"', from=1-5, to=2-5]
+        \arrow["\cong", from=2-1, to=2-2]
+        \arrow["{\nabla_\ell}", from=2-2, to=2-5]
+      \end{tikzcd}
+    \end{equation*}
     In particular,
     \begin{align*}
-      \hat\nabla^\dagger(
-      \Omega^2_\ell \oplus
-      \Omega^0_\ell)
-      =
-      \nabla^\dagger\Omega^2_\ell \oplus
-      \nabla\Omega^0_\ell.
+      T_\nabla(G(E,h)_{\ell+1}\cdot\nabla) = \im\rho_\lambda = \im\nabla_\ell.
     \end{align*}
-    Is the image of a Fredholm operator, hence closed.
-    \missingproof
+    Now the claim follows from \ref{ex:nabla_hat_elliptic} as $\im\nabla_\ell$
+    is closed in $\Omega^1(C,\End(E,h))_\ell$.
   \end{proof}
 \end{lemma}
 
@@ -1695,7 +1692,7 @@ Note however that these spaces need not admit Banach manifold structures.
   \begin{proof}[Proof sketch]
     A full proof is given in \cite[223-225]{kobayashi1987}. The key idea is to look
     at curves in $M^{\dol}(E)$ to obtain the tangent space at $\nabla$ as a set of
-    equivalence classes in $\Omega^1_{\mathbb{R}}(C,\mathfrak u(E))_\ell$. One then
+    equivalence classes in $\Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell$. One then
     identifies this space with $H^{0,1}(C,\End(E,\dol_E))$ via a sequence of calculations
     involving harmonic forms.
   \end{proof}
@@ -1740,10 +1737,6 @@ Knowing the tangent space also allows us to calculate the dimension:
 \section{To Do}
 
 \begin{itemize}
-  \item motivate Einstein connections
-  \item show that action on Einstein connections yields closed and complemented orbits
-  \item show that irreducible Einstein connections form submanifold
-  \item show that tangent spaces to orbits are closed
   \item show that the moduli spaces do not depend on $\ell$
 \end{itemize}
 
