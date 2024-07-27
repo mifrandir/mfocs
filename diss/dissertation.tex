@@ -363,6 +363,19 @@ holomorphic vector bundles:
   \end{align*}
 \end{definition}
 
+As most cohomology theories, this is agrees with sheaf cohomology
+in some sense. In particular, we have Dolbeault's theorem:
+
+\begin{theorem}[Dolbeault]\label{thm:dolbeault}
+  Let $(E,\dol_E)$ be a holomorphic vector bundle on a complex manifold
+  $X$ of dimension $n$. Then
+  \begin{align*}
+    H^{p,q}(X,(E,\dol_E)) = H^q(X,(E,\dol_E)\otimes K^{\otimes p})
+  \end{align*}
+  where $K$ is the \emph{canonical bundle}
+  $K_X := \bigwedge^n T_{1,0}^* X$.
+\end{theorem}
+
 \subsection{Higgs Bundles}
 
 \todo{write about why Higgs bundles exist, what they're good for, yadda
@@ -379,6 +392,14 @@ We immediately observe that, in the case where $X=C$ is a compact
 Riemann surface, the condition $\phi\wedge\phi=0$ is trivially
 satisfied. However, if one is to consider moduli spaces of Higgs bundles
 over more general base spaces then this condition is quite important.
+
+Observe that a Higgs field is a section of $\End E \otimes K$. 
+Recalling the trivial fact that $H^0(X,(E,\dol_E))=\Gamma(X,(E,\dol_E))$
+in sheaf cohomology, we use Dolbeault's theorem \ref{thm:dolbeault} to
+find that the space of Higgs bundles is
+\begin{align*}
+  \Gamma(X,\End(E,\dol_E)\otimes K) = H^{1,0}(X,\End(E,\dol_E)\otimes K).
+\end{align*}
 
 Consider Higgs bundles $(E,\dol_E,\phi_E)$ and $(F,\dol_F,\phi_F)$
 and a map of smooth bundles $f:E\to F$. We say $f$ is a map of Higgs
@@ -639,7 +660,7 @@ to require some additional information. The correct geometric
 structure to consider is a metric:
 
 \begin{definition}
-  A \emph{hermitian metric} on $E$ is a smooth section $h$ of
+  A \emph{Hermitian metric} on $E$ is a smooth section $h$ of
   $(E\otimes\bar E)^*$ that is sesquilinear and positive definite.
   That is, $h(s,\bar t) = \overline{h(t,\bar s)}$ and $h(s,\bar s) > 0$
   if $s \neq 0$.
@@ -652,7 +673,7 @@ Fortunately for us, it will always be possible to choose a metric:
 
 \begin{theorem}\label{thm:hermitian_structures_exist}\missingcitation
   Every smooth vector bundle on a compact complex manifold admits a
-  hermitian metric.
+  Hermitian metric.
 \end{theorem}
 
 Fix such a metric $h$ on $E$. We are going to restrict our attention to
@@ -669,7 +690,7 @@ of the unitary principal bundle corresponding to $(E,h)$.
 \end{definition}
 
 \begin{lemma}
-  Every hermitian bundle $(E,h)$ admits a $h$-unitary connection.
+  Every Hermitian bundle $(E,h)$ admits a $h$-unitary connection.
   \begin{proof}
     Choose any connection $\nabla$ and take
     $\nabla' := \frac{1}{2}(\nabla + \nabla^\dagger)$
@@ -686,7 +707,7 @@ some Dolbeault operator:
 Analogous to $\mathcal A_{\dol} (E)$, this is an affine space.
 As the connections are required to be unitary, their differences
 are given by sections of the real smooth bundle $\End(E,h)$ of
-skew-hermitian endomorphisms. Just as the fibres of $\End(E)$
+skew-Hermitian endomorphisms. Just as the fibres of $\End(E)$
 are Lie algebras of the automorphism group $\Aut(E_x)\cong GL_r(\mathbb C)$,
 the fibres of $\End(E,h)$ are Lie algebras of $\Aut(E_x,h)\cong U(r)$.
 
@@ -707,7 +728,7 @@ the fibres of $\End(E,h)$ are Lie algebras of $\Aut(E_x,h)\cong U(r)$.
       h((\nabla + \xi)s, \bar t) + h(s,\overline{(\nabla + \xi)t})
       =  h(\nabla s, \bar t) + h(s,\overline{\nabla t})
     \end{align*}
-    as $\xi$ is skew-hermitian.
+    as $\xi$ is skew-Hermitian.
   \end{proof}
 \end{lemma}
 
@@ -751,7 +772,7 @@ Indeed, in the presence of $h$, every Dolbeault operator has a unique
 compatible connection:
 
 \begin{theorem}\label{thm:chern_connection}
-  If $h$ is a hermitian metric on $E$ and $\dol_E$ is a Dolbeault
+  If $h$ is a Hermitian metric on $E$ and $\dol_E$ is a Dolbeault
   operator then there exists a unique connection $\nabla^h(\dol_E)$
   that is compatible with both $h$ and $\dol_E$.
   \begin{proof}
@@ -765,8 +786,11 @@ $\nabla \mapsto \nabla_{0,1}$. It is not difficult to verify that this
 is a homeomorphism of affine spaces which is locally given by
 the $\mathbb{R}$-linear isomorphism in \ref{lem:real_vector_space_iso}.
 
-Let us abuse notation slightly and denote by $U(E,h)$ the group of smooth
-$h$-unitary sections of $\End E$. That is, $U(E,h) := \Gamma^\infty(C,U(E,h))$.
+Denote by $U(E,h)$ the group of smooth $h$-unitary sections of $\End E$.
+That is,
+\begin{align*}
+  U(E,h) := \{A \in\Gamma^\infty(C,\End E) : AA^\dagger = A^\dagger A = I\}.
+\end{align*}
 We have an action of $U(E,h)$ on $\mathcal A_\nabla(E,h)$ via conjugation. That is,
 for $g\in U(E,h)$ and $\nabla\in \mathcal A_\nabla(E,h)$, $g\cdot\nabla$ is the map
 \begin{align*}
@@ -791,7 +815,7 @@ to help us introduce a symplectic structure on $\mathcal A_{\dol} (E)$ and hence
 take a symplectic quotient. Let us do the same for the space of Higgs
 bundles $\mathcal A_\phi(E)$. We are going to identify $\mathcal A_\phi$ with an affine
 space modelled on $\Omega^1_{\mathbb{R}}(C,\End(E,h))^{\oplus 2}$.
-Once again fix a hermitian metric $h$ on $E$.
+Once again fix a Hermitian metric $h$ on $E$.
 
 Just as holomorphic bundles correspond to connections, Higgs bundles
 correspond to Higgs connections.
@@ -842,7 +866,7 @@ the space of smooth sections.
 
 Consider the following, more general setting. Let $X$ be a compact
 Riemannian manifold $X$ of dimension $n$, let $E$ be a smooth complex
-bundle on $X$ with hermitian metric $h$, let $\nabla$ be a $h$-unitary
+bundle on $X$ with Hermitian metric $h$, let $\nabla$ be a $h$-unitary
 connection in $E$, and let $\ell\geq 0$ and $1<p<\infty$ be integers.
 Here we are going to think of $\nabla$ as a derivative of sections and
 define a space $W_{p,\ell}(X,E)$ which may be thought of as the space of
@@ -1054,8 +1078,7 @@ as \cite[Chapter 7]{kahn1982} or \cite{bc2009}.
 
 \begin{example}
   Every smooth manifold is locally isomorphic to
-  $(\mathbb{R}^n,C^\infty_{\mathbb{R}^n})$ and hence is a Banach manifold.
-  In particular, every complex manifold has an underlying Banach manifold.
+  the Banach space $\mathbb R^n$ and hence a Banach manifold.
 \end{example}
 
 \begin{example}
@@ -1069,7 +1092,7 @@ as \cite[Chapter 7]{kahn1982} or \cite{bc2009}.
   In particular, for each $\nabla\in \mathcal A_\nabla(E,h)_\ell$, we have the
   tangent space
   \begin{align*}
-    T^*_\nabla \mathcal A_\nabla(E,h)_\ell
+    T_\nabla \mathcal A_\nabla(E,h)_\ell
     = \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell.
   \end{align*}
   Noticing that the direct sum of Banach spaces remains a Banach space,
@@ -1097,13 +1120,11 @@ as \cite[Chapter 7]{kahn1982} or \cite{bc2009}.
   \end{align*}
   One may show that this is a Banach manifold by applying the
   analogue of the regular value theorem. In particular,
-  the tangent space at $g\in U(E,h)_\ell$
+  the tangent space at $g\in U(E,h)_\ell$ is
   \begin{align*}
-    T_g U(E,h)_\ell = W_{2,\ell}(C,\End(E,h)).
+    T_g U(E,h)_\ell = W_{2,\ell}(C,\End(E,h)) =: \mathfrak u(E,h)_\ell.
   \end{align*}
 \end{example}
-
-\missingsection
 
 \section{Quotients of Banach Manifolds}
 
@@ -1114,10 +1135,10 @@ one needs to ensure that the group actions are sufficiently well-behaved. Moreov
 we need to ensure that the actions on affine spaces extend to a Banach Lie group
 action on Banach manifolds.
 
-We will make see which of properties of our actions are necessary to
+We will see which of properties of our actions are necessary to
 obtain a geometrically well-behaved quotient. A lot of work will go into justifying why
 these properties are attained. In some cases we will have to
-restrict our moduli spaces to avoid some special cases while in others
+restrict our moduli spaces to avoid special cases while in others
 the theory of elliptic operators is going to help us out.
 
 \subsection{Proper and Free Group Actions}
@@ -1167,8 +1188,10 @@ topological groups:
 \end{example}
 
 \begin{example}\label{ex:higgs_proper_action}
-  the action of $U(E,h)$ on $\mathcal A_\Phi (E,h)$ is proper.
-  \missingexample
+  The action of $U(E,h)$ on $\mathcal A_\Phi (E,h)$ is proper.
+  \begin{proof}
+    \missingproof
+  \end{proof}
 \end{example}
 
 Being free is not a topological property, i.e. any action of any group on any
@@ -1210,19 +1233,35 @@ the quotient are locally indistinguishable, as one expects from manifolds.
 In particular, there is a natural notion of a Banach Lie group and
 corresponding actions on Banach manifolds.
 
-\begin{example}
-  The Banach manifold $U(E,h)_\ell$ is a Banach Lie group with the usual
-  multiplication. One need only check that $\Vert\cdot\Vert_{2,\ell}$-Cauchy
-  sequences $(g_i)$ and $(h_j)$ in $U(E,h)$ yield a Cauchy sequence
-  $(g_ih_i)$.
+\begin{example}\label{ex:unitary_banach_lie_group}
+  For sufficiently large $\ell$, the Banach manifold $U(E,h)_\ell$ is a
+  Banach Lie group with the usual multiplication.
+  \begin{proof}
+    This is somewhat subtle as we have to ensure that, for any
+    $g,h\in U(E,h)_\ell$, we have $gh\in U(E,h)_\ell$. However, it
+    is well-known that pointwise multiplication
+    in Sobolev spaces of trivial bundles yields a map
+    \begin{align*}
+      W_{2,\ell}(C,\mathbb R^k) \times
+      W_{2,\ell}(C,\mathbb R^k) \to
+      W_{2,\ell}(C,\mathbb R^k)
+    \end{align*}
+    whenever $\ell > k/2$. \cite[Theorem 6.1]{behzadan2021}
+    Noting that matrix multiplication consists of addition and
+    pointwise multiplication for some $k$, one may verify locally that the
+    product $gh$ is indeed $W_{2,\ell}$. 
+  \end{proof}
 \end{example}
 
+Whenever we refer to the group $U(E,h)_\ell$ we are implicitly going to
+assume that $\ell$ was chosen sufficiently large for Sobolev multiplication
+to work.
 In complete analogy to the finite dimensional case, the tangent space
 at the identity of a Banach Lie group may be equipped with a Lie bracket
 and hence is called the Lie algebra of the group.
 
 \begin{example}
-  The Lie algebra of $U(E,h)_\ell$ is $W_{2,\ell}(C,\End(E,h))$.
+  The Lie algebra of $U(E,h)_\ell$ is $\mathfrak u(E,h)_\ell$.
 \end{example}
 
 Similarly, a action of a Banach Lie group on a Banach manifold
@@ -1235,22 +1274,19 @@ actions:
 
 \begin{example}
   Consider the action of $U(E,h)$ on $\mathcal A_\nabla(E,h)$
-  by conjugation. This extends to an action of $U(E,h)_{\ell+1}$
+  by conjugation. This extends to a proper action of $U(E,h)_{\ell+1}$
   on $\mathcal A_\nabla(E,h)_\ell$ via
   \begin{align*}
     (g,\nabla) & \mapsto g\nabla g^{-1}.
   \end{align*}
-  Note that, if we fix $\nabla_0\in\Omega^1(C,\End(E,h))$ and write
-  $\nabla = \nabla_0 + $
-  for $s\in\Omega^0_{\mathbb{R}}(C,E)$ we have
+  Using the Leibniz rule we calculate, for $s\in\Omega^0(C,E)$,
   \begin{align*}
     g\nabla g^{-1}(s) = g\nabla(g^{-1}s) = g(g^{-1}(\nabla s) + (\nabla g^{-1})s)
     = \nabla s + g(\nabla g^{-1})s.
   \end{align*}
   Hence we require $g\in U(E,h)_{\ell + 1}$ to make sure that $g\cdot\nabla\in \mathcal A_\nabla(E,h)_\ell$.
-  Analogously we have a Banach Lie group action of $U(E,h)_{\ell+1}$
+  Analogously, we have a proper Banach Lie group action of $U(E,h)_{\ell+1}$
   on $\mathcal A_\Phi (E,h)_\ell$.
-  \todo{mention that they're free and proper}
 \end{example}
 
 All of our recent discussions about proper and free actions, Sobolev
@@ -1264,7 +1300,6 @@ infinite dimensional, Banach manifolds:
   $T_x(G\cdot x) \subseteq T_x X$ is closed and complemented then
   $X/G$ is a Banach manifold and $T_x X/T_x (G\cdot x) \cong T_x(X/G)$
   for all $x\in X$.
-  \todo{doublecheck}
   \begin{proof}
     The idea is to construct a slice at each point $x\in X$, i.e. a submanifold
     $x\in S_x\subseteq X$ such that $T_x X = T_xS_x \oplus T_x(G\cdot x)$. A slice is
@@ -1305,7 +1340,7 @@ Hilbert spaces, all closed subspaces in our examples will automatically be compl
   \end{align*}
   is a Banach manifold whose tangent space at $g\in G(E,h)_\ell$ is
   \begin{align*}
-    T_g G(E,h)_\ell = W_{2,\ell}(C,\End(E,h))/i\mathbb{R}.
+    T_g G(E,h)_\ell =  W_{2,\ell}(C,\End(E,h))/i\mathbb{R} =: \mathfrak g(E,h)_\ell.
   \end{align*}
 \end{example}
 
@@ -1426,7 +1461,7 @@ of orbits are closed and hence complemented.
     \end{tikzcd}
   \end{equation*}
   which extends to Sobolev spaces.  Noting $\im\nabla_\ell^\dagger$
-  naturally is $W_{2,\ell}$-orthogonal to $\ker\nabla_{\ell}=\im\nabla_{\ell+1}$
+  naturally is $W_{2,\ell}$-orthogonal to $\ker\nabla_{\ell}=\im\nabla_{\ell+1}$\todo{false}
   in $\Omega^1_{\mathbb R}(\End(E,h))_\ell$, we find that
   $\im\nabla_\ell$ and $\im\nabla_\ell^\dagger$ must be individually
   closed. \todo{doublecheck the $\ell$s here.}
@@ -1436,7 +1471,7 @@ Finally, we have that the kernels and cokernels are not just
 finite-dimensional, but also independent of the particular $\ell$
 that we have chosen.
 
-\begin{theorem}
+\begin{theorem}\label{eq:independence_of_l}
   If $P:E\to F$ is an elliptic operator and $\ell\geq 0$ then
   \begin{align*}
     \ker P_\ell \subseteq \Gamma^\infty(X,E),\hspace{1cm}
@@ -1464,7 +1499,7 @@ There are multiple ways of restricting the affine spaces we are thinking about t
 ensure orbits with closed tangent spaces. We do this by introducing harmonicity.
 
 Observe that if we have a compact Riemannian manifold $X$ may refer to the
-formal adjoint \todo{hermitian or Hermitian?}
+formal adjoint
 \begin{align*}
   d^* : \Omega^k_{\mathbb{R}}(X)\to \Omega^{k-1}_{\mathbb{R}}(X)
 \end{align*}
@@ -1522,7 +1557,7 @@ More importantly, we have the following:
 \begin{lemma}
   Let $\nabla\in \mathcal A^{ss}_\nabla(E,h)_{\ell}$. Then the tangent space
   \begin{align*}
-    T_\nabla(G(E,h)_{\ell+1}\cdot\nabla) \subseteq T_\nabla A(E,h)_\ell
+    T_\nabla(G(E,h)_{\ell+1}\cdot\nabla) \subseteq T_\nabla\mathcal A_\nabla(E,h)_\ell
   \end{align*}
   is a closed subspace.
   \begin{proof}
@@ -1585,10 +1620,20 @@ $(E,\nabla_{0,1})$.  The second equation is a harmonicity condition generalising
 Yang-Mills.
 
 Now consider the space $\mathcal A_\Phi^{ss}(E,h)$ of Hitchin connections.
-We once again have a Banach manifold
-\begin{align*}
-  \mathcal A_\Phi^{ss}(E,h)_\ell := \mathcal A_\Phi^{ss}(E,h) +
-\end{align*}
+This once again gives rise to a Banach manifold $\mathcal A_\Phi^{ss}(E,h)_\ell$
+and, for sufficiently large $\ell$, an action by $G(E,h)_{\ell+1}$.
+
+\begin{lemma}
+  Let $(\nabla,\Phi)\in\mathcal A_\Phi^{ss}(E,h)_\ell$. Then the tangent space
+  \begin{align*}
+    T_{\nabla,\Phi}(G(E,h)_{\ell+1}\cdot(\nabla,\Phi))
+    \subseteq T_{\nabla,\Phi}\mathcal A_{\nabla,\Phi}^{ss}(E,h)_\ell.
+  \end{align*}
+  is a closed subspace.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
 
 \subsection{Reducible Connections}
 
@@ -1661,28 +1706,47 @@ of connections that we have thus far defined.
   \caption{Spaces of unitary holomorphic connections and their group actions.}
 \end{table}
 Finally we are able to construct the Banach manifolds of connections
-that we are after. Choose $\ell > $\todo{finish this}
+that we are after. Choose $\ell \geq 0$ sufficiently large in the
+sense of \ref{ex:unitary_banach_lie_group}. Define the moduli spaces
+of irreducible harmonic connections:
 \begin{align*}
-  \mathcal M^s_\nabla(E,h) := \mathcal A^s_\nabla(E,h)/G(E,h)_\ell, \hspace{1cm}
-  \mathcal M^s_\Phi(E,h) := \mathcal A^s_\Phi(E,h)/G(E,h)_\ell.
+  \mathcal M^s_\nabla(E,h) := \mathcal A^s_\nabla(E,h)_\ell/G(E,h)_{\ell + 1}, \hspace{1cm}
+  \mathcal M^s_\Phi(E,h) := \mathcal A^s_\Phi(E,h)_\ell/G(E,h)_{\ell + 1}.
+\end{align*}
+Note that, as the tangent space of $\mathcal M^s_\nabla(E,h)$ is
+the kernel of the elliptic operator \todo{finish}
+\begin{align*}
+  \hat\nabla : \Omega^1_{\mathbb R}
 \end{align*}
 For completeness, we are also going to define the moduli spaces of
 possibly reducible harmonic connections:
 \begin{align*}
-  \mathcal M^{ss}_\nabla(E,h) := \mathcal A^{ss}_\nabla(E,h)/G(E,h)_{\ell + 1}, \hspace{1cm}
-  \mathcal M^{ss}_\Phi(E,h) := \mathcal A^{ss}_\Phi(E,h)/G(E,h)_{\ell + 1}.
+  \mathcal M^{ss}_\nabla(E,h) := \mathcal A^{ss}_\nabla(E,h)_\ell/G(E,h)_{\ell + 1}, \hspace{1cm}
+  \mathcal M^{ss}_\Phi(E,h) := \mathcal A^{ss}_\Phi(E,h)_\ell/G(E,h)_{\ell + 1}.
 \end{align*}
 Note however that these spaces need not admit Banach manifold structures.
-
-\subsection{Relation to vector bundles}
 
 \subsection{On Symplectic Quotients}
 
 \section{Properties of the Analytic Moduli Spaces}
 
-\subsection{Independence of the Choice of Sobolev Completion}
+\subsection{Stable Bundles}
+
+\begin{definition}
+  (semi-)stable
+\end{definition}
+
+\begin{theorem}[Narasimhan-Seshadri]
+ \todo{} 
+\end{theorem}
 
 \subsection{Tangent Space and Dimension}
+
+So far, we have seen that the moduli spaces of stable holomorphic
+bundles may be realised as analytic spaces, in particular as
+Banach manifolds. In this section we show that they are infact
+finite-dimensional complex manifolds. We do this by determining
+the tangent space:
 
 \begin{theorem}
   Let $[\dol_E]\in M^{\dol}(E)$. Then the tangent space at $[\dol_E]$ is
@@ -1702,45 +1766,84 @@ It is worth noting that the proof does not rely on $M^{\dol_E}(E)$ being a manif
 at all. Indeed, a similar calculation is done for a moduli space that is not
 in general a manifold, yet it makes sense to classify curves passing through a point.
 
-Having calculated the tangent space, we may be relieved and observe that the moduli
-space is indeed a complex manifold in the usual sense:
+Having calculated the tangent space, we may observe two key consequences.
+Firstly, we see that the moduli space is indeed a complex manifold in the usual sense:
 
 \begin{corollary}
-  $M^{\dol}(E)$ is a complex manifold of finite dimension.
+  $M^{\dol}(E)$ is a complex manifold of dimension
+  \begin{align*}
+    \dim_{\mathbb{C}} M^{\dol}(E) = (g-1)r^2 + 1.
+  \end{align*}
   \begin{proof}
     By Dolbeault's theorem we may express the tangent space in terms of holomorphic
     sections as
     \begin{align*}
-      T_{[\dol_E]}\mathcal M^{\dol}(E) = \Gamma(C,\End(E,\dol_E) \otimes T_{1,0}^*C).
+      T_{[\dol_E]}\mathcal M^{\dol}(E) = \Gamma(C,\End(E,\dol_E) \otimes K_X).
     \end{align*}
     The space of holomorphic sections of a holomorphic vector bundle is finite dimensional,
     hence so is $M^{\dol}$. Moreover, the tangent space naturally is a complex vector
     space and hence we have a natural complex structure on $M^{\dol}(E)$.
+
+    \todo{dimension}
   \end{proof}
 \end{corollary}
 
-Knowing the tangent space also allows us to calculate the dimension:
+Secondly, we find that the moduli space does not depend on the
+choice of $\ell$. This follows because $\mathcal A_\nabla^{s}(E,h)$
+is dense in all its Sobolev completions. Hence every orbit has a
+smooth representative meaning that topologically the quotients are
+the same. Moreover, the complex manifold structure does clearly
+not depend on $\ell$ either.
+
+\subsection{Higgs Bundles as Cotangent Vectors}
+
+The moduli space of Higgs bundles is also finite dimensional. One way to
+see this is by considering a differential operator analogous to $\hat\nabla$,
+showing that it is elliptic, and using this to prove that the
+tangent space is the kernel of a Fredholm operator, i.e. finite
+dimensional. We are going to take a different approach.
+
+Recall that the space of Higgs bundles associated to a holomorphic
+bundle $(E,\dol_E)$ is the space of holomorphic sections
+\begin{align*}
+  \Gamma(C,\End(E,\dol_E) \otimes K_C) = H^{1,0}(C,\End(E,\dol_E)\otimes K_C).
+\end{align*}
+By definition of $H^{p,q}$, this is dual to
+\begin{align*}
+  T_{[\dol_E]}\mathcal M_{\dol}(E) = H^{0,1}(C,\End(E,\dol_E)\otimes K_C)
+\end{align*}
+whenever $(E,\dol_E)$ is stable. Hence we have an inclusion
+\begin{align}\label{eq:cotangent_inclusion}
+  T_{[\dol_E]}^*\mathcal M_{\dol}(E) \longinc\mathcal M_\phi(E).
+\end{align}
+Observe that the holomorphic bundle underlying a stable Higgs bundle need
+not be stable. Hence (\ref{eq:cotangent_inclusion}) is not a bijection.
+However, we have the next best thing:
+
+\begin{theorem}
+ $T_{[\dol_E]}^*\mathcal M_{\dol}(E)$ is Zariski open in $\mathcal M_\phi(E)$.
+ In particular, it is open and dense.
+ \begin{proof}
+  \missingproof
+ \end{proof}
+\end{theorem}
 
 \begin{corollary}
-  $\dim_{\mathbb{C}} M^{\dol}(E) = (g-1)r^2 + 1$.
-  \begin{proof}
-    By Dolbeault's theorem we may express the tangent space in terms of holomorphic
-    sections as
-    \begin{align*}
-      T_{[\dol_E]}\mathcal M^{\dol}(E) = \Gamma(C,\End(E,\dol_E) \otimes T_{1,0}^*C).
-    \end{align*}
-    Hence, using sheaf cohomology,
-    \missingproof
-  \end{proof}
+ The tangent space of $\mathcal M_{\phi}(E)$ at $[\dol_E,\phi]$
+ is
+ \begin{align*}
+  T_{[\dol_E,\phi]}\mathcal M_\phi(E) = T_{[\dol_E,\phi]} T^*_{[\dol_E]}\mathcal M_{\dol}(E).
+ \end{align*} 
+ In particular,
+ \begin{align*}
+  \dim_{\mathbb C}\mathcal M_{\phi}(E)
+  =2\dim_{\mathbb C}\mathcal M_{\dol}(E)
+  =2(g-1)r^2 + 2.
+ \end{align*}
+ \begin{proof}
+  \missingproof
+ \end{proof}
 \end{corollary}
-
-\section{To Do}
-
-\begin{itemize}
-  \item show that the moduli spaces do not depend on $\ell$
-\end{itemize}
-
-\missingsection
 
 \chapter{As Schemes}
 

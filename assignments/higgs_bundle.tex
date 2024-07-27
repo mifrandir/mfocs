@@ -244,7 +244,7 @@ is isomorphic to $TX$ via
 
 \begin{definition}
   Consider a complex manifold $X$.
-  A \emph{hermitian metric} is a section
+  A \emph{Hermitian metric} is a section
   \begin{align*}
     h\in\Gamma(X,(T^{1,0}X\otimes T^{0,1})^*)
   \end{align*}
@@ -256,21 +256,21 @@ is isomorphic to $TX$ via
   \end{itemize}
 \end{definition}
 
-That is, there is a positive definite hermitian form
+That is, there is a positive definite Hermitian form
 $h_p: T^{1,0}_p\otimes T^{0,1}_p\to\mathbb{C}$ at every point $p\in X$
 that varies smoothly. Note that the expression $h_p(e,\bar e) > 0$
 makes sense as $h_p(e,\bar e) = \overline{h_p(e,\bar e)}$,
 i.e. $h_p(e,\bar e)\in\mathbb{R}$.
 
-We are not going to care about any particular hermitian metric,
+We are not going to care about any particular Hermitian metric,
 but rather about their existence. Fortunately, our underlying
 manifold is a compact Riemann surface. This allows us to make use
 of the following:
 
 \begin{theorem}
   Every smooth vector bundle on a compact complex manifold admits
-  a hermitian metric. In particular, every compact complex manifold admits
-  a hermitian metric.
+  a Hermitian metric. In particular, every compact complex manifold admits
+  a Hermitian metric.
 \end{theorem}
 
 Recall that the exterior derivative
@@ -282,7 +282,7 @@ splits into maps
   \partial : \Omega^{p,q}(X) \to \Omega^{p+1,q}(X),\hspace{1cm}
   \dol : \Omega^{p,q} \to \Omega^{p,q+1}(X).
 \end{align*}
-A hermitian metric on $X$ defines a pairing \question{how is this
+A Hermitian metric on $X$ defines a pairing \question{how is this
 defined and what is its type?} on $\Omega^*(X)$. With respect to this
 pairing we have the adjoints
 \begin{align*}
@@ -294,7 +294,7 @@ This lets us define harmonic forms, i.e. forms that vanish
 under the Laplacian:
 
 \begin{definition}
-  Let $X$ be a compact manifold with a choice of hermitian metric.
+  Let $X$ be a compact manifold with a choice of Hermitian metric.
   The \emph{harmonic} $(p,q)$-forms are \question{do we need a
   K\"ahler structure for this to make sense?}
   \begin{align*}
@@ -380,7 +380,7 @@ respect this structure.
   \end{equation*}
 \end{definition}
 
-Moreover, if $E$ is hermitian then we may reasonably require
+Moreover, if $E$ is Hermitian then we may reasonably require
 connections to respect this structure too. To make this precise,
 recall that a connection is equivalently a map
 \begin{align*}
@@ -391,20 +391,20 @@ which we may write as $(s,v)\mapsto \nabla_v s$.
 
 \begin{definition}
   A connection $\nabla$ in $E$ is \emph{compatible with
-  a hermitian metric $h$ on $E$} if, for all
+  a Hermitian metric $h$ on $E$} if, for all
   $s,t\in\Gamma(X,E)$ and $v\in\Gamma(X,TX)$,
   \begin{align*}
     v(h(s,\bar t)) = h(\nabla_v s,\bar t) + h(s,\overline{\nabla_v t}).
   \end{align*}
 \end{definition}
 
-It turns out that fixing both a hermitian metric as well as a
+It turns out that fixing both a Hermitian metric as well as a
 holomorphic structure determines the connection:
 
 \begin{proposition}
-  Let $h$ be a hermitian metric on a holomorphic bundle $(E,\dol_E)$.
+  Let $h$ be a Hermitian metric on a holomorphic bundle $(E,\dol_E)$.
   Then there exists a unique connection $F_h$ in $E$ that is
-  compatible with both the hermitian and the holomorphic structure.
+  compatible with both the Hermitian and the holomorphic structure.
   It is called the \emph{Chern connection}.
 \end{proposition}
 
