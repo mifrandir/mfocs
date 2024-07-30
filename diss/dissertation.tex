@@ -240,10 +240,10 @@ Locally, these are given by
 \end{align*}
 In particular, we now have a family of complexes
 \begin{align}\label{eq:dolbeault_complex}
-  \cdots \xlongrightarrow{\dol}
-  \Omega^{p,q-1}(X)\xlongrightarrow{\dol}
-  \Omega^{p,q}(X)\xlongrightarrow{\dol}
-  \Omega^{p,q+1}(X)\xlongrightarrow{\dol}
+  \cdots \xlongrightarrow\dol
+  \Omega^{p,q-1}(X)\xlongrightarrow\dol
+  \Omega^{p,q}(X)\xlongrightarrow\dol
+  \Omega^{p,q+1}(X)\xlongrightarrow\dol
   \cdots
 \end{align}
 \begin{definition}
@@ -498,7 +498,7 @@ and degree $d$ on a compact Riemann surface $C$.
 Recall that a holomorphic bundle with underlying smooth structure $E$
 is given by a Dolbeault operator $\dol_E$. Hence we have a set of
 \begin{align*}
-  \mathcal A_{\dol} (E) := \left\lbrace{
+  \mathcal A_\dol (E) := \left\lbrace{
     \text{Dolbeault operators $\dol_E : \Omega^0(C,E) \to \Omega^{0,1}(C,E)$}
   }\right\rbrace.
 \end{align*}
@@ -508,7 +508,7 @@ This has an obvious topology given by the following observations:
   \begin{align*}
     \dol_E,\alpha : \Omega^0(C,E) \to \Omega^{0,1}(C,E).
   \end{align*}
-  Then $\dol_E\in \mathcal A_{\dol} (E)$ if, and only if, $\dol_E+\alpha\in \mathcal A_{\dol} (E)$.
+  Then $\dol_E\in \mathcal A_\dol (E)$ if, and only if, $\dol_E+\alpha\in \mathcal A_\dol (E)$.
   \begin{proof}
     We calculate in local coordinates:
     \begin{align*}
@@ -531,17 +531,17 @@ This has an obvious topology given by the following observations:
   \end{proof}
 \end{lemma}
 
-Thus we may write $\mathcal A_{\dol} (E) = \dol_E + \Omega^{0,1}(C,\End(E))$
-for some fixed $\dol_E$. This induces a topology on $\mathcal A_{\dol} (E)$.
-In particular, $\mathcal A_{\dol} (E)$ is an affine space modelled on
+Thus we may write $\mathcal A_\dol (E) = \dol_E + \Omega^{0,1}(C,\End(E))$
+for some fixed $\dol_E$. This induces a topology on $\mathcal A_\dol (E)$.
+In particular, $\mathcal A_\dol (E)$ is an affine space modelled on
 $\Omega^{0,1}(C,\End(E))$.
 
 This allows us to define the space of all Higgs bundles
 \begin{align*}
-  \mathcal A_\phi(E) := \bigsqcup_{\dol_E \in \mathcal A_{\dol} (E)} \Gamma(C,\End(E,\dol_E)\otimes K_C)
+  \mathcal A_\phi(E) := \bigsqcup_{\dol_E \in \mathcal A_\dol (E)} \Gamma(C,\End(E,\dol_E)\otimes K_C)
 \end{align*}
 whose topology is induced by the topologies on
-$\Gamma(C,\End(E,\dol_E)\otimes K_C)$ and $\mathcal A_{\dol} (E)$.
+$\Gamma(C,\End(E,\dol_E)\otimes K_C)$ and $\mathcal A_\dol (E)$.
 All that is left to do is take a quotient by equivalence of holomorphic
 bundles, respectively Higgs bundles. One of the major topics of this
 paper is to explore various ways in which we may take quotients by
@@ -553,9 +553,12 @@ an invertible section of $\End(E)$. Hence consider the group
 \begin{align*}
   GL(E) := \{A \in \Gamma^\infty(C,\End(E)) : \forall x \in C.\:\det A_x \neq 0\}
 \end{align*}
-This acts on $\mathcal A_{\dol}(E)$ by conjugation.
+Elements $g\in GL(E)$ are usually called gauge transformations and
+$GL(E)$ as a whole is referred to as the gauge group.
+The gauge group acts on $\mathcal A_\dol(E)$ by conjugation.
+Unfortunately, the quotient leaves a lot to be desired:
 \begin{lemma}
-  The topological space $\mathcal A_{\dol} (E)/\Aut(E)$ of isomorphism classes of
+  The topological space $\mathcal A_\dol (E)/GL(E)$ of isomorphism classes of
   Dolbeault operators is not Hausdorff. In particular, it does not
   admit a manifold structure.
   \begin{proof}
@@ -563,25 +566,21 @@ This acts on $\mathcal A_{\dol}(E)$ by conjugation.
   \end{proof}
 \end{lemma}
 
-Note that we have a similar action of $\Aut(E)$ on $\mathcal A_\phi(E)$ and
+Note that we have a similar action of $GL(E)$ on $\mathcal A_\phi(E)$ and
 indeed many other topological spaces of holomorphic bundles. However,
 it is quite clear that any space that arises as a disjoint union
-over $\mathcal A_{\dol} (E)$ must also be non-Hausdorff. Therefore we need
+over $\mathcal A_\dol (E)$ must also be non-Hausdorff. Therefore we need
 to use more sophisticated techniques to construct any moduli
 space of holomorphic bundles.
 
-\section{Gauge Theory}\todo{motivate or improve this name}
+\section{From Bundles to Connections}
 
-To construct a manifolds whose points are equivalence classes of
-holomorphic bundles, we need to take quotients of manifolds by
-group actions. To be precise, we are going to take quotients of
-Banach manifolds by actions of Banach Lie groups.
-
-There are a few things to take care of before this can be made
-precise. In this section we define what it means to be an infinite
-dimensional manifold. We will have to alter our topological spaces
-to satisfy the requirements. We are also going to see how maps
-lift to this new setting.
+The actions of the complex gauge group on the spaces of holomorphic
+bundles are badly behaved. We aim to rectify this by temporarily
+changing our point of view from holomorphic bundles to unitary
+connections. It turns out that the corresponding topological spaces
+are diffeomorphic and that the complex gauge group action on holomorphic bundles
+may be interpreted as a real gauge group action on unitary connections.
 
 Once again fix a smooth bundle $E$ of rank $r$ on a compact
 Riemann surface $C$.
@@ -699,7 +698,7 @@ some Dolbeault operator:
 \begin{align*}
   \mathcal A_\nabla(E,h) := \left\lbrace{\text{$h$-unitary holomorphic connections $\nabla$ in $E$}}\right\rbrace.
 \end{align*}
-Analogous to $\mathcal A_{\dol} (E)$, this is an affine space.
+Analogous to $\mathcal A_\dol (E)$, this is an affine space.
 As the connections are required to be unitary, their differences
 are given by sections of the real smooth bundle $\End(E,h)$ of
 skew-Hermitian endomorphisms. Just as the fibres of $\End(E)$
@@ -728,7 +727,7 @@ the fibres of $\End(E,h)$ are Lie algebras of $\Aut(E_x,h)\cong U(r)$.
 \end{lemma}
 
 Combining what we have seen so far with the next result, the
-similarities between $\mathcal A_{\dol} (E)$ and $\mathcal A_\nabla(E,h)$ grow even more
+similarities between $\mathcal A_\dol (E)$ and $\mathcal A_\nabla(E,h)$ grow even more
 striking:
 
 \begin{lemma}\label{lem:real_vector_space_iso}
@@ -761,7 +760,7 @@ striking:
   \end{proof}
 \end{lemma}
 
-It is not a coincidence that $\mathcal A_{\dol} (E)$ and $\mathcal A_\nabla(E,h)$ both are
+It is not a coincidence that $\mathcal A_\dol (E)$ and $\mathcal A_\nabla(E,h)$ both are
 affine spaces modelled on the same underlying real vector space.
 Indeed, in the presence of $h$, every Dolbeault operator has a unique
 compatible connection:
@@ -776,7 +775,7 @@ compatible connection:
 \end{theorem}
 
 In particular, this gives us a bijection
-$\nabla^h : \mathcal A_{\dol} (E) \to \mathcal A_\nabla(E,h)$ whose inverse is the restriction
+$\nabla^h : \mathcal A_\dol (E) \to \mathcal A_\nabla(E,h)$ whose inverse is the restriction
 $\nabla \mapsto \nabla_{0,1}$. It is not difficult to verify that this
 is a homeomorphism of affine spaces which is locally given by
 the $\mathbb{R}$-linear isomorphism in \ref{lem:real_vector_space_iso}.
@@ -811,10 +810,10 @@ $g$ and $\nabla$ are.
 
 \subsection{Higgs Connections}
 
-We have successfully viewed the space of holomorphic bundles $\mathcal A_{\dol} (E)$
+We have successfully viewed the space of holomorphic bundles $\mathcal A_\dol (E)$
 as an affine space modelled on
 $\Omega^1_{\mathbb{R}}(C,\mathfrak{u}(E))$. This is eventually going
-to help us introduce a symplectic structure on $\mathcal A_{\dol} (E)$ and hence
+to help us introduce a symplectic structure on $\mathcal A_\dol (E)$ and hence
 take a symplectic quotient. Let us do the same for the space of Higgs
 bundles $\mathcal A_\phi(E)$. We are going to identify $\mathcal A_\phi$ with an affine
 space modelled on $\Omega^1_{\mathbb{R}}(C,\End(E,h))^{\oplus 2}$.
@@ -839,7 +838,7 @@ $\Omega^1_{\mathbb{R}}(C,\End(E,h))\oplus\Omega_{\mathbb{R}}^1(C,\End(E,h))$. Us
 and the map given by (\ref{thm:chern_connection}) we have an inclusion
 of topological spaces
 \begin{align*}
-  \mathcal A_\phi(E) \subseteq \mathcal A_{\dol} (E) \times \Omega^{1,0}(\End(E)) \cong \mathcal A_\Phi (E,h).
+  \mathcal A_\phi(E) \subseteq \mathcal A_\dol (E) \times \Omega^{1,0}(\End(E)) \cong \mathcal A_\Phi (E,h).
 \end{align*}
 Note that in general $\mathcal A_\phi(E)$ and $\mathcal A_\Phi (E,h)$ are not isomorphic. In
 particular, a Higgs connection $(\nabla,\Phi)$ corresponds to
@@ -854,6 +853,7 @@ by conjugation:
   (g,\nabla,\Phi)                     & \mapsto (g\nabla{g}^{-1},g\Phi{g}^{-1})
 \end{align*}
 
+\section{Banach Manifolds}
 
 \subsection{Sobolev Spaces}
 
@@ -1072,7 +1072,7 @@ To define infinite dimensional manifolds, we are going to replace
 $\mathbb{C}^n$ with infinite dimensional vector spaces. Of course,
 the point of the usual manifold definition is to facilitate analysis
 on a wider range of topological spaces. To this end, we are going to
-restrict our attention to the case of Banach spaces. While a brief
+restrict our attention to the case of real Banach spaces. While a brief
 definition in the sense of the paragraph above would be correct,
 it would also be unhelpful. Instead we are going to consider some
 examples. The reader interested in a more holistic
@@ -1250,9 +1250,10 @@ corresponding actions on Banach manifolds.
       W_{2,\ell}(C,\mathbb R^k)
     \end{align*}
     whenever $\ell > k/2$. \cite[Theorem 6.1]{behzadan2021}
-    Noting that matrix multiplication consists of addition and
-    pointwise multiplication for some $k$, one may verify locally that the
-    product $gh$ is indeed $W_{2,\ell}$.
+    Note that matrix multiplication consists of addition and
+    pointwise multiplication with $k=1$. Moreover, recall that both
+    the base space $C$ and the unitary gauge group $U(E,h)$ is compact.
+    Using these facts, one may verify locally that the product $gh$ is indeed $W_{2,\ell}$.
   \end{proof}
 \end{example}
 
@@ -1479,14 +1480,30 @@ finite-dimensional, but also independent of the particular $\ell$
 that we have chosen.
 
 \begin{theorem}\label{eq:independence_of_l}
-  If $P:E\to F$ is an elliptic operator and $\ell\geq 0$ then
+  If $P:E\to F$ is an elliptic operator of order 1
+  and $\ell\geq 0$ then
   \begin{align*}
     \ker P_\ell \subseteq \Gamma^\infty(X,E),\hspace{1cm}
     W_{2,\ell}(X,F)/\im P_\ell \subseteq \Gamma^\infty(X,F).
   \end{align*}
   In particular, neither subspace depends on $\ell$.
-  \begin{proof}
-    \missingproof
+  \begin{proof}[Proof idea]
+    The key observation is that, for an operator
+    $P':E\to E$ of order 2 and for each $\ell\geq 0$,
+    there exists a constant $C$ such that
+    \begin{align*}
+      \Vert s\Vert^\nabla_{2,\ell+2} \leq C(\Vert P's\Vert_{2,\ell} + \Vert s\Vert_{2,0})
+    \end{align*}
+    for all $s\in\Gamma^\infty(X,E)$.
+    This may be deduced from the Euclidean case, e.g. as presented in
+    \cite[6.3.1 Theorem 2]{evans1998}. Hence, if $P's = 0$ then the
+    $(2,\ell+2)$-norm is bounded
+    by the $(2,0)$ norm and hence independent of $\ell$.
+    One then only needs to define $P' := P^\dagger P$ which is easily
+    verified to be elliptic as both $P$ and $P^\dagger$ are by
+    \ref{lem:elliptic_adjoints}. We then use $\ker P = \ker P'$
+    to find that $\ker P_\ell$ is independent of $\ell$. The
+    statement about the cokernel follows by taking adjoints.
   \end{proof}
 \end{theorem}
 
@@ -1555,7 +1572,7 @@ Thus we have a proper $G(E,h)$-action on $\mathcal A_\nabla(E,h)$.
     to consider is the moment map for the $G(E,h)_{\ell+1}$-action
     on $\mathcal A_\nabla(E,h)_\ell$ considered as a symplectic
     Banach manifold, which we have not introduced for brevity.
-    \missingcitation
+    \cite[Proposition 5.8]{neitzke2021}
   \end{proof}
 \end{lemma}
 Just as in the finite dimensional case, the proper $G(E,h)_{\ell+1}$
@@ -1738,7 +1755,7 @@ possibly reducible harmonic connections:
 \end{align*}
 Note however that these spaces need not admit Banach manifold structures.
 
-\subsection{On Symplectic Quotients}
+\subsection{On Symplectic Quotients}\label{sec:symplectic_quotients}
 
 In order to construct the moduli spaces as manifolds as directly as
 possible, we have left out a lot of the context that they usually appear
@@ -1786,7 +1803,7 @@ precisely this condition that yields the defining equations of
 Hitchin connections.
 
 Considering the complex structures on $A_\nabla$ and $A_\Phi$ induced
-by the real isomorphism $A_{\dol}\cong A_\nabla$, the quotients
+by the real isomorphism $A_\dol\cong A_\nabla$, the quotients
 thus constructed yield K\"ahler and Hyperk\"ahler manifolds, respectively.
 
 \section{Properties of the Analytic Moduli Spaces}
@@ -1821,8 +1838,21 @@ the quotient of the latter into a Banach manifold, we had to discard
 some points. Moving back to the original problem this raises
 the question: Which bundles did we lose in the process?
 
+To answer the question, consider the following:
 \begin{definition}
-  semi-, poly-, stable
+  Let $(E,\dol_E)$ be a holomorphic bundle on a compact complex
+  manifold $X$. Then $(E,\dol_E)$ is
+  \begin{itemize}
+    \item \emph{semi-stable} if, for all holomorphic subbundles
+      $(F,\dol_F)\subseteq (E,\dol_E)$,
+      \begin{align}\label{eq:stability}
+        \frac{\deg F}{\rank F} \leq \frac{\deg E}{\rank E};
+      \end{align}
+    \item \emph{stable} if the inequality (\ref{eq:stability})
+      is strict for all holomorphic subbundles;
+    \item \emph{polystable} if $E$ decomposes as a direct sum of
+      stable bundles.
+  \end{itemize} 
 \end{definition}
 
 \begin{theorem}[Donaldson–Uhlenbeck–Yau]\label{thm:duy}
@@ -1842,11 +1872,12 @@ going to refer to a few ways one may see that it is indeed true.
         apply the theorem.
   \item The \emph{Kempf-Ness theorem} \missingcitation gives a homeomorphism between
         symplectic quotients by compact groups and geometric invariant
-        theory (GIT) quotients by their complexification. We have briefly
+        theory (GIT) quotients by their complexification. In
+        \ref{sec:symplectic_quotients} we have briefly
         explained how to view $\mathcal M_\nabla(E)$ as a symplectic quotient
         and in the next chapter we are going to show how to regard
-        $\mathcal M_{\dol}(E)$ as a GIT quotient.
-  \item The \emph{Narasimhan–Seshadri theorem} \missingcitation gives
+        $\mathcal M_\dol(E)$ as a GIT quotient.
+  \item The \emph{Narasimhan–Seshadri theorem} \cite[Theorem 8.1]{ns1965} gives
         a correspondence between stable bundles and certain representations
         of the fundamental group. The original proof in \cite{ns1965}
         is algebraic in nature, but in \cite{donaldson1983} Donaldson
@@ -1863,20 +1894,20 @@ finite-dimensional complex manifolds. We do this by determining
 the tangent space:
 
 \begin{theorem}
-  Let $[\dol_E]\in M^{\dol}(E)$. Then the tangent space at $[\dol_E]$ is
+  Let $[\dol_E]\in\mathcal M_\dol(E)$. Then the tangent space at $[\dol_E]$ is
   \begin{align*}
-    T_{[\dol_E]}\mathcal M^{\dol}(E) = H^{0,1}(C,\End(E,\dol_E)).
+    T_{[\dol_E]}\mathcal M_\dol(E) = H^{0,1}(C,\End(E,\dol_E)).
   \end{align*}
   \begin{proof}[Proof sketch]
     A full proof is given in \cite[223-225]{kobayashi1987}. The key idea is to look
-    at curves in $M^{\dol}(E)$ to obtain the tangent space at $\nabla$ as a set of
+    at curves in $\mathcal M_\dol(E)$ to obtain the tangent space at $\nabla$ as a set of
     equivalence classes in $\Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell$. One then
     identifies this space with $H^{0,1}(C,\End(E,\dol_E))$ via a sequence of calculations
     involving harmonic forms.
   \end{proof}
 \end{theorem}
 
-It is worth noting that the proof does not rely on $M^{\dol_E}(E)$ being a manifold
+It is worth noting that the proof does not rely on $\mathcal M_\dol(E)$ being a manifold
 at all. Indeed, a similar calculation is done for a moduli space that is not
 in general a manifold, yet it makes sense to classify curves passing through a point.
 
@@ -1884,19 +1915,19 @@ Having calculated the tangent space, we may observe two key consequences.
 Firstly, we see that the moduli space is indeed a complex manifold in the usual sense:
 
 \begin{corollary}
-  $M^{\dol}(E)$ is a complex manifold of dimension
+  $M^\dol(E)$ is a complex manifold of dimension
   \begin{align*}
-    \dim_{\mathbb{C}} M^{\dol}(E) = (g-1)r^2 + 1.
+    \dim_{\mathbb{C}} M^\dol(E) = (g-1)r^2 + 1.
   \end{align*}
   \begin{proof}
     By Dolbeault's theorem we may express the tangent space in terms of holomorphic
     sections as
     \begin{align*}
-      T_{[\dol_E]}\mathcal M^{\dol}(E) = \Gamma(C,\End(E,\dol_E) \otimes K_X).
+      T_{[\dol_E]}\mathcal M^\dol(E) = \Gamma(C,\End(E,\dol_E) \otimes K_X).
     \end{align*}
     The space of holomorphic sections of a holomorphic vector bundle is finite dimensional,
-    hence so is $M^{\dol}$. Moreover, the tangent space naturally is a complex vector
-    space and hence we have a natural complex structure on $M^{\dol}(E)$.
+    hence so is $M^\dol$. Moreover, the tangent space naturally is a complex vector
+    space and hence we have a natural complex structure on $M^\dol(E)$.
 
     \todo{dimension}
   \end{proof}
@@ -1920,42 +1951,49 @@ dimensional. We are going to take a different approach.
 Recall that the space of Higgs bundles associated to a holomorphic
 bundle $(E,\dol_E)$ is the space of holomorphic sections
 \begin{align*}
-  \Gamma(C,\End(E,\dol_E) \otimes K_C) = H^{1,0}(C,\End(E,\dol_E)\otimes K_C).
+  \Gamma(C,\End(E,\dol_E) \otimes K_C) = H^{1,0}(C,\End(E,\dol_E)).
 \end{align*}
 By definition of $H^{p,q}$, this is dual to
 \begin{align*}
-  T_{[\dol_E]}\mathcal M_{\dol}(E) = H^{0,1}(C,\End(E,\dol_E)\otimes K_C)
+  T_{[\dol_E]}\mathcal M_\dol(E) = H^{0,1}(C,\End(E,\dol_E))
 \end{align*}
 whenever $(E,\dol_E)$ is stable. Hence we have an inclusion
 \begin{align}\label{eq:cotangent_inclusion}
-  T_{[\dol_E]}^*\mathcal M_{\dol}(E) \longinc\mathcal M_\phi(E).
+  T^*\mathcal M_\dol(E) \longinc\mathcal M_\phi(E).
 \end{align}
 Observe that the holomorphic bundle underlying a stable Higgs bundle need
 not be stable. Hence (\ref{eq:cotangent_inclusion}) is not a bijection.
 However, we have the next best thing:
 
 \begin{theorem}
-  $T_{[\dol_E]}^*\mathcal M_{\dol}(E)$ is Zariski open in $\mathcal M_\phi(E)$.
-  In particular, it is open and dense.
+  $T^*\mathcal M_\dol(E)$ is Zariski open in $\mathcal M_\phi(E)$.
+  In particular, it is open and dense in the analytic topology.
   \begin{proof}
     \missingproof
   \end{proof}
 \end{theorem}
 
+Rather than computing the manifold structure on $\mathcal M_\phi(E)$
+directly, we may now simply deduce it from $T^*\mathcal M_\dol(E)$.
+
 \begin{corollary}
-  The tangent space of $\mathcal M_{\phi}(E)$ at $[\dol_E,\phi]$
-  is
-  \begin{align*}
-    T_{[\dol_E,\phi]}\mathcal M_\phi(E) = T_{[\dol_E,\phi]} T^*_{[\dol_E]}\mathcal M_{\dol}(E).
-  \end{align*}
-  In particular,
+  $\mathcal M_\phi(E)$ is a complex manifold of dimension
   \begin{align*}
     \dim_{\mathbb C}\mathcal M_{\phi}(E)
-    =2\dim_{\mathbb C}\mathcal M_{\dol}(E)
+    =2\dim_{\mathbb C}\mathcal M_\dol(E)
     =2(g-1)r^2 + 2.
   \end{align*}
   \begin{proof}
-    \missingproof
+    All that remains is to show that the cotangent space is a submanifold.
+    The claim then follows as
+    \begin{align*}
+     T_{[\dol_E,\phi]}\mathcal M_\phi(E) = T_{[\dol_E,\phi]} T^*_{[\dol_E]}\mathcal M_\dol(E)
+    \end{align*}
+    for $[\dol_E]\in A_\dol(E)$. The fact that the manifold
+    structure $T^*\mathcal M_\dol(E)$ agrees with that of $\mathcal M_{\phi}(E)$
+    may be deduced from the observation that
+    $\mathcal M_\dol(E) \subseteq \mathcal M_\phi(E)$ is a submanifold
+    via $[\dol_E] \mapsto [\dol_E,0]$.
   \end{proof}
 \end{corollary}
 
