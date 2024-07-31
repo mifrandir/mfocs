@@ -8,7 +8,7 @@
 %and uncomment the next line)
 %\include{mymacros}
 
-\title{Moduli Spaces of\\[1ex]Holomorphic Bundles}   %note \\[1ex] is a line break in the title
+\title{Analytic and Algebraic\\[1ex]Moduli Spaces of Vector Bundles}   %note \\[1ex] is a line break in the title
 
 \author{Franz Miltz}             %your name
 \college{Lady Margaret Hall}  %your college
@@ -33,13 +33,15 @@
 
 \maketitle                  % create a title page from the preamble info
 \begin{dedication}
-  To somebody
+  \todo{dedication}
 \end{dedication}
+
 \begin{acknowledgements}
-
+  \todo{acknowledgements}
 \end{acknowledgements}
-\begin{abstract}
 
+\begin{abstract}
+  \todo{abstract}
 \end{abstract}
 
 \begin{romanpages}          % start roman page numbering
@@ -52,6 +54,8 @@
   \item Riemann surfaces
   \item complex geometry at the intersection between the analytic and algebraic settings
 \end{itemize}
+
+\todo{make sure that every section introduces all the objects we are thinking about}
 
 \chapter{As Manifolds}
 
@@ -855,8 +859,6 @@ by conjugation:
 
 \section{Banach Manifolds}
 
-\subsection{Sobolev Spaces}
-
 Our next goal is to equip the affine spaces of connections $\mathcal A_\nabla(E,h)$
 and $\mathcal A_\Phi (E,h)$ with manifold structures. Of course, both are affine
 spaces modelled on infinite dimensional vector spaces. In the next
@@ -867,7 +869,13 @@ it means that we have to turn $\Omega^1_{\mathbb{R}}(C,\End(E,h))$
 into a Banach space. We are going to do this by using a completion of
 the space of smooth sections.
 
-Consider the following, more general setting. Let $X$ be a compact
+\subsection{Sobolev Spaces}
+
+The Banach space completions that we are going to use are referred to
+Sobolev spaces and roughly contain sections with a certain number of
+derivatives, all of which in some $L^p$.
+
+Consider the following setting. Let $X$ be a compact
 Riemannian manifold $X$ of dimension $n$, let $E$ be a smooth complex
 bundle on $X$ with Hermitian metric $h$, let $\nabla$ be a $h$-unitary
 connection in $E$, and let $\ell\geq 0$ and $1<p<\infty$ be integers.
@@ -1155,10 +1163,10 @@ Properness is a topological property. That is, it applies only to
 topological groups:
 
 \begin{definition}
-  An action $\rho : G\times X\to X$ of a topological group $G$
+  An action $\sigma : G\times X\to X$ of a topological group $G$
   on a topological space $X$ is \emph{proper} if the map
   \begin{align}\label{eq:proper_map}
-    (\rho,\pi) : G\times X \to X\times X
+    (\sigma,\pi) : G\times X \to X\times X
   \end{align}
   is proper, i.e. the preimage of every compact set in $X\times X$
   is compact.
@@ -1203,7 +1211,7 @@ setting as it ensures that the orbits are homogeneous and hence all points in
 the quotient are locally indistinguishable, as one expects from manifolds.
 
 \begin{definition}
-  An action $\rho : G\times X\to X$ is \emph{free} if, for all
+  An action $\sigma : G\times X\to X$ is \emph{free} if, for all
   $g\in G$ and $x\in X$, $g\cdot x = x$ implies $g = e$.
 \end{definition}
 
@@ -1299,7 +1307,7 @@ In particular, it will allow us to construct moduli spaces as, possibly
 infinite dimensional, Banach manifolds:
 
 \begin{theorem}\label{thm:banach_quotient}
-  Consider a proper free action $\rho : G\times X\to X$ of a Banach
+  Consider a proper free action $\sigma : G\times X\to X$ of a Banach
   Lie group $G$ on a Banach manifold $X$. If each tangent space
   $T_x(G\cdot x) \subseteq T_x X$ is closed and complemented then
   $X/G$ is a Banach manifold and $T_x X/T_x (G\cdot x) \cong T_x(X/G)$
@@ -1776,15 +1784,15 @@ automatically an isomorphism.
 
 More precisely, a moment map of an action of a Lie group $G$ on a symplectic manifold
 $(X,\omega)$ is a map $\mu : X \to \mathfrak g^*$
-where $\mathfrak g$ is the Lie algebra of $G$ such that 
+where $\mathfrak g$ is the Lie algebra of $G$ such that
 \begin{align*}
-  d\langle\mu,A\rangle = \iota_{\rho(A)}\omega.
+  d\langle\mu,A\rangle = \iota_{\sigma(A)}\omega.
 \end{align*}
 for all $A\in\mathfrak g$ where $\langle \cdot,\cdot\rangle : \mathfrak g^* \times \mathfrak g \to \mathbb R$
-is the natural pairing and $\iota_{\rho(A)} : \Omega^2_{\mathbb R}(X)\to \Omega^1_{\mathbb R}(X)$
-is the contraction by the vector field $\rho(A)$. To take a
+is the natural pairing and $\iota_{\sigma(A)} : \Omega^2_{\mathbb R}(X)\to \Omega^1_{\mathbb R}(X)$
+is the contraction by the vector field $\sigma(A)$. To take a
 quotient $X/G$ then is to consider the topological quotient $\mu^{-1}(0)/G$.
-Assuming some reasonable conditions, similar to the ones 
+Assuming some reasonable conditions, similar to the ones
 in the Banach manifold quotient theorem \ref{thm:banach_quotient},
 this quotient may be endowed with a symplectic structure.
 
@@ -1844,15 +1852,15 @@ To answer the question, consider the following:
   manifold $X$. Then $(E,\dol_E)$ is
   \begin{itemize}
     \item \emph{semi-stable} if, for all holomorphic subbundles
-      $(F,\dol_F)\subseteq (E,\dol_E)$,
-      \begin{align}\label{eq:stability}
-        \frac{\deg F}{\rank F} \leq \frac{\deg E}{\rank E};
-      \end{align}
+          $(F,\dol_F)\subseteq (E,\dol_E)$,
+          \begin{align}\label{eq:stability}
+            \frac{\deg F}{\rank F} \leq \frac{\deg E}{\rank E};
+          \end{align}
     \item \emph{stable} if the inequality (\ref{eq:stability})
-      is strict for all holomorphic subbundles;
+          is strict for all holomorphic subbundles;
     \item \emph{polystable} if $E$ decomposes as a direct sum of
-      stable bundles.
-  \end{itemize} 
+          stable bundles.
+  \end{itemize}
 \end{definition}
 
 \begin{theorem}[Donaldson–Uhlenbeck–Yau]\label{thm:duy}
@@ -1987,7 +1995,7 @@ directly, we may now simply deduce it from $T^*\mathcal M_\dol(E)$.
     All that remains is to show that the cotangent space is a submanifold.
     The claim then follows as
     \begin{align*}
-     T_{[\dol_E,\phi]}\mathcal M_\phi(E) = T_{[\dol_E,\phi]} T^*_{[\dol_E]}\mathcal M_\dol(E)
+      T_{[\dol_E,\phi]}\mathcal M_\phi(E) = T_{[\dol_E,\phi]} T^*_{[\dol_E]}\mathcal M_\dol(E)
     \end{align*}
     for $[\dol_E]\in A_\dol(E)$. The fact that the manifold
     structure $T^*\mathcal M_\dol(E)$ agrees with that of $\mathcal M_{\phi}(E)$
@@ -2273,7 +2281,7 @@ possible to do better:
     \item $\eta : \mathcal M(\Spec\mathbb{C})\to M(\Spec\mathbb{C})$ is a bijection;
     \item for every scheme $N$, every natural transformation
           $\nu : M \to \Hom(-,N)$ factors through $\eta$ as in the diagram
-          \missingdefinition{universal property}
+          \missingdefinition
   \end{itemize}
 \end{definition}
 
@@ -2824,7 +2832,11 @@ Grothendieck constructed a moduli space for it. \missingcitation
   $\mathcal Q(\mathscr E)^{p,\mathscr L}$ has a fine moduli space
   $Q(\mathscr E)$ called the \emph{Quot scheme}.
   \begin{proof}
-    For an extensive overview see \cite{hoskins2016}.
+    The key idea is to realise the quot functor as a subfunctor
+    of the Grassmann functor which is known to be representable
+    by a projective scheme. It then remains to show that the map
+    into projective space is an immersion 
+    For an extensive overview see \cite[70-73]{hoskins2016}.
   \end{proof}
 \end{theorem}
 
@@ -2836,7 +2848,7 @@ Grothendieck constructed a moduli space for it. \missingcitation
 
 \missingsection
 
-\section{Geometric Invariant Theory}
+\section{Quotients of Schemes}
 
 The second major step in constructing moduli spaces of holomorphic
 bundles, algebraic or analytic, is to take a quotient by an automorphism
@@ -2847,13 +2859,8 @@ The goal of this section is to eliminate these redundancies.
 The first step is defining group actions in the setting of schemes.
 This allows us to make precise what we mean by a quotient with
 respect to such an action and what properties we would like such
-quotients to satisfy. To construct such quotients we are going to
-use a very powerful tool called geometric invariant theory (GIT).
-In the affine case, the GIT quotients will not be very difficult
-to obtain. However, a lot of work will be required to generalise the
-construction sufficiently to suit our needs. We will find that
-GIT naturally gives rise to a notion of stability which coincides
-with the stability of vector bundles.
+quotients to satisfy.
+
 
 \subsection{Group Schemes}
 
@@ -2893,6 +2900,7 @@ $e$, $i$, and $m$ implicit.
           See e.g. \cite[\href{https://stacks.math.columbia.edu/tag/022W}{Tag 022W}]{stacks-project} for details.
     \item The sepcial linear group $SL_N$ analogous to the above by
           quotienting by $\det(x_{ij})^2 - 1$.
+    \item \todo{GL(V)}
   \end{enumerate}
 \end{example}
 But what do these group schemes have to do with their well-known
@@ -3049,43 +3057,180 @@ $\mathscr O_{X/G}\inc\mathscr O_X$ should be:
 Consider a group scheme $G$ acting on $X$. What do we mean by a
 quotient of $X$ by the $G$-action? We are looking for a $G$-invariant
 surjective map $f : X\surj Y$ such that $Y$ contains as much of th
-geometrical information of $X$ as possible.
-
-\todo{explain better why these conditions are relevant}
+geometrical information of $X$ as possible. In particular
+we want to make sure that
+\begin{enumerate}
+  \item the topology on $Y$ is induced by the topology on $X$,
+  \item the affines on $Y$ correspond to affines on $X$,
+  \item disjoint closed points in $Y$ correspond to disjoint
+        closed orbits in $X$, and
+  \item the functions on $Y$ correspond to $G$-invariant functions
+        on $X$.
+\end{enumerate}
+With this in mind, we are ready to make the following definition:
 
 \begin{definition}[{\cite[Definition 4.2.2]{huybrechts2010}}]
-  A \emph{good quotient} of $X$ by $G$-action is a map
-  $f : X\surj Y$ such that the following hold:
-  \todo{fix definition}
+  A \emph{good quotient} of $X$ by $G$-action is a $G$-invariant
+  surjective map $f : X\surj Y$ such that the following hold:
   \begin{enumerate}
+    \item $Y$ has the quotient topology.
     \item $f$ is affine.
-    \item $f$ is surjective and $Y$ has the quotient topology.
-    \item The map $f^\sharp : \mathscr O_Y \to \mathscr O_X$
-          is an isomorphism $\mathscr O_Y \cong \mathscr O_X^G$.
     \item For every closed $G$-invariant $V\subseteq X$,
           $f(V)$ is closed in $Y$.
     \item For all disjoint closed $G$-invariant $V,V'\subseteq X$,
           $f(V)$ and $f(V')$ are disjoint.
+    \item The map $f^\sharp : \mathscr O_Y \to f_*\mathscr O_X$
+          is an isomorphism onto $(f_*\mathscr O_X)^G$.
   \end{enumerate}
 \end{definition}
 
+
+Note that our definition of a geometric quotient $f : X\surj Y$
+ensures that $f$ is well-behaved with respect to closed orbits, but
+allows for some leeway when it comes to non-closed orbits. That is,
+$Y$ need not be in bijection with the topological quotient $X/G$. In particular,
+all point in the closure of an orbit may be identified. It will be
+possible to do better. Hence we add the following property:
+
 \begin{definition}
-  geometric quotient
+  A good quotient is \emph{geometric} if it is injective on orbits.
 \end{definition}
+
+\section{Constructing Geometric Quotients}
+
+While we have been able to write down some conditions that we want
+a map to satisfy in order to call it a geometric quotient, it is not
+obvious under which conditions such quotients exist, let alone how to
+construct them. To overcome these issues, we are going to
+use a very powerful tool called geometric invariant theory (GIT).
+In the affine case, the GIT quotients will not be very difficult
+to obtain. However, a lot of work will be required to generalise the
+construction sufficiently to suit our needs. We will find that
+GIT naturally gives rise to a notion of stability which coincides
+with the stability of vector bundles.
 
 \subsection{Reductive Groups}
 
+\begin{definition}
+  A \emph{linear representation} of an algebraic group $G$
+  on a vector space $V$ is a homomorphism
+  $\rho : G \to GL(V)$ of group-valued functors.
+\end{definition}
+
+\begin{example}
+  if $V$ is finite-dimensional then its a map of algebraic groups
+  \missingexample
+\end{example}
+
+\begin{example}
+  affine linear rep using co-module structure
+  \missingexample
+\end{example}
+
+\begin{definition}
+  redutive group \missingdefinition
+\end{definition}
+
+\begin{theorem}
+  The following are equivalent:
+  \begin{itemize}
+    \item reductive
+    \item geometrically reductive
+    \item linearly reductive
+  \end{itemize}
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
+
 \missingsection
 
-\subsection{Of Affine Schemes}
+\subsection{Affine Good Quotients}
+
+Consider a reductive group $G$ acting on an affine scheme $X$.
+
+\begin{theorem}[Nagata]
+  If $\mathscr O(X)$ is finitely generated then so is $\mathscr O(X)^G$.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
+
+Indeed, this condition is necessary. A theorem by Popov \missingcitation
+states that $G$ is reductive if, and only if, for all affine schemes of
+finite type, the ring of invariants is finitely generated.
+
+\begin{definition}
+  The \emph{affine GIT quotient} is the map 
+  \begin{align*}
+    X \longrightarrow X\sslash G := \Spec\mathscr O(X)^G
+  \end{align*}  
+  arising from the inclusion $\mathscr O(X)^G \inc \mathscr O(X)$.
+\end{definition}
+
+\begin{example}
+  \missingexample
+\end{example}
+
+\begin{theorem}
+  The affine GIT quotient is a good quotient.
+  \begin{proof}
+    \missingproof
+  \end{proof} 
+\end{theorem}
+
+While we are not yet in a position to take the quotient of the Quot
+schemes with respect to the actions of $GL_n$ \todo{doublecheck},
+we can at least contemplate some examples of good and geometric
+quotients:
+
+\begin{example}
+  good and geometric
+ \missingexample 
+\end{example}
+
+\begin{example}
+  good but not geometric
+  \missingexample
+\end{example}
+
+\subsection{Affine Geometric Quotients}
+
+Consider an affine GIT quotient $\phi : X \surj X\sslash G$.
+
+\begin{definition}
+  A point $x\in X$ is \emph{stable} if $G\cdot x$ is closed in $X$
+  and $\dim G\cdot x = \dim G$. We denote by $X^s$ the set of stable
+  points.
+\end{definition}
+
+\begin{lemma}
+  $X^s \subseteq X$ is open and $G$-invariant.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+\begin{lemma}
+  $X^s\sslash G := \phi(X^s)$ is open in $X\sslash G$ and
+  $\phi^{-1}(X^s\sslash G) = X^s$.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+\begin{theorem}
+  The restriction $\phi : X^s \surj X^s\sslash G$ is a geometric quotient.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
 
 \missingsection
 
-\subsection{By Linear Actions}
+\subsection{Linearisation}
 
-\missingsection
-
-\subsection{By Linearised Actions}
+\subsection{Quotients by Linearised Actions}
 
 \missingsection
 
@@ -3093,7 +3238,23 @@ geometrical information of $X$ as possible.
 
 \missingsection
 
-\chapter{Future Work}
+\chapter{Conclusion}
+
+\missingsection
+
+\section{Evaluation}
+
+\missingsection
+
+\subsection{Bypassing Banach Manifolds}
+
+\missingsection
+
+\subsection{Language Barrier}
+
+\missingsection
+
+\section{Future Work}
 
 \missingsection
 
