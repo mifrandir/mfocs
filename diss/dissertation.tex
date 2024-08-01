@@ -388,12 +388,12 @@ in some sense. In particular, we have Dolbeault's theorem:
 \begin{definition}
   Let $(E,\dol_E)$ be a holomorphic bundle on a complex manifold $X$.
   A \emph{Higgs field} on $(E,\dol_E)$ is a holomorphic section
-  $\phi \in \Omega^{1,0}(X,\End(E))$ satisfying $\phi\wedge\phi = 0$.
+  $\varphi \in \Omega^{1,0}(X,\End(E))$ satisfying $\varphi\wedge\varphi = 0$.
   A \emph{Higgs bundle} is a holomorphic bundle equipped with
   a Higgs field.
 \end{definition}
 We immediately observe that, in the case where $X=C$ is a compact
-Riemann surface, the condition $\phi\wedge\phi=0$ is trivially
+Riemann surface, the condition $\varphi\wedge\varphi=0$ is trivially
 satisfied. However, if one is to consider moduli spaces of Higgs bundles
 over more general base spaces then this condition is quite important.
 
@@ -542,7 +542,7 @@ $\Omega^{0,1}(C,\End(E))$.
 
 This allows us to define the space of all Higgs bundles
 \begin{align*}
-  \mathcal A_\phi(E) := \bigsqcup_{\dol_E \in \mathcal A_\dol (E)} \Gamma(C,\End(E,\dol_E)\otimes K_C)
+  \mathcal A_\varphi(E) := \bigsqcup_{\dol_E \in \mathcal A_\dol (E)} \Gamma(C,\End(E,\dol_E)\otimes K_C)
 \end{align*}
 whose topology is induced by the topologies on
 $\Gamma(C,\End(E,\dol_E)\otimes K_C)$ and $\mathcal A_\dol (E)$.
@@ -570,7 +570,7 @@ Unfortunately, the quotient leaves a lot to be desired:
   \end{proof}
 \end{lemma}
 
-Note that we have a similar action of $GL(E)$ on $\mathcal A_\phi(E)$ and
+Note that we have a similar action of $GL(E)$ on $\mathcal A_\varphi(E)$ and
 indeed many other topological spaces of holomorphic bundles. However,
 it is quite clear that any space that arises as a disjoint union
 over $\mathcal A_\dol (E)$ must also be non-Hausdorff. Therefore we need
@@ -819,7 +819,7 @@ as an affine space modelled on
 $\Omega^1_{\mathbb{R}}(C,\mathfrak{u}(E))$. This is eventually going
 to help us introduce a symplectic structure on $\mathcal A_\dol (E)$ and hence
 take a symplectic quotient. Let us do the same for the space of Higgs
-bundles $\mathcal A_\phi(E)$. We are going to identify $\mathcal A_\phi$ with an affine
+bundles $\mathcal A_\varphi(E)$. We are going to identify $\mathcal A_\varphi$ with an affine
 space modelled on $\Omega^1_{\mathbb{R}}(C,\End(E,h))^{\oplus 2}$.
 Once again fix a Hermitian metric $h$ on $E$.
 
@@ -842,12 +842,12 @@ $\Omega^1_{\mathbb{R}}(C,\End(E,h))\oplus\Omega_{\mathbb{R}}^1(C,\End(E,h))$. Us
 and the map given by (\ref{thm:chern_connection}) we have an inclusion
 of topological spaces
 \begin{align*}
-  \mathcal A_\phi(E) \subseteq \mathcal A_\dol (E) \times \Omega^{1,0}(\End(E)) \cong \mathcal A_\Phi (E,h).
+  \mathcal A_\varphi(E) \subseteq \mathcal A_\dol (E) \times \Omega^{1,0}(\End(E)) \cong \mathcal A_\Phi (E,h).
 \end{align*}
-Note that in general $\mathcal A_\phi(E)$ and $\mathcal A_\Phi (E,h)$ are not isomorphic. In
+Note that in general $\mathcal A_\varphi(E)$ and $\mathcal A_\Phi (E,h)$ are not isomorphic. In
 particular, a Higgs connection $(\nabla,\Phi)$ corresponds to
-a pair $(\dol_E,\phi)$ where $\dol_E$ is a Dolbeault operator and
-$\phi$ is a section in $\Omega^{1,0}(C,\End(E))$, not necessarily
+a pair $(\dol_E,\varphi)$ where $\dol_E$ is a Dolbeault operator and
+$\varphi$ is a section in $\Omega^{1,0}(C,\End(E))$, not necessarily
 holomorphic. We will have to deal with this at a later stage.
 
 For now, observe that the group $G(E,h)$ also acts on $\mathcal A_\Phi (E,h)$
@@ -1637,18 +1637,18 @@ Higgs bundles.
   A Higgs connection $(\nabla,\Phi)\in \mathcal A_\Phi(E,h)$
   is \emph{Hitchin} if
   \begin{align}\label{eq:Hitchin_equations}
-    \nabla_{0,1}\phi = 0,\hspace{1cm}
-    K(\nabla) + [\phi,\phi^\dagger] \in i\mathcal H^2(X)\otimes I
+    \nabla_{0,1}\varphi = 0,\hspace{1cm}
+    K(\nabla) + [\varphi,\varphi^\dagger] \in i\mathcal H^2(X)\otimes I
   \end{align}
   for some $\alpha\in\mathcal H^2(C)$ where we write
-  $\Phi = \phi - \phi^\dagger$ as in \ref{lem:real_vector_space_iso}.
+  $\Phi = \varphi - \varphi^\dagger$ as in \ref{lem:real_vector_space_iso}.
 \end{definition}
 
 Here the first equation in (\ref{eq:Hitchin_equations}) merely says that $\Phi$
 correspond to a holomorphic Higgs field on the holomorphic bundle
 $(E,\nabla_{0,1})$.  The second equation is a harmonicity condition generalising
-\ref{eq:yang_mills_condition}. In particular, if $\Phi = 0$ the $\phi =
-  \phi^\dagger$ so $(\nabla,0)$ is Hitchin if, and only if, $\nabla$ is
+\ref{eq:yang_mills_condition}. In particular, if $\Phi = 0$ the $\varphi =
+  \varphi^\dagger$ so $(\nabla,0)$ is Hitchin if, and only if, $\nabla$ is
 Yang-Mills.
 
 Now consider the space $\mathcal A_\Phi^{ps}(E,h)$ of Hitchin connections.
@@ -1967,27 +1967,27 @@ By definition of $H^{p,q}$, this is dual to
 \end{align*}
 whenever $(E,\dol_E)$ is stable. Hence we have an inclusion
 \begin{align}\label{eq:cotangent_inclusion}
-  T^*\mathcal M_\dol(E) \longinc\mathcal M_\phi(E).
+  T^*\mathcal M_\dol(E) \longinc\mathcal M_\varphi(E).
 \end{align}
 Observe that the holomorphic bundle underlying a stable Higgs bundle need
 not be stable. Hence (\ref{eq:cotangent_inclusion}) is not a bijection.
 However, we have the next best thing:
 
 \begin{theorem}
-  $T^*\mathcal M_\dol(E)$ is Zariski open in $\mathcal M_\phi(E)$.
+  $T^*\mathcal M_\dol(E)$ is Zariski open in $\mathcal M_\varphi(E)$.
   In particular, it is open and dense in the analytic topology.
   \begin{proof}
     \missingproof
   \end{proof}
 \end{theorem}
 
-Rather than computing the manifold structure on $\mathcal M_\phi(E)$
+Rather than computing the manifold structure on $\mathcal M_\varphi(E)$
 directly, we may now simply deduce it from $T^*\mathcal M_\dol(E)$.
 
 \begin{corollary}
-  $\mathcal M_\phi(E)$ is a complex manifold of dimension
+  $\mathcal M_\varphi(E)$ is a complex manifold of dimension
   \begin{align*}
-    \dim_{\mathbb C}\mathcal M_{\phi}(E)
+    \dim_{\mathbb C}\mathcal M_{\varphi}(E)
     =2\dim_{\mathbb C}\mathcal M_\dol(E)
     =2(g-1)r^2 + 2.
   \end{align*}
@@ -1995,12 +1995,12 @@ directly, we may now simply deduce it from $T^*\mathcal M_\dol(E)$.
     All that remains is to show that the cotangent space is a submanifold.
     The claim then follows as
     \begin{align*}
-      T_{[\dol_E,\phi]}\mathcal M_\phi(E) = T_{[\dol_E,\phi]} T^*_{[\dol_E]}\mathcal M_\dol(E)
+      T_{[\dol_E,\varphi]}\mathcal M_\varphi(E) = T_{[\dol_E,\varphi]} T^*_{[\dol_E]}\mathcal M_\dol(E)
     \end{align*}
     for $[\dol_E]\in A_\dol(E)$. The fact that the manifold
-    structure $T^*\mathcal M_\dol(E)$ agrees with that of $\mathcal M_{\phi}(E)$
+    structure $T^*\mathcal M_\dol(E)$ agrees with that of $\mathcal M_{\varphi}(E)$
     may be deduced from the observation that
-    $\mathcal M_\dol(E) \subseteq \mathcal M_\phi(E)$ is a submanifold
+    $\mathcal M_\dol(E) \subseteq \mathcal M_\varphi(E)$ is a submanifold
     via $[\dol_E] \mapsto [\dol_E,0]$.
   \end{proof}
 \end{corollary}
@@ -2140,7 +2140,7 @@ sensible definition based on the usual setting of manifolds:
     \phi_i : {\pi}^{-1}U_i \cong \affine{r}{}\times U_i
   \end{align}
   such that, for every affine $U = \Spec R \subseteq U_i \cap U_j$,
-  the map $\phi_i \circ \phi^{-1}_j$ restricts to a $R$-linear
+  the map $\phi_i \circ \varphi^{-1}_j$ restricts to a $R$-linear
   automorphism of $\affine{r}{}\times U = \Spec R[T_1,\ldots,T_r]$.
 \end{definition}
 
@@ -2352,7 +2352,7 @@ definition:
 
 \begin{definition}[{\cite[13.4]{gortz2010}}]
   For $m\in\mathbb{Z}$, define the graded $R$-module $R(m)$ by
-  $R(d)_d := R_{m+d}$ for all $d\in\mathbb{Z}$. \emph{Serre's
+  $R(m)_d := R_{m+d}$ for all $d\in\mathbb{Z}$. \emph{Serre's
     twisting sheaf} is
   \begin{align*}
     \mathscr O_X(m) := \widetilde{R(m)}.
@@ -2415,14 +2415,14 @@ projective space the twisting sheaves serve as an example:
 \begin{proposition}
   Let $R$ be a finitely generated $R_0$-algebra,
   write $X=\Proj R$ and let $m,n\geq 1$. Then
-  $\mathscr O_X(m)$ is ample.
+  $\mathscr O_X(m)$ is ample. \todo{what's n?}
   \begin{proof}
     See \cite[Example 13.45]{gortz2010}.
   \end{proof}
 \end{proposition}
 
 More generally, any quasi-projective quasi-compact scheme has
-an ample sheaf given by pulling back a twisted sheaf:
+an ample sheaf given by pulling back a twisting sheaf:
 
 \begin{proposition}
   Let $X$ be projective, $U\subseteq X$ quasi-compact, and
@@ -2579,7 +2579,7 @@ A similar definition is possible for locally free sheaves:
 
 \missingsection
 
-\section{Locally Free Sheaves as Points of Quot Schemes}
+\section{Locally Free Sheaves and Quot Schemes}
 
 The first step in constructing the analytic moduli spaces of
 holomorphic bundles was to consider the slightly larger space of
@@ -2665,10 +2665,10 @@ However, this fails to have any moduli space at all:
 Let us think about the case of Higgs sheaves. Consider the moduli problem
 given by \todo{add new equivalence; make sure the canonical sheaf restricts to a canonical sheaf}
 \begin{align*}
-  \mathcal A_H(T) = \left\lbrace{\text{Higgs sheaves $(\mathscr E,\phi)$
+  \mathcal A_H(T) = \left\lbrace{\text{Higgs sheaves $(\mathscr E,\varphi)$
       on $X_T$}}\right\rbrace/\sim.
 \end{align*}
-where $(\mathscr E,\phi)\sim(\mathscr E',\phi')$ if, and only if,
+where $(\mathscr E,\varphi)\sim(\mathscr E',\varphi')$ if, and only if,
 there is an isomorphism $\mathscr E\cong\mathscr E'$ that makes the
 following commute:
 \begin{equation*}
@@ -2676,14 +2676,14 @@ following commute:
   \begin{tikzcd}
     {\mathscr E} && {\mathscr E\otimes \Omega^1_{C\times T}} \\
     {\mathscr E'} && {\mathscr E'\otimes\Omega^1_{C\times T}}
-    \arrow["\phi", from=1-1, to=1-3]
+    \arrow["\varphi", from=1-1, to=1-3]
     \arrow["\cong"', from=1-1, to=2-1]
     \arrow["\cong", from=1-3, to=2-3]
-    \arrow["{\phi'}", from=2-1, to=2-3]
+    \arrow["{\varphi'}", from=2-1, to=2-3]
   \end{tikzcd}
 \end{equation*}
 Once again, by restricting to fibres over $t\in T(\mathbb{C})$
-a family of Higgs sheaves $(\mathscr E,\phi)$ on $X_T$ yields
+a family of Higgs sheaves $(\mathscr E,\varphi)$ on $X_T$ yields
 a Higgs field
 \begin{align*}
   \phi_t : \mathscr E_t \to \mathscr E_t \otimes \Omega^1_C.
@@ -2835,7 +2835,7 @@ Grothendieck constructed a moduli space for it. \missingcitation
     The key idea is to realise the quot functor as a subfunctor
     of the Grassmann functor which is known to be representable
     by a projective scheme. It then remains to show that the map
-    into projective space is an immersion 
+    into projective space is an immersion
     For an extensive overview see \cite[70-73]{hoskins2016}.
   \end{proof}
 \end{theorem}
@@ -2877,20 +2877,24 @@ satisfying the usual conditions of unitality, inverses, and associativity.
 As usual with classical groups, we are going to leave the maps
 $e$, $i$, and $m$ implicit.
 
+In the affine case $G = \Spec R$ the multiplication and inverse maps
+correspond to $\mathbb{C}$-algebra homomorphisms
+$m^\sharp : R \to R\otimes R$ and $i^\sharp : R\to R$.
+If one thinks of elements $f\in R$ as functions $G\to\mathbb C$
+then the comulitiplication is given by $m^\sharp(f)(g,h) = f(m(g,h))$
+for $f\in R$ and $g,h\in G$.
+
 \begin{example}\label{ex:group_schemes}
-  In the affine case $G = \Spec R$ we may specify the multiplication
-  and inverse maps in terms of $\mathbb{C}$-algebra homomorphisms
-  $m^* : R \to R\otimes R$ and $i^* : R\to R$.
   There are several affine group schemes that we are already
   intuitively familiar with:
   \begin{enumerate}
-    \item The additive group $\mathbf{G}_a := \Spec k[t]$ with
+    \item The additive group $\mathbf{G}_a := \Spec\mathbb C[t]$ with
           comulitiplication $t\mapsto t\otimes 1 + 1\otimes t$,
-    \item The multiplicative group $\mathbf{G}_m := \Spec k[t^\pm]$
+    \item The multiplicative group $\mathbf{G}_m := \Spec\mathbb C[t^\pm]$
           with comultiplication $t\mapsto t\otimes t$,
     \item The general linear group
           \begin{align*}
-            GL_n := \Spec k[x_{ij} : 1\leq i,j\leq n][1/\det(x_{ij})]
+            GL_n := \Spec\mathbb C[x_{ij} : 1\leq i,j\leq n][1/\det(x_{ij})]
           \end{align*}
           where $(x_{ij})$ is the $n\times n$ matrix with entries $x_{ij}$
           with comultiplication
@@ -2970,6 +2974,17 @@ $G(T)$ on $X(T)$ by
 \begin{equation*}
   T \xlongrightarrow{(g,x)} G\times X \xlongrightarrow{\sigma} X.
 \end{equation*}
+
+\begin{example}
+  If $G$ and $X$ are affine then an action $\sigma : G\times X\to X$
+  corresponds to a map of $\mathbb C$-algebras
+  $\mathscr O(X) \to \mathscr O(G)\otimes\mathscr O(X)$.
+  In particular, taking $G=GL_n$ and $X=\affine{n}{}$, there is
+  an action given by
+  \begin{align*}
+    \mathbb C[t_1,\ldots,t_n] \to  
+  \end{align*}
+\end{example}
 
 \begin{example}
   On locally free sheaves.
@@ -3096,7 +3111,13 @@ possible to do better. Hence we add the following property:
   A good quotient is \emph{geometric} if it is injective on orbits.
 \end{definition}
 
-\section{Constructing Geometric Quotients}
+In practice, our method of constructing quotients is going to yield
+good quotients and it will always be possible to turn them into geometric
+quotients. However, at each step may come at the cost of having to
+discard some insufficiently well-behaved orbits. Hence geometric quotients
+exist but they need not be non-trivial.
+
+\section{Constructing Quotients of Affine Schemes}
 
 While we have been able to write down some conditions that we want
 a map to satisfy in order to call it a geometric quotient, it is not
@@ -3145,7 +3166,7 @@ with the stability of vector bundles.
 
 \missingsection
 
-\subsection{Affine Good Quotients}
+\subsection{Good Quotients}
 
 Consider a reductive group $G$ acting on an affine scheme $X$.
 
@@ -3161,10 +3182,10 @@ states that $G$ is reductive if, and only if, for all affine schemes of
 finite type, the ring of invariants is finitely generated.
 
 \begin{definition}
-  The \emph{affine GIT quotient} is the map 
+  The \emph{affine GIT quotient} is the map
   \begin{align*}
     X \longrightarrow X\sslash G := \Spec\mathscr O(X)^G
-  \end{align*}  
+  \end{align*}
   arising from the inclusion $\mathscr O(X)^G \inc \mathscr O(X)$.
 \end{definition}
 
@@ -3176,7 +3197,7 @@ finite type, the ring of invariants is finitely generated.
   The affine GIT quotient is a good quotient.
   \begin{proof}
     \missingproof
-  \end{proof} 
+  \end{proof}
 \end{theorem}
 
 While we are not yet in a position to take the quotient of the Quot
@@ -3186,7 +3207,7 @@ quotients:
 
 \begin{example}
   good and geometric
- \missingexample 
+  \missingexample
 \end{example}
 
 \begin{example}
@@ -3194,9 +3215,9 @@ quotients:
   \missingexample
 \end{example}
 
-\subsection{Affine Geometric Quotients}
+\subsection{Geometric Quotients}
 
-Consider an affine GIT quotient $\phi : X \surj X\sslash G$.
+Consider an affine GIT quotient $\varphi : X \surj X\sslash G$.
 
 \begin{definition}
   A point $x\in X$ is \emph{stable} if $G\cdot x$ is closed in $X$
@@ -3212,15 +3233,15 @@ Consider an affine GIT quotient $\phi : X \surj X\sslash G$.
 \end{lemma}
 
 \begin{lemma}
-  $X^s\sslash G := \phi(X^s)$ is open in $X\sslash G$ and
-  $\phi^{-1}(X^s\sslash G) = X^s$.
+  $X^s\sslash G := \varphi(X^s)$ is open in $X\sslash G$ and
+  $\varphi^{-1}(X^s\sslash G) = X^s$.
   \begin{proof}
     \missingproof
   \end{proof}
 \end{lemma}
 
 \begin{theorem}
-  The restriction $\phi : X^s \surj X^s\sslash G$ is a geometric quotient.
+  The restriction $\varphi : X^s \surj X^s\sslash G$ is a geometric quotient.
   \begin{proof}
     \missingproof
   \end{proof}
@@ -3228,9 +3249,92 @@ Consider an affine GIT quotient $\phi : X \surj X\sslash G$.
 
 \missingsection
 
+\section{Constructing Quotients of Projective Schemes}
+
 \subsection{Linearisation}
 
-\subsection{Quotients by Linearised Actions}
+\begin{definition}
+  A \emph{linear action} of an affine algebraic group $G$
+  on a projective scheme $X$ is an action with a group homomorphism
+  $G\to GL_{n+1}$ and an embedding $X\inc\projective{n}{}$
+  which is $G$-invariant, i.e. making the following commutes:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNCxbMCwxLCJYIl0sWzIsMSwiXFxtYXRoYmYgUF5uIl0sWzAsMCwiR1xcdGltZXMgWCJdLFsyLDAsIkdMX3tuKzF9XFx0aW1lc1xcbWF0aGJmIFBebiJdLFswLDEsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsMCwiXFxzaWdtYSIsMl0sWzMsMV0sWzIsM11d
+    \begin{tikzcd}
+      {G\times X} && {GL_{n+1}\times\mathbf P^n} \\
+      X && {\mathbf P^n}
+      \arrow[from=1-1, to=1-3]
+      \arrow[from=1-1, to=2-1]
+      \arrow[from=1-3, to=2-3]
+      \arrow[hook, from=2-1, to=2-3]
+    \end{tikzcd}
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  A \emph{linearisation} of an action $\sigma : G\times X\to X$
+  of an affine algebraic group on a scheme $X$ is a line bundle
+  $\pi:L\to X$ with a bundle isomorphism $G\times L\cong \sigma^* L$
+  such that there is an action $\tilde\sigma : G\times L\to L$
+  making the following commute:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNSxbMCwwLCJHXFx0aW1lcyBMIl0sWzEsMSwiXFxzaWdtYV4qTCJdLFsyLDEsIkwiXSxbMSwyLCJHXFx0aW1lcyBYIl0sWzIsMiwiWCJdLFswLDIsIlxcdGlsZGVcXHNpZ21hIiwwLHsiY3VydmUiOi0yfV0sWzEsMl0sWzAsMSwiXFxjb25nIl0sWzAsMywiXFx0ZXh0e2lkfVxcdGltZXNcXHBpIiwyLHsiY3VydmUiOjJ9XSxbMSwzXSxbMyw0LCJcXHNpZ21hIiwyXSxbMiw0LCJcXHBpIl1d
+    \begin{tikzcd}
+      {G\times L} \\
+      & {\sigma^*L} & L \\
+      & {G\times X} & X
+      \arrow["\cong", from=1-1, to=2-2]
+      \arrow["{\tilde\sigma}", curve={height=-12pt}, from=1-1, to=2-3]
+      \arrow["{\text{id}\times\pi}"', curve={height=12pt}, from=1-1, to=3-2]
+      \arrow[from=2-2, to=2-3]
+      \arrow[from=2-2, to=3-2]
+      \arrow["\pi", from=2-3, to=3-3]
+      \arrow["\sigma"', from=3-2, to=3-3]
+    \end{tikzcd}
+  \end{equation*}
+\end{definition}
+
+
+\begin{example}
+  locally free sheaves \missingexample
+\end{example}
+
+\begin{example}
+  higgs sheaves \missingexample
+\end{example}
+
+\begin{lemma}\label{lem:linearisations_give_reps}
+  Consider a linearisation $L$ inducing the action
+  $\tilde\sigma : G\times L\to L$.
+  Then there is a natural linear representation $G\to GL(\Gamma(X,L))$.
+  \begin{proof}[Proof idea]
+    Following \cite[Lemma 5.19]{hoskins2016}. As $\Gamma(X,L)$
+    is finite-dimensional, the objective is to construct a map 
+    $\Gamma(X,L) \to \mathscr O(G) \otimes \Gamma(X,L)$
+    satisfying the relevant conditions. One may do so by considering
+    $\sigma^* : \Gamma(X,L) \to \Gamma(G\times X,\sigma^*L)$ and
+    composing with the isomorphism from the linearisation and
+    the K\"unneth formula for sheaf cohomology.
+  \end{proof}
+\end{lemma}
+
+\begin{example}
+  Consider the action of $GL_{n+1}$ on $\projective{n}{}$ and the
+  twisting sheaf $\mathscr O(1)=\Gamma(\projective{n}{},O(1))^\vee$.
+  Then the 
+
+  Consider a linear action $G\times X\to X$. Then the twisting sheaf
+  $\mathscr O(1)$ on $\projective{n}{}$ pulls back to an invertible
+  sheaf $\mathscr L = \Gamma(X,L)^\vee$ on $X$ via the embedding
+  $X\inc\projective{n}{}$.
+  \missingexample
+\end{example}
+
+\subsection{Good Quotients}
+
+\missingsection
+
+\subsection{Geometric Quotients}
 
 \missingsection
 
