@@ -2976,14 +2976,18 @@ $G(T)$ on $X(T)$ by
 \end{equation*}
 
 \begin{example}
-  If $G$ and $X$ are affine then an action $\sigma : G\times X\to X$
-  corresponds to a map of $\mathbb C$-algebras
-  $\mathscr O(X) \to \mathscr O(G)\otimes\mathscr O(X)$.
-  In particular, taking $G=GL_n$ and $X=\affine{n}{}$, there is
-  an action given by
-  \begin{align*}
-    \mathbb C[t_1,\ldots,t_n] \to  
-  \end{align*}
+  The multiplicative group $\mathbf G_m$ acts on $\affine{n}{}$
+  via scalar mutliplication. That is the action on $\mathbb C$-points
+  is $\lambda\cdot x = \lambda x$.
+\end{example}
+
+\begin{example}
+  There is an action of $GL_n$ on $\affine{n}{}$ given by vector
+  matrix multiplication. That is, for $g\in GL_n(\mathbb C)$
+  and $x\in\affine{n}{}(\mathbb C)$, the action is $g\cdot x = gx$.
+  There is a similar action of $GL_{n+1}$ on $\projective{n}{}$
+  given by $g\cdot[x] = [gx]$ for $g\in GL_{n+1}(\mathbb C)$
+  and $[x]\in\projective{n}{}(\mathbb C) \cong (\mathbb C^n - \{0\})/\mathbb C^\times$.
 \end{example}
 
 \begin{example}
@@ -3257,7 +3261,7 @@ Consider an affine GIT quotient $\varphi : X \surj X\sslash G$.
   A \emph{linear action} of an affine algebraic group $G$
   on a projective scheme $X$ is an action with a group homomorphism
   $G\to GL_{n+1}$ and an embedding $X\inc\projective{n}{}$
-  which is $G$-invariant, i.e. making the following commutes:
+  which is $G$-equivariant, i.e. making the following commute:
   \begin{equation*}
     % https://q.uiver.app/#q=WzAsNCxbMCwxLCJYIl0sWzIsMSwiXFxtYXRoYmYgUF5uIl0sWzAsMCwiR1xcdGltZXMgWCJdLFsyLDAsIkdMX3tuKzF9XFx0aW1lc1xcbWF0aGJmIFBebiJdLFswLDEsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsMCwiXFxzaWdtYSIsMl0sWzMsMV0sWzIsM11d
     \begin{tikzcd}
@@ -3330,11 +3334,78 @@ Consider an affine GIT quotient $\varphi : X \surj X\sslash G$.
   \missingexample
 \end{example}
 
+\begin{lemma}
+  If $L$ is a linearisation then so is $L^{\otimes k}$ for all $k\geq 1$.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+\begin{lemma}\label{lem:rxl}
+  Let $L$ be a linearisation of an action of an affine algebraic
+  group on a projective scheme $X$. Then
+  \begin{align*}
+    X \cong \Proj\bigoplus_{k\geq 0}\Gamma(X,L^{\otimes k}).
+  \end{align*}
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+
 \subsection{Good Quotients}
+
+Consider an ample linearisation $L$ of the action $\sigma : G\times X\to X$
+of a reductive group on a projective scheme.
+
+One difficulty when working with projective schemes, rather
+than affine ones, is the failure of $\Proj$ to be a functor. In particular,
+a graded algebra homomorphism $f : S \to R$ only induces a map 
+$\Proj R - N \to \Proj S$ where $N\subseteq\Proj R$ is the closed
+subscheme defined by \missingcitation
+\begin{align*}
+  N := \{ p \in \Proj R : S_+ \subseteq f^{-1}p\}.
+\end{align*}
+the inclusion $R^G \inc R$ only yields a map
+\begin{align*}
+  \Proj(R) - N \longrightarrow \Proj(R^G)
+\end{align*}
+where $N\subseteq\Proj R$ is a closed subscheme sometimes referred
+to as the null cone. This means that we can, in general, only hope to
+obtain a good quotient on an open subscheme. In light of
+\ref{lem:rxl}, we consider the graded algebra of sections
+\begin{align*}
+  R(X,L) := \Proj\bigoplus_{k\geq 0}\Gamma(X,L^{\otimes k}).
+\end{align*}
+We now call the points outside the null cone in $\Proj R(X,L)$
+semi-stable:
+
+\begin{definition}
+  A point $x\in X$ is \emph{semi-stable} if there exists a section
+  $s\in\Gamma(X,L^{\otimes k})^G$ for some $k>0$ such that $s(x)\neq 0$.
+  Denote by $X^{ss}(L)$ the set of all semi-stable points of $X$
+  with respect to the linearisation $L$.
+\end{definition}
+
+\begin{lemma}
+  If 
+\end{lemma}
 
 \missingsection
 
 \subsection{Geometric Quotients}
+
+\begin{definition}
+  A point $x\in X$ is \emph{semi-stable} if there exists a section
+  $s\in\Gamma(X,L^{\otimes k})^G$ for some $k>0$ such that $s(x)\neq 0$
+  and the action of $G$ on the standard open $D_+(s)\subseteq X$ is closed.
+  Denote by $X^s(L)$ the set of all stable points of $X$ with respect
+  to the linearisation $L$.
+\end{definition}
+
+\begin{lemma}
+  $X^s(L)$ is the largest 
+\end{lemma}
 
 \missingsection
 
