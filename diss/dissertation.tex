@@ -1016,7 +1016,8 @@ the we say that $P$ is a differential operator:
 
 \begin{example}
   Let $\nabla\in A_\nabla(E,h)$ be a connection. Generalising the previous
-  example slightly, consider the operator
+  example slightly, consider the operator \todo{change $\nabla$ to $d_\nabla$
+    and be careful about $TX\otimes TX$ vs $TX\wedge TX$}
   \begin{align}\label{eq:nabla_hat}
     \hat\nabla := \nabla + \nabla^\dagger :
     \Omega^1_{\mathbb R}(\End(E,h)) \to
@@ -2376,6 +2377,12 @@ i.e. is invertible. That is, it has rank 1.
   \end{proof}
 \end{proposition}
 
+\begin{example}
+  Let us calculate the twisting sheaf $\mathscr O(1)$ on $\projective{n}{}$
+  more explicitly.
+  \missingexample
+\end{example}
+
 Why are the twisting sheaves important to us? They are well-behaved
 with respect to the parameters. In particular,
 under the assumption of \ref{thm:twisiting_sheaf_invertible},
@@ -3088,7 +3095,7 @@ we want to make sure that
 \end{enumerate}
 With this in mind, we are ready to make the following definition:
 
-\begin{definition}[{\cite[Definition 4.2.2]{huybrechts2010}}]
+\begin{definition}[{\cite[Definition 4.2.2]{huybrechts2010}}]\label{def:good_quotient}
   A \emph{good quotient} of $X$ by $G$-action is a $G$-invariant
   surjective map $f : X\surj Y$ such that the following hold:
   \begin{enumerate}
@@ -3223,10 +3230,10 @@ quotients:
 
 Consider an affine GIT quotient $\varphi : X \surj X\sslash G$.
 
-\begin{definition}
+\begin{definition}\label{def:affine_stability}
   A point $x\in X$ is \emph{stable} if $G\cdot x$ is closed in $X$
-  and $\dim G\cdot x = \dim G$. We denote by $X^s$ the set of stable
-  points.
+  and $\dim G_x = 0$. We denote by $X^s$ the set of stable
+  points. \todo{define stabiliser}
 \end{definition}
 
 \begin{lemma}
@@ -3258,24 +3265,6 @@ Consider an affine GIT quotient $\varphi : X \surj X\sslash G$.
 \subsection{Linearisation}
 
 \begin{definition}
-  A \emph{linear action} of an affine algebraic group $G$
-  on a projective scheme $X$ is an action with a group homomorphism
-  $G\to GL_{n+1}$ and an embedding $X\inc\projective{n}{}$
-  which is $G$-equivariant, i.e. making the following commute:
-  \begin{equation*}
-    % https://q.uiver.app/#q=WzAsNCxbMCwxLCJYIl0sWzIsMSwiXFxtYXRoYmYgUF5uIl0sWzAsMCwiR1xcdGltZXMgWCJdLFsyLDAsIkdMX3tuKzF9XFx0aW1lc1xcbWF0aGJmIFBebiJdLFswLDEsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsMCwiXFxzaWdtYSIsMl0sWzMsMV0sWzIsM11d
-    \begin{tikzcd}
-      {G\times X} && {GL_{n+1}\times\mathbf P^n} \\
-      X && {\mathbf P^n}
-      \arrow[from=1-1, to=1-3]
-      \arrow[from=1-1, to=2-1]
-      \arrow[from=1-3, to=2-3]
-      \arrow[hook, from=2-1, to=2-3]
-    \end{tikzcd}
-  \end{equation*}
-\end{definition}
-
-\begin{definition}
   A \emph{linearisation} of an action $\sigma : G\times X\to X$
   of an affine algebraic group on a scheme $X$ is a line bundle
   $\pi:L\to X$ with a bundle isomorphism $G\times L\cong \sigma^* L$
@@ -3298,6 +3287,30 @@ Consider an affine GIT quotient $\varphi : X \surj X\sslash G$.
   \end{equation*}
 \end{definition}
 
+\begin{example}
+  Consider the action of $GL_{n+1}$ on $\projective{n}{}$. The
+  line bundle corresponding to the twisting sheaf $\mathscr O(1)$
+  provides a somewhat trivial linearisation of the action.
+
+  More generally, suppose we have a $G$-equivariant embedding
+  $X\inc\projective{n}{}$, i.e. a homomorphism $G\to GL_{n+1}$
+  such that the following commutes:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNCxbMCwxLCJYIl0sWzIsMSwiXFxtYXRoYmYgUF5uIl0sWzAsMCwiR1xcdGltZXMgWCJdLFsyLDAsIkdMX3tuKzF9XFx0aW1lc1xcbWF0aGJmIFBebiJdLFswLDEsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsMCwiXFxzaWdtYSIsMl0sWzMsMV0sWzIsM11d
+    \begin{tikzcd}
+      {G\times X} && {GL_{n+1}\times\mathbf P^n} \\
+      X && {\mathbf P^n}
+      \arrow[from=1-1, to=1-3]
+      \arrow[from=1-1, to=2-1]
+      \arrow[from=1-3, to=2-3]
+      \arrow[hook, from=2-1, to=2-3]
+    \end{tikzcd}
+  \end{equation*}
+  Then pulling back $\mathscr O(1)$ along the embedding
+  gives a linearisation. Actions on projective schemes that arise
+  from the $GL_{n+1}$ action on subschemes $X\subseteq\projective{n}{}$
+  in this fashion are called \emph{linear}.
+\end{example}
 
 \begin{example}
   locally free sheaves \missingexample
@@ -3313,7 +3326,7 @@ Consider an affine GIT quotient $\varphi : X \surj X\sslash G$.
   Then there is a natural linear representation $G\to GL(\Gamma(X,L))$.
   \begin{proof}[Proof idea]
     Following \cite[Lemma 5.19]{hoskins2016}. As $\Gamma(X,L)$
-    is finite-dimensional, the objective is to construct a map 
+    is finite-dimensional, the objective is to construct a map
     $\Gamma(X,L) \to \mathscr O(G) \otimes \Gamma(X,L)$
     satisfying the relevant conditions. One may do so by considering
     $\sigma^* : \Gamma(X,L) \to \Gamma(G\times X,\sigma^*L)$ and
@@ -3322,36 +3335,12 @@ Consider an affine GIT quotient $\varphi : X \surj X\sslash G$.
   \end{proof}
 \end{lemma}
 
-\begin{example}
-  Consider the action of $GL_{n+1}$ on $\projective{n}{}$ and the
-  twisting sheaf $\mathscr O(1)=\Gamma(\projective{n}{},O(1))^\vee$.
-  Then the 
-
-  Consider a linear action $G\times X\to X$. Then the twisting sheaf
-  $\mathscr O(1)$ on $\projective{n}{}$ pulls back to an invertible
-  sheaf $\mathscr L = \Gamma(X,L)^\vee$ on $X$ via the embedding
-  $X\inc\projective{n}{}$.
-  \missingexample
-\end{example}
-
 \begin{lemma}
   If $L$ is a linearisation then so is $L^{\otimes k}$ for all $k\geq 1$.
   \begin{proof}
     \missingproof
   \end{proof}
 \end{lemma}
-
-\begin{lemma}\label{lem:rxl}
-  Let $L$ be a linearisation of an action of an affine algebraic
-  group on a projective scheme $X$. Then
-  \begin{align*}
-    X \cong \Proj\bigoplus_{k\geq 0}\Gamma(X,L^{\otimes k}).
-  \end{align*}
-  \begin{proof}
-    \missingproof
-  \end{proof}
-\end{lemma}
-
 
 \subsection{Good Quotients}
 
@@ -3360,24 +3349,28 @@ of a reductive group on a projective scheme.
 
 One difficulty when working with projective schemes, rather
 than affine ones, is the failure of $\Proj$ to be a functor. In particular,
-a graded algebra homomorphism $f : S \to R$ only induces a map 
-$\Proj R - N \to \Proj S$ where $N\subseteq\Proj R$ is the closed
+a graded algebra homomorphism $f : S \to R$ only induces a map
+$\Proj R - N(f) \to \Proj S$ where the null cone $N(f)\subseteq\Proj R$ is the closed
 subscheme defined by \missingcitation
 \begin{align*}
-  N := \{ p \in \Proj R : S_+ \subseteq f^{-1}p\}.
+  N(f) := \{ p \in \Proj R : S_+ \subseteq f^{-1}p\}
 \end{align*}
-the inclusion $R^G \inc R$ only yields a map
+where $S_+\subseteq S$ is the irrelevant ideal.
+Now recall that
 \begin{align*}
-  \Proj(R) - N \longrightarrow \Proj(R^G)
+  X \cong \Proj\bigoplus_{k\geq 0}\Gamma(X,L^{\otimes k}).
 \end{align*}
-where $N\subseteq\Proj R$ is a closed subscheme sometimes referred
-to as the null cone. This means that we can, in general, only hope to
-obtain a good quotient on an open subscheme. In light of
-\ref{lem:rxl}, we consider the graded algebra of sections
+This essentially follows from \cite[Proposition 13.48]. Hence
+it is natural to consider the graded algebra of sections
 \begin{align*}
-  R(X,L) := \Proj\bigoplus_{k\geq 0}\Gamma(X,L^{\otimes k}).
+  R(X,L) := \bigoplus_{k\geq 0}\Gamma(X,L^{\otimes k})
 \end{align*}
-We now call the points outside the null cone in $\Proj R(X,L)$
+and the corresponding invariants
+\begin{align*}
+  R(X,L)^G := \bigoplus_{k\geq 0}\Gamma(X,L^{\otimes k})^G.
+\end{align*}
+Thus the quotient is going to arise from the inclusion
+$\iota : R(X,L)^G\inc R(X,L)$. We call the points out of the null cone
 semi-stable:
 
 \begin{definition}
@@ -3387,25 +3380,78 @@ semi-stable:
   with respect to the linearisation $L$.
 \end{definition}
 
-\begin{lemma}
-  If 
-\end{lemma}
+Verifying that $N(\iota) = X - X^{ss}(L)$ is a matter of unpacking definitions.
+Hence we obtain a good quotient of semi-stable points in the natural way:
+
+\begin{definition}
+  The \emph{projective GIT quotient} of $X$ with respect to $L$ is the map
+  \begin{align*}
+    X^{ss}(L) \longrightarrow X \sslash_L G := \Proj R(X,L)^G
+  \end{align*}
+  corresponding to the inclusion $R(X,L)^G\inc R(X,L)$.
+\end{definition}
+
+\begin{theorem}
+  The projective GIT quotient is good.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
+
+\begin{example}
+  
+\end{example}
 
 \missingsection
 
 \subsection{Geometric Quotients}
 
 \begin{definition}
-  A point $x\in X$ is \emph{semi-stable} if there exists a section
+  A point $x\in X$ is \emph{stable} if there exists a section
   $s\in\Gamma(X,L^{\otimes k})^G$ for some $k>0$ such that $s(x)\neq 0$
   and the action of $G$ on the standard open $D_+(s)\subseteq X$ is closed.
   Denote by $X^s(L)$ the set of all stable points of $X$ with respect
   to the linearisation $L$.
 \end{definition}
 
-\begin{lemma}
-  $X^s(L)$ is the largest 
+We find that this is completely analogous to the definition
+of stability in the affine case \ref{def:affine_stability}, at
+least when considering closed points.
+
+\begin{lemma}[{\cite[Lemma 5.9]{hoskins2016}}]
+  A closed point $x\in X^{ss}(L)$ is stable if, and only if, the orbit
+  $G\cdot x\subseteq X^{ss}(L)$ is closed and $\dim G_x = 0$.
+  \begin{proof}
+    \missingproof
+  \end{proof}
 \end{lemma}
+
+Of course, the point of restricting to a stable subset is to turn
+good quotients into geometric ones. Let us make sure that we have
+achieved this. The first step is to verify that we have defined
+an open subscheme:
+
+\begin{lemma}
+  $X^s(L)$ is open in $X$.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+Now consider the GIT quotient $\phi : X^{ss}(L)\to X\sslash_L G$.
+It follows from the definition \ref{def:good_quotient} that
+$\phi(X^s(L))$ is open in $X\sslash_L G$.
+
+\begin{theorem}
+  The GIT quotient $\phi : X^{ss}(L) \to X\sslash_L G$ 
+  restricts to a geometric quotient
+  \begin{align*}
+    \phi : X^s(L) \to X^s\sslash_L G := \phi(X^s(L)).
+  \end{align*}
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
 
 \missingsection
 
