@@ -2867,14 +2867,42 @@ Grothendieck constructed a moduli space for it. \missingcitation
   corresponds to a quotient $\mathscr O^{\oplus n}_C\surj \mathscr F$,
   i.e. a closed point of the scheme
   \begin{align*}
-    \mathcal Q(r,d) := Quot(\mathscr O^{\oplus n}_C)^{r,d}
+    Q(r,d) := Quot(\mathscr O^{\oplus n}_C)^{r,d}
   \end{align*}
 \end{example}
 
 Some creativity is required to extend this procedure to Higgs
-sheaves. What we are looking for is a scheme whose closed points
-are pairs $(\mathscr E,\phi)$ where $\mathscr E\in\mathcal Q(r,d)$
+sheaves. What we are looking for is a scheme $\mathcal F(r,d)$ whose closed points
+are pairs $(\mathscr E,\phi)$ where $\mathscr E\in Q(r,d)$
 and $\phi : \mathscr E \to \mathscr E \otimes \mathscr K$.
+Now a Higgs field $\phi$ may be thought of as a global section of
+$\Hom(\mathscr E,\mathscr E\otimes\mathscr K)$. Moreover, global
+sections are unchanged under pushforwards. Hence the following technical
+lemma is going to be of great value:
+
+\begin{lemma}\label{lem:linear_scheme}
+  Let $S$ be a reduced scheme and $\mathscr F$ a coherent sheaf over
+  $S\times C$, flat over $S$. Then the functor on $(\Sch/S)^{op}$ given by
+  \begin{align*}
+    (f : T\to S) \mapsto \Gamma(T,\pi_*(\identity\times f)^*\mathscr F)
+  \end{align*}
+  is representable.
+  \begin{proof}
+    \cite[Lemma 3.5]{nitsure1991}
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+We consider the universal sheaf $\hat{\mathscr E}$ on
+$Q(r,d)\times C$ arising from the universal quotient
+\begin{align*}
+  \hat q : \mathscr O^{\oplus n}_{Q(r,d)\times C} \to \hat{\mathscr E}
+\end{align*}
+in $Q(r,d)$. The lemma \ref{lem:linear_scheme} tells us
+that the functor sending $T$-points $x \in \mathcal Q(r,d)(T)$
+to sections $\Gamma(T,\pi_*(\identity\times x)^*\hat{\mathscr E})$
+is representable. In particular, there is a map of schemes
+$\mathcal F(r,d)\to\mathcal Q(r,d)$
 
 \begin{example}
   Certain Higgs sheaves also correspond to closed points of 
