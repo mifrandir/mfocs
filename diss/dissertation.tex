@@ -15,7 +15,7 @@
 
 %\renewcommand{\submittedtext}{change the default text here if needed}
 \degree{Master of Science}     %the degree
-\degreedate{2024}         %the degree date
+\degreedate{August 2024}         %the degree date
 
 \addbibresource{references.bib}
 
@@ -2280,8 +2280,8 @@ possible to do better:
   $\eta : \mathcal M \to \Hom(-,M)$ such that
   \begin{itemize}
     \item $\eta : \mathcal M(\Spec\mathbb{C})\to M(\Spec\mathbb{C})$ is a bijection;
-    \item for every scheme $N$, every natural transformation
-          $\nu : M \to \Hom(-,N)$ factors through $\eta$ as in the diagram
+    \item every natural transformation $\nu : M \to \Hom(-,M')$ factors through
+          $\eta$ as in the diagram
           \missingdefinition
   \end{itemize}
 \end{definition}
@@ -2504,6 +2504,52 @@ all $\mathscr F$.
   \todo{invariance under base change}
 \end{lemma}
 
+\subsection{Degree}
+
+Recall that for vector bundles on a compact Riemann surfaces we defined the
+degree.  The Euler characteristic allows us to make a similar definition for
+locally free sheaves on the curve $C$.
+
+\begin{definition}
+  The \emph{degree} of a locally free sheaf $\mathscr F$ of rank $r$
+  on $C$ is
+  \begin{align*}
+    \deg \mathscr F := \chi (C,\mathscr F) - r\chi(C,\mathscr O_C).
+  \end{align*}
+\end{definition}
+
+\begin{example}
+  As the rank of $\mathscr O_C$ is $1$ its degree must be $0$.
+\end{example}
+
+\begin{lemma}\label{lem:degree_of_tensor}
+  If $\mathscr E$ and $\mathscr F$ are locally free on $C$ then
+  \begin{align*}
+    \deg(\mathscr E\otimes\mathscr F) = \rank\mathscr E\deg\mathscr F + \rank\mathscr F\deg\mathscr E.
+  \end{align*}
+  \begin{proof}
+    \cite[Exercise 8.24]{hoskins2016}.
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+\begin{example}
+  Using~\ref{lem:degree_of_tensor}, we find \todo{make sure $\mathscr O_X(1)$ has degree 1}
+  \begin{align*}
+    \deg \mathscr E(m) = \deg\mathscr E + m\rank\mathscr E.
+  \end{align*}
+\end{example}
+
+\begin{theorem}[Riemann-Roch]\label{thm:riemann_roch}
+  Let $\mathscr F$ be a locally free sheaf of rank $r$ and degree $d$
+  on $C$. Then
+  \begin{align*}
+    \chi(\mathscr F) = d + r(1-g).
+  \end{align*}
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
 \subsection{Hilbert Polynomials}
 
 While the Euler characteristic certainly is a topological invariant,
@@ -2536,7 +2582,13 @@ surprising and non-trivial.
 \end{lemma}
 
 \begin{example}
-  \missingexample
+  If $\mathscr F$ is a locally free sheaf of rank $r$ and degree $d$
+  on $C$ then we use Riemann-Roch \ref{thm:riemann_roch} and
+  \ref{lem:degree_of_tensor} to calculate
+  \begin{align*}
+    P(\mathscr F, \mathscr L)(t) = rt + d + r(1-g)
+  \end{align*}
+  for any degree 1 invertible sheaf $\mathscr L$ on $C$.
 \end{example}
 
 Serre's vanishing theorem \missingcitation states that,
@@ -2549,40 +2601,6 @@ $P(\mathscr F,\mathscr L)(m) = \dim H^0(X,\mathscr F\otimes \mathscr L^{\otimes 
   \todo{invariance under base change}
 \end{lemma}
 
-\subsection{Degree}
-
-While the Hilbert polynomial of a coherent sheaf is in general the
-correct invariant to consider, we are working with locally free
-sheaves on a curve. Hence some simplifications are in order.
-Recall that for vector bundles on a curve we defined the degree.
-A similar definition is possible for locally free sheaves:
-
-\begin{definition}[{\cite[\href{https://stacks.math.columbia.edu/tag/0AYQ}{Tag 0AYQ}]{stacks-project}}]
-  The \emph{degree} of a locally free sheaf $\mathscr F$ of rank $r$
-  on $C$ is $\deg \mathscr F := \chi (C,\mathscr F) - r\chi(C,\mathscr O_C)$.
-\end{definition}
-
-\begin{example}
-  As the rank of $\mathscr O_C$ is $1$ its degree must be $0$.
-\end{example}
-
-\begin{lemma}\label{lem:degree_of_tensor}
-  If $\mathscr E$ and $\mathscr F$ are locally free on $C$ then
-  \begin{align*}
-    \deg(\mathscr E\otimes\mathscr F) = \rank\mathscr E\deg\mathscr F + \rank\mathscr F\deg\mathscr E.
-  \end{align*}
-  \begin{proof}
-    \cite[Exercise 8.24]{hoskins2016}.
-    \missingproof
-  \end{proof}
-\end{lemma}
-
-\begin{example}
-  Using~\ref{lem:degree_of_tensor}, we find \todo{make sure $\mathscr O_X(1)$ has degree 1}
-  \begin{align*}
-    \deg \mathscr E(m) = \deg\mathscr E + m\rank\mathscr E.
-  \end{align*}
-\end{example}
 
 \missingsection
 
@@ -2620,7 +2638,7 @@ $\mathscr E_t$. We may view a sheaf $\mathscr E$ on $C_T := C\times T$
 as a family of sheaves on $C$ indexed by $T$. If we have a point $t\in T$
 then we have the fibre $C_t := \Spec k(t) \times C$ and the sheaf
 $\mathscr E_t := \restrict{\mathscr E}{C_t}$. In the case where
-$t$ is a $\mathbb{C}$-point, $C_t \cong C$ so $\mathscr E_t$ is indeed
+$t$ is a closed point, $C_t \cong C$ so $\mathscr E_t$ is indeed
 a sheaf on $C$. Moreover, if $\mathscr E$ is flat over $T$ then
 each $\mathscr E_t$ has the same Hilbert polynomial.
 
@@ -2630,10 +2648,14 @@ equivalence. In particular, we require all the fibres to be isomorphic.
 
 \begin{lemma}
   Let $\mathscr E$ and $\mathscr F$ be locally free sheaves on $C_T$
-  flat over $T$. Then $\mathscr E_t\cong\mathscr F_t$ for all $t\in T$
-  if, and only if, there exists an invertible sheaf $\mathscr L$ on
+  flat over $T$. Then the following are equivalent:
+  \begin{enumerate}
+    \item For all $t\in T$, there is an isomorphism of fibres
+    $\mathscr E_t\cong\mathscr F_t$.
+    \item There exists an invertible sheaf $\mathscr L$ on
   $T$ such that $\mathscr E \cong \mathscr F \otimes \pi^*\mathscr L$
   where $\pi : C_T \to C$ is the base change.
+  \end{enumerate}
   \begin{proof}
     \todo{not sure this is true; if it isn't then we need to find a
       different explanation}
@@ -2644,16 +2666,16 @@ equivalence. In particular, we require all the fibres to be isomorphic.
 Hence we make the following definition:
 
 \begin{definition}
-  Define the moduli problem $\mathcal A : \Sch^{\text{op}} \to \Set$
-  bysending a scheme $T$ to
+  The moduli problem of locally free sheaves on $C$ is given by the
+  functor $\mathcal A_h : \Sch^{\text{op}} \to \Set$
+  mapping schemes $T$ to
   \begin{align*}
-    \mathcal A(T) := \left\lbrace{\text{locally free sheaves $\mathscr E$ on $C_T$ flat over $T$}}\right\rbrace/\sim
+    \mathcal A_h(T) := \left\lbrace{\text{locally free sheaves $\mathscr E$ on $C_T$ flat over $T$}}\right\rbrace/\sim
   \end{align*}
   where $\mathscr E\sim\mathscr F$ if, and only if, there is a line bundle
   $\mathscr L$ on $T$ such that
-  $\mathscr E \cong \mathscr F\otimes\pi^* \mathscr L$. Maps
-  $f: T'\to T$ get sent to the pullback map
-  $\mathscr E\mapsto f^*\mathscr E$.
+  $\mathscr E \cong \mathscr F\otimes\pi^* \mathscr L$ and sending
+  maps $f: T'\to T$ to the pullback $f^*$.
 \end{definition}
 
 However, this fails to have any moduli space at all:
@@ -2663,7 +2685,7 @@ However, this fails to have any moduli space at all:
   does not admit a coarse moduli space.
   \begin{proof}
     Follwing \cite[Example 2.2]{hoskins2016}. We aim to construct
-    an $\mathscr E\in\mathcal A(\affine{1}{})$ that satisfies the
+    an $\mathscr E\in\mathcal A_h(\affine{1}{})$ that satisfies the
     condition in \ref{lem:no_coarse_condition}.
     \missingproof
   \end{proof}
@@ -2700,9 +2722,9 @@ Unfortunately, we find ourselves in a similar position.
   The moduli problem $\mathcal A_H$ of Higgs sheaves on $C$ does not admit
   a coarse moduli space.
   \begin{proof}
-    Consider the natural transformation $\mathcal A\to\mathcal A_H$
+    Consider the natural transformation $\mathcal A_h\to\mathcal A_H$
     given by $\mathscr E \mapsto (\mathscr E,0)$. Now the sheaf
-    $\mathscr E\in\mathcal A(\affine{1}{})$ from the proof of
+    $\mathscr E\in\mathcal A_h(\affine{1}{})$ from the proof of
     \ref{lem:no_coarse_moduli_space} pushes forward to a Higgs field
     $(\mathscr E,0)\in\mathcal A_H(\affine{1}{})$ which, moreover,
     satisfies the same property.
@@ -2720,23 +2742,21 @@ our attention to a subclass of locally free sheaves. Indeed, we are
 going to end up with those sheaves corresponding to (semi-)stable
 bundles.
 
-\subsection{Quotients}
+\subsection{Quotient Sheaves}
 
-If a sheaf $\mathscr F$ is globally generated and
-$\dim H^0(X,\mathscr F) = N$ then $\mathscr F$ may be thought
-of as a quotient of the free sheaf $\mathscr O_X^{\oplus N}$
-by choosing an isomorphism
-\begin{align*}
-  H^0(X,\mathscr F) \otimes \mathscr O_X \cong \mathbb{C}^N \otimes \mathscr O_X \cong \mathscr O_X^{\oplus N}.
-\end{align*}
-It will turn out that being globally generated will be a reasonable
-condition in the sense that we are not missing too many vector
-bundles. Thus it is sensible to study quotients of coherent sheaves.
+Choosing an isomorphism $\mathbb C^n \cong \Gamma(C,\mathscr F)$
+allows us to think of globally generated sheaves $\mathscr F$
+as quotients $\mathscr O_X^{\oplus n} \surj \mathscr F$.
+It will turn out that being globally generated is a reasonable
+condition in the sense that we are not discarding too many
+vector bundles. Thus it is natural to study quotients of coherent sheaves,
+not to be confused with the quotients of geometric spaces that
+are the overarching theme of this paper.
 
 \begin{definition}
   Let $\mathscr E$ be a coherent sheaf on a scheme $X$.
   A \emph{family of quotients} of $\mathscr E$ over a scheme $T$
-  consists of a sheaf $\mathscr F$ on $X_T$ flat over $T$ and a
+  consists of a coherent sheaf $\mathscr F$ on $X_T$ flat over $T$ and a
   surjection $q:\pi^*\mathscr E\surj\mathscr F$ where
   $\pi : X_T \to X$ is the base change.
 \end{definition}
@@ -2746,25 +2766,11 @@ $\mathscr F$ on $X_T$ is flat over $T$ if each of the functors
 $M \mapsto \mathscr F_{(x,t)} \otimes_{\mathscr O_{T,t}} M$ is exact.
 In light of \cite[III Theorem 9.9]{hartshorne1977} this is a
 particularly useful condition for us as it ensures that the fibres
-$\mathscr F_t$ all have the same Hilbert polynomial. Hence we may
-refer to the Hilbert polynomial $P(q,\mathscr L)$ of the family
-$q:\pi^*\mathscr E\surj\mathscr F$.
+$\mathscr F_t$ all have the same Hilbert polynomial
+for all $t$ in the same connected component.
 
-\begin{example}
-  We saw earlier that a globally generated locally free sheaf
-  $\mathscr F$ of rank $r$ and degree $d$ on $C$ together with
-  a choice of isomorphism $\mathbb{C}^N \cong H^0(C,\mathscr F)$
-  give rise to a family of quotients
-  \begin{align*}
-    H^0(C,\mathscr F)\otimes\mathscr O_C \cong \mathscr O^{\oplus N}_C
-    \surj \mathscr F
-  \end{align*}
-  over $\mathbb{C}$ where $N := \dim H^0(X,\mathscr F)$.
-\end{example}
-
-Consider two quotients $\mathscr F$ and $\mathscr F'$ of a
-sheaf $\mathscr E$.
-Such quotients are equivalent if there is an isomorphism
+Two families $\mathscr F$ and $\mathscr F'$ of quotients of a
+sheaf $\mathscr E$ are equivalent if there is an isomorphism
 $\mathscr F\cong\mathscr F'$ such that the following commutes
 \begin{equation}\label{eq:quotient_equivalence}
   % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWwgRSJdLFsyLDAsIlxcbWF0aGNhbCBGIl0sWzIsMSwiXFxtYXRoY2FsIEYnIl0sWzEsMiwiXFxjb25nIl0sWzAsMSwicSIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFswLDIsInEnIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV1d
@@ -2776,58 +2782,58 @@ $\mathscr F\cong\mathscr F'$ such that the following commutes
     \arrow["\cong", from=1-3, to=2-3]
   \end{tikzcd}
 \end{equation}
+\subsection{Quot Functors}
 
-We would now like to consider the moduli problem of equivalence
-classes of quotients of a coherent sheaf $\mathscr E$ on $X$.
-We note that base change preserves quotients. In particular,
-if $q : \mathscr E \surj \mathscr F$ is a quotient and
-$f : Y \to X$ is a base change then
-$f^*q : f^*\mathscr E \surj f^*\mathscr F$ is a quotient
-by \cite[\href{https://stacks.math.columbia.edu/tag/01U9}{Tag 01U9}]{stacks-project}.
+Let us now consider the moduli problem of families of 
+quotients of a coherent sheaf $\mathscr E$ on $X$ up to equivalence.
+To do this, we need to define a functor. In particular, we need to
+each map of quotients a map of sets. Fortunately, base change preserves flat families.
+In particular,
+if $q : \pi^*\mathscr E \surj \mathscr F$ is a family of quotients over $T$ and
+$f : T' \to T$ is a base change then we have an equality
+$\pi^*\mathscr E = (\identity\times f)^*\pi^*\mathscr E$
+of sheaves on $X\times T'$.
+Moreover, as flatness is preserved under base change \cite[\href{https://stacks.math.columbia.edu/tag/01U9}{Tag 01U9}]{stacks-project}
+$(\identity\times f)^*q : \pi^*\mathscr E \surj (\identity\times f)^*\mathscr F$
+is a family of quotients over $T'$. Thus we may define the moduli problem:
 
-\subsection{Quot functors}
-
-Thus we may consider the moduli problem of equivalence classes of
-quotients of a given sheaf:
-
-\begin{definition}\missingcitation
+\begin{definition}
   Let $\mathscr E$ be a coherent sheaf on a projective scheme $X$.
   The corresponding \emph{Quot functor} is given by sending each
   scheme $T$ to
   \begin{align*}
-    \mathcal Q(\mathscr E)(T) = \left\lbrace{
-      \text{quotients $q : \pi^*\mathscr E \surj \mathscr F$
+    \mathcal Quot (\mathscr E)(T) = \left\lbrace{
+      \text{families of quotients $q : \pi^*\mathscr E \surj \mathscr F$
         over $T$}
     }\right\rbrace / \sim
   \end{align*}
   and $f : T' \to T$ to
-  $\mathcal Q(\mathscr E)(f) = (\identity \times f)^*$ where
+  $\mathcal Quot(\mathscr E)(f) = (\identity \times f)^*$ where
   $\pi^*\mathscr E$ is the pullback of $\mathscr E$ along
   the base change $\pi:X_T\to X$.
 \end{definition}
 
-Now note that this functor splits
+Now note that this functor splits into
 \begin{align*}
-  \mathcal Q(\mathscr E)
-  = \bigsqcup_{P\in\mathbb{Q}[t]} \mathcal Q(\mathscr E)^{P,\mathscr L}.
+  \mathcal Quot(\mathscr E)
+  = \bigsqcup_{P\in\mathbb{Q}[t]} \mathcal Quot(\mathscr E)^{P,\mathscr L}
 \end{align*}
-where each $\mathcal Q(\mathscr E)^{P,\mathscr L}$ contains families
-with Hilbert polynomial $P$.
+where each $\mathcal Quot(\mathscr E)^{P,\mathscr L}$ contains families
+with Hilbert polynomial $P$. One needs to be a little bit careful
+about non-connected $T$ (see e.g. the Remark in \cite[5-6]{siddharth2016}), but our main application will be
+$T = \Spec\mathbb C$ where the above formula holds in the obvious way.
 
 \begin{example}
-  Recall on $C$, we have
-  \begin{align*}
-    P(\mathscr F,\mathscr O_C(1))(t) = rt + d + r(1-g)
-  \end{align*}
-  for any locally free sheaf $\mathscr F$ of rank $r$ and degree $d$.
-  Thus, for any coherent sheaf $\mathscr E$, we have a splitting
-  \begin{align*}
-    \mathcal Q(\mathscr E) = \bigsqcup_{r,d} \mathcal Q(\mathscr E)^{r,d}.
-  \end{align*}
+  Recall that the Hilbert polynomial of a locally free sheaf on $C$
+  with respect to a fixed invertible sheaf depends only on its rank and degree.
+  Thus, for any locally free sheaf $\mathscr E$ on $C$, we have a splitting
+  \begin{align}\label{eq:quot_functor_split_on_c}
+    \mathcal Quot(\mathscr E) = \bigsqcup_{r,d} \mathcal Quot(\mathscr E)^{r,d}.
+  \end{align}
   \missingexample
 \end{example}
 
-\subsection{Quot schemes}
+\subsection{Quot Schemes}
 
 One of the reasons the Quot functor is of interest to us is because
 Grothendieck constructed a moduli space for it. \missingcitation
@@ -2836,20 +2842,47 @@ Grothendieck constructed a moduli space for it. \missingcitation
   Let $X$ be a projective scheme with an ample sheaf $\mathscr L$,
   let $\mathscr E$ be a coherent sheaf on $X$, and let
   $p\in\mathbb{Q}[t]$. Then the Quot functor
-  $\mathcal Q(\mathscr E)^{p,\mathscr L}$ has a fine moduli space
-  $Q(\mathscr E)$ called the \emph{Quot scheme}.
+  $\mathcal Quot(\mathscr E)^{p,\mathscr L}$ has a fine moduli space
+  $Quot(\mathscr E)^{p,\mathscr L}$ called the \emph{Quot scheme}.
   \begin{proof}
     The key idea is to realise the quot functor as a subfunctor
     of the Grassmann functor which is known to be representable
     by a projective scheme. It then remains to show that the map
-    into projective space is an immersion
+    into projective space is an immersion \missingproof
     For an extensive overview see \cite[70-73]{hoskins2016}.
   \end{proof}
 \end{theorem}
 
 \begin{example}
   Once again, in the case $X=C$ we have schemes
-  $Q(\mathscr E)^{r,d}$.
+  $Quot(\mathscr E)^{r,d}$ representing the functors in
+  (\ref{eq:quot_functor_split_on_c}). Now consider a locally free
+  sheaf $\mathscr F$ on $C$ of rank
+  $r$ and degree $d$ with $H^1(C,\mathscr F)=0$. By Riemann-Roch 
+  \ref{thm:riemann_roch} we have 
+  \begin{align*}
+    n := \dim\Gamma(C,\mathscr F) = \chi(C,\mathscr F) = d + r(1-g).
+  \end{align*}
+  If, moreover, $\mathscr F$ is globally generated then it 
+  corresponds to a quotient $\mathscr O^{\oplus n}_C\surj \mathscr F$,
+  i.e. a closed point of the scheme
+  \begin{align*}
+    \mathcal Q(r,d) := Quot(\mathscr O^{\oplus n}_C)^{r,d}
+  \end{align*}
+\end{example}
+
+Some creativity is required to extend this procedure to Higgs
+sheaves. What we are looking for is a scheme whose closed points
+are pairs $(\mathscr E,\phi)$ where $\mathscr E\in\mathcal Q(r,d)$
+and $\phi : \mathscr E \to \mathscr E \otimes \mathscr K$.
+
+\begin{example}
+  Certain Higgs sheaves also correspond to closed points of 
+  a scheme related to a Quot scheme.
+  \begin{align*}
+    (\Sch/Q)^\text{op} \to \Set \\
+    (f : T \to Q) \mapsto 
+  \end{align*}
   \missingexample
 \end{example}
 
@@ -3399,7 +3432,9 @@ Hence we obtain a good quotient of semi-stable points in the natural way:
 \end{theorem}
 
 \begin{example}
-  
+  This allows us to define the moduli spaces that we
+  are after:
+  \missingexample
 \end{example}
 
 \missingsection
@@ -3443,7 +3478,7 @@ It follows from the definition \ref{def:good_quotient} that
 $\phi(X^s(L))$ is open in $X\sslash_L G$.
 
 \begin{theorem}
-  The GIT quotient $\phi : X^{ss}(L) \to X\sslash_L G$ 
+  The GIT quotient $\phi : X^{ss}(L) \to X\sslash_L G$
   restricts to a geometric quotient
   \begin{align*}
     \phi : X^s(L) \to X^s\sslash_L G := \phi(X^s(L)).
@@ -3452,6 +3487,11 @@ $\phi(X^s(L))$ is open in $X\sslash_L G$.
     \missingproof
   \end{proof}
 \end{theorem}
+
+\begin{example}
+  We now have the stable subsets of the moduli spaces:
+  \missingexample
+\end{example}
 
 \missingsection
 
