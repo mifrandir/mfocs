@@ -123,7 +123,7 @@ the same underlying smooth bundle.
 Recall the definition of a smooth bundle on a complex
 manifold:
 
-\begin{definition}
+\begin{definition}\label{def:complex_bundle}
   Let $X$ be a complex manifold of dimension $n$. A
   \emph{smooth vector bundle} $E$ of rank $r$ on $X$ is a smooth map
   $\pi : E\to X$ such that there
@@ -2101,10 +2101,12 @@ otherwise indicated,
 
 \subsection{Vector Bundles on Schemes}
 
-As we are now able to regard our base space, a compact Riemann
-surface, as a scheme, it makes sense to translate vector bundles
-into this setting. It is not very difficult to come up with a
-sensible definition based on the usual setting of manifolds:
+Let us start the algebraic treatment by defining vector bundles on
+schemes. By treating affine opens on a scheme as charts on a manifold
+and by regarding the affine space $\affine{n}{}$ as the algebraic
+analogue of $\mathbb C^n$, it is straightforward to translate
+the definition of a complex vector bundle \ref{def:complex_bundle}
+to schemes:
 
 \begin{definition}[{\cite[Definition 11.5]{gortz2010}}]
   \label{def:vector_bundle}
@@ -2119,20 +2121,8 @@ sensible definition based on the usual setting of manifolds:
   automorphism of $\affine{r}{}\times U = \Spec R[T_1,\ldots,T_r]$.
 \end{definition}
 
-\begin{example}
-  \begin{itemize}
-    \item trivial bundle
-    \item bundle on curve from previous section, e.g. $T^1$ or
-          $T^1 \# T^1$.
-  \end{itemize}
-\end{example}
-
-\begin{itemize}
-  \item show that holomorphic bundles on a compact Riemann surface $C$
-        are the same thing as vector bundles on $C$, regarded as a smooth algebraic curve and hence a scheme
-\end{itemize}
-
-\missingsection
+Non-trivial examples are going to arise when we consider vector bundles
+as locally free sheaves.
 
 \subsection{Locally Free Sheaves}\label{sec:locally_free_sheaves}
 
@@ -2164,10 +2154,10 @@ $\Gamma(-,E)$. This has a natural $\mathscr O_X$-module structure.
 However, much more is true. It turns out that on a scheme $X$
 a vector bundle of rank $n$ is the same thing as a locally
 free sheaf of rank $n$. That is, there is an equivalence
-of categories given by $E \mapsto \Gamma(-,E)^\vee$.~\cite[128-129]{hartshorne1977}
+of categories given by $E \mapsto \Gamma(-,E)$.~\cite[128-129]{hartshorne1977}
 We will say that a sheaf $\mathscr E$ corresponds to a vector bundle
 $E$ and write $\mathscr E=\mathcal V(E)$ to mean
-$\mathscr E\cong\Gamma(-,E)^\vee$.
+$\mathscr E\cong\Gamma(-,E)$.
 
 \subsection{Compact Riemann Surfaces as Algebraic Curves}
 \label{sec:surfaces_as_curves}
@@ -2176,7 +2166,7 @@ In the previous sections we saw that, on schemes, vector bundles are
 the same thing as locally free sheaves. It is not difficult to adapt
 the argument to obtain an analogous correspondence for manifolds.
 However, in order to fully justify an algebraic treatment of the
-moduli problem of vector bundles on compact Riemann surfaces, we 
+moduli problem of vector bundles on compact Riemann surfaces, we
 need to relate manifolds to schemes. It is not in general possible
 to view every manifold as a scheme \missingcitation, it is a well
 known fact that compact Riemann surfaces correspond to smooth
@@ -2201,27 +2191,27 @@ with one-dimensional subspaces of $V$. \missingcitation
 Now if $\mathscr L$ is
 an invertible sheaf on $C$ then there is a natural map
 \begin{align}\label{eq:natural_line_bundle_map}
-  H^0(C,\mathscr L)\otimes\mathscr O_C \to \mathscr L
+  \Gamma(C,\mathscr L)\otimes\mathscr O_C \to \mathscr L
 \end{align}
 given by $s\otimes f \mapsto f\restrict{s}{U}$. We will be
 particularly interested in the case where $\mathscr L$ is a
 quotient of the free sheaf
-$H^0(C,\mathscr L)\otimes\mathscr O_C$ of rank
-$\dim_{\mathbb C} H^0(C,\mathscr L)$.
+$\Gamma(C,\mathscr L)\otimes\mathscr O_C$ of rank
+$\dim_{\mathbb C} \Gamma(C,\mathscr L)$.
 
 \begin{definition}
   A sheaf $\mathscr F$ on a ringed space $X$ is
   \emph{globally generated} if the induced map
-  $H^0(X,\mathscr F) \otimes \mathscr O_X \to \mathscr F$
+  $\Gamma(X,\mathscr F) \otimes \mathscr O_X \to \mathscr F$
   is a surjection.
 \end{definition}
 
 \todo{check notation here}
 In particular, if $\mathscr L$ is globally generated then,
 for every $x\in C$, it induces a surjection on stalks
-$H^0(C,\mathscr L) \surj \mathscr L_x$ whose kernel is a
+$\Gamma(C,\mathscr L) \surj \mathscr L_x$ whose kernel is a
 subspace of codimension 1, i.e. a closed point of
-$\projective{}{}(H^0(C,\mathscr L)^\vee)$. It turns out that this map
+$\projective{}{}(\Gamma(C,\mathscr L)^\vee)$. It turns out that this map
 is an embedding \todo{we should define degree...}
 whenever $\deg\mathscr L > 2g$. \cite[Proposition 2.14]{harris2011}
 All that is left to do is to find invertible sheaves with large
@@ -2232,17 +2222,25 @@ sheaf of positive degree will do. Fortunately, the degree of
 the canonical sheaf $\mathscr K=\Gamma(-,K)^*$ is $2g-2$. As we have restricted
 our attention to the case $g\geq 2$, we are free to choose
 $m\geq 2$ and hence $\mathscr L = \Omega_C^{\otimes m}$ to obtain
-an embedding $C\inc\projective{}{}(H^0(C,\mathscr L)^\vee)$, as
+an embedding $C\inc\projective{}{}(\Gamma(C,\mathscr L)^\vee)$, as
 required.
 By Chow's theorem, this makes $C$ an algebraic subvariety
 and hence an algebraic curve.
+
+\begin{lemma}
+  Holomorphic bundles on $C$ regarded as a manifold are equivalent
+  to vector bundles on $C$ regarded as a scheme.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
 
 \subsection{Higgs Sheaves}
 
 Under the correspondence outlined above, we may consider the canonical
 bundle $K$ on $C$. This then corresponds to a sheaf
 \begin{align*}
-  \mathscr K := \Gamma(-,K)^\vee
+  \mathscr K := \Gamma(-,K)
 \end{align*}
 on $C$ regarded as a scheme. This allows us to define Higgs
 sheaves on $C$:
@@ -2256,13 +2254,13 @@ sheaves on $C$:
   called a \emph{Higgs field}.
 \end{definition}
 
-\begin{lemma}
-  Higgs bundles on the compact Riemann surfaces are equivalent
-  to Higgs sheaves on smooth algebraic curves.
-  \begin{proof}
-    \missingproof
-  \end{proof}
-\end{lemma}
+Just as an analytic Higgs field may be thought of as a holomorphic
+section on $\End(E)\otimes K = \Hom(E,E\otimes K)$, an algebraic
+Higgs field is equivalently a section of $\Hom(\mathscr E,\mathscr E\otimes K)$.
+Moreover, it is straightforward to verify that under the correspondence
+$E\to\Gamma(-,E)$ a Higgs field $E\to E\otimes K$ on bundles is
+equivalent to a Higgs field $\mathscr E\to\mathscr E\otimes\mathscr K$
+on schemes.
 
 Thus we are justified in treating the construction of moduli
 spaces of Higgs bundles algebraically.
@@ -2579,7 +2577,7 @@ all $\mathscr F$.
   \todo{additivity on short exact sequences}
 \end{lemma}
 
-\begin{lemma}
+\begin{lemma}\label{lem:hilbert_base_change}
   \todo{invariance under base change}
 \end{lemma}
 
@@ -2660,7 +2658,7 @@ surprising and non-trivial.
   \end{proof}
 \end{lemma}
 
-\begin{example}
+\begin{example}\label{ex:hilbert_polynomial}
   If $\mathscr F$ is a locally free sheaf of rank $r$ and degree $d$
   on $C$ then we use Riemann-Roch \ref{thm:riemann_roch} and
   \ref{lem:degree_of_tensor} to calculate
@@ -2674,7 +2672,7 @@ Serre's vanishing theorem \missingcitation states that,
 for $m$ sufficiently large and $j>0$,
 $H^j(X,\mathscr F\otimes\mathscr L^{\otimes m})=0$. Hence,
 eventually,
-$P(\mathscr F,\mathscr L)(m) = \dim H^0(X,\mathscr F\otimes \mathscr L^{\otimes m})$.
+$P(\mathscr F,\mathscr L)(m) = \dim \Gamma(X,\mathscr F\otimes \mathscr L^{\otimes m})$.
 
 \begin{lemma}
   \todo{invariance under base change}
@@ -2848,11 +2846,14 @@ $M \mapsto \mathscr F_{(x,t)} \otimes_{\mathscr O_{T,t}} M$ is exact.
 In light of \cite[III Theorem 9.9]{hartshorne1977} this is a
 particularly useful condition for us as it ensures that the fibres
 $\mathscr F_t$ all have the same Hilbert polynomial
-for all $t$ in the same connected component.
+for all $t$ in the same connected component. In particular,
+we may define the Hilbert polynomial of a family
+$q : \pi^*\mathscr E \surj \mathscr F$ of quotients over $T$ to be
+$P(\mathscr F_t,\mathscr L)$ for any $t\in T$.
 
 Two families $\mathscr F$ and $\mathscr F'$ of quotients of a
 sheaf $\mathscr E$ are equivalent if there is an isomorphism
-$\mathscr F\cong\mathscr F'$ such that the following commutes
+$\mathscr F\cong\mathscr F'$ such that the following commutes:
 \begin{equation}\label{eq:quotient_equivalence}
   % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWwgRSJdLFsyLDAsIlxcbWF0aGNhbCBGIl0sWzIsMSwiXFxtYXRoY2FsIEYnIl0sWzEsMiwiXFxjb25nIl0sWzAsMSwicSIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFswLDIsInEnIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV1d
   \begin{tikzcd}
@@ -2871,7 +2872,7 @@ To do this, we need to define a functor. In particular, we need to
 each map of quotients a map of sets. Fortunately, base change preserves flat families.
 In particular,
 if $q : \pi^*\mathscr E \surj \mathscr F$ is a family of quotients over $T$ and
-$f : T' \to T$ is a base change then we have an equality
+$f : T' \to T$ is a morphism then we have an equality
 $\pi^*\mathscr E = (\identity\times f)^*\pi^*\mathscr E$
 of sheaves on $X\times T'$.
 Moreover, as flatness is preserved under base change \cite[\href{https://stacks.math.columbia.edu/tag/01U9}{Tag 01U9}]{stacks-project}
@@ -2891,10 +2892,11 @@ is a family of quotients over $T'$. Thus we may define the moduli problem:
   and $f : T' \to T$ to
   $\mathcal Quot(\mathscr E)(f) = (\identity \times f)^*$ where
   $\pi^*\mathscr E$ is the pullback of $\mathscr E$ along
-  the base change $\pi:X_T\to X$.
+  the base change $\pi:X\times T\to X$.
 \end{definition}
 
-Now note that this functor splits into
+As the Hilbert polynomial is invariant under base change
+\ref{lem:hilbert_base_change}, the Quot functor splits as
 \begin{align*}
   Quot(\mathscr E)
   = \bigsqcup_{P\in\mathbb{Q}[t]} Quot(\mathscr E)^{P,\mathscr L}
@@ -2905,9 +2907,10 @@ about non-connected $T$ (see e.g. the Remark in \cite[5-6]{siddharth2016}), but 
 $T = \Spec\mathbb C$ where the above formula holds in the obvious way.
 
 \begin{example}
-  Recall that the Hilbert polynomial of a locally free sheaf on $C$
-  with respect to a fixed invertible sheaf depends only on its rank and degree.
-  Thus, for any locally free sheaf $\mathscr E$ on $C$, we have a splitting
+  Recall from \ref{ex:hilbert_polynomial} that the Hilbert polynomial of a
+  locally free sheaf on $C$ with respect to a fixed invertible sheaf depends
+  only on its rank and degree.  Thus, for any locally free sheaf $\mathscr E$ on
+  $C$, we have a splitting
   \begin{align}\label{eq:quot_functor_split_on_c}
     Quot(\mathscr E) = \bigsqcup_{r,d} Quot(\mathscr E)^{r,d}.
   \end{align}
@@ -2917,7 +2920,7 @@ $T = \Spec\mathbb C$ where the above formula holds in the obvious way.
 \subsection{Quot Schemes}
 
 One of the reasons the Quot functor is of interest to us is because
-Grothendieck constructed a moduli space for it. \missingcitation
+Grothendieck constructed a fine moduli space for it. \missingcitation
 
 \begin{theorem}
   Let $X$ be a projective scheme with an ample sheaf $\mathscr L$,
@@ -2925,16 +2928,17 @@ Grothendieck constructed a moduli space for it. \missingcitation
   $p\in\mathbb{Q}[t]$. Then the Quot functor
   $\mathcal Quot(\mathscr E)^{p,\mathscr L}$ has a fine moduli space
   $\Quot(\mathscr E)^{p,\mathscr L}$ called the \emph{Quot scheme}.
-  \begin{proof}
-    The key idea is to realise the quot functor as a subfunctor
+  Moreover, $\Quot(\mathscr E)^{p,\mathscr L}$ is projective.
+  \begin{proof}[Proof idea]
+    The key idea is to realise the Quot functor as a subfunctor
     of the Grassmann functor which is known to be representable
     by a projective scheme. It then remains to show that the map
-    into projective space is an immersion \missingproof
-    For an extensive overview see \cite[70-73]{hoskins2016}.
+    into projective space is an immersion and that its image is
+    closed. For an extensive overview see \cite[70-73]{hoskins2016}.
   \end{proof}
 \end{theorem}
 
-\begin{example}
+\begin{example}\label{ex:quot_scheme_of_lf}
   Once again, in the case $X=C$ we have schemes
   $Quot(\mathscr E)^{r,d}$ representing the functors in
   (\ref{eq:quot_functor_split_on_c}). Now consider a locally free
@@ -2971,13 +2975,13 @@ We are going to use the following lemma to obtain such a scheme:
   \end{proof}
 \end{lemma}
 
-\begin{example}
+\begin{example}\label{ex:quot_scheme_of_higgs}
   Consider a Higgs sheaf $(\mathscr E,\varphi)$ such that $\mathscr E$ is globally generated of
   rank $r$ and degree $d$ with $H^1(C,\mathscr E)=0$.
   Consider the universal sheaf $\mathscr U$ on $\mathcal Q(r,d)$
   arising from the universal quotient
   \begin{align*}
-    \hat q : \mathscr O^{\oplus n}_{Q(r,d)\times C} \to \mathscr U.
+    \hat q : \mathscr O^{\oplus n}_{C\times\mathcal Q(r,d)} \to \mathscr U.
   \end{align*}
   Applying the lemma \ref{lem:linear_scheme} to the sheaf
   $\Hom(\mathscr U,\mathscr U\otimes K)$ on $C\otimes\mathcal Q(r,d)$
@@ -2985,9 +2989,10 @@ We are going to use the following lemma to obtain such a scheme:
   \begin{align*}
     (f:T\to\mathcal Q(r,d))
     \mapsto
-    \Gamma(C\times T,(\identity\times f)^*\Hom(\mathscr U,\mathscr U\otimes\mathscr K))
+    \Gamma(C\times T,(\identity\times f)^*\Hom(\mathscr U,\mathscr U\otimes\pi^*\mathscr K))
   \end{align*}
-  is represented by a $\mathcal Q(r,d)$-scheme $\mathcal F(r,d)$.
+  where $\pi : C\times\mathcal Q(r,d)\to C$ is represented by a
+  $\mathcal Q(r,d)$-scheme $\mathcal F(r,d)$.
   In particular, a closed point of $\mathcal F(r,d)$ corresponds to a
   closed point $f$ of $\mathcal Q(r,d)$ and an $f$-point of $\mathcal F(r,d)$.
   We may now choose $f$ such that $\mathscr E = f^*\mathscr U$ and note
@@ -2998,8 +3003,8 @@ We are going to use the following lemma to obtain such a scheme:
   To see this, a few things need to be checked. Firstly, pullbacks
   commute with taking tensor products. Secondly,
   \begin{align*}
-    \Gamma(C\times\Spec\mathbb C,(\identity\times f)^*\mathscr K_{C\times\mathcal Q(r,d)})
-    \cong \Gamma(C,\mathscr K_C).
+    \Gamma(C\times\Spec\mathbb C,(\identity\times f)^*\pi^*\mathscr K)
+    \cong \Gamma(C,\mathscr K).
   \end{align*}
   Thus $\varphi$ corresponds to an $f$-point of $\mathcal F(r,d)$
   and hence $(\mathscr E,\varphi)$ corresponds to a closed point in
@@ -3023,15 +3028,18 @@ all the points that are not of interest to us.
 The second major step in constructing moduli spaces of holomorphic
 bundles, algebraic or analytic, is to take a quotient by an automorphism
 group. In particular, we noticed that different choices of isomorphism
-$H^0(X,\mathscr F)\cong\mathbb{C}^N$ give rise to different quotients.
+$\Gamma(X,\mathscr F)\cong\mathbb{C}^N$ give rise to different quotients.
 The goal of this section is to eliminate these redundancies.
 
 The first step is defining group actions in the setting of schemes.
 This allows us to make precise what we mean by a quotient with
 respect to such an action and what properties we would like such
-quotients to satisfy.
+quotients to posses.
 
 \subsection{Group Schemes}
+
+Category theory tells us what the correct notion of a group in the
+settings of schemes is:
 
 \begin{definition}
   A \emph{group scheme} is a group object in $\Sch$.
@@ -3088,8 +3096,9 @@ Group schemes induce group structures on their points:
     \item For every scheme $T$, $G(T)$ is a group.
   \end{enumerate}
   \begin{proof}
-
-    \missingproof
+    The group structure on $G(T)$ is obtained by functoriality of
+    $\Hom(-,G)$. The other direction the follows from a simple
+    application of the Yoneda lemma.
   \end{proof}
 \end{lemma}
 
@@ -3123,7 +3132,7 @@ Group schemes induce group structures on their points:
   All the group schemes in \ref{ex:group_schemes} are affine algebraic
   groups. (See \cite[IV Theorem 9,3]{milne2012} for smoothness
   and \cite[Remark 3.2]{hoskins2016} for separatedness.) While group
-  schemes are worth studying their full generality, the affine algebraic
+  schemes are worth studying in full generality, the affine algebraic
   case will be sufficient for our purposes. Hence the only examples
   that the reader should have in mind are the ones already presented.
 \end{example}
@@ -3156,18 +3165,54 @@ $G(T)$ on $X(T)$ by
   and $x\in\affine{n}{}(\mathbb C)$, the action is $g\cdot x = gx$.
   There is a similar action of $GL_{n+1}$ on $\projective{n}{}$
   given by $g\cdot[x] = [gx]$ for $g\in GL_{n+1}(\mathbb C)$
-  and $[x]\in\projective{n}{}(\mathbb C) \cong (\mathbb C^n - \{0\})/\mathbb C^\times$.
+  and $[x]\in\projective{n}{}(\mathbb C) \cong (\mathbb C^{n+1} - \{0\})/\mathbb C^\times$.
 \end{example}
 
 \begin{example}
-  On locally free sheaves.
-  \missingexample
+  Following \cite[Lemma 8.49]{hoskins2016}.
+  Consider the setting of \ref{ex:quot_scheme_of_lf} and recall
+  that, in order to map a locally free sheaf $\mathscr F$ to a point of
+  $\mathcal Q(r,d)$, we had to choose an isomorphism
+  $\mathbb C^n \cong \Gamma(C,\mathscr F)$. In particular, there
+  is an action of $GL_n$ on closed points of $\mathcal Q(r,d)$
+  given by $g\cdot q = q\circ g^{-1}$ for all $g\in GL_n(\mathbb C)$
+  and $q : \mathscr O^{\oplus n}_C \surj \mathscr E$.
+
+  To extend this to a schematic action $GL_n \times \mathcal Q(r,d) \to \mathcal Q(r,d)$ 
+  we need to specify a family of quotients
+  \begin{align*}
+    \mathscr O^{\oplus n}_{C\times GL_n\times\mathcal Q(r,d)}\surj \mathscr E 
+  \end{align*}
+  of rank $r$ and degree $d$. We construct such a family by 
+  considering the universal family $q_{\mathscr U}:\mathscr Q^{\oplus n}_{C\times\mathcal Q(r,d)}\surj \mathscr U$,
+  pulling it back along the projection $GL_n\otimes\mathcal Q(r,d)\to\mathcal Q(r,d)$,
+  and composing it with the sheaf isomorphism
+  \begin{align*}
+    \iota : \mathscr O^{\oplus n}_{GL_n} \to \mathscr O^{\oplus n}_{GL_n}
+  \end{align*}
+  induces by the inversion on $GL_n$. That is, the action is defined
+  by
+  \begin{align*}
+    \mathscr O^{\oplus n}_{C\times GL_n\times\mathcal Q(r,d)}
+    \xlongrightarrow{\pi^*\iota}
+    \mathscr O^{\oplus n}_{C\times GL_n\times\mathcal Q(r,d)}
+    \xlongrightarrow{\pi^*q_{\mathscr U}}
+    \pi^*\mathscr U
+  \end{align*}
+  where each $\pi$ denotes the natural projection. As base change
+  preserves Hilbert polynomials \ref{lem:hilbert_base_change} this
+  has rank $r$ and degree $d$. It is then straightforward to verify
+  that this is indeed an action.
 \end{example}
 
 \begin{example}
   On Higgs sheaves.
   \missingexample
 \end{example}
+
+\begin{definition}
+  \todo{satbilisers}
+\end{definition}
 
 
 \subsection{Invariants}
@@ -3181,12 +3226,12 @@ Fortunately, we are able to define
   A morphism $f:X\to Y$ is \emph{$G$-invariant} if the following
   commutes:
   \begin{equation*}
-    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJHXFx0aW1lcyBYIl0sWzIsMCwiWCJdLFs0LDAsIlkiXSxbMCwxLCJcXHJobyIsMSx7ImN1cnZlIjotMn1dLFswLDEsIlxccGkiLDEseyJjdXJ2ZSI6Mn1dLFsxLDIsImYiLDFdXQ==
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJHXFx0aW1lcyBYIl0sWzIsMCwiWCJdLFs0LDAsIlkiXSxbMCwxLCJcXHJobyIsMCx7ImN1cnZlIjotMn1dLFswLDEsIlxccGkiLDIseyJjdXJ2ZSI6Mn1dLFsxLDIsImYiXV0=
     \begin{tikzcd}
       {G\times X} && X && Y
-      \arrow["\sigma"{description}, curve={height=-12pt}, from=1-1, to=1-3]
-      \arrow["\pi"{description}, curve={height=12pt}, from=1-1, to=1-3]
-      \arrow["f"{description}, from=1-3, to=1-5]
+      \arrow["\rho", curve={height=-12pt}, from=1-1, to=1-3]
+      \arrow["\pi"', curve={height=12pt}, from=1-1, to=1-3]
+      \arrow["f", from=1-3, to=1-5]
     \end{tikzcd}
   \end{equation*}
 \end{definition}
@@ -3245,8 +3290,8 @@ $\mathscr O_{X/G}\inc\mathscr O_X$ should be:
 Consider a group scheme $G$ acting on $X$. What do we mean by a
 quotient of $X$ by the $G$-action? We are looking for a $G$-invariant
 surjective map $f : X\surj Y$ such that $Y$ contains as much of th
-geometrical information of $X$ as possible. In particular
-we want to make sure that
+geometric information of $X$ as possible. In particular
+we want to make sure that:
 \begin{enumerate}
   \item the topology on $Y$ is induced by the topology on $X$,
   \item the affines on $Y$ correspond to affines on $X$,
@@ -3286,7 +3331,7 @@ possible to do better. Hence we add the following property:
 
 In practice, our method of constructing quotients is going to yield
 good quotients and it will always be possible to turn them into geometric
-quotients. However, at each step may come at the cost of having to
+quotients. However, each step may come at the cost of having to
 discard some insufficiently well-behaved orbits. Hence geometric quotients
 exist but they need not be non-trivial.
 
@@ -3518,7 +3563,7 @@ of a reductive group on a projective scheme.
 One difficulty when working with projective schemes, rather
 than affine ones, is the failure of $\Proj$ to be a functor. In particular,
 a graded algebra homomorphism $f : S \to R$ only induces a map
-$\Proj R - N(f) \to \Proj S$ where the null cone $N(f)\subseteq\Proj R$ is the closed
+$\Proj R - N(f) \to \Proj S$ where the nullcone $N(f)\subseteq\Proj R$ is the closed
 subscheme defined by \missingcitation
 \begin{align*}
   N(f) := \{ p \in \Proj R : S_+ \subseteq f^{-1}p\}
@@ -3538,7 +3583,7 @@ and the corresponding invariants
   R(X,L)^G := \bigoplus_{k\geq 0}\Gamma(X,L^{\otimes k})^G.
 \end{align*}
 Thus the quotient is going to arise from the inclusion
-$\iota : R(X,L)^G\inc R(X,L)$. We call the points out of the null cone
+$\iota : R(X,L)^G\inc R(X,L)$. We call the points outside the nullcone
 semi-stable:
 
 \begin{definition}
