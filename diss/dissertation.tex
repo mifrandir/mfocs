@@ -2821,7 +2821,7 @@ our attention to a subclass of locally free sheaves. Indeed, we are
 going to end up with those sheaves corresponding to (semi-)stable
 bundles.
 
-\subsection{Quotient Sheaves}
+\subsection{Quotient Sheaves} \todo{fix $\mathscr E$ vs $\mathscr F$}
 
 Choosing an isomorphism $\mathbb C^n \cong \Gamma(C,\mathscr F)$
 allows us to think of globally generated sheaves $\mathscr F$
@@ -2954,6 +2954,11 @@ Grothendieck constructed a fine moduli space for it. \missingcitation
   \begin{align*}
     Q(r,d) := \Quot(\mathscr O^{\oplus n}_C)^{r,d}.
   \end{align*}
+  Moreover, if $q : \mathscr O^{\oplus n}_C \surj \mathscr E$ is
+  a closed point of $Q(r,d)$ such that $\mathscr E$ is locally
+  free and globally generated then there exists an isomorphism
+  $\Gamma(X,\mathscr E)\cong\mathbb C^n$ such that $\mathscr E$ corresponds
+  to $q$.
 \end{example}
 
 Some creativity is required to extend this procedure to Higgs
@@ -3046,19 +3051,19 @@ settings of schemes is:
 \end{definition}
 In particular, a group scheme consists of a scheme $G$ and three maps
 \begin{align}\label{eq:group_maps}
-  e:\Spec\mathbb{C}\to G,\hspace{1cm}
-  i:G\to G,\hspace{1cm}
-  m:G\times G\to G
+  \eta:\Spec\mathbb{C}\to G,\hspace{1cm}
+  \iota:G\to G,\hspace{1cm}
+  \mu:G\times G\to G
 \end{align}
 satisfying the usual conditions of unitality, inverses, and associativity.
 As usual with classical groups, we are going to leave the maps
-$e$, $i$, and $m$ implicit.
+$\eta$, $\iota$, and $\mu$ implicit.
 
 In the affine case $G = \Spec R$ the multiplication and inverse maps
 correspond to $\mathbb{C}$-algebra homomorphisms
-$m^\sharp : R \to R\otimes R$ and $i^\sharp : R\to R$.
+$\mu^\sharp : R \to R\otimes R$ and $i^\sharp : R\to R$.
 If one thinks of elements $f\in R$ as functions $G\to\mathbb C$
-then the comulitiplication is given by $m^\sharp(f)(g,h) = f(m(g,h))$
+then the comulitiplication is given by $\mu^\sharp(f)(g,h) = f(\mu(g,h))$
 for $f\in R$ and $g,h\in G$.
 
 \begin{example}\label{ex:group_schemes}
@@ -3087,7 +3092,7 @@ for $f\in R$ and $g,h\in G$.
 But what do these group schemes have to do with their well-known
 counterparts. For example, how does the scheme $GL_n$ relate to the
 group $GL_n(\mathbb{C})$? The notation is no coincidence.
-Group schemes induce group structures on their points:
+Group schemes induce group structures on their schematic points:
 \begin{lemma}
   Let $G$ be a scheme with maps (\ref{eq:group_maps}). The following
   are equivalent:
@@ -3168,7 +3173,7 @@ $G(T)$ on $X(T)$ by
   and $[x]\in\projective{n}{}(\mathbb C) \cong (\mathbb C^{n+1} - \{0\})/\mathbb C^\times$.
 \end{example}
 
-\begin{example}
+\begin{example}\label{ex:lf_action}
   Following \cite[Lemma 8.49]{hoskins2016}.
   Consider the setting of \ref{ex:quot_scheme_of_lf} and recall
   that, in order to map a locally free sheaf $\mathscr F$ to a point of
@@ -3178,12 +3183,12 @@ $G(T)$ on $X(T)$ by
   given by $g\cdot q = q\circ g^{-1}$ for all $g\in GL_n(\mathbb C)$
   and $q : \mathscr O^{\oplus n}_C \surj \mathscr E$.
 
-  To extend this to a schematic action $GL_n \times \mathcal Q(r,d) \to \mathcal Q(r,d)$ 
+  To extend this to a schematic action $GL_n \times \mathcal Q(r,d) \to \mathcal Q(r,d)$
   we need to specify a family of quotients
   \begin{align*}
-    \mathscr O^{\oplus n}_{C\times GL_n\times\mathcal Q(r,d)}\surj \mathscr E 
+    \mathscr O^{\oplus n}_{C\times GL_n\times\mathcal Q(r,d)}\surj \mathscr E
   \end{align*}
-  of rank $r$ and degree $d$. We construct such a family by 
+  of rank $r$ and degree $d$. We construct such a family by
   considering the universal family $q_{\mathscr U}:\mathscr Q^{\oplus n}_{C\times\mathcal Q(r,d)}\surj \mathscr U$,
   pulling it back along the projection $GL_n\otimes\mathcal Q(r,d)\to\mathcal Q(r,d)$,
   and composing it with the sheaf isomorphism
@@ -3205,9 +3210,44 @@ $G(T)$ on $X(T)$ by
   that this is indeed an action.
 \end{example}
 
+\begin{lemma}\label{lem:orbits_are_iso_classes}
+  Let $\mathscr E,\mathscr E'$ be locally free sheaves corresponding
+  to closed points $q,q'$ in $\mathcal Q(r,d)$ such that
+  $\Gamma(X,q)$ and $\Gamma(X,q')$ are isomorphisms.
+  Then $\mathscr E\cong\mathscr E'$
+  if, and only if, there is a closed point $g$ of $GL_n$
+  such that $g\cdot q \cong q'$.
+  \begin{proof}
+    If $g\cdot q \cong q'$ then there exists an isomorphism
+    $\mathscr E\cong\mathscr E'$ by definition. In the other direction,
+    consider an isomorphism $\psi:\mathscr E\cong\mathscr E'$.
+    As both $\mathscr E$ and $\mathscr E'$ are globally generated,
+    the composition
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhiYiBDXm4iXSxbNiwwLCJcXG1hdGhiYiBDXm4iXSxbMiwwLCJcXEdhbW1hKFgsXFxtYXRoc2NyIEUpIl0sWzQsMCwiXFxHYW1tYShYLFxcbWF0aHNjciBFJykiXSxbMCwyLCJcXEdhbW1hKFgscV57LTF9KSJdLFszLDEsIlxcR2FtbWEoWCxxJykiXSxbMiwzLCJcXEdhbW1hKFgsXFxwc2kpIl1d
+      \begin{tikzcd}
+        {\mathbb C^n} && {\Gamma(X,\mathscr E)} && {\Gamma(X,\mathscr E')} && {\mathbb C^n}
+        \arrow["{\Gamma(X,q)^{-1}}", from=1-1, to=1-3]
+        \arrow["{\Gamma(X,\psi)}", from=1-3, to=1-5]
+        \arrow["{\Gamma(X,q')}", from=1-5, to=1-7]
+      \end{tikzcd}
+    \end{equation*}
+    defines an element $g\in GL_n(\mathbb C)$ that satisfies
+    $g\cdot q \cong q'$.
+  \end{proof}
+\end{lemma}
+
 \begin{example}
-  On Higgs sheaves.
-  \missingexample
+  The $GL_n$ action on $\mathcal Q(r,d)$ lifts to $\mathcal F(r,d)$.
+  In particular, we use \ref{lem:orbits_are_iso_classes} to make sure
+  that
+  \begin{align*}
+    \mathcal F(r,d)(q) \cong \mathcal F(r,d)(g\cdot q)
+  \end{align*}
+  where we view $q$ as a $\mathbb C$-point of $\mathcal Q(r,d)$. Hence
+  $\varphi$ defines a Higgs field on the sheaf corresponding to
+  $g\cdot q$. This lets us express the action on closed points
+  as $g\cdot(q,\varphi) = (g\cdot q,\varphi)$.
 \end{example}
 
 \begin{definition}
@@ -3380,6 +3420,10 @@ allow us to appreciate the more general construction.
   \end{proof}
 \end{theorem}
 
+\begin{example}
+  \todo{$GL_n$}
+\end{example}
+
 \missingsection
 
 \subsection{Good Quotients}
@@ -3526,7 +3570,49 @@ with the additional data required in order to make sense of the quotient.
 \end{example}
 
 \begin{example}
-  locally free sheaves \missingexample
+  Let us define a linearisation for the $GL_n$-action on
+  $\mathcal Q(r,d)$ from \ref{ex:lf_action}. The key observation
+  here is that, by construction of the action, we have equivalent
+  families of quotients
+  \begin{align*}
+    \mathscr O^{\oplus n}_{C\times\mathcal Q(r,d)\times GL_n}
+    \xlongrightarrow{(\sigma\times\identity)^* q_\mathscr U}
+    (\sigma\times\identity)^* \mathscr U
+  \end{align*}
+  and 
+  \begin{align*}
+    \mathscr O^{\oplus n}_{C\times GL_n\times\mathcal Q(r,d)}
+    \xlongrightarrow{\pi^*\iota}
+    \mathscr O^{\oplus n}_{C\times GL_n\times\mathcal Q(r,d)}
+    \xlongrightarrow{\pi^*q_{\mathscr U}}
+    \pi^*\mathscr U
+  \end{align*}
+  over $GL_n\times\mathcal Q(r,d)$ where 
+  $q_{\mathscr U} : \mathscr O^{\oplus n}_{C\times\mathcal Q(r,d)\times GL_N} \surj \mathscr U$
+  is the universal quotient in $\mathcal Q(r,d)$. In particular, we have
+  an isormorphism of sheaves
+  \begin{align*}
+    (\sigma\times\identity)^*\mathscr U \cong \pi^*\mathscr U.
+  \end{align*}
+  It is straightforward to verify that this extends to the invertible sheaf
+  \begin{align*}
+    \mathscr L^m_h := \det(\pi_*(\mathscr U \otimes \pi^*\mathscr O_X(m)))
+  \end{align*}
+  on $\mathcal Q(r,d)$. That is, there is an isormorphism
+  \begin{align*}
+    \Phi:\sigma^*\mathscr L^m_h \cong \pi^*\mathscr L^m_h
+  \end{align*}
+  of sheaves on $GL_n\times\mathcal Q(r,d)$ such that
+  \begin{align*}
+    (\mu\times\identity_C)^*\Phi = \pi^*\Phi \circ (\identity_{GL_n}\times\sigma)^*\Phi
+  \end{align*}
+  where $\mu$ is the multiplication on $GL_n$. Now $\Phi$ is just the
+  sheaf theoretic analogue of a linearisation ,
+  meaning that under the
+  correspondence of locally free sheaves and vector bundles
+  $\mathscr L^m_h$ and $\Phi$ define a linearisation $L^m_h$
+  for all $m$. \cite[Remark 5.16]{hoskins2016}
+  \todo{actually, we need $m$ large}
 \end{example}
 
 \begin{example}
@@ -3573,7 +3659,7 @@ Now recall that
 \begin{align*}
   X \cong \Proj\bigoplus_{k\geq 0}\Gamma(X,L^{\otimes k}).
 \end{align*}
-This essentially follows from \cite[Proposition 13.48]. Hence
+This essentially follows from \cite[Proposition 13.48]{gortz2010}. Hence
 it is natural to consider the graded algebra of sections
 \begin{align*}
   R(X,L) := \bigoplus_{k\geq 0}\Gamma(X,L^{\otimes k})
