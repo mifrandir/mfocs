@@ -2931,10 +2931,20 @@ Grothendieck constructed a fine moduli space for it. \missingcitation
   Moreover, $\Quot(\mathscr E)^{p,\mathscr L}$ is projective.
   \begin{proof}[Proof idea]
     The key idea is to realise the Quot functor as a subfunctor
-    of the Grassmann functor which is known to be representable
-    by a projective scheme. It then remains to show that the map
-    into projective space is an immersion and that its image is
-    closed. For an extensive overview see \cite[70-73]{hoskins2016}.
+    of the Grassmann functor and use the Grassmannian to construct the
+    scheme that represents it. One thus obtains an embedding
+    \begin{align}\label{eq:quot_embedding}
+      Quot^{p,\mathscr O(1)}_{\projective{n}{}}(\mathscr O^{\oplus r}_{\projective{n}{}})
+      \longinc
+      Gr(H^0(\mathscr O^{\oplus r}_{\projective{n}{}}),p(m))
+      \longinc
+      \projective{}{}(\bigwedge^{p(m)}H^0(\mathscr O^{\oplus r}_{\projective{n}{}}))
+    \end{align}
+    in the case where $X=\projective{n}{}$, $\mathscr E=\mathscr O^{\oplus r}$,
+    and $\mathscr L=\mathscr O(1)$. The general case is obtained by
+    twisting.
+    It then remains to show that the image of this map is closed.
+    For an extensive overview see \cite[70-73]{hoskins2016}.
   \end{proof}
 \end{theorem}
 
@@ -2983,24 +2993,24 @@ We are going to use the following lemma to obtain such a scheme:
 \begin{example}\label{ex:quot_scheme_of_higgs}
   Consider a Higgs sheaf $(\mathscr E,\varphi)$ such that $\mathscr E$ is globally generated of
   rank $r$ and degree $d$ with $H^1(C,\mathscr E)=0$.
-  Consider the universal sheaf $\mathscr U$ on $\mathcal Q(r,d)$
+  Consider the universal sheaf $\hat{\mathscr E}$ on $Q(r,d)$
   arising from the universal quotient
   \begin{align*}
-    \hat q : \mathscr O^{\oplus n}_{C\times\mathcal Q(r,d)} \to \mathscr U.
+    \hat q : \mathscr O^{\oplus n}_{C\times Q(r,d)} \to \hat{\mathscr E}.
   \end{align*}
   Applying the lemma \ref{lem:linear_scheme} to the sheaf
-  $\Hom(\mathscr U,\mathscr U\otimes K)$ on $C\otimes\mathcal Q(r,d)$
+  $\Hom(\hat{\mathscr E},\hat{\mathscr E}\otimes K)$ on $C\otimes Q(r,d)$
   tells us that the functor
   \begin{align*}
-    (f:T\to\mathcal Q(r,d))
+    (f:T\to Q(r,d))
     \mapsto
-    \Gamma(C\times T,(\identity\times f)^*\Hom(\mathscr U,\mathscr U\otimes\pi^*\mathscr K))
+    \Gamma(C\times T,(\identity\times f)^*\Hom(\hat{\mathscr E},\hat{\mathscr E}\otimes\pi^*\mathscr K))
   \end{align*}
-  where $\pi : C\times\mathcal Q(r,d)\to C$ is represented by a
-  $\mathcal Q(r,d)$-scheme $\mathcal F(r,d)$.
+  where $\pi : C\times Q(r,d)\to C$ is represented by a
+  $Q(r,d)$-scheme $\mathcal F(r,d)$.
   In particular, a closed point of $\mathcal F(r,d)$ corresponds to a
-  closed point $f$ of $\mathcal Q(r,d)$ and an $f$-point of $\mathcal F(r,d)$.
-  We may now choose $f$ such that $\mathscr E = f^*\mathscr U$ and note
+  closed point $f$ of $Q(r,d)$ and an $f$-point of $\mathcal F(r,d)$.
+  We may now choose $f$ such that $\mathscr E = f^*\hat{\mathscr E}$ and note
   that
   \begin{align*}
     \mathcal F(r,d)(f) = \Gamma(C,\Hom(\mathscr E,\mathscr E\otimes\mathscr K)).
@@ -3177,20 +3187,20 @@ $G(T)$ on $X(T)$ by
   Following \cite[Lemma 8.49]{hoskins2016}.
   Consider the setting of \ref{ex:quot_scheme_of_lf} and recall
   that, in order to map a locally free sheaf $\mathscr F$ to a point of
-  $\mathcal Q(r,d)$, we had to choose an isomorphism
+  $Q(r,d)$, we had to choose an isomorphism
   $\mathbb C^n \cong \Gamma(C,\mathscr F)$. In particular, there
-  is an action of $GL_n$ on closed points of $\mathcal Q(r,d)$
+  is an action of $GL_n$ on closed points of $Q(r,d)$
   given by $g\cdot q = q\circ g^{-1}$ for all $g\in GL_n(\mathbb C)$
   and $q : \mathscr O^{\oplus n}_C \surj \mathscr E$.
 
-  To extend this to a schematic action $GL_n \times \mathcal Q(r,d) \to \mathcal Q(r,d)$
+  To extend this to a schematic action $GL_n \times Q(r,d) \to Q(r,d)$
   we need to specify a family of quotients
   \begin{align*}
-    \mathscr O^{\oplus n}_{C\times GL_n\times\mathcal Q(r,d)}\surj \mathscr E
+    \mathscr O^{\oplus n}_{C\times GL_n\times Q(r,d)}\surj \mathscr E
   \end{align*}
   of rank $r$ and degree $d$. We construct such a family by
-  considering the universal family $q_{\mathscr U}:\mathscr Q^{\oplus n}_{C\times\mathcal Q(r,d)}\surj \mathscr U$,
-  pulling it back along the projection $GL_n\otimes\mathcal Q(r,d)\to\mathcal Q(r,d)$,
+  considering the universal family $\hat q:\mathscr Q^{\oplus n}_{C\times Q(r,d)}\surj \hat{\mathscr E}$,
+  pulling it back along the projection $GL_n\times Q(r,d)\to Q(r,d)$,
   and composing it with the sheaf isomorphism
   \begin{align*}
     \iota : \mathscr O^{\oplus n}_{GL_n} \to \mathscr O^{\oplus n}_{GL_n}
@@ -3198,11 +3208,11 @@ $G(T)$ on $X(T)$ by
   induces by the inversion on $GL_n$. That is, the action is defined
   by
   \begin{align*}
-    \mathscr O^{\oplus n}_{C\times GL_n\times\mathcal Q(r,d)}
+    \mathscr O^{\oplus n}_{C\times GL_n\times Q(r,d)}
     \xlongrightarrow{\pi^*\iota}
-    \mathscr O^{\oplus n}_{C\times GL_n\times\mathcal Q(r,d)}
-    \xlongrightarrow{\pi^*q_{\mathscr U}}
-    \pi^*\mathscr U
+    \mathscr O^{\oplus n}_{C\times GL_n\times Q(r,d)}
+    \xlongrightarrow{\pi^*\hat q}
+    \pi^*\hat{\mathscr E}
   \end{align*}
   where each $\pi$ denotes the natural projection. As base change
   preserves Hilbert polynomials \ref{lem:hilbert_base_change} this
@@ -3212,7 +3222,7 @@ $G(T)$ on $X(T)$ by
 
 \begin{lemma}\label{lem:orbits_are_iso_classes}
   Let $\mathscr E,\mathscr E'$ be locally free sheaves corresponding
-  to closed points $q,q'$ in $\mathcal Q(r,d)$ such that
+  to closed points $q,q'$ in $Q(r,d)$ such that
   $\Gamma(X,q)$ and $\Gamma(X,q')$ are isomorphisms.
   Then $\mathscr E\cong\mathscr E'$
   if, and only if, there is a closed point $g$ of $GL_n$
@@ -3238,13 +3248,13 @@ $G(T)$ on $X(T)$ by
 \end{lemma}
 
 \begin{example}
-  The $GL_n$ action on $\mathcal Q(r,d)$ lifts to $\mathcal F(r,d)$.
+  The $GL_n$ action on $Q(r,d)$ lifts to $\mathcal F(r,d)$.
   In particular, we use \ref{lem:orbits_are_iso_classes} to make sure
   that
   \begin{align*}
     \mathcal F(r,d)(q) \cong \mathcal F(r,d)(g\cdot q)
   \end{align*}
-  where we view $q$ as a $\mathbb C$-point of $\mathcal Q(r,d)$. Hence
+  where we view $q$ as a $\mathbb C$-point of $Q(r,d)$. Hence
   $\varphi$ defines a Higgs field on the sheaf corresponding to
   $g\cdot q$. This lets us express the action on closed points
   as $g\cdot(q,\varphi) = (g\cdot q,\varphi)$.
@@ -3571,38 +3581,50 @@ with the additional data required in order to make sense of the quotient.
 
 \begin{example}
   Let us define a linearisation for the $GL_n$-action on
-  $\mathcal Q(r,d)$ from \ref{ex:lf_action}. The key observation
+  $Q(r,d)$ from \ref{ex:lf_action}. We follow
+  \cite[75-76]{hoskins2016} and \cite[90]{huybrechts2010}.
+  The key observation
   here is that, by construction of the action, we have equivalent
   families of quotients
   \begin{align*}
-    \mathscr O^{\oplus n}_{C\times\mathcal Q(r,d)\times GL_n}
-    \xlongrightarrow{(\sigma\times\identity)^* q_\mathscr U}
-    (\sigma\times\identity)^* \mathscr U
+    \mathscr O^{\oplus n}_{C\times Q(r,d)\times GL_n}
+    \xlongrightarrow{(\sigma\times\identity)^* \hat q}
+    (\sigma\times\identity)^* \hat{\mathscr E}
   \end{align*}
   and 
   \begin{align*}
-    \mathscr O^{\oplus n}_{C\times GL_n\times\mathcal Q(r,d)}
+    \mathscr O^{\oplus n}_{C\times GL_n\times Q(r,d)}
     \xlongrightarrow{\pi^*\iota}
-    \mathscr O^{\oplus n}_{C\times GL_n\times\mathcal Q(r,d)}
-    \xlongrightarrow{\pi^*q_{\mathscr U}}
-    \pi^*\mathscr U
+    \mathscr O^{\oplus n}_{C\times GL_n\times Q(r,d)}
+    \xlongrightarrow{\pi^*\hat q}
+    \pi^*\hat{\mathscr E}
   \end{align*}
-  over $GL_n\times\mathcal Q(r,d)$ where 
-  $q_{\mathscr U} : \mathscr O^{\oplus n}_{C\times\mathcal Q(r,d)\times GL_N} \surj \mathscr U$
-  is the universal quotient in $\mathcal Q(r,d)$. In particular, we have
+  over $GL_n\times Q(r,d)$ where 
+  $\hat q : \mathscr O^{\oplus n}_{C\times Q(r,d)\times GL_N} \surj \hat{\mathscr E}$
+  is the universal quotient in $Q(r,d)$. In particular, we have
   an isormorphism of sheaves
   \begin{align*}
-    (\sigma\times\identity)^*\mathscr U \cong \pi^*\mathscr U.
+    (\sigma\times\identity)^*\hat{\mathscr E} \cong \pi^*\hat{\mathscr E}.
   \end{align*}
-  It is straightforward to verify that this extends to the invertible sheaf
+  The line bundle on $Q(r,d)$ to consider then arises
+  by pulling back $\mathscr O(1)$ along the embedding (\ref{eq:quot_embedding}).
+  In particular, for $m$ sufficiently large, we have an
+  embedding
   \begin{align*}
-    \mathscr L^m_h := \det(\pi_*(\mathscr U \otimes \pi^*\mathscr O_X(m)))
+    Q(r,d) \longinc
+    \projective{}{}(\wedge^{mr+d+r(1-g)} H^0(\mathscr O^{\oplus n}_C(m))^\vee).
   \end{align*}
-  on $\mathcal Q(r,d)$. That is, there is an isormorphism
+  The pullback of $\mathscr O(1)$ along this embedding is \todo{why?}
+  \begin{align*}
+    \mathscr L^m_h := \det(\pi_*(\hat{\mathscr E} \otimes \pi^*\mathscr O_C(m)))
+  \end{align*}
+  which, for $m$ large, is an ample sheaf on on $Q(r,d)$.
+  That is, for $m$ sufficiently large, 
+  on $Q(r,d)$. That is, there is an isormorphism
   \begin{align*}
     \Phi:\sigma^*\mathscr L^m_h \cong \pi^*\mathscr L^m_h
   \end{align*}
-  of sheaves on $GL_n\times\mathcal Q(r,d)$ such that
+  of sheaves on $GL_n\times Q(r,d)$ such that \todo{check what sides the identities are on}
   \begin{align*}
     (\mu\times\identity_C)^*\Phi = \pi^*\Phi \circ (\identity_{GL_n}\times\sigma)^*\Phi
   \end{align*}
@@ -3616,6 +3638,10 @@ with the additional data required in order to make sense of the quotient.
 \end{example}
 
 \begin{example}
+  The linearisation of the $GL_n$ action on $Q(r,d)$ lifts to
+  $F(r,d)$. Given that the action on $F(r,d)$ is induced by the
+  action on $Q(r,d)$, this is unsurprising.
+
   higgs sheaves \missingexample
 \end{example}
 
@@ -3760,6 +3786,11 @@ $\varphi(X^s(L))$ is open in $X\sslash_L G$.
 
 \begin{example}
   We now have the stable subsets of the moduli spaces:
+  \begin{align*}
+    M^{s}_h(r,d) := Q(r,d)^s\sslash_{L^m_h} G(r,d), \hspace{1cm}
+    M^{s}_H(r,d) := F(r,d)^s\sslash_{L^m_H} G(r,d).
+  \end{align*}
+  
   \missingexample
 \end{example}
 
@@ -3772,6 +3803,12 @@ $\varphi(X^s(L))$ is open in $X\sslash_L G$.
 \subsection{Tangent Spaces}
 
 \chapter{Analytification}
+
+\begin{theorem}[{\cite[Theorem C]{fan2020}}]
+  \begin{align*}
+    \mathcal M_H(r,d) \cong M_H(r,d)^{an}
+  \end{align*} 
+\end{theorem}
 
 \missingsection
 
