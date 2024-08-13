@@ -2935,11 +2935,10 @@ Grothendieck constructed a fine moduli space for it. \missingcitation
     scheme that represents it. One thus obtains an embedding
     \begin{align}\label{eq:quot_embedding}
       Quot^{p,\mathscr O(1)}_{\projective{n}{}}(\mathscr O^{\oplus r}_{\projective{n}{}})
-      \longinc
-      Gr(H^0(\mathscr O^{\oplus r}_{\projective{n}{}}),p(m))
-      \longinc
-      \projective{}{}(\bigwedge^{p(m)}H^0(\mathscr O^{\oplus r}_{\projective{n}{}}))
+      \longinc Gr(V,p(m))
+      \longinc \projective{}{}(\wedge^{p(m)}V^*)
     \end{align}
+    where $V := \Gamma(\mathscr O^{\oplus r}_{\projective{n}{}})$
     in the case where $X=\projective{n}{}$, $\mathscr E=\mathscr O^{\oplus r}$,
     and $\mathscr L=\mathscr O(1)$. The general case is obtained by
     twisting.
@@ -2960,15 +2959,25 @@ Grothendieck constructed a fine moduli space for it. \missingcitation
   \end{align*}
   If, moreover, $\mathscr F$ is globally generated then it
   corresponds to a quotient $\mathscr O^{\oplus n}_C\surj \mathscr F$,
-  i.e. a closed point of the scheme
+  i.e. a closed point of
   \begin{align*}
-    Q(r,d) := \Quot(\mathscr O^{\oplus n}_C)^{r,d}.
+   Q(r,d) := \Quot(\mathscr O^{\oplus n}_C)^{r,d}
   \end{align*}
-  Moreover, if $q : \mathscr O^{\oplus n}_C \surj \mathscr E$ is
-  a closed point of $Q(r,d)$ such that $\mathscr E$ is locally
-  free and globally generated then there exists an isomorphism
-  $\Gamma(X,\mathscr E)\cong\mathbb C^n$ such that $\mathscr E$ corresponds
-  to $q$.
+  Now consider the universal quotient family
+  $\hat q : \mathscr O^{\oplus n}_{C\times Q(r,d)} \surj \hat{\mathscr E}$.
+  Then each quotient sheaf of $\mathscr O_C^{\oplus n}$ is given by
+  $\hat{\mathscr E}_q$ for some $q\in Q(r,d)$. In light of the discussion
+  above, define
+  \begin{align*}
+    Q^\circ(r,d) \subseteq Q(r,d) := \Quot(\mathscr O^{\oplus n}_C)^{r,d}
+  \end{align*}
+  to consists of all $q\in Q(r,d)$ such that $\hat{\mathscr E}_q$ is locally
+  free, $H^1(C,\hat{\mathscr E}_q)=0$, and the map
+  $\Gamma(C,\mathscr O^{\oplus n}_C)\surj\Gamma(C,\hat{\mathscr E}_q)$ is
+  an isomorphism.
+
+  each locally free globally generated sheaf with vanishing
+  cohomology in
 \end{example}
 
 Some creativity is required to extend this procedure to Higgs
@@ -2993,14 +3002,10 @@ We are going to use the following lemma to obtain such a scheme:
 \begin{example}\label{ex:quot_scheme_of_higgs}
   Consider a Higgs sheaf $(\mathscr E,\varphi)$ such that $\mathscr E$ is globally generated of
   rank $r$ and degree $d$ with $H^1(C,\mathscr E)=0$.
-  Consider the universal sheaf $\hat{\mathscr E}$ on $Q(r,d)$
-  arising from the universal quotient
-  \begin{align*}
-    \hat q : \mathscr O^{\oplus n}_{C\times Q(r,d)} \to \hat{\mathscr E}.
-  \end{align*}
-  Applying the lemma \ref{lem:linear_scheme} to the sheaf
-  $\Hom(\hat{\mathscr E},\hat{\mathscr E}\otimes K)$ on $C\otimes Q(r,d)$
-  tells us that the functor
+  Note that $Q^\circ(r,d)$ is reduced, hence lemma \ref{lem:linear_scheme}
+  applies.
+  Considering the sheaf $\Hom(\hat{\mathscr E},\hat{\mathscr E}\otimes K)$ on
+  $C\otimes Q(r,d)$ tells us that the functor
   \begin{align*}
     (f:T\to Q(r,d))
     \mapsto
@@ -3529,59 +3534,61 @@ The abstract theory is rather straightforward to lay out. However,
 it is going to take considerable effort to equip our the actions of interest
 with the additional data required in order to make sense of the quotient.
 
+Fix an action $\sigma : G\times X\to X$ of a reductive
+group on a projective scheme.
+
 \subsection{Linearisation}
 
+There is a wide range of actions on projective schemes. To be able to
+take a quotient, one needs to consider some additional structure. This
+will come in the form of linearised sheaves:
+
 \begin{definition}
-  A \emph{linearisation} of an action $\sigma : G\times X\to X$
-  of an affine algebraic group on a scheme $X$ is a line bundle
-  $\pi:L\to X$ with a bundle isomorphism $G\times L\cong \sigma^* L$
-  such that there is an action $\tilde\sigma : G\times L\to L$
-  making the following commute:
-  \begin{equation*}
-    % https://q.uiver.app/#q=WzAsNSxbMCwwLCJHXFx0aW1lcyBMIl0sWzEsMSwiXFxzaWdtYV4qTCJdLFsyLDEsIkwiXSxbMSwyLCJHXFx0aW1lcyBYIl0sWzIsMiwiWCJdLFswLDIsIlxcdGlsZGVcXHNpZ21hIiwwLHsiY3VydmUiOi0yfV0sWzEsMl0sWzAsMSwiXFxjb25nIl0sWzAsMywiXFx0ZXh0e2lkfVxcdGltZXNcXHBpIiwyLHsiY3VydmUiOjJ9XSxbMSwzXSxbMyw0LCJcXHNpZ21hIiwyXSxbMiw0LCJcXHBpIl1d
-    \begin{tikzcd}
-      {G\times L} \\
-      & {\sigma^*L} & L \\
-      & {G\times X} & X
-      \arrow["\cong", from=1-1, to=2-2]
-      \arrow["{\tilde\sigma}", curve={height=-12pt}, from=1-1, to=2-3]
-      \arrow["{\text{id}\times\pi}"', curve={height=12pt}, from=1-1, to=3-2]
-      \arrow[from=2-2, to=2-3]
-      \arrow[from=2-2, to=3-2]
-      \arrow["\pi", from=2-3, to=3-3]
-      \arrow["\sigma"', from=3-2, to=3-3]
-    \end{tikzcd}
-  \end{equation*}
+  A \emph{linearisation} of a quasi-coherent sheaf
+  $\mathscr E$ on $X$ with respect to the $G$-action
+  is an isomorphism $\Phi : \sigma^*\mathscr E \cong\pi^*\mathscr E$
+  of sheaves on $G\times X$ satisfying the cocylce condition
+  \begin{align}\label{eq:cocyle_condition}
+    (\mu \times \identity)^*\Phi = \pi^*\Phi \circ (\identity\times\sigma)^*\Phi
+  \end{align}
+  where $\mu$ denotes the multiplication on $G$.
 \end{definition}
 
 \begin{example}
-  Consider the action of $GL_{n+1}$ on $\projective{n}{}$. The
-  line bundle corresponding to the twisting sheaf $\mathscr O(1)$
-  provides a somewhat trivial linearisation of the action.
-
-  More generally, suppose we have a $G$-equivariant embedding
-  $X\inc\projective{n}{}$, i.e. a homomorphism $G\to GL_{n+1}$
-  such that the following commutes:
+  Consider a $G$-linearised invertible sheaf $\mathscr L$ on $X$
+  and the corresponding line bundle $\tau : L\to X$. Then the linearisation
+  $\Phi : \sigma^*\mathscr L \cong \pi^*\mathscr L$ induces
+  a map
   \begin{equation*}
-    % https://q.uiver.app/#q=WzAsNCxbMCwxLCJYIl0sWzIsMSwiXFxtYXRoYmYgUF5uIl0sWzAsMCwiR1xcdGltZXMgWCJdLFsyLDAsIkdMX3tuKzF9XFx0aW1lc1xcbWF0aGJmIFBebiJdLFswLDEsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsMCwiXFxzaWdtYSIsMl0sWzMsMV0sWzIsM11d
+    % https://q.uiver.app/#q=WzAsNCxbMSwwLCIoR1xcdGltZXMgWClcXHRpbWVzX3tcXHBpLFxcdGF1fSBMIl0sWzIsMCwiKEdcXHRpbWVzIFgpXFx0aW1lc197XFxzaWdtYSxcXHRhdX0gTCJdLFszLDAsIkwiXSxbMCwwLCJHXFx0aW1lcyBMIl0sWzAsMSwiXFxQaGkiXSxbMSwyXSxbMywwLCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
     \begin{tikzcd}
-      {G\times X} && {GL_{n+1}\times\mathbf P^n} \\
-      X && {\mathbf P^n}
-      \arrow[from=1-1, to=1-3]
-      \arrow[from=1-1, to=2-1]
-      \arrow[from=1-3, to=2-3]
-      \arrow[hook, from=2-1, to=2-3]
+      {G\times L} & {(G\times X)\times_{\pi,\tau} L} & {(G\times X)\times_{\sigma,\tau} L} & L
+      \arrow[Rightarrow, no head, from=1-1, to=1-2]
+      \arrow["\Phi", from=1-2, to=1-3]
+      \arrow[from=1-3, to=1-4]
     \end{tikzcd}
   \end{equation*}
-  Then pulling back $\mathscr O(1)$ along the embedding
-  gives a linearisation. Actions on projective schemes that arise
-  from the $GL_{n+1}$ action on subschemes $X\subseteq\projective{n}{}$
-  in this fashion are called \emph{linear}.
-\end{example}
+  where the equality comes from the fact that $\pi : G\times X \to X$
+  is the base change of the structure map $G\to\Spec\mathbb C$
+  by $X\to\Spec\mathbb C$ and the last component arises from the
+  definition of the fibre product. The cocycle condition
+  (\ref{eq:cocyle_condition}) ensures that this is an action. \cite[84]{huybrechts2010}
+  Moreover, if $\mathscr L$ is ample then it defines a homomorphism
+  $G\to GL(\Gamma(X,\mathscr L)^*)$ such that the induced embedding
+  an embedding $X\inc\projective{}{}(\Gamma(X,\mathscr L)^*)$ is
+  $G$-equivariant. \cite[Remark 5.20]{hoskins2016} That is, the
+  linearisation ensures that the $G$-action on the projective
+  scheme $X$ comes from a $GL_n$ action on a projective space.
+ \end{example}
+
+To take quotients of $X$ by $G$-actions, we are going to equip
+$X$ with ample $G$-linearised sheaves. That is, we are
+going to construct ample sheaves $\mathscr L$ and corresponding
+$G$-linearisations.
 
 \begin{example}
-  Let us define a linearisation for the $GL_n$-action on
-  $Q(r,d)$ from \ref{ex:lf_action}. We follow
+  Let us define an ample $GL_n$-linearised sheaf on
+  $Q(r,d)$ with respect to the action in \ref{ex:lf_action}. We follow
   \cite[75-76]{hoskins2016} and \cite[90]{huybrechts2010}.
   The key observation
   here is that, by construction of the action, we have equivalent
@@ -3591,7 +3598,7 @@ with the additional data required in order to make sense of the quotient.
     \xlongrightarrow{(\sigma\times\identity)^* \hat q}
     (\sigma\times\identity)^* \hat{\mathscr E}
   \end{align*}
-  and 
+  and
   \begin{align*}
     \mathscr O^{\oplus n}_{C\times GL_n\times Q(r,d)}
     \xlongrightarrow{\pi^*\iota}
@@ -3599,50 +3606,53 @@ with the additional data required in order to make sense of the quotient.
     \xlongrightarrow{\pi^*\hat q}
     \pi^*\hat{\mathscr E}
   \end{align*}
-  over $GL_n\times Q(r,d)$ where 
+  over $GL_n\times Q(r,d)$ where
   $\hat q : \mathscr O^{\oplus n}_{C\times Q(r,d)\times GL_N} \surj \hat{\mathscr E}$
   is the universal quotient in $Q(r,d)$. In particular, we have
   an isormorphism of sheaves
-  \begin{align*}
-    (\sigma\times\identity)^*\hat{\mathscr E} \cong \pi^*\hat{\mathscr E}.
-  \end{align*}
+  \begin{align}\label{eq:universal_linearisation}
+    (\sigma^*\times\identity)\hat{\mathscr E} \cong (\pi^*\times\identity)\hat{\mathscr E}.
+  \end{align}
+  This is a linearisation of $\hat{\mathscr E}$ with respect to
+  the action $\sigma\times\identity$ on $Q(r,d)\times C$, as the
+  cocycle condition (\ref{eq:cocyle_condition}) is easily verified.
+
   The line bundle on $Q(r,d)$ to consider then arises
   by pulling back $\mathscr O(1)$ along the embedding (\ref{eq:quot_embedding}).
-  In particular, for $m$ sufficiently large, we have an
-  embedding
+  In particular, for $\ell$ sufficiently large, we have an
+  embedding of $Q(r,d)$ into the projective space
+  $\projective{}{}(\wedge^m V_\ell^*)$
+  where $V_\ell:=\Gamma(\mathscr O^{\oplus n}_C(\ell))$ and $m := \ell r+d+r(1-g)$.
+  This embedding is constructed by factoring through the Grassmannian
+  $\text{Gr}(V,m)$, a fine moduli space of locally free rank $m$ quotients of
+  $V_\ell$.  The map $\text{Gr}(V_\ell,m)\inc\projective{}{}(\wedge^m V_\ell^*)$ is known as the Pl\"ucker
+  embedding.  One may then calculate that the pullback of $\mathscr
+    O_{\projective{}{}}(1)$ to $Q(r,d)$ is
   \begin{align*}
-    Q(r,d) \longinc
-    \projective{}{}(\wedge^{mr+d+r(1-g)} H^0(\mathscr O^{\oplus n}_C(m))^\vee).
+    \mathscr L^\ell_h
+    := \det(\pi_*(\hat{\mathscr E} \otimes \pi^*\mathscr O_C(\ell))).
   \end{align*}
-  The pullback of $\mathscr O(1)$ along this embedding is \todo{why?}
+  Hence, for $\ell$ large, $\mathscr L^\ell_h$ is an ample sheaf
+  on $Q(r,d)$. \cite[Proposition 2.2.5]{huybrechts2010}.
+  The isomorphism (\ref{eq:universal_linearisation}) induces an isomorphism
   \begin{align*}
-    \mathscr L^m_h := \det(\pi_*(\hat{\mathscr E} \otimes \pi^*\mathscr O_C(m)))
+    \Phi:\sigma^*\mathscr L^\ell_h \cong \pi^*\mathscr L^\ell_h.
   \end{align*}
-  which, for $m$ large, is an ample sheaf on on $Q(r,d)$.
-  That is, for $m$ sufficiently large, 
-  on $Q(r,d)$. That is, there is an isormorphism
-  \begin{align*}
-    \Phi:\sigma^*\mathscr L^m_h \cong \pi^*\mathscr L^m_h
-  \end{align*}
-  of sheaves on $GL_n\times Q(r,d)$ such that \todo{check what sides the identities are on}
-  \begin{align*}
-    (\mu\times\identity_C)^*\Phi = \pi^*\Phi \circ (\identity_{GL_n}\times\sigma)^*\Phi
-  \end{align*}
-  where $\mu$ is the multiplication on $GL_n$. Now $\Phi$ is just the
-  sheaf theoretic analogue of a linearisation ,
-  meaning that under the
-  correspondence of locally free sheaves and vector bundles
-  $\mathscr L^m_h$ and $\Phi$ define a linearisation $L^m_h$
-  for all $m$. \cite[Remark 5.16]{hoskins2016}
-  \todo{actually, we need $m$ large}
+  For $\ell$ large, this is in fact a linearisation.
 \end{example}
 
 \begin{example}
   The linearisation of the $GL_n$ action on $Q(r,d)$ lifts to
   $F(r,d)$. Given that the action on $F(r,d)$ is induced by the
-  action on $Q(r,d)$, this is unsurprising.
-
-  higgs sheaves \missingexample
+  action on $Q(r,d)$, this is unsurprising. In \cite{nitsure1991}
+  this is made precise by embedding $F(r,d)$ into the projective
+  space
+  \begin{align*}
+    \projective{}{}(\mathscr O_{\text{Gr}(V_\ell,m)}\oplus\End(\hat{\mathscr E}))
+  \end{align*}
+  where $\hat{\mathscr E}$ corresponds to the universal quotient
+  on the Grassmannian.
+  \missingexample
 \end{example}
 
 \begin{lemma}\label{lem:linearisations_give_reps}
@@ -3661,7 +3671,8 @@ with the additional data required in order to make sense of the quotient.
 \end{lemma}
 
 \begin{lemma}
-  If $L$ is a linearisation then so is $L^{\otimes k}$ for all $k\geq 1$.
+  If $\mathscr L$ is a linearisation then so is $\mathscr L^{\otimes k}$
+  for all $k\geq 1$.
   \begin{proof}
     \missingproof
   \end{proof}
@@ -3669,7 +3680,7 @@ with the additional data required in order to make sense of the quotient.
 
 \subsection{Good Quotients}
 
-Consider an ample linearisation $L$ of the action $\sigma : G\times X\to X$
+Consider an ample linearisation $\mathscr L$ of the action $\sigma : G\times X\to X$
 of a reductive group on a projective scheme.
 
 One difficulty when working with projective schemes, rather
@@ -3683,38 +3694,38 @@ subscheme defined by \missingcitation
 where $S_+\subseteq S$ is the irrelevant ideal.
 Now recall that
 \begin{align*}
-  X \cong \Proj\bigoplus_{k\geq 0}\Gamma(X,L^{\otimes k}).
+  X \cong \Proj\bigoplus_{k\geq 0}\Gamma(X,\mathscr L^{\otimes k}).
 \end{align*}
 This essentially follows from \cite[Proposition 13.48]{gortz2010}. Hence
 it is natural to consider the graded algebra of sections
 \begin{align*}
-  R(X,L) := \bigoplus_{k\geq 0}\Gamma(X,L^{\otimes k})
+  R(X,\mathscr L) := \bigoplus_{k\geq 0}\Gamma(X,\mathscr L^{\otimes k})
 \end{align*}
 and the corresponding invariants
 \begin{align*}
-  R(X,L)^G := \bigoplus_{k\geq 0}\Gamma(X,L^{\otimes k})^G.
+  R(X,\mathscr L)^G := \bigoplus_{k\geq 0}\Gamma(X,\mathscr L^{\otimes k})^G.
 \end{align*}
 Thus the quotient is going to arise from the inclusion
-$\iota : R(X,L)^G\inc R(X,L)$. We call the points outside the nullcone
+$\iota : R(X,\mathscr L)^G\inc R(X,\mathscr L)$. We call the points outside the nullcone
 semi-stable:
 
 \begin{definition}
   A point $x\in X$ is \emph{semi-stable} if there exists a section
-  $s\in\Gamma(X,L^{\otimes k})^G$ for some $k>0$ such that $s(x)\neq 0$.
-  Denote by $X^{ss}(L)$ the set of all semi-stable points of $X$
-  with respect to the linearisation $L$.
+  $s\in\Gamma(X,\mathscr L^{\otimes k})^G$ for some $k>0$ such that $s(x)\neq 0$.
+  Denote by $X^{ss}(\mathscr L)$ the set of all semi-stable points of $X$
+  with respect to the linearisation $\mathscr L$.
 \end{definition}
 
-Verifying that $N(\iota) = X - X^{ss}(L)$ is a matter of unpacking definitions.
-In particular, $X^{ss}(L)$ is open in $X$. Hence we obtain a good quotient
+Verifying that $N(\iota) = X - X^{ss}(\mathscr L)$ is a matter of unpacking definitions.
+In particular, $X^{ss}(\mathscr L)$ is open in $X$. Hence we obtain a good quotient
 of semi-stable points in the natural way:
 
 \begin{definition}
-  The \emph{projective GIT quotient} of $X$ with respect to $L$ is the map
+  The \emph{projective GIT quotient} of $X$ with respect to $\mathscr L$ is the map
   \begin{align*}
-    X^{ss}(L) \longrightarrow X \sslash_L G := \Proj R(X,L)^G
+    X^{ss}(\mathscr L) \longrightarrow X \sslash_{\mathscr L} G := \Proj R(X,{\mathscr L})^G
   \end{align*}
-  corresponding to the inclusion $R(X,L)^G\inc R(X,L)$.
+  corresponding to the inclusion $R(X,{\mathscr L})^G\inc R(X,{\mathscr L})$.
 \end{definition}
 
 \begin{theorem}
@@ -3727,8 +3738,8 @@ of semi-stable points in the natural way:
 \begin{example}
   This allows us to define the moduli spaces that we are after:
   \begin{align*}
-    M^{ss}_h(r,d) := Q(r,d)\sslash_{L^m_h} G(r,d), \hspace{1cm}
-    M^{ss}_H(r,d) := F(r,d)\sslash_{L^m_H} G(r,d).
+    M^{ss}_h(r,d) := Q(r,d)\sslash_{{\mathscr L}^m_h} G(r,d), \hspace{1cm}
+    M^{ss}_H(r,d) := F(r,d)\sslash_{{\mathscr L}^m_H} G(r,d).
   \end{align*}
   \missingexample
 \end{example}
@@ -3790,7 +3801,7 @@ $\varphi(X^s(L))$ is open in $X\sslash_L G$.
     M^{s}_h(r,d) := Q(r,d)^s\sslash_{L^m_h} G(r,d), \hspace{1cm}
     M^{s}_H(r,d) := F(r,d)^s\sslash_{L^m_H} G(r,d).
   \end{align*}
-  
+
   \missingexample
 \end{example}
 
@@ -3807,7 +3818,7 @@ $\varphi(X^s(L))$ is open in $X\sslash_L G$.
 \begin{theorem}[{\cite[Theorem C]{fan2020}}]
   \begin{align*}
     \mathcal M_H(r,d) \cong M_H(r,d)^{an}
-  \end{align*} 
+  \end{align*}
 \end{theorem}
 
 \missingsection
