@@ -2010,7 +2010,7 @@ Observe that the holomorphic bundle underlying a stable Higgs bundle need
 not be stable. Hence (\ref{eq:cotangent_inclusion}) is not a bijection.
 However, we have the next best thing:
 
-\begin{theorem}
+\begin{theorem}\label{thm:stables_are_dense}
   $T^*\mathcal M_\dol(E)$ is Zariski open in $\mathcal M_\varphi(E)$.
   In particular, it is open and dense in the analytic topology.
   \begin{proof}
@@ -2283,16 +2283,6 @@ $T$-points of a hypothetical moduli space.
   A \emph{moduli problem} is a functor $\mathcal M:\Sch^{op}\to\Set$.
 \end{definition}
 
-\begin{example}
-  \missingexample
-  \begin{itemize}
-    \item lines in a vector space
-    \item holomorphic bundles up to isomorphism
-    \item Higgs bundles up to isomorphism
-    \item some coarse example
-  \end{itemize}
-\end{example}
-
 Now the obvious notion of a moduli space is a scheme whose functor
 of points is precisely the moduli problem. This is called a fine
 moduli space:
@@ -2316,15 +2306,25 @@ isomorphism $\eta$ and call $M$ the fine moduli space.
 
 Beyond the fact that a fine moduli spaces represent the moduli
 problem and thus are the best possible solution, there are some
-pleasant properties to observe. Consider an element
-$F\in\mathcal M(T)$, for some $T$. Observe that under $\eta$,
-this corresponds to a map $f:T\to M$ which induces pullback maps
-$f^* : \Hom(M,M)\to\Hom(T,M)$ and hence
-$F^* : \mathcal M(M)\to \mathcal M(T)$.
-Now note that there is an element $U\in\mathcal M(M)$ that
-corresponds to the identity on $M$. Thus $F^* U = F$, so every
-element $\mathcal M(T)$ is given by pulling back $U$. Hence
-we make the following definition:
+pleasant properties to observe.
+Consider an element $F\in\mathcal M(T)$, for some $T$. Observe that
+under $\eta$, this corresponds to a map $f:T\to M$. By considering
+closed points, we have a map sending a closed point $t\in T(\mathbb C)$
+to a closed point $f\circ t\in M(\mathbb C)$. We denote th corresponding
+map by $t \mapsto F_t$. This lets us consider $F$ as a family of
+points in $M$ indexed by $T$.
+
+Moreover, note that there are induced
+pullback maps
+\begin{align*}
+  f^* : \Hom(M,M)\to\Hom(T,M), \hspace{1cm}
+  F^* : \mathcal M(M)\to \mathcal M(T).
+\end{align*}
+Now the element $U\in\mathcal M(M)$ corresponding to the identity on $M$
+induces a map $M(\mathbb C)\to M(\mathbb C)$ which allows us to
+interpret $U$ as a family of all points of $M$. In particular,
+every family in $\mathcal M$ is given by pulling back $U$.
+Hence we make the following definition:
 
 \begin{definition}
   Let $\mathcal M$ be a moduli problem and $M$ a fine moduli space.
@@ -2864,6 +2864,7 @@ $\mathscr F\cong\mathscr F'$ such that the following commutes:
     \arrow["\cong", from=1-3, to=2-3]
   \end{tikzcd}
 \end{equation}
+
 \subsection{Quot Functors}
 
 Let us now consider the moduli problem of families of
@@ -2931,8 +2932,14 @@ Grothendieck constructed a fine moduli space for it. \missingcitation
   Moreover, $\Quot(\mathscr E)^{p,\mathscr L}$ is projective.
   \begin{proof}[Proof idea]
     The key idea is to realise the Quot functor as a subfunctor
-    of the Grassmann functor and use the Grassmannian to construct the
-    scheme that represents it. One thus obtains an embedding
+    of the Grassmann functor
+    \begin{align*}
+      Gr(V,m) := Quot(\mathscr O^{\oplus n}_{\Spec\mathbb C})^{n-m}
+    \end{align*}
+    of $m$-dimensional subspaces of $V\cong\mathbb C^n$. This is
+    well-known to be representable by a projective variety.
+    \cite[Proposition 8.14]{gortz2010}
+    In particular, one obtains an embedding
     \begin{align}\label{eq:quot_embedding}
       Quot^{p,\mathscr O(1)}_{\projective{n}{}}(\mathscr O^{\oplus r}_{\projective{n}{}})
       \longinc Gr(V,p(m))
@@ -3002,31 +3009,32 @@ We are going to use the following lemma to obtain such a scheme:
 \begin{example}\label{ex:quot_scheme_of_higgs}
   Consider a Higgs sheaf $(\mathscr E,\varphi)$ such that $\mathscr E$ is globally generated of
   rank $r$ and degree $d$ with $H^1(C,\mathscr E)=0$.
-  Note that $Q^\circ(r,d)$ is reduced, hence lemma \ref{lem:linear_scheme}
-  applies.
+  Note that $Q^\circ(r,d)$ is a reduced open subscheme
+  \cite[281]{nitsure1991}, hence lemma
+  \ref{lem:linear_scheme} applies.
   Considering the sheaf $\Hom(\hat{\mathscr E},\hat{\mathscr E}\otimes K)$ on
-  $C\otimes Q(r,d)$ tells us that the functor
+  $C\times Q^\circ(r,d)$ we find that the functor
   \begin{align*}
     (f:T\to Q(r,d))
     \mapsto
     \Gamma(C\times T,(\identity\times f)^*\Hom(\hat{\mathscr E},\hat{\mathscr E}\otimes\pi^*\mathscr K))
   \end{align*}
-  where $\pi : C\times Q(r,d)\to C$ is represented by a
-  $Q(r,d)$-scheme $\mathcal F(r,d)$.
+  where $\pi : C\times Q^\circ(r,d)\to C$ is represented by a
+  $Q^\circ(r,d)$-scheme $\mathcal F(r,d)$.
   In particular, a closed point of $\mathcal F(r,d)$ corresponds to a
-  closed point $f$ of $Q(r,d)$ and an $f$-point of $\mathcal F(r,d)$.
-  We may now choose $f$ such that $\mathscr E = f^*\hat{\mathscr E}$ and note
+  closed point $q\in Q^\circ(r,d)(\mathbb C)$ and a $q$-point of $\mathcal F(r,d)$.
+  We may now choose $q$ such that $\mathscr E = \hat{\mathscr E}_q$ and note
   that
   \begin{align*}
-    \mathcal F(r,d)(f) = \Gamma(C,\Hom(\mathscr E,\mathscr E\otimes\mathscr K)).
+    \mathcal F(r,d)(q) = \Gamma(C,\Hom(\mathscr E,\mathscr E\otimes\mathscr K)).
   \end{align*}
   To see this, a few things need to be checked. Firstly, pullbacks
   commute with taking tensor products. Secondly,
   \begin{align*}
-    \Gamma(C\times\Spec\mathbb C,(\identity\times f)^*\pi^*\mathscr K)
+    \Gamma(C\times\Spec\mathbb C,(\identity\times q)^*\pi^*\mathscr K)
     \cong \Gamma(C,\mathscr K).
   \end{align*}
-  Thus $\varphi$ corresponds to an $f$-point of $\mathcal F(r,d)$
+  Thus $\varphi$ corresponds to an $q$-point of $\mathcal F(r,d)$
   and hence $(\mathscr E,\varphi)$ corresponds to a closed point in
   $\mathcal F(r,d)$. \todo{make sure we don't need the fact that
     $\mathcal F(r,d)$ is linear}
@@ -3464,19 +3472,31 @@ finite type, the ring of invariants is finitely generated.
   arising from the inclusion $\mathscr O(X)^G \inc \mathscr O(X)$.
 \end{definition}
 
-\begin{example}
-  \missingexample
-\end{example}
-
 \begin{theorem}
   The affine GIT quotient is a good quotient.
-  \begin{proof}
-    \missingproof
+  \begin{proof}[Proof idea]
+    We follow \cite[Theorem 4.30]{hoskins2016}. Recall the definition
+    \ref{def:good_quotient} of a good quotient. $G$-invariance,
+    and affineness are essentially immediate and verifying that
+    $\phi^\sharp$ is an isomorphism onto $(\phi_*\mathscr O_X)^G$
+    is straightforward on distinguished opens.
+
+    To show surjectivity, one only needs to consider closed points.
+    Reductivity of $G$ enables the construction of some closed point
+    $x$ of $X$ for each closed point $y$ of $X\sslash G$ such that
+    $\phi(x) = y$ where $\phi : X\to X\sslash G$ is the GIT quotient.
+
+    Conditions 3 and 4 are are addressed by considering
+    $G$-invariant closed sets $W$ and $W'$ in $X$ and showing that
+    it is possible to find $f\in\mathscr O(X)^G$ such that
+    $f(W) = 0$ and $f(W') = 1$. \cite[Lemma 4.29]{hoskins2016}
+    This then implies that $\overline{\phi(W)}$ and $\overline{\phi(W')}$
+    are disjiont which may be sufficient to prove both remaining conditions.
   \end{proof}
 \end{theorem}
 
 While we are not yet in a position to take the quotient of the Quot
-schemes with respect to the actions of $GL_n$ \todo{doublecheck},
+schemes with respect to the actions of $GL_n$,
 we can at least contemplate some examples of good and geometric
 quotients:
 
@@ -3642,17 +3662,11 @@ $G$-linearisations.
 \end{example}
 
 \begin{example}
-  The linearisation of the $GL_n$ action on $Q(r,d)$ lifts to
-  $F(r,d)$. Given that the action on $F(r,d)$ is induced by the
-  action on $Q(r,d)$, this is unsurprising. In \cite{nitsure1991}
-  this is made precise by embedding $F(r,d)$ into the projective
-  space
-  \begin{align*}
-    \projective{}{}(\mathscr O_{\text{Gr}(V_\ell,m)}\oplus\End(\hat{\mathscr E}))
-  \end{align*}
-  where $\hat{\mathscr E}$ corresponds to the universal quotient
-  on the Grassmannian.
-  \missingexample
+  The $GL_n$-linearised ample sheaf $\mathscr L^\ell_h$ on $Q(r,d)$
+  pulls back along $u:F(r,d)\to Q^\circ(r,d)$ so we have a line bundle
+  $\mathscr L^\ell_H$ on $F(r,d)$. The linearisation of
+  $\mathscr L^\ell_h$ extends to $\mathscr L^\ell_H$ by
+  $GL_n$-equivariance of $u$. \todo{ampleness?}
 \end{example}
 
 \begin{lemma}\label{lem:linearisations_give_reps}
@@ -3738,8 +3752,8 @@ of semi-stable points in the natural way:
 \begin{example}
   This allows us to define the moduli spaces that we are after:
   \begin{align*}
-    M^{ss}_h(r,d) := Q(r,d)\sslash_{{\mathscr L}^m_h} G(r,d), \hspace{1cm}
-    M^{ss}_H(r,d) := F(r,d)\sslash_{{\mathscr L}^m_H} G(r,d).
+    M^{ss}_h(r,d) := Q(r,d)\sslash_{{\mathscr L}^m_h} GL_n, \hspace{1cm}
+    M^{ss}_H(r,d) := F(r,d)\sslash_{{\mathscr L}^m_H} GL_n.
   \end{align*}
   \missingexample
 \end{example}
@@ -3798,8 +3812,8 @@ $\varphi(X^s(L))$ is open in $X\sslash_L G$.
 \begin{example}
   We now have the stable subsets of the moduli spaces:
   \begin{align*}
-    M^{s}_h(r,d) := Q(r,d)^s\sslash_{L^m_h} G(r,d), \hspace{1cm}
-    M^{s}_H(r,d) := F(r,d)^s\sslash_{L^m_H} G(r,d).
+    M^{s}_h(r,d) := Q(r,d)^s\sslash_{L^m_h} GL_n, \hspace{1cm}
+    M^{s}_H(r,d) := F(r,d)^s\sslash_{L^m_H} GL_n.
   \end{align*}
 
   \missingexample
@@ -3808,6 +3822,23 @@ $\varphi(X^s(L))$ is open in $X\sslash_L G$.
 \missingsection
 
 \section{Properties of the Algebraic Moduli Space}
+
+By using the power of geometric invariant theory, we have been able
+to construct the moduli spaces of locally free sheaves and Higgs
+sheaves, respectively. Under mild assumptions, we were able to
+find schemes $Q^\circ(r,d)$ and $F(r,d)$ parametrising the sheaves
+that we are after. We then used these schemes and a linearised
+$GL_n$-action to construct good and geometric quotients.
+Unfortunately, both steps required us to discard some points.
+Once again we find ourselves where we have constructed moduli spaces
+but cannot yet be sure which orbits in $Q^\circ(r,d)$ and $F(r,d)$
+are represented.
+
+The first step in this section is to translate the stability
+conditions of geometric invariant theory to the setting of
+sheaves on $C$. Thereafter we are going to analyse the schematic
+tangent spaces and establish a relation between the moduli spaces
+analogous to \ref{thm:stables_are_dense}.
 
 \subsection{Stable Bundles}
 
