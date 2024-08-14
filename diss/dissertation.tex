@@ -1877,22 +1877,20 @@ To answer the question, consider the following:
   Let $(E,\dol_E)$ be a holomorphic bundle on a compact complex
   manifold $X$. Then $(E,\dol_E)$ is
   \begin{itemize}
-    \item \emph{semi-stable} if, for all holomorphic subbundles
+    \item \emph{slope semi-stable} if, for all holomorphic subbundles
           $(F,\dol_F)\subseteq (E,\dol_E)$,
           \begin{align}\label{eq:stability}
             \frac{\deg F}{\rank F} \leq \frac{\deg E}{\rank E};
           \end{align}
-    \item \emph{stable} if the inequality (\ref{eq:stability})
-          is strict for all holomorphic subbundles;
-    \item \emph{polystable} if $E$ decomposes as a direct sum of
-          stable bundles.
+    \item \emph{slope stable} if the inequality (\ref{eq:stability})
+          is strict for all holomorphic subbundles.
   \end{itemize}
 \end{definition}
 
 \begin{theorem}[Donaldson–Uhlenbeck–Yau]\label{thm:duy}
   The correspondence between holomorphic unitary connections in $E$ and
   Dolbeault operators on $E$ maps irreducible Yang-Mills connections to
-  stable bundles and vice versa.
+  slope stable bundles and vice versa.
 \end{theorem}
 
 This theorem is highly non-trivial and we are not going to attempt
@@ -1913,15 +1911,15 @@ that it may be derived from:
         and in the next chapter we are going to show how to regard
         $\mathcal M_\dol(E)$ as a GIT quotient.
   \item The \emph{Narasimhan–Seshadri theorem} \cite[Theorem 8.1]{ns1965} gives
-        a correspondence between stable bundles and certain representations
+        a correspondence between slope stable bundles and certain representations
         of the fundamental group. The original proof in \cite{ns1965}
         is algebraic in nature, but in \cite{donaldson1983} Donaldson
         uses more analytic methods. One may use the result by establishing
         a correspondence between connections and representations.
 \end{itemize}
 
-Now let $A^s_{\dol}(E)$ and $A^{ss}_\dol(E)$ denote the sets of stable
-and semi-stable bundles, respectively. Then we have the following:
+Now let $A^s_{\dol}(E)$ and $A^{ss}_\dol(E)$ denote the sets of slope stable
+and slope semi-stable bundles, respectively. Then we have the following:
 
 \begin{lemma}
   $A^s_{\dol}(E)$ and $A^{ss}_{\dol}(E)$ are open and dense subsets
@@ -2968,7 +2966,7 @@ Grothendieck constructed a fine moduli space for it. \missingcitation
   corresponds to a quotient $\mathscr O^{\oplus n}_C\surj \mathscr F$,
   i.e. a closed point of
   \begin{align*}
-   Q(r,d) := \Quot(\mathscr O^{\oplus n}_C)^{r,d}
+    Q(r,d) := \Quot(\mathscr O^{\oplus n}_C)^{r,d}
   \end{align*}
   Now consider the universal quotient family
   $\hat q : \mathscr O^{\oplus n}_{C\times Q(r,d)} \surj \hat{\mathscr E}$.
@@ -2976,21 +2974,18 @@ Grothendieck constructed a fine moduli space for it. \missingcitation
   $\hat{\mathscr E}_q$ for some $q\in Q(r,d)$. In light of the discussion
   above, define
   \begin{align*}
-    Q^\circ(r,d) \subseteq Q(r,d) := \Quot(\mathscr O^{\oplus n}_C)^{r,d}
+    Q_\circ(r,d) \subseteq Q(r,d) := \Quot(\mathscr O^{\oplus n}_C)^{r,d}
   \end{align*}
   to consists of all $q\in Q(r,d)$ such that $\hat{\mathscr E}_q$ is locally
   free, $H^1(C,\hat{\mathscr E}_q)=0$, and the map
   $\Gamma(C,\mathscr O^{\oplus n}_C)\surj\Gamma(C,\hat{\mathscr E}_q)$ is
   an isomorphism.
-
-  each locally free globally generated sheaf with vanishing
-  cohomology in
 \end{example}
 
 Some creativity is required to extend this procedure to Higgs
-sheaves. What we are looking for is a scheme $\mathcal F(r,d)$ whose closed points
-are pairs $(\mathscr E,\varphi)$ where $\mathscr E\in Q(r,d)$
-and $\varphi : \mathscr E \to \mathscr E \otimes \mathscr K$.
+sheaves. What we are looking for is a scheme $F(r,d)$ whose closed points
+are pairs $(q,\varphi)$ where $q$ is a closed point
+in $Q_\circ(r,d)$ and $\varphi : \hat{\mathscr E}_q \to \hat{\mathscr E}_q \otimes \mathscr K$.
 We are going to use the following lemma to obtain such a scheme:
 
 \begin{lemma}\label{lem:linear_scheme}
@@ -3007,26 +3002,26 @@ We are going to use the following lemma to obtain such a scheme:
 \end{lemma}
 
 \begin{example}\label{ex:quot_scheme_of_higgs}
-  Consider a Higgs sheaf $(\mathscr E,\varphi)$ such that $\mathscr E$ is globally generated of
-  rank $r$ and degree $d$ with $H^1(C,\mathscr E)=0$.
-  Note that $Q^\circ(r,d)$ is a reduced open subscheme
+  Fix a Higgs sheaf $(\mathscr E,\varphi)$ such that
+  $\mathscr E = \hat{\mathscr E}_q$ for some $q\in Q_\circ(r,d)$.
+  Note that $Q_\circ(r,d)$ is a reduced open subscheme
   \cite[281]{nitsure1991}, hence lemma
   \ref{lem:linear_scheme} applies.
   Considering the sheaf $\Hom(\hat{\mathscr E},\hat{\mathscr E}\otimes K)$ on
-  $C\times Q^\circ(r,d)$ we find that the functor
+  $C\times Q_\circ(r,d)$ we find that the functor
   \begin{align*}
     (f:T\to Q(r,d))
     \mapsto
     \Gamma(C\times T,(\identity\times f)^*\Hom(\hat{\mathscr E},\hat{\mathscr E}\otimes\pi^*\mathscr K))
   \end{align*}
-  where $\pi : C\times Q^\circ(r,d)\to C$ is represented by a
-  $Q^\circ(r,d)$-scheme $\mathcal F(r,d)$.
-  In particular, a closed point of $\mathcal F(r,d)$ corresponds to a
-  closed point $q\in Q^\circ(r,d)(\mathbb C)$ and a $q$-point of $\mathcal F(r,d)$.
+  where $\pi : C\times Q_\circ(r,d)\to C$ is represented by a
+  $Q_\circ(r,d)$-scheme $F(r,d)$.
+  In particular, a closed point of $F(r,d)$ corresponds to a
+  closed point $q\in Q_\circ(r,d)$ and a $q$-point of $F(r,d)$.
   We may now choose $q$ such that $\mathscr E = \hat{\mathscr E}_q$ and note
   that
   \begin{align*}
-    \mathcal F(r,d)(q) = \Gamma(C,\Hom(\mathscr E,\mathscr E\otimes\mathscr K)).
+    F(r,d)(q) = \Gamma(C,\Hom(\mathscr E,\mathscr E\otimes\mathscr K)).
   \end{align*}
   To see this, a few things need to be checked. Firstly, pullbacks
   commute with taking tensor products. Secondly,
@@ -3034,10 +3029,14 @@ We are going to use the following lemma to obtain such a scheme:
     \Gamma(C\times\Spec\mathbb C,(\identity\times q)^*\pi^*\mathscr K)
     \cong \Gamma(C,\mathscr K).
   \end{align*}
-  Thus $\varphi$ corresponds to an $q$-point of $\mathcal F(r,d)$
+  Thus $\varphi$ corresponds to an $q$-point of $F(r,d)$
   and hence $(\mathscr E,\varphi)$ corresponds to a closed point in
-  $\mathcal F(r,d)$. \todo{make sure we don't need the fact that
-    $\mathcal F(r,d)$ is linear}
+  $F(r,d)$. The structure map
+  \begin{align*}
+    \tau : F(r,d) \longrightarrow Q_\circ(r,d)
+  \end{align*}
+  is just the forgetful map $(\mathscr E,\phi) \mapsto \mathscr E$
+  on closed points.
 \end{example}
 
 We have thus constructed schemes that may be thought of as containing
@@ -3063,6 +3062,10 @@ The first step is defining group actions in the setting of schemes.
 This allows us to make precise what we mean by a quotient with
 respect to such an action and what properties we would like such
 quotients to posses.
+
+There is a wide range of introductory material to group schemes.
+What we need may be found in \cite{hoskins2016}. A more general
+treatment is given in \cite{milne2017}.
 
 \subsection{Group Schemes}
 
@@ -3158,7 +3161,7 @@ Group schemes induce group structures on their schematic points:
 
 \begin{example}
   All the group schemes in \ref{ex:group_schemes} are affine algebraic
-  groups. (See \cite[IV Theorem 9,3]{milne2012} for smoothness
+  groups. (See \cite[IV Theorem 9.3]{milne2012} for smoothness
   and \cite[Remark 3.2]{hoskins2016} for separatedness.) While group
   schemes are worth studying in full generality, the affine algebraic
   case will be sufficient for our purposes. Hence the only examples
@@ -3261,11 +3264,11 @@ $G(T)$ on $X(T)$ by
 \end{lemma}
 
 \begin{example}
-  The $GL_n$ action on $Q(r,d)$ lifts to $\mathcal F(r,d)$.
+  The $GL_n$ action on $Q(r,d)$ lifts to $F(r,d)$.
   In particular, we use \ref{lem:orbits_are_iso_classes} to make sure
   that
   \begin{align*}
-    \mathcal F(r,d)(q) \cong \mathcal F(r,d)(g\cdot q)
+    F(r,d)(q) \cong F(r,d)(g\cdot q)
   \end{align*}
   where we view $q$ as a $\mathbb C$-point of $Q(r,d)$. Hence
   $\varphi$ defines a Higgs field on the sheaf corresponding to
@@ -3273,10 +3276,46 @@ $G(T)$ on $X(T)$ by
   as $g\cdot(q,\varphi) = (g\cdot q,\varphi)$.
 \end{example}
 
+\subsection{Orbits and Stabilisers}
+
+Recall that one may use orbits or stabilisers or both to measure
+how well-behaved an action is at particular points. For example,
+in the analytic setting it was important that the action is free
+which means that all orbits are isomorphic to the group
+or, equivalently, that all stabilisers are trivial.
+We are going to impose similar conditions on schematic
+group actions. Hence we need to define orbits and stabilisers.
+Consider an action $\sigma : G\times X\to X$ and a closed point
+$x \in X(\mathbb C)$.
+
 \begin{definition}
-  \todo{satbilisers}
+  The \emph{orbit} of $x$ is the set-theoretic image
+  $G\cdot x := \sigma(G(\mathbb C),x)$.
 \end{definition}
 
+That is, the orbit of $x$ is just the usual orbit under the induced
+action $G(\mathbb C)\times X(\mathbb C) \to X(\mathbb C)$ on closed
+points. Stabilisers have a more categorical definition:
+
+\begin{definition}
+  The \emph{stabiliser} is the fibre product
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJHX3giXSxbMCwxLCJHIl0sWzEsMSwiWCJdLFsxLDAsIlxcU3BlY1xcbWF0aGJiICBDIl0sWzMsMiwieCJdLFsxLDIsIlxcc2lnbWEoLSx4KSIsMl0sWzAsM10sWzAsMV0sWzAsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+    \begin{tikzcd}
+      {G_x} & {\Spec\mathbb  C} \\
+      G & X
+      \arrow[from=1-1, to=1-2]
+      \arrow[from=1-1, to=2-1]
+      \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+      \arrow["x", from=1-2, to=2-2]
+      \arrow["{\sigma(-,x)}"', from=2-1, to=2-2]
+    \end{tikzcd}
+  \end{equation*}
+\end{definition}
+
+Thus $G_x$ is a scheme by construction. Moreover, the stabiliser is the
+preimage of the closed point $x$ under the map
+$\sigma(-,x) : G\to X$, and hence a closed subscheme of $G$.
 
 \subsection{Invariants}
 
@@ -3367,28 +3406,28 @@ With this in mind, we are ready to make the following definition:
 
 \begin{definition}[{\cite[Definition 4.2.2]{huybrechts2010}}]\label{def:good_quotient}
   A \emph{good quotient} of $X$ by $G$-action is a $G$-invariant
-  surjective map $f : X\surj Y$ such that the following hold:
+  surjective map $\nu : X\surj Y$ such that the following hold:
   \begin{enumerate}
     \item $Y$ has the quotient topology.
-    \item $f$ is affine.
+    \item $\nu$ is affine.
     \item For every closed $G$-invariant $V\subseteq X$,
-          $f(V)$ is closed in $Y$.
+          $\nu(V)$ is closed in $Y$.
     \item For all disjoint closed $G$-invariant $V,V'\subseteq X$,
-          $f(V)$ and $f(V')$ are disjoint.
-    \item The map $f^\sharp : \mathscr O_Y \to f_*\mathscr O_X$
-          is an isomorphism onto $(f_*\mathscr O_X)^G$.
+          $\nu(V)$ and $\nu(V')$ are disjoint.
+    \item The map $\nu^\sharp : \mathscr O_Y \to \nu_*\mathscr O_X$
+          is an isomorphism onto $(\nu_*\mathscr O_X)^G$.
   \end{enumerate}
 \end{definition}
 
 
-Note that our definition of a geometric quotient $f : X\surj Y$
+Note that our definition of a good quotient $f : X\surj Y$
 ensures that $f$ is well-behaved with respect to closed orbits, but
 allows for some leeway when it comes to non-closed orbits. That is,
 $Y$ need not be in bijection with the topological quotient $X/G$. In particular,
 all point in the closure of an orbit may be identified. It will be
 possible to do better. Hence we add the following property:
 
-\begin{definition}
+\begin{definition}\label{def:geometric_quotient}
   A good quotient is \emph{geometric} if it is injective on orbits.
 \end{definition}
 
@@ -3397,6 +3436,17 @@ good quotients and it will always be possible to turn them into geometric
 quotients. However, each step may come at the cost of having to
 discard some insufficiently well-behaved orbits. Hence geometric quotients
 exist but they need not be non-trivial.
+
+We are going to turn good quotients into geometric quotients by
+restricting to open subsets. Let us make sure that in doing so we
+do not break any of the properties of good quotients. Direct computation
+yields the following:
+
+\begin{lemma}\label{lem:restrictions_of_good_quotients}
+  For every good quotient $\nu:X\surj Y$ and every open $U\subseteq Y$
+  the restriction $\nu : \nu^{-1}(U)\to U$ is
+  also a good quotient.
+\end{lemma}
 
 \section{Constructing Quotients of Affine Schemes}
 
@@ -3447,13 +3497,8 @@ allow us to appreciate the more general construction.
   \todo{$GL_n$}
 \end{example}
 
-\missingsection
-
-\subsection{Good Quotients}
-
-Consider a reductive group $G$ acting on an affine scheme $X$.
-
-\begin{theorem}[Nagata]
+\begin{theorem}[Nagata]\todo{rational?}
+  Consider a reductive group $G$ acting on an affine scheme $X$.
   If $\mathscr O(X)$ is finitely generated then so is $\mathscr O(X)^G$.
   \begin{proof}
     \missingproof
@@ -3464,15 +3509,21 @@ Indeed, this condition is necessary. A theorem by Popov \missingcitation
 states that $G$ is reductive if, and only if, for all affine schemes of
 finite type, the ring of invariants is finitely generated.
 
+\missingsection
+
+\subsection{Good Quotients}
+
+Consider a reductive group $G$ acting on an affine scheme $X$.
+
 \begin{definition}
   The \emph{affine GIT quotient} is the map
   \begin{align*}
-    X \longrightarrow X\sslash G := \Spec\mathscr O(X)^G
+    \nu : X \longrightarrow X\sslash G := \Spec\mathscr O(X)^G
   \end{align*}
   arising from the inclusion $\mathscr O(X)^G \inc \mathscr O(X)$.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}\label{thm:affine_quotient_is_good}
   The affine GIT quotient is a good quotient.
   \begin{proof}[Proof idea]
     We follow \cite[Theorem 4.30]{hoskins2016}. Recall the definition
@@ -3486,7 +3537,7 @@ finite type, the ring of invariants is finitely generated.
     $x$ of $X$ for each closed point $y$ of $X\sslash G$ such that
     $\phi(x) = y$ where $\phi : X\to X\sslash G$ is the GIT quotient.
 
-    Conditions 3 and 4 are are addressed by considering
+    Openness and separation of orbits are are addressed by considering
     $G$-invariant closed sets $W$ and $W'$ in $X$ and showing that
     it is possible to find $f\in\mathscr O(X)^G$ such that
     $f(W) = 0$ and $f(W') = 1$. \cite[Lemma 4.29]{hoskins2016}
@@ -3512,7 +3563,13 @@ quotients:
 
 \subsection{Geometric Quotients}
 
-Consider an affine GIT quotient $\varphi : X \surj X\sslash G$.
+Consider an affine GIT quotient $\nu : X \surj X\sslash G$. This is
+always a good quotient but it need not be geometric
+(\ref{def:good_quotient} and \ref{def:geometric_quotient}, respectively).
+Unfortunately, good quotients are, in particular, categorical
+quotients \cite[Proposition 3.30]{hoskins2016} and hence unique
+up to isomorphism. Therefore, the only way to reliably turn a good
+quotient into a geometric quotient is to exclude certain orbits.
 
 \begin{definition}\label{def:affine_stability}
   A point $x\in X$ is \emph{stable} if $G\cdot x$ is closed in $X$
@@ -3520,25 +3577,42 @@ Consider an affine GIT quotient $\varphi : X \surj X\sslash G$.
   points. \todo{define stabiliser}
 \end{definition}
 
-\begin{lemma}
+\begin{lemma}\label{lem:affine_open_invariant}
   $X^s \subseteq X$ is open and $G$-invariant.
-  \begin{proof}
-    \missingproof
+  \begin{proof}[Proof idea]
+    Following \cite[Proposition 4.36]{hoskins2016}.
+    The only thing to check is openness.
+    Consider $x\in X(\mathbb C)$.  Once again we make use of the
+    ability to separate closed $G$-invariant subsets by functions
+    $f \in \mathscr O(X)^G$. \cite[Lemma 4.29]{hoskins2016}
+    We choose $f$ to separate the orbit $G\cdot x$ and the
+    subsets of $X$ where $\dim G_x > 0$, both may be shown to
+    be closed and $G$-invariant. This implies $x\in D(f)$.
+    By a dimension argument on stabilisers one then finds
+    $D(f)\subseteq X^s$, showing that $X^s$ is a union of opens.
   \end{proof}
 \end{lemma}
 
-\begin{lemma}
+\begin{lemma}\label{lem:affine_quotient_is_open}
   $X^s\sslash G := \varphi(X^s)$ is open in $X\sslash G$ and
   $\varphi^{-1}(X^s\sslash G) = X^s$.
   \begin{proof}
-    \missingproof
+    $X^s$ and $\varphi$ are open, hence $\varphi(X^s)$ is too.
+    Then the isomorphism $\nu^\sharp : \mathscr O_Y \to (\nu_*\mathscr O(X))^G$
+    allows us to verify $\nu^{-1}(\nu(D(f))) = D(f)$ for the open
+    affine cover from the proof of \ref{lem:affine_open_invariant}.
+    Hence it holds everywhere.
   \end{proof}
 \end{lemma}
 
-\begin{theorem}
+\begin{theorem}\ref{thm:affine_quotient_is_geometric}
   The restriction $\varphi : X^s \surj X^s\sslash G$ is a geometric quotient.
   \begin{proof}
-    \missingproof
+    By \ref{lem:affine_open_invariant}, \ref{lem:affine_quotient_is_open},
+    and \ref{lem:restrictions_of_good_quotients}, we know that
+    the restriction is a good quotient. We then notice that, by construction,
+    the action of $G$ on $X^s$ only has closed orbits. Now good
+    quotients separate closed orbits, hence $\nu$ is injective on orbits.
   \end{proof}
 \end{theorem}
 
@@ -3599,7 +3673,7 @@ will come in the form of linearised sheaves:
   $G$-equivariant. \cite[Remark 5.20]{hoskins2016} That is, the
   linearisation ensures that the $G$-action on the projective
   scheme $X$ comes from a $GL_n$ action on a projective space.
- \end{example}
+\end{example}
 
 To take quotients of $X$ by $G$-actions, we are going to equip
 $X$ with ample $G$-linearised sheaves. That is, we are
@@ -3649,24 +3723,28 @@ $G$-linearisations.
   embedding.  One may then calculate that the pullback of $\mathscr
     O_{\projective{}{}}(1)$ to $Q(r,d)$ is
   \begin{align*}
-    \mathscr L^\ell_h
+    \mathscr L_\ell
     := \det(\pi_*(\hat{\mathscr E} \otimes \pi^*\mathscr O_C(\ell))).
   \end{align*}
-  Hence, for $\ell$ large, $\mathscr L^\ell_h$ is an ample sheaf
+  Hence, for $\ell$ large, $\mathscr L_\ell$ is an ample sheaf
   on $Q(r,d)$. \cite[Proposition 2.2.5]{huybrechts2010}.
   The isomorphism (\ref{eq:universal_linearisation}) induces an isomorphism
   \begin{align*}
-    \Phi:\sigma^*\mathscr L^\ell_h \cong \pi^*\mathscr L^\ell_h.
+    \Phi:\sigma^*\mathscr L_\ell \cong \pi^*\mathscr L_\ell.
   \end{align*}
   For $\ell$ large, this is in fact a linearisation.
 \end{example}
 
 \begin{example}
-  The $GL_n$-linearised ample sheaf $\mathscr L^\ell_h$ on $Q(r,d)$
-  pulls back along $u:F(r,d)\to Q^\circ(r,d)$ so we have a line bundle
-  $\mathscr L^\ell_H$ on $F(r,d)$. The linearisation of
-  $\mathscr L^\ell_h$ extends to $\mathscr L^\ell_H$ by
-  $GL_n$-equivariance of $u$. \todo{ampleness?}
+  The $GL_n$-linearised ample sheaf $\mathscr L_\ell$ on
+  $Q(r,d)$ pulls back along $\tau:F(r,d)\to Q_\circ(r,d)$ so
+  we have a line bundle on $F(r,d)$ which, by abuse of
+  notation, we denote by $\mathscr L_\ell$, too. The
+  linearisation of $\mathscr L_\ell$ extends to the pullback by
+  $GL_n$-equivariance of $u$. Moreover, the structure
+  map of relative spec is affine by construction and the
+  pullback of ample sheaves is ample. Thus $\mathscr L_\ell$
+  is a $GL_n$-linearised ample sheaf on $F(r,d)$.
 \end{example}
 
 \begin{lemma}\label{lem:linearisations_give_reps}
@@ -3694,8 +3772,9 @@ $G$-linearisations.
 
 \subsection{Good Quotients}
 
-Consider an ample linearisation $\mathscr L$ of the action $\sigma : G\times X\to X$
-of a reductive group on a projective scheme.
+The presence of a linearised ample sheaf enables us to construct a good
+quotient.  Fix a $G$-linearised ample sheaf $\mathscr L$ with respect to an
+action $\sigma : G\times X\to X$ of a reductive group on a projective scheme.
 
 One difficulty when working with projective schemes, rather
 than affine ones, is the failure of $\Proj$ to be a functor. In particular,
@@ -3737,37 +3816,56 @@ of semi-stable points in the natural way:
 \begin{definition}
   The \emph{projective GIT quotient} of $X$ with respect to $\mathscr L$ is the map
   \begin{align*}
-    X^{ss}(\mathscr L) \longrightarrow X \sslash_{\mathscr L} G := \Proj R(X,{\mathscr L})^G
+    X^{ss}(\mathscr L) \longrightarrow X^{ss} \sslash_{\mathscr L} G := \Proj R(X,{\mathscr L})^G
   \end{align*}
   corresponding to the inclusion $R(X,{\mathscr L})^G\inc R(X,{\mathscr L})$.
 \end{definition}
 
 \begin{theorem}
   The projective GIT quotient is good.
-  \begin{proof}
-    \missingproof
+  \begin{proof}[Proof idea]
+    Following \cite[Theorem 5.3]{hoskins2016}.
+    Consider the projective GIT quotient
+    $\nu : X^{ss}(\mathscr L)\to X^{ss}\sslash_{\mathscr L} G$.
+    The key observation is that being a good quotient is local on target.
+    Thus the strategy is to consider an affine cover and apply
+    \ref{thm:affine_quotient_is_good}. The affines to consider
+    are $D_+(f)$ in $X^{ss}\sslash_{\mathscr L} G$
+    for $f\in R(X,\mathscr L)^G_+$. One then only needs to verify
+    \begin{align*}
+      \mathscr O_{X^{ss}\sslash_{\mathscr L} G}(D_+(f)) = \mathscr O_X(\nu^{-1} D_+(f))^G
+    \end{align*}
+    which is easily done by direct computation.
   \end{proof}
 \end{theorem}
 
 \begin{example}
   This allows us to define the moduli spaces that we are after:
   \begin{align*}
-    M^{ss}_h(r,d) := Q(r,d)\sslash_{{\mathscr L}^m_h} GL_n, \hspace{1cm}
-    M^{ss}_H(r,d) := F(r,d)\sslash_{{\mathscr L}^m_H} GL_n.
+    M^{ss}_h(r,d) := Q_\circ(r,d)^{ss}\sslash_{{\mathscr L}_\ell} GL_n, \hspace{1cm}
+    M^{ss}_H(r,d) := F(r,d)^{ss}\sslash_{{\mathscr L}_\ell} GL_n.
   \end{align*}
-  \missingexample
+  Of course, we know very little other than that these are good
+  quotients.
 \end{example}
 
 \missingsection
 
 \subsection{Geometric Quotients}
 
+Although we already had to exclude some orbits to obtain a good
+quotients, further restrictions are required to construct a geometric
+quotient. This parallels the affine construction.
+Once again fix an action $\sigma : G\times X\to X$ of a
+reductive group $G$ on a projective scheme $X$ and a linearised
+ample sheaf $\mathscr L$ on $X$.
+
 \begin{definition}
   A point $x\in X$ is \emph{stable} if there exists a section
-  $s\in\Gamma(X,L^{\otimes k})^G$ for some $k>0$ such that $s(x)\neq 0$
+  $s\in\Gamma(X,\mathscr L^{\otimes k})^G$ for some $k>0$ such that $s(x)\neq 0$
   and the action of $G$ on the standard open $D_+(s)\subseteq X$ is closed.
-  Denote by $X^s(L)$ the set of all stable points of $X$ with respect
-  to the linearisation $L$.
+  Denote by $X^s(\mathscr L)$ the set of all stable points of $X$ with respect
+  to the linearisation $\mathscr L$.
 \end{definition}
 
 We find that this is completely analogous to the definition
@@ -3775,9 +3873,10 @@ of stability in the affine case \ref{def:affine_stability}, at
 least when considering closed points.
 
 \begin{lemma}[{\cite[Lemma 5.9]{hoskins2016}}]
-  A closed point $x\in X^{ss}(L)$ is stable if, and only if, the orbit
-  $G\cdot x\subseteq X^{ss}(L)$ is closed and $\dim G_x = 0$.
+  A closed point $x\in X^{ss}(\mathscr L)$ is stable if, and only if, the orbit
+  $G\cdot x\subseteq X^{ss}(\mathscr L)$ is closed and $\dim G_x = 0$.
   \begin{proof}
+    The `only if' direction is a matter of direct calculation.
     \missingproof
   \end{proof}
 \end{lemma}
@@ -3788,21 +3887,24 @@ achieved this. The first step is to verify that we have defined
 an open subscheme:
 
 \begin{lemma}
-  $X^s(L)$ is open in $X$.
+  $X^s(\mathscr L)$ is open in $X$.
   \begin{proof}
-    \missingproof
+    Recall that the set of points with zero-dimensional stabilisers is open.
+    Moreover, the union $\bigcup D_+(f)$ over $f\in R(X,\mathscr L)_+^G$
+    with closed action on $D_+(f)$ is open and so is the intersection
+    $X^s(\mathscr L)$.
   \end{proof}
 \end{lemma}
 
-Now consider the GIT quotient $\varphi : X^{ss}(L)\to X\sslash_L G$.
+Now consider the GIT quotient $\varphi : X^{ss}(\mathscr L)\to X\sslash_{\mathscr L} G$.
 It follows from the definition \ref{def:good_quotient} that
-$\varphi(X^s(L))$ is open in $X\sslash_L G$.
+$\varphi(X^s(\mathscr L))$ is open in $X\sslash_{\mathscr L} G$.
 
 \begin{theorem}
-  The GIT quotient $\varphi : X^{ss}(L) \to X\sslash_L G$
+  The GIT quotient $\varphi : X^{ss}({\mathscr L}) \to X\sslash_{\mathscr L} G$
   restricts to a geometric quotient
   \begin{align*}
-    \varphi : X^s(L) \to X^s\sslash_L G := \varphi(X^s(L)).
+    \varphi : X^s({\mathscr L}) \to X^s\sslash_{\mathscr L} G := \varphi(X^s({\mathscr L})).
   \end{align*}
   \begin{proof}
     \missingproof
@@ -3812,8 +3914,8 @@ $\varphi(X^s(L))$ is open in $X\sslash_L G$.
 \begin{example}
   We now have the stable subsets of the moduli spaces:
   \begin{align*}
-    M^{s}_h(r,d) := Q(r,d)^s\sslash_{L^m_h} GL_n, \hspace{1cm}
-    M^{s}_H(r,d) := F(r,d)^s\sslash_{L^m_H} GL_n.
+    M^{s}_h(r,d) := Q(r,d)^s\sslash_{\mathscr L_\ell} GL_n, \hspace{1cm}
+    M^{s}_H(r,d) := F(r,d)^s\sslash_{\mathscr L_\ell} GL_n.
   \end{align*}
 
   \missingexample
@@ -3823,15 +3925,15 @@ $\varphi(X^s(L))$ is open in $X\sslash_L G$.
 
 \section{Properties of the Algebraic Moduli Space}
 
-By using the power of geometric invariant theory, we have been able
+Using the might of geometric invariant theory, we have been able
 to construct the moduli spaces of locally free sheaves and Higgs
 sheaves, respectively. Under mild assumptions, we were able to
-find schemes $Q^\circ(r,d)$ and $F(r,d)$ parametrising the sheaves
+find schemes $Q_\circ(r,d)$ and $F(r,d)$ parametrising the sheaves
 that we are after. We then used these schemes and a linearised
 $GL_n$-action to construct good and geometric quotients.
 Unfortunately, both steps required us to discard some points.
 Once again we find ourselves where we have constructed moduli spaces
-but cannot yet be sure which orbits in $Q^\circ(r,d)$ and $F(r,d)$
+but cannot yet be sure which orbits in $Q_\circ(r,d)$ and $F(r,d)$
 are represented.
 
 The first step in this section is to translate the stability
@@ -3841,6 +3943,8 @@ tangent spaces and establish a relation between the moduli spaces
 analogous to \ref{thm:stables_are_dense}.
 
 \subsection{Stable Bundles}
+
+It should not come as a surprise that the vector 
 
 \subsection{Tangent Spaces}
 
