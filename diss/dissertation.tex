@@ -1873,7 +1873,7 @@ some points. Moving back to the original problem thus raises
 the question: Which bundles did we lose in the process?
 
 To answer the question, consider the following:
-\begin{definition}
+\begin{definition}\label{def:stable_bundle}
   Let $(E,\dol_E)$ be a holomorphic bundle on a compact complex
   manifold $X$. Then $(E,\dol_E)$ is
   \begin{itemize}
@@ -3594,10 +3594,10 @@ quotient into a geometric quotient is to exclude certain orbits.
 \end{lemma}
 
 \begin{lemma}\label{lem:affine_quotient_is_open}
-  $X^s\sslash G := \varphi(X^s)$ is open in $X\sslash G$ and
-  $\varphi^{-1}(X^s\sslash G) = X^s$.
+  $X\sslash^s G := \nu(X^s)$ is open in $X\sslash G$ and
+  $\nu^{-1}(X\sslash^s G) = X^s$.
   \begin{proof}
-    $X^s$ and $\varphi$ are open, hence $\varphi(X^s)$ is too.
+    $X^s$ and $\nu$ are open, hence $\nu(X^s)$ is too.
     Then the isomorphism $\nu^\sharp : \mathscr O_Y \to (\nu_*\mathscr O(X))^G$
     allows us to verify $\nu^{-1}(\nu(D(f))) = D(f)$ for the open
     affine cover from the proof of \ref{lem:affine_open_invariant}.
@@ -3605,8 +3605,8 @@ quotient into a geometric quotient is to exclude certain orbits.
   \end{proof}
 \end{lemma}
 
-\begin{theorem}\ref{thm:affine_quotient_is_geometric}
-  The restriction $\varphi : X^s \surj X^s\sslash G$ is a geometric quotient.
+\begin{theorem}\label{thm:affine_quotient_is_geometric}
+  The restriction $\nu : X^s \surj X\sslash^s G$ is a geometric quotient.
   \begin{proof}
     By \ref{lem:affine_open_invariant}, \ref{lem:affine_quotient_is_open},
     and \ref{lem:restrictions_of_good_quotients}, we know that
@@ -3648,7 +3648,7 @@ will come in the form of linearised sheaves:
   where $\mu$ denotes the multiplication on $G$.
 \end{definition}
 
-\begin{example}
+\begin{example}\label{ex:linearised_action_on_bundle}
   Consider a $G$-linearised invertible sheaf $\mathscr L$ on $X$
   and the corresponding line bundle $\tau : L\to X$. Then the linearisation
   $\Phi : \sigma^*\mathscr L \cong \pi^*\mathscr L$ induces
@@ -3816,7 +3816,7 @@ of semi-stable points in the natural way:
 \begin{definition}
   The \emph{projective GIT quotient} of $X$ with respect to $\mathscr L$ is the map
   \begin{align*}
-    X^{ss}(\mathscr L) \longrightarrow X^{ss} \sslash_{\mathscr L} G := \Proj R(X,{\mathscr L})^G
+    X^{ss}(\mathscr L) \longrightarrow X \sslash^{ss}_{\mathscr L} G := \Proj R(X,{\mathscr L})^G
   \end{align*}
   corresponding to the inclusion $R(X,{\mathscr L})^G\inc R(X,{\mathscr L})$.
 \end{definition}
@@ -3826,14 +3826,14 @@ of semi-stable points in the natural way:
   \begin{proof}[Proof idea]
     Following \cite[Theorem 5.3]{hoskins2016}.
     Consider the projective GIT quotient
-    $\nu : X^{ss}(\mathscr L)\to X^{ss}\sslash_{\mathscr L} G$.
+    $\nu : X^{ss}(\mathscr L)\to X\sslash^{ss}_{\mathscr L} G$.
     The key observation is that being a good quotient is local on target.
     Thus the strategy is to consider an affine cover and apply
     \ref{thm:affine_quotient_is_good}. The affines to consider
-    are $D_+(f)$ in $X^{ss}\sslash_{\mathscr L} G$
+    are $D_+(f)$ in $X\sslash^{ss}_{\mathscr L} G$
     for $f\in R(X,\mathscr L)^G_+$. One then only needs to verify
     \begin{align*}
-      \mathscr O_{X^{ss}\sslash_{\mathscr L} G}(D_+(f)) = \mathscr O_X(\nu^{-1} D_+(f))^G
+      \mathscr O_{X\sslash^{ss}_{\mathscr L} G}(D_+(f)) = \mathscr O_X(\nu^{-1} D_+(f))^G
     \end{align*}
     which is easily done by direct computation.
   \end{proof}
@@ -3842,11 +3842,12 @@ of semi-stable points in the natural way:
 \begin{example}
   This allows us to define the moduli spaces that we are after:
   \begin{align*}
-    M^{ss}_h(r,d) := Q_\circ(r,d)^{ss}\sslash_{{\mathscr L}_\ell} GL_n, \hspace{1cm}
-    M^{ss}_H(r,d) := F(r,d)^{ss}\sslash_{{\mathscr L}_\ell} GL_n.
+    M^{ss}_h(r,d)_\ell := Q_\circ(r,d)\sslash^{ss}_{{\mathscr L}_\ell} GL_n, \hspace{1cm}
+    M^{ss}_H(r,d)_\ell := F(r,d)\sslash^{ss}_{{\mathscr L}_\ell} GL_n.
   \end{align*}
-  Of course, we know very little other than that these are good
-  quotients.
+  Of course, we know very little about these spaces other than that
+  they are good quotients. In particular, it is not clear how the moduli
+  space depends on the parameter $\ell$.
 \end{example}
 
 \missingsection
@@ -3896,15 +3897,15 @@ an open subscheme:
   \end{proof}
 \end{lemma}
 
-Now consider the GIT quotient $\varphi : X^{ss}(\mathscr L)\to X\sslash_{\mathscr L} G$.
+Now consider the GIT quotient $\varphi : X^{ss}(\mathscr L)\to X\sslash^{ss}_{\mathscr L} G$.
 It follows from the definition \ref{def:good_quotient} that
 $\varphi(X^s(\mathscr L))$ is open in $X\sslash_{\mathscr L} G$.
 
 \begin{theorem}
-  The GIT quotient $\varphi : X^{ss}({\mathscr L}) \to X\sslash_{\mathscr L} G$
+  The GIT quotient $\varphi : X^{ss}({\mathscr L}) \to X\sslash^{ss}_{\mathscr L} G$
   restricts to a geometric quotient
   \begin{align*}
-    \varphi : X^s({\mathscr L}) \to X^s\sslash_{\mathscr L} G := \varphi(X^s({\mathscr L})).
+    \varphi : X^s({\mathscr L}) \to X\sslash^s_{\mathscr L} G := \varphi(X^s({\mathscr L})).
   \end{align*}
   \begin{proof}
     \missingproof
@@ -3914,16 +3915,14 @@ $\varphi(X^s(\mathscr L))$ is open in $X\sslash_{\mathscr L} G$.
 \begin{example}
   We now have the stable subsets of the moduli spaces:
   \begin{align*}
-    M^{s}_h(r,d) := Q(r,d)^s\sslash_{\mathscr L_\ell} GL_n, \hspace{1cm}
-    M^{s}_H(r,d) := F(r,d)^s\sslash_{\mathscr L_\ell} GL_n.
+    M^{s}_h(r,d)_\ell := Q_\circ(r,d)\sslash^s_{\mathscr L_\ell} GL_n, \hspace{1cm}
+    M^{s}_H(r,d)_\ell := F(r,d)\sslash^s_{\mathscr L_\ell} GL_n.
   \end{align*}
-
-  \missingexample
+  Once again, this is unsatisfactory as the moduli spaces ought
+  not to depend on the parameter $\ell$.
 \end{example}
 
-\missingsection
-
-\section{Properties of the Algebraic Moduli Space}
+\section{Stability Analysis}
 
 Using the might of geometric invariant theory, we have been able
 to construct the moduli spaces of locally free sheaves and Higgs
@@ -3937,16 +3936,148 @@ but cannot yet be sure which orbits in $Q_\circ(r,d)$ and $F(r,d)$
 are represented.
 
 The first step in this section is to translate the stability
-conditions of geometric invariant theory to the setting of
-sheaves on $C$. Thereafter we are going to analyse the schematic
-tangent spaces and establish a relation between the moduli spaces
-analogous to \ref{thm:stables_are_dense}.
+conditions of geometric invariant theory to conditions on the locally
+free sheaves which the points of the moduli spaces correspond to.
+In particular, we are going to find that for sufficiently large $\ell$,
+the moduli spaces stabilise.
 
-\subsection{Stable Bundles}
+\subsection{Hilbert-Mumford Criterion}
 
-It should not come as a surprise that the vector 
+Consider an action $\sigma : G \times X\to X$ of a reductive group $G$
+on a projective scheme $X$ and a $G$-linearised ample sheaf
+$\mathscr L$ on $X$. Points of $X$ are stable if they are sufficiently
+well-behaved with respect to the $G$-action. The key idea to simplify
+the analysis of this behaviour is to restrict the action to certain
+subgroups. The simplest subgroup available is $\mathbf G_m$.
 
-\subsection{Tangent Spaces}
+\begin{definition}
+  A \emph{one-parameter subgroup} of $G$ is a non-trivial homomorphism
+  of group schemes $\lambda : \mathbf G_m \to G$.
+\end{definition}
+
+We now observe that every one-parameter sugbroup $\lambda$ of $G$
+induces a $\mathbf G_m$ action on $X$. Moreover, this action is
+guaranteed to have a fixed point. We obtain such a fixed point
+considering the morphism $\lambda_x : \mathbf G_m \to X$ given by
+the action of $\mathbf G_m$ on a fixed $x \in X(\mathbb C)$.
+Projective schemes are proper and hence we may use the valuative
+criterion for properness to extend $\lambda_x$ uniquely along the
+embedding $\mathbf G_m \inc \affine{1}{}$ to a map
+$\lambda_x : \affine{1}{} \to X$.
+In particular, we obtain
+the new value $\lambda_x(0)$ which
+we may think of as taking the limit of the action as $t\to 0$
+in $\mathbf G_m$. This is the fixed point \todo{why?} of the $\mathbf G_m$
+action induced by $\lambda$ we are looking for. Now recall that the
+linearisation of $\mathscr L$ induces an action on the corresponding
+line bundle $L$. For $s\in L_x$ and $g\in G$ we have
+$g\cdot s\in L_{g\cdot x}$. In particular, $\lambda$ induces an
+action of $\mathbf G_m$ on $L_{\lambda_x(0)}$. As this action is
+induced by the linearisation it must be of the form \todo{why?}
+$t\cdot s = t^r s$ for some $r$. \todo{why is this an integer?}
+
+\begin{definition}
+  Let $\lambda$ be a one-parameter subgroup of $G$ and let
+  $x\in X$.  The \emph{Hilbert-Mumford weight} of $\lambda$ 
+  at $x$ with respect to a linearisation
+  $\Phi:\pi^*\mathscr L\cong\sigma^*\mathscr L$
+  is the integer \todo{check!} $\mu^{\mathscr L}(x,\lambda)$
+  such that \todo{make less ugly}
+  \begin{align*}
+    \Phi(\lambda(t),\lambda_x(0))
+    = t^{-\mu^{\mathscr L}(x,\lambda)}\identity.
+  \end{align*}
+\end{definition}
+
+It is possible to show that $x$ is stable (resp. semi-stable) with
+respect to the $\mathbf G_m$-action induced by $\lambda$ if, and only
+if, $\mu^{\mathscr L}(x,\lambda)$ and $\mu^{\mathscr L}(x,\lambda^{-1})$
+positive (resp. non-negative).
+See \cite[Lemma 6.9]{hoskins2016}.
+The Hilbert-Mumford criterion now just says that measuring the
+stability of a point with respect to every one-parameter subgroup
+is indeed sufficient to determine the stability with respect to the
+general action:
+
+\begin{theorem}
+  A closed point $x$ of $X$ is stable (resp. semi-stable) with
+  respect to $\mathscr L$ if, and only if, for all one-parameter
+  subgroups $\lambda$ of $G$, the Hilbert-Mumford weight
+  $\mu^{\mathscr L}(x,\lambda)$ is positive (resp. non-negative).
+  \begin{proof}
+    2.1 in Mumford GIT, \cite[Theorem 4.9]{newstead1978}.
+    \missingproof
+  \end{proof}
+\end{theorem}
+
+\subsection{Stability of Locally Free Sheaves}
+
+The Hilbert-Mumford criterion enables us to determine which orbits
+are represented in our moduli spaces.
+We address stability of locally free sheaves first.
+The following characterises
+(semi-)stable points of $Q_\circ$ fully:
+
+\begin{theorem}
+  Let $q : \mathscr O^{\oplus n}_C \surj \mathscr E$ be a closed point
+  in $Q_\circ(r,d)$. Then $q\in Q^{ss}_\circ(r,d)(\mathscr L_\ell)$
+  if, and only if, for all non-trivial proper subspaces
+  $V\subseteq \mathbb C^n$, \todo{which line bundle?}
+  \begin{align}\label{eq:git_stable_sheaf}
+    \frac{\dim V}{P(\mathscr F,\ell)}\leq\frac{n}{P(\mathscr E,\ell)}
+  \end{align}
+  where $\mathscr F := q(V\otimes\mathscr O_C)$. Moreover,
+  $q\in Q^s_\circ(\mathscr L_\ell)$ if, and only if, the inequality
+  (\ref{eq:git_stable_sheaf}) is always strict.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
+
+It should not come as a surprise that (semi-)stable points of
+$Q_\circ(r,d)$ correspond to slope (semi-)stable bundles
+in the sense of \ref{def:stable_bundle}.
+We begin by translating the notion of slope (semi-)stability to
+locally free sheaves:
+
+\begin{lemma}
+  Let $\mathscr E=\Gamma(-,E)$ be a locally free sheaf on $C$.
+  Then
+  \begin{itemize}
+    \item $E$ is slope semi-stable if, and only if, for all subsheaves
+     $\mathscr F\subseteq\mathscr E$ with $0<\rank\mathscr F<\rank\mathscr E$,
+     \begin{align}\label{eq:sheaf_slope_stability}
+      \frac{\deg\mathscr F}{\rank\mathscr F}\leq\frac{\deg\mathscr E}{\rank\mathscr E};
+     \end{align}
+    \item $E$ is slope stable if, and only if, it is slope semistable
+     and the inequality (\ref{eq:sheaf_slope_stability}) is always strict.
+  \end{itemize}
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{lemma}
+
+Thus we are justified in calling a locally free sheaf (semi-)stable
+whenever its corresponding vector bundle is stable. Let us now turn
+towards stability of sheaves in the GIT sense.
+
+\begin{theorem}\todo{closed points?}
+  If $r$ and $d$ satisfy
+  \begin{align*}
+    d > \max(r^2(2g-2), gr^2 + r(2g-2))
+  \end{align*}
+  then, for $\ell$ sufficiently large,
+  $Q^s_\circ(r,d)(\mathscr L_\ell)$ and $Q^{ss}_\circ(r,d)(\mathscr L_\ell)$
+  consist of all stable and semi-stable sheaves of $Q_\circ(r,d)$,
+  respectively.
+  \begin{proof}
+    \missingproof
+  \end{proof}
+\end{theorem}
+
+\subsection{Stability of Higgs Sheaves}
+
+\section{Properties of the Algebraic Moduli Spaces}
 
 \chapter{Analytification}
 
