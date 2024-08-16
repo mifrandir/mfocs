@@ -1861,7 +1861,7 @@ by regarding Higgs fields as cotangent vectors. This will allow us to
 regard the moduli space of the former as a compactification of the moduli
 space of the latter. We will revisit this fact in the algebraic discussion.
 
-\subsection{Stable Bundles}
+\subsection{Stable Bundles}\label{sec:analytic_stable_bundles}
 
 Our goal was to construct a moduli space of holomorphic bundles,
 i.e. a geometric space whose points are isomorphism classes of
@@ -1904,8 +1904,8 @@ that it may be derived from:
         are K\"ahler \missingcitation so one may simply choose such a structure to
         apply the theorem.
   \item The \emph{Kempf-Ness theorem} \missingcitation gives a homeomorphism between
-        symplectic quotients by compact groups and geometric invariant
-        theory (GIT) quotients by their complexification. In
+        symplectic quotients by compact groups and quotients by their
+        complexification in the sense of geometric invariant theory (GIT). In
         \ref{sec:symplectic_quotients} we have briefly
         explained how to view $\mathcal M_\nabla(E)$ as a symplectic quotient
         and in the next chapter we are going to show how to regard
@@ -4075,15 +4075,68 @@ towards stability of sheaves in the GIT sense.
   \end{proof}
 \end{theorem}
 
+Now observe that tensoring with a line bundle does not affect
+stability. That is, if $q:\mathscr O^{\oplus n}_{C\times T} \surj \mathscr E$
+is a family of quotients in $Q_\circ(r,d)$ then twisting by
+$\mathscr O_C(d')$ yields a family $q(d')$ in $Q_\circ(r,d+d')$.
+For each $d'$, the map $q \mapsto q(d')$ is a bijection
+$Q^s_\circ(r,d)\to Q_\circ(r,d+d')$. Thus we have the following:
+
+\begin{corollary}
+  For $\ell$ sufficiently large,
+  $Q^s_\circ(r,d)(\mathscr L_\ell)$ and $Q^{ss}_\circ(r,d)(\mathscr L_\ell)$
+  consist of all stable and semi-stable sheaves of $Q_\circ(r,d)$,
+  respectively.
+\end{corollary}
+
 \subsection{Stability of Higgs Sheaves}
+
+Now the stability analysis for Higgs sheaves is analagous.
+\missingsection
 
 \section{Properties of the Algebraic Moduli Spaces}
 
 \chapter{Analytification}
 
+In various places throughout this paper we witnessed the interplay
+between analytic and algebraic geometry. For instance, we saw that
+holomorphic vector bundles on compact Riemann surfaces are equivalent
+to locally free sheaves on smooth algebraic curves. More generally,
+even though in one chapter we constructed manifolds and on the other
+we constructed schemes, we found that the analytic and algebraic
+constructions of the corresponding moduli spaces follow the same
+fundamental steps. Further, we saw that the properties we observed
+in the analytic setting, especially with respect to the relation
+of plain holomorphic bundles to Higgs bundles, were present in the
+algebraic setting, too.
+
+In this chapter we investigate in which sense the analytic and
+algebraic moduli spaces actually agree. Serre's GAGA principles \missingcitation
+are going to
+enable us to equip the sets of complex points of the algebraic spaces
+with manifold structures. Unfortunately, a priori it is not clear
+that the manifolds thus obtained agree with the analytic construction.
+Fortunately, it turns out that everything is as expected and the
+analytification of the algebraic moduli space yields the analytic
+moduli space.
+
+\section{The Analytic Topology}
+
+Recall that the correspondence between holomorphic bundles on
+compact Riemann surfaces and locally free sheaves on smooth algebraic
+curves gives bijections
+\begin{align*}
+  M^s_{\dol}(r,d) \to M^s_h(r,d)(\mathbb C)
+\end{align*}
+between the spaces constructed in \todo{}
+
+\section{GAGA principles}
+
+\section{The Equivalence}
+
 \begin{theorem}[{\cite[Theorem C]{fan2020}}]
   \begin{align*}
-    \mathcal M_H(r,d) \cong M_H(r,d)^{an}
+    M^s_\phi(r,d) \cong M^s_H(r,d)^{an}
   \end{align*}
 \end{theorem}
 
@@ -4092,6 +4145,29 @@ towards stability of sheaves in the GIT sense.
 \chapter{Conclusion}
 
 \missingsection
+
+\section{Comparison of the Constructions}
+
+In the preceeding chapters we explored two fundamentally different
+approaches to constructing moduli spaces of holomorphic vector
+bundles on a fixed compact Riemann surface $C$.
+
+The analytic approach
+quickly lead us to consider the quotients of spaces of unitary connections
+by the action of a compact gauge group. We were forced to restrict these
+spaces twice, firstly to ensure that the quotient is locally a manifold
+and secondly to make sure that this is true globally. We then had to
+backtrack to translate the conditions we imposed on unitary connections
+to the setting on holomorphic vector bundles.
+
+The algebraic construction then provided a much more systematic
+point of view. The categorical language naturally enabled us to make
+precise what properties we expect quotients of geometric spaces to
+have. Moreover, we were able to construct the moduli spaces as GIT
+quotients. While we were required to exclude exactly the same set of
+vector bundles from our construction to obtain good and geometric
+quotients, this time around we were able to view each step as an
+instance of a much broader theory.
 
 \section{Evaluation}
 
