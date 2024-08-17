@@ -4194,7 +4194,7 @@ we establish that both algebraic spaces are in fact smooth varieties.
   \end{proof}
 \end{theorem}
 
-\chapter{Analytification}
+\subsection{Analytification}
 
 In various places throughout this paper we witnessed the interplay
 between analytic and algebraic geometry. For instance, we saw that
@@ -4207,17 +4207,6 @@ fundamental steps. Further, we saw that the properties we observed
 in the analytic setting, especially with respect to the relation
 of plain holomorphic bundles to Higgs bundles, were present in the
 algebraic setting, too.
-
-In this chapter we investigate in which sense the analytic and
-algebraic moduli spaces actually agree. We are going to equip the
-sets of complex points of the algebraic spaces
-with manifold structures. Unfortunately, a priori it is not clear
-that the manifolds thus obtained agree with the analytic construction.
-Fortunately, it turns out that everything is as expected and the
-analytification of the algebraic moduli space yields the analytic
-moduli space.
-
-\section{From Schemes to Manifolds}
 
 Recall that the correspondence between holomorphic bundles on
 compact Riemann surfaces and locally free sheaves on smooth algebraic
@@ -4277,13 +4266,9 @@ be a manifold.
 \end{example}
 
 Moreover, analytification extends to maps. That is, there is a
-functor $(\cdot)^{an}$ from quasi-projective schemes to analytic spaces.
+functor $(-)^{an}$ from quasi-projective schemes to analytic spaces.
 Fortunately, this restricts to a functor from smooth projective varieties
 to complex manifolds.
-
-\missingcitation{} 
-
-\section{The Equivalence}
 
 Using the analytification functor we have now obtained two
 manifolds whose points are stable holomorphic bundles on $C$:
@@ -4298,6 +4283,9 @@ Fortunately, \cite[Theorem C]{fan2020} answers this question affirmatively:
   The bijection
   $M^s_\varphi(r,d) \cong M^s_H(r,d)^{an}$
   is a biholomorphism.
+  \begin{proof}
+    \missingproof
+  \end{proof}
 \end{theorem}
 
 We may consider $M^s_\dol(r,d)$ and $M^s_h(r,d)^{an}$ as submanifolds
@@ -4313,13 +4301,18 @@ holomorphic bundles:
 
 \chapter{Conclusion}
 
-\missingsection
+In the preceeding chapters we explored two fundamentally different
+approaches to constructing moduli spaces of holomorphic vector
+bundles on a fixed compact Riemann surface. Our goal was to
+outline the processes of constructing such spaces and highlight where
+the main difficulties with each of the methods arise.
+In this chapter we spend some time reflecting, both on the methods
+themselves as well as our presentation of the material.
+Furthermore, we sketch some ways in which this account may be
+extended.
 
 \section{Comparison of the Constructions}
 
-In the preceeding chapters we explored two fundamentally different
-approaches to constructing moduli spaces of holomorphic vector
-bundles on a fixed compact Riemann surface $C$.
 
 The analytic approach
 quickly lead us to consider the quotients of spaces of unitary connections
@@ -4327,7 +4320,9 @@ by the action of a compact gauge group. We were forced to restrict these
 spaces twice, firstly to ensure that the quotient is locally a manifold
 and secondly to make sure that this is true globally. We then had to
 backtrack to translate the conditions we imposed on unitary connections
-to the setting on holomorphic vector bundles.
+to the setting on holomorphic vector bundles. Overall it was clear
+why each step was necessary, but less obvious why it was correct or
+how one might apply the principles to an unsolved problem.
 
 The algebraic construction then provided a much more systematic
 point of view. The categorical language naturally enabled us to make
@@ -4336,11 +4331,29 @@ have. Moreover, we were able to construct the moduli spaces as GIT
 quotients. While we were required to exclude exactly the same set of
 vector bundles from our construction to obtain good and geometric
 quotients, this time around we were able to view each step as an
-instance of a much broader theory.
+instance of a much broader theory. Moreover, we were able to recover
+the analytic constructions by applying the anlytification functor.
+
+Unfortunately, there is no such thing as a free lunch. \cite{friedman1977}
+Taking the algebraic point of view turned out to be no easier than
+doing things analytically. It was merely a case of moving difficulties
+from one place to another. In particular, obtaining suitable schemes with
+a linearised ample sheaves requires a large amount of creativity.
+Moreover, many of the proofs ended up being analytic, in particular
+stability analysis using one parameter subgroups
+and tangent space calculation using deformation theory come to mind.
 
 \section{Evaluation}
 
-\missingsection
+Presenting the constructions of moduli spaces comes with two main
+difficulties. Firstly, each construction takes a lot of space on its
+own. In particular, the analytic and algebraic approaches each
+require a lot of theory. This makes it difficult to present both
+processes alongside each other. Due to this, most resources cover
+either one or the other. This introduces the second hurdle: There is a
+fundamental language difference between analytic and algebraic treatments.
+In this section we discuss some decisions that had to be made in
+order to deal with these problems.
 
 \subsection{Bypassing Banach Manifolds}
 
