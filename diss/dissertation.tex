@@ -189,13 +189,16 @@ One is usually interested in what kinds of sections a vector bundle
 admits. Indeed, in the next chapter we are going to make extensive use
 of the fact that a vector bundle is uniquely determined by its sheaf
 of sections. In the complex case, we need to be careful about the
-kind of sections we are referring to:
+kind of sections we are referring to. Let $X$ be a complex manifold
+with sheaves $\mathscr C^\infty_X$ and $\mathscr O_X$ of complex smooth
+and holomoprhic functions, respectively.
 
 \begin{itemize}
   \item If $E\to X$ is a smooth vector bundle then $\Gamma^\infty(U,E)$
-        denotes the vector space of smooth sections on $U$.
+        denotes the $C^\infty_X(U)$-vector space of smooth sections on $U$.
   \item If $\mathcal E\to X$ is holomorphic then $\Gamma(U,\mathcal E)$
-        denotes the vector space of holomorphic sections on $U$.
+        denotes the $\mathscr O_X(U)$-vector space of holomorphic sections
+        on $U$.
 \end{itemize}
 
 Note that if $\mathcal E$ is holomorphic then it is also smooth.
@@ -206,7 +209,6 @@ dimensional while $\Gamma(U,\mathcal E)$ is always finite
 dimensional.~\cite[Theorem 1.4.1]{ma2007}
 
 \subsection{Dolbeault Cohomology}
-\missingcitation
 
 Consider a complex manifold $X$ of dimension $n$. Recall the de Rahm
 complex
@@ -218,7 +220,7 @@ complex
   \cdots
 \end{align*}
 of the underlying real manifold where
-$\Omega^0_{\mathbb{R}}(X) = C^\infty(X,\mathbb{R})$ and,
+$\Omega^0_{\mathbb{R}}(X) = \mathscr C^\infty(X,\mathbb{R})$ and,
 for $k > 0$,
 \begin{align*}
   \Omega^k_{\mathbb{R}}(X) := \Gamma^\infty(X,\Lambda^k T^*X).
@@ -272,8 +274,8 @@ In particular, we now have a family of complexes
 For a smooth bundle $E$ of rank $r$, consider the spaces of
 $E$-valued $k$-forms and $(p,q)$-forms, respectively,
 \begin{align*}
-  \Omega^k(X,E)     & := \Omega^k_{\mathbb C}(X)\otimes_{C^\infty(X,\mathbb C)}\Gamma^\infty(X,E), \\
-  \Omega^{p,q}(X,E) & := \Omega^{p,q}(X)\otimes_{C^\infty(X,\mathbb C)}\Gamma^\infty(X,E).
+  \Omega^k(X,E)     & := \Omega^k_{\mathbb C}(X)\otimes_{\mathscr C^\infty(X,\mathbb C)}\Gamma^\infty(X,E), \\
+  \Omega^{p,q}(X,E) & := \Omega^{p,q}(X)\otimes_{\mathscr C^\infty(X,\mathbb C)}\Gamma^\infty(X,E).
 \end{align*}
 If we are given a holomorphic bundle $\mathcal E$ with underlying
 smooth bundle $E$
@@ -296,14 +298,14 @@ $\Omega^0(X,\mathcal E) \to \Omega^{0,1}(X,\mathcal E)$. Indeed,
 any linear map $\alpha : \Omega^0(X,E) \to \Omega^{0,1}(X,E)$ may be
 extended to a map $\Omega^{p,q}(X,E) \to \Omega^{p,q+1}(X,E)$
 via
-\begin{align*}
+\begin{align}\label{eq:leibniz_extension}
   \alpha(\xi \otimes s) = \dol\xi \otimes s + (-1)^{p+q}\xi\wedge \alpha(s).
-\end{align*}
+\end{align}
 This leads us to the following definition:
 
 \begin{definition}
   A \emph{Dolbeault operator} on a smooth bundle $E$ on a complex
-  manifold $X$ is a linear operator
+  manifold $X$ is a $\mathscr C^\infty(X)$-linear operator
   \begin{align*}
     \dol_E : \Omega^0(X,E) \to \Omega^{0,1}(X,E)
   \end{align*}
@@ -379,7 +381,7 @@ in some sense. In particular, we have Dolbeault's theorem:
   Let $(E,\dol_E)$ be a holomorphic vector bundle on a complex manifold
   $X$ of dimension $n$. Then
   \begin{align*}
-    H^{p,q}(X,(E,\dol_E)) = H^q(X,(E,\dol_E)\otimes K^{\otimes p})
+    H^{p,q}(X,(E,\dol_E)) = H^q(X,(E,\dol_E)\otimes K^{\otimes p}_X)
   \end{align*}
   where $K$ is the \emph{canonical bundle}
   $K_X := \bigwedge^n T_{1,0}^* X$.
@@ -387,8 +389,15 @@ in some sense. In particular, we have Dolbeault's theorem:
 
 \subsection{Higgs Bundles}
 
-\todo{write about why Higgs bundles exist, what they're good for, yadda
-  yadda}
+Higgs bundles were introduced by Hitchin in \cite{hitchin1987}
+as solutions to a system of differential equations. Since then
+Higgs bundles have become increasingly prominent due to their applications
+in geometry and physics. In particular, Higgs bundles serve as a
+prime example of decorated holomorphic bundles, i.e. holomorphic bundles
+with additional structure. Studying their moduli spaces is particularly
+interesting because they do not fit into the large class of framed
+bundles and hence require special attention.
+\cite[Example 4.B.3]{huybrechts2010}
 
 \begin{definition}
   Let $(E,\dol_E)$ be a holomorphic bundle on a complex manifold $X$.
@@ -402,12 +411,13 @@ Riemann surface, the condition $\varphi\wedge\varphi=0$ is trivially
 satisfied. However, if one is to consider moduli spaces of Higgs bundles
 over more general base spaces then this condition is quite important.
 
-Observe that a Higgs field is a section of $\End(E) \otimes K$.
+Observe that a Higgs field is a section of $\End(E) \otimes K$
+where $K$ is the canonical bundle on $X$ as in \ref{thm:dolbeault}.
 Recalling the trivial fact that $H^0(X,(E,\dol_E))=\Gamma(X,(E,\dol_E))$
 in sheaf cohomology, we use Dolbeault's theorem \ref{thm:dolbeault} to
-find that the space of Higgs bundles is
+find that the space of Higgs fields on $(E,\dol_E)$ is
 \begin{align*}
-  \Gamma(X,\End(E,\dol_E)\otimes K) = H^{1,0}(X,\End(E,\dol_E)\otimes K).
+  \Gamma(X,\End(E,\dol_E)\otimes K) = H^{1,0}(X,\End(E,\dol_E)).
 \end{align*}
 
 Consider Higgs bundles $(E,\dol_E,\phi_E)$ and $(F,\dol_F,\phi_F)$
@@ -466,18 +476,9 @@ it is sufficient to know a few key properties:
   \end{enumerate}
 \end{lemma}
 
-\subsection{Degree}
-
-Our goal is to classify holomorphic bundles on a compact Riemann surface,
-i.e. a compact connected complex manifold of dimension 1. Hence we
-ought to consider this case more closely. To this end, fix a compact
-Riemann surface $C$.
-
-\todo{genus}
-
-Note that the real manifold of dimension $2$ underlying $C$ is orientable. \missingcitation
-Hence the cohomology group $H^2(X,\mathbb{Z})$ is generated by the
-fundamental class $[C]$.
+Let us now consider the case where $X=C$ is our fixed compact Riemann surface.
+Recall that every complex manifold is orientable. Hence the cohomology
+group $H^2(X,\mathbb{Z})$ is generated by the fundamental class $[C]$.
 
 \begin{definition}
   The \emph{degree} of a smooth bundle $E$ on $C$ is the integer
@@ -486,9 +487,14 @@ fundamental class $[C]$.
   \end{align*}
 \end{definition}
 
+Thus we have two invariants on smooth bundles on $C$: rank and degree.
+We say a smooth bundle $E$ is of type $(r,d)$ if it has rank $r$
+and degree $d$. It turns out that this classifies smooth bundles
+completely:
+
 \begin{theorem}
-  Smooth bundles on $C$ are isomorphic if, and only if, they have
-  equal rank and degree.
+  Any two smooth vector bundles of type $(r,d)$ on $C$
+  are isomorphic.
   \begin{proof}
     \missingproof
   \end{proof}
@@ -504,8 +510,8 @@ quite straightforward to obtain topological spaces of equivalence
 classes of holomorphic bundles, the result is not Hausdorff.
 This extends to decorated holomorphic bundles such as Higgs bundles.
 
-In light of previous results, fix a smooth bundle $E$ of rank $r$
-and degree $d$ on a compact Riemann surface $C$.
+In light of previous results, fix a smooth bundle $E$ of type $(r,d)$
+on a compact Riemann surface $C$.
 Recall that a holomorphic bundle with underlying smooth structure $E$
 is given by a Dolbeault operator $\dol_E$. Hence we have a set of
 \begin{align*}
@@ -515,7 +521,7 @@ is given by a Dolbeault operator $\dol_E$. Hence we have a set of
 \end{align*}
 This has an obvious topology given by the following observations:
 \begin{lemma}\label{lem:affine_space_of_dolbeault_operators}
-  Consider any two linear maps \todo{$C^\infty$-linear?}
+  Consider any two $\mathscr C^\infty(C)$-linear maps
   \begin{align*}
     \dol_E,\alpha : \Omega^0(C,E) \to \Omega^{0,1}(C,E).
   \end{align*}
@@ -532,7 +538,7 @@ This has an obvious topology given by the following observations:
       \sum_{k,k'} (\dol_{ijk} + \alpha_{ijk})(\dol_{k,j',k'} + \alpha_{k,j',k'}) s_{k}\right)                                                                                 \\
        & = 0
     \end{align*}
-    Moreover, for $f\in C^\infty(C)$ and $s\in\Omega^0(C,E)$,
+    Moreover, for $f\in \mathscr C^\infty(C)$ and $s\in\Omega^0(C,E)$,
     \begin{align*}
       (\dol_E + \alpha)(fs) = f\dol_E(s) + f\alpha(s) + \dol f \otimes s
       = f(\dol_E+\alpha)(s) + \dol f \otimes s.
@@ -611,7 +617,7 @@ vector bundles:
 
 \begin{definition}
   A \emph{connection} in a smooth complex bundle $E$ on
-  a complex manifold $X$ is a $C^\infty(X,\mathbb C)$-linear
+  a complex manifold $X$ is a $\mathscr C^\infty(X,\mathbb C)$-linear
   map $\nabla : \Omega^0(X,E) \to \Omega^1(X,E)$
   such that
   \begin{align*}
@@ -652,12 +658,26 @@ We may ask whether this is the same as a holomorphic structure on $E$:
   $\dol_E$.
 \end{definition}
 
-Note that all connections $\nabla$ satisfy the Leibniz rule. It is
-straightforward to check that
+Note that all connections $\nabla$ satisfy the Leibniz rule. This has
+two pleasant consequences. Firstly, it is straightforward to check that
 \begin{align*}
   \nabla_{0,1} (fs) = \dol f\otimes s + f \nabla_{0,1} s.
 \end{align*}
 Hence $\nabla$ is holomorphic if, and only if, $(\nabla_{0,1})^2 = 0$.
+Secondly, just as is the case for Dolbeault operators, each connection
+$\nabla$ extends to an operator
+\begin{align*}
+  d^\nabla : \Omega^k(X,E) \longrightarrow \Omega^{k+1}(X,E)
+\end{align*}
+as in (\ref{eq:leibniz_extension}). In particular, the
+composition
+\begin{align*}
+  \Omega^0(X,E) \xlongrightarrow{\nabla}
+  \Omega^1(X,E) \xlongrightarrow{d^\nabla}
+  \Omega^{2}(X,E)
+\end{align*}
+defines a 2-form $K(\nabla)\in\Omega^2(X,\End(E))$ called
+the curvature of $\nabla$.
 
 \subsection{Unitary Connections}
 
@@ -744,7 +764,7 @@ similarities between $A_\dol (E)$ and $A_\nabla(E,h)$ grow even more
 striking:
 
 \begin{lemma}\label{lem:real_vector_space_iso}
-  As $C^\infty(C,\mathbb R)$-vector spaces,
+  As $\mathscr C^\infty(C,\mathbb R)$-vector spaces,
   $\Omega^1_{\mathbb{R}}(C,\End(E,h))\cong\Omega^{0,1}(C,\End(E))$.
   \begin{proof}
     Now recall the isomorphism (\ref{eq:holomorphic_tangent_bundle}) of
@@ -961,13 +981,13 @@ Observe that we immediately have a sequence of inclusions
   W_{2,\ell}(X,E) \supseteq
   \cdots
   \supseteq
-  C^\infty(X,E)
+  \mathscr C^\infty(X,E)
 \end{align*}
 where the last inclusion intuitively follows from the fact
-$C^\infty \subseteq L^2$ and the observation that each derivative
-$\nabla^i s$ is $C^\infty$. For a more rigorous argument, see
+$\mathscr C^\infty \subseteq L^2$ and the observation that each derivative
+$\nabla^i s$ is $\mathscr C^\infty$. For a more rigorous argument, see
 \cite[Corollary 3.8.3]{bc2009}.
-Moreover, $C^\infty$ is dense in $L^2$ so it must be dense in each
+Moreover, $\mathscr C^\infty$ is dense in $L^2$ so it must be dense in each
 $W^{2,\ell}$, too. Thus we will be able to regard $\Gamma^\infty(X,E)$
 as a Banach space by expanding it slightly.
 
@@ -994,7 +1014,7 @@ $\Gamma^\infty(X,E)\to\Gamma^\infty(X,F)$ extends to a map on
 Sobolev spaces. Fortunately, there are some reasonable assumptions
 we can make.
 
-Consider a $C^\infty(X)$-linear map
+Consider a $\mathscr C^\infty(X)$-linear map
 \begin{align*}
   P : \Gamma^\infty(X,E) \to \Gamma^\infty(X,F).
 \end{align*}
@@ -1013,7 +1033,7 @@ the we say that $P$ is a differential operator:
 
 \begin{definition}\label{def:diff_operator}
   Let $E$ and $F$ be smooth bundles on $X$. A \emph{differential
-    operator $P:E\to F$ of order $m$} is a $C^\infty(X)$-linear map
+    operator $P:E\to F$ of order $m$} is a $\mathscr C^\infty(X)$-linear map
   \begin{align*}
     P : \Gamma^\infty(X,E) \to \Gamma^\infty(X,F)
   \end{align*}
@@ -1023,9 +1043,15 @@ the we say that $P$ is a differential operator:
 \end{definition}
 
 \begin{example}
-  Consider the operator
+  Observe that, in the presence of a Riemannian metric on a compact
+  manifold $X$, one may refer to the formal adjoint
+  \begin{align*}
+    d^\dagger : \Omega^{k+1}_{\mathbb{R}}(X)\to \Omega^{k}_{\mathbb{R}}(X)
+  \end{align*}
+  of the operator $d : \Omega^k_{\mathbb{R}}(X)\to\Omega^{k+1}_{\mathbb{R}}(X)$.
+  Now consider the operator
   \begin{align}\label{eq:d_hat}
-    \hat d = d + d^* : \Omega^1_{\mathbb R}(C) \to \Omega^2_{\mathbb R}(C) \oplus \Omega^0_{\mathbb R}(C).
+    \hat d = d + d^\dagger : \Omega^1_{\mathbb R}(C) \to \Omega^2_{\mathbb R}(C) \oplus \Omega^0_{\mathbb R}(C).
   \end{align}
   Locally, in local coordinates $(x_1,x_2)$ around $x$ we may write
   \begin{align*}
@@ -1065,7 +1091,7 @@ the we say that $P$ is a differential operator:
       = \sum_k \partial_k fdx^k\wedge dx^i\otimes A^j
       - fdx^i \wedge \sum_{mn} \nabla_{jmn}dx^m\otimes A^n
     \end{align}
-    where $\nabla_{jk}\in C^\infty(X)$ such that
+    where $\nabla_{jk}\in \mathscr C^\infty(X)$ such that
     $\nabla A^i = \sum_{jk}\nabla_{ijk}dx^j\otimes A^k$. Both
     $\nabla$ (\ref{eq:nabla_diff_operator}) and $\nabla^\dagger$
     (\ref{eq:nabla_adjoint}) are differential operators of order 1 hence
@@ -1381,8 +1407,8 @@ Hilbert spaces, all closed subspaces in our examples will automatically be compl
 
 Unfortunately, we are not yet ready to apply the theorem \ref{thm:banach_quotient} to
 the actions of $G(E,h)_{\ell+1}$ on $A_\nabla(E,h)_\ell$ and
-$A_\Phi(E,h)_\ell$ as they are not free. Moreover, the tangent spaces fail to
-be closed:
+$A_\Phi(E,h)_\ell$ as they are not free. Moreover, the tangent spaces
+may fail to be closed:
 
 \begin{example}
   \missingexample
@@ -1401,13 +1427,10 @@ parameter $\ell$ which our final moduli space ought not to depend on.
 Secondly, proper non-trivial subspaces of infinite dimensional Hilbert
 spaces need not be closed and hence may not be complemented.
 We will address both of these issues using elliptic regularity.
-
-We briefly introduce the theory of elliptic regularity. While it is
-impossible to treat any of the material introduced in full rigour,
-we generally intend to establish a solid intuition. Unfortunately, we
-cannot hope to achieve this for elliptic regularity. The reader is
-invited to consult any of the many introductory texts such
-as \cite{hance2014} and \cite[Chapter 6]{warner1983}. \todo{improve}
+We briefly introduce the required theory.
+For a more rigorous treatment, the reader is invited to consult
+any of the many introductory texts such as \cite{hance2014} and
+\cite[Chapter 6]{warner1983}.
 
 Recall the notion of a differential operator \ref{def:diff_operator}.
 What we are going to require is the the matrix defined by the
@@ -1422,7 +1445,7 @@ The following is a more algebraic condition:
 \begin{definition}\label{def:elliptic_operator}
   A differential operator $P:E\to F$ is \emph{elliptic} if
   $\rank E = \rank F$ and, for all $x\in X$, all $s\in\Omega^0_{\mathbb C}(E)$,
-  and all $f\in C^\infty(X,\mathbb R)$ such that $s(x) \neq 0$,
+  and all $f\in \mathscr C^\infty(X,\mathbb R)$ such that $s(x) \neq 0$,
   $f(x) = 0$, and $df(x) \neq 0$, it holds that $P(f^m s)(x) \neq 0$.
 \end{definition}
 
@@ -1431,7 +1454,7 @@ Let us make sure that this is a reasonable condition:
 \begin{example}
   Consider the operator $\hat d = d + d^\dagger$ (\ref{eq:d_hat}). Let
   $x\in C$, $\omega\in\Omega^1_{\mathbb R}(C)$,
-  $f\in C^\infty(C,\mathbb R)$
+  $f\in \mathscr C^\infty(C,\mathbb R)$
   satisfying the assumptions in \ref{def:elliptic_operator}.
   Recalling that $\hat d$ is of order $m=1$, we calculate
   \begin{align*}
@@ -1443,21 +1466,16 @@ Let us make sure that this is a reasonable condition:
 \end{example}
 
 Elliptic operators have many important properties. Firstly, the class
-of elliptic operators is closed under taking adjoints:
-
-\begin{lemma}\label{lem:elliptic_adjoints}
-  If $P : E \to F$ is an elliptic operator then the formal adjoint
-  $P^\dagger$ is elliptic.
-  \begin{proof}
-    \missingproof
-  \end{proof}
-\end{lemma}
+of elliptic operators is closed under taking adjoints. That is,
+the formal adjoint of an elliptic operator is elliptic. This is particularly
+easy to see if one uses the symbol definition.
 
 Secondly, if we consider the extension of an elliptic operator
 to Sobolev spaces then we find several desirable properties.
 In particular, the image of such an operator is closed which is
 exactly what we are going to use to prove that the tangent spaces
-of orbits are closed and hence complemented.
+of orbits are closed and hence complemented. This is a consequence
+of the following well-known result:
 
 \begin{theorem}\label{thm:fredholm_extension}
   If $P : E\to F$ is an elliptic operator of order $m$ and $\ell\geq 0$
@@ -1469,43 +1487,10 @@ of orbits are closed and hence complemented.
     \item the cokernel $W_{2,\ell}(X,F)/\im P_\ell$ is finite-dimensional.
   \end{enumerate}
   \begin{proof}
-    \missingproof
+    This is essentially contained in \cite[Proposition 2.3(3)]{reutter2015}.
   \end{proof}
 \end{theorem}
 
-\begin{example}\label{ex:nabla_hat_elliptic}\todo{THIS EXAMPLE DOES NOT WORK HERE, WE NEED HARMONICITY.}
-  Using \ref{lem:elliptic_adjoints} we have an elliptic operator
-  \begin{align*}
-    \hat\nabla = \nabla + \nabla^\dagger :
-    \Omega^0_{\mathbb R}(\End(E,h)) \oplus
-    \Omega^2_{\mathbb R}(\End(E,h)) \to
-    \Omega^1_{\mathbb R}(\End(E,h)).
-  \end{align*}
-  In particular, the image of the operator
-  \begin{align*}
-    \hat\nabla_\ell :
-    \Omega^0_{\mathbb R}(\End(E,h))_{\ell+1}
-    \oplus \Omega^2_{\mathbb R}(\End(E,h))_{\ell-1}
-    \to \Omega^1_{\mathbb R}(\End(E,h))_\ell
-  \end{align*}
-  is closed. As $\nabla$ is Yang-Mills, we have a chain complex \todo{elaborate?}
-  \begin{equation*}
-    % https://q.uiver.app/#q=WzAsNSxbMCwwLCIwIl0sWzEsMCwiXFxPbWVnYV4wX3tcXG1hdGhiYiBSfShcXEVuZChFLGgpKV97XFxlbGwrMX0iXSxbMiwwLCJcXE9tZWdhXjFfe1xcbWF0aGJiIFJ9KFxcRW5kKEUsaCkpX1xcZWxsIl0sWzMsMCwiXFxPbWVnYV4yX3tcXG1hdGhiYiBSfShcXEVuZChFLGgpKV97XFxlbGwtMX0iXSxbNCwwLCIwIl0sWzAsMV0sWzEsMiwiXFxuYWJsYV9cXGVsbCJdLFsyLDMsIlxcbmFibGFfe1xcZWxsLTF9Il0sWzMsNF1d
-    \begin{tikzcd}
-      0 & {\Omega^0_{\mathbb R}(\End(E,h))_{\ell+1}} & {\Omega^1_{\mathbb R}(\End(E,h))_\ell} & {\Omega^2_{\mathbb R}(\End(E,h))_{\ell-1}} & 0
-      \arrow[from=1-1, to=1-2]
-      \arrow["{\nabla_\ell}", from=1-2, to=1-3]
-      \arrow["{\nabla_{\ell-1}}", from=1-3, to=1-4]
-      \arrow[from=1-4, to=1-5]
-    \end{tikzcd}
-  \end{equation*}
-  for all $\ell\geq 1$.  Noting $\im(\nabla_{\ell-1}^\dagger)$
-  naturally is $W_{2,\ell}$-orthogonal to $\ker(\nabla_{\ell-1})$
-  and hence the subspace $\im(\nabla_{\ell})\subseteq\ker(\nabla_{\ell-1})$
-  in $\Omega^1_{\mathbb R}(\End(E,h))_\ell$, we find that
-  $\im(\nabla_\ell)$ and $\im(\nabla_\ell^\dagger)$ must each be
-  closed.
-\end{example}
 
 Finally, we have that the kernels and cokernels are not just
 finite-dimensional, but also independent of the particular $\ell$
@@ -1532,12 +1517,16 @@ that we have chosen.
     $(2,\ell+2)$-norm is bounded
     by the $(2,0)$ norm and hence independent of $\ell$.
     One then only needs to define $P' := P^\dagger P$ which is easily
-    verified to be elliptic as both $P$ and $P^\dagger$ are by
-    \ref{lem:elliptic_adjoints}. We then use $\ker P = \ker P'$
+    verified to be elliptic as both $P$ and $P^\dagger$ are. We then
+    use $\ker P = \ker P'$
     to find that $\ker P_\ell$ is independent of $\ell$. The
     statement about the cokernel follows by taking adjoints.
   \end{proof}
 \end{theorem}
+
+Before we are able to make use of ellipticity of the operator
+$\hat\nabla$, we have to make some further assumptions about the
+underlying connections.
 
 \subsection{Harmonic Connections}
 
@@ -1555,19 +1544,14 @@ hence there may not be a slice to identify the quotient with. Hence we address t
 There are multiple ways of restricting the affine spaces we are concerned with to
 ensure orbits with closed tangent spaces. We do this by introducing harmonicity.
 
-Observe that, in the presence of a Riemannian metric on a compact
-manifold $X$, one may refer to the formal adjoint
-\begin{align*}
-  d^* : \Omega^{k+1}_{\mathbb{R}}(X)\to \Omega^{k}_{\mathbb{R}}(X)
-\end{align*}
-of the operator $d : \Omega^k_{\mathbb{R}}(X)\to\Omega^{k+1}_{\mathbb{R}}(X)$. This allows us to
+This allows us to
 define what it means for a form on $X$ to be harmonic:
 
 \begin{definition}
   A $k$-form $\alpha$ on a compact Riemannian manifold $X$ is \emph{harmonic} if
-  $d \alpha = d^* \alpha = 0$. The space of harmonic $k$-forms is
+  $d \alpha = d^\dagger \alpha = 0$. The space of harmonic $k$-forms is
   \begin{align*}
-    \mathcal H^k(X) := \ker d \cap \ker d^* \subseteq \Omega^k_{\mathbb{R}}(X).
+    \mathcal H^k(X) := \ker d \cap \ker d^\dagger \subseteq \Omega^k_{\mathbb{R}}(X).
   \end{align*}
 \end{definition}
 
@@ -1595,7 +1579,7 @@ that $I\in\End(E)$ is gauge-invariant. Thus, for $\nabla\in A_\nabla^{ps}(E,h)$,
   = i\alpha\otimes I,
 \end{align*}
 i.e. $A_\nabla^{ps}(E,h)\subseteq A_\nabla(E,h)$ is $U(E,h)$-invariant.
-Thus we have a $G(E,h)$-action on $A_\nabla(E,h)$ which is
+Thus we have a $G(E,h)$-action on $A^{ps}_\nabla(E,h)$ which
 one may easily verify to be proper.
 
 \begin{lemma}
@@ -1613,7 +1597,7 @@ one may easily verify to be proper.
 Just as in the finite dimensional case, the proper $G(E,h)_{\ell+1}$
 action restricts to $A^{ps}_\nabla(E,h)_\ell$.
 More importantly, we have the following:
-\begin{lemma}
+\begin{lemma}\label{lem:holomorphic_tangent_is_closed}
   Let $\nabla\in A^{ps}_\nabla(E,h)_{\ell}$. Then the tangent space
   \begin{align*}
     T_\nabla(G(E,h)_{\ell+1}\cdot\nabla) \subseteq T_\nabla A_\nabla(E,h)_\ell
@@ -1632,28 +1616,41 @@ More importantly, we have the following:
     This linearises the action and determines the embedding
     $T_\nabla G(E,h)_{\ell+1}\subseteq T_\nabla \mathcal A(E,h)_\ell$.
     Direct calculation shows $\rho_\nabla(A) = \nabla A$
-    and hence we have the diagram \todo{the $\ell$'s here
-      are a little troublesome still, but there certainly is some
-      Fredholm operator that $\nabla$ gives rise to whose image is what we
-      are looking for so nothing's going to break}
-    \begin{equation*}
-      % https://q.uiver.app/#q=WzAsNSxbMSwxLCJcXE9tZWdhXjAoXFxtYXRoZnJhayB1KEUsaCkpX1xcZWxsIl0sWzQsMSwiXFxPbWVnYV4xKFxcbWF0aGZyYWsgdShFLGgpKV9cXGVsbCJdLFswLDEsIlRfXFxuYWJsYShHKEUsaClfe1xcZWxsKzF9XFxjZG90IFxcbmFibGEpIl0sWzAsMCwiVF9lIEcoRSxoKV97XFxlbGwrMX0iXSxbNCwwLCJUX1xcbmFibGFcXG1hdGhjYWwgQV9cXG5hYmxhKEUsaClfXFxlbGwiXSxbMCwxLCJcXG5hYmxhX1xcZWxsIl0sWzQsMSwiXFxjb25nIiwyXSxbMiwwLCJcXGNvbmciXSxbMywyLCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMyw0LCJcXHJob19cXG5hYmxhIl1d
-      \begin{tikzcd}
-        {T_e G(E,h)_{\ell+1}} &&&& {T_\nabla A_\nabla(E,h)_\ell} \\
-        {T_\nabla(G(E,h)_{\ell+1}\cdot \nabla)} & {\Omega^0(\End(E,h))_\ell} &&& {\Omega^1(\End(E,h))_\ell}
-        \arrow["{\rho_\nabla}", from=1-1, to=1-5]
-        \arrow[two heads, from=1-1, to=2-1]
-        \arrow["\cong"', from=1-5, to=2-5]
-        \arrow["\cong", from=2-1, to=2-2]
-        \arrow["{\nabla_\ell}", from=2-2, to=2-5]
-      \end{tikzcd}
-    \end{equation*}
-    In particular,
+    so, in particular,
     \begin{align*}
       T_\nabla(G(E,h)_{\ell+1}\cdot\nabla) = \im\rho_\lambda = \im\nabla_\ell.
     \end{align*}
-    Now the claim follows from \ref{ex:nabla_hat_elliptic} as $\im\nabla_\ell$
-    is closed in $\Omega^1(C,\End(E,h))_\ell$.
+    Now we have the elliptic operator
+    \begin{align*}
+      \hat\nabla = \nabla + \nabla^\dagger :
+      \Omega^0_{\mathbb R}(\End(E,h)) \oplus
+      \Omega^2_{\mathbb R}(\End(E,h)) \to
+      \Omega^1_{\mathbb R}(\End(E,h)).
+    \end{align*}
+    In particular, the image of the operator
+    \begin{align*}
+      \hat\nabla_\ell :
+      \Omega^0_{\mathbb R}(\End(E,h))_{\ell+1}
+      \oplus \Omega^2_{\mathbb R}(\End(E,h))_{\ell-1}
+      \to \Omega^1_{\mathbb R}(\End(E,h))_\ell
+    \end{align*}
+    is closed. As $\nabla$ is Yang-Mills, we have a chain complex
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsNSxbMCwwLCIwIl0sWzEsMCwiXFxPbWVnYV4wX3tcXG1hdGhiYiBSfShcXEVuZChFLGgpKV97XFxlbGwrMX0iXSxbMiwwLCJcXE9tZWdhXjFfe1xcbWF0aGJiIFJ9KFxcRW5kKEUsaCkpX1xcZWxsIl0sWzMsMCwiXFxPbWVnYV4yX3tcXG1hdGhiYiBSfShcXEVuZChFLGgpKV97XFxlbGwtMX0iXSxbNCwwLCIwIl0sWzAsMV0sWzEsMiwiXFxuYWJsYV9cXGVsbCJdLFsyLDMsIlxcbmFibGFfe1xcZWxsLTF9Il0sWzMsNF1d
+      \begin{tikzcd}
+        0 & {\Omega^0_{\mathbb R}(\End(E,h))_{\ell+1}} & {\Omega^1_{\mathbb R}(\End(E,h))_\ell} & {\Omega^2_{\mathbb R}(\End(E,h))_{\ell-1}} & 0
+        \arrow[from=1-1, to=1-2]
+        \arrow["{\nabla_\ell}", from=1-2, to=1-3]
+        \arrow["{\nabla_{\ell-1}}", from=1-3, to=1-4]
+        \arrow[from=1-4, to=1-5]
+      \end{tikzcd}
+    \end{equation*}
+    for all $\ell\geq 1$.  Noting $\im(\nabla_{\ell-1}^\dagger)$
+    naturally is $W_{2,\ell}$-orthogonal to $\ker(\nabla_{\ell-1})$
+    and hence the subspace $\im(\nabla_{\ell})\subseteq\ker(\nabla_{\ell-1})$
+    in $\Omega^1_{\mathbb R}(\End(E,h))_\ell$, we find that
+    $\im(\nabla_\ell)$ and $\im(\nabla_\ell^\dagger)$ must each be
+    closed.
   \end{proof}
 \end{lemma}
 
@@ -1690,7 +1687,25 @@ and, for sufficiently large $\ell$, an action by $G(E,h)_{\ell+1}$.
   \end{align*}
   is a closed subspace.
   \begin{proof}
-    \missingproof
+    This is naturally similar to \ref{lem:holomorphic_tangent_is_closed}.
+    The main difference is that one starts out by considering a chain
+    complex
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsNSxbMCwwLCIwIl0sWzEsMCwiXFxPbWVnYV4wX3tcXG1hdGhiYiBSfShcXEVuZChFLGgpKV97XFxlbGwrMX0iXSxbMiwwLCJcXE9tZWdhXjFfe1xcbWF0aGJiIFJ9KFxcRW5kKEUsaCkpXntcXG9wbHVzIDJ9X1xcZWxsIl0sWzMsMCwiXFxPbWVnYV4yX3tcXG1hdGhiYiBSfShcXEVuZChFLGgpKV57XFxvcGx1cyAzfV97XFxlbGwtMX0iXSxbNCwwLCIwIl0sWzAsMV0sWzEsMiwiUCJdLFsyLDMsIlEiXSxbMyw0XV0=
+      \begin{tikzcd}[column sep=small]
+        0 & {\Omega^0_{\mathbb R}(\End(E,h))_{\ell+1}} & {\Omega^1_{\mathbb R}(\End(E,h))^{\oplus 2}_\ell} & {\Omega^2_{\mathbb R}(\End(E,h))^{\oplus 3}_{\ell-1}} & 0
+        \arrow[from=1-1, to=1-2]
+        \arrow["P", from=1-2, to=1-3]
+        \arrow["Q", from=1-3, to=1-4]
+        \arrow[from=1-4, to=1-5]
+      \end{tikzcd}
+    \end{equation*}
+    whose maps are best described using the Hodge star which we have
+    not been able to introduce. One may then
+    verify that the corresponding operator $P+Q^\dagger$ is elliptic
+    and argue that the tangent space of interest is a closed subspace
+    of $\im(P+Q^\dagger)$. See \cite[98]{neitzke2021} for a concrete
+    description of the operator.
   \end{proof}
 \end{lemma}
 
@@ -1944,7 +1959,7 @@ the moduli spaces as abstract manifolds
   M^s_\dol(r,d) := M^s_\dol(E) := M^s_\nabla(E,h), \hspace{1cm}
   M^s_\varphi(r,d) := M^s_\varphi(E) := M^s_\Phi(E,h)
 \end{align}
-for any hermitian bundle $(E,h)$ of rank $r$ and degree $d$.
+for any hermitian bundle $(E,h)$ of type $(r,d)$.
 
 \subsection{Tangent Space and Dimension}
 
@@ -2168,12 +2183,11 @@ $\Gamma(-,E)$. This has a natural $\mathscr O_X$-module structure.
 \end{lemma}
 
 However, much more is true. It turns out that on a scheme $X$
-a vector bundle of rank $n$ is the same thing as a locally
-free sheaf of rank $n$. That is, there is an equivalence
+a vector bundle of rank $r$ is the same thing as a locally
+free sheaf of rank $r$. That is, there is an equivalence
 of categories given by $E \mapsto \Gamma(-,E)$.~\cite[128-129]{hartshorne1977}
 We will say that a sheaf $\mathscr E$ corresponds to a vector bundle
-$E$ and write $\mathscr E=\mathcal V(E)$ to mean
-$\mathscr E\cong\Gamma(-,E)$.
+$E$ and to mean $\mathscr E\cong\Gamma(-,E)$.
 
 \subsection{Compact Riemann Surfaces as Algebraic Curves}
 \label{sec:surfaces_as_curves}
@@ -2611,6 +2625,9 @@ locally free sheaves on the curve $C$.
   \end{align*}
 \end{definition}
 
+Once again we say a locally free sheaf on $C$ is of
+type $(r,d)$ to mean that it is of rank $r$ and degree $d$.
+
 \begin{example}
   As the rank of $\mathscr O_C$ is $1$ its degree must be $0$.
 \end{example}
@@ -2634,7 +2651,7 @@ locally free sheaves on the curve $C$.
 \end{example}
 
 \begin{theorem}[Riemann-Roch]\label{thm:riemann_roch}
-  Let $\mathscr F$ be a locally free sheaf of rank $r$ and degree $d$
+  Let $\mathscr F$ be a locally free sheaf of type $(r,d)$
   on $C$. Then
   \begin{align*}
     \chi(\mathscr F) = d + r(1-g).
@@ -2675,7 +2692,7 @@ surprising and non-trivial.
 \end{lemma}
 
 \begin{example}\label{ex:hilbert_polynomial}
-  If $\mathscr F$ is a locally free sheaf of rank $r$ and degree $d$
+  If $\mathscr F$ is a locally free sheaf of type $(r,d)$
   on $C$ then we use Riemann-Roch \ref{thm:riemann_roch} and
   \ref{lem:degree_of_tensor} to calculate
   \begin{align*}
@@ -2974,8 +2991,7 @@ Grothendieck constructed a fine moduli space for it. \missingcitation
   Once again, in the case $X=C$ we have schemes
   $Quot(\mathscr E)^{r,d}$ representing the functors in
   (\ref{eq:quot_functor_split_on_c}). Now consider a locally free
-  sheaf $\mathscr F$ on $C$ of rank
-  $r$ and degree $d$ with $H^1(C,\mathscr F)=0$. By Riemann-Roch
+  sheaf $\mathscr F$ on $C$ of type $(r,d)$ with $H^1(C,\mathscr F)=0$. By Riemann-Roch
   \ref{thm:riemann_roch} we have
   \begin{align*}
     n := \dim\Gamma(C,\mathscr F) = \chi(C,\mathscr F) = d + r(1-g).
@@ -3232,7 +3248,7 @@ $G(T)$ on $X(T)$ by
   \begin{align*}
     \mathscr O^{\oplus n}_{C\times GL_n\times Q(r,d)}\surj \mathscr E
   \end{align*}
-  of rank $r$ and degree $d$. We construct such a family by
+  of type $(r,d)$. We construct such a family by
   considering the universal family $\hat q:\mathscr Q^{\oplus n}_{C\times Q(r,d)}\surj \hat{\mathscr E}$,
   pulling it back along the projection $GL_n\times Q(r,d)\to Q(r,d)$,
   and composing it with the sheaf isomorphism
@@ -4153,7 +4169,7 @@ we establish that both algebraic spaces are in fact smooth varieties.
 
 \begin{definition}
   Let $X$ be a scheme and $x\in X$ a point. The \emph{Zariski cotangent
-  space} of $X$ at $x$ is
+    space} of $X$ at $x$ is
   \begin{align*}
     T_x^* X := \mathfrak m_x /\mathfrak m_x^2
   \end{align*}
@@ -4254,10 +4270,10 @@ obtains the structure of a locally ringed subspace:
   $(X^{an},\mathscr O_X^{an}) := (X^{an},\restrict{\mathscr O_{\mathbf{CP}^n}}{X^{an}})$.
 \end{definition}
 
-Observe that, being a locally ringed subspace of $\mathbf{CP}^n$, 
+Observe that, being a locally ringed subspace of $\mathbf{CP}^n$,
 the space $X^{an}$ has many desirable properties. In particular, it is
 an analytic space. However, it is in general not guaranteed to
-be a manifold. 
+be a manifold.
 
 \begin{example}
   A classical example of this is $X=\Spec \mathbb C[x,y]/(y^2-x^3)$
