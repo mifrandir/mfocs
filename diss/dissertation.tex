@@ -3949,7 +3949,7 @@ free sheaves which the points of the moduli spaces correspond to.
 In particular, we are going to find that for sufficiently large $\ell$,
 the moduli spaces stabilise.
 
-\subsection{One-parameter Subgroups}
+\subsection{Taking Limits}
 
 Consider an action $\sigma : G \times X\to X$ of a reductive group $G$
 on a projective scheme $X$ and a $G$-linearised ample sheaf
@@ -3966,14 +3966,16 @@ subgroups. The simplest subgroup available is $\mathbf G_m$.
 We now observe that every one-parameter sugbroup $\lambda$ of $G$
 induces a $\mathbf G_m$ action on $X$. Now recall that the
 linearisation of $\mathscr L$ induces an action on the corresponding
-line bundle $L$. For $s\in L_x$ and $g\in G$ we have
-$g\cdot s\in L_{g\cdot x}$. If $x$ was a fixed point of the action,
-then we would have an induced action $G\times L_x \to L_x$. We would
-like to analyse this action.
+line bundle $L$. For $s\in L_x$ and $t\in \mathbf G_m$ we have
+$t\cdot s\in L_{t\cdot x}$. If $x$ was a fixed point of the
+$\mathbf G_m$-action, then we would have an induced action
+$\mathbf G_m\times L_x \to L_x$ and hence a representation
+$\mathbf G_m\to GL(L_x)$. Such representations are well-understood
+so it is worth moving to this setting.
 
 Intuitively it is clear how such a fixed point might be obtained.
 For any $x\in X$, we would like to take the limits of $t\cdot x$
-as $t\to 0$, respectively. We make this precise
+as $t\to 0$. We make this precise
 by embedding $\mathbf G_m\inc\mathbf A^1$ and
 considering the morphism $\lambda_x : \mathbf G_m \to X$ given by
 the action of $\mathbf G_m$ on $x$.
@@ -3985,40 +3987,34 @@ In particular, we obtain the new value
   \lim_{t\to 0}\lambda(t)\cdot x := \lambda_x(0).
 \end{align*}
 
-\begin{example}
+\begin{example}\label{ex:lf_limits}
   Let us calculate this limit for a fixed closed point
   $q : \mathscr O^{\oplus n}_C \surj \mathscr E$ of $Q_\circ(r,d)$
   and a fixed one-parameter subgroup $\lambda : \mathbf G_m \to GL_n$.
   Recall $\lambda$ induces a weight space decomposition
   \begin{align*}
-    \mathbb C^n  = \bigoplus_{w\in\mathbb Z} V_w
+    V := \mathbb C^n  = \bigoplus_{w\in\mathbb Z} V_w
   \end{align*}
   where $V_w := \{v \in V : \lambda(t)\cdot v = t^w\}$ and hence
   quotients
   \begin{align*}
-    q_w : \mathscr V_w := V_w\otimes\mathscr O_C \surj \mathscr E_w.
+    q_w : V_w\otimes\mathscr O_C \surj q(\mathscr V_w) =: \mathscr E_w.
   \end{align*}
   We use this to express the limit:
-  Let $\lambda$ be a one parameter subgroup of $GL_n$ and let
-  $q:\mathscr O^{\oplus n}_C \surj \mathscr E$ be a closed point in
-  $Q_\circ(r,d)$. Then
   \begin{align*}
-    \lim_{t\to 0} \lambda(t)\cdot q = \bigoplus_{w\in\mathbb Z} q_w.
+    \lim_{t\to 0} \lambda(t)\cdot q =: \overline{q} = \bigoplus_{w\in\mathbb Z} q_w.
   \end{align*}
   \begin{proof}[Proof idea]
-    Following \cite[76-78]{hoskins2016}.
+    Following \cite[Lemma 4.4]{huybrechts2010}.
     By the valuative criterion of properness the extension
     of $\lambda_q$ to $\affine{1}{}\to Q_\circ(r,d)$ is unique.
-    The idea then is to construct a family
+    The idea then is to construct a family $\theta$
+    of quotients over $\affine{1}{}$ such that $\theta_t = \lambda(t)\cdot q$
+    for $t\neq 0$ and $\theta_0 = \oplus_w q_w$. Writing
+    $V_{\leq w} :=\oplus_{w'\leq w} V_{w'}$ and $\mathscr E_{\leq w} := q(V_{\leq w} \otimes \mathscr O_C)$
+    one then considers the $\mathscr O_X\otimes\mathbb C[t]$-module
     \begin{align*}
-      \Phi : \mathscr V := \mathscr O^{\oplus n}_{C\times\affine{1}{}}\surj\mathscr F
-    \end{align*}
-    of quotients over $\affine{1}{}$ such that $\Phi_t = \lambda(t)\cdot q$
-    for $t\neq 0$ and $\Phi_0 = \oplus_w q_w$. Writing
-    $\mathscr V_{\leq w} :=\bigoplus_{w'\leq w} \mathscr V_{w'}$, one then considers
-    the $\mathscr O_X\otimes\mathbb C[t]$-module
-    \begin{align*}
-      \mathscr F := \bigoplus_{w\in\mathbb Z} q(\mathscr V_{\leq w}) \otimes t^w\mathbb C
+      \mathscr T := \bigoplus_{w\in\mathbb Z} \mathscr E_{\leq w}\otimes t^w\mathbb C
     \end{align*}
     which corresponds to a quasi-coherent sheaf on $X\times\affine{1}{}$.
     It is not difficult to show that this is in fact coherent by
@@ -4026,9 +4022,9 @@ In particular, we obtain the new value
     corresponding to $\mathscr E\otimes t^{w_0}\mathbb C$ for some $w_0$.
     Then there is an induced surjection
     \begin{align*}
-      \mathscr V \otimes \mathbb C[t]
-      \cong\bigoplus_{w\in\mathbb Z} \mathscr V_{\leq w}\otimes t^w\mathbb C
-      \surj \mathscr F
+      \theta : V\otimes\mathscr O_C \otimes \mathbb C[t]
+      \cong\bigoplus_{w\in\mathbb Z} V_{\leq w}\otimes\mathscr O_C\otimes t^w\mathbb C
+      \surj \mathscr T
     \end{align*}
     which defines the desired family.
   \end{proof}
@@ -4038,26 +4034,61 @@ In particular, we obtain the new value
   higgs sheaves \missingexample
 \end{example}
 
-\subsection{Hilbert-Mumford Criterion}
+\subsection{Hilbert-Mumford Weights}
 
-Continuing the setting of the previous section,
-consider the action of $\mathbf G_m$ on the fibre of $L$ over
-one of the limit point $\lim_{t\to 0}\lambda(t)\cdot x$.
-This must be of the form \todo{why?} $t\cdot s = t^w s$ for some
-$w\in\mathbb Z$.
+\todo{change to $SL_n$ action?}
+
+Continuing in the context of the previous section, recall that the action
+of $\mathbf G_m$ on the fibre of $L$ over a fixed point $x$ induces a
+representation $\mathbf G_m\to GL(L_x)$. As such representations must
+be of the form $t \mapsto t^w\identity$ for some $w\in\mathbb Z$,
+we may refer to the weight of the $\mathbf G_m$ action on $L_x$.
 
 \begin{definition}
   Let $\lambda$ be a one-parameter subgroup of $G$ and let
-  $x\in X$.  The \emph{Hilbert-Mumford weight} of $\lambda$
-  at $x$ with respect to a linearisation
-  $\Phi:\pi^*\mathscr L\cong\sigma^*\mathscr L$
-  is the integer \todo{check!} $\mu^{\mathscr L}(x,\lambda)$
-  such that \todo{make less ugly}
-  \begin{align*}
-    \Phi(\lambda(t),\lambda_x(0))
-    = t^{-\mu^{\mathscr L}(x,\lambda)}\identity.
-  \end{align*}
+  $x\in X$. The \emph{Hilbert-Mumford weight}
+  is $\mu^{\mathscr L}(x,\lambda) := -w$ where $w$ is the weight of the
+  $\mathbf G_m$ action on the fibre of $L$ over $\lim_{t\to 0}\lambda(t)\cdot x$.
 \end{definition}
+
+Writing $P(\mathscr F) := P(\mathscr F,\mathscr O_C(1))$, we are
+able to compute the Hilbert-Mumford weights for the actions of
+interest to us:
+
+\begin{example}\label{ex:lf_hm_weight}
+  Let us continue \ref{ex:lf_limits} an calculate the corresponding
+  Hilbert-Mumford weight. The claim, for $\ell$ sufficiently large,
+  \begin{align*}
+    \mu^{\mathscr L_\ell}(q,\lambda)
+    = -\sum_{w\in\mathbb Z} w P(\mathscr E_w)(\ell).
+  \end{align*}
+  \begin{proof}[Proof idea]
+    Following \cite[Lemma 8.52]{hoskins2016}. The difficulty lies
+    in calculating the fibre
+    \begin{align*}
+      L_{\ell,\overline q} \cong \bigotimes_{w\in\mathbb Z}\bigotimes_{k\geq 0} \det H^k(X,\mathscr E_w(\ell))^{\otimes(-1)^k}.
+    \end{align*}
+    Once this is done, one notices that for $\ell$ large,
+    $H^k(X,\mathscr F(\ell))=0$ for $k>0$. Hence we may write
+    \begin{align*}
+      L_{\ell,\overline q}
+      \cong \bigotimes_{w\in\mathbb Z}\det H^0(X,\mathscr E_w(\ell))
+      = \bigotimes_{w\in\mathbb Z}\wedge^{\dim_{\mathbb C}H^0(X,\mathscr E_w(\ell))} H^0(X,\mathscr E_w(\ell)).
+    \end{align*}
+    By construction, $\mathbf G_m$ acts on $\mathscr E_w$ with weight
+    $w$. Hence the weight of the action on $L_{\ell,\overline{q}}$
+    must be
+    \begin{align*}
+      \sum_{w\in\mathbb Z} w P(\mathscr E_w)(\ell).
+    \end{align*}
+  \end{proof}
+\end{example}
+
+\begin{example}
+  \missingexample
+\end{example}
+
+\subsection{Hilbert-Mumford Criterion}
 
 It is possible to show that $x$ is stable (resp. semistable) with
 respect to the $\mathbf G_m$-action induced by $\lambda$ if, and only
@@ -4080,29 +4111,40 @@ general action:
   \end{proof}
 \end{theorem}
 
-\subsection{Stability of Locally Free Sheaves}
+We are now able to to characterise the notions of stability
+in our moduli spaces. As usual, we begin with locally free sheaves:
 
-The Hilbert-Mumford criterion enables us to determine which orbits
-are represented in our moduli spaces.
-We address stability of locally free sheaves first.
-The following characterises
-(semi-)stable points of $Q_\circ$ fully:
-
-\begin{theorem}
+\begin{example}
   Let $q : \mathscr O^{\oplus n}_C \surj \mathscr E$ be a closed point
-  in $Q_\circ(r,d)$. Then $q\in Q^{ss}_\circ(r,d)(\mathscr L_\ell)$
+  in $Q_\circ(r,d)$. Then $q\in Q^{s}_\circ(r,d)(\mathscr L_\ell)$
   if, and only if, for all non-trivial proper subspaces
-  $V\subseteq \mathbb C^n$, \todo{which line bundle?}
+  $V'\subseteq \mathbb C^n$,
   \begin{align}\label{eq:git_stable_sheaf}
-    \frac{\dim V}{P(\mathscr F,\ell)}\leq\frac{n}{P(\mathscr E,\ell)}
+    P(\mathscr E,\ell)\dim V'< P(\mathscr E',\ell)\dim V
   \end{align}
-  where $\mathscr F := q(V\otimes\mathscr O_C)$. Moreover,
-  $q\in Q^s_\circ(\mathscr L_\ell)$ if, and only if, the inequality
-  (\ref{eq:git_stable_sheaf}) is always strict.
+  where $\mathscr E' := q(V'\otimes\mathscr O_C)$.
   \begin{proof}
-    \missingproof
+    Writing
+    \begin{align*}
+      \theta(V') := P(\mathscr E',\ell)\dim V-P(\mathscr E,\ell)\dim V'
+    \end{align*}
+    the Hilbert-Mumford weights read
+    \begin{align*}
+      \mu(q,\lambda) = \frac{1}{\dim V}\sum_{w\in\mathbb Z} \theta(V_{\leq w}).
+    \end{align*}
+    The `if' direction now is a direct consequence of the Hilbert-Mumford
+    criterion. In the other direction, if $\theta(V')\leq 0$ then the
+    claim follows by considering the weight decomposition given by
+    $V_{\dim V''} = V'$ and $V_{-\dim V'} = V''$
+    where $V = V' \oplus V''$.
   \end{proof}
-\end{theorem}
+\end{example}
+
+\begin{example}
+  higgs sheaves \missingexample
+\end{example}
+
+\subsection{Stability of Locally Free Sheaves}
 
 It should not come as a surprise that (semi-)stable points of
 $Q_\circ(r,d)$ correspond to slope (semi-)stable bundles
