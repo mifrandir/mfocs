@@ -50,6 +50,34 @@
 
 \chapter{Introduction}
 
+A large part of mathematics is about classifying objects. In some cases,
+it is possible to group the isomorphism classes into a few well-behaved
+families. Consider for example the classification of finite abelian
+groups or, more generally, finite groups. At other times, however, one
+finds that there are uncountably many distinct instances. In such cases,
+the primary goal then becomes to construct and study geometric spaces
+whose points correspond to the objects in question. A well-known example
+of this is projective space $\projective{n}{}$ which parametrises
+subspaces of $\affine{n}{}$ of codimension 1. Geometric 
+spaces parametrising geometric objects are referred to as moduli spaces.
+We are going to study methods of constructing methods of constructing
+moduli spaces in analytic and algebraic categories.
+
+The primary examples we are going to consider are types of holomorphic
+vector bundles on compact Riemann surfaces $C$ of genus $g\geq 2$. By Riemann surface
+we mean a connected one-dimensional complex manifold. In other words, 
+one of the simplest non-trivial base spaces possible. Holomorphic vector
+bundles are particularly suitable to demonstrate the core principles
+for three reasons. Firstly, the moduli spaces are non-trivial. A priori, this
+is not guaranteed. For example, up to isomorphism there are only countably
+many smooth bundles for any fixed $C$. Secondly, there are well-known
+moduli spaces of such bundles, meaning the problem is not too
+difficult. Finally, there are frequently studied extensions to holomorphic
+bundles which enable us to illustrate how to adapt moduli spaces in the
+presence of additional structure. The primary example we are going
+to contemplate are Higgs bundles which were first introduced by
+Hitchin in \cite{hitchin1987}.
+
 \begin{itemize}
   \item Riemann surfaces
   \item complex geometry at the intersection between the analytic and algebraic settings
@@ -223,7 +251,7 @@ of the underlying real manifold where
 $\Omega^0_{\mathbb{R}}(X) = \mathscr C^\infty(X,\mathbb{R})$ and,
 for $k > 0$,
 \begin{align*}
-  \Omega^k_{\mathbb{R}}(X) := \Gamma^\infty(X,\Lambda^k T^*X).
+  \Omega^k_{\mathbb{R}}(X) := \Gamma^\infty(X,\wedge^k T^*X).
 \end{align*}
 We may complexify this to obtain
 $\Omega^k_{\mathbb C}(X) := \Omega^k_{\mathbb R}(X)\otimes_{\mathbb{R}} \mathbb{C}$.
@@ -231,7 +259,7 @@ The splitting $T^*X_\mathbb{C} = T^*X^{1,0} \oplus T^*X^{0,1}$
 leads us to define
 \begin{align*}
   \Omega^{p,q}(X)
-  := \Gamma^\infty(X,\Lambda^p T^*X^{1,0} \wedge\Lambda^q T^*_{0,1}X)
+  := \Gamma^\infty(X,\wedge^p T^*X^{1,0} \otimes\wedge^q T^*X^{0,1})
 \end{align*}
 and hence we have
 \begin{align*}
@@ -2115,16 +2143,19 @@ otherwise indicated,
 
 \section{Holomorphic Bundles as Locally Free Sheaves}
 
-\missingsection
+Before we are able to move our moduli spaces to the category of
+schemes, we need to describe the objects of interest algebraically.
+We are going to see that holomorphic bundles on
+compact Riemann surfaces are equivalent to locally free sheaves
+of finite rank on smooth algebraic curves.
 
 \subsection{Vector Bundles on Schemes}
 
-Let us start the algebraic treatment by defining vector bundles on
-schemes. By treating affine opens on a scheme as charts on a manifold
+Let us begin the algebraic treatment by defining the scheme-theoretic
+analogue of holomorphic bundles. By treating affine opens on a scheme as charts on a manifold
 and by regarding the affine space $\affine{n}{}$ as the algebraic
 analogue of $\mathbb C^n$, it is straightforward to translate
-the definition of a complex vector bundle \ref{def:complex_bundle}
-to schemes:
+the definition of a vector bundle \ref{def:complex_bundle} to schemes:
 
 \begin{definition}[{\cite[Definition 11.5]{gortz2010}}]
   \label{def:vector_bundle}
@@ -2139,6 +2170,8 @@ to schemes:
   automorphism of $\affine{r}{}\times U = \Spec R[T_1,\ldots,T_r]$.
 \end{definition}
 
+Note that each $\phi_i$ is an isomorphism of complex schemes
+and hence analogous to holomorphic transition functions.
 Non-trivial examples are going to arise when we consider vector bundles
 as locally free sheaves.
 
@@ -2185,7 +2218,7 @@ the argument to obtain an analogous correspondence for manifolds.
 However, in order to fully justify an algebraic treatment of the
 moduli problem of vector bundles on compact Riemann surfaces, we
 need to relate manifolds to schemes. It is not in general possible
-to view every manifold as a scheme \missingcitation, it is a well
+to view every manifold as a scheme, it is a well
 known fact that compact Riemann surfaces correspond to smooth
 algebraic curves.
 This fact is proven in various places, see \cite[215]{griffiths1994}
@@ -2223,26 +2256,15 @@ $\dim_{\mathbb C} \Gamma(C,\mathscr L)$.
   is a surjection.
 \end{definition}
 
-\todo{check notation here}
-In particular, if $\mathscr L$ is globally generated then,
-for every $x\in C$, it induces a surjection on stalks
-$\Gamma(C,\mathscr L) \surj \mathscr L_x$ whose kernel is a
-subspace of codimension 1, i.e. a closed point of
-$\projective{}{}(\Gamma(C,\mathscr L)^\vee)$. It turns out that this map
-is an embedding \todo{we should define degree...}
-whenever $\deg\mathscr L > 2g$. \cite[Proposition 2.14]{harris2011}
-All that is left to do is to find invertible sheaves with large
-degree. Fortunately, for any invertible sheaf $\mathscr L$,
-the tensor powers $\mathscr L^{\otimes m}$ are invertible and
-$\deg\mathscr L^{\otimes m} = m\deg\mathscr L$. Hence any invertible
-sheaf of positive degree will do. Fortunately, the degree of
-the canonical sheaf $\mathscr K=\Gamma(-,K)^*$ is $2g-2$. As we have restricted
-our attention to the case $g\geq 2$, we are free to choose
-$m\geq 2$ and hence $\mathscr L = \Omega_C^{\otimes m}$ to obtain
-an embedding $C\inc\projective{}{}(\Gamma(C,\mathscr L)^\vee)$, as
-required.
-By Chow's theorem, this makes $C$ an algebraic subvariety
-and hence an algebraic curve.
+In particular, if $\mathscr L$ is globally generated then, for every $x\in C$,
+it induces a surjection on stalks $\Gamma(C,\mathscr L) \surj \mathscr L_x$
+whose kernel is a subspace of codimension 1, i.e. a closed point of
+$\projective{}{}(\Gamma(C,\mathscr L)^\vee)$. It turns out that this map is an
+embedding when we choose $\mathscr L$ to be a sufficently large tensor power of
+the canonical sheaf $\mathscr K := \Gamma(-,K)$, e.g. $\mathscr L = \mathscr
+K^{\otimes 2}$.  Thus $C$ is an algebraic subvariety of
+$\projective{}{}(\Gamma(C,\mathscr L)^\vee)$ and hence by Chow's
+theorem an algebraic curve. \todo{analytic?}
 
 \begin{lemma}
   Holomorphic bundles on $C$ regarded as a manifold are equivalent
@@ -2444,10 +2466,10 @@ denotes the homogeneous localisation $M$ at $f\in R$. This
 correspondence between modules and sheaves allows the following
 definition:
 
-\begin{definition}[{\cite[13.4]{gortz2010}}]
+\begin{definition}
   For $m\in\mathbb{Z}$ and some graded ring $R$, define the graded
   $R$-module $R(m)$ by $R(m)_d := R_{m+d}$ for all $d\in\mathbb{Z}$. \emph{Serre's
-    twisting sheaf} is
+    twisting sheaf} on $X=\Proj R$ is
   \begin{align*}
     \mathscr O_X(m) := \widetilde{R(m)}.
   \end{align*}
@@ -2455,17 +2477,18 @@ definition:
   $\mathscr F(m) := \mathscr F \otimes \mathscr O_X(m)$.
 \end{definition}
 The notation $\mathscr O_X(m)$ is consistent with $\mathscr F(m)$
-as $\mathscr O_X(m) \cong \mathscr O_X \otimes \mathscr O_X(m)$.
-Of course, the main case of interest for us is
-$R=\mathbb{C}[T_0,\ldots,T_n]$, i.e. $X=\projective{n}{}$.
+as, trivially, $\mathscr O_X(m) \cong \mathscr O_X \otimes \mathscr O_X(m)$.
+Of course, our main case of interest is where $X=\Proj R$ is
+projective, i.e. $R$ is finitely generated as a $\mathbb C$-algebra.
 In this case, the twisting sheaf corresponds to a line bundle,
-i.e. is invertible. That is, it has rank 1.
+i.e. is invertible.
 
-\begin{proposition}[{\cite[Proposition 13.15]{gortz2010}}]
+\begin{proposition}
   \label{thm:twisiting_sheaf_invertible}
   If $R$ is finitely generated as a $R_0$-algebra, then each
   $\mathscr O_X(m)$ is an invertible sheaf.
   \begin{proof}
+    \cite[Proposition 13.15]{gortz2010}
     \missingproof
   \end{proof}
 \end{proposition}
@@ -2476,7 +2499,7 @@ i.e. is invertible. That is, it has rank 1.
   \missingexample
 \end{example}
 
-Why are the twisting sheaves important to us? They are well-behaved
+Why are the twisting sheaves important to us?  They are well-behaved
 with respect to the parameters. In particular,
 under the assumption of \ref{thm:twisiting_sheaf_invertible},
 $(\mathscr F,m)\mapsto \mathscr F(m)$ defines an action of
@@ -2494,9 +2517,8 @@ $\otimes$:
 
 We will see that topological properties of sheaves behave well
 with respect to taking direct sums and tensor products and hence
-with respect to twisting, too. Moreover, for suitable $R$ and
-sufficiently large $m$, $\mathscr F(m)$ is globally generated. In this
-case, for $m\geq 1$, the sheaves $\mathscr O_X(m)$ are ample.
+with respect to twisting, too. Moreover, twisting sheaves are going
+to be the canonical example of an ample sheaf on projective schemes.
 
 \subsection{Ample sheaves}
 
@@ -2519,6 +2541,7 @@ projective space the twisting sheaves serve as an example:
   $\mathscr O_X(m)$ is ample.
   \begin{proof}
     See \cite[Example 13.45]{gortz2010}.
+    \missingproof
   \end{proof}
 \end{proposition}
 
@@ -2531,6 +2554,7 @@ an ample sheaf given by pulling back a twisting sheaf:
   $j^*\mathscr O_X(m)$ is ample.
   \begin{proof}
     See \cite[\href{https://stacks.math.columbia.edu/tag/01Q2}{Tag 01Q2}]{stacks-project}.
+    \missingproof
   \end{proof}
 \end{proposition}
 
@@ -2538,11 +2562,14 @@ an ample sheaf given by pulling back a twisting sheaf:
   Every quasi-projective scheme has an ample sheaf.
 \end{corollary}
 
-\todo{motivate all this a little bit more}
+Indeed, as we saw for the case of compact Riemann surfaces, ample
+sheaves may be used to define immersions in projective spaces. It is
+therefore not unreasonable to think of quasi-projectivity and existence
+of an ample sheaf to be equivalent.
 
 \subsection{Euler Characteristic}
 
-The fundamental topological invariant of sheaves that we are going
+The fundamental invariant of sheaves that we are going
 to be interested in is the Euler characteristic. This is defined
 in the obvious way, replacing regular cohomology with sheaf
 cohomology:
@@ -2631,10 +2658,14 @@ type $(r,d)$ to mean that it is of rank $r$ and degree $d$.
 \end{lemma}
 
 \begin{example}
-  Using~\ref{lem:degree_of_tensor}, we find \todo{make sure $\mathscr O_X(1)$ has degree 1}
+  Using~\ref{lem:degree_of_tensor} and $\deg\mathscr O_C(1)=1$ \missingcitation,
+  we find
   \begin{align*}
     \deg \mathscr E(m) = \deg\mathscr E + m\rank\mathscr E.
   \end{align*}
+  In particular, the map $\mathscr E \mapsto \mathscr E(d')$ defines
+  a bijection between locally free sheaves of type $(r,d)$ and
+  type $(r,d+rd')$.
 \end{example}
 
 \begin{theorem}[Riemann-Roch]\label{thm:riemann_roch}
@@ -4056,32 +4087,27 @@ able to compute the Hilbert-Mumford weights for the actions of
 interest to us:
 
 \begin{example}\label{ex:lf_hm_weight}
-  Let us continue \ref{ex:lf_limits} an calculate the corresponding
-  Hilbert-Mumford weight. The claim, for $\ell$ sufficiently large,
+  Let us continue \ref{ex:lf_limits} and calculate the corresponding
+  Hilbert-Mumford weight. Following \cite[Lemma 8.52]{hoskins2016}.
+  The difficulty lies
+  in calculating the fibre
   \begin{align*}
-    \mu^{\mathscr L_\ell}(q,\lambda)
-    = -\sum_{w\in\mathbb Z} w P(\mathscr E_w)(\ell).
+    L_{\ell,\overline q} \cong \bigotimes_{w\in\mathbb Z}\bigotimes_{k\geq 0} \det H^k(X,\mathscr E_w(\ell))^{\otimes(-1)^k}.
   \end{align*}
-  \begin{proof}[Proof idea]
-    Following \cite[Lemma 8.52]{hoskins2016}. The difficulty lies
-    in calculating the fibre
-    \begin{align*}
-      L_{\ell,\overline q} \cong \bigotimes_{w\in\mathbb Z}\bigotimes_{k\geq 0} \det H^k(X,\mathscr E_w(\ell))^{\otimes(-1)^k}.
-    \end{align*}
-    Once this is done, one notices that for $\ell$ large,
-    $H^k(X,\mathscr F(\ell))=0$ for $k>0$. Hence we may write
-    \begin{align*}
-      L_{\ell,\overline q}
-      \cong \bigotimes_{w\in\mathbb Z}\det H^0(X,\mathscr E_w(\ell))
-      = \bigotimes_{w\in\mathbb Z}\wedge^{\dim_{\mathbb C}H^0(X,\mathscr E_w(\ell))} H^0(X,\mathscr E_w(\ell)).
-    \end{align*}
-    By construction, $\mathbf G_m$ acts on $\mathscr E_w$ with weight
-    $w$. Hence the weight of the action on $L_{\ell,\overline{q}}$
-    must be
-    \begin{align*}
-      \sum_{w\in\mathbb Z} w P(\mathscr E_w)(\ell).
-    \end{align*}
-  \end{proof}
+  Once this is done, one notices that for $\ell$ large,
+  $H^k(X,\mathscr F(\ell))=0$ for $k>0$. Hence we may write
+  \begin{align*}
+    L_{\ell,\overline q}
+    \cong \bigotimes_{w\in\mathbb Z}\det H^0(X,\mathscr E_w(\ell))
+    = \bigotimes_{w\in\mathbb Z}\wedge^{\dim_{\mathbb C}H^0(X,\mathscr E_w(\ell))} H^0(X,\mathscr E_w(\ell)).
+  \end{align*}
+  By construction, $\mathbf G_m$ acts on $\mathscr E_w$ with weight
+  $w$. Hence, for $\ell$ sufficiently large, the Hilbert-Mumford
+  weight must be
+  \begin{align*}
+    \mu^{\mathscr L_\ell}(q,\lambda) =
+    -\sum_{w\in\mathbb Z} w P(\mathscr E_w)(\ell).
+  \end{align*}
 \end{example}
 
 \begin{example}
@@ -4263,7 +4289,14 @@ we establish that both algebraic spaces are in fact smooth varieties.
   \end{proof}
 \end{theorem}
 
-
+Using the natural isomorphism of vector spaces
+\begin{align*}
+  \Ext^1(\mathscr E,\mathscr E) \cong H^1(C,\End(\mathscr E))
+\end{align*}
+we have a natural inclusion
+\begin{align*}
+  TM^s_h(r,d) \longinc M^s_H(r,d).
+\end{align*}
 
 \begin{corollary}\label{thm:cotangent_is_open}
   $TM^s_h(r,d)\subseteq M^s_H(r,d)$ is an open subscheme.
@@ -4409,7 +4442,6 @@ extended.
 
 \section{Comparison of the Constructions}
 
-
 The analytic approach
 quickly lead us to consider the quotients of spaces of unitary connections
 by the action of a compact gauge group. We were forced to restrict these
@@ -4453,15 +4485,86 @@ order to deal with these problems.
 
 \subsection{Bypassing Banach Manifolds}
 
-\missingsection
+Our initial plan was to briefly construct the analytic moduli spaces 
+and establish some results, such as that the cotangent vectors of
+stable bundles are open dense in the space of stable Higgs bundles.
+The main focus was to be the algebraic construction and establishing the
+same results in this new language. Unfortunately, we were not able to
+cut sufficiently many corners to make this work. In particular,
+it ought to be possible to describe the complex 
+manifold structures of $M^s_\dol(r,d)$ and $M^s_\varphi(r,d)$
+without making use of Banach Manifolds, Sobolev completions, and
+Elliptic regularity. We have not found a way to do so.
+
+\subsection{General Ringed Spaces}
+
+Another issue we ran into when streamlining the presentation is
+a decent amount of duplication. Indeed, the theory of coherent sheaves
+on manifolds is reasonably similar to that on schemes. Hence
+one might reasonably begin with a more general exposition of this
+theory, establishing the correspondence between locally free sheaves
+and vector bundles, inveriants of such sheaves, and the relation to
+embeddings in projective space. Indeed, this is probably the correct
+approach for a more comprehensive treatment of the material. 
+Unfortunately, care is required when highlighting special properties
+of one case or the other, so that it is unclear whether, at the end
+of the day, any space would be saved at all. Moreover, the way we
+have chosen to approach the problem is makes the material more
+acessible to readers coming from an analytic background.
 
 \subsection{Language Barrier}
 
-\missingsection
+Another problem that one runs into when trying to use a more
+algebraic language to present the analytic material is that,
+unsurprisingly, the analytic language is more suitable for the
+task. While it is certainly possible to exclusively focus on
+sheaves and define moduli spaces in the analytic category, many
+of the proofs are most easily completed using analytic methods.
+Hence unifying the language would inevitably come at the cost
+of adding a substantial degree of complexity to one half of the
+material.
 
 \section{Future Work}
 
-\missingsection
+In many ways, the moduli spaces constructed in this paper are
+merely the tip of the iceberg. There are two obvious ways in which
+the treatment may be extended: Firstly, there are many properties
+that one may establish. Secondly, the constructions naturally generalise
+to more general sheaves on more general base spaces. We discuss
+some of these extensions.
+
+\subsection{K\"ahler Geometry}
+
+On the analytic side, the lowest hanging fruit is K\"ahler geometry.
+It is very straightforward to introduce moment maps and thus obtain
+symplectic forms on the moduli spaces. Showing that the forms thus
+obtained are actually K\"ahler or Hyperk\"ahler would connect more
+tightly to complex analytic geometry. Moreover, K\"ahler manifolds
+come with a wide range of useful results such as Hodge's theorem 
+or Poincar\'e duality for harmonic forms. These would come in
+particularly useful when further studying the moduli spaces.
+
+\subsection{More General Bundles on More General Surfaces}
+
+An obvious generalisation of the moduli problems considered here
+arise by recalling that vector bundles are just principal
+$GL_n$-bundles. Hence it is a natural next step to think about
+moduli spaces principal bundles. Moreover, there is a natural
+notion of decorated principal bundle for which moduli spaces have
+been constructed and studied. \missingcitation
+Another generalisation arises by considering wider classes
+of base spaces such as algebraic surfaces \missingcitation.
+
+\subsection{Stacks}
+
+Perhaps the most obvious extension of the theory presented here
+arises when trying to study the moduli spaces without discarding
+any isomorphism classes. Indeed, we did not even manage to pay a lot
+of attention to the spaces of semi-stable bundles, which at least
+are analytic spaces or schemes. However, it is possible to go one
+step further. Moduli stacks are powerful enough to capture the whole
+story. As an introduction to the subject, one may consider
+\cite{cm2017} where the moduli stack of Higgs bundles is studied. 
 
 \pagebreak
 \renewcommand{\bibname}{References}
