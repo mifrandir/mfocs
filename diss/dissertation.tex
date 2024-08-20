@@ -13,7 +13,7 @@
 \author{Franz Miltz}             %your name
 \college{Lady Margaret Hall}  %your college
 
-\renewcommand{\submittedtext}{A dissertation submitted for the degree of}
+%\renewcommand{\submittedtext}{A dissertation submitted for the degree of}
 \degree{Master of Science}     %the degree
 \degreedate{August 2024}         %the degree date
 
@@ -33,15 +33,46 @@
 
 \maketitle                  % create a title page from the preamble info
 \begin{dedication}
-  \todo{dedication}
+  To my parents \todo{dedication}
 \end{dedication}
 
 \begin{acknowledgements}
-  \todo{acknowledgements}
+  I am extremely grateful to my supervisor, Professor Jason Lotay,
+  who has been answering my questions with great intuition ever since
+  guiding me towards a project idea. Thank you for tolerating my
+  ignorance towards the beauty of analytic geometry.
+
+  Thanks should also go to my good friend David Bowman who has
+  been of great help in finding references for the more elementary
+  facts of algebraic geometry.
+
+  Last but not least, I have to thank my parents,
+  Mrs Manina Miltz-Kulowatz and Mr Torsten Leske, who have never
+  failed to support me over the past 23 years. Thank you for
+  making all of this possible.
 \end{acknowledgements}
 
 \begin{abstract}
-  \todo{abstract}
+  Moduli spaces are geometric spaces parametrising geometric objects.
+  We review two approaches to the construction of
+  well-known moduli spaces of certain types of vector bundles
+  on a fixed compact Riemann surface.
+
+  The analytic construction realises the moduli spaces as complex
+  manifolds obtained via infinite dimensional quotients by gauge
+  transformations. Using elliptic regularity, we show that the
+  constructions are independent of the choice of Sobolev completion.
+
+  The algebraic construction uses techniques from Mumford's Geometric
+  Invariant Theory (GIT). Here we obtain the moduli space of
+  stable holomorphic bundles as a GIT quotient of a Quot scheme with
+  respect to a linearised ample sheaf. The result is a smooth
+  quasi-projective variety. A similar process yields another
+  quasi-projective variety, the moduli space of stable Higgs bundles.
+
+  Finally, we recall a result that allows us to identify the
+  analytification of the algebraic spaces with their analytic
+  counterparts.
 \end{abstract}
 
 \begin{romanpages}          % start roman page numbering
@@ -58,17 +89,17 @@ finds that there are uncountably many distinct instances. In such cases,
 the primary goal then becomes to construct and study geometric spaces
 whose points correspond to the objects in question. A well-known example
 of this is projective space $\projective{n}{}$ which parametrises
-subspaces of $\affine{n}{}$ of codimension 1. Geometric 
+subspaces of $\affine{n}{}$ of codimension 1. Geometric
 spaces parametrising geometric objects are referred to as moduli spaces.
 We are going to study methods of constructing methods of constructing
 moduli spaces in analytic and algebraic categories.
 
 The primary examples we are going to consider are types of holomorphic
 vector bundles on compact Riemann surfaces $C$ of genus $g\geq 2$. By Riemann surface
-we mean a connected one-dimensional complex manifold. In other words, 
+we mean a connected one-dimensional complex manifold. In other words,
 one of the simplest non-trivial base spaces possible. Holomorphic vector
 bundles are particularly suitable to demonstrate the core principles
-for three reasons. Firstly, the moduli spaces are non-trivial but 
+for three reasons. Firstly, the moduli spaces are non-trivial but
 well-known and well-behaved. A priori, this is not guaranteed. For example, up to isomorphism there are only countably
 many smooth bundles for any fixed $C$. This observation allows us to
 focus on holomorphic bundles with a fixed underlying smooth bundle.
@@ -91,7 +122,10 @@ on $C$ would admit a complex manifold structure. Indeed, it is not difficult
 to construct the corresponding topological space. Unfortunately, one
 quickly observes that the space thus obtained is not Hausdorff and hence
 makes for a poor candidate for an analytic moduli space.
-The only solution is to discard some points.
+The only solution is to discard some points. We are going to present
+the construction of the analytic moduli space of holomorphic bundles
+due to Narasimhan and Seshadri \cite{ns1964}. For Higgs bundles, our
+construction will follow that of Hitchin in \cite{hitchin1987}.
 
 If one thinks of the moduli space as the space of all holomorphic bundles
 $A_{\dol}(E)$ with underlying smooth bundle $E$ quotiented by the action
@@ -149,23 +183,24 @@ We are thus going to obtain schemes $M^s_h(r,d)$ and $M^s_H(r,d)$
 of stable locally free sheaves and stable Higgs sheaves of rank $r$ and
 degree $d$, respectively.
 
-Further analysis is going to reveal that the algebraic moduli spaces, 
+Further analysis is going to reveal that the algebraic moduli spaces,
 although obtained by very different methods, have much the same
 properties as their analytic counterparts. In particular, the stable
 sheaves correspond to stable bundles. Moreover, the moduli spaces
 are indeed smooth varieties. Finally, we see that the Zariski cotangent
 bundle of $M^s_h(r,d)$ is an open subscheme of $M^s_H(r,d)$, which
 is analogous to being open and dense in the analytic sense. This is
-not a coincidence: It may be shown that the analytification functor
-takes the algebraic moduli spaces to the analytic ones. Hence the
-algebraic approach recovers the analytic properties fully.
+not a coincidence: It may be shown that the complex manifolds obtained
+by analytifying the algebraic moduli spaces are biholomorphic to
+the analytic ones. Hence algebraic construction recover the analytic
+moduli spaces fully.
 
 \chapter{As Manifolds}
 
-Consider the set of holomorphic bundles on a compact Riemann surface,
-up to isomorphism. What can we say about this set? What additional
-structure does it have? How does this structure change if we equip
-the bundles with additional data?
+Consider a compact Riemann $C$ of genus $g\geq 2$.
+What can we say about the set of holomorphic vector bundles on $C$,
+up to isomorphism? What geometric structure does it have? How does
+this structure change if we equip the bundles with additional data?
 In this chapter we are going to construct complex manifolds whose
 points correspond to equivalence classes of holomorphic bundles
 and Higgs bundles, a type of decorated holomorphic bundle. These
@@ -181,7 +216,8 @@ allows for the construction of the moduli spaces. Although unstable
 bundles are the main obstacle, removing them does not trivialise the
 problem. To obtain the moduli spaces, we have to consider quotients
 of infinite dimensional manifolds by group actions. Such considerations
-require us to introduce the theory of Banach manifolds.
+require us to introduce Banach manifolds, Sobolev completions, and
+Elliptic regularlity.
 
 The first part of this chapter is going to be spent discussing the kinds of
 objects that we aim to classify, i.e. holomorphic bundles and Higgs
@@ -257,7 +293,8 @@ manifold:
 Now a holomorphic bundle is a smooth bundle where the trivialisations
 (\ref{eq:smooth_trivialisation}) are biholomorphic. As holomorphic
 maps are smooth, each holomorphic bundle has an underlying smooth
-structure.
+structure. However, a smooth bundle may underly multiple holomorphic
+bundles or none at all.
 
 \begin{example}
   smooth bundle with multiple holomorphic structures
@@ -1988,32 +2025,21 @@ the question: Which bundles did we lose in the process?
 To answer this question, we define the following:
 \begin{definition}\label{def:stable_bundle}
   Let $(E,\dol_E)$ be a holomorphic bundle on a compact complex
-  manifold $X$. Then $(E,\dol_E)$ is
-  \begin{itemize}
-    \item \emph{slope semistable} if, for all holomorphic subbundles
-          $(F,\dol_F)\subseteq (E,\dol_E)$,
-          \begin{align}\label{eq:stability}
-            \frac{\deg F}{\rank F} \leq \frac{\deg E}{\rank E};
-          \end{align}
-    \item \emph{slope stable} if the inequality (\ref{eq:stability})
-          is strict for all holomorphic subbundles.
-    \item \emph{slope polystable} if it decomposes as a direct sum
-          of slope stable subbundles.
-  \end{itemize}
+  manifold $X$. Then $(E,\dol_E)$ is \emph{slope stable}
+  if, for all holomorphic subbundles
+  $(F,\dol_F)\subset (E,\dol_E)$,
+  \begin{align}\label{eq:stability}
+    \frac{\deg F}{\rank F} < \frac{\deg E}{\rank E}.
+  \end{align}
 \end{definition}
 
-Now let $A^s_\dol(E)$ and $A^{ps}_\dol(E)$ denote the sets of slope stable
-and slope semistable bundles, respectively.
-Then we have the following:
+Now let $A^s_\dol(E)$ denote the sets of slope stable bundles. Then we
+have the following:
 
 \begin{theorem}[Donaldson–Uhlenbeck–Yau]\label{thm:duy}
   The correspondence (\ref{eq:chern_correspondence}) between
   Dolbeault operators on $E$ and holomorphic unitary connections in $(E,h)$
-  restricts to maps
-  \begin{align}\label{eq:duy}
-    A^s_\dol(E) \to A^s_\nabla(E,h), \hspace{1cm}
-    A^{ps}_\dol(E) \to A^{ps}_\nabla(E,h).
-  \end{align}
+  restricts to a bijection $A^s_\dol(E) \to A^s_\nabla(E,h).$
 \end{theorem}
 
 This theorem is highly non-trivial and we are not going to attempt
@@ -2041,8 +2067,8 @@ that it may be derived from:
         a correspondence between connections and representations.
 \end{itemize}
 
-Noting that the maps (\ref{eq:duy}) are equivariant with respect
-to gauge transformations and that the moduli spaces corresponding
+Noting that the bijection $A^s_\dol(E)\to A^s_\nabla(E,h)$ is
+equivariant with respect to gauge transformations and that the moduli spaces corresponding
 to isomorphic smooth bundles are naturally isomorphic, we may define
 the moduli spaces as abstract manifolds
 \begin{align}\label{eq:abstract_analytic_spaces}
@@ -2337,7 +2363,7 @@ whose kernel is a subspace of codimension 1, i.e. a closed point of
 $\projective{}{}(\Gamma(C,\mathscr L)^\vee)$. It turns out that this map is an
 embedding when we choose $\mathscr L$ to be a sufficently large tensor power of
 the canonical sheaf $\mathscr K := \Gamma(-,K)$, e.g. $\mathscr L = \mathscr
-K^{\otimes 2}$.  Thus $C$ is an algebraic subvariety of
+  K^{\otimes 2}$.  Thus $C$ is an algebraic subvariety of
 $\projective{}{}(\Gamma(C,\mathscr L)^\vee)$ and hence by Chow's
 theorem an algebraic curve. \todo{analytic?}
 
@@ -4191,10 +4217,10 @@ interest to us:
 
 \subsection{Hilbert-Mumford Criterion}
 
-It is possible to show that $x$ is stable (resp. semistable) with
+It is possible to show that $x$ is stable with
 respect to the $\mathbf G_m$-action induced by $\lambda$ if, and only
 if, $\mu^{\mathscr L}(x,\lambda)$ and $\mu^{\mathscr L}(x,\lambda^{-1})$
-positive (resp. non-negative).
+positive.
 See \cite[Lemma 6.9]{hoskins2016}.
 The Hilbert-Mumford criterion now just says that measuring the
 stability of a point with respect to every one-parameter subgroup
@@ -4202,10 +4228,10 @@ is indeed sufficient to determine the stability with respect to the
 general action:
 
 \begin{theorem}[Hilbert-Mumford]
-  A closed point $x$ of $X$ is stable (resp. semistable) with
+  A closed point $x$ of $X$ is stable with
   respect to $\mathscr L$ if, and only if, for all one-parameter
   subgroups $\lambda$ of $G$, the Hilbert-Mumford weight
-  $\mu^{\mathscr L}(x,\lambda)$ is positive (resp. non-negative).
+  $\mu^{\mathscr L}(x,\lambda)$ is positive.
   \begin{proof}
     2.1 in Mumford GIT, \cite[Theorem 4.9]{newstead1978}.
     \missingproof
@@ -4255,16 +4281,11 @@ locally free sheaves:
 
 \begin{lemma}
   Let $\mathscr E=\Gamma(-,E)$ be a locally free sheaf on $C$.
-  Then
-  \begin{itemize}
-    \item $E$ is slope semistable if, and only if, for all subsheaves
-          $\mathscr F\subseteq\mathscr E$ with $0<\rank\mathscr F<\rank\mathscr E$,
-          \begin{align}\label{eq:sheaf_slope_stability}
-            \frac{\deg\mathscr F}{\rank\mathscr F}\leq\frac{\deg\mathscr E}{\rank\mathscr E};
-          \end{align}
-    \item $E$ is slope stable if, and only if, it is slope semistable
-          and the inequality (\ref{eq:sheaf_slope_stability}) is always strict.
-  \end{itemize}
+  Then $E$ is slope stable if, and only if, for all subsheaves
+  $\mathscr F\subset\mathscr E$ with $0<\rank\mathscr F<\rank\mathscr E$,
+  \begin{align}\label{eq:sheaf_slope_stability}
+    \frac{\deg\mathscr F}{\rank\mathscr F}<\frac{\deg\mathscr E}{\rank\mathscr E};
+  \end{align}
   \begin{proof}
     \missingproof
   \end{proof}
@@ -4281,10 +4302,8 @@ calculating the limits of $\lambda(t)\cdot q$ as $t\to 0$.
   \begin{align*}
     d > \max(r^2(2g-2), gr^2 + r(2g-2))
   \end{align*}
-  then, for $\ell$ sufficiently large,
-  $Q^s_\circ(r,d)(\mathscr L_\ell)$ and $Q^{ss}_\circ(r,d)(\mathscr L_\ell)$
-  consist of all stable and semistable sheaves of $Q_\circ(r,d)$,
-  respectively.
+  then, for $\ell$ sufficiently large, $Q^s_\circ(r,d)(\mathscr L_\ell)$
+  consist of all families of stable sheaves of $Q_\circ(r,d)$, respectively.
   \begin{proof}
     \missingproof
   \end{proof}
@@ -4298,10 +4317,8 @@ For each $d'$, the map $q \mapsto q(d')$ is a bijection
 $Q^s_\circ(r,d)\to Q_\circ(r,d+d')$. Thus we have the following:
 
 \begin{corollary}\label{thm:stability_of_lf_sheaves}
-  For $\ell$ sufficiently large,
-  $Q^s_\circ(r,d)(\mathscr L_\ell)$ and $Q^{ss}_\circ(r,d)(\mathscr L_\ell)$
-  consist of all slope stable and slope semistable sheaves of $Q_\circ(r,d)$,
-  respectively.
+  For $\ell$ sufficiently large, $Q^s_\circ(r,d)(\mathscr L_\ell)$
+  consist of all families of  slope stable sheaves of $Q_\circ(r,d)$.
 \end{corollary}
 
 In particular, we find that the moduli spaces stabilise as $\ell \to \infty$.
@@ -4317,10 +4334,8 @@ Now the stability analysis for Higgs sheaves is analagous.
 \missingsection
 
 \begin{corollary}\label{thm:stability_of_higgs_sheaves}
-  For $\ell$ sufficiently large,
-  $F^s(r,d)(\mathscr L_\ell)$ and $F^{ss}(r,d)(\mathscr L_\ell)$
-  consist of all slope stable and slope semistable sheaves of $F(r,d)$,
-  respectively.
+  For $\ell$ sufficiently large, $F^s(r,d)(\mathscr L_\ell)$
+  consist of all families of slope stable of $F(r,d)$.
 \end{corollary}
 
 In particular, the moduli spaces of Higgs sheaves also stabilise as
@@ -4560,13 +4575,13 @@ order to deal with these problems.
 
 \subsection{Bypassing Banach Manifolds}
 
-Our initial plan was to briefly construct the analytic moduli spaces 
+Our initial plan was to briefly construct the analytic moduli spaces
 and establish some results, such as that the cotangent vectors of
 stable bundles are open dense in the space of stable Higgs bundles.
 The main focus was to be the algebraic construction and establishing the
 same results in this new language. Unfortunately, we were not able to
 cut sufficiently many corners to make this work. In particular,
-it ought to be possible to describe the complex 
+it ought to be possible to describe the complex
 manifold structures of $M^s_\dol(r,d)$ and $M^s_\varphi(r,d)$
 without making use of Banach Manifolds, Sobolev completions, and
 Elliptic regularity. We have not found a way to do so.
@@ -4580,7 +4595,7 @@ one might reasonably begin with a more general exposition of this
 theory, establishing the correspondence between locally free sheaves
 and vector bundles, inveriants of such sheaves, and the relation to
 embeddings in projective space. Indeed, this is probably the correct
-approach for a more comprehensive treatment of the material. 
+approach for a more comprehensive treatment of the material.
 Unfortunately, care is required when highlighting special properties
 of one case or the other, so that it is unclear whether, at the end
 of the day, any space would be saved at all. Moreover, the way we
@@ -4615,7 +4630,7 @@ It is very straightforward to introduce moment maps and thus obtain
 symplectic forms on the moduli spaces. Showing that the forms thus
 obtained are actually K\"ahler or Hyperk\"ahler would connect more
 tightly to complex analytic geometry. Moreover, K\"ahler manifolds
-come with a wide range of useful results such as Hodge's theorem 
+come with a wide range of useful results such as Hodge's theorem
 or Poincar\'e duality for harmonic forms. These would come in
 particularly useful when further studying the moduli spaces.
 
@@ -4634,12 +4649,13 @@ of base spaces such as algebraic surfaces \missingcitation.
 
 Perhaps the most obvious extension of the theory presented here
 arises when trying to study the moduli spaces without discarding
-any isomorphism classes. Indeed, we did not even manage to pay a lot
-of attention to the spaces of semi-stable bundles, which at least
+any isomorphism classes. Indeed, we did not pay a lot
+of attention to the spaces of semistable bundles, which at least
 are analytic spaces or schemes. However, it is possible to go one
-step further. Moduli stacks are powerful enough to capture the whole
-story. As an introduction to the subject, one may consider
-\cite{cm2017} where the moduli stack of Higgs bundles is studied. 
+step further. Moduli stacks are powerful enough to parametrise
+all isomorphism classes of vector bundles, including the unstable ones.
+As an introduction to the subject, one may consider
+\cite{cm2017} where the moduli stack of Higgs bundles is studied.
 
 \pagebreak
 \renewcommand{\bibname}{References}
