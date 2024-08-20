@@ -68,16 +68,21 @@ vector bundles on compact Riemann surfaces $C$ of genus $g\geq 2$. By Riemann su
 we mean a connected one-dimensional complex manifold. In other words, 
 one of the simplest non-trivial base spaces possible. Holomorphic vector
 bundles are particularly suitable to demonstrate the core principles
-for three reasons. Firstly, the moduli spaces are non-trivial. A priori, this
-is not guaranteed. For example, up to isomorphism there are only countably
+for three reasons. Firstly, the moduli spaces are non-trivial but 
+well-known and well-behaved. A priori, this is not guaranteed. For example, up to isomorphism there are only countably
 many smooth bundles for any fixed $C$. This observation allows us to
 focus on holomorphic bundles with a fixed underlying smooth bundle.
-Secondly, there are well-known moduli spaces of such bundles, meaning the problem is not too
-difficult. Finally, there are frequently studied extensions to holomorphic
+Secondly, holomorphic bundles on compact Riemann surfaces are equivalent
+to finite rank locally free sheaves on smooth algebraic curves. This
+makes the problem both analytic and algebraic in nature, enabling
+us to showcase both approaches.
+Finally, there are frequently studied extensions to holomorphic
 bundles which enable us to illustrate how to adapt moduli spaces in the
 presence of additional structure. The primary example of such decorated
 bundles that we are going to contemplate are Higgs bundles which were
-first introduced by Hitchin in \cite{hitchin1987}.
+first introduced by Hitchin in \cite{hitchin1987}. A
+Higgs bundle is a holomorphic bundle equipped with a certain
+vector valued holomorphic 1-form.
 
 \section{The Analytic Point of View}
 
@@ -113,7 +118,7 @@ holomorphic section of $\End\mathcal E\otimes TC$ where $TC$ is the
 holomorphic tangent bundle. The same considerations as above lead to
 the construction of the moduli space $M^s_\varphi(E) := A^s_\varphi(E)/\Aut(E)$
 of stable Higgs bundles with underlying smooth vector bundle $E$. This also is a
-complex manifold. It is worth noting that, while the procedure outline
+complex manifold. It is worth noting that, while the procedure outlined
 here is correct in principle, the infinite-dimensional nature of the
 problem is going to require us to do a lot of additional work.
 Nonetheless, the resulting moduli space is finite-dimensional.
@@ -126,12 +131,34 @@ of $M^s_\varphi(E)$.
 
 \section{The Algebraic Point of View}
 
-\begin{itemize}
-  \item Riemann surfaces
-  \item complex geometry at the intersection between the analytic and algebraic settings
-\end{itemize}
+If one regards the compact Riemann surfaces $C$ as an algebraic curve
+then holomorphic bundles correspond to locally free sheaves of finite
+rank. In this context, a natural question to ask is whether there is
+some scheme whose points are such locally free sheaves. Of course,
+having gone through the analytic construction and being aware of
+the correspondence between algebraic and analytic geometry, we know
+that there ought to exist a moduli space of stable bundles that is not
+just a scheme, but in fact a smooth variety. Starting only with
+general properties of quotients of schemes by group actions, we will
+see that the notions of stability that we encountered in the analytic
+construction appear quite naturally in the algebraic case. Indeed,
+Mumford's Geometric Invariant Theory (GIT) \cite{mumford1994}
+precisely describes stability conditions for the construction of quotients
+by group actions.
+We are thus going to obtain schemes $M^s_h(r,d)$ and $M^s_H(r,d)$
+of stable locally free sheaves and stable Higgs sheaves of rank $r$ and
+degree $d$, respectively.
 
-\todo{make sure that every section introduces all the objects we are thinking about}
+Further analysis is going to reveal that the algebraic moduli spaces, 
+although obtained by very different methods, have much the same
+properties as their analytic counterparts. In particular, the stable
+sheaves correspond to stable bundles. Moreover, the moduli spaces
+are indeed smooth varieties. Finally, we see that the Zariski cotangent
+bundle of $M^s_h(r,d)$ is an open subscheme of $M^s_H(r,d)$, which
+is analogous to being open and dense in the analytic sense. This is
+not a coincidence: It may be shown that the analytification functor
+takes the algebraic moduli spaces to the analytic ones. Hence the
+algebraic approach recovers the analytic properties fully.
 
 \chapter{As Manifolds}
 
