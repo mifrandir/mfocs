@@ -70,13 +70,61 @@ one of the simplest non-trivial base spaces possible. Holomorphic vector
 bundles are particularly suitable to demonstrate the core principles
 for three reasons. Firstly, the moduli spaces are non-trivial. A priori, this
 is not guaranteed. For example, up to isomorphism there are only countably
-many smooth bundles for any fixed $C$. Secondly, there are well-known
-moduli spaces of such bundles, meaning the problem is not too
+many smooth bundles for any fixed $C$. This observation allows us to
+focus on holomorphic bundles with a fixed underlying smooth bundle.
+Secondly, there are well-known moduli spaces of such bundles, meaning the problem is not too
 difficult. Finally, there are frequently studied extensions to holomorphic
 bundles which enable us to illustrate how to adapt moduli spaces in the
-presence of additional structure. The primary example we are going
-to contemplate are Higgs bundles which were first introduced by
-Hitchin in \cite{hitchin1987}.
+presence of additional structure. The primary example of such decorated
+bundles that we are going to contemplate are Higgs bundles which were
+first introduced by Hitchin in \cite{hitchin1987}.
+
+\section{The Analytic Point of View}
+
+In an ideal world, the set of all isomorphism classes of holomorphic bundles
+on $C$ would admit a complex manifold structure. Indeed, it is not difficult
+to construct the corresponding topological space. Unfortunately, one
+quickly observes that the space thus obtained is not Hausdorff and hence
+makes for a poor candidate for an analytic moduli space.
+The only solution is to discard some points.
+
+If one thinks of the moduli space as the space of all holomorphic bundles
+$A_{\dol}(E)$ with underlying smooth bundle $E$ quotiented by the action
+of the automorphism group $\Aut(E)$ then there are two ways in which
+the moduli space can fail to be a manifold. Firstly, one requires that
+the quotient is locally a manifold. Around a point $\mathcal E\in A_\dol(E)$
+this means that there needs to be a slice, i.e. a submanifold whose
+tangent space at $\mathcal E$ complements the tangent space of the orbit
+of $\mathcal E$. This may fail to be the case as $A_\dol(E)$ is
+infinite-dimensional. Secondly, for the quotient to be a manifold
+globally, one requires that the slices are uniform. This is the case
+whenever the orbits are uniform. Hence a sufficient condition is that
+the action is free at every point.
+
+One may use these two conditions to construct subsets
+\begin{align*}
+  A^s_\dol(E) \subset A^{ps}_\dol(E) \subset A_\dol(E)
+\end{align*}
+and hence a complex manifold $M_\dol^s(E) := A^s_\dol(E) / \Aut(E)$
+whose points are isomorphism classes of stable holomorphic bundles.
+Now a Higgs bundle on $C$ is just a pair $(\mathcal E,\varphi)$
+where $\mathcal E$ is a holomorphic bundle and $\varphi$ is a
+holomorphic section of $\End\mathcal E\otimes TC$ where $TC$ is the
+holomorphic tangent bundle. The same considerations as above lead to
+the construction of the moduli space $M^s_\varphi(E) := A^s_\varphi(E)/\Aut(E)$
+of stable Higgs bundles with underlying smooth vector bundle $E$. This also is a
+complex manifold. It is worth noting that, while the procedure outline
+here is correct in principle, the infinite-dimensional nature of the
+problem is going to require us to do a lot of additional work.
+Nonetheless, the resulting moduli space is finite-dimensional.
+
+After constructing the moduli spaces, one may wish to investigate
+them a little further. In particular, one finds that the cotangent
+vectors of holomorphic bundles may be thought of Higgs field and that
+the cotangent bundle $T^* M^s_\dol(E)$ is an open dense submanifold
+of $M^s_\varphi(E)$.
+
+\section{The Algebraic Point of View}
 
 \begin{itemize}
   \item Riemann surfaces
@@ -2088,7 +2136,7 @@ directly, we may now simply deduce it from $T^*M_\dol(E)$.
   \end{proof}
 \end{corollary}
 
-\chapter{As Schemes}
+\chapter{As Smooth Varieties}
 
 The moduli space of holomorphic bundles on a compact Riemann
 surface maybe constructed as a complex manifold exclusively
