@@ -10,12 +10,12 @@
 
 \title{Analytic and Algebraic\\[1ex]Moduli Spaces of Vector Bundles}   %note \\[1ex] is a line break in the title
 
-\author{Franz Miltz}             %your name
-\college{Lady Margaret Hall}  %your college
+\author{Candidate 1082394}             %your name
+\college{[redacted]}  %your college
 
 %\renewcommand{\submittedtext}{A dissertation submitted for the degree of}
-\degree{Master of Science}     %the degree
-\degreedate{August 2024}         %the degree date
+\degree{MSc Mathematics and Foundations of Computer Science}     %the degree
+\degreedate{Summer 2024}         %the degree date
 
 \addbibresource{references.bib}
 
@@ -37,42 +37,44 @@
 \end{dedication}
 
 \begin{acknowledgements}
-  I am extremely grateful to my supervisor, Professor Jason Lotay,
+  I am extremely grateful to my supervisor, [redacted],
   who has been answering my questions with great intuition ever since
   guiding me towards a project idea. Thank you for tolerating my
   ignorance towards the beauty of analytic geometry.
 
-  Thanks should also go to my good friend David Bowman who has
+  Thanks should also go to my good friend [redacted] who has
   been of great help in finding references for the more elementary
   facts of algebraic geometry.
 
   Last but not least, I have to thank my parents,
-  Mrs Manina Miltz-Kulowatz and Mr Torsten Leske, who have never
+  [redacted] and [redacted], who have never
   failed to support me over the past 23 years. Thank you for
   making all of this possible.
 \end{acknowledgements}
 
 \begin{abstract}
-  Moduli spaces are geometric spaces parametrising geometric objects.
-  We review two approaches to the construction of
-  well-known moduli spaces of certain types of vector bundles
-  on a fixed compact Riemann surface.
+  Moduli spaces are geometric spaces parametrising geometric objects.  We review
+  and compare two well-known approaches, one analytic and one algebraic, to the
+  construction of moduli spaces of holomorphic vector bundles and Higgs bundles,
+  respectively, on a fixed compact Riemann surface. Special attention
+  is paid to the development of a toolkit that is simiarly applicable to
+  other moduli problems.
 
-  The analytic construction realises the moduli spaces as complex
+  The analytic approach realises the moduli spaces as complex
   manifolds obtained via infinite dimensional quotients by gauge
-  transformations. Using elliptic regularity, we show that the
-  constructions are independent of the choice of Sobolev completion.
+  transformations. We demonstrate how to use the theory of elliptic
+  regularlity to show that the constructions are independent
+  of the choice of Sobolev completion.
 
-  The algebraic construction uses techniques from Mumford's Geometric
-  Invariant Theory (GIT). Here we obtain the moduli space of
-  stable holomorphic bundles as a GIT quotient of a Quot scheme with
-  respect to a linearised ample sheaf. The result is a smooth
-  quasi-projective variety. A similar process yields another
-  quasi-projective variety, the moduli space of stable Higgs bundles.
+  The algebraic moduli space is constructed as a quotient of a
+  Quot scheme with respect to a linearised ample sheaf in the
+  sense of Mumford's Geometric Invariant Theory. The result is a smooth
+  quasi-projective variety. A similar process yields the moduli
+  space of Higgs bundles.
 
-  Finally, we recall a result that allows us to identify the
-  analytification of the algebraic spaces with their analytic
-  counterparts.
+  Finally, we survey further results about the spaces. In particular,
+  we find that the analytification of the algebraic space yields the
+  analytic space.
 \end{abstract}
 
 \begin{romanpages}          % start roman page numbering
@@ -3265,14 +3267,18 @@ for $f\in R$ and $g,h\in G$.
           See e.g. \cite[\href{https://stacks.math.columbia.edu/tag/022W}{Tag 022W}]{stacks-project} for details.
     \item The sepcial linear group $SL_N$ analogous to the above by
           quotienting by $\det(x_{ij})^2 - 1$.
-    \item \todo{GL(V)}
+    \item More generally, if $V$ is a vector space of finite dimension $n$, then
+          $GL(V)$ is the scheme whose $T$-points are automorphisms of
+          $V\otimes\mathscr O_T$. Choosing an isomorphism
+          $V\cong\mathbb C^n$ gives an isomorphism $GL(V)\cong GL_n$.
   \end{enumerate}
 \end{example}
-But what do these group schemes have to do with their well-known
-counterparts. For example, how does the scheme $GL_n$ relate to the
+
+What do these group schemes have to do with their well-known
+counterparts? For example, how does the scheme $GL_n$ relate to the
 group $GL_n(\mathbb{C})$? The notation is no coincidence.
 Group schemes induce group structures on their schematic points:
-\begin{lemma}
+\begin{lemma}\label{lem:group_yoneda}
   Let $G$ be a scheme with maps (\ref{eq:group_maps}). The following
   are equivalent:
   \begin{enumerate}
@@ -3536,9 +3542,8 @@ $\mathscr O_{X/G}\inc\mathscr O_X$ should be:
   Thus we have a sheaf $\mathscr O_X^G$ on $X$.
 \end{definition}
 
-\begin{example}
-  \missingexample
-\end{example}
+We are going to compute some examples of such invariant rings when
+constructing affine GIT quotients in \ref{sec:affine_good_quotients}.
 
 \subsection{Quotients}
 
@@ -3649,7 +3654,7 @@ Note that the usual statement of Nagata's theorem
 Fortunately, we have assume our reductive groups to be affine, hence
 this is a trivial condition. \cite[Lemma 3.8]{hoskins2016}
 
-\subsection{Good Quotients}
+\subsection{Good Quotients}\label{sec:affine_good_quotients}
 
 Now consider a reductive group $G$ acting on an affine scheme $X$. It is
 clear what the good quotient in this case must be:
@@ -3797,8 +3802,9 @@ quotient into a geometric quotient is to exclude certain orbits.
   Recall the action of $\mathbf G_m$ on $\mathbf A^2$ from
   \ref{ex:nice_multiplicative_action}. We note that the orbits
   $G\cdot(1,0)$ and $G\cdot(0,1)$ are not closed. Hence their points
-  are not stable. Further, we have the stabiliser $G_{(0,0)}=G$ which
-  is not zero-dimensional. Hence the stable points are
+  are not stable. Further, we have the stabiliser $G_{(0,0)}$
+  is canonically isomorphic to $G$ which is not zero-dimensional.
+  Hence the stable points are
   \begin{align*}
     (\mathbf A^2)^s = \{(a,b):a,b\neq 0\} = \Spec \mathbb C[x^\pm,y^\pm]
   \end{align*}
@@ -3939,25 +3945,37 @@ $G$-linearisations.
 \end{example}
 
 \begin{lemma}\label{lem:linearisations_give_reps}
-  Consider a linearisation $L$ inducing the action
-  $\tilde\sigma : G\times L\to L$.
-  Then there is a natural group homomorphism $G\to GL(\Gamma(X,L))$.
+  Consider a $G$-linearised quasi-coherent sheaf $\mathscr E$ on $X$.
+  Then there is a natural group homomorphism $G\to GL(\Gamma(X,\mathscr E))$.
   \begin{proof}[Proof idea]
     Following \cite[Lemma 5.19]{hoskins2016}. As $\Gamma(X,L)$
     is finite-dimensional, the objective is to construct a map
     $\Gamma(X,L) \to \mathscr O(G) \otimes \Gamma(X,L)$
     satisfying the relevant conditions. One may do so by considering
     $\sigma^* : \Gamma(X,L) \to \Gamma(G\times X,\sigma^*L)$ and
-    composing with the isomorphism from the linearisation and
-    the K\"unneth formula for sheaf cohomology: \todo{diagram}
+    composing with the isomorphism from the linearisation:
+    \begin{equation*}
+      % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEdhbW1hKFgsXFxtYXRoc2NyIEUpIl0sWzEsMCwiXFxHYW1tYShHXFx0aW1lcyBYLFxcc2lnbWFeKlxcbWF0aHNjciBFKSJdLFsyLDAsIlxcR2FtbWEoR1xcdGltZXMgWCxcXHBpXipcXG1hdGhzY3IgRSkiXSxbMywwLCJcXEdhbW1hKEcsXFxtYXRoc2NyIE9fRylcXG90aW1lc1xcR2FtbWEoWCxcXG1hdGhzY3IgRSkiXSxbMCwxLCJcXHNpZ21hXioiXSxbMSwyLCJcXFBoaSJdLFsyLDMsIlxcY29uZyJdXQ==
+      \begin{tikzcd}
+        {\Gamma(X,\mathscr E)} & {\Gamma(G\times X,\sigma^*\mathscr E)} & {\Gamma(G\times X,\pi^*\mathscr E)} & {\Gamma(G,\mathscr O_G)\otimes\Gamma(X,\mathscr E)}
+        \arrow["{\sigma^*}", from=1-1, to=1-2]
+        \arrow["\Phi", from=1-2, to=1-3]
+        \arrow["\cong", from=1-3, to=1-4]
+      \end{tikzcd}
+    \end{equation*}
+    The last isomorphism arises from the K\"unneth formula.
   \end{proof}
 \end{lemma}
 
 \begin{lemma}
-  If $\mathscr L$ is a linearisation then so is $\mathscr L^{\otimes k}$
-  for all $k\geq 1$.
+  If $\mathscr L$ is a $G$-linearised invertible sheaf then so is
+  $\mathscr L^{\otimes k}$ for all $k\geq 1$.
   \begin{proof}
-    \missingproof
+    Denote the linearisation by $\Phi : \sigma^*\mathscr L \cong \pi^*\mathscr
+      L$.  Then pullback functor on locally free sheaves is exact, hence we have
+    an induced isomorphism $\Phi^{\otimes k} : \sigma^*\mathscr L^{\otimes k}
+      \cong \pi^*\mathscr L^{\otimes k}$ and it is straightforward to check that
+    this satisfies the cocyle condition.
   \end{proof}
 \end{lemma}
 
@@ -4051,10 +4069,11 @@ We find that this is completely analogous to the definition
 of stability in the affine case \ref{def:affine_stability}, at
 least when considering closed points.
 
-\begin{lemma}[{\cite[Lemma 5.9]{hoskins2016}}]
+\begin{lemma}
   A closed point $x\in X^{ss}(\mathscr L)$ is stable if, and only if, the orbit
   $G\cdot x\subseteq X^{ss}(\mathscr L)$ is closed and $\dim G_x = 0$.
-  \begin{proof}
+  \begin{proof}[Proof idea]
+    Following \cite[Lemma 5.9]{hoskins2016}.
     The `only if' direction is a matter of direct calculation.
     \missingproof
   \end{proof}
@@ -4099,6 +4118,8 @@ $\varphi(X^s(\mathscr L))$ is open in $X\sslash_{\mathscr L} G$.
   As of right now these are unsatisfactory as moduli spaces. In particular,
   the construction ought not to depend on the parameter $\ell$.
 \end{example}
+
+\todo{do we want the closed points theorem?}
 
 \section{Stability Analysis}
 
@@ -4288,7 +4309,7 @@ in our moduli spaces. As usual, we begin with locally free sheaves:
     P(\mathscr E,\ell)\dim V'< P(\mathscr E',\ell)\dim V
   \end{align}
   where $\mathscr E' := q(V'\otimes\mathscr O_C)$.
-  \begin{proof}
+  \begin{proof}[Proof idea]
     Writing
     \begin{align*}
       \theta(V') := P(\mathscr E',\ell)\dim V-P(\mathscr E,\ell)\dim V'
