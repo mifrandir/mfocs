@@ -2231,8 +2231,8 @@ In addtion to the notation used in the previous chapters, unless
 otherwise indicated,
 \begin{itemize}
   \item all schemes, maps, and products are taken over $\mathbb{C}$,
-        i.e.~in the slice category
-        $\Sch := \Sch/\Spec\mathbb{C}$;
+        i.e.~in the slice category $\Sch := \Sch/\Spec\mathbb{C}$;
+        \todo{finite type?}
   \item a projective scheme is a projective scheme over $\mathbb{C}$
         in the sense of \cite{hartshorne1977} - that is, $X$ is projective
         if there exists a closed immersion $X\inc\projective{n}{}$ for
@@ -3614,59 +3614,45 @@ allow us to appreciate the more general construction.
 
 \subsection{Reductive Groups}
 
-\begin{definition}
-  A \emph{linear representation} of an algebraic group $G$
-  on a vector space $V$ is a homomorphism
-  $\rho : G \to GL(V)$ of group-valued functors.
-\end{definition}
-
-\begin{example}
-  if $V$ is finite-dimensional then its a map of algebraic groups
-  \missingexample
-\end{example}
-
-\begin{example}
-  affine linear rep using co-module structure
-  \missingexample
-\end{example}
+Recall that for a map $\nu : X\to Y$ to be a good quotient, we
+require that $\mathscr O_Y$ is isomorphic to $\mathscr O_X^G$.
+Moreover, if $X$ is affine then $Y$ ought to be affine, too. For
+this to be the case, we require $\mathscr O(X)^G$ to be
+finitely generated. Even for affine algebraic groups this
+need not be the case. We require a stronger condition.
 
 \begin{definition}
-  reductive group \missingdefinition
+  An affine algebraic group $G$ is \emph{reductive} if every
+  representation $G\to GL_n$ is completely reducible.
 \end{definition}
 
-\begin{theorem}
-  The following are equivalent:
-  \begin{itemize}
-    \item reductive
-    \item geometrically reductive
-    \item linearly reductive
-  \end{itemize}
-  \begin{proof}
-    \missingproof
-  \end{proof}
-\end{theorem}
+This notion of reductivity is usually referred to as linear
+reductivity. Fortunately, for affine algebraic groups over $\mathbb C$,
+it coincides with the usual notion of reductivity as well as
+geometric reductivity. \cite[Theorem 4.6]{hoskins2016} See also
+\cite[40-42]{newstead1978} for a historical discussion of terminology.
 
 \begin{example}
-  \todo{$GL_n$}
+  Examples of reductive groups include tori $\mathbf G_m^n$ as well
+  as the linear groups $GL_n$ and $SL_n$.
 \end{example}
 
-\begin{theorem}[Nagata]\todo{rational?}
-  Consider a reductive group $G$ acting on an affine scheme $X$.
+We now have the result that we require:
+
+\begin{theorem}[Nagata]
+  Let $G$ be a reductive group acting on an affine scheme $X$.
   If $\mathscr O(X)$ is finitely generated then so is $\mathscr O(X)^G$.
-  \begin{proof}
-    \missingproof
-  \end{proof}
 \end{theorem}
 
-Indeed, this condition is necessary. A theorem by Popov \missingcitation
-states that $G$ is reductive if, and only if, for all affine schemes of
-finite type, the ring of invariants is finitely generated.
-
-\missingsection
+Note that the usual statement of Nagata's theorem
+(e.g. \cite[Theorem 3.4]{newstead1978}) requires the action to be rational.
+Fortunately, we have assume our reductive groups to be affine, hence
+this is a trivial condition. \cite[Lemma 3.8]{hoskins2016}
 
 \subsection{Good Quotients}
 
-Consider a reductive group $G$ acting on an affine scheme $X$.
+Now consider a reductive group $G$ acting on an affine scheme $X$. It is
+clear what the good quotient in this case must be:
 
 \begin{definition}
   The \emph{affine GIT quotient} is the map
@@ -3705,13 +3691,51 @@ we can at least contemplate some examples of good and geometric
 quotients:
 
 \begin{example}
-  good and geometric
-  \missingexample
+  Consider the action of $\mathbf G_m = \Spec\mathbb C[t^\pm]$ on
+  $\mathbf A^2 = \Spec\mathbb C[x_1, x_2]$ given by
+  the coaction $x_i \mapsto t\otimes x_i$. The ring of
+  invariants then is
+  \begin{align*}
+    \mathbb C[x_1,x_2]^{\mathbf G_m} = \mathbb C.
+  \end{align*}
+  Hence the GIT quotient of this action is just the
+  trivial map $\mathbf A^2 \to \mathbf A^2 \sslash \mathbf G_m = \Spec\mathbb C$. Note that this
+  is indeed a good quotient as the only closed orbit in $\mathbf A^2$ is
+  the point $G\cdot(0,0)$. However, it is certainly not geometric.
+\end{example}
+
+\begin{example}\label{ex:nice_multiplicative_action}
+  Consider the action of $\mathbf G_m=\Spec\mathbb C[t^\pm]$
+  on $\mathbf A^2=\Spec\mathbb C[x,y]$ given by $t\cdot(a,b) = (ta,t^{-1}b)$.
+  The corresponding coaction is $x \mapsto t\otimes x$ and $y\mapsto t^{-1}\otimes y$.
+  Thus we have the ring of invariants
+  \begin{align*}
+    \mathbb C[x,y]^{\mathbf G_m} = \mathbb C[xy].
+  \end{align*}
+  Hence the GIT quotient is the map
+  \begin{align*}
+    \mathbf A^2 \longrightarrow \mathbf A^2 \sslash \mathbf G_m = \mathbf A^1
+  \end{align*}
+  given by $(a,b)\mapsto a/b$ for $b \neq 0$ and $(a,b)\mapsto 0$ otherwise.
+  Note that this is not geometric as the orbits $\mathbf G_m\cdot(0,0)$,
+  $\mathbf G_m\cdot (1,0)$, and $\mathbf G_m\cdot(0,1)$ are disjoint but
+  map to the same point in the quotient.
 \end{example}
 
 \begin{example}
-  good but not geometric
-  \missingexample
+  Of course we would like to take the quotient of $\mathbf A^2-\{(0,0)\}$
+  by the above action of $\mathbf G_m$. Unfortunately, the punctured
+  plane is not affine hence our theory does not yet apply. Instead,
+  consider the $\mathbf G_m$-action on $\mathbf G_m^2 = \Spec\mathbb C[x^\pm,y^\pm]$
+  given by $x \mapsto t\otimes x$ and $y\mapsto 1\otimes y$. This
+  corresponds to $t\cdot(r,s) = (tr, s)$. Then the ring of invariants
+  is
+  \begin{align*}
+    \mathbb C[x,y]^{\mathbf G_m} = \mathbb C[y]
+  \end{align*}
+  so the GIT quotient is the projection
+  $\mathbf G^2_m \to \mathbf G^2_m \sslash \mathbf G_m = \mathbf G_m$
+  which is geometric.
 \end{example}
 
 \subsection{Geometric Quotients}
@@ -3727,7 +3751,7 @@ quotient into a geometric quotient is to exclude certain orbits.
 \begin{definition}\label{def:affine_stability}
   A point $x\in X$ is \emph{stable} if $G\cdot x$ is closed in $X$
   and $\dim G_x = 0$. We denote by $X^s$ the set of stable
-  points. \todo{define stabiliser}
+  points.
 \end{definition}
 
 \begin{lemma}\label{lem:affine_open_invariant}
@@ -3769,7 +3793,21 @@ quotient into a geometric quotient is to exclude certain orbits.
   \end{proof}
 \end{theorem}
 
-\missingsection
+\begin{example}
+  Recall the action of $\mathbf G_m$ on $\mathbf A^2$ from
+  \ref{ex:nice_multiplicative_action}. We note that the orbits
+  $G\cdot(1,0)$ and $G\cdot(0,1)$ are not closed. Hence their points
+  are not stable. Further, we have the stabiliser $G_{(0,0)}=G$ which
+  is not zero-dimensional. Hence the stable points are
+  \begin{align*}
+    (\mathbf A^2)^s = \{(a,b):a,b\neq 0\} = \Spec \mathbb C[x^\pm,y^\pm]
+  \end{align*}
+  and the geometric quotient of this action is the map
+  \begin{align*}
+    \Spec\mathbb C[x^\pm,y^\pm]\longrightarrow\Spec\mathbb C[(xy)^\pm]
+  \end{align*}
+  given by $(a,b)\mapsto ab$.
+\end{example}
 
 \section{Constructing Quotients of Projective Schemes}
 
@@ -3903,7 +3941,7 @@ $G$-linearisations.
 \begin{lemma}\label{lem:linearisations_give_reps}
   Consider a linearisation $L$ inducing the action
   $\tilde\sigma : G\times L\to L$.
-  Then there is a natural linear representation $G\to GL(\Gamma(X,L))$.
+  Then there is a natural group homomorphism $G\to GL(\Gamma(X,L))$.
   \begin{proof}[Proof idea]
     Following \cite[Lemma 5.19]{hoskins2016}. As $\Gamma(X,L)$
     is finite-dimensional, the objective is to construct a map
@@ -3911,7 +3949,7 @@ $G$-linearisations.
     satisfying the relevant conditions. One may do so by considering
     $\sigma^* : \Gamma(X,L) \to \Gamma(G\times X,\sigma^*L)$ and
     composing with the isomorphism from the linearisation and
-    the K\"unneth formula for sheaf cohomology.
+    the K\"unneth formula for sheaf cohomology: \todo{diagram}
   \end{proof}
 \end{lemma}
 
@@ -4383,7 +4421,7 @@ Using the natural isomorphism of vector spaces
 \begin{align*}
   \Ext^1(\mathscr E,\mathscr E) \cong H^1(C,\End(\mathscr E))
 \end{align*}
-we have a natural inclusion
+we have an inclusion
 \begin{align*}
   TM^s_h(r,d) \longinc M^s_H(r,d).
 \end{align*}
