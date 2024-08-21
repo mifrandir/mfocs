@@ -627,6 +627,7 @@ completely:
   Any two smooth vector bundles of type $(r,d)$ on $C$
   are isomorphic.
   \begin{proof}
+    \cite[Proposition 5.4]{neitzke2021}
     \missingproof
   \end{proof}
 \end{theorem}
@@ -710,7 +711,11 @@ Unfortunately, the quotient leaves a lot to be desired:
   Dolbeault operators is not Hausdorff. In particular, it does not
   admit a manifold structure.
   \begin{proof}
-    \missingproof
+    For a proof see \cite{norton1978}. Let us briefly give an idea
+    how the quotient may fail to be Hausdorff. In rank 2 it is possible
+    to construct an example of non-separated points by finding
+    non-isomorphic bundles $E$ and $F$ whose determinants are
+    isomorphic and a non-zero homomorphism $E\to F$. 
   \end{proof}
 \end{lemma}
 
@@ -721,7 +726,7 @@ over $A_\dol (E)$ must also be non-Hausdorff. Therefore we need
 to use more sophisticated techniques to construct any moduli
 space of holomorphic bundles.
 
-\section{From Bundles to Connections}
+\section{From Vector Bundles to Unitary Connections}
 
 The actions of the complex gauge group on the spaces of holomorphic
 bundles are badly behaved. We aim to rectify this by temporarily
@@ -828,10 +833,16 @@ intention to study them more than absolutely necessary. Indeed, it will
 become apparent that the mere presence of a metric is sufficient.
 Fortunately for us, it will always be possible to choose a metric:
 
-\begin{theorem}\label{thm:hermitian_structures_exist}\missingcitation
+\begin{lemma}\label{thm:hermitian_structures_exist}
   Every smooth vector bundle on a compact complex manifold admits a
   Hermitian metric.
-\end{theorem}
+  \begin{proof}[Proof idea]
+    This follows from the analogous statement for real smooth vector
+    bundles on Riemannian manifolds. Indeed, the Riemannian metric on
+    the underlying real bundle may be used to construct a Hermitian
+    metric on the complex bundle.
+  \end{proof}
+\end{lemma}
 
 Fix such a metric $h$ on $E$. We are going to restrict our attention to
 connections that are compatible with this metric. We call such
@@ -932,8 +943,18 @@ compatible connection:
   If $h$ is a Hermitian metric on $E$ and $\dol_E$ is a Dolbeault
   operator then there exists a unique connection $\nabla^h(\dol_E)$
   that is compatible with both $h$ and $\dol_E$.
-  \begin{proof}
-    \missingproof
+  \begin{proof}[Proof idea]
+    This is a standard result.
+    The connection $\nabla^h(\dol_E)$ is known as the Chern connection.
+    One constructs an operator
+    \begin{align*}
+      \partial^h_E : \Omega^0(X,E) \to \Omega^{1,0}(X,E)
+    \end{align*}
+    by using the operator $\dol_E : \Omega^0(X,E)\to \Omega^{0,1}(X,E)$
+    and the induced isomorphism $h : \Omega^0(E) \cong \Omega^0(\overline E)$.
+    One then defines $\nabla^h(\dol_E) = \partial^h_E + \dol_E$.
+    This is naturally holomorphic so one only needs to verify that it
+    is $h$-unitary.
   \end{proof}
 \end{theorem}
 
@@ -1082,15 +1103,12 @@ $\Gamma^\infty(X,E)$:
 Observe that Sobolev norms generalise $L^p$ norms. In particular,
 we have $\Vert\cdot\Vert^\nabla_{p,0} = \Vert\cdot\Vert_{L^p}$.
 Further, the norm depends on the choice of connection $\nabla$. Of
-course, we do not want moduli spaces to have the same dependency. Hence
-we establish the following:
+course, we do not want moduli spaces to have the same dependency.
+Indeed, e.g. by \cite[Corollary 7.3]{shubin2001}, we have the following:
 \begin{lemma}
   Let $\nabla$ and $\nabla'$ be $h$-unitary connections in $E$. Then the
   norms $\Vert\cdot\Vert_{p,\ell}^\nabla$ and
   $\Vert\cdot\Vert_{p,\ell}^{\nabla'}$ are equivalent.
-  \begin{proof}
-    \missingproof
-  \end{proof}
 \end{lemma}
 
 Therefore we are justified in defining a completion that does not depend
@@ -1117,8 +1135,8 @@ where the last inclusion intuitively follows from the fact
 $\mathscr C^\infty \subseteq L^2$ and the observation that each derivative
 $\nabla^i s$ is $\mathscr C^\infty$. For a more rigorous argument, see
 \cite[Corollary 3.8.3]{bc2009}.
-Moreover, $\mathscr C^\infty$ is dense in $L^2$ so it must be dense in each
-$W^{2,\ell}$, too. Thus we will be able to regard $\Gamma^\infty(X,E)$
+Moreover, $\mathscr C^\infty(X,E)$ is dense in $L^2(X,E)$ so it must be dense in each
+$W^{2,\ell}(X,E)$, too. Thus we will be able to regard $\Gamma^\infty(X,E)$
 as a Banach space by expanding it slightly.
 
 As usual, we are going to think of the elements of $W_{2,\ell}(X,E)$ as
@@ -1735,6 +1753,7 @@ More importantly, we have the following:
   \end{align*}
   is a closed subspace.
   \begin{proof}
+    Following \cite[77-78]{neitzke2021}.
     The key observation is that, as a subspace of
     $\Omega^1(C,\End(E,h))$,
     \begin{align*}
@@ -1749,7 +1768,7 @@ More importantly, we have the following:
     Direct calculation shows $\rho_\nabla(A) = \nabla A$
     so, in particular,
     \begin{align*}
-      T_\nabla(G(E,h)_{\ell+1}\cdot\nabla) = \im\rho_\lambda = \im\nabla_\ell.
+      T_\nabla(G(E,h)_{\ell+1}\cdot\nabla) = \im\rho_\nabla = \im\nabla_\ell.
     \end{align*}
     Now we have the elliptic operator
     \begin{align*}
@@ -1765,18 +1784,19 @@ More importantly, we have the following:
       \oplus \Omega^2_{\mathbb R}(\End(E,h))_{\ell-1}
       \to \Omega^1_{\mathbb R}(\End(E,h))_\ell
     \end{align*}
-    is closed. As $\nabla$ is harmonic, we have a chain complex \todo{maybe we want to investigate this}
+    is closed. As $\nabla$ is harmonic, we have a chain complex
     \begin{equation*}
       % https://q.uiver.app/#q=WzAsNSxbMCwwLCIwIl0sWzEsMCwiXFxPbWVnYV4wX3tcXG1hdGhiYiBSfShcXEVuZChFLGgpKV97XFxlbGwrMX0iXSxbMiwwLCJcXE9tZWdhXjFfe1xcbWF0aGJiIFJ9KFxcRW5kKEUsaCkpX1xcZWxsIl0sWzMsMCwiXFxPbWVnYV4yX3tcXG1hdGhiYiBSfShcXEVuZChFLGgpKV97XFxlbGwtMX0iXSxbNCwwLCIwIl0sWzAsMV0sWzEsMiwiXFxuYWJsYV9cXGVsbCJdLFsyLDMsIlxcbmFibGFfe1xcZWxsLTF9Il0sWzMsNF1d
       \begin{tikzcd}
         0 & {\Omega^0_{\mathbb R}(\End(E,h))_{\ell+1}} & {\Omega^1_{\mathbb R}(\End(E,h))_\ell} & {\Omega^2_{\mathbb R}(\End(E,h))_{\ell-1}} & 0
         \arrow[from=1-1, to=1-2]
-        \arrow["{\nabla_\ell}", from=1-2, to=1-3]
-        \arrow["{\nabla_{\ell-1}}", from=1-3, to=1-4]
+        \arrow["{d^\nabla_\ell}", from=1-2, to=1-3]
+        \arrow["{d^\nabla_{\ell-1}}", from=1-3, to=1-4]
         \arrow[from=1-4, to=1-5]
       \end{tikzcd}
     \end{equation*}
-    for all $\ell\geq 1$.  Noting $\im((d^\nabla_{\ell-1})^\dagger)$
+    for all $\ell\geq 1$.
+    Noting $\im((d^\nabla_{\ell-1})^\dagger)$
     naturally is $W_{2,\ell}$-orthogonal to $\ker(d^\nabla_{\ell-1})$
     and hence the subspace $\im(d^\nabla_{\ell})\subseteq\ker(d^\nabla_{\ell-1})$
     in $\Omega^1_{\mathbb R}(\End(E,h))_\ell$, we find that
