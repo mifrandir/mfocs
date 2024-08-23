@@ -14,7 +14,7 @@
 \college{[redacted]}  %your college
 
 %\renewcommand{\submittedtext}{A dissertation submitted for the degree of}
-\degree{MSc Mathematics and Foundations of Computer Science}     %the degree
+\degree{MSc in Mathematics and Foundations of Computer Science}     %the degree
 \degreedate{Summer 2024}         %the degree date
 
 \addbibresource{references.bib}
@@ -83,20 +83,26 @@
 
 \chapter{Introduction}
 
-A large part of mathematics is about classifying objects. In some cases,
+A large part of mathematics is about classifying objects, usually
+up to a natural notion of isomorphism. In some cases,
 it is possible to group the isomorphism classes into a few well-behaved
-families. Consider for example the classification of finite abelian
-groups or, more generally, finite groups. At other times, however, one
-finds that there are uncountably many distinct instances. In such cases,
-the primary goal then becomes to construct and study geometric spaces
-whose points correspond to the objects in question. A well-known example
-of this is projective space $\projective{n}{}$ which parametrises
-subspaces of $\affine{n}{}$ of codimension 1. Geometric
+families. For example, finite abelian groups uniquely decompose
+into direct sums of prime power cyclic groups. Hence the family of
+isomorphism classes of finite abelian groups indexed by the natural
+numbers.  At other times, however, one finds that there are uncountably
+many non-isomorphic instances. In such cases one usually finds that
+the objects of interest naturally have topological and geometric 
+properties. Thus the goal is to construct and study geometric spaces
+that parametrise the objects in question. A well-known example
+of this are projective spaces
+$\projective{n}{}(\mathbb C) = (\mathbb C^n - \{0\})/\mathbb C^*$
+which parametrise subspaces of the affine spaces $\affine{n}{}(\mathbb C) = \mathbb C^n$
+of codimension 1. Geometric
 spaces parametrising geometric objects are referred to as moduli spaces.
-We are going to study methods of constructing methods of constructing
+We are going to study methods of constructing
 moduli spaces in analytic and algebraic categories.
 
-The primary examples we are going to consider are types of holomorphic
+The primary examples we are going to consider are holomorphic
 vector bundles on compact Riemann surfaces $C$ of genus $g\geq 2$. By Riemann surface
 we mean a connected one-dimensional complex manifold. In other words,
 one of the simplest non-trivial base spaces possible. Holomorphic vector
@@ -111,11 +117,9 @@ makes the problem both analytic and algebraic in nature, enabling
 us to showcase both approaches.
 Finally, there are frequently studied extensions to holomorphic
 bundles which enable us to illustrate how to adapt moduli spaces in the
-presence of additional structure. The primary example of such decorated
-bundles that we are going to contemplate are Higgs bundles which were
-first introduced by Hitchin in \cite{hitchin1987}. A
-Higgs bundle is a holomorphic bundle equipped with a certain
-vector valued holomorphic 1-form.
+presence of additional structure. Higgs bundles, as introduced by
+Hitchin~\cite{hitchin1987}, are going to serve as a suitable example
+of such decorated holomorphic bundles.
 
 \section{The Analytic Point of View}
 
@@ -124,10 +128,10 @@ on $C$ would admit a complex manifold structure. Indeed, it is not difficult
 to construct the corresponding topological space. Unfortunately, one
 quickly observes that the space thus obtained is not Hausdorff and hence
 makes for a poor candidate for an analytic moduli space.
-The only solution is to discard some points. We are going to present
+The only solution is to discard some points. We present
 the construction of the analytic moduli space of holomorphic bundles
-due to Narasimhan and Seshadri \cite{ns1964}. For Higgs bundles, our
-construction will follow that of Hitchin in \cite{hitchin1987}.
+due to Narasimhan and Seshadri~\cite{ns1964}. For Higgs bundles, our
+construction follows that of Hitchin~\cite{hitchin1987}.\todo{check}
 
 If one thinks of the moduli space as the space of all holomorphic bundles
 $A_{\dol}(E)$ with underlying smooth bundle $E$ quotiented by the action
@@ -141,19 +145,19 @@ infinite-dimensional. Secondly, for the quotient to be a manifold
 globally, one requires that the slices are uniform. This is the case
 whenever the orbits are uniform. Hence a sufficient condition is that
 the action is free at every point.
-
 One may use these two conditions to construct subsets
 \begin{align*}
   A^s_\dol(E) \subset A^{ps}_\dol(E) \subset A_\dol(E)
 \end{align*}
 and hence a complex manifold $M_\dol^s(E) := A^s_\dol(E) / \Aut(E)$
 whose points are isomorphism classes of stable holomorphic bundles.
-Now a Higgs bundle on $C$ is just a pair $(\mathcal E,\varphi)$
+
+A Higgs bundle on $C$ is just a pair $(\mathcal E,\varphi)$
 where $\mathcal E$ is a holomorphic bundle and $\varphi$ is a
 holomorphic section of $\End\mathcal E\otimes TC$ where $TC$ is the
 holomorphic tangent bundle. The same considerations as above lead to
 the construction of the moduli space $M^s_\varphi(E) := A^s_\varphi(E)/\Aut(E)$
-of stable Higgs bundles with underlying smooth vector bundle $E$. This also is a
+of stable Higgs bundles with underlying smooth vector bundle $E$. This is also a
 complex manifold. It is worth noting that, while the procedure outlined
 here is correct in principle, the infinite-dimensional nature of the
 problem is going to require us to do a lot of additional work.
@@ -178,7 +182,7 @@ just a scheme, but in fact a smooth variety. Starting only with
 general properties of quotients of schemes by group actions, we will
 see that the notions of stability that we encountered in the analytic
 construction appear quite naturally in the algebraic case. Indeed,
-Mumford's Geometric Invariant Theory (GIT) \cite{mumford1994}
+Mumford's Geometric Invariant Theory (GIT)~\cite{mumford1994}
 precisely describes stability conditions for the construction of quotients
 by group actions.
 We are thus going to obtain schemes $M^s_h(r,d)$ and $M^s_H(r,d)$
@@ -197,7 +201,7 @@ by analytifying the algebraic moduli spaces are biholomorphic to
 the analytic ones. Hence algebraic construction recover the analytic
 moduli spaces fully.
 
-\chapter{As Manifolds}
+\chapter{Manifolds as Moduli Spaces}
 
 Consider a compact Riemann $C$ of genus $g\geq 2$.
 What can we say about the set of holomorphic vector bundles on $C$,
@@ -238,10 +242,9 @@ moduli spaces by characterising membership by a more natural
 condition and computing tangent spaces.
 
 \paragraph*{Notation}
-
-Before we begin, let us establish some notation. Unless otherwise
-indicated,
-
+Before we begin, let us establish some notation. As we are going to study
+complex geometric objects, it is natural to default to complex
+geometric conventions. Hence, unless otherwise indicated,
 \begin{itemize}
   \item all vector spaces are complex, maps of vector spaces are
         $\mathbb{C}$-linear, and tensor products of vector spaces are
@@ -488,7 +491,7 @@ if, and only if, it commutes with the operators:
   between holomorphic bundles on $X$ and smooth bundles with corresponding
   Dolbeault operators.
   \begin{proof}
-    This is essentially \cite[Theorem 3.2]{moroianu2004}. One only
+    This is essentially~\cite[Theorem 3.2]{moroianu2004}. One only
     needs to verify that a map of smooth bundles is a map of
     holomorphic bundles if, and only if, it respects the holomorphic
     structure. \todo{maybe we should do this proof?}
@@ -531,15 +534,14 @@ in some sense. In particular, we have Dolbeault's theorem:
 
 \subsection{Higgs Bundles}
 
-Higgs bundles were introduced by Hitchin in \cite{hitchin1987}
+Higgs bundles were introduced by Hitchin in~\cite{hitchin1987}
 as solutions to a system of differential equations. Since then
 Higgs bundles have become increasingly prominent due to their applications
 in geometry and physics. In particular, Higgs bundles serve as a
 prime example of decorated holomorphic bundles, i.e. holomorphic bundles
 with additional structure. Studying their moduli spaces is particularly
-interesting because they do not fit into the large class of framed
-bundles and hence require special attention.
-\cite[Example 4.B.3]{huybrechts2010}
+interesting because Higgs bundles do not fit into the large class of framed
+bundles and hence require special attention.~\cite[Example 4.B.3]{huybrechts2010}
 
 \begin{definition}
   Let $(E,\dol_E)$ be a holomorphic bundle on a complex manifold $X$.
@@ -591,7 +593,8 @@ This leads us to consider another invariant: Chern classes. For
 every smooth bundle $E$ on $X$ of rank $r$ there are elements
 $c_j(E)\in H^{2j}(X,\mathbb{Z})$ for $j\geq 0$ called the Chern
 classes of $E$. There are different ways of constructing these classes,
-e.g. \cite{fine2013} and \cite{griffiths1994}, for our purposes
+e.g. using Chern-Weil theory as presented in~\cite[Chapter 2]{fine2013}
+or using cohomology as in~\cite{griffiths1994} \todo{specify}, for our purposes
 it is sufficient to know a few key properties:
 
 \begin{lemma}\label{lem:chern_classes}
@@ -684,11 +687,11 @@ In particular, $A_\dol (E)$ is an affine space modelled on
 $\Omega^{0,1}(C,\End(E))$.
 
 We may now define the space of all Higgs bundles with underlying
-smooth bundle $E$:
+smooth vector bundle $E$ by
 \begin{align*}
   A_\varphi(E) := \bigsqcup_{\dol_E \in A_\dol (E)} \Gamma(C,\End(E,\dol_E)\otimes K_C).
 \end{align*}
-Once again this has a topology induced by the topologies on
+This has a topology induced by the topologies on
 $\Gamma(C,\End(E,\dol_E)\otimes K_C)$ and $A_\dol (E)$.
 All that is left to do is take a quotient by equivalence of holomorphic
 bundles, respectively Higgs bundles. One of the major topics of this
@@ -711,11 +714,11 @@ Unfortunately, the quotient leaves a lot to be desired:
   Dolbeault operators is not Hausdorff. In particular, it does not
   admit a manifold structure.
   \begin{proof}
-    For a proof see \cite{norton1978}. Let us briefly give an idea
+    For a proof see~\cite{norton1978}. Let us briefly give an idea
     how the quotient may fail to be Hausdorff. In rank 2 it is possible
     to construct an example of non-separated points by finding
     non-isomorphic bundles $E$ and $F$ whose determinants are
-    isomorphic and a non-zero homomorphism $E\to F$. 
+    isomorphic and a non-zero homomorphism $E\to F$.
   \end{proof}
 \end{lemma}
 
@@ -734,8 +737,7 @@ changing our point of view from holomorphic bundles to unitary
 connections. It turns out that the corresponding topological spaces
 are diffeomorphic and that the complex gauge group action on holomorphic bundles
 may be interpreted as a real gauge group action on unitary connections.
-
-Once again fix a smooth bundle $E$ of rank $r$ on a compact
+Throughout this section, fix a smooth bundle $E$ of rank $r$ on a compact
 Riemann surface $C$.
 
 \subsection{Connections}
@@ -746,8 +748,7 @@ alternative point of view on spaces of holomorphic bundles.
 Secondly, they are going to allow us to define the Sobolev norm and
 hence provide us with a suitable Banach manifold structure on
 the moduli spaces.
-
-Recall that connections enable us to differentiate sections of
+Begin by recalling that connections enable us to differentiate sections of
 vector bundles:
 
 \begin{definition}
@@ -1104,7 +1105,7 @@ Observe that Sobolev norms generalise $L^p$ norms. In particular,
 we have $\Vert\cdot\Vert^\nabla_{p,0} = \Vert\cdot\Vert_{L^p}$.
 Further, the norm depends on the choice of connection $\nabla$. Of
 course, we do not want moduli spaces to have the same dependency.
-Indeed, e.g. by \cite[Corollary 7.3]{shubin2001}, we have the following:
+Indeed, e.g. by~\cite[Corollary 7.3]{shubin2001}, we have the following:
 \begin{lemma}
   Let $\nabla$ and $\nabla'$ be $h$-unitary connections in $E$. Then the
   norms $\Vert\cdot\Vert_{p,\ell}^\nabla$ and
@@ -1133,8 +1134,7 @@ Observe that we immediately have a sequence of inclusions
 \end{align*}
 where the last inclusion intuitively follows from the fact
 $\mathscr C^\infty \subseteq L^2$ and the observation that each derivative
-$\nabla^i s$ is $\mathscr C^\infty$. For a more rigorous argument, see
-\cite[Corollary 3.8.3]{bc2009}.
+$\nabla^i s$ is $\mathscr C^\infty$. For a more rigorous argument, see~\cite[Corollary 3.8.3]{bc2009}.
 Moreover, $\mathscr C^\infty(X,E)$ is dense in $L^2(X,E)$ so it must be dense in each
 $W^{2,\ell}(X,E)$, too. Thus we will be able to regard $\Gamma^\infty(X,E)$
 as a Banach space by expanding it slightly.
@@ -1258,7 +1258,7 @@ it can take an element of $W_{2,\ell}$ at most to $W_{2,\ell-m}$.
     P_\ell : W_{2,\ell+m}(X,E) \to W_{2,\ell}(X,F).
   \end{align}
   \begin{proof}
-    See \cite[{Proposition 3.8.4}]{bc2009}.
+    See~\cite[{Proposition 3.8.4}]{bc2009}.
   \end{proof}
 \end{theorem}
 
@@ -1281,7 +1281,7 @@ definition in the sense of the paragraph above would be correct,
 it would also be unhelpful. Instead we are going to consider some
 examples. The reader interested in a more holistic
 introduction may consult any text on global analysis such
-as \cite[Chapter 7]{kahn1982} or \cite{bc2009}.
+as~\cite[Chapter 7]{kahn1982} or~\cite{bc2009}.
 
 \begin{example}
   Every smooth manifold is locally isomorphic to
@@ -1377,8 +1377,7 @@ topological groups:
 \begin{example}\label{ex:h_proper_action}
   The action of $U(E,h)$ on $A_\nabla(E,h)$ is proper.
   \begin{proof}
-    We sketch the proof given in
-    \cite[{Proposition 7.1.14}]{kobayashi1987}.
+    We sketch the proof given in~\cite[{Proposition 7.1.14}]{kobayashi1987}.
     The goal is to show that, if we have a sequence $(g_j,\nabla_j)$
     such that $\nabla_j\to\nabla$ and $g_j\cdot\nabla_j\to\nabla'$
     then $g_j\to g$ such that $g\cdot\nabla = \nabla'$. To do this
@@ -2211,12 +2210,11 @@ directly, we may now simply deduce it from $T^*M_\dol(E)$.
   \end{proof}
 \end{corollary}
 
-\chapter{As Smooth Varieties}
+\chapter{Schemes as Moduli Spaces}
 
 The moduli space of holomorphic bundles on a compact Riemann
 surface maybe constructed as a complex manifold exclusively
-using analytic methods. Since this space was first constructed
-in \missingcitation
+using analytic methods. Since this space was first considered,
 the theory of moduli spaces has come a long way.
 The goal of this section is to formally define moduli spaces
 as schemes representing functors, explain how such schemes
@@ -2243,13 +2241,11 @@ a plethora of similar problems without much extra work.
 Once constructed, we will take some time to study the moduli
 spaces which we have thus obtained. It turns out that the GIT
 quotients have several desirable properties such as being
-quasi-projective varieties. Moreover, we will use deformation
+quasi-projective varieties. Moreover, we will use deformation \todo{do we?}
 theory to show that holomorphic bundles may still be thought
 of as cotangent vectors of holomorphic bundles.
 
-\paragraph*{Notation}
-
-In addtion to the notation used in the previous chapters, unless
+\paragraph*{Notation} In addition to the notation used in the previous chapter, unless
 otherwise indicated,
 \begin{itemize}
   \item all schemes, maps, and products are taken over $\mathbb{C}$,
@@ -2423,7 +2419,6 @@ Moreover, it is straightforward to verify that under the correspondence
 $E\to\Gamma(-,E)$ a Higgs field $E\to E\otimes K$ on bundles is
 equivalent to a Higgs field $\mathscr E\to\mathscr E\otimes\mathscr K$
 on schemes.
-
 Thus we are justified in treating the construction of moduli
 spaces of Higgs bundles algebraically.
 
@@ -2462,7 +2457,7 @@ isomorphism $\eta$ and call $M$ the fine moduli space.
 
 \begin{example}
   \begin{itemize}
-    \item projectivisation/projective space
+    \item projectivisation/projective space \missingexample
   \end{itemize}
 \end{example}
 
@@ -2530,8 +2525,7 @@ possible to do better:
 
 Unfortunately, even coarse moduli spaces may not exist. Here is
 one property that prevents a moduli space from existing. We will
-see an example of this later. \todo{add reference to problem of all
-  locally free sheaves}
+see an example of this later in \ref{lem:no_coarse_moduli_space}.
 
 \begin{lemma}\label{lem:no_coarse_condition}
   Let $\mathcal M$ be a moduli problem and
@@ -2562,7 +2556,7 @@ three steps:
 
 Vector bundles correspond to locally free sheaves. Hence it is worth
 taking some time to study locally free sheaves and, more generally,
-sheaves on schemes. This is of course a very wide field
+sheaves on schemes. Of course, this is a very wide field,
 so we are going to highlight only a few key properties.
 
 The main goal of this section is to establish some topological
@@ -2916,12 +2910,12 @@ equivalence. In particular, we require all the fibres to be isomorphic.
 
 Hence we make the following definition:
 
-\begin{definition}
+\begin{definition}\label{def:lf_moduli_problem}
   The moduli problem of locally free sheaves on $C$ is given by the
-  functor $\mathcal A_h : \Sch^{\text{op}} \to \Set$
+  functor $\mathcal M_h : \Sch^{\text{op}} \to \Set$
   mapping schemes $T$ to
   \begin{align*}
-    \mathcal A_h(T) := \left\lbrace{\text{locally free sheaves $\mathscr E$ on $C_T$ flat over $T$}}\right\rbrace/\sim
+    \mathcal M_h(T) := \left\lbrace{\text{locally free sheaves $\mathscr E$ on $C_T$ flat over $T$}}\right\rbrace/\sim
   \end{align*}
   where $\mathscr E\sim\mathscr F$ if, and only if, there is a line bundle
   $\mathscr L$ on $T$ such that
@@ -2929,14 +2923,18 @@ Hence we make the following definition:
   maps $f: T'\to T$ to the pullback $f^*$.
 \end{definition}
 
-However, this fails to have any moduli space at all:
+The choice of equivalence relation does indeed make a big difference.
+Indeed, our construction of the moduli space would not work for the
+naive notion of equivalence of families.
+Unfortunately, in its present formulation, the moduli problem does not
+have a moduli space at all:
 
 \begin{lemma}\label{lem:no_coarse_moduli_space}
-  The moduli problem $\mathcal A$ of locally free sheaves on $C$
+  The moduli problem $\mathcal M_h$ of locally free sheaves on $C$
   does not admit a coarse moduli space.
   \begin{proof}
     Follwing \cite[Example 2.2]{hoskins2016}. We aim to construct
-    an $\mathscr E\in\mathcal A_h(\affine{1}{})$ that satisfies the
+    an $\mathscr E\in\mathcal M_h(\affine{1}{})$ that satisfies the
     condition in \ref{lem:no_coarse_condition}.
     \missingproof
   \end{proof}
@@ -2944,52 +2942,59 @@ However, this fails to have any moduli space at all:
 
 \subsection{All Higgs Sheaves}
 
-Let us turn to the case of Higgs sheaves. Consider the moduli problem
-given by \todo{add new equivalence; make sure the canonical sheaf restricts to a canonical sheaf}
-\begin{align*}
-  \mathcal A_H(T) = \left\lbrace{\text{Higgs sheaves $(\mathscr E,\varphi)$
-      on $X_T$}}\right\rbrace/\sim.
-\end{align*}
-where $(\mathscr E,\varphi)\sim(\mathscr E',\varphi')$ if, and only if,
-there is an isomorphism $\mathscr E\cong\mathscr E'$ that makes the
-following commute:\todo{this is not the correct canonical bundle}
-\begin{equation*}
-  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhzY3IgRSJdLFswLDEsIlxcbWF0aHNjciBFJyJdLFsyLDEsIlxcbWF0aHNjciBFJ1xcb3RpbWVzXFxtYXRoc2NyIEtfe0NcXHRpbWVzIFR9Il0sWzIsMCwiXFxtYXRoc2NyIEVcXG90aW1lcyBcXG1hdGhzY3IgS197Q1xcdGltZXMgVH0iXSxbMCwzLCJcXHZhcnBoaSJdLFsxLDIsIlxcdmFycGhpIl0sWzAsMSwiXFxjb25nIiwyXSxbMywyLCJcXGNvbmciXV0=
-  \begin{tikzcd}
-    {\mathscr E} && {\mathscr E\otimes \mathscr K_{C\times T}} \\
-    {\mathscr E'} && {\mathscr E'\otimes\mathscr K_{C\times T}}
-    \arrow["\varphi", from=1-1, to=1-3]
-    \arrow["\cong"', from=1-1, to=2-1]
-    \arrow["\cong", from=1-3, to=2-3]
-    \arrow["\varphi", from=2-1, to=2-3]
-  \end{tikzcd}
-\end{equation*}
-Once again, by restricting to fibres over $t\in T(\mathbb{C})$
+Let us turn to the case of Higgs sheaves. Based on the discussion
+in the previous section, it is clear what the moduli problem ought to be:
+
+\begin{definition}\label{def:higgs_moduli_problem}
+  The moduli problem of Higgs sheaves is given by the functor
+  $\mathcal M_H : \Sch^{op}\to \Set$ mapping schemes $T$ to
+  \begin{align*}
+    \mathcal M_H(T) := \left\lbrace{(\mathscr E,\varphi) : \mathscr E\in\mathcal M_h(T), \varphi : \mathscr E \to \mathscr E \otimes \pi^*\mathscr K }\right\rbrace/\sim
+  \end{align*}
+  where $(\mathscr E,\varphi)\sim(\mathscr E',\varphi')$ if, and only if,
+  there is an invertible sheaf $\mathscr L$ on $T$ and an isomorphism
+  $\mathscr E\cong\mathscr E'\otimes\pi^*\mathscr L$ that makes the following
+  commute:
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhzY3IgRSJdLFswLDEsIlxcbWF0aHNjciBFJ1xcb3RpbWVzXFxwaV4qXFxtYXRoc2NyIEwiXSxbMiwxLCJcXG1hdGhzY3IgRSdcXG90aW1lc1xccGleKlxcbWF0aHNjciBLXFxvdGltZXNcXHBpXipcXG1hdGhzY3IgTCJdLFsyLDAsIlxcbWF0aHNjciBFXFxvdGltZXMgXFxwaV4qXFxtYXRoc2NyIEsiXSxbMCwzLCJcXHZhcnBoaSJdLFsxLDIsIlxcdmFycGhpJ1xcb3RpbWVzXFxwaV4qXFxtYXRoc2NyIEwiXSxbMCwxLCJcXGNvbmciLDJdLFszLDIsIlxcY29uZyJdXQ==
+    \begin{tikzcd}
+      {\mathscr E} && {\mathscr E\otimes \pi^*\mathscr K} \\
+      {\mathscr E'\otimes\pi^*\mathscr L} && {\mathscr E'\otimes\pi^*\mathscr K\otimes\pi^*\mathscr L}
+      \arrow["\varphi", from=1-1, to=1-3]
+      \arrow["\cong"', from=1-1, to=2-1]
+      \arrow["\cong", from=1-3, to=2-3]
+      \arrow["{\varphi'\otimes\pi^*\mathscr L}", from=2-1, to=2-3]
+    \end{tikzcd}
+  \end{equation*}
+  Once again, $\mathcal M_H(f : T' \to T) := f^*$.
+\end{definition}
+By restricting to fibres over $t\in T(\mathbb{C})$
 a family of Higgs sheaves $(\mathscr E,\varphi)$ on $X_T$ yields
 a Higgs field
 \begin{align*}
-  \phi_t : \mathscr E_t \to \mathscr E_t \otimes \Omega^1_C.
+  \phi_t : \mathscr E_t \to \mathscr E_t \otimes \mathscr K.
 \end{align*}
 Unfortunately, we find ourselves in a similar position.
 \begin{corollary}
-  The moduli problem $\mathcal A_H$ of Higgs sheaves on $C$ does not admit
+  The moduli problem $\mathcal M_H$ of Higgs sheaves on $C$ does not admit
   a coarse moduli space.
   \begin{proof}
-    Consider the natural transformation $\mathcal A_h\to\mathcal A_H$
+    Consider the natural transformation $\mathcal M_h\to\mathcal M_H$
     given by $\mathscr E \mapsto (\mathscr E,0)$. Now the sheaf
-    $\mathscr E\in\mathcal A_h(\affine{1}{})$ from the proof of
+    $\mathscr E\in\mathcal M_h(\affine{1}{})$ from the proof of
     \ref{lem:no_coarse_moduli_space} pushes forward to a Higgs field
-    $(\mathscr E,0)\in\mathcal A_H(\affine{1}{})$ which, moreover,
-    satisfies the same property.
+    $(\mathscr E,0)\in\mathcal M_H(\affine{1}{})$ which, moreover,
+    also satisfies the property from \ref{lem:no_coarse_condition}.
   \end{proof}
 \end{corollary}
-Thus it is not possible to construct the moduli spaces we desire
-in the naive way. There are essentially two ways to get around this.
-One option is to deal with
-moduli stacks instead. This has the advantage of solving the problem
-without discarding any information. However, it involves dealing with
-algebraic stacks which are unwieldy, even more so than schemes.
-See \cite{cm2017} for this point of view. We will instead take an
+Thus it is not possible to construct the moduli spaces we desire.
+There are essentially two ways to get around this. One option is to deal with
+moduli stacks instead. Indeed there are algebraic stacks of locally
+free sheaves and Higgs sheaves, respectively. The advantage of
+considering stacks is that no information is lost. However, stacks
+are unwieldy and very far from the intuitive notion of a well-behaved
+geometric space, even more so than schemes. See \cite{cm2017} for this point of view.
+We will instead take an
 approach that is much in line with the analytic construction by narrowing
 our attention to a subclass of locally free sheaves. Indeed, we are
 going to end up with those sheaves corresponding to (semi-)stable
@@ -3182,7 +3187,7 @@ We are going to use the following lemma to obtain such a scheme:
   Note that $Q_\circ(r,d)$ is a reduced open subscheme
   \cite[281]{nitsure1991}, hence lemma
   \ref{lem:linear_scheme} applies.
-  Considering the sheaf $\Hom(\hat{\mathscr E},\hat{\mathscr E}\otimes K)$ on
+  Considering the sheaf $\Hom(\hat{\mathscr E},\hat{\mathscr E}\otimes\mathscr K)$ on
   $C\times Q_\circ(r,d)$ we find that the functor
   \begin{align*}
     (f:T\to Q(r,d))
@@ -3244,8 +3249,8 @@ treatment is given in \cite{milne2017}.
 
 \subsection{Group Schemes}
 
-Category theory tells us what the correct notion of a group in the
-settings of schemes is:
+Category theory tells us what a group in the
+setting of schemes ought to be:
 
 \begin{definition}
   A \emph{group scheme} is a group object in $\Sch$.
@@ -3285,8 +3290,7 @@ for $f\in R$ and $g,h\in G$.
             x_{ij} \mapsto \sum_{k=1}^n x_{ik}\otimes x_{kj}.
           \end{align*}
           See e.g. \cite[\href{https://stacks.math.columbia.edu/tag/022W}{Tag 022W}]{stacks-project} for details.
-    \item The sepcial linear group $SL_N$ analogous to the above by
-          quotienting by $\det(x_{ij})^2 - 1$.
+    \item $SL_n$ is obtained from $GL_n$ by quotienting by $\det(x_{ij})^2-1$.
     \item More generally, if $V$ is a vector space of finite dimension $n$, then
           $GL(V)$ is the scheme whose $T$-points are automorphisms of
           $V\otimes\mathscr O_T$. Choosing an isomorphism
@@ -3381,21 +3385,21 @@ $G(T)$ on $X(T)$ by
 \begin{example}\label{ex:lf_action}
   Following \cite[Lemma 8.49]{hoskins2016}.
   Consider the setting of \ref{ex:quot_scheme_of_lf} and recall
-  that, in order to map a locally free sheaf $\mathscr F$ to a point of
+  that, in order to regard a locally free sheaf $\mathscr E$ to a point of
   $Q(r,d)$, we had to choose an isomorphism
-  $\mathbb C^n \cong \Gamma(C,\mathscr F)$. In particular, there
+  $\mathbb C^n \cong \Gamma(C,\mathscr E)$. In particular, there
   is an action of $GL_n$ on closed points of $Q(r,d)$
   given by $g\cdot q = q\circ g^{-1}$ for all $g\in GL_n(\mathbb C)$
   and $q : \mathscr O^{\oplus n}_C \surj \mathscr E$.
 
-  To extend this to a schematic action $GL_n \times Q(r,d) \to Q(r,d)$
-  we need to specify a family of quotients
+  To extend this to a schematic action $GL_n \times Q_\circ(r,d) \to Q_\circ(r,d)$
+  we specify a family of quotients
   \begin{align*}
     \mathscr O^{\oplus n}_{C\times GL_n\times Q(r,d)}\surj \mathscr E
   \end{align*}
-  of type $(r,d)$. We construct such a family by
+  of type $(r,d)$ over $GL_n\times Q(r,d)$. We construct such a family by
   considering the universal family $\hat q:\mathscr Q^{\oplus n}_{C\times Q(r,d)}\surj \hat{\mathscr E}$,
-  pulling it back along the projection $GL_n\times Q(r,d)\to Q(r,d)$,
+  pulling it back along the projection $\pi:GL_n\times Q(r,d)\to Q(r,d)$,
   and composing it with the sheaf isomorphism
   \begin{align*}
     \iota : \mathscr O^{\oplus n}_{GL_n} \to \mathscr O^{\oplus n}_{GL_n}
@@ -3412,48 +3416,65 @@ $G(T)$ on $X(T)$ by
   where each $\pi$ denotes the natural projection. As base change
   preserves Hilbert polynomials \ref{lem:hilbert_base_change} this
   has rank $r$ and degree $d$. It is then straightforward to verify
-  that this is indeed an action.
+  that this is indeed an action that restricts to $Q_\circ(r,d)$.
+  Indeed, we see in the lemma below that more is true.
 \end{example}
 
-\begin{lemma}\label{lem:orbits_are_iso_classes}
-  Let $\mathscr E,\mathscr E'$ be locally free sheaves corresponding
-  to closed points $q,q'$ in $Q(r,d)$ such that
-  $\Gamma(X,q)$ and $\Gamma(X,q')$ are isomorphisms.
-  Then $\mathscr E\cong\mathscr E'$
+\begin{lemma}\label{lem:lf_orbits_are_iso_classes}
+  Consider closed points $q,q'$ in $Q_\circ(r,d)$.
+  Then $\hat{\mathscr E}_q\cong\hat{\mathscr E}_{q'}$
   if, and only if, there is a closed point $g$ of $GL_n$
-  such that $g\cdot q \cong q'$.
+  such that $g\cdot q = q'$ in $Q_\circ(r,d)$.
   \begin{proof}
-    If $g\cdot q \cong q'$ then there exists an isomorphism
+    If $g\cdot q = q'$ then there exists an isomorphism
     $\mathscr E\cong\mathscr E'$ by definition. In the other direction,
     consider an isomorphism $\psi:\mathscr E\cong\mathscr E'$.
     As both $\mathscr E$ and $\mathscr E'$ are globally generated,
     the composition
     \begin{equation*}
-      % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhiYiBDXm4iXSxbNiwwLCJcXG1hdGhiYiBDXm4iXSxbMiwwLCJcXEdhbW1hKFgsXFxtYXRoc2NyIEUpIl0sWzQsMCwiXFxHYW1tYShYLFxcbWF0aHNjciBFJykiXSxbMCwyLCJcXEdhbW1hKFgscV57LTF9KSJdLFszLDEsIlxcR2FtbWEoWCxxJykiXSxbMiwzLCJcXEdhbW1hKFgsXFxwc2kpIl1d
+      % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhiYiBDXm4iXSxbNiwwLCJcXG1hdGhiYiBDXm4iXSxbMiwwLCJcXEdhbW1hKEMsXFxtYXRoc2NyIEUpIl0sWzQsMCwiXFxHYW1tYShDLFxcbWF0aHNjciBFJykiXSxbMCwyLCJcXEdhbW1hKEMscV57LTF9KSJdLFszLDEsIlxcR2FtbWEoQyxxJykiXSxbMiwzLCJcXEdhbW1hKFgsXFxwc2kpIl1d
       \begin{tikzcd}
-        {\mathbb C^n} && {\Gamma(X,\mathscr E)} && {\Gamma(X,\mathscr E')} && {\mathbb C^n}
-        \arrow["{\Gamma(X,q)^{-1}}", from=1-1, to=1-3]
+        {\mathbb C^n} && {\Gamma(C,\mathscr E)} && {\Gamma(C,\mathscr E')} && {\mathbb C^n}
+        \arrow["{\Gamma(C,q^{-1})}", from=1-1, to=1-3]
         \arrow["{\Gamma(X,\psi)}", from=1-3, to=1-5]
-        \arrow["{\Gamma(X,q')}", from=1-5, to=1-7]
+        \arrow["{\Gamma(C,q')}", from=1-5, to=1-7]
       \end{tikzcd}
     \end{equation*}
-    defines an element $g\in GL_n(\mathbb C)$ that satisfies
-    $g\cdot q \cong q'$.
+    defines an element $g\in GL_n(\mathbb C)$ that realises
+    $g\cdot q$ and $q'$ as isomorphic quotients and hence as
+    equal in $Q_\circ(r,d)$.
   \end{proof}
 \end{lemma}
 
 \begin{example}
-  The $GL_n$ action on $Q(r,d)$ lifts to $F(r,d)$.
-  In particular, we use \ref{lem:orbits_are_iso_classes} to make sure
-  that
+  The $GL_n$ action on $Q(r,d)$ lifts to $F(r,d)$. \cite[281-282]{nitsure1991}
+  On closed points $(q,\varphi)\in F(r,d)$ this may be written
+  as $g\cdot(q,\varphi) = (g\cdot q, g\cdot\varphi)$ where
+  $g\cdot q$ is given by the action of $GL_n$ on $Q(r,d)$ and
+  $g\in GL_n(\mathbb C)$ acts on $\varphi$ via the induced isomorphism
+  of sheaves
   \begin{align*}
-    F(r,d)(q) \cong F(r,d)(g\cdot q)
+    \Hom(\hat{\mathscr E}_q,\hat{\mathscr E}_q\otimes\mathscr K)
+    \xlongrightarrow{\sim}
+    \Hom(\hat{\mathscr E}_{g\cdot q},\hat{\mathscr E}_{g\cdot q}\otimes\mathscr K)
   \end{align*}
-  where we view $q$ as a $\mathbb C$-point of $Q(r,d)$. Hence
-  $\varphi$ defines a Higgs field on the sheaf corresponding to
-  $g\cdot q$. This lets us express the action on closed points
-  as $g\cdot(q,\varphi) = (g\cdot q,\varphi)$.
+  that we obtain from \ref{lem:lf_orbits_are_iso_classes}.
 \end{example}
+
+\begin{lemma}\label{lem:higgs_orbits_are_iso_classes}
+  Let $(\mathscr E,\varphi),(\mathscr E',\varphi')$ be Higgs sheaves
+  corresponding to closed points $(q,\varphi),(q',\varphi')\in F(r,d)$.
+  Then $(\mathscr E,\varphi)$ and $(\mathscr E',\varphi')$ are isomorphic
+  as Higgs sheaves if, and only if, there is a closed point $g$ of $GL_n$
+  such that $g\cdot (q,\varphi) \cong (q',\varphi')$.
+  \begin{proof}
+    Analogous to \ref{lem:lf_orbits_are_iso_classes}. Indeed, an isomorphism
+    of Higgs sheaves has an underlying isomorphism $\psi : \mathscr E \cong \mathscr E'$
+    which corresponds to a closed point of $GL_n$ by
+    \ref{lem:lf_orbits_are_iso_classes}. By construction, this does the
+    trick.
+  \end{proof}
+\end{lemma}
 
 \subsection{Orbits and Stabilisers}
 
@@ -3964,6 +3985,21 @@ $G$-linearisations.
   is a $GL_n$-linearised ample sheaf on $F(r,d)$.
 \end{example}
 
+It is worth noting that there are other linearised sheaves for
+the actions on $Q(r,d)$ and $F(r,d)$.  In particular
+Newstead \cite{newstead1978} and Nitsure \cite{nitsure1991} linearise
+actions on products of Grassmannians and embed $Q(r,d)$ and $F(r,d)$,
+respectively, in those products such that stable sets are contained
+in the image of the embedding. This reduces the quotient construction
+to a GIT problem on the Grassmannians. While this approach is in
+some sense easier and certainly easier to understand, we have
+chosen to deviate from these original constructions as the linearisations
+that we have specified generalise to higher-dimensional base spaces
+as they are considered in \cite{huybrechts2010}.
+
+We conclude our discussion of linearisations by establishing
+some useful results:
+
 \begin{lemma}\label{lem:linearisations_give_reps}
   Consider a $G$-linearised quasi-coherent sheaf $\mathscr E$ on $X$.
   Then there is a natural group homomorphism $G\to GL(\Gamma(X,\mathscr E))$.
@@ -4154,11 +4190,13 @@ Once again we find ourselves where we have constructed moduli spaces
 but cannot yet be sure which orbits in $Q_\circ(r,d)$ and $F(r,d)$
 are represented.
 
+As the analysis between the two moduli spaces is quite similar,
+we are going to focus on the quotient of $Q_\circ(r,d)$ only.
 The first step in this section is to translate the stability
 conditions of geometric invariant theory to conditions on the locally
-free sheaves which the points of the moduli spaces correspond to.
-In particular, we are going to find that for sufficiently large $\ell$,
-the moduli spaces stabilise.
+free sheaves which the points of $Q_\circ(r,d)$.  In particular, we
+are going to find that for sufficiently large $\ell$,
+the stability conditions and hence moduli spaces stabilise.
 
 \subsection{Taking Limits}
 
@@ -4192,10 +4230,10 @@ considering the morphism $\lambda_x : \mathbf G_m \to X$ given by
 the action of $\mathbf G_m$ on $x$.
 Projective schemes are proper and hence we may use the valuative
 criterion for properness to extend $\lambda_x$ uniquely to a map
-$\lambda_x : \affine{1}{} \to X$.
+$\overline{\lambda_x} : \affine{1}{} \to X$.
 In particular, we obtain the new value
 \begin{align*}
-  \lim_{t\to 0}\lambda(t)\cdot x := \lambda_x(0).
+  \lim_{t\to 0}\lambda(t)\cdot x := \overline{\lambda_x}(0).
 \end{align*}
 
 \begin{example}\label{ex:lf_limits}
@@ -4206,24 +4244,26 @@ In particular, we obtain the new value
   \begin{align*}
     V := \mathbb C^n  = \bigoplus_{w\in\mathbb Z} V_w
   \end{align*}
-  where $V_w := \{v \in V : \lambda(t)\cdot v = t^w\}$ and hence
-  quotients
+  where $V_w := \{v \in V : \lambda(t)\cdot v = t^w\}$. We then
+  write $V_{\leq w} := \oplus_{w'\leq w}V_{w'}$ so that $V_w = V_{\leq w}/V_{\leq w-1}$,
+  $\mathscr E_{\leq w} := q(V_{\leq w}\mathscr O_C)$, and
+  $\mathscr E_w := \mathscr E_{\leq w}/\mathscr E_{\leq w-1}$.
+  We then have quotients
   \begin{align*}
-    q_w : V_w\otimes\mathscr O_C \surj q(\mathscr V_w) =: \mathscr E_w.
+    q_w : V_w\otimes\mathscr O_C \surj \mathscr E_w.
   \end{align*}
   We use this to express the limit:
   \begin{align*}
     \lim_{t\to 0} \lambda(t)\cdot q =: \overline{q} = \bigoplus_{w\in\mathbb Z} q_w.
   \end{align*}
   \begin{proof}[Proof idea]
-    Following \cite[Lemma 4.4]{huybrechts2010}.
+    Following \cite[Lemma 4.4.3]{huybrechts2010}.
     By the valuative criterion of properness the extension
     of $\lambda_q$ to $\affine{1}{}\to Q_\circ(r,d)$ is unique.
     The idea then is to construct a family $\theta$
     of quotients over $\affine{1}{}$ such that $\theta_t = \lambda(t)\cdot q$
-    for $t\neq 0$ and $\theta_0 = \oplus_w q_w$. Writing
-    $V_{\leq w} :=\oplus_{w'\leq w} V_{w'}$ and $\mathscr E_{\leq w} := q(V_{\leq w} \otimes \mathscr O_C)$
-    one then considers the $\mathscr O_X\otimes\mathbb C[t]$-module
+    for $t\neq 0$ and $\theta_0 = \oplus_w q_w$.
+    One then considers the $\mathscr O_X\otimes\mathbb C[t]$-module
     \begin{align*}
       \mathscr T := \bigoplus_{w\in\mathbb Z} \mathscr E_{\leq w}\otimes t^w\mathbb C
     \end{align*}
@@ -4232,17 +4272,49 @@ In particular, we obtain the new value
     realising it as a quasi-coherent subsheaf of the coherent sheaf
     corresponding to $\mathscr E\otimes t^{w_0}\mathbb C$ for some $w_0$.
     Then there is an induced surjection
-    \begin{align*}
+    \begin{align}\label{eq:lf_extension}
       \theta : V\otimes\mathscr O_C \otimes \mathbb C[t]
       \cong\bigoplus_{w\in\mathbb Z} V_{\leq w}\otimes\mathscr O_C\otimes t^w\mathbb C
       \surj \mathscr T
-    \end{align*}
+    \end{align}
     which defines the desired family.
   \end{proof}
 \end{example}
 
 \begin{example}
-  higgs sheaves \missingexample
+  Having done the hard work for locally free sheaves, it is now
+  straightforward to calculate the limit
+  \begin{align}\label{eq:higgs_limit}
+    \overline{(q,\varphi)}:=\lim_{t\to 0} \lambda(t)\cdot (q,\varphi) = (\overline q,\overline\varphi)
+  \end{align}
+  for a fixed one-parameter subgroup $\lambda$ and a fixed closed point
+  $(q,\varphi)$. Indeed, we find that any extension
+  $\overline{\lambda}_{(q,\varphi)}:\affine{1}{}\to F(r,d)$ must
+  respect $\overline{\lambda}_q:\affine{1}{}\to Q_\circ(r,d)$
+  as defined by (\ref{eq:lf_extension}). Hence the commutative
+  diagram do consider is
+  \begin{equation*}
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhiZiBHX20iXSxbMCwxLCJcXG1hdGhiZiBBXjEiXSxbMiwwLCJGKHIsZCkiXSxbMiwxLCJRX1xcY2lyYyhyLGQpIl0sWzIsM10sWzAsMiwiXFxsYW1iZGFfeyhxLFxcdmFycGhpKX0iXSxbMCwxXSxbMSwyLCJcXG92ZXJsaW5le1xcbGFtYmRhfV97KHEsXFx2YXJwaGkpfSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsxLDMsIlxcb3ZlcmxpbmV7XFxsYW1iZGF9X3EiLDJdXQ==
+    \begin{tikzcd}
+      {\mathbf G_m} && {F(r,d)} \\
+      {\mathbf A^1} && {Q_\circ(r,d)}
+      \arrow["{\lambda_{(q,\varphi)}}", from=1-1, to=1-3]
+      \arrow[from=1-1, to=2-1]
+      \arrow[from=1-3, to=2-3]
+      \arrow["{\overline{\lambda}_{(q,\varphi)}}", dashed, from=2-1, to=1-3]
+      \arrow["{\overline{\lambda}_q}"', from=2-1, to=2-3]
+    \end{tikzcd}
+  \end{equation*}
+  To obtain the map $\overline{\lambda}_{(q,\varphi)}$ we only need
+  to specify a section
+  \begin{align*}
+    \varphi^q\in F(r,d)(\overline \lambda_q)
+    = \Gamma(C\times\mathbf A^1,\Hom(\mathscr T,\mathscr T\otimes \pi^*\mathscr K))
+  \end{align*}
+  such that $\varphi^q_t := \restrict{\varphi^q}{C\times\{t\}} = \lambda(t)\cdot\varphi$
+  for all $t\in\mathbf G_m$ and $\varphi^q_0 = \overline{\varphi}$.
+
+  \missingexample
 \end{example}
 
 \subsection{Hilbert-Mumford Weights}
@@ -4320,7 +4392,7 @@ general action:
 We are now able to to characterise the notions of stability
 in our moduli spaces. As usual, we begin with locally free sheaves:
 
-\begin{example}
+\begin{example}\label{ex:lf_git_stability}
   Let $q : \mathscr O^{\oplus n}_C \surj \mathscr E$ be a closed point
   in $Q_\circ(r,d)$. Then $q\in Q^{s}_\circ(r,d)(\mathscr L_\ell)$
   if, and only if, for all non-trivial proper subspaces
@@ -4347,10 +4419,19 @@ in our moduli spaces. As usual, we begin with locally free sheaves:
 \end{example}
 
 \begin{example}
-  higgs sheaves \missingexample
+  Let $(\mathscr E,\varphi)$ be a closed point in $F(r,d)$
+  with $q:\mathscr O^{\oplus n}_C\surj\mathscr E$ the corresponding
+  quotient in $Q_\circ(r,d)$. Then $(q,\varphi)\in F^s(r,d)$
+  if, and only if, for all non-trivial proper subspaces $V'\subseteq\mathbb C^n$
+  such that $\varphi' := \restrict{\varphi}{\mathscr E'}$ is a Higgs
+  field on $\mathscr E' := q(V'\otimes\mathscr O_C)$,
+  \begin{align}\label{eq:git_higgs_stable_sheaf}
+    P(\mathscr E,\ell)\dim V'< P(\mathscr E',\ell)\dim V.
+  \end{align}
+  \missingexample
 \end{example}
 
-\subsection{Stability of Locally Free Sheaves}
+\subsection{The Moduli Space of Stable Sheaves}
 
 It should not come as a surprise that (semi-)stable points of
 $Q_\circ(r,d)$ correspond to slope (semi-)stable bundles
@@ -4371,34 +4452,27 @@ locally free sheaves:
 \end{lemma}
 
 Thus we are justified in calling a locally free sheaf slope (semi-)stable
-whenever its corresponding vector bundle is slope (semi-)stable. Let us now turn
-towards stability of sheaves in the GIT sense. We begin by
-calculating the limits of $\lambda(t)\cdot q$ as $t\to 0$.
+whenever its corresponding vector bundle is slope (semi-)stable. We
+then find that GIT stability in the sense of \ref{ex:lf_git_stability}
+coincides with slope stability:
 
-
-\begin{theorem}\todo{closed points?}
-  If $r$ and $d$ satisfy
-  \begin{align*}
-    d > \max(r^2(2g-2), gr^2 + r(2g-2))
-  \end{align*}
-  then, for $\ell$ sufficiently large, $Q^s_\circ(r,d)(\mathscr L_\ell)$
-  consist of all families of stable sheaves of $Q_\circ(r,d)$, respectively.
-  \begin{proof}
-    \missingproof
-  \end{proof}
-\end{theorem}
-
-Now observe that tensoring with a line bundle does not affect
-stability. That is, if $q:\mathscr O^{\oplus n}_{C\times T} \surj \mathscr E$
-is a family of quotients in $Q_\circ(r,d)$ then twisting by
-$\mathscr O_C(d')$ yields a family $q(d')$ in $Q_\circ(r,d+d')$.
-For each $d'$, the map $q \mapsto q(d')$ is a bijection
-$Q^s_\circ(r,d)\to Q_\circ(r,d+d')$. Thus we have the following:
-
-\begin{corollary}\label{thm:stability_of_lf_sheaves}
+\begin{example}\label{thm:stability_of_lf_sheaves}
   For $\ell$ sufficiently large, $Q^s_\circ(r,d)(\mathscr L_\ell)$
   consist of all families of  slope stable sheaves of $Q_\circ(r,d)$.
-\end{corollary}
+  \begin{proof}
+    Observe that tensoring with a line bundle does not affect
+    stability. That is, if $q:\mathscr O^{\oplus n}_{C\times T} \surj \mathscr E$
+    is a family of quotients in $Q_\circ(r,d)$ then twisting by
+    $\mathscr O_C(d')$ yields a family $q(d')$ in $Q_\circ(r,d+d')$.
+    For each $d'$, the map $q \mapsto q(d')$ is a bijection
+    $Q^s_\circ(r,d)\to Q_\circ(r,d+d')$. Thus we are free to
+    assume
+    \begin{align*}
+      d > \max(r^2(2g-2), gr^2 + r(2g-2)).
+    \end{align*}
+    \missingproof
+  \end{proof}
+\end{example}
 
 In particular, we find that the moduli spaces stabilise as $\ell \to \infty$.
 Hence we define
@@ -4406,23 +4480,28 @@ Hence we define
   M^s_h(r,d) := M^s_h(r,d)_\ell = Q_\circ(r,d)\sslash^s_{\mathscr L_\ell} GL_n
 \end{align}
 for large $\ell$ in the sense of \ref{thm:stability_of_lf_sheaves}.
+This is indeed a moduli space:
 
-\subsection{Stability of Higgs Sheaves}
-
-Now the stability analysis for Higgs sheaves is analagous.
-\missingsection
-
-\begin{corollary}\label{thm:stability_of_higgs_sheaves}
-  For $\ell$ sufficiently large, $F^s(r,d)(\mathscr L_\ell)$
-  consist of all families of slope stable of $F(r,d)$.
+\begin{corollary}
+  $M^s_h(r,d)$ is a coarse moduli space for the subfunctor
+  $\mathcal M^s(r,d)\subset\mathcal M(r,d)$ of stable sheaves in
+  the sense of \ref{def:lf_moduli_problem}.
+  \begin{proof}[Proof idea]
+    We have constructed $M^s_h(r,d)$ as a geometric quotient. Moreover,
+    the quotient map $Q_\circ(r,d)\surj M^s_h(r,d)$ is injective on
+    orbits. These are sufficient conditions for $M^s_h(r,d)$
+    to be a coarse moduli space. This relies on a correspondence between
+    natural transformations $\mathcal M^s_h(r,d)\cong\Hom(-,M^s_h(r,d))$ and
+    $GL_n$-invariant $f:Q_\circ(r,d)\to M$ given by
+    $\eta\mapsto\eta_{Q_\circ(r,d)}(\hat{\mathscr E})$. See
+    \cite[Proposition 3.35]{hoskins2016} for a precise statement
+    of the correspondence.
+  \end{proof}
 \end{corollary}
 
-In particular, the moduli spaces of Higgs sheaves also stabilise as
-$\ell\to\infty$. Hence we define
-\begin{align}\label{eq:higgs_algebraic_space}
-  M^s_H(r,d) := M^s_H(r,d)_\ell = F(r,d)\sslash^s_{\mathscr L_\ell} GL_n
-\end{align}
-for large $\ell$ in the sense of \ref{thm:stability_of_higgs_sheaves}.
+This completes our task of constructing an algebraic moduli space
+for locally free sheaves. A similar construction yields a moduli
+space $M^s_H(r,d)$ of Higgs sheaves. 
 
 \section{Properties of the Algebraic Moduli Spaces}
 
@@ -4476,17 +4555,41 @@ we have an inclusion
 
 \subsection{Varieties}
 
+It is now time to establish that the moduli spaces we have constructed
+are not merely schemes but in fact smooth varieties. The difficult
+part is showing that the quotients are indeed smooth. From the analytic
+construction we already know how to do this: We need to ensure that
+there are slices at each point which allow us to obtain a smooth
+structure on the quotient. Fortunately, a very powerful result by
+Luna \cite[97]{luna1973} ensures that this is so. In particular, it
+ensures that, if $G$ is a reductive group acting on an affine scheme
+$X$, then around $x\in X^s$ there exists an \emph{\'etale slice}
+which allows us to identify the tangent space of the quotient with
+the tangent space of the slice. See \cite{drezet2004} for a modern
+treatment. A precise statement of the theorem that we require is
+\cite[Theorem 4.2.12]{huybrechts2010}.
+
 \begin{theorem}
   $M^s_h(r,d)$ is a smooth quasi-projective variety.
-  \begin{proof}
-    \cite[Proposition 8.65]{hoskins2016}
+  \begin{proof}[Proof idea]
+    Following \cite[Proposition 8.65]{hoskins2016}.
+    $Q_\circ(r,d)$ is reduced and hence a quasi-projective variety.
+    In particular, the open subset $Q^s_\circ(r,d)$ is a quasi-projective
+    variety, too.
+    
+    Let us show that $Q^s_\circ(r,d)$ is smooth.
     \missingproof
+
+    It now follows from Luna's Slice Theorem and the fact that the
+    projective GIT quotient was constructed by gluing affine GIT quotients
+    that the quotient is also smooth.
   \end{proof}
 \end{theorem}
 
 \begin{theorem}
   $M^s_H(r,d)$ is a smooth quasi-projective variety.
   \begin{proof}
+
     \cite[Proposition 7.4]{nitsure1991}
     \missingproof
   \end{proof}
@@ -4631,7 +4734,7 @@ quotients, this time around we were able to view each step as an
 instance of a much broader theory. Moreover, we were able to recover
 the analytic constructions by applying the anlytification functor.
 
-Unfortunately, there is no such thing as a free lunch. \cite{friedman1977}
+Unfortunately, there is no such thing as a free lunch.~\cite{friedman1977}
 Taking the algebraic point of view turned out to be no easier than
 doing things analytically. It was merely a case of moving difficulties
 from one place to another. In particular, obtaining suitable schemes with
@@ -4672,13 +4775,13 @@ a decent amount of duplication. Indeed, the theory of coherent sheaves
 on manifolds is reasonably similar to that on schemes. Hence
 one might reasonably begin with a more general exposition of this
 theory, establishing the correspondence between locally free sheaves
-and vector bundles, inveriants of such sheaves, and the relation to
+and vector bundles, invariants of such sheaves, and the relation to
 embeddings in projective space. Indeed, this is probably the correct
 approach for a more comprehensive treatment of the material.
 Unfortunately, care is required when highlighting special properties
 of one case or the other, so that it is unclear whether, at the end
 of the day, any space would be saved at all. Moreover, the way we
-have chosen to approach the problem is makes the material more
+have chosen to approach the problem makes the material more
 acessible to readers coming from an analytic background.
 
 \subsection{Language Barrier}
@@ -4704,7 +4807,8 @@ some of these extensions.
 
 \subsection{K\"ahler Geometry}
 
-On the analytic side, the lowest hanging fruit is K\"ahler geometry.
+On the analytic side, the most immediate extension lies in the 
+direction of K\"ahler geometry.
 It is very straightforward to introduce moment maps and thus obtain
 symplectic forms on the moduli spaces. Showing that the forms thus
 obtained are actually K\"ahler or Hyperk\"ahler would connect more
@@ -4733,12 +4837,11 @@ of attention to the spaces of semistable bundles, which at least
 are analytic spaces or schemes. However, it is possible to go one
 step further. Moduli stacks are powerful enough to parametrise
 all isomorphism classes of vector bundles, including the unstable ones.
-As an introduction to the subject, one may consider
-\cite{cm2017} where the moduli stack of Higgs bundles is studied.
+As an introduction to the subject, one may consider~\cite{cm2017} where the moduli stack of Higgs bundles is studied.
 
 \pagebreak
 \renewcommand{\bibname}{References}
-\addcontentsline{toc}{chapter}{References}
+\addcontentsline{toc}{chapter}{References}\todo{fix references}
 \printbibliography
 
 \end{document}
