@@ -40,16 +40,16 @@
   I am extremely grateful to my supervisor, [redacted],
   who has been answering my questions with great intuition ever since
   guiding me towards a project idea. Thank you for tolerating my
-  ignorance towards the beauty of analytic geometry.
+  ignorance towards the beauty of differential geometry.
 
-  Thanks should also go to my good friend [redacted] who has
-  been of great help in finding references for the more elementary
-  facts of algebraic geometry.
+  The last year would not have been possible without the generous
+  financial help I received from my grandparents, [redacted] and
+  [redacted].  I appreciate your support!
 
   Last but not least, I have to thank my parents,
-  [redacted] and [redacted], who have never
-  failed to support me over the past 23 years. Thank you for
-  making all of this possible.
+  [redacted] and [redacted], who have always been there for
+  me over the past 23 years. Thank you for your love and your
+  encouragement, thank you for making me who I am today!
 \end{acknowledgements}
 
 \begin{abstract}
@@ -91,7 +91,7 @@ into direct sums of prime power cyclic groups. Hence the family of
 isomorphism classes of finite abelian groups indexed by the natural
 numbers.  At other times, however, one finds that there are uncountably
 many non-isomorphic instances. In such cases one usually finds that
-the objects of interest naturally have topological and geometric 
+the objects of interest naturally have topological and geometric
 properties. Thus the goal is to construct and study geometric spaces
 that parametrise the objects in question. A well-known example
 of this are projective spaces
@@ -185,9 +185,15 @@ construction appear quite naturally in the algebraic case. Indeed,
 Mumford's Geometric Invariant Theory (GIT)~\cite{mumford1994}
 precisely describes stability conditions for the construction of quotients
 by group actions.
-We are thus going to obtain schemes $M^s_h(r,d)$ and $M^s_H(r,d)$
-of stable locally free sheaves and stable Higgs sheaves of rank $r$ and
-degree $d$, respectively.
+We are thus going to obtain two smooth quasi-projective varieties:
+One one hand, we have the moduli space $M^s_h(r,d)$ of stable locally free sheaves of
+rank $r$ and degree $d$ as first constructed by Mumford in
+\cite{mumford1963}. On the other hand, there is the moduli space
+$M^s_H(r,d)$ of stable Higgs sheaves first introduced by Nitsure in
+\cite{nitsure1991}. We deviate slightly from these original sources
+in favour of the steps taken by Simpson in \cite{simpson1994}. Simpson's
+approach generalises to higher dimensional base spaces which is in the
+spirit of the current presentation.
 
 Further analysis is going to reveal that the algebraic moduli spaces,
 although obtained by very different methods, have much the same
@@ -436,8 +442,9 @@ by considering local trivialisations where we have
 \end{align*}
 Moreover, the operator $\dol_E$ satisfies
 \begin{align*}
-  \dol_E(\xi \otimes s) = \dol\xi \otimes s + (-1)^{p+q} \xi \wedge \dol_E s.
+  \dol_E(\xi \otimes s) = \dol\xi \otimes s + (-1)^{p+q} \xi \wedge \dol_E s
 \end{align*}
+and $\ker(\dol_E) = \Gamma(X,E)$.
 Hence it is uniquely determined by the component
 $\Omega^0(X,\mathcal E) \to \Omega^{0,1}(X,\mathcal E)$. Indeed,
 any linear map $\alpha : \Omega^0(X,E) \to \Omega^{0,1}(X,E)$ may be
@@ -528,7 +535,7 @@ in some sense. In particular, we have Dolbeault's theorem:
   \begin{align*}
     H^{p,q}(X,(E,\dol_E)) = H^q(X,(E,\dol_E)\otimes K^{\otimes p}_X)
   \end{align*}
-  where $K$ is the \emph{canonical bundle}
+  where $K_X$ is the \emph{canonical bundle}
   $K_X := \bigwedge^n T_{1,0}^* X$.
 \end{theorem}
 
@@ -1971,7 +1978,7 @@ Higgs connections are obvious choices. This question may be
 answered by considering the quotients taken as K\"ahler or Hyperk\"ahler.
 
 While we leave details to other sources such as \missingcitation,
-we outline the idea. The key idea of taking such quotients is to
+we outline the general principles. The key idea of taking such quotients is to
 construct a moment map corresponding to the relevant group action.
 The existence of a moment map ensures that the group action respects
 the symplectic structure. A symplectic manifold $(X,\omega)$
@@ -2381,15 +2388,20 @@ whose kernel is a subspace of codimension 1, i.e. a closed point of
 $\projective{}{}(\Gamma(C,\mathscr L)^\vee)$. It turns out that this map is an
 embedding when we choose $\mathscr L$ to be a sufficently large tensor power of
 the canonical sheaf $\mathscr K := \Gamma(-,K)$, e.g. $\mathscr L = \mathscr
-  K^{\otimes 2}$.  Thus $C$ is an algebraic subvariety of
-$\projective{}{}(\Gamma(C,\mathscr L)^\vee)$ and hence by Chow's
-theorem an algebraic curve. \todo{analytic?}
+  K^{\otimes 2}$.  Thus $C$ is an analytic subvariety of
+$\projective{}{}(\Gamma(C,\mathscr L)^\vee)$ and hence, by Chow's
+theorem, an algebraic curve.
 
 \begin{lemma}
   Holomorphic bundles on $C$ regarded as a manifold are equivalent
   to vector bundles on $C$ regarded as a scheme.
-  \begin{proof}
-    \missingproof
+  \begin{proof}[Proof idea]
+    Going from schematic vector bundles to holomorphic ones
+    is straightforward as open immersions $\affine{1}{}\inc C$
+    define charts and hence trivialisations of schematic
+    bundles are trivialisations of analytic bundles.
+    The same argument works in the other direction by Chow's
+    theorem.
   \end{proof}
 \end{lemma}
 
@@ -3174,7 +3186,7 @@ We are going to use the following lemma to obtain such a scheme:
   \begin{align*}
     (f : T\to S) \mapsto \Gamma(C\times T,(\identity\times f)^*\mathscr F)
   \end{align*}
-  where $\pi : C\times T \to T$ is representable.
+  is representable.
   \begin{proof}
     \cite[Lemma 3.5]{nitsure1991}
     \missingproof
@@ -4467,9 +4479,9 @@ coincides with slope stability:
     For each $d'$, the map $q \mapsto q(d')$ is a bijection
     $Q^s_\circ(r,d)\to Q_\circ(r,d+d')$. Thus we are free to
     assume
-    \begin{align*}
+    \begin{align}\label{eq:assumption_large_d}
       d > \max(r^2(2g-2), gr^2 + r(2g-2)).
-    \end{align*}
+    \end{align}
     \missingproof
   \end{proof}
 \end{example}
@@ -4501,7 +4513,7 @@ This is indeed a moduli space:
 
 This completes our task of constructing an algebraic moduli space
 for locally free sheaves. A similar construction yields a moduli
-space $M^s_H(r,d)$ of Higgs sheaves. 
+space $M^s_H(r,d)$ of Higgs sheaves.
 
 \section{Properties of the Algebraic Moduli Spaces}
 
@@ -4514,25 +4526,107 @@ the tangent spaces and observed that the cotangent space of
 $M^s_\dol(r,d)$ is open and dense in $M^s_\varphi(r,d)$.
 
 This section is going to establish analogous results in the algebraic
-setting. We begin by defining tangent spaces of schemes. We then
-determine the tangent spaces of the algebraic moduli spaces and
-relate cotangent vectors of locally free sheaves to Higgs field. Finally,
-we establish that both algebraic spaces are in fact smooth varieties.
+setting. We begin by showing that the moduli spaces are in fact
+smooth varieties. We then proceed by defining tangent spaces of schemes
+and determining the tangent spaces of the algebraic moduli spaces.
+In particular, we are once again able to relate cotangent vectors
+of locally free sheaves to Higgs fields. Finally, we discuss
+analytifications and state a result that shows that the analytifications
+of the algebraic moduli spaces are precisely the analytic spaces.
 
+\subsection{Smoothness}
+
+It is now time to establish that the moduli spaces we have constructed
+are not merely schemes but in fact smooth varieties. The difficult
+part is showing that the quotients are smooth. From the analytic
+construction we already know how to do this: We need to ensure that
+there are slices at each point which allow us to obtain a smooth
+structure on the quotient. Fortunately, a very powerful result by
+Luna \cite[97]{luna1973} ensures that this is so. In particular, it
+ensures that, if $G$ is a reductive group acting on an affine scheme
+$X$, then around $x\in X^s$ there exists an \emph{\'etale slice}
+which allows us to identify the tangent space of the quotient with
+the tangent space of the slice. See \cite{drezet2004} for a modern
+treatment. A precise statement of the theorem that we require is
+\cite[Theorem 4.2.12]{huybrechts2010}.
+
+\begin{theorem}
+  $M^s_h(r,d)$ is a smooth quasi-projective variety.
+  \begin{proof}[Proof idea]
+    Following \cite[Proposition 8.65]{hoskins2016}.
+    $Q_\circ(r,d)$ is reduced and hence a quasi-projective variety.
+    In particular, the open subset $Q^s_\circ(r,d)$ is a quasi-projective
+    variety, too.
+
+    Let us show that $Q^s_\circ(r,d)$ is smooth around every
+    $q : \mathscr O^{\oplus n}_C \surj \mathscr E$. Using~\cite[Proposition 2.2.8]{huybrechts2010}, it suffices
+    to show that $\Ext^1(\mathscr F,\mathscr E)=0$ where
+    $\mathscr F = \Ker(q)$. This is easily shown by applying
+    $\Hom(-,\mathscr E)$ to the short exact sequence
+    \begin{align*}
+      0 \to \mathscr F \to \mathscr O^{\oplus n}_C \to \mathscr E \to 0
+    \end{align*}
+    which, by definition of $\Ext$ as a derived functor, gives a
+    long exact sequence ending in
+    \begin{align*}
+      \cdots
+      \to \Ext^1(\mathscr O^{\oplus n}_C,\mathscr E)
+      \to \Ext^1(\mathscr F,\mathscr E)
+      \to 0.
+    \end{align*}
+    By taking $d$ sufficiently large, Serre's vanishing theorem
+    states
+    \begin{align*}
+      \Ext^1(\mathscr O^{\oplus n}_C,\mathscr E) = H^1(X,\mathscr E)^n = 0.
+    \end{align*}
+    Hence $Q_\circ(r,d)$ is smooth around $q$.
+
+    It now follows from Luna's Slice Theorem and the fact that the
+    projective GIT quotient was constructed by gluing affine GIT quotients
+    that the quotient is also smooth. Then separatedness and reducedness
+    follow directly from the reducedness of $Q_\circ(r,d)$ and
+    $Q_\circ(r,d)\surj M^s_h(r,d)$ being a geometric quotient.
+  \end{proof}
+\end{theorem}
+
+\begin{theorem}
+  $M^s_H(r,d)$ is a smooth quasi-projective variety.
+  \begin{proof}
+
+    \cite[Proposition 7.4]{nitsure1991}
+    \missingproof
+  \end{proof}
+\end{theorem}
 \subsection{Tangent Space}
+
+Recall that the tangent space of a smooth manifold $X$ at a point $x$ may be
+defined algebraically as dual to the quotient $I_x/I_x^2$ where
+$I_x\subseteq\mathscr C^\infty(X,\mathbb R)$ is the ideal of smooth
+functions vanishing at $x$. Regarding $\mathscr C^\infty$ as the
+structure sheaf and $I_x$ as the maximal ideal of the local ring
+$\mathscr C^\infty_{X,x}$, this extends naturally to schemes:
 
 \begin{definition}
   Let $X$ be a scheme and $x\in X$ a point. The \emph{Zariski cotangent
-    space} of $X$ at $x$ is
-  \begin{align*}
-    T_x^* X := \mathfrak m_x /\mathfrak m_x^2
-  \end{align*}
+    space} of $X$ at $x$ is $T_x^* X := \mathfrak m_x /\mathfrak m_x^2$
   where $\mathfrak m_x\subseteq\mathscr O_{X,x}$ is the maximal ideal.
 \end{definition}
+
+\begin{example}
+  Let us consider some examples of schemes we are familiar with:
+  \begin{itemize}
+    \item For smooth schemes over $\mathbb C$, nothing surprising happens:
+          The tangent spaces of $\affine{n}{}$ and $\projective{n}{}$
+          are $\mathbb C^n$ everywhere.
+    \item
+  \end{itemize}
+  \missingexample
+\end{example}
 
 \begin{theorem}
   $T_{[q]} M^s_h(r,d) = \Ext^1(\mathscr E,\mathscr E)$.
   \begin{proof}
+    \cite[Corollary 4.5.2]{huybrechts2010}
     \missingproof
   \end{proof}
 \end{theorem}
@@ -4553,47 +4647,6 @@ we have an inclusion
   \end{proof}
 \end{corollary}
 
-\subsection{Varieties}
-
-It is now time to establish that the moduli spaces we have constructed
-are not merely schemes but in fact smooth varieties. The difficult
-part is showing that the quotients are indeed smooth. From the analytic
-construction we already know how to do this: We need to ensure that
-there are slices at each point which allow us to obtain a smooth
-structure on the quotient. Fortunately, a very powerful result by
-Luna \cite[97]{luna1973} ensures that this is so. In particular, it
-ensures that, if $G$ is a reductive group acting on an affine scheme
-$X$, then around $x\in X^s$ there exists an \emph{\'etale slice}
-which allows us to identify the tangent space of the quotient with
-the tangent space of the slice. See \cite{drezet2004} for a modern
-treatment. A precise statement of the theorem that we require is
-\cite[Theorem 4.2.12]{huybrechts2010}.
-
-\begin{theorem}
-  $M^s_h(r,d)$ is a smooth quasi-projective variety.
-  \begin{proof}[Proof idea]
-    Following \cite[Proposition 8.65]{hoskins2016}.
-    $Q_\circ(r,d)$ is reduced and hence a quasi-projective variety.
-    In particular, the open subset $Q^s_\circ(r,d)$ is a quasi-projective
-    variety, too.
-    
-    Let us show that $Q^s_\circ(r,d)$ is smooth.
-    \missingproof
-
-    It now follows from Luna's Slice Theorem and the fact that the
-    projective GIT quotient was constructed by gluing affine GIT quotients
-    that the quotient is also smooth.
-  \end{proof}
-\end{theorem}
-
-\begin{theorem}
-  $M^s_H(r,d)$ is a smooth quasi-projective variety.
-  \begin{proof}
-
-    \cite[Proposition 7.4]{nitsure1991}
-    \missingproof
-  \end{proof}
-\end{theorem}
 
 \subsection{Analytification}
 
@@ -4807,7 +4860,7 @@ some of these extensions.
 
 \subsection{K\"ahler Geometry}
 
-On the analytic side, the most immediate extension lies in the 
+On the analytic side, the most immediate extension lies in the
 direction of K\"ahler geometry.
 It is very straightforward to introduce moment maps and thus obtain
 symplectic forms on the moduli spaces. Showing that the forms thus
