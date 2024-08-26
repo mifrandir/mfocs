@@ -2159,12 +2159,27 @@ the tangent space:
   \begin{align*}
     T_{[\dol_E]}M^s_\dol(E) = H^{0,1}(C,\End(E,\dol_E)).
   \end{align*}
-  \begin{proof}[Proof sketch]\todo{add details}
-    A full proof is given in \cite[223-225]{kobayashi1987}. The key idea is to look
-    at curves in $M^s_\dol(E)$ to obtain the tangent space at $\nabla$ as a set of
-    equivalence classes in $\Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell$. One then
-    identifies this space with $H^{0,1}(C,\End(E,\dol_E))$ via a sequence of calculations
-    involving harmonic forms.
+  \begin{proof}[Proof idea]
+    Following \cite[223-225]{kobayashi1987}. The key idea is to look
+    at curves in $M^s_\dol(E)$ to obtain the tangent space at $\dol_E$.
+    To this end, fix some $\dol_E$ and consider a curve 
+    $\alpha : (-\delta,\delta) \to \Omega^{0,1}(C,\End E)$
+    with $\alpha_0 = 0$ and write $\dol_t := \dol_E + \alpha_t$.
+    Now, for each $s\in\Omega^0(C,E)$,
+    \begin{align*}
+      0 = \dol_t^2(s) = (\dol_E \alpha_t)(s) + (\alpha_t\wedge\alpha_t)(s)
+    \end{align*}
+    Thus, writing $\alpha = \restrict{\partial_t\alpha_t}{t=0}$,
+    we have $\dol_E \alpha = 0$. Now, if $\dol_t$ is given by
+    a family $f : (-\delta,\delta) \to GL(E)$ with $f_0 = I$
+    then one finds $\dol_t = \dol_E + f^{-1}_t \circ \dol_E f_t$.
+    Hence $\alpha = \dol_E f$.  Thus the directions normal to
+    the $GL(E)$-action at $\dol_E$ are given by
+    \begin{align*}
+      \frac{\ker(\dol_E : \Omega^{0,1}(E) \to \Omega^{0,2}(E))}{\im(\dol_E : \Omega^0(E)\to\Omega^{0,1}(E))}
+      = H^{0,1}(C,\End(E,\dol_E))
+    \end{align*}
+    as required.
   \end{proof}
 \end{theorem}
 
@@ -2428,7 +2443,7 @@ by
       }\right)
 \end{align*}
 Complex points in $\projective{}{}(V)$ may be identified
-with one-dimensional subspaces of $V$. \missingcitation
+with one-dimensional subspaces of $V$.
 Now if $\mathscr L$ is
 an invertible sheaf on $C$ then there is a natural map
 \begin{align}\label{eq:natural_line_bundle_map}
@@ -2483,19 +2498,17 @@ sheaves on $C$:
 \begin{definition}
   A \emph{Higgs sheaf} on $C$ consists of a locally free sheaf
   $\mathscr E$ on $C$ and a map of sheaves
-  \begin{align*}
-    \varphi : \mathscr E \to \mathscr E \otimes \mathscr K
-  \end{align*}
+  $\varphi : \mathscr E \to \mathscr E \otimes \mathscr K$
   called a \emph{Higgs field}.
 \end{definition}
 
 Just as an analytic Higgs field may be thought of as a holomorphic
 section on $\End(E)\otimes K = \Hom(E,E\otimes K)$, an algebraic
-Higgs field is equivalently a section of $\Hom(\mathscr E,\mathscr E\otimes K)$.
+Higgs field is equivalently a section of $\Hom(\mathscr E,\mathscr E\otimes\mathscr K)$.
 Moreover, it is straightforward to verify that under the correspondence
 $E\to\Gamma(-,E)$ a Higgs field $E\to E\otimes K$ on bundles is
 equivalent to a Higgs field $\mathscr E\to\mathscr E\otimes\mathscr K$
-on schemes.
+on sheaves.
 Thus we are justified in treating the construction of moduli
 spaces of Higgs bundles algebraically.
 
@@ -2544,13 +2557,6 @@ $S(T) := \Hom(T,S)$. Hence we may abuse notation and write
 $\eta : \mathcal M \cong M$. We are often going to surpress the
 isomorphism $\eta$ and call $M$ the fine moduli space.
 
-\begin{example}
-  \begin{itemize}
-    \item
-    \item projectivisation/projective space \missingexample
-  \end{itemize}
-\end{example}
-
 Beyond the fact that fine moduli spaces represent the moduli
 problem and thus are the best possible solution, there are some
 pleasant properties to observe.
@@ -2579,13 +2585,9 @@ Hence we make the following definition:
   $U:=\eta^{-1}_M (\identity)$.
 \end{definition}
 
-\begin{example}
-  \missingexample
-\end{example}
-
-However, it turns out that this is often too much to ask. Indeed,
+Unfortunately, it turns out that genuine representability often is too much to ask. Indeed,
 we really care about the $\mathbb{C}$-points and hence
-we are otherwise ready accept some deviation so long as it is not
+we are otherwise ready to accept some deviation so long as it is not
 possible to do better:
 
 \begin{definition}
@@ -2608,10 +2610,6 @@ possible to do better:
           \end{equation*}
   \end{itemize}
 \end{definition}
-
-\begin{example}
-  \missingexample
-\end{example}
 
 Unfortunately, even coarse moduli spaces may not exist. A common reason
 for this failure is known as the jump phenomenon: The existence of a family
@@ -2709,12 +2707,6 @@ i.e. is invertible.
     Omitted. See \cite[Proposition 13.15]{gortz2010}.
   \end{proof}
 \end{proposition}
-
-\begin{example}
-  Let us calculate the twisting sheaf $\mathscr O(1)$ on $\projective{n}{}$
-  more explicitly.
-  \missingexample
-\end{example}
 
 Why are the twisting sheaves important to us?  They are well-behaved
 with respect to the parameters. In particular,
@@ -3001,7 +2993,13 @@ have a moduli space at all:
       \to \mathscr O_{\mathbf P^n}(-n)
       \to 0
     \end{align*}
-    \missingproof
+    The key observation is that, while every $t$ corresopnds to a
+    distinct extension, the corresponding sheaves $\mathscr E_t$
+    may be isomorphic. Indeed, $\mathscr E_t = \mathscr O_C^{\oplus 2}$
+    for $t\neq 0$ and
+    $\mathscr E_0 = \mathscr O_{\mathbf P^n}(1) \oplus\mathscr O_{\mathbf P^n}(-n)$.
+    For further discussion of this subject see
+    \cite[Sections 5.1]{newstead1978}.
   \end{proof}
 \end{lemma}
 
