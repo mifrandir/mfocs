@@ -42,11 +42,16 @@
   guiding me towards a project idea. Thank you for tolerating my
   ignorance towards the beauty of differential geometry.
 
+  Thanks must also go to my good friend, [redacted], who has
+  helped me many a time over the last year. If not with his
+  impressive knowledge of basic algebraic geometry, then certainly
+  through his ability of finding references.
+
   The last year would not have been possible without the generous
   financial help I received from my grandparents, [redacted] and
     [redacted].  I appreciate your support!
 
-  Last but not least, I have to thank my parents,
+  Last but certainly not least, I have to thank my parents,
   [redacted] and [redacted], who have always been there for
   me over the past 23 years. Thank you for your love and your
   encouragement, thank you for making me who I am today!
@@ -2046,7 +2051,7 @@ To answer this question, we define the following:
 \begin{definition}\label{def:stable_bundle}
   Let $(E,\dol_E)$ be a holomorphic bundle on a compact complex
   manifold $X$. Then $(E,\dol_E)$ is \emph{slope stable}
-  if, for all holomorphic subbundles
+  if, for all non-trivial proper holomorphic subbundles
   $(F,\dol_F)\subset (E,\dol_E)$,
   \begin{align}\label{eq:stability}
     \frac{\deg F}{\rank F} < \frac{\deg E}{\rank E}.
@@ -2113,7 +2118,7 @@ There is an entirely analogous condition for Higgs bundles:
   manifold $X$. Then $(E,\dol_E,\varphi)$ is \emph{slope stable}
   if, for all Higgs subbundles
   $(F,\dol_F,\restrict{\varphi}{F})\subset (E,\dol_E,\varphi)$,
-  \begin{align}\label{eq:stability}
+  \begin{align}\label{eq:higgs_stability}
     \frac{\deg F}{\rank F} < \frac{\deg E}{\rank E}.
   \end{align}
 \end{definition}
@@ -2283,7 +2288,7 @@ using analytic methods. Since this space was first considered,
 the theory of moduli spaces has come a long way.
 The goal of this section is to formally define moduli spaces
 as schemes representing functors, explain how such schemes
-are constructed, and hence formally define the schemes whose
+are constructed, and hence define the schemes whose
 points correspond to holomorphic bundles and Higgs bundles
 on a compact Riemann surface, respectively.
 
@@ -2304,11 +2309,14 @@ we will see that the same machinery can be used to solve
 a plethora of similar problems without much extra work.
 
 Once constructed, we will take some time to study the moduli
-spaces which we have thus obtained. It turns out that the GIT
-quotients have several desirable properties such as being
-quasi-projective varieties. Moreover, we will use deformation \todo{do we?}
-theory to show that holomorphic bundles may still be thought
-of as cotangent vectors of holomorphic bundles.
+spaces which we have thus obtained. The most important step is going
+to be the analysis of the stability conditions on locally free
+sheaves. It turns out that stable sheaves in the sense of GIT
+correspond to slope stable bundles. We then proceed by establishing
+some further results, such as that the moduli spaces are
+quasi-projective varieties and that the total space of the cotangent
+bundle of the moduli space of locally free sheaves is open in the
+moduli space of Higgs sheaves.
 
 \paragraph*{Notation} In addition to the notation used in the previous chapter, unless
 otherwise indicated,
@@ -2611,8 +2619,7 @@ where, at a singular point, the fibre is different to everywhere else.
 We will see an example of this later in \ref{lem:no_coarse_moduli_space}.
 
 \begin{lemma}\label{lem:no_coarse_condition}
-  Let $\mathcal M$ be a moduli problem and
-  $s,t\in \affine{1}{}(\mathbb{C})$. If there is an
+  Let $\mathcal M$ be a moduli problem.  If there is an
   $F\in\mathcal M(\affine{1}{})$ such that
   $F_s=F_t$ if, and only if,
   $s,t\neq 0$ or $s=t=0$ then there is no coarse moduli space
@@ -2801,25 +2808,17 @@ all $\mathscr F$.
   \begin{align*}
     \chi (X,\mathscr F) = \dim H^0(X,\mathscr F)-\dim H^1(X,\mathscr F).
   \end{align*}
-  If we moreover take $\mathscr F=\mathscr O_X$ then
-  $\chi (X,\mathscr O_X) = 1 - g$. \todo{justify}
 \end{example}
-
-\begin{lemma}
-  \todo{invariance under base change}
-\end{lemma}
-
-\subsection{Degree}
 
 Recall that for vector bundles on a compact Riemann surfaces we defined the
 degree.  The Euler characteristic allows us to make a similar definition for
 locally free sheaves on the curve $C$.
 
 \begin{definition}
-  The \emph{degree} of a locally free sheaf $\mathscr F$ of rank $r$
+  The \emph{degree} of a locally free sheaf $\mathscr E$ of rank $r$
   on $C$ is
   \begin{align}\label{def:degree}
-    \deg \mathscr F := \chi (C,\mathscr F) - r\chi(C,\mathscr O_C).
+    \deg \mathscr E := \chi (C,\mathscr E) - r\chi(C,\mathscr O_C).
   \end{align}
 \end{definition}
 
@@ -2827,33 +2826,21 @@ Once again we say a locally free sheaf on $C$ is of
 type $(r,d)$ to mean that it is of rank $r$ and degree $d$.
 
 \begin{example}
-  As the rank of $\mathscr O_C$ is $1$ its degree must be $0$.
-\end{example}
-
-\begin{lemma}\label{lem:degree_of_tensor}
   If $\mathscr E$ and $\mathscr F$ are locally free on $C$ then
   \begin{align*}
     \deg(\mathscr E\otimes\mathscr F) = \rank\mathscr E\deg\mathscr F + \rank\mathscr F\deg\mathscr E.
   \end{align*}
-  \begin{proof}
-    \cite[Exercise 8.24]{hoskins2016}.
-    \missingproof
-  \end{proof}
-\end{lemma}
-
-\begin{example}
-  Using~\ref{lem:degree_of_tensor} and $\deg\mathscr O_C(1)=1$ \missingcitation,
-  we find
+  In particular,
   \begin{align*}
     \deg \mathscr E(m) = \deg\mathscr E + m\rank\mathscr E.
   \end{align*}
-  In particular, the map $\mathscr E \mapsto \mathscr E(d')$ defines
+  Thus the map $\mathscr E \mapsto \mathscr E(d')$ defines
   a bijection between locally free sheaves of type $(r,d)$ and
   type $(r,d+rd')$.
 \end{example}
 
 In most instances the degree of a locally free sheaf is going to
-be known and it will be interesting to caculate the Euler characteristic
+be known and it will be interesting to calculate the Euler characteristic
 or, more specifically, the dimension of the space of global sections.
 To this end, we have the Riemann-Roch theorem:
 
@@ -2901,7 +2888,7 @@ surprising and non-trivial.
   There exists a unique polynomial $p\in\mathbb{Q}[t]$ such that,
   for all $m$, $P(\mathscr F,\mathscr L)(m) = p(m)$.
   \begin{proof}
-    See \cite[Lemma 1.2.1]{huybrechts2010}.
+    Omitted. See \cite[Lemma 1.2.1]{huybrechts2010}.
   \end{proof}
 \end{lemma}
 
@@ -2920,13 +2907,6 @@ states that, for $m$ sufficiently large and $j>0$,
 $H^j(X,\mathscr F\otimes\mathscr L^{\otimes m})=0$. Hence,
 eventually,
 $P(\mathscr F,\mathscr L)(m) = \dim \Gamma(X,\mathscr F\otimes \mathscr L^{\otimes m})$.
-
-\begin{lemma}\label{lem:hilbert_base_change}
-  \todo{invariance under base change}
-\end{lemma}
-
-
-\missingsection
 
 \section{Locally Free Sheaves and Quot Schemes}
 
@@ -2968,26 +2948,9 @@ each $\mathscr E_t$ has the same Hilbert polynomial.
 
 To truly view locally free sheaves $\mathscr E,\mathscr F$ on
 $C_T$ flat over $T$ as a family, we need to adjust our notion of
-equivalence. In particular, we require all the fibres to be isomorphic.
-
-\begin{lemma}
-  Let $\mathscr E$ and $\mathscr F$ be locally free sheaves on $C_T$
-  flat over $T$. Then the following are equivalent:
-  \begin{enumerate}
-    \item For all $t\in T$, there is an isomorphism of fibres
-          $\mathscr E_t\cong\mathscr F_t$.
-    \item There exists an invertible sheaf $\mathscr L$ on
-          $T$ such that $\mathscr E \cong \mathscr F \otimes \pi^*\mathscr L$
-          where $\pi : C_T \to C$ is the base change.
-  \end{enumerate}
-  \begin{proof}
-    \todo{not sure this is true; if it isn't then we need to find a
-      different explanation}
-    \missingproof
-  \end{proof}
-\end{lemma}
-
-Hence we make the following definition:
+equivalence. In particular, if each fibre $\mathscr E_t$ is isomorphic
+to $\mathscr F_t$ then one would reasonably consider $\mathscr E$
+and $\mathscr F$ to be equivalent families. Hence we make the following definition:
 
 \begin{definition}\label{def:lf_moduli_problem}
   The moduli problem of locally free sheaves on $C$ is given by the
@@ -3002,6 +2965,10 @@ Hence we make the following definition:
   maps $f: T'\to T$ to the pullback $f^*$.
 \end{definition}
 
+Note $\pi^*\mathscr L$ is free on $C\times\{t\}$ and hence
+any isomorphism $\mathscr E\cong\mathscr F\cong\pi^*\mathscr L$
+restricted to $C\times\{t\}$ induces an isomorphism
+$\mathscr E_t \cong \mathscr F_t$.
 The choice of equivalence relation does indeed make a big difference.
 Indeed, our construction of the moduli space would not work for the
 naive notion of equivalence of families.
@@ -3011,10 +2978,29 @@ have a moduli space at all:
 \begin{lemma}\label{lem:no_coarse_moduli_space}
   The moduli problem $\mathcal M_h$ of locally free sheaves on $C$
   does not admit a coarse moduli space.
-  \begin{proof}
-    Follwing \cite[Example 2.2]{hoskins2016}. We aim to construct
+  \begin{proof}[Proof idea]
+    Follwing \cite[Example 2.22]{hoskins2016}. 
+    We aim to construct
     an $\mathscr E\in\mathcal M_h(\affine{1}{})$ that satisfies the
-    condition in \ref{lem:no_coarse_condition}.
+    condition in \ref{lem:no_coarse_condition}. This may be achieved
+    by choosing an embedding $\iota : C\inc\projective{n}{}$. Then 
+    we calculate
+    \begin{align*}
+      \Ext^1(\mathscr O_{\mathbf P^n}(1),\mathscr O_{\mathbf P^n}(-n)) 
+      \cong H^1(\mathbf P^n,\mathscr O_{\mathbf P^n}(-n-1))
+      \cong H^0(\mathbf P^n,\mathscr O_{\mathbf P^n}) 
+      \cong \mathbb C
+    \end{align*}
+    using Serre duality and the fact that $\mathscr O_{\mathbf P^n}(-n-1)$
+    is the canonical invertible sheaf. This isomorphism
+    defines a family $\mathscr E$ of extensions
+    \begin{align*}
+      0
+      \to \mathscr O_{\mathbf P^n}(1)
+      \to \mathscr E_t
+      \to \mathscr O_{\mathbf P^n}(-n)
+      \to 0
+    \end{align*}
     \missingproof
   \end{proof}
 \end{lemma}
@@ -3079,7 +3065,7 @@ our attention to a subclass of locally free sheaves. Indeed, we are
 going to end up with those sheaves corresponding to (semi-)stable
 bundles.
 
-\subsection{Quotient Sheaves} \todo{fix $\mathscr E$ vs $\mathscr F$}
+\subsection{Quotient Sheaves}
 
 Choosing an isomorphism $\mathbb C^n \cong \Gamma(C,\mathscr E)$
 allows us to think of globally generated sheaves $\mathscr F$
@@ -3115,8 +3101,8 @@ $\mathscr E\cong\mathscr E'$ such that the following commutes:
 \begin{equation}\label{eq:quotient_equivalence}
   % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWwgRSJdLFsyLDAsIlxcbWF0aGNhbCBGIl0sWzIsMSwiXFxtYXRoY2FsIEYnIl0sWzEsMiwiXFxjb25nIl0sWzAsMSwicSIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFswLDIsInEnIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV1d
   \begin{tikzcd}
-    {\mathscr E} && {\mathscr F} \\
-    && {\mathscr F'}
+    {\mathscr F} && {\mathscr E} \\
+    && {\mathscr E'}
     \arrow["q", two heads, from=1-1, to=1-3]
     \arrow["{q'}"', two heads, from=1-1, to=2-3]
     \arrow["\cong", from=1-3, to=2-3]
@@ -3143,7 +3129,7 @@ is a family of quotients over $T'$. Thus we may define the moduli problem:
   The corresponding \emph{Quot functor} is given by sending each
   scheme $T$ to
   \begin{align*}
-    \mathcal Quot (\mathscr E)(T) = \left\lbrace{
+    \mathcal Quot (\mathscr F)(T) = \left\lbrace{
       \text{families of quotients $q : \pi^*\mathscr F \surj \mathscr E$
         over $T$}
     }\right\rbrace / \sim
@@ -3213,15 +3199,15 @@ Grothendieck constructed a fine moduli space for it. \cite[{Proposition 3.8}]{gr
 
 \begin{example}\label{ex:quot_scheme_of_lf}
   Once again, in the case $X=C$ we have schemes
-  $Quot(\mathscr E)^{r,d}$ representing the functors in
+  $Quot(\mathscr F)^{r,d}$ representing the functors in
   (\ref{eq:quot_functor_split_on_c}). Now consider a locally free
-  sheaf $\mathscr F$ on $C$ of type $(r,d)$ with $H^1(C,\mathscr F)=0$. By Riemann-Roch
+  sheaf $\mathscr E$ on $C$ of type $(r,d)$ with $H^1(C,\mathscr E)=0$. By Riemann-Roch
   \ref{thm:riemann_roch} we have
   \begin{align*}
-    n := \dim\Gamma(C,\mathscr F) = \chi(C,\mathscr F) = d + r(1-g).
+    n := \dim\Gamma(C,\mathscr E) = \chi(C,\mathscr E) = d + r(1-g).
   \end{align*}
-  If, moreover, $\mathscr F$ is globally generated then it
-  corresponds to a quotient $\mathscr O^{\oplus n}_C\surj \mathscr F$,
+  If, moreover, $\mathscr E$ is globally generated then it
+  corresponds to a quotient $\mathscr O^{\oplus n}_C\surj \mathscr E$,
   i.e. a closed point of
   \begin{align*}
     Q(r,d) := \Quot(\mathscr O^{\oplus n}_C)^{r,d}
@@ -3244,7 +3230,8 @@ Some creativity is required to extend this procedure to Higgs
 sheaves. What we are looking for is a scheme $F(r,d)$ whose closed points
 are pairs $(q,\varphi)$ where $q$ is a closed point
 in $Q_\circ(r,d)$ and $\varphi : \hat{\mathscr E}_q \to \hat{\mathscr E}_q \otimes \mathscr K$.
-We are going to use the following lemma to obtain such a scheme:
+The following technical lemma is going to enable the construction of
+such a scheme:
 
 \begin{lemma}\label{lem:linear_scheme}
   Let $S$ be a reduced scheme and $\mathscr F$ a coherent sheaf over
@@ -3253,9 +3240,16 @@ We are going to use the following lemma to obtain such a scheme:
     (f : T\to S) \mapsto \Gamma(C\times T,(\identity\times f)^*\mathscr F)
   \end{align*}
   is representable.
-  \begin{proof}
-    \cite[Lemma 3.5]{nitsure1991}
-    \missingproof
+  \begin{proof}[Proof idea]
+    This lemma is already contained in \cite{grothendieck1963}. A proof is
+    essentially given in \cite[206-207]{bosch2012}. While the exact construction is
+    going to be of little help, it is worth noting that the
+    desired scheme is constructed as the total space
+    \begin{align*}
+      B = \mathbf V(\mathscr B)=\underline{\Spec}_S(\Sym^\bullet(\mathscr B)^\vee)
+    \end{align*}
+    of a cokernel $\mathscr B$ of a certain morphism of sheaves. In
+    particular, there is an affine map $B \to S$. \cite[\href{https://stacks.math.columbia.edu/tag/01LX}{Tag 01LX}]{stacks-project}
   \end{proof}
 \end{lemma}
 
@@ -3294,7 +3288,7 @@ We are going to use the following lemma to obtain such a scheme:
     \tau : F(r,d) \longrightarrow Q_\circ(r,d)
   \end{align*}
   is just the forgetful map $(\mathscr E,\varphi) \mapsto \mathscr E$
-  on closed points.
+  on closed points. In particular, it is affine.
 \end{example}
 
 We have thus constructed schemes that may be thought of as containing
@@ -3472,9 +3466,7 @@ $G(T)$ on $X(T)$ by
 
   To extend this to a schematic action $GL_n \times Q_\circ(r,d) \to Q_\circ(r,d)$
   we specify a family of quotients
-  \begin{align*}
-    \mathscr O^{\oplus n}_{C\times GL_n\times Q(r,d)}\surj \mathscr E
-  \end{align*}
+  $\mathscr O^{\oplus n}_{C\times GL_n\times Q(r,d)}\surj \mathscr E$
   of type $(r,d)$ over $GL_n\times Q(r,d)$. We construct such a family by
   considering the universal family $\hat q:\mathscr Q^{\oplus n}_{C\times Q(r,d)}\surj \hat{\mathscr E}$,
   pulling it back along the projection $\pi:GL_n\times Q(r,d)\to Q(r,d)$,
@@ -3491,10 +3483,8 @@ $G(T)$ on $X(T)$ by
     \xlongrightarrow{\pi^*\hat q}
     \pi^*\hat{\mathscr E}
   \end{align*}
-  where each $\pi$ denotes the natural projection. As base change
-  preserves Hilbert polynomials \ref{lem:hilbert_base_change} this
-  has rank $r$ and degree $d$. It is then straightforward to verify
-  that this is indeed an action that restricts to $Q_\circ(r,d)$.
+  where each $\pi$ denotes the natural projection. It is straightforward
+  to verify that this defines an action that restricts to $Q_\circ(r,d)$.
   Indeed, we see in the lemma below that more is true.
 \end{example}
 
@@ -4058,7 +4048,7 @@ $G$-linearisations.
   notation, we denote by $\mathscr L_\ell$, too. The
   linearisation of $\mathscr L_\ell$ extends to the pullback by
   $GL_n$-equivariance of $u$. Moreover, the structure
-  map of relative spec is affine by construction and the
+  map of relative spectra is affine by construction and the
   pullback of ample sheaves is ample. Thus $\mathscr L_\ell$
   is a $GL_n$-linearised ample sheaf on $F(r,d)$.
 \end{example}
@@ -4191,27 +4181,13 @@ Once again fix an action $\sigma : G\times X\to X$ of a
 reductive group $G$ on a projective scheme $X$ and a linearised
 ample sheaf $\mathscr L$ on $X$.
 
-\begin{definition}
+\begin{definition}\label{def:git_stability}
   A point $x\in X$ is \emph{stable} if there exists a section
   $s\in\Gamma(X,\mathscr L^{\otimes k})^G$ for some $k>0$ such that $s(x)\neq 0$
   and the action of $G$ on the standard open $D_+(s)\subseteq X$ is closed.
   Denote by $X^s(\mathscr L)$ the set of all stable points of $X$ with respect
   to the linearisation $\mathscr L$.
 \end{definition}
-
-We find that this is completely analogous to the definition
-of stability in the affine case \ref{def:affine_stability}, at
-least when considering closed points.
-
-\begin{lemma}
-  A closed point $x\in X^{ss}(\mathscr L)$ is stable if, and only if, the orbit
-  $G\cdot x\subseteq X^{ss}(\mathscr L)$ is closed and $\dim G_x = 0$.
-  \begin{proof}[Proof idea]
-    Following \cite[Lemma 5.9]{hoskins2016}.
-    The `only if' direction is a matter of direct calculation.
-    \missingproof
-  \end{proof}
-\end{lemma}
 
 Of course, the point of restricting to a stable subset is to turn
 good quotients into geometric ones. Let us make sure that we have
@@ -4220,11 +4196,12 @@ an open subscheme:
 
 \begin{lemma}
   $X^s(\mathscr L)$ is open in $X$.
-  \begin{proof}
-    Recall that the set of points with zero-dimensional stabilisers is open.
-    Moreover, the union $\bigcup D_+(f)$ over $f\in R(X,\mathscr L)_+^G$
-    with closed action on $D_+(f)$ is open and so is the intersection
-    $X^s(\mathscr L)$.
+  \begin{proof}[Proof idea]
+    Following \cite[Lemma 5.5]{hoskins2016}.  The key observation is that the
+    set of points with zero-dimensional stabilisers is open. This essentially
+    follows from \cite[III 12.8]{hartshorne1977}.  Moreover, the union $\bigcup
+    D_+(f)$ over $f\in R(X,\mathscr L)_+^G$ with closed action on $D_+(f)$ is
+    open and so is the intersection $X^s(\mathscr L)$.
   \end{proof}
 \end{lemma}
 
@@ -4238,8 +4215,14 @@ $\varphi(X^s(\mathscr L))$ is open in $X\sslash_{\mathscr L} G$.
   \begin{align*}
     \nu : X^s({\mathscr L}) \to X\sslash^s_{\mathscr L} G := \nu(X^s({\mathscr L})).
   \end{align*}
-  \begin{proof}
-    \missingproof
+  \begin{proof}[Proof idea]
+    Following \cite[Theorem 5.6]{hoskins2016}. Write
+    $Y := X\sslash^s_{\mathscr L}G$. It is straightforward to
+    restrict $\nu$ to a geometric quotient by considering the
+    union $X^c$ of all $D_+(f)\subseteq X$ such that $f$ is $G$-invariant
+    and the action of $G$ on $D_+(f)$ is closed. Now
+    $X^s(\mathscr L)\subseteq X^c$ is open and good quotients restrict
+    to good quotients on open subsets.
   \end{proof}
 \end{theorem}
 
@@ -4253,7 +4236,26 @@ $\varphi(X^s(\mathscr L))$ is open in $X\sslash_{\mathscr L} G$.
   the construction ought not to depend on the parameter $\ell$.
 \end{example}
 
-\todo{do we want the closed points theorem?}
+We find that projective GIT stability is completely analogous to the definition
+of stability in the affine case \ref{def:affine_stability}, at least when
+considering closed points.
+
+\begin{lemma}
+  A closed point $x\in X^{ss}(\mathscr L)$ is stable if, and only if, the orbit
+  $G\cdot x\subseteq X^{ss}(\mathscr L)$ is closed and $\dim G_x = 0$.
+  \begin{proof}[Proof idea]
+    Following \cite[Lemma 5.9]{hoskins2016}.
+    The `only if' direction is a matter of direct calculation.
+    In the other direction, assume $x\in X^{ss}(\mathscr L)$ has a
+    closed orbit. Choose a standard open $D_+(f)$ containing
+    $x$. Then there is a closed subset $Z\subseteq D_+(f)$ of
+    points $z$ with $\dim G_z > 0$. It is then possible to find
+    a homogeneous $h$ such that $D_+(fh)\cap Z$ is empty and
+    $x\in D_+(fh)$. It is then straightforward to check that this
+    $fh$ witnesses the stability of $x$ in the sense of
+    \ref{def:git_stability}.
+  \end{proof}
+\end{lemma}
 
 \section{Stability Analysis}
 
@@ -4359,42 +4361,6 @@ In particular, we obtain the new value
   \end{proof}
 \end{example}
 
-\begin{example}
-  Having done the hard work for locally free sheaves, it is now
-  straightforward to calculate the limit
-  \begin{align}\label{eq:higgs_limit}
-    \overline{(q,\varphi)}:=\lim_{t\to 0} \lambda(t)\cdot (q,\varphi) = (\overline q,\overline\varphi)
-  \end{align}
-  for a fixed one-parameter subgroup $\lambda$ and a fixed closed point
-  $(q,\varphi)$. Indeed, we find that any extension
-  $\overline{\lambda}_{(q,\varphi)}:\affine{1}{}\to F(r,d)$ must
-  respect $\overline{\lambda}_q:\affine{1}{}\to Q_\circ(r,d)$
-  as defined by (\ref{eq:lf_extension}). Hence the commutative
-  diagram do consider is
-  \begin{equation*}
-    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhiZiBHX20iXSxbMCwxLCJcXG1hdGhiZiBBXjEiXSxbMiwwLCJGKHIsZCkiXSxbMiwxLCJRX1xcY2lyYyhyLGQpIl0sWzIsM10sWzAsMiwiXFxsYW1iZGFfeyhxLFxcdmFycGhpKX0iXSxbMCwxXSxbMSwyLCJcXG92ZXJsaW5le1xcbGFtYmRhfV97KHEsXFx2YXJwaGkpfSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsxLDMsIlxcb3ZlcmxpbmV7XFxsYW1iZGF9X3EiLDJdXQ==
-    \begin{tikzcd}
-      {\mathbf G_m} && {F(r,d)} \\
-      {\mathbf A^1} && {Q_\circ(r,d)}
-      \arrow["{\lambda_{(q,\varphi)}}", from=1-1, to=1-3]
-      \arrow[from=1-1, to=2-1]
-      \arrow[from=1-3, to=2-3]
-      \arrow["{\overline{\lambda}_{(q,\varphi)}}", dashed, from=2-1, to=1-3]
-      \arrow["{\overline{\lambda}_q}"', from=2-1, to=2-3]
-    \end{tikzcd}
-  \end{equation*}
-  To obtain the map $\overline{\lambda}_{(q,\varphi)}$ we only need
-  to specify a section
-  \begin{align*}
-    \varphi^q\in F(r,d)(\overline \lambda_q)
-    = \Gamma(C\times\mathbf A^1,\Hom(\mathscr T,\mathscr T\otimes \pi^*\mathscr K))
-  \end{align*}
-  such that $\varphi^q_t := \restrict{\varphi^q}{C\times\{t\}} = \lambda(t)\cdot\varphi$
-  for all $t\in\mathbf G_m$ and $\varphi^q_0 = \overline{\varphi}$.
-
-  \missingexample
-\end{example}
-
 \subsection{Hilbert-Mumford Weights}
 
 \todo{change to $SL_n$ action?}
@@ -4440,10 +4406,6 @@ interest to us:
   \end{align*}
 \end{example}
 
-\begin{example}
-  \missingexample
-\end{example}
-
 \subsection{Hilbert-Mumford Criterion}
 
 It is possible to show that $x$ is stable with
@@ -4461,18 +4423,15 @@ general action:
   respect to $\mathscr L$ if, and only if, for all one-parameter
   subgroups $\lambda$ of $G$, the Hilbert-Mumford weight
   $\mu^{\mathscr L}(x,\lambda)$ is positive.
-  \begin{proof}
-    2.1 in Mumford GIT, \cite[Theorem 4.9]{newstead1978}.
-    \missingproof
-  \end{proof}
 \end{theorem}
 
+The original statement and proof are due to Mumford's GIT~\cite{mumford1963}.
 We are now able to to characterise the notions of stability
 in our moduli spaces. As usual, we begin with locally free sheaves:
 
 \begin{example}\label{ex:lf_git_stability}
   Let $q : \mathscr O^{\oplus n}_C \surj \mathscr E$ be a closed point
-  in $Q_\circ(r,d)$. Then $q\in Q^{s}_\circ(r,d)(\mathscr L_\ell)$
+  in $Q_\circ(r,d)$. Then $q$ is stable with respect to $\mathscr L_\ell$
   if, and only if, for all non-trivial proper subspaces
   $V'\subseteq \mathbb C^n$,
   \begin{align}\label{eq:git_stable_sheaf}
@@ -4480,7 +4439,7 @@ in our moduli spaces. As usual, we begin with locally free sheaves:
   \end{align}
   where $\mathscr E' := q(V'\otimes\mathscr O_C)$.
   \begin{proof}[Proof idea]
-    Writing
+    Following \cite[Lemma 4.4.5]{huybrechts2010}. Writing
     \begin{align*}
       \theta(V') := P(\mathscr E',\ell)\dim V-P(\mathscr E,\ell)\dim V'
     \end{align*}
@@ -4494,19 +4453,6 @@ in our moduli spaces. As usual, we begin with locally free sheaves:
     $V_{\dim V''} = V'$ and $V_{-\dim V'} = V''$
     where $V = V' \oplus V''$.
   \end{proof}
-\end{example}
-
-\begin{example}
-  Let $(\mathscr E,\varphi)$ be a closed point in $F(r,d)$
-  with $q:\mathscr O^{\oplus n}_C\surj\mathscr E$ the corresponding
-  quotient in $Q_\circ(r,d)$. Then $(q,\varphi)\in F^s(r,d)$
-  if, and only if, for all non-trivial proper subspaces $V'\subseteq\mathbb C^n$
-  such that $\varphi' := \restrict{\varphi}{\mathscr E'}$ is a Higgs
-  field on $\mathscr E' := q(V'\otimes\mathscr O_C)$,
-  \begin{align}\label{eq:git_higgs_stable_sheaf}
-    P(\mathscr E,\ell)\dim V'< P(\mathscr E',\ell)\dim V.
-  \end{align}
-  \missingexample
 \end{example}
 
 \subsection{The Moduli Space of Stable Sheaves}
@@ -4525,7 +4471,8 @@ locally free sheaves:
     \frac{\deg\mathscr F}{\rank\mathscr F}<\frac{\deg\mathscr E}{\rank\mathscr E};
   \end{align}
   \begin{proof}
-    \missingproof
+    One only needs to observe that subbundles are equivalent to
+    subsheaves with a fixed smaller rank.
   \end{proof}
 \end{lemma}
 
@@ -4537,18 +4484,18 @@ coincides with slope stability:
 \begin{example}\label{thm:stability_of_lf_sheaves}
   For $\ell$ sufficiently large, $Q^s_\circ(r,d)(\mathscr L_\ell)$
   consist of all families of  slope stable sheaves of $Q_\circ(r,d)$.
-  \begin{proof}
-    Observe that tensoring with a line bundle does not affect
-    stability. That is, if $q:\mathscr O^{\oplus n}_{C\times T} \surj \mathscr E$
-    is a family of quotients in $Q_\circ(r,d)$ then twisting by
-    $\mathscr O_C(d')$ yields a family $q(d')$ in $Q_\circ(r,d+d')$.
-    For each $d'$, the map $q \mapsto q(d')$ is a bijection
-    $Q^s_\circ(r,d)\to Q_\circ(r,d+d')$. Thus we are free to
-    assume
-    \begin{align}\label{eq:assumption_large_d}
-      d > \max(r^2(2g-2), gr^2 + r(2g-2)).
-    \end{align}
-    \missingproof
+  \begin{proof}[Proof idea]
+    Following \cite[79-82]{hoskins2016}. This essentially follows
+    from \ref{ex:lf_git_stability}. However, there are some subtleties
+    to consider. Firstly, one needs to choose $d$ large. Indeed,
+    both directions require some bound on $d$. This is
+    not an issue as tensoring with a degree $d'$ invertible sheaf
+    provides us with a bijection $Q_\circ(r,d)\to Q_\circ(r,d+rd')$.
+    Secondly, subsheaves and subbundles lead to a significant number
+    of cases to be considered. Thirdly, the proof in \cite{hoskins2016}
+    goes further than required in that it shows that GIT stability
+    of the action on $Q(r,d)$ implies several of the conditions that
+    we already assumed by restricting to $Q_\circ(r,d)$.
   \end{proof}
 \end{example}
 
@@ -4581,7 +4528,7 @@ This completes our task of constructing an algebraic moduli space
 for locally free sheaves. A similar construction yields a moduli
 space $M^s_H(r,d)$ of Higgs sheaves.
 
-\section{Properties of the Algebraic Moduli Spaces}
+\section{Additional Results}
 
 In \ref{sec:properties_of_analytic_spaces} we observed that the
 analytic moduli spaces $M^s_\dol(r,d)$ and $M^s_\varphi(r,d)$ have
@@ -4616,7 +4563,7 @@ the tangent space of the slice. See \cite{drezet2004} for a modern
 treatment. A precise statement of the theorem that we require is
 \cite[Theorem 4.2.12]{huybrechts2010}.
 
-\begin{theorem}
+\begin{theorem}\label{thm:lf_are_smooth}
   $M^s_h(r,d)$ is a smooth quasi-projective variety.
   \begin{proof}[Proof idea]
     Following \cite[Proposition 8.65]{hoskins2016}.
@@ -4652,17 +4599,15 @@ treatment. A precise statement of the theorem that we require is
     that the quotient is also smooth. Then separatedness and reducedness
     follow directly from the reducedness of $Q_\circ(r,d)$ and
     $Q_\circ(r,d)\surj M^s_h(r,d)$ being a geometric quotient.
+
+    Quasi-projectivity follows from the presence of an ample
+    sheaf on the projective GIT quotient $M^s_h(r,d)$.~\cite[\href{https://stacks.math.columbia.edu/tag/0B42}{Tag 0B42}]{stacks-project}
+    This is induced by the linearised ample sheaf on $Q_\circ(r,d)$.
+    For the explicit construction see the proof of
+    \cite[Theorem 8.1]{dolgachev2003}.
   \end{proof}
 \end{theorem}
 
-\begin{theorem}
-  $M^s_H(r,d)$ is a smooth quasi-projective variety.
-  \begin{proof}
-
-    \cite[Proposition 7.4]{nitsure1991}
-    \missingproof
-  \end{proof}
-\end{theorem}
 \subsection{Tangent Space}
 
 Recall that the tangent space of a smooth manifold $X$ at a point $x$ may be
@@ -4678,12 +4623,53 @@ $\mathscr C^\infty_{X,x}$, this extends naturally to schemes:
   where $\mathfrak m_x\subseteq\mathscr O_{X,x}$ is the maximal ideal.
 \end{definition}
 
+Using Zariski tangent spaces, one may establish an analogue of
+\ref{thm:lf_are_smooth} for Higgs sheaves:
+
 \begin{theorem}
-  $T_{[q]} M^s_h(r,d) = \Ext^1(\mathscr E,\mathscr E)$.
-  \begin{proof}
-    \cite[Corollary 4.5.2]{huybrechts2010}
-    \missingproof
+  $M^s_H(r,d)$ is a smooth quasi-projective variety.
+  \begin{proof}[Proof idea]
+    Following \cite[296-298]{nitsure1991}. The difficult part is
+    showing that the tangent space is constant on $M^s_H(r,d)$. This is
+    done by constructing an exact sequence
+    \begin{align*}
+      H^0(\End\mathscr E)
+      \to H^0(\End\mathscr E\otimes\mathscr K)
+      \to T_{[\mathscr E,\varphi]}M^s_H(r,d)
+      \to H^1(\End\mathscr E)
+      \to H^1(\End\mathscr E\otimes\mathscr K)
+    \end{align*}
+    where the first and last maps are induced by the commutator map
+    $[\varphi, -] : \End\mathscr E \to \End\mathscr E \otimes L$
+    given by $s \mapsto \varphi\circ s - (s\otimes\identity)\circ\varphi$
+    on local sections. Analysing the kernels of these induced
+    maps then allows calculation of the dimension of the tangent
+    space.
+
+    Showing that the connected component of $M^0_H\subseteq M^s_H(r,d)$ of
+    Higgs sheaves whose underlying locally free sheaf is stable is
+    a smooth variety follows by considering the projection $M^0_H\to M^s_h(r,d)$
+    and using the fact that $M^s_h(r,d)$ is a smooth variety.
+
+    Since Nitsure's initial construction it has been established that
+    that $M^s_H(r,d)$ is connected. See \cite{gpo2016} fo a very
+    high level of generality. In particular, $M^s_H(r,d) = M^0$ is
+    a smooth variety. This is once again quasi-projective by
+    considering the induced ample sheaf on the projective GIT
+    quotient.
   \end{proof}
+\end{theorem}
+
+Unfortunately, cotangent spaces are best calculated using deformation
+theory and further applications of Luna's Slice theory. \cite[Corollary 4.5.2]{huybrechts2010}
+Hence we record the following result without proof:
+
+\begin{theorem}
+  For every closed point $[q : \mathscr O^{\oplus n}_C \surj \mathscr E]$ of
+  $M^s_h(r,d)$, we have
+  \begin{align*}
+  T_{[q]} M^s_h(r,d) = \Ext^1(\mathscr E,\mathscr E).
+  \end{align*}
 \end{theorem}
 
 Just as one does in the analytic space, we would like to consider the
@@ -4720,37 +4706,46 @@ gives rise to the module of differentials:
   \emph{K\"ahler differentials}.
   \begin{proof}[Proof idea]
     There are multiple established ways to construct $\Omega^1(X)$. One way is by
-    considering the kernel $\mathfrak m$ of the multiplication map
-    $R\otimes R \to R$ and defining $\Omega^1(X) := \mathfrak m/\mathfrak m^2$. Then the derivation
-    map is $r \mapsto 1\otimes r - r \otimes 1$. It is then straightforward
+    considering the kernel $\mathfrak a$ of the multiplication map
+    $R\otimes R \to R$ and defining $\Omega^1(X) := \mathfrak a/\mathfrak a^2$. Then the derivation
+    map is $r \mapsto 1\otimes r - r \otimes 1$. It is now straightforward
     to verify the universal property.
   \end{proof}
 \end{theorem}
 
 Now consider an affine scheme $U$. Recall that $\mathscr O(U)$-modules
 correspond to $\mathscr O_U$-modules. Hence we have a sheaf of K\"ahler
-differentials $\Omega^1_U$ on $U$. Moreover, one may check that the
+differentials $\Omega^1_U$ on $U$. Moreover, it is routine to check that the
 sheaves of K\"ahler differentials $\Omega^1_U$ on affine opens
 $U\subseteq X$ of a scheme glue to a sheaf on the whole scheme $X$.
 
 In general, $\Omega^1_X$ is quasi-coherent and for smooth $X$ it is
 locally free. \cite[\href{https://stacks.math.columbia.edu/tag/02G1}{Tag 02G1}]{stacks-project}
-In particular, the sheaf $\Omega^1_X$ defines a bundle $T^*X\to X$
-whose fibre at smooth a point $x$ is the Zariski cotangent space
-$T^*_x X$.  Using the natural isomorphism of vector spaces
+Moreover, the sheaf $\Omega^1_X$ defines a bundle $T^*X\to X$
+whose fibre at a closed point $x$ is the Zariski cotangent space
+$T^*_x X$. \cite[\href{https://stacks.math.columbia.edu/tag/0B2D}{Tag 0B2D}]{stacks-project}
+Using the natural isomorphism of vector spaces
 \begin{align*}
   \Ext^1(\mathscr E,\mathscr E) \cong H^1(C,\End(\mathscr E))
 \end{align*}
-there is a natural inclusion
-\begin{align*}
-  TM^s_h(r,d) \longinc M^s_H(r,d).
-\end{align*}
+and recalling the construction of $F(r,d)\to Q_\circ(r,d)$ with
+fibre $H^1(C,\End(\mathscr E))$ over the closed point corresponding
+to $\mathscr E$, we have a natural inclusion
+\begin{align}\label{eq:cotangent_inclusion}
+  T^*M^s_h(r,d)(\mathbb C) \longinc M^s_H(r,d)(\mathbb C).
+\end{align}
 
 \begin{corollary}\label{thm:cotangent_is_open}
-  $TM^s_h(r,d)\subseteq M^s_H(r,d)$ is an open subscheme.
+  $T^*M^s_h(r,d)(\mathbb C)$ is an open subset of $M^s_H(r,d)(\mathbb C)$.
   \begin{proof}
-    Now $Q_\circ^s(r,d)$ is open in $Q_\circ(r,d)$.
-    \missingproof
+    Now $Q_\circ^s(r,d)$ is open in $Q_\circ(r,d)$ so
+    $T^*M^s_h(r,d)(\mathbb C)$ is open in
+    \begin{align*}
+      \bigsqcup_{q\in M_h(r,d)(\mathbb C)} H^1(C,\End(\hat{\mathscr E}_q))
+    \end{align*}
+    and the inclusion factors through (\ref{eq:cotangent_inclusion})
+    where $M_h(r,d)(\mathbb C)$ is the topological space
+    $Q_\circ(r,d)(\mathbb C)/GL_n(\mathbb C)$.
   \end{proof}
 \end{corollary}
 
@@ -4774,10 +4769,8 @@ compact Riemann surfaces and locally free sheaves on smooth algebraic
 curves gives bijections
 \begin{align*}
   M^s_{\dol}(r,d) \to M^s_h(r,d)(\mathbb C), \hspace{1cm}
-  M^s_{\varphi}(r,d) \to M^s_H(r,d)(\mathbb C)
+  M^s_{\varphi}(r,d) \to M^s_H(r,d)(\mathbb C).
 \end{align*}
-between the spaces constructed in \ref{eq:abstract_analytic_spaces},
-\ref{eq:plain_algebraic_space}, and \ref{eq:higgs_algebraic_space}.
 We would like to turn these maps into homeomorphisms. If we consider
 the subspace topology on the sets of complex points, we have no hope
 of achieving this. Fortunately, observe that there is another choice of
@@ -4798,12 +4791,13 @@ Moreover, it is not difficult to verify the following:
 
 \begin{lemma}
   Let $X$ be a quasi-projective variety.  Every non-empty open subset
-  $U\subseteq X$ induces and open and dense subset $U(\mathbb C)\subseteq X^{an}$.
+  $U\subseteq X(\mathbb C)$ is open and dense in $X^{an}$.
 \end{lemma}
 
 \begin{example}
-  By \ref{thm:cotangent_is_open}, $TM_h^s(r,d)$ is open in $M_H^s(r,d)$. Thus,
-  in particular, $TM_h^s(r,d)(\mathbb C)$ is open and dense in $M^s_H(r,d)^{an}$.
+  By \ref{thm:cotangent_is_open}, $TM_h^s(r,d)(\mathbb C)$ is open in
+  $M_H^s(r,d)(\mathbb C)$. Thus, in particular, $TM_h^s(r,d)(\mathbb C)$
+  is open and dense in $M^s_H(r,d)^{an}$.
 \end{example}
 
 The key observation now is that $X^{an}$ inherits more than just a
@@ -4983,9 +4977,12 @@ arise by recalling that vector bundles are just principal
 $GL_n$-bundles. Hence it is a natural next step to think about
 moduli spaces principal bundles. Moreover, there is a natural
 notion of decorated principal bundle for which moduli spaces have
-been constructed and studied. \missingcitation
+been constructed and studied. See e.g.
+\cite[Section 4.B]{huybrechts2010} or \cite{schmitt2004}.
 Another generalisation arises by considering wider classes
-of base spaces such as algebraic surfaces \missingcitation.
+of base spaces such as algebraic surfaces or general K\"ahler
+manifolds. Many of these generalisations are already well-studied,
+as can be seen in \cite{huybrechts2010} and \cite{kobayashi1987}.
 
 \subsection{Stacks}
 
