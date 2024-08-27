@@ -49,7 +49,7 @@
 
   The last year would not have been possible without the generous
   financial help I received from my grandparents, [redacted] and
-    [redacted].  I appreciate your support!
+  [redacted].  I appreciate your support.
 
   Last but certainly not least, I have to thank my parents,
   [redacted] and [redacted], who have always been there for
@@ -110,21 +110,22 @@ moduli spaces in analytic and algebraic categories.
 
 The primary examples we are going to consider are holomorphic
 vector bundles on compact Riemann surfaces $C$ of genus $g\geq 2$. By Riemann surface
-we mean a connected one-dimensional complex manifold. In other words,
+we mean a connected complex manifold of complex dimension 1. In other words,
 one of the simplest non-trivial base spaces possible. Holomorphic vector
 bundles are particularly suitable to demonstrate the core principles
+of moduli space construction
 for three reasons. Firstly, the moduli spaces are non-trivial but
-well-known and well-behaved. A priori, this is not guaranteed. For example, up to isomorphism there are only countably
-many smooth bundles for any fixed $C$. This observation allows us to
-focus on holomorphic bundles with a fixed underlying smooth bundle.
-Secondly, holomorphic bundles on compact Riemann surfaces are equivalent
+well-known and well-behaved. A priori, this is not guaranteed. For
+example, up to isomorphism, there are only countably
+many smooth bundles for any fixed $C$. Hence the moduli space is
+discrete. Secondly, holomorphic bundles on compact Riemann surfaces are equivalent
 to finite rank locally free sheaves on smooth algebraic curves. This
 makes the problem both analytic and algebraic in nature, enabling
 us to showcase both approaches.
 Finally, there are frequently studied extensions to holomorphic
 bundles which enable us to illustrate how to adapt moduli spaces in the
 presence of additional structure. Higgs bundles, as introduced by
-Hitchin~\cite{hitchin1987}, are going to serve as a suitable example
+Hitchin~\cite{hitchin1987}, are going to serve as an example
 of such decorated holomorphic bundles.
 
 \section{The Analytic Point of View}
@@ -137,11 +138,13 @@ makes for a poor candidate for an analytic moduli space.
 The only solution is to discard some points. We present
 the construction of the analytic moduli space of holomorphic bundles
 due to Narasimhan and Seshadri~\cite{ns1964}. For Higgs bundles, our
-construction follows that of Hitchin~\cite{hitchin1987}.\todo{check}
+construction follows that of Hitchin~\cite{hitchin1987}.
+A more modern discussion of analytic moduli spaces of holomorphic
+bundles may be found in \cite{kobayashi1987}.
 
-If one thinks of the moduli space as the space of all holomorphic bundles
-$A_{\dol}(E)$ with underlying smooth bundle $E$ quotiented by the action
-of the automorphism group $\Aut(E)$ then there are two ways in which
+If one thinks of the moduli space as the affine space $A_{\dol}(E)$
+of all holomorphic bundles with underlying smooth bundle $E$ quotiented
+by the action of the automorphism group $\Aut(E)$ then there are two ways in which
 the moduli space can fail to be a manifold. Firstly, one requires that
 the quotient is locally a manifold. Around a point $\mathcal E\in A_\dol(E)$
 this means that there needs to be a slice, i.e. a submanifold whose
@@ -156,11 +159,12 @@ One may use these two conditions to construct subsets
   A^s_\dol(E) \subset A^{ps}_\dol(E) \subset A_\dol(E)
 \end{align*}
 and hence a complex manifold $M_\dol^s(E) := A^s_\dol(E) / \Aut(E)$
-whose points are isomorphism classes of stable holomorphic bundles.
+whose points are isomorphism classes of so-called stable
+holomorphic bundles.
 
 A Higgs bundle on $C$ is just a pair $(\mathcal E,\varphi)$
 where $\mathcal E$ is a holomorphic bundle and $\varphi$ is a
-holomorphic section of $\End\mathcal E\otimes TC$ where $TC$ is the
+holomorphic section of $\End\mathcal E\otimes T^*C$ where $T^*C$ is the
 holomorphic tangent bundle. The same considerations as above lead to
 the construction of the moduli space $M^s_\varphi(E) := A^s_\varphi(E)/\Aut(E)$
 of stable Higgs bundles with underlying smooth vector bundle $E$. This is also a
@@ -228,9 +232,10 @@ viewpoint.
 \section{Holomorphic Vector Bundles}
 
 Holomorphic maps are smooth. Hence, holomorphic vector bundles
-are smooth vector bundles. In contrast to maps, in the case of vector
-bundles the word `holomorphic' does not refer to a property, but
-a structure. In particular, there may be many holomorphic bundles with
+are smooth vector bundles. However, a holomorphic bundle is a 
+smooth bundle with additional structure. This is in contrast to
+the case of maps where being holomorphic is a property. In particular,
+there may be many holomorphic bundles with
 the same underlying smooth bundle. The theory presented
 in this section is standard. See e.g. \cite{moroianu2004}.
 
@@ -247,8 +252,7 @@ geometric conventions. Hence, unless otherwise indicated,
 
 \subsection{Complex Vector Bundles}
 
-We begin by studying smooth structures. Recall the definition
-of a smooth vector bundle on a complex manifold:
+Recall the definition of a smooth vector bundle on a complex manifold:
 
 \begin{definition}\label{def:complex_bundle}
   Let $X$ be a complex manifold of dimension $n$. A
@@ -256,10 +260,10 @@ of a smooth vector bundle on a complex manifold:
   $\pi : E\to X$ such that there
   is an open cover $X = \bigcup_i U_i$ and diffeomorphisms
   \begin{equation}\label{eq:smooth_trivialisation}
-    \phi_i : {\pi}^{-1}U_i \cong \mathbb{C}^r \times U_i
+    \varphi_i : {\pi}^{-1}U_i \cong \mathbb{C}^r \times U_i
   \end{equation}
   such that, for every chart $U\subseteq U_i\cap U_j$, the
-  map $\phi_i \circ {\phi_j}^{-1}$ restricts to a linear
+  map $\varphi_i \circ {\varphi_j}^{-1}$ restricts to a linear
   automorphism of $\mathbb{C}^r\times U \cong \mathbb{C}^{r+n}$.
 \end{definition}
 
@@ -308,25 +312,25 @@ structure.
 \end{example}
 
 One is usually interested in what kinds of sections a vector bundle
-admits. Indeed, in the next chapter we are going to make extensive use
+admits. Indeed, in the next section we are going to make extensive use
 of the fact that a vector bundle is uniquely determined by its sheaf
 of sections. In the complex case, we need to be careful about the
 kind of sections we are referring to. Let $X$ be a complex manifold
-with sheaves $\mathscr C^\infty_X$ and $\mathscr O_X$ of complex smooth
-and holomoprhic functions, respectively.
+with sheaves $\mathscr C^\infty_X$ and $\mathscr O_X$ of complex
+valued smooth and holomorphic functions, respectively.
 
 \begin{itemize}
   \item If $E\to X$ is a smooth vector bundle then $\Gamma^\infty(U,E)$
-        denotes the $C^\infty_X(U)$-vector space of smooth sections on $U$.
+        denotes the $\mathscr C^\infty_X(U)$-module of smooth sections on $U$.
   \item If $\mathcal E\to X$ is holomorphic then $\Gamma(U,\mathcal E)$
-        denotes the $\mathscr O_X(U)$-vector space of holomorphic sections
+        denotes the $\mathscr O_X(U)$-module of holomorphic sections
         on $U$.
 \end{itemize}
 
 Note that if $\mathcal E$ is holomorphic then it is also smooth.
 However, there are some important differences between
 $\Gamma^\infty(U,\mathcal E)$ and $\Gamma(U,\mathcal E)$. While both are
-complex vector spaces $\Gamma^\infty(U,\mathcal E)$ is typically infinite
+complex vector spaces, $\Gamma^\infty(U,\mathcal E)$ is typically infinite
 dimensional while $\Gamma(U,\mathcal E)$ is always finite
 dimensional.~\cite[Theorem 1.4.1]{ma2007}
 
@@ -393,8 +397,9 @@ In particular, we now have a family of complexes
 
 \subsection{Dolbeault Cohomology of Holomorphic Bundles}
 
-For a smooth bundle $E$ of rank $r$, consider the spaces of
-$E$-valued $k$-forms and $(p,q)$-forms, respectively,
+For a smooth bundle $E$ of rank $r$ on a complex manifold $X$,
+consider the $\mathscr C^\infty(X)$-modules of $E$-valued $k$-forms and $(p,q)$-forms,
+respectively,
 \begin{align*}
   \Omega^k(X,E)     & := \Omega^k_{\mathbb C}(X)\otimes_{\mathscr C^\infty(X,\mathbb C)}\Gamma^\infty(X,E), \\
   \Omega^{p,q}(X,E) & := \Omega^{p,q}(X)\otimes_{\mathscr C^\infty(X,\mathbb C)}\Gamma^\infty(X,E).
@@ -412,11 +417,13 @@ by considering local trivialisations where we have
   = \sum_{i=1}^k \dol \xi_i \otimes s_i.
 \end{align*}
 Moreover, the operator $\dol_E$ satisfies
-\begin{align*}
+\begin{align}\label{eq:dolbeault_rule}
   \dol_E(\xi \otimes s) = \dol\xi \otimes s + (-1)^{p+q} \xi \wedge \dol_E s
-\end{align*}
+\end{align}
 and $\ker(\dol_E) = \Gamma(X,E)$.
-Hence it is uniquely determined by the component
+The relation (\ref{eq:dolbeault_rule}) says, in particular, that
+the operator (\ref{eq:general_dolbeault_operator}) is uniquely
+determined by the component
 $\Omega^0(X,\mathcal E) \to \Omega^{0,1}(X,\mathcal E)$. Indeed,
 any linear map $\alpha : \Omega^0(X,E) \to \Omega^{0,1}(X,E)$ may be
 extended to a map $\Omega^{p,q}(X,E) \to \Omega^{p,q+1}(X,E)$
@@ -439,7 +446,8 @@ This leads us to the following definition:
   \end{align*}
 \end{definition}
 
-The process outlined above is reversible. That is, a holomorphic
+The process of constructing a Dolbeault operator from a holomorphic
+vector bundle is reversible. That is, a holomorphic
 bundle is just a smooth bundle with a Dolbeault operator. To make
 this precise, we need to say what morphisms of such operators are.
 Consider a map $f : E \to F$ of smooth bundles on a fixed complex
@@ -449,7 +457,7 @@ given by $s \mapsto f\circ s$. Hence $f$ is a map of Dolbeault operators
 if, and only if, it commutes with the operators:
 
 \begin{definition}
-  A \emph{morphism of Dolbeault operators} $f : \dol_E \to \dol_F$
+  A \emph{map of Dolbeault operators} $f : \dol_E \to \dol_F$
   is a map of smooth bundles $f : E\to F$ such that the following commutes:
   \begin{equation*}
     % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXE9tZWdhXjAoWCxFKSJdLFswLDEsIlxcT21lZ2FeMChYLEYpIl0sWzIsMSwiXFxPbWVnYV57MCwxfShYLEYpIl0sWzIsMCwiXFxPbWVnYV57MCwxfShYLEUpIl0sWzAsMywiXFxiYXJcXHBhcnRpYWxfRSJdLFsxLDIsIlxcYmFyXFxwYXJ0aWFsX0YiXSxbMCwxLCJmXyoiLDJdLFszLDIsImZfKiIsMl1d
@@ -476,7 +484,9 @@ if, and only if, it commutes with the operators:
     sections $s'_1,\ldots,s'_r$ using the operator. The key idea is
     to find a transformation $A : U' \to GL_r(\mathbb C)$ on a smaller
     open set $U'\subseteq U$ such that $s_i' = As_i$ is holomorphic,
-    i.e. $\dol_E(As_i) = 0$.
+    i.e. $\dol_E(As_i) = 0$. The other direction is as described
+    above. All that remains to do is verify that a smooth bundle map
+    is holomorphic if, and only if, it is a map of Dolbeault operators.
   \end{proof}
 \end{theorem}
 
@@ -537,21 +547,20 @@ Riemann surface, the condition $\varphi\wedge\varphi=0$ is trivially
 satisfied. However, if one is to consider moduli spaces of Higgs bundles
 over more general base spaces then this condition is quite important.
 
-Observe that a Higgs field is a section of $\End(E) \otimes K$
-where $K$ is the canonical bundle on $X$ as in \ref{thm:dolbeault}.
+Observe that a Higgs field is a section of $\End(E) \otimes K_X$
+where $K_X$ is the canonical bundle on $X$ as in \ref{thm:dolbeault}.
 Recalling the trivial fact that $H^0(X,(E,\dol_E))=\Gamma(X,(E,\dol_E))$
 in sheaf cohomology, we use Dolbeault's theorem \ref{thm:dolbeault} to
 find that the space of Higgs fields on $(E,\dol_E)$ is
 \begin{align*}
-  \Gamma(X,\End(E,\dol_E)\otimes K) = H^{1,0}(X,\End(E,\dol_E)).
+  \Gamma(X,\End(E,\dol_E)\otimes K_X) = H^{1,0}(X,\End(E,\dol_E)).
 \end{align*}
 
-Consider Higgs bundles $(E,\dol_E,\phi_E)$ and $(F,\dol_F,\phi_F)$
+Consider Higgs bundles $(E,\dol_E,\varphi_E)$ and $(F,\dol_F,\varphi_F)$
 and a map of smooth bundles $f:E\to F$. We say $f$ is a map of Higgs
 bundles if, and only if, it is a map of holomorphic bundles
-$f:(E,\dol_E)\to (F,\dol_F)$ and $\phi_E = f^*\phi_F$.
-This means in particular that, if
-$(E,\dol_E,\phi_E)\cong(F,\dol_F,\phi_F)$
+$f:(E,\dol_E)\to (F,\dol_F)$ and $\varphi_E = f^*\varphi_F$.
+This means, in particular, if $(E,\dol_E,\varphi_E)\cong(F,\dol_F,\varphi_F)$
 are isomorphic Higgs bundles then we have isomorphic holomorphic bundles
 $(E,\dol_E)\cong(F,\dol_F)$ and hence isomorphic smooth bundles
 $E\cong F$.
@@ -581,7 +590,7 @@ algebraic category. Hence, unless otherwise indicated,
 
 \subsection{Vector Bundles on Schemes}
 
-Let us begin the algebraic treatment by defining the scheme-theoretic
+Let us begin our algebraic considerations by defining the scheme-theoretic
 analogue of holomorphic bundles. By treating affine opens on a scheme as charts on a manifold
 and by regarding the affine space $\affine{n}{}$ as the algebraic
 analogue of $\mathbb C^n$, it is straightforward to translate
@@ -593,17 +602,17 @@ the definition of a vector bundle \ref{def:complex_bundle} to schemes:
   a map of schemes $\pi : E \to X$ such that there is an open
   cover $X = \bigcup_i U_i$ and isomorphisms
   \begin{align}\label{eq:trivialisation}
-    \phi_i : {\pi}^{-1}U_i \cong \affine{r}{}\times U_i
+    \varphi_i : {\pi}^{-1}U_i \cong \affine{r}{}\times U_i
   \end{align}
   such that, for every affine $U = \Spec R \subseteq U_i \cap U_j$,
-  the map $\varphi_i \circ \varphi^{-1}_j$ restricts to a $R$-linear
+  the map $\varphi_i \circ \varphi^{-1}_j$ restricts to an $R$-linear
   automorphism of $\affine{r}{}\times U = \Spec R[T_1,\ldots,T_r]$.
 \end{definition}
 
-Note that each $\phi_i$ is an isomorphism of complex schemes
+Note that each $\varphi_i$ is an isomorphism of complex schemes
 and hence analogous to holomorphic transition functions.
 Non-trivial examples are going to arise when we consider vector bundles
-as locally free sheaves.
+as locally free sheaves, in particular in \ref{sec:twisting_sheaves}.
 
 \subsection{Locally Free Sheaves}\label{sec:locally_free_sheaves}
 
@@ -611,7 +620,9 @@ While it was easy to translate vector bundles from manifolds
 to schemes, the resulting notion may not always be the most
 useful. It is much more natural to talk about sheaves. We know
 that with each vector bundle $E\to X$ comes a sheaf of sections
-$\Gamma(-,E)$. This has a natural $\mathscr O_X$-module structure.
+$\Gamma(-,E)$. Indeed, this is a sheaf in the sense of the
+conventions adopted in this paper as there is a natural
+$\mathscr O_X$-module structure.
 
 \begin{lemma}
   The sheaf of sections of a vector bundle $E$ on a scheme $X$ is
@@ -632,12 +643,13 @@ $\Gamma(-,E)$. This has a natural $\mathscr O_X$-module structure.
   \end{proof}
 \end{lemma}
 
-However, much more is true. It turns out that on a scheme $X$
+However, much more is true. It turns out that, on a scheme $X$,
 a vector bundle of rank $r$ is the same thing as a locally
 free sheaf of rank $r$. That is, there is an equivalence
 of categories given by $E \mapsto \Gamma(-,E)$.~\cite[128-129]{hartshorne1977}
 We will say that a sheaf $\mathscr E$ corresponds to a vector bundle
-$E$ and to mean $\mathscr E\cong\Gamma(-,E)$.
+$E$ and to mean there is an $\mathscr O_X$-linear isomorphism
+$\mathscr E\cong\Gamma(-,E)$.
 
 \subsection{Compact Riemann Surfaces as Algebraic Curves}
 \label{sec:surfaces_as_curves}
@@ -649,7 +661,7 @@ to view every manifold as a scheme, but it is a well known fact that
 compact Riemann surfaces correspond to smooth algebraic curves.
 This fact is proven in various places, see \cite[215]{griffiths1994}
 for the general idea and \cite[5-16]{harris2011}
-for a comprehensive treatment.
+for a comprehensive argument.
 
 It is worth recalling what the algebraic structure on a compact
 Riemann surface $C$ of genus $g\geq 2$ is. The easiest way to obtain
@@ -709,9 +721,7 @@ theorem, an algebraic curve.
 
 Under the correspondence outlined above, we may consider the canonical
 bundle $K$ on $C$. This then corresponds to a sheaf
-\begin{align*}
-  \mathscr K := \Gamma(-,K)
-\end{align*}
+$\mathscr K := \Gamma(-,K)$
 on $C$ regarded as a scheme. This allows us to define Higgs
 sheaves on $C$:
 
@@ -726,7 +736,7 @@ Just as an analytic Higgs field may be thought of as a holomorphic
 section on $\End(E)\otimes K = \Hom(E,E\otimes K)$, an algebraic
 Higgs field is equivalently a section of $\Hom(\mathscr E,\mathscr E\otimes\mathscr K)$.
 Moreover, it is straightforward to verify that under the correspondence
-$E\to\Gamma(-,E)$ a Higgs field $E\to E\otimes K$ on bundles is
+$E\mapsto\Gamma(-,E)$ a Higgs field $E\to E\otimes K$ on bundles is
 equivalent to a Higgs field $\mathscr E\to\mathscr E\otimes\mathscr K$
 on sheaves.
 Thus we are justified in treating the construction of moduli
@@ -742,7 +752,7 @@ fully classifying smooth bundles on $C$. Moreover, we establish
 useful properties of coherent sheaves and, in particular, sheaf
 cohomology.
 
-\subsection{Twisting}
+\subsection{Twisting}\label{sec:twisting_sheaves}
 
 We begin by revisiting one of the most important family of sheaves
 on projective schemes. See e.g. \cite{gortz2010} or
@@ -913,10 +923,10 @@ the underlying smooth vector bundle.
 
 \begin{example}
   Combining the previous example with \ref{thm:classification_of_smooth_bundles},
-  we find that, for all $m\in\mathbb Z$ and any embedding
+  we find that, for all $m\in\mathbb Z$ and every embedding
   $C\inc\mathbf P^n$, the locally free sheaf
   $\mathscr E = \mathscr O(-m)\oplus\mathscr O(m)$ has type $(2,0)$.
-  Hence the corresponding holomorphic vector bundle is
+  Hence the corresponding vector bundle is
   smoothly isomorphic to the rank 2 trivial bundle.
 \end{example}
 
@@ -965,7 +975,8 @@ and degree. This is known as the Riemann-Roch theorem:
 \end{theorem}
 
 Indeed, in the algebraic setting it is not uncommon to define
-the degree of a locally free sheaf $\mathscr E$ as
+the degree of a locally free sheaf $\mathscr E$ through the
+equation
 \begin{align*}
   \deg \mathscr E = \chi(C,\mathscr E)  - r\chi(C,\mathscr O_C).
 \end{align*}
@@ -1128,15 +1139,19 @@ $GL(E)$ as a whole is referred to as the gauge group.
 The gauge group acts on $A_\dol(E)$ by conjugation.
 Unfortunately, the quotient leaves a lot to be desired:
 \begin{lemma}
-  The topological space $A_\dol (E)/GL(E)$ of isomorphism classes of
-  Dolbeault operators is not Hausdorff. In particular, it does not
-  admit a manifold structure.
-  \begin{proof}
-    For a proof see~\cite{norton1978}. Let us briefly give an idea
+  If $\rank E > 1$ then the topological space $A_\dol (E)/GL(E)$
+  of isomorphism classes of Dolbeault operators is not Hausdorff.
+  In particular, it does not admit a manifold structure.
+  \begin{proof}[Proof idea]
+    See~\cite[Corollary 2]{norton1978}. Let us briefly give an idea
     how the quotient may fail to be Hausdorff. In rank 2 it is possible
     to construct an example of non-separated points by finding
     non-isomorphic bundles $E$ and $F$ whose determinants are
-    isomorphic and a non-zero homomorphism $E\to F$.
+    isomorphic and a non-zero homomorphism $E\to F$. This is
+    sufficient for showing that the points $E$ and $F$ are
+    distinct but non-separated in the quotient. Moreover, considering
+    direct sums with trivial bundles extends the argument to
+    higher ranks.
   \end{proof}
 \end{lemma}
 
@@ -1433,14 +1448,14 @@ Just as holomorphic bundles correspond to unitary connections, Higgs bundles
 correspond to Higgs connections.
 
 \begin{definition}
-  A \emph{Higgs connection} in $E$ is a pair $(\nabla,\Phi)$
+  A \emph{Higgs connection} in $E$ is a pair $(\nabla,\varphi)$
   where $\nabla$ is a $h$-unitary connection in $E$ and
-  $\Phi\in\Omega^1_{\mathbb{R}}(C,\End(E,h))$.
+  $\varphi\in\Omega^1_{\mathbb{R}}(C,\End(E,h))$.
 \end{definition}
 
 Hence we have the space
 \begin{align}\label{eq:Higgs_connections_space}
-  A_{\Phi}(E,h) := A_\nabla(E,h) \times \Omega^1_{\mathbb{R}}(C,\End(E,h))
+  A_{\varphi}(E,h) := A_\nabla(E,h) \times \Omega^1_{\mathbb{R}}(C,\End(E,h))
 \end{align}
 which naturally has the structure of an affine space modelled on
 the real vector space
@@ -1448,25 +1463,25 @@ $\Omega^1_{\mathbb{R}}(C,\End(E,h))\oplus\Omega_{\mathbb{R}}^1(C,\End(E,h))$. Us
 and the map given by (\ref{thm:chern_connection}) we have an inclusion
 of topological spaces
 \begin{align}\label{eq:higgs_chern_correspondence}
-  A_\varphi(E) \subseteq A_\dol (E) \times \Omega^{1,0}(\End(E)) \cong A_\Phi (E,h).
+  A_\varphi(E) \subseteq A_\dol (E) \times \Omega^{1,0}(\End(E)) \cong A_\varphi (E,h).
 \end{align}
-Note that in general $A_\varphi(E)$ and $A_\Phi (E,h)$ are not homeomorphic. In
-particular, a Higgs connection $(\nabla,\Phi)$ corresponds to
+Note that in general $A_\varphi(E)$ and $A_\varphi (E,h)$ are not homeomorphic. In
+particular, a Higgs connection $(\nabla,\varphi)$ corresponds to
 a pair $(\dol_E,\varphi)$ where $\dol_E$ is a Dolbeault operator and
 $\varphi$ is a section in $\Omega^{1,0}(C,\End(E))$, not necessarily
 holomorphic. We will have to deal with this at a later stage.
 
-For now, observe that the group $G(E,h)$ also acts on $A_\Phi (E,h)$
+For now, observe that the group $G(E,h)$ also acts on $A_\varphi (E,h)$
 by conjugation:
 \begin{align*}
-  G(E,h) \times A_\Phi (E,h) & \to A_\Phi (E,h)                        \\
-  (g,\nabla,\Phi)            & \mapsto (g\nabla{g}^{-1},g\Phi{g}^{-1})
+  G(E,h) \times A_\varphi (E,h) & \to A_\varphi (E,h)                        \\
+  (g,\nabla,\varphi)            & \mapsto (g\nabla{g}^{-1},g\varphi{g}^{-1})
 \end{align*}
 
 \section{Banach Manifolds}
 
 Our next goal is to equip the affine spaces of connections $A_\nabla(E,h)$
-and $A_\Phi (E,h)$ with manifold structures. Of course, both are affine
+and $A_\varphi (E,h)$ with manifold structures. Of course, both are affine
 spaces modelled on infinite dimensional vector spaces. In the next
 section we are going to require our infinite dimensional manifolds to
 be locally isomorphic to Banach spaces, rather than arbitrary
@@ -1724,12 +1739,12 @@ as~\cite[Chapter 7]{kahn1982} or~\cite{bc2009}.
   the affine space (\ref{eq:Higgs_connections_space}) of Higgs connections also
   extends to a Banach manifold
   \begin{align*}
-    A_\Phi(E,h)_\ell := A_\Phi(E,h) + \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell
+    A_\varphi(E,h)_\ell := A_\varphi(E,h) + \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell
     \oplus \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell
   \end{align*}
-  with the obvious cotangent space at $(\nabla,\Phi)$:
+  with the obvious cotangent space at $(\nabla,\varphi)$:
   \begin{align*}
-    T^*_{\nabla,\Phi} A_\Phi(E,h)_\ell
+    T^*_{\nabla,\varphi} A_\varphi(E,h)_\ell
     = \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell
     \oplus \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell
   \end{align*}
@@ -1812,9 +1827,9 @@ topological groups:
 \end{example}
 
 \begin{example}\label{ex:higgs_proper_action}
-  The action of $U(E,h)$ on $A_\Phi (E,h)$ is proper.
+  The action of $U(E,h)$ on $A_\varphi (E,h)$ is proper.
   \begin{proof}
-    We have constructed $A_\Phi(E,h)$, essentially, by copying $A_\nabla(E,h)$
+    We have constructed $A_\varphi(E,h)$, essentially, by copying $A_\nabla(E,h)$
     and the action on this additional copy is identical. Hence the map
     $(\sigma,\pi)$ is a product of proper maps and thus proper.
   \end{proof}
@@ -1846,11 +1861,11 @@ the quotient are locally indistinguishable, as one expects from manifolds.
 
 \begin{example}\label{ex:not_free_double}
   The fact that the $G(E,h)$ action on $A_\nabla(E,h)$ is not free does not
-  immediately imply that the action on $A_\Phi(E,h)$ is not either. However,
+  immediately imply that the action on $A_\varphi(E,h)$ is not either. However,
   similar reasoning shows why it cannot be free: If there is a non-trivial
-  proper subbundle $E'\subseteq E$ that is preserved by $\nabla$ and $\Phi$,
+  proper subbundle $E'\subseteq E$ that is preserved by $\nabla$ and $\varphi$,
   respectively, then an automorphism $g\in G(E,h)$ need only be trivial
-  outside of $E'$ to act trivially on $(\nabla,\Phi)$.
+  outside of $E'$ to act trivially on $(\nabla,\varphi)$.
 \end{example}
 
 
@@ -1913,7 +1928,7 @@ actions:
   \end{align*}
   Hence we require $g\in U(E,h)_{\ell + 1}$ to make sure that $g\cdot\nabla\in A_\nabla(E,h)_\ell$.
   Analogously, we have a proper Banach Lie group action of $U(E,h)_{\ell+1}$
-  on $A_\Phi (E,h)_\ell$.
+  on $A_\varphi (E,h)_\ell$.
 \end{example}
 
 All of our recent discussions about proper and free actions, Sobolev
@@ -1973,7 +1988,7 @@ Hilbert spaces, all closed subspaces in our examples will automatically be compl
 
 Unfortunately, we are not yet ready to apply the theorem \ref{thm:banach_quotient} to
 the actions of $G(E,h)_{\ell+1}$ on $A_\nabla(E,h)_\ell$ and
-$A_\Phi(E,h)_\ell$ as they are not free. Moreover, the tangent spaces
+$A_\varphi(E,h)_\ell$ as they are not free. Moreover, the tangent spaces
 may fail to be closed. We would like to consider an example of this but
 doing so turns out to be difficult. From algebraic considerations that the bundles
 corresponding to $\mathscr O(-m)\oplus\mathscr O(m)$ for $m\geq 1$ ought
@@ -2230,34 +2245,34 @@ of the 2-form $K(\nabla) := d^\nabla \circ \nabla$
 in $\Omega^2(C,\End(E))$.
 
 \begin{definition}
-  A Higgs connection $(\nabla,\Phi)\in A_\Phi(E,h)$
+  A Higgs connection $(\nabla,\varphi)\in A_\varphi(E,h)$
   is \emph{harmonic} if
   \begin{align}\label{eq:Hitchin_equations}
     \nabla_{0,1}\varphi = 0,\hspace{1cm}
     K(\nabla) + [\varphi,\varphi^\dagger] \in i\mathcal H^2(X)\otimes I
   \end{align}
   for some $\alpha\in\mathcal H^2(C)$ where we write
-  $\Phi = \varphi - \varphi^\dagger$ as in \ref{lem:real_vector_space_iso}.
+  $\varphi = \varphi - \varphi^\dagger$ as in \ref{lem:real_vector_space_iso}.
 \end{definition}
 
 The equations (\ref{eq:Hitchin_equations}) are called Hitchin equations
 so one may call a harmonic Higgs connection Hitchin. The first equation
-in (\ref{eq:Hitchin_equations}) merely says that $\Phi$
+in (\ref{eq:Hitchin_equations}) merely says that $\varphi$
 corresponds to a holomorphic Higgs field on the holomorphic bundle
 $(E,\nabla_{0,1})$.  The second equation is a harmonicity condition generalising
-\ref{eq:yang_mills_condition}. In particular, if $\Phi = 0$ then $\varphi =
+\ref{eq:yang_mills_condition}. In particular, if $\varphi = 0$ then $\varphi =
   \varphi^\dagger$ so $(\nabla,0)$ is harmonic if, and only if, $\nabla$ is
 harmonic.
 
-Now consider the space $A_\Phi^{ps}(E,h)$ of harmonic Higgs connections.
-This once again gives rise to a Banach manifold $A_\Phi^{ps}(E,h)_\ell$
+Now consider the space $A_\varphi^{ps}(E,h)$ of harmonic Higgs connections.
+This once again gives rise to a Banach manifold $A_\varphi^{ps}(E,h)_\ell$
 and, for sufficiently large $\ell$, an action by $G(E,h)_{\ell+1}$.
 
 \begin{lemma}
-  Let $(\nabla,\Phi)\in A_\Phi^{ps}(E,h)_\ell$. Then the tangent space
+  Let $(\nabla,\varphi)\in A_\varphi^{ps}(E,h)_\ell$. Then the tangent space
   \begin{align*}
-    T_{\nabla,\Phi}(G(E,h)_{\ell+1}\cdot(\nabla,\Phi))
-    \subseteq T_{\nabla,\Phi}A_{\nabla,\Phi}^{ps}(E,h)_\ell.
+    T_{\nabla,\varphi}(G(E,h)_{\ell+1}\cdot(\nabla,\varphi))
+    \subseteq T_{\nabla,\varphi}A_{\nabla,\varphi}^{ps}(E,h)_\ell.
   \end{align*}
   is a closed subspace.
   \begin{proof}
@@ -2283,11 +2298,11 @@ and, for sufficiently large $\ell$, an action by $G(E,h)_{\ell+1}$.
   \end{proof}
 \end{lemma}
 
-Note that in $A^{ps}_\dol(E,h)_\ell$ and $A^{ps}_\Phi(E,h)_\ell$ slices for the
+Note that in $A^{ps}_\dol(E,h)_\ell$ and $A^{ps}_\varphi(E,h)_\ell$ slices for the
 $G(E,h)_{\ell+1}$-action exist everywhere. Hence the quotients
 \begin{align*}
   M^{ps}_\nabla(E,h) := A^{ps}_\nabla(E,h)_\ell / G(E,h)_{\ell+1},\hspace{1cm}
-  M^{ps}_\Phi(E,h) := A^{ps}_\Phi(E,h)_\ell / G(E,h)_{\ell+1}
+  M^{ps}_\varphi(E,h) := A^{ps}_\varphi(E,h)_\ell / G(E,h)_{\ell+1}
 \end{align*}
 are locally manifolds. Thus one might refer to these as the analytic
 moduli spaces of unitary connections. We are, however, going to go
@@ -2297,22 +2312,22 @@ one step further.
 
 Let us now ensure that gauge transformations act freely on
 our space of connections. We are going to restrict $A^{ps}_\nabla$ and
-$A^{ps}_\Phi$ further to ensure that this is the case. Of course we will have
+$A^{ps}_\varphi$ further to ensure that this is the case. Of course we will have
 to deal with the loss of information that this entails at a later stage.
 
 In light of our observations in \ref{ex:not_free} and \ref{ex:not_free_double}
 we make the following definition:
 
 \begin{definition}
-  We define reducibility for both plain holomoprhic bundles and Higgs
+  We define reducibility for both plain holomorphic bundles and Higgs
   bundles:
   \begin{itemize}
     \item A connection $\nabla\in A_\nabla (E,h)$ is \emph{reducible} if there exists
           a non-trivial proper subbundle $E'\subseteq E$ such that $\nabla$ restricts
           to a connection on $E'$.
-    \item Similarly, a Higgs connection $(\nabla,\Phi)\in A_\Phi(E,h)$ is
+    \item Similarly, a Higgs connection $(\nabla,\varphi)\in A_\varphi(E,h)$ is
           \emph{reducible} if there exists a non-trivial proper subbundle $E'\subseteq E$
-          such that $(\nabla,\Phi)$ restricts to a Higgs connection on $E'$.
+          such that $(\nabla,\varphi)$ restricts to a Higgs connection on $E'$.
   \end{itemize}
 \end{definition}
 
@@ -2321,7 +2336,7 @@ consider the spaces of irreducible harmonic connections and their Sobolev
 completions
 \begin{align*}
   A^s_\nabla(E,h)_\ell \subseteq A^{ps}_\nabla(E,h)_\ell,\hspace{1cm}
-  A^s_\Phi(E,h)_\ell \subseteq A^{ps}_\Phi(E,h)_\ell.
+  A^s_\varphi(E,h)_\ell \subseteq A^{ps}_\varphi(E,h)_\ell.
 \end{align*}
 Indeed, this suffices to make the $G(E,h)_{\ell+1}$ action free.
 
@@ -2344,7 +2359,7 @@ Indeed, this suffices to make the $G(E,h)_{\ell+1}$ action free.
 An analogous argument also shows:
 
 \begin{lemma}
-  The action of $G(E,h)_{\ell+1}$ on $A_\Phi(E,h)_\ell$
+  The action of $G(E,h)_{\ell+1}$ on $A_\varphi(E,h)_\ell$
   restricts to a free action on $A^{s}_\nabla(E,h)_\ell$.
 \end{lemma}
 
@@ -2356,7 +2371,7 @@ of connections that we have thus far defined.
       \hline
       \textbf{Elements}   & Proper Action   &             & \begin{tabular}[c]{@{}l@{}}Closed \&\\ Complemented\\ Tangent Space\end{tabular} &             & Free Action       \\ \hline
       Unitary connections & $A_\nabla(E,h)$ & $\supseteq$ & $A^{ps}_\nabla(E,h)$                                                             & $\supseteq$ & $A^s_\nabla(E,h)$ \\ \hline
-      Doubled connections & $A_\Phi(E,h)$   & $\supseteq$ & $A^{ps}_\Phi(E,h)$                                                               & $\supseteq$ & $A^s_\Phi(E,h)$   \\ \hline
+      Doubled connections & $A_\varphi(E,h)$   & $\supseteq$ & $A^{ps}_\varphi(E,h)$                                                               & $\supseteq$ & $A^s_\varphi(E,h)$   \\ \hline
     \end{tabular}
   \end{center}
   \caption{Spaces of unitary holomorphic connections and their group actions.}
@@ -2368,7 +2383,7 @@ sense of \ref{ex:unitary_banach_lie_group}. Define the moduli spaces
 of irreducible harmonic connections:
 \begin{align*}
   M^s_\nabla(E,h) := A^s_\nabla(E,h)_\ell/G(E,h)_{\ell + 1}, \hspace{1cm}
-  M^s_\Phi(E,h) := A^s_\Phi(E,h)_\ell/G(E,h)_{\ell + 1}.
+  M^s_\varphi(E,h) := A^s_\varphi(E,h)_\ell/G(E,h)_{\ell + 1}.
 \end{align*}
 Note that, as the tangent space of $M^s_\nabla(E,h)$ is
 contained in the kernel of the operator $D^\nabla_{\ell-1}$ via
@@ -2422,12 +2437,12 @@ connections to construct the moduli space.
 
 For the case of Higgs bundles, the picture is a little more complicated.
 There are three distinct choices of symplectic structure on
-$A_\Phi(E,h)_\ell$ hence the standard symplectic quotient is non-canonical.
+$A_\varphi(E,h)_\ell$ hence the standard symplectic quotient is non-canonical.
 To get around this, one requires all three moment maps to vanish. It is
 precisely this condition that yields the Hitchin equations that
 define harmonic Higgs connections.
 
-Considering the complex structures on $A_\nabla$ and $A_\Phi$ induced
+Considering the complex structures on $A_\nabla$ and $A_\varphi$ induced
 by the real isomorphism $A_\dol\cong A_\nabla$, the quotients
 thus constructed yield K\"ahler and Hyperk\"ahler manifolds, respectively.
 
@@ -2552,13 +2567,13 @@ Higgs bundles:
 \end{theorem}
 
 Recalling that the bijections $A^s_\dol(E)\to A^s_\nabla(E,h)$ and
-$A^s_\varphi(E)\to A^s_\Phi(E,h)$ are equivariant with respect to gauge
+$A^s_\varphi(E)\to A^s_\varphi(E,h)$ are equivariant with respect to gauge
 transformations and that the moduli spaces corresponding
 to isomorphic smooth bundles are naturally isomorphic, we may define
 the moduli spaces as abstract manifolds
 \begin{align}\label{eq:abstract_analytic_spaces}
   M^s_\dol(r,d) := M^s_\dol(E) := M^s_\nabla(E,h), \hspace{1cm}
-  M^s_\varphi(r,d) := M^s_\varphi(E) := M^s_\Phi(E,h)
+  M^s_\varphi(r,d) := M^s_\varphi(E) := M^s_\varphi(E,h)
 \end{align}
 for any hermitian bundle $(E,h)$ of type $(r,d)$.
 
@@ -3010,7 +3025,7 @@ By restricting to fibres over $t\in T(\mathbb{C})$
 a family of Higgs sheaves $(\mathscr E,\varphi)$ on $X_T$ yields
 a Higgs field
 \begin{align*}
-  \phi_t : \mathscr E_t \to \mathscr E_t \otimes \mathscr K.
+  \varphi_t : \mathscr E_t \to \mathscr E_t \otimes \mathscr K.
 \end{align*}
 Unfortunately, we find ourselves in a similar position.
 \begin{corollary}
@@ -3755,7 +3770,7 @@ clear what the good quotient in this case must be:
     We follow \cite[Theorem 4.30]{hoskins2016}. Recall the definition
     \ref{def:good_quotient} of a good quotient. $G$-invariance,
     and affineness are essentially immediate and verifying that
-    $\varphi^\sharp$ is an isomorphism onto $(\phi_*\mathscr O_X)^G$
+    $\varphi^\sharp$ is an isomorphism onto $(\varphi_*\mathscr O_X)^G$
     is straightforward on distinguished opens.
 
     To show surjectivity, one only needs to consider closed points.
@@ -3919,10 +3934,10 @@ will come in the form of linearised sheaves:
 \begin{definition}
   A \emph{linearisation} of a quasi-coherent sheaf
   $\mathscr E$ on $X$ with respect to the $G$-action
-  is an isomorphism $\Phi : \sigma^*\mathscr E \cong\pi^*\mathscr E$
+  is an isomorphism $\varphi : \sigma^*\mathscr E \cong\pi^*\mathscr E$
   of sheaves on $G\times X$ satisfying the cocylce condition
   \begin{align}\label{eq:cocyle_condition}
-    (\mu \times \identity)^*\Phi = \pi^*\Phi \circ (\identity\times\sigma)^*\Phi
+    (\mu \times \identity)^*\varphi = \pi^*\varphi \circ (\identity\times\sigma)^*\varphi
   \end{align}
   where $\mu$ denotes the multiplication on $G$.
 \end{definition}
@@ -3930,14 +3945,14 @@ will come in the form of linearised sheaves:
 \begin{example}\label{ex:linearised_action_on_bundle}
   Consider a $G$-linearised invertible sheaf $\mathscr L$ on $X$
   and the corresponding line bundle $\tau : L\to X$. Then the linearisation
-  $\Phi : \sigma^*\mathscr L \cong \pi^*\mathscr L$ induces
+  $\varphi : \sigma^*\mathscr L \cong \pi^*\mathscr L$ induces
   a map
   \begin{equation*}
     % https://q.uiver.app/#q=WzAsNCxbMSwwLCIoR1xcdGltZXMgWClcXHRpbWVzX3tcXHBpLFxcdGF1fSBMIl0sWzIsMCwiKEdcXHRpbWVzIFgpXFx0aW1lc197XFxzaWdtYSxcXHRhdX0gTCJdLFszLDAsIkwiXSxbMCwwLCJHXFx0aW1lcyBMIl0sWzAsMSwiXFxQaGkiXSxbMSwyXSxbMywwLCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
     \begin{tikzcd}
       {G\times L} & {(G\times X)\times_{\pi,\tau} L} & {(G\times X)\times_{\sigma,\tau} L} & L
       \arrow[Rightarrow, no head, from=1-1, to=1-2]
-      \arrow["\Phi", from=1-2, to=1-3]
+      \arrow["\varphi", from=1-2, to=1-3]
       \arrow[from=1-3, to=1-4]
     \end{tikzcd}
   \end{equation*}
@@ -4009,7 +4024,7 @@ $G$-linearisations.
   on $Q(r,d)$. \cite[Proposition 2.2.5]{huybrechts2010}.
   The isomorphism (\ref{eq:universal_linearisation}) induces an isomorphism
   \begin{align*}
-    \Phi:\sigma^*\mathscr L_\ell \cong \pi^*\mathscr L_\ell.
+    \varphi:\sigma^*\mathscr L_\ell \cong \pi^*\mathscr L_\ell.
   \end{align*}
   For $\ell$ large, this is in fact a linearisation.
 \end{example}
@@ -4056,7 +4071,7 @@ some useful results:
       \begin{tikzcd}
         {\Gamma(X,\mathscr E)} & {\Gamma(G\times X,\sigma^*\mathscr E)} & {\Gamma(G\times X,\pi^*\mathscr E)} & {\Gamma(G,\mathscr O_G)\otimes\Gamma(X,\mathscr E)}
         \arrow["{\sigma^*}", from=1-1, to=1-2]
-        \arrow["\Phi", from=1-2, to=1-3]
+        \arrow["\varphi", from=1-2, to=1-3]
         \arrow["\cong", from=1-3, to=1-4]
       \end{tikzcd}
     \end{equation*}
@@ -4068,9 +4083,9 @@ some useful results:
   If $\mathscr L$ is a $G$-linearised invertible sheaf then so is
   $\mathscr L^{\otimes k}$ for all $k\geq 1$.
   \begin{proof}
-    Denote the linearisation by $\Phi : \sigma^*\mathscr L \cong \pi^*\mathscr
+    Denote the linearisation by $\varphi : \sigma^*\mathscr L \cong \pi^*\mathscr
       L$.  Then pullback functor on locally free sheaves is exact, hence we have
-    an induced isomorphism $\Phi^{\otimes k} : \sigma^*\mathscr L^{\otimes k}
+    an induced isomorphism $\varphi^{\otimes k} : \sigma^*\mathscr L^{\otimes k}
       \cong \pi^*\mathscr L^{\otimes k}$ and it is straightforward to check that
     this satisfies the cocyle condition.
   \end{proof}
@@ -4958,7 +4973,7 @@ As an introduction to the subject, one may consider~\cite{cm2017} where the modu
 
 \pagebreak
 \renewcommand{\bibname}{References}
-\addcontentsline{toc}{chapter}{References}\todo{fix references}
+\addcontentsline{toc}{chapter}{References}
 \printbibliography
 
 \end{document}
