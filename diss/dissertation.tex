@@ -2271,11 +2271,11 @@ However, we have the next best thing:
   \end{proof}
 \end{theorem}
 
-Rather than computing the manifold structure on $M_\varphi(E)$
-directly, we may now simply deduce it from $T^*M_\dol(E)$.
+Rather than computing the manifold structure on $M^s_\varphi(E)$
+directly, we may now simply deduce it from $T^*M^s_\dol(E)$.
 
 \begin{corollary}
-  $M_\varphi(E)$ is a complex manifold of dimension
+  $M^s_\varphi(E)$ is a complex manifold of dimension
   \begin{align*}
     \dim_{\mathbb C}M^s_{\varphi}(E)
     =2\dim_{\mathbb C}M^s_\dol(E)
@@ -2516,35 +2516,21 @@ spaces of Higgs bundles algebraically.
 
 We have shown that holomorphic bundles on a compact Riemann surface
 correspond to locally free sheaves on a certain smooth algebraic
-curve. Now we would like to construct schemes whose points are
-holomorphic bundles. By points of a scheme $M$ one usually means the
-closed points. In the case where $M$ is locally of finite type,
-closed points are $\mathbb{C}$-points, i.e. maps
-$\Spec\mathbb{C}\to M$. \cite[Corollary 3.36]{gortz2010} As we
-are hoping for our moduli spaces to be geometrically well-behaved,
-this is a reasonable approximation to make. We are now justified in
-thinking of a moduli problem as sending a scheme $T$ to the
-$T$-points of a hypothetical moduli space.
+curve. Now we would like to construct schemes parametrising holomorphic
+bundles. In particular, for a general scheme $T$, we are going to
+think about families of holomorphic bundles on $C$, indexed by
+$T$. Indeed, if we take $T=\Spec\mathbb C$, then such families
+are in bijection with holomorphic bundles on $C$. This approach
+of associating families to schemes formalises the notion of a
+moduli problem:
 
 \begin{definition}
   A \emph{moduli problem} is a functor $\mathcal M:\Sch^{op}\to\Set$.
 \end{definition}
 
-\begin{example}
-  Let us consider some popular examples:
-  \begin{itemize}
-    \item The moduli problem $\mathcal M_g$ maps schemes $T$ to isomorphism
-          classes of flat $T$-schemes $S\to T$ whose fibres are smooth curves
-          of genus $g$.
-    \item The moduli functor $\mathcal Gr(k,n)$ maps schemes $T$ to
-          isomorphism classes of quotients `'
-  \end{itemize}
-  \missingexample
-\end{example}
-
-Now the obvious notion of a moduli space is a scheme whose functor
-of points is precisely the moduli problem. This is called a fine
-moduli space:
+We are going to see examples of this in due time. For now, 
+observe that there is an obvious notion of a moduli spaces
+corresponding to a moduli problem:
 
 \begin{definition}
   A \emph{fine moduli space} of a moduli problem $\mathcal M$
@@ -2560,7 +2546,7 @@ isomorphism $\eta$ and call $M$ the fine moduli space.
 Beyond the fact that fine moduli spaces represent the moduli
 problem and thus are the best possible solution, there are some
 pleasant properties to observe.
-Consider an element $F\in\mathcal M(T)$, for some $T$. Observe that
+Consider a family $F\in\mathcal M(T)$, for some $T$. Observe that
 under $\eta$, this corresponds to a map $f:T\to M$. By considering
 closed points, we have a map sending a closed point $t\in T(\mathbb C)$
 to a closed point $f\circ t\in M(\mathbb C)$. We denote th corresponding
@@ -2581,12 +2567,14 @@ Hence we make the following definition:
 
 \begin{definition}
   Let $\mathcal M$ be a moduli problem and $M$ a fine moduli space.
-  The \emph{universal element} $U\in\mathcal M(M)$ is
+  The \emph{universal family} $U\in\mathcal M(M)$ is
   $U:=\eta^{-1}_M (\identity)$.
 \end{definition}
 
+Hence a fine moduli space is precisely the scheme that indexes
+a family of all the geometric objects under consideration.
 Unfortunately, it turns out that genuine representability often is too much to ask. Indeed,
-we really care about the $\mathbb{C}$-points and hence
+we really care about closed points and hence
 we are otherwise ready to accept some deviation so long as it is not
 possible to do better:
 
