@@ -496,11 +496,15 @@ if, and only if, it commutes with the operators:
   Fix a complex manifold $X$. There is an equivalence of categories
   between holomorphic bundles on $X$ and smooth bundles with corresponding
   Dolbeault operators.
-  \begin{proof}
-    This is essentially~\cite[Theorem 3.2]{moroianu2004}. One only
-    needs to verify that a map of smooth bundles is a map of
-    holomorphic bundles if, and only if, it respects the holomorphic
-    structure. \todo{maybe we should do this proof?}
+  \begin{proof}[Proof idea]
+    Following~\cite[Theorem 9.2]{moroianu2004}. 
+    Going from a Dolbeault operator $\dol_E$ to a holomorphic structure
+    on the bundle, one starts with local smooth sections
+    $s_1,\ldots,s_r$ in a trivialisation and obtains holomorphic 
+    sections $s'_1,\ldots,s'_r$ using the operator. The key idea is
+    to find a transformation $A : U' \to GL_r(\mathbb C)$ on a smaller
+    open set $U'\subseteq U$ such that $s_i' = As_i$ is holomorphic,
+    i.e. $\dol_E(As_i) = 0$.
   \end{proof}
 \end{theorem}
 
