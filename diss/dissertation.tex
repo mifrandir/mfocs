@@ -212,47 +212,27 @@ by analytifying the algebraic moduli spaces are biholomorphic to
 the analytic ones. Hence algebraic construction recover the analytic
 moduli spaces fully.
 
-\chapter{Manifolds as Moduli Spaces}
+\chapter{Holomorphic Vector Bundles and Locally Free Sheaves}
 
-Consider a compact Riemann $C$ of genus $g\geq 2$.
-What can we say about the set of holomorphic vector bundles on $C$,
-up to isomorphism? What geometric structure does it have? How does
-this structure change if we equip the bundles with additional data?
-In this chapter we are going to construct complex manifolds whose
-points correspond to equivalence classes of holomorphic bundles
-and Higgs bundles, a type of decorated holomorphic bundle. These
-manifolds are referred to as moduli spaces. While it
-is possible to construct topological spaces representing all such bundles,
-the result is non-Hausdorff and hence does not provide us with a
-satisfying answer. The majority of the chapter is going to be spent
-on rectifying this issue.
+Holomorphic vector bundles on compact Riemann surfaces are an excellent
+example for demonstrating analytic and algebraic methods for 
+the construction of moduli spaces. In large part, this is because
+of the natural correspondece between such vector bundles and
+locally free sheaves on smooth algebraic curves. We use this
+chapter to establish this correspondence and to develop the combined
+theory as it will be useful for both the analytic and the algebraic
+viewpoint.
 
-The key observation will be to ignore certain `unstable' bundles. We
-are going to find that doing so does not lose much information but
-allows for the construction of the moduli spaces. Although unstable
-bundles are the main obstacle, removing them does not trivialise the
-problem. To obtain the moduli spaces, we have to consider quotients
-of infinite dimensional manifolds by group actions. Such considerations
-require us to introduce Banach manifolds, Sobolev completions, and
-Elliptic regularlity.
 
-The first part of this chapter is going to be spent discussing the kinds of
-objects that we aim to classify, i.e. holomorphic bundles and Higgs
-bundles on compact Riemann surfaces. We recall some facts and establish
-notation. From then on we work towards constructing the moduli spaces.
-The first step is to establish how one would do so naively and
-see why this approach fails. Secondly, we establish a correspondence
-between holomorphic bundles and unitary connections. After establishing the necessary
-theory we endow the topological spaces of all unitary connections
-with an infinite dimensional manifold structure. Thirdly, we establish
-conditions under which we may take quotients of infinite dimensional
-manifolds by group actions. This allows us to find submanifolds on which
-those conditions are met and thus define the analytic moduli spaces of
-unitary actions. Finally we establish some key properties of the
-moduli spaces by characterising membership by a more natural
-condition and computing tangent spaces.
+\section{Holomorphic Vector Bundles}
 
-\paragraph*{Notation}
+Holomorphic maps are smooth. Hence, holomorphic vector bundles
+are smooth vector bundles. In contrast to maps, in the case of vector
+bundles the word `holomorphic' does not refer to a property, but
+a structure. In particular, there may be many holomorphic bundles with
+the same underlying smooth bundle. The theory presented
+in this section is standard. See e.g. \cite{moroianu2004}.
+
 Before we begin, let us establish some notation. As we are going to study
 complex geometric objects, it is natural to default to complex
 geometric conventions. Hence, unless otherwise indicated,
@@ -261,22 +241,13 @@ geometric conventions. Hence, unless otherwise indicated,
         $\mathbb{C}$-linear, and tensor products of vector spaces are
         over $\mathbb{C}$;
   \item all manifolds are smooth;
-  \item dimensions are taken over $\mathbb{C}$;
   \item the word `bundle' refers to a vector bundle.
 \end{itemize}
 
-\section{Holomorphic Bundles on Compact Riemann Surfaces}
-
-Holomorphic maps are smooth. Hence, holomorphic vector bundles
-are smooth vector bundles. In contrast to maps, in the case of vector
-bundles the word `holomorphic' does not refer to a property, but
-a structure. In particular, there may be many holomorphic bundles with
-the same underlying smooth bundle.
-
 \subsection{Complex Vector Bundles}
 
-Recall the definition of a smooth bundle on a complex
-manifold:
+We begin by studying smooth structures. Recall the definition
+of a smooth vector bundle on a complex manifold:
 
 \begin{definition}\label{def:complex_bundle}
   Let $X$ be a complex manifold of dimension $n$. A
@@ -584,45 +555,325 @@ are isomorphic Higgs bundles then we have isomorphic holomorphic bundles
 $(E,\dol_E)\cong(F,\dol_F)$ and hence isomorphic smooth bundles
 $E\cong F$.
 
+\section{Locally Free Sheaves}
+
+In algebraic geometry, it is common to think of vector bundles
+exclusively as locally free sheaves. We are going to recall
+why this makes sense. To fully justify our algebraic treatment,
+we also need to ensure that compact Riemann surfaces are algebraic.
+In particular, we are going to see that they correspond to 
+smooth algebraic curves. The material presented in this section
+is standard, references include \cite{gortz2010} and
+\cite{hartshorne1977}.
+
+We extend the conventions used in the previous section to the
+algebraic category. Hence, unless otherwise indicated,
+\begin{itemize}
+  \item all schemes are complex and of finite type, forming
+        the category $\Sch$;
+  \item a scheme $X$ is projective if there exists a closed
+        immersion $X\inc\projective{n}{}$;
+  \item sheaves on a scheme $X$ are sheaves of $\mathscr O_X$-modules,
+        maps of sheaves are $\mathscr O_X$-linear, and tensor products
+        of sheaves are taken over $\mathscr O_X$.
+\end{itemize}
+
+\subsection{Vector Bundles on Schemes}
+
+Let us begin the algebraic treatment by defining the scheme-theoretic
+analogue of holomorphic bundles. By treating affine opens on a scheme as charts on a manifold
+and by regarding the affine space $\affine{n}{}$ as the algebraic
+analogue of $\mathbb C^n$, it is straightforward to translate
+the definition of a vector bundle \ref{def:complex_bundle} to schemes:
+
+\begin{definition}
+  \label{def:vector_bundle}
+  A \emph{vector bundle} of rank $r$ on a scheme $X$ is
+  a map of schemes $\pi : E \to X$ such that there is an open
+  cover $X = \bigcup_i U_i$ and isomorphisms
+  \begin{align}\label{eq:trivialisation}
+    \phi_i : {\pi}^{-1}U_i \cong \affine{r}{}\times U_i
+  \end{align}
+  such that, for every affine $U = \Spec R \subseteq U_i \cap U_j$,
+  the map $\varphi_i \circ \varphi^{-1}_j$ restricts to a $R$-linear
+  automorphism of $\affine{r}{}\times U = \Spec R[T_1,\ldots,T_r]$.
+\end{definition}
+
+Note that each $\phi_i$ is an isomorphism of complex schemes
+and hence analogous to holomorphic transition functions.
+Non-trivial examples are going to arise when we consider vector bundles
+as locally free sheaves.
+
+\subsection{Locally Free Sheaves}\label{sec:locally_free_sheaves}
+
+While it was easy to translate vector bundles from manifolds
+to schemes, the resulting notion may not always be the most
+useful. It is much more natural to talk about sheaves. We know
+that with each vector bundle $E\to X$ comes a sheaf of sections
+$\Gamma(-,E)$. This has a natural $\mathscr O_X$-module structure.
+
+\begin{lemma}
+  The sheaf of sections of a vector bundle $E$ on a scheme $X$ is
+  locally free.
+  \begin{proof}
+    If $E=\affine{r}{}\times X$ is
+    trivial then the sections $s\in\Gamma(U,E)$ are just maps
+    $s:U\to \affine{r}{}$. If, moreover, $U$ is affine,
+    $\Gamma(U,E)$ corresponds to maps of
+    $\mathbb{C}$-algebras
+    $\mathbb{C}[T_1,\ldots,T_n]\to\mathscr O_X(U)$ so
+    $\Gamma(U,E)\cong \mathscr O^r_X(U)$, i.e. $\Gamma(-,E)$
+    is free.
+    More generally, for each element $U_i$ of the cover in
+    \ref{def:vector_bundle}, we can consider affines $U\subseteq U_i$
+    to find $\restrict{\Gamma(-,E)}{U_i}\cong \restrict{\mathscr O_X^r}{U_i}$,
+    as required.
+  \end{proof}
+\end{lemma}
+
+However, much more is true. It turns out that on a scheme $X$
+a vector bundle of rank $r$ is the same thing as a locally
+free sheaf of rank $r$. That is, there is an equivalence
+of categories given by $E \mapsto \Gamma(-,E)$.~\cite[128-129]{hartshorne1977}
+We will say that a sheaf $\mathscr E$ corresponds to a vector bundle
+$E$ and to mean $\mathscr E\cong\Gamma(-,E)$.
+
+\subsection{Compact Riemann Surfaces as Algebraic Curves}
+\label{sec:surfaces_as_curves}
+
+In order to fully justify an algebraic treatment of the
+moduli problem of holomorphic vector bundles on compact Riemann surfaces, we
+need to relate manifolds to schemes. It is not in general possible
+to view every manifold as a scheme, but it is a well known fact that
+compact Riemann surfaces correspond to smooth algebraic curves.
+This fact is proven in various places, see \cite[215]{griffiths1994}
+for the general idea and \cite[5-16]{harris2011}
+for a comprehensive treatment.
+
+It is worth recalling what the algebraic structure on a compact
+Riemann surface $C$ of genus $g\geq 2$ is. The easiest way to obtain
+this structure is by constructing an embedding into an ambient
+scheme. The correct scheme to consider will be the projectivisation
+of an $n$-dimensional complex vector space $V$ which is given
+by
+\begin{align*}
+  \projective{}{}(V) := \Proj\left({
+        \bigoplus_{d=0}^\infty \Sym^d(V^\vee)
+      }\right)
+\end{align*}
+Complex points in $\projective{}{}(V)$ may be identified
+with one-dimensional subspaces of $V$.
+Now if $\mathscr L$ is
+an invertible sheaf on $C$ then there is a natural map
+\begin{align}\label{eq:natural_line_bundle_map}
+  \Gamma(C,\mathscr L)\otimes\mathscr O_C \to \mathscr L
+\end{align}
+given by $s\otimes f \mapsto f\restrict{s}{U}$. We will be
+particularly interested in the case where $\mathscr L$ is a
+quotient of the free sheaf
+$\Gamma(C,\mathscr L)\otimes\mathscr O_C$ of rank
+$\dim_{\mathbb C} \Gamma(C,\mathscr L)$.
+
+\begin{definition}
+  A sheaf $\mathscr F$ on a ringed space $X$ is
+  \emph{globally generated} if the induced map
+  $\Gamma(X,\mathscr F) \otimes \mathscr O_X \to \mathscr F$
+  is a surjection.
+\end{definition}
+
+In particular, if $\mathscr L$ is globally generated then, for every $x\in C$,
+it induces a surjection on stalks $\Gamma(C,\mathscr L) \surj \mathscr L_x$
+whose kernel is a subspace of codimension 1, i.e. a closed point of
+$\projective{}{}(\Gamma(C,\mathscr L)^\vee)$. It turns out that this map is an
+embedding when we choose $\mathscr L$ to be a sufficently large tensor power of
+the canonical sheaf $\mathscr K := \Gamma(-,K)$, e.g. $\mathscr L = \mathscr
+  K^{\otimes 2}$.  Thus $C$ is an analytic subvariety of
+$\projective{}{}(\Gamma(C,\mathscr L)^\vee)$ and hence, by Chow's
+theorem, an algebraic curve.
+
+\begin{lemma}
+  Holomorphic bundles on $C$ regarded as a manifold are equivalent
+  to vector bundles on $C$ regarded as a scheme.
+  \begin{proof}[Proof idea]
+    Going from schematic vector bundles to holomorphic ones
+    is straightforward as open immersions $\affine{1}{}\inc C$
+    define charts and hence trivialisations of schematic
+    bundles are trivialisations of analytic bundles.
+    The same argument works in the other direction by Chow's
+    theorem.
+  \end{proof}
+\end{lemma}
+
+\subsection{Higgs Sheaves}
+
+Under the correspondence outlined above, we may consider the canonical
+bundle $K$ on $C$. This then corresponds to a sheaf
+\begin{align*}
+  \mathscr K := \Gamma(-,K)
+\end{align*}
+on $C$ regarded as a scheme. This allows us to define Higgs
+sheaves on $C$:
+
+\begin{definition}
+  A \emph{Higgs sheaf} on $C$ consists of a locally free sheaf
+  $\mathscr E$ on $C$ and a map of sheaves
+  $\varphi : \mathscr E \to \mathscr E \otimes \mathscr K$
+  called a \emph{Higgs field}.
+\end{definition}
+
+Just as an analytic Higgs field may be thought of as a holomorphic
+section on $\End(E)\otimes K = \Hom(E,E\otimes K)$, an algebraic
+Higgs field is equivalently a section of $\Hom(\mathscr E,\mathscr E\otimes\mathscr K)$.
+Moreover, it is straightforward to verify that under the correspondence
+$E\to\Gamma(-,E)$ a Higgs field $E\to E\otimes K$ on bundles is
+equivalent to a Higgs field $\mathscr E\to\mathscr E\otimes\mathscr K$
+on sheaves.
+Thus we are justified in treating the construction of moduli
+spaces of Higgs bundles algebraically.
+
+\section{Invariants of Sheaves}
+
+Our goal is to classify holomorphic bundles and locally free sheaves,
+respectively. Before we are able to study this classification
+geometrically, we need to do so on a topological level. In this
+section we establish topological invariants of vector bundles,
+fully classifying smooth bundles on $C$. Moreover, we establish
+useful properties of coherent sheaves and, in particular, sheaf
+cohomology.
+
+\subsection{Twisting}
+
+We begin by revisiting one of the most important family of sheaves
+on projective schemes. See e.g. \cite{gortz2010} or
+\cite{hartshorne1977} for detailed treatments.
+
+Consider a projective scheme $X$. Recall that we may write
+$X=\Proj R$ for some $R=\mathbb{C}[T_0,\ldots,T_n]/I$ \cite[II Corollary 5.16]{hartshorne1977}. Such a scheme comes
+equipped with a particularly important family of invertible sheaves
+called Serre's twisting sheaves. To define them, recall that each
+graded $R$-module $M$ defines a unique sheaf $\tilde M$ on $X$
+that satisfies $\tilde M (D_+(f)) = M_{(f)}$ where $M_{(f)}$
+denotes the homogeneous localisation $M$ at $f\in R$. This
+correspondence between modules and sheaves allows the following
+definition:
+
+\begin{definition}
+  For $m\in\mathbb{Z}$ and some graded ring $R$, define the graded
+  $R$-module $R(m)$ by $R(m)_d := R_{m+d}$ for all $d\in\mathbb{Z}$. \emph{Serre's
+    twisting sheaf} on $X=\Proj R$ is
+  \begin{align*}
+    \mathscr O_X(m) := \widetilde{R(m)}.
+  \end{align*}
+  More generally, for a sheaf $\mathscr F$ on $X$, define
+  $\mathscr F(m) := \mathscr F \otimes \mathscr O_X(m)$.
+\end{definition}
+The notation $\mathscr O_X(m)$ is consistent with $\mathscr F(m)$
+as, trivially, $\mathscr O_X(m) \cong \mathscr O_X \otimes \mathscr O_X(m)$.
+Of course, our main case of interest is where $X=\Proj R$ is
+projective, i.e. $R$ is finitely generated as a $\mathbb C$-algebra.
+In this case, the twisting sheaf corresponds to a line bundle,
+i.e. is invertible.
+
+\begin{proposition}
+  \label{thm:twisiting_sheaf_invertible}
+  If $R$ is a finitely generated $\mathbb C$-algebra, then each
+  $\mathscr O_X(m)$ is an invertible sheaf.
+  \begin{proof}
+    Omitted. See \cite[Proposition 13.15]{gortz2010}.
+  \end{proof}
+\end{proposition}
+
+Why are the twisting sheaves important to us?  They are well-behaved
+with respect to the parameters. In particular,
+under the assumption of \ref{thm:twisiting_sheaf_invertible},
+$(\mathscr F,m)\mapsto \mathscr F(m)$ defines an action of
+the integers on the group of $\mathscr O_X$-modules under
+$\otimes$:
+
+\begin{lemma}\label{lem:additivity_twisting_sheaf}
+  Let $R$ be finitely generated as a $\mathbb C$-algebra and $m,n\in\mathbb{Z}$.
+  Then $\mathscr O_X(m) \otimes \mathscr O_X(n) \cong \mathscr O_X(m + n)$. Hence
+  $\mathscr F(m) \otimes \mathscr O_X(n) \cong \mathscr F(m+n)$.
+  \begin{proof}
+    Omitted. See \cite[378]{gortz2010}.
+  \end{proof}
+\end{lemma}
+
+We will see that topological properties of sheaves behave well
+with respect to taking direct sums and tensor products and hence
+with respect to twisting, too. Moreover, twisting sheaves are going
+to be the canonical example of an ample sheaf on projective schemes.
+
+\subsection{Ample sheaves}
+
+Recall the definition of an ample sheaf:
+
+\begin{definition}
+  An invertible sheaf $\mathscr L$ on a quasi-compact quasi-separated
+  scheme $X$ is \emph{ample} if, for all quasi-coherent sheaves of
+  finite type $\mathscr F$, for $m$ sufficiently large,
+  $\mathscr F\otimes \mathscr L^{\otimes m}$ is
+  globally generated.
+\end{definition}
+
+On general schemes, ample sheaves need not exist. However, on
+projective space the twisting sheaves serve as an example:
+
+\begin{proposition}
+  Let $R$ be a finitely generated $R_0$-algebra,
+  write $X=\Proj R$ and let $m\geq 1$. Then
+  $\mathscr O_X(m)$ is ample.
+  \begin{proof}
+    Omitted. See \cite[Example 13.45]{gortz2010}.
+  \end{proof}
+\end{proposition}
+
+More generally, any quasi-projective quasi-compact scheme has
+an ample sheaf given by pulling back a twisting sheaf:
+
+\begin{proposition}
+  Let $X$ be projective, $U\subseteq X$ quasi-compact, and
+  $j : U \inc X$ an open immersion. Then, for some $m\geq 1$,
+  $j^*\mathscr O_X(m)$ is ample.
+  \begin{proof}
+    Omitted. See \cite[\href{https://stacks.math.columbia.edu/tag/01Q2}{Tag 01Q2}]{stacks-project}.
+  \end{proof}
+\end{proposition}
+
+\begin{corollary}
+  Every quasi-projective scheme has an ample sheaf.
+\end{corollary}
+
+Indeed, as we saw for the case of compact Riemann surfaces, ample
+sheaves may be used to define immersions in projective spaces. It is
+therefore not unreasonable to think of quasi-projectivity and existence
+of an ample sheaf as being equivalent. See e.g. 
+\cite[\href{https://stacks.math.columbia.edu/tag/01VW}{Tag 01VW}]{stacks-project}.
+
 \subsection{Degree}
 
-Having introduced holomorphic bundles on compact Riemann surfaces,
-we are ready to contemplate the spaces that they might form.
-We noticed that in order for two holomorphic bundles to be isomorphic
-they must have the same underlying smooth bundles. Hence it is makes
-sense to begin by classifying smooth bundles. Fix a complex manifold $X$
-of dimension $n$.
-
-The first observation we make is that, if we have isomorphic smooth
-bundles $E\cong E'$ then $\rank E = \rank E'$. However, the converse
-is not true. To see this it suffices to consider any non-trivial
-bundle and compare it to the trivial bundle of equal rank. E.g.
-$TS^2$ will do.
-
-This leads us to consider another invariant: Chern classes. For
-every smooth bundle $E$ on $X$ of rank $r$ there are elements
-$c_j(E)\in H^{2j}(X,\mathbb{Z})$ for $j\geq 0$ called the Chern
-classes of $E$. There are different ways of constructing these classes,
+Arguably the most useful invariant of vector bundles and locally
+free sheaves is called the degree. There are various ways of
+making this precise. A common way is using the first Chern
+class $c_1(E)$ of a smooth bundle $E$ which is an element of $H^2(X,\mathbb Z)$.
+Chern classes themselves may be defined in various ways, 
 e.g. using Chern-Weil theory as presented in~\cite[Chapter 2]{fine2013}
-or using cohomology as in~\cite{griffiths1994} \todo{specify}, for our purposes
-it is sufficient to know a few key properties:
+or using sheaf cohomology as in~\cite{griffiths1994}. 
+For our purposes it is sufficient to know two properties of
+the first Chern class:
 
 \begin{lemma}\label{lem:chern_classes}
-  Let $E$ be a smooth bundle on $X$ of rank $r$. Then
+  Let $E$ and $F$ be smooth vector bundles. Then
   \begin{enumerate}
-    \item $c_0(E) = 1$.
-    \item If $F$ is a smooth bundle on $X$ such that $E\cong F$
-          then $c_i(E) = c_i(F)$ for all $i$.
-    \item For every other smooth bundle $F$ on $X$,
-          \begin{align*}
-            c_i(E\oplus F) = \bigoplus_{j=0}^{i} c_j(E)\cup c_{i-j}(F).
-          \end{align*}
+    \item $c_1(E\oplus F) = c_1(E) + c_1(F)$,
+    \item $c_1(E\otimes F) = \rank(E)c_1(F) + \rank(F) c_1(E)$,
+    \item if $E\cong F$ then $c_1(E) = c_1(F)$.
   \end{enumerate}
 \end{lemma}
 
-Let us now consider the case where $X=C$ is our fixed compact Riemann surface.
-Recall that every complex manifold is orientable. Hence the homology
-group $H_2(X,\mathbb{Z})$ is generated by the fundamental class $[C]$.
+Observe that $C$ is a complex manifold and hence orientable. 
+Thus we may fix a fundamental class $[C]\in H_2(X,\mathbb Z)$
+and use the first Chern class to define an integer:
 
 \begin{definition}
   The \emph{degree} of a smooth bundle $E$ on $C$ is the integer
@@ -636,12 +887,174 @@ We say a smooth bundle $E$ is of type $(r,d)$ if it has rank $r$
 and degree $d$. It is well known that, on a compact Riemann surface,
 the topological type classifies smooth bundles completely. \cite{thaddeus2021}
 
-\begin{theorem}
+\begin{theorem}\label{thm:classification_of_smooth_bundles}
   Any two smooth vector bundles of type $(r,d)$ on $C$
   are isomorphic.
 \end{theorem}
 
-\subsection{The Naive Quotients}
+Of course the notion of degree extends to holomorphic bundles
+and thus locally free sheaf: One simply considers the degree of
+the underlying smooth vector bundle.
+
+\begin{example}
+  If $\mathscr E$ and $\mathscr F$ are locally free sheaves on $C$ then
+  \begin{align}\label{eq:degree_of_tensor}
+    \deg(\mathscr E\otimes\mathscr F) = \rank\mathscr E\deg\mathscr F + \rank\mathscr F\deg\mathscr E.
+  \end{align}
+  In particular, $\deg \mathscr O_{\mathbf P^n}(1) = 1$, so
+  \begin{align*}
+    \deg \mathscr E(m) = \deg\mathscr E + m\rank\mathscr E.
+  \end{align*}
+  Thus the map $\mathscr E \mapsto \mathscr E(d')$ defines
+  a bijection between locally free sheaves of type $(r,d)$ and
+  type $(r,d+rd')$.
+\end{example}
+
+\begin{example}
+  Combining the previous example with \ref{thm:classification_of_smooth_bundles},
+  we find that, for all $m\in\mathbb Z$ and any embedding
+  $C\inc\mathbf P^n$, the locally free sheaf
+  $\mathscr E = \mathscr O(-m)\oplus\mathscr O(m)$ has type $(2,0)$.
+  Hence the corresponding holomorphic vector bundle is
+  smoothly isomorphic to the rank 2 trivial bundle.
+\end{example}
+
+\subsection{Euler Characteristic}
+
+While the degree is well-defined, it is not the most natural construction.
+Indeed, it is difficult to generalise to wider classes of
+sheaves or more general base spaces. A more natural notion is
+the Euler characteristic of a sheaf:
+
+\begin{definition}
+  The \emph{Euler characteristic} of a coherent sheaf $\mathscr F$
+  on a projective scheme $X$ is
+  \begin{align*}
+    \chi (X,\mathscr F) := \sum_{j=0}^\infty (-1)^j \dim H^j (X,\mathscr F).
+  \end{align*}
+\end{definition}
+
+Note that, by finite-dimensionality of coherent cohomology
+(e.g. \cite[\href{https://stacks.math.columbia.edu/tag/02O6}{Tag 02O6}]{stacks-project}) and Grothendieck's vanishing theorem (e.g.
+\cite[III Theorem 2.7]{hartshorne1977}), this is sum is finite for
+all $\mathscr F$.
+
+\begin{example}
+  Our primary interest will be in the case where
+  $\dim X = 1$, so $H^j(X,\mathscr F)=0$ for $j\geq 2$ and
+  \begin{align*}
+    \chi (X,\mathscr F) = \dim H^0(X,\mathscr F)-\dim H^1(X,\mathscr F).
+  \end{align*}
+  In particular, if $\mathscr F = \mathscr O_C$ then we
+  find $\chi(C,\mathscr O_C) = 1 - g$ where $\dim_{\mathbb C}H^1(C,\mathscr O_C)=g$
+  either by definition or by application of a suitable theorem
+  relating cohomology theories.
+\end{example}
+
+Fortunately for us, the Euler characteristic of locally free
+sheaves on a smooth algebraic curve is determined by rank
+and degree. This is known as the Riemann-Roch theorem:
+
+\begin{theorem}[Riemann-Roch]\label{thm:riemann_roch}
+  Let $\mathscr E$ be a locally free sheaf of type $(r,d)$
+  on $C$. Then
+  \begin{align*}
+    \chi(C,\mathscr E) = d + r(1-g).
+  \end{align*}
+\end{theorem}
+
+Indeed, in the algebraic setting it is not uncommon to define
+the degree of a locally free sheaf $\mathscr E$ as
+\begin{align*}
+  \deg \mathscr E = \chi(C,\mathscr E)  - r\chi(C,\mathscr O_C).
+\end{align*}
+See e.g. \cite[\href{https://stacks.math.columbia.edu/tag/0AYQ}{Tag 0AYQ}]{stacks-project}.
+
+\subsection{Hilbert Polynomials}
+
+While the Euler characteristic certainly is a topological invariant,
+it is rather limiting in the general case. Rather than focusing on
+a single integer, the Euler characteristic,
+we are going to keep track of all the Euler characteristics of all
+the twists of a sheaf. This turns out to be described by a polynomial.
+Consider a projective scheme $X$ with an ample sheaf $\mathscr L$
+and a coherent sheaf $\mathscr F$.
+
+\begin{definition}
+  The \emph{Hilbert polynomial} of $\mathscr F$ at $m\in\mathbb{Z}$
+  is
+  \begin{align*}
+    P(\mathscr F,\mathscr L)(m) := \chi(X,\mathscr F \otimes \mathscr L^{\otimes m}).
+  \end{align*}
+\end{definition}
+
+A priori, the Hilbert polynomial is a function taking integers to
+integers. The fact that it is described by a polynomial is
+surprising and non-trivial.
+
+\begin{lemma}
+  There exists a unique polynomial $p\in\mathbb{Q}[t]$ such that,
+  for all $m$, $P(\mathscr F,\mathscr L)(m) = p(m)$.
+  \begin{proof}
+    Omitted. See \cite[Lemma 1.2.1]{huybrechts2010}.
+  \end{proof}
+\end{lemma}
+
+\begin{example}\label{ex:hilbert_polynomial}
+  If $\mathscr F$ is a locally free sheaf of type $(r,d)$
+  on $C$ then we use Riemann-Roch \ref{thm:riemann_roch} and
+  \ref{eq:degree_of_tensor} to calculate
+  \begin{align*}
+    P(\mathscr F, \mathscr L)(t) = rt + d + r(1-g)
+  \end{align*}
+  for any degree 1 invertible sheaf $\mathscr L$ on $C$.
+\end{example}
+
+Serre's vanishing theorem \cite[\href{https://stacks.math.columbia.edu/tag/0B5P}{Tag 0B5P}]{stacks-project}
+states that, for $m$ sufficiently large and $j>0$,
+$H^j(X,\mathscr F\otimes\mathscr L^{\otimes m})=0$. Hence,
+eventually,
+$P(\mathscr F,\mathscr L)(m) = \dim \Gamma(X,\mathscr F\otimes \mathscr L^{\otimes m})$.
+
+\chapter{Manifolds as Moduli Spaces}
+
+Consider a compact Riemann $C$ of genus $g\geq 2$.
+What can we say about the set of holomorphic vector bundles on $C$,
+up to isomorphism? What geometric structure does it have? How does
+this structure change if we equip the bundles with additional data?
+In this chapter we are going to construct complex manifolds whose
+points correspond to equivalence classes of holomorphic bundles
+and Higgs bundles, a type of decorated holomorphic bundle. These
+manifolds are referred to as moduli spaces. While it
+is possible to construct topological spaces representing all such bundles,
+the result is non-Hausdorff and hence does not provide us with a
+satisfying answer. The majority of the chapter is going to be spent
+on rectifying this issue.
+
+The key observation will be to ignore certain `unstable' bundles. We
+are going to find that doing so does not lose much information but
+allows for the construction of the moduli spaces. Although unstable
+bundles are the main obstacle, removing them does not trivialise the
+problem. To obtain the moduli spaces, we have to consider quotients
+of infinite dimensional manifolds by group actions. Such considerations
+require us to introduce Banach manifolds, Sobolev completions, and
+Elliptic regularlity.
+
+Throughout this chapter we are going to work towards constructing
+the moduli spaces.
+The first step is to discuss how such a space might be obtained naively
+and see why this approach fails. Secondly, we establish a correspondence
+between holomorphic bundles and unitary connections. After establishing the necessary
+theory we endow the topological spaces of all unitary connections
+with an infinite dimensional manifold structure. Thirdly, we establish
+conditions under which quotients of infinite dimensional manifolds
+once again admit a manifold structure. This allows us to find submanifolds on which
+those conditions are met and thus define the analytic moduli spaces of
+unitary actions. Finally we establish some key properties of the
+moduli spaces by characterising membership by a more natural
+condition and computing tangent spaces.
+
+\section{The Naive Quotients}
 
 Having established holomorphic bundles on compact Riemann surfaces,
 we are ready to contemplate the spaces that they might form. While it is
@@ -649,8 +1062,7 @@ quite straightforward to obtain topological spaces of equivalence
 classes of holomorphic bundles, the result is not Hausdorff.
 This extends to decorated holomorphic bundles such as Higgs bundles.
 
-In light of the previous section, fix a smooth bundle $E$ of type $(r,d)$
-on a compact Riemann surface $C$.
+Fix a smooth bundle $E$ of type $(r,d)$ on a compact Riemann surface $C$.
 Recall that a holomorphic bundle with underlying smooth structure $E$
 is given by a Dolbeault operator $\dol_E$. Hence we consider the set
 \begin{align*}
@@ -692,12 +1104,12 @@ for some fixed $\dol_E$. This induces a topology on $A_\dol (E)$.
 In particular, $A_\dol (E)$ is an affine space modelled on
 $\Omega^{0,1}(C,\End(E))$.
 
-We may now define the space of all Higgs bundles with underlying
+Similarly, we define the space of all Higgs bundles with underlying
 smooth vector bundle $E$ by
 \begin{align*}
   A_\varphi(E) := \bigsqcup_{\dol_E \in A_\dol (E)} \Gamma(C,\End(E,\dol_E)\otimes K_C).
 \end{align*}
-This has a topology induced by the topologies on
+This is a topological space induced by the topologies on
 $\Gamma(C,\End(E,\dol_E)\otimes K_C)$ and $A_\dol (E)$.
 All that is left to do is take a quotient by equivalence of holomorphic
 bundles, respectively Higgs bundles. One of the major topics of this
@@ -2337,188 +2749,29 @@ quasi-projective varieties and that the total space of the cotangent
 bundle of the moduli space of locally free sheaves is open in the
 moduli space of Higgs sheaves.
 
-\paragraph*{Notation} In addition to the notation used in the previous chapter, unless
-otherwise indicated,
-\begin{itemize}
-  \item all schemes are complex and of finite type and $\Sch$ denotes
-        the category of all such schemes;
-  \item a projective scheme is a projective scheme over $\mathbb{C}$
-        in the sense of \cite{hartshorne1977} - that is, $X$ is projective
-        if there exists a closed immersion $X\inc\projective{n}{}$ for
-        some $n$;
-  \item sheaves on a scheme $X$ are sheaves of $\mathscr O_X$-modules,
-        maps of sheaves are $\mathscr O_X$-linear, and tensor products
-        of sheaves are taken over $\mathscr O_X$.
-\end{itemize}
+\section{Locally Free Sheaves and Quot Schemes}
 
-\section{Holomorphic Bundles as Locally Free Sheaves}
+The first step when constructing the analytic moduli spaces of
+holomorphic bundles was to consider the slightly larger space of
+all bundles of a certain rank and degree, including repeated
+occurences of isomorphic instances. While this preliminary space
+did not serve as a true
+classification,
+it provided us with a good starting point for further analysis. As the
+algebraic construction follows a similar procedure, it is now
+time to construct an analogous scheme.
 
-Before we are able to move our moduli spaces to the category of
-schemes, we need to describe the objects of interest algebraically.
-We are going to see that holomorphic bundles on
-compact Riemann surfaces are equivalent to locally free sheaves
-of finite rank on smooth algebraic curves.
-
-\subsection{Vector Bundles on Schemes}
-
-Let us begin the algebraic treatment by defining the scheme-theoretic
-analogue of holomorphic bundles. By treating affine opens on a scheme as charts on a manifold
-and by regarding the affine space $\affine{n}{}$ as the algebraic
-analogue of $\mathbb C^n$, it is straightforward to translate
-the definition of a vector bundle \ref{def:complex_bundle} to schemes:
-
-\begin{definition}[{\cite[Definition 11.5]{gortz2010}}]
-  \label{def:vector_bundle}
-  A \emph{vector bundle} of rank $r$ on a scheme $X$ is
-  a map of schemes $\pi : E \to X$ such that there is an open
-  cover $X = \bigcup_i U_i$ and isomorphisms
-  \begin{align}\label{eq:trivialisation}
-    \phi_i : {\pi}^{-1}U_i \cong \affine{r}{}\times U_i
-  \end{align}
-  such that, for every affine $U = \Spec R \subseteq U_i \cap U_j$,
-  the map $\varphi_i \circ \varphi^{-1}_j$ restricts to a $R$-linear
-  automorphism of $\affine{r}{}\times U = \Spec R[T_1,\ldots,T_r]$.
-\end{definition}
-
-Note that each $\phi_i$ is an isomorphism of complex schemes
-and hence analogous to holomorphic transition functions.
-Non-trivial examples are going to arise when we consider vector bundles
-as locally free sheaves.
-
-\subsection{Locally Free Sheaves}\label{sec:locally_free_sheaves}
-
-While it was easy to translate vector bundles from manifolds
-to schemes, the resulting notion may not always be the most
-useful. It is much more natural to talk about sheaves. We know
-that with each vector bundle $E\to X$ comes a sheaf of sections
-$\Gamma(-,E)$. This has a natural $\mathscr O_X$-module structure.
-
-\begin{lemma}
-  The sheaf of sections of a vector bundle $E$ on a scheme $X$ is
-  locally free.
-  \begin{proof}
-    If $E=\affine{r}{}\times X$ is
-    trivial then the sections $s\in\Gamma(U,E)$ are just maps
-    $s:U\to \affine{r}{}$. If, moreover, $U$ is affine,
-    $\Gamma(U,E)$ corresponds to maps of
-    $\mathbb{C}$-algebras
-    $\mathbb{C}[T_1,\ldots,T_n]\to\mathscr O_X(U)$ so
-    $\Gamma(U,E)\cong \mathscr O^r_X(U)$, i.e. $\Gamma(-,E)$
-    is free.
-    More generally, for each element $U_i$ of the cover in
-    \ref{def:vector_bundle}, we can consider affines $U\subseteq U_i$
-    to find $\restrict{\Gamma(-,E)}{U_i}\cong \restrict{\mathscr O_X^r}{U_i}$,
-    as required.
-  \end{proof}
-\end{lemma}
-
-However, much more is true. It turns out that on a scheme $X$
-a vector bundle of rank $r$ is the same thing as a locally
-free sheaf of rank $r$. That is, there is an equivalence
-of categories given by $E \mapsto \Gamma(-,E)$.~\cite[128-129]{hartshorne1977}
-We will say that a sheaf $\mathscr E$ corresponds to a vector bundle
-$E$ and to mean $\mathscr E\cong\Gamma(-,E)$.
-
-\subsection{Compact Riemann Surfaces as Algebraic Curves}
-\label{sec:surfaces_as_curves}
-
-In the previous sections we saw that, on schemes, vector bundles are
-the same thing as locally free sheaves. It is not difficult to adapt
-the argument to obtain an analogous correspondence for manifolds.
-However, in order to fully justify an algebraic treatment of the
-moduli problem of vector bundles on compact Riemann surfaces, we
-need to relate manifolds to schemes. It is not in general possible
-to view every manifold as a scheme, it is a well
-known fact that compact Riemann surfaces correspond to smooth
-algebraic curves.
-This fact is proven in various places, see \cite[215]{griffiths1994}
-for the general idea and \cite[5-16]{harris2011}
-for a comprehensive treatment.
-
-It is worth recalling what the algebraic structure on a compact
-Riemann surface $C$ of genus $g\geq 2$ is. The easiest way to obtain
-this structure is by constructing an embedding into an ambient
-scheme. The correct scheme to consider will be the projectivisation
-of an $n$-dimensional complex vector space $V$ which is given
-by
-\begin{align*}
-  \projective{}{}(V) := \Proj\left({
-        \bigoplus_{d=0}^\infty \Sym^d(V^\vee)
-      }\right)
-\end{align*}
-Complex points in $\projective{}{}(V)$ may be identified
-with one-dimensional subspaces of $V$.
-Now if $\mathscr L$ is
-an invertible sheaf on $C$ then there is a natural map
-\begin{align}\label{eq:natural_line_bundle_map}
-  \Gamma(C,\mathscr L)\otimes\mathscr O_C \to \mathscr L
-\end{align}
-given by $s\otimes f \mapsto f\restrict{s}{U}$. We will be
-particularly interested in the case where $\mathscr L$ is a
-quotient of the free sheaf
-$\Gamma(C,\mathscr L)\otimes\mathscr O_C$ of rank
-$\dim_{\mathbb C} \Gamma(C,\mathscr L)$.
-
-\begin{definition}
-  A sheaf $\mathscr F$ on a ringed space $X$ is
-  \emph{globally generated} if the induced map
-  $\Gamma(X,\mathscr F) \otimes \mathscr O_X \to \mathscr F$
-  is a surjection.
-\end{definition}
-
-In particular, if $\mathscr L$ is globally generated then, for every $x\in C$,
-it induces a surjection on stalks $\Gamma(C,\mathscr L) \surj \mathscr L_x$
-whose kernel is a subspace of codimension 1, i.e. a closed point of
-$\projective{}{}(\Gamma(C,\mathscr L)^\vee)$. It turns out that this map is an
-embedding when we choose $\mathscr L$ to be a sufficently large tensor power of
-the canonical sheaf $\mathscr K := \Gamma(-,K)$, e.g. $\mathscr L = \mathscr
-  K^{\otimes 2}$.  Thus $C$ is an analytic subvariety of
-$\projective{}{}(\Gamma(C,\mathscr L)^\vee)$ and hence, by Chow's
-theorem, an algebraic curve.
-
-\begin{lemma}
-  Holomorphic bundles on $C$ regarded as a manifold are equivalent
-  to vector bundles on $C$ regarded as a scheme.
-  \begin{proof}[Proof idea]
-    Going from schematic vector bundles to holomorphic ones
-    is straightforward as open immersions $\affine{1}{}\inc C$
-    define charts and hence trivialisations of schematic
-    bundles are trivialisations of analytic bundles.
-    The same argument works in the other direction by Chow's
-    theorem.
-  \end{proof}
-\end{lemma}
-
-\subsection{Higgs Sheaves}
-
-Under the correspondence outlined above, we may consider the canonical
-bundle $K$ on $C$. This then corresponds to a sheaf
-\begin{align*}
-  \mathscr K := \Gamma(-,K)
-\end{align*}
-on $C$ regarded as a scheme. This allows us to define Higgs
-sheaves on $C$:
-
-\begin{definition}
-  A \emph{Higgs sheaf} on $C$ consists of a locally free sheaf
-  $\mathscr E$ on $C$ and a map of sheaves
-  $\varphi : \mathscr E \to \mathscr E \otimes \mathscr K$
-  called a \emph{Higgs field}.
-\end{definition}
-
-Just as an analytic Higgs field may be thought of as a holomorphic
-section on $\End(E)\otimes K = \Hom(E,E\otimes K)$, an algebraic
-Higgs field is equivalently a section of $\Hom(\mathscr E,\mathscr E\otimes\mathscr K)$.
-Moreover, it is straightforward to verify that under the correspondence
-$E\to\Gamma(-,E)$ a Higgs field $E\to E\otimes K$ on bundles is
-equivalent to a Higgs field $\mathscr E\to\mathscr E\otimes\mathscr K$
-on sheaves.
-Thus we are justified in treating the construction of moduli
-spaces of Higgs bundles algebraically.
+We define a much more general moduli problem called
+the Quot functor which was shown to have a fine moduli space by
+Grothendieck. This is the first piece of machinery which will do a
+lot of the work for us and for many other moduli problems of vector
+bundles. We will show that there is a Quot scheme whose points
+may be thought of as locally free sheaves of a certain rank and
+degree.
 
 \subsection{Moduli Problems}
 
-We have shown that holomorphic bundles on a compact Riemann surface
+We have seen that holomorphic bundles on a compact Riemann surface
 correspond to locally free sheaves on a certain smooth algebraic
 curve. Now we would like to construct schemes parametrising holomorphic
 bundles. In particular, for a general scheme $T$, we are going to
@@ -2532,7 +2785,7 @@ moduli problem:
   A \emph{moduli problem} is a functor $\mathcal M:\Sch^{op}\to\Set$.
 \end{definition}
 
-We are going to see examples of this in due time. For now, 
+We are going to see examples of this in the next section. For now, 
 observe that there is an obvious notion of a moduli spaces
 corresponding to a moduli problem:
 
@@ -2577,8 +2830,8 @@ Hence we make the following definition:
 
 Hence a fine moduli space is precisely the scheme that indexes
 a family of all the geometric objects under consideration.
-Unfortunately, it turns out that genuine representability often is too much to ask. Indeed,
-we really care about closed points and hence
+Unfortunately, it turns out that genuine representability often is
+too much to ask. Indeed, we really care about closed points and hence
 we are otherwise ready to accept some deviation so long as it is not
 possible to do better:
 
@@ -2642,276 +2895,6 @@ three steps:
   \item Construct a coarse moduli space.
   \item Check under which conditions the moduli space is fine.
 \end{enumerate}
-
-\section{Invariants of Sheaves}
-
-Vector bundles correspond to locally free sheaves. Hence it is worth
-taking some time to study locally free sheaves and, more generally,
-sheaves on schemes. Of course, this is a very wide field,
-so we are going to highlight only a few key properties.
-
-The main goal of this section is to establish some topological
-invariants of coherent sheaves, generalising the grouping of
-vector bundles by rank and degree. The obvious tool for studying
-the topology of sheaves is cohomology. While we will have little
-to do with sheaf cohomology in its raw form, we are going to
-observe several properties of sheaves on curves and, more generally,
-projective schemes that are going to prove useful.
-
-\subsection{Twisting}
-
-We begin by revisiting one of the most important family of sheaves
-on projective schemes. See e.g. \cite{gortz2010} or
-\cite{hartshorne1977} for detailed treatments.
-
-Consider a projective scheme $X$. Recall that we may write
-$X=\Proj R$ for some $R=\mathbb{C}[T_0,\ldots,T_n]/I$ \cite[II Corollary 5.16]{hartshorne1977}. Such a scheme comes
-equipped with a particularly important family of invertible sheaves
-called Serre's twisting sheaves. To define them, recall that each
-graded $R$-module $M$ defines a unique sheaf $\tilde M$ on $X$
-that satisfies $\tilde M (D_+(f)) = M_{(f)}$ where $M_{(f)}$
-denotes the homogeneous localisation $M$ at $f\in R$. This
-correspondence between modules and sheaves allows the following
-definition:
-
-\begin{definition}
-  For $m\in\mathbb{Z}$ and some graded ring $R$, define the graded
-  $R$-module $R(m)$ by $R(m)_d := R_{m+d}$ for all $d\in\mathbb{Z}$. \emph{Serre's
-    twisting sheaf} on $X=\Proj R$ is
-  \begin{align*}
-    \mathscr O_X(m) := \widetilde{R(m)}.
-  \end{align*}
-  More generally, for a sheaf $\mathscr F$ on $X$, define
-  $\mathscr F(m) := \mathscr F \otimes \mathscr O_X(m)$.
-\end{definition}
-The notation $\mathscr O_X(m)$ is consistent with $\mathscr F(m)$
-as, trivially, $\mathscr O_X(m) \cong \mathscr O_X \otimes \mathscr O_X(m)$.
-Of course, our main case of interest is where $X=\Proj R$ is
-projective, i.e. $R$ is finitely generated as a $\mathbb C$-algebra.
-In this case, the twisting sheaf corresponds to a line bundle,
-i.e. is invertible.
-
-\begin{proposition}
-  \label{thm:twisiting_sheaf_invertible}
-  If $R$ is a finitely generated $\mathbb C$-algebra, then each
-  $\mathscr O_X(m)$ is an invertible sheaf.
-  \begin{proof}
-    Omitted. See \cite[Proposition 13.15]{gortz2010}.
-  \end{proof}
-\end{proposition}
-
-Why are the twisting sheaves important to us?  They are well-behaved
-with respect to the parameters. In particular,
-under the assumption of \ref{thm:twisiting_sheaf_invertible},
-$(\mathscr F,m)\mapsto \mathscr F(m)$ defines an action of
-the integers on the group of $\mathscr O_X$-modules under
-$\otimes$:
-
-\begin{lemma}\label{lem:additivity_twisting_sheaf}
-  Let $R$ be finitely generated as a $\mathbb C$-algebra and $m,n\in\mathbb{Z}$.
-  Then $\mathscr O_X(m) \otimes \mathscr O_X(n) \cong \mathscr O_X(m + n)$. Hence
-  $\mathscr F(m) \otimes \mathscr O_X(n) \cong \mathscr F(m+n)$.
-  \begin{proof}
-    Omitted. See \cite[378]{gortz2010}.
-  \end{proof}
-\end{lemma}
-
-We will see that topological properties of sheaves behave well
-with respect to taking direct sums and tensor products and hence
-with respect to twisting, too. Moreover, twisting sheaves are going
-to be the canonical example of an ample sheaf on projective schemes.
-
-\subsection{Ample sheaves}
-
-Recall the definition of an ample sheaf:
-
-\begin{definition}
-  An invertible sheaf $\mathscr L$ on a quasi-compact quasi-separated
-  scheme $X$ is \emph{ample} if, for all quasi-coherent sheaves of
-  finite type $\mathscr F$, for $m$ sufficiently large,
-  $\mathscr F\otimes \mathscr L^{\otimes m}$ is
-  globally generated.
-\end{definition}
-
-On general schemes, ample sheaves need not exist. However, on
-projective space the twisting sheaves serve as an example:
-
-\begin{proposition}
-  Let $R$ be a finitely generated $R_0$-algebra,
-  write $X=\Proj R$ and let $m\geq 1$. Then
-  $\mathscr O_X(m)$ is ample.
-  \begin{proof}
-    Omitted. See \cite[Example 13.45]{gortz2010}.
-  \end{proof}
-\end{proposition}
-
-More generally, any quasi-projective quasi-compact scheme has
-an ample sheaf given by pulling back a twisting sheaf:
-
-\begin{proposition}
-  Let $X$ be projective, $U\subseteq X$ quasi-compact, and
-  $j : U \inc X$ an open immersion. Then, for some $m\geq 1$,
-  $j^*\mathscr O_X(m)$ is ample.
-  \begin{proof}
-    Omitted. See \cite[\href{https://stacks.math.columbia.edu/tag/01Q2}{Tag 01Q2}]{stacks-project}.
-  \end{proof}
-\end{proposition}
-
-\begin{corollary}
-  Every quasi-projective scheme has an ample sheaf.
-\end{corollary}
-
-Indeed, as we saw for the case of compact Riemann surfaces, ample
-sheaves may be used to define immersions in projective spaces. It is
-therefore not unreasonable to think of quasi-projectivity and existence
-of an ample sheaf to be equivalent.
-
-\subsection{Euler Characteristic}
-
-The fundamental invariant of sheaves that we are going
-to be interested in is the Euler characteristic. This is defined
-in the obvious way, replacing regular cohomology with sheaf
-cohomology:
-
-\begin{definition}
-  The \emph{Euler characteristic} of a coherent sheaf $\mathscr F$
-  on a projective scheme $X$ is
-  \begin{align*}
-    \chi (X,\mathscr F) := \sum_{j=0}^\infty (-1)^j \dim H^j (X,\mathscr F).
-  \end{align*}
-\end{definition}
-
-Note that, by finite-dimensionality of coherent cohomology
-(e.g. \cite[\href{https://stacks.math.columbia.edu/tag/02O6}{Tag 02O6}]{stacks-project}) and Grothendieck's vanishing theorem (e.g.
-\cite[III Theorem 2.7]{hartshorne1977}), this is sum is finite for
-all $\mathscr F$.
-
-\begin{example}
-  Our primary interest will be in the case where
-  $\dim X = 1$, so $H^j(X,\mathscr F)=0$ for $j\geq 2$ and
-  \begin{align*}
-    \chi (X,\mathscr F) = \dim H^0(X,\mathscr F)-\dim H^1(X,\mathscr F).
-  \end{align*}
-\end{example}
-
-Recall that for vector bundles on a compact Riemann surfaces we defined the
-degree.  The Euler characteristic allows us to make a similar definition for
-locally free sheaves on the curve $C$.
-
-\begin{definition}
-  The \emph{degree} of a locally free sheaf $\mathscr E$ of rank $r$
-  on $C$ is
-  \begin{align}\label{def:degree}
-    \deg \mathscr E := \chi (C,\mathscr E) - r\chi(C,\mathscr O_C).
-  \end{align}
-\end{definition}
-
-Once again we say a locally free sheaf on $C$ is of
-type $(r,d)$ to mean that it is of rank $r$ and degree $d$.
-
-\begin{example}
-  If $\mathscr E$ and $\mathscr F$ are locally free on $C$ then
-  \begin{align*}
-    \deg(\mathscr E\otimes\mathscr F) = \rank\mathscr E\deg\mathscr F + \rank\mathscr F\deg\mathscr E.
-  \end{align*}
-  In particular,
-  \begin{align*}
-    \deg \mathscr E(m) = \deg\mathscr E + m\rank\mathscr E.
-  \end{align*}
-  Thus the map $\mathscr E \mapsto \mathscr E(d')$ defines
-  a bijection between locally free sheaves of type $(r,d)$ and
-  type $(r,d+rd')$.
-\end{example}
-
-In most instances the degree of a locally free sheaf is going to
-be known and it will be interesting to calculate the Euler characteristic
-or, more specifically, the dimension of the space of global sections.
-To this end, we have the Riemann-Roch theorem:
-
-\begin{theorem}[Riemann-Roch]\label{thm:riemann_roch}
-  Let $\mathscr F$ be a locally free sheaf of type $(r,d)$
-  on $C$. Then
-  \begin{align*}
-    \chi(C,\mathscr F) = d + r(1-g).
-  \end{align*}
-  \begin{proof}
-    This just follows from (\ref{def:degree}) and the observation
-    \begin{align*}
-      \chi(C,\mathscr O_C) = \dim_{\mathbb C} H^0(C,\mathscr O_C)-\dim_{\mathbb C} H^1(C,\mathscr O_C)
-      = 1-g
-    \end{align*}
-    where $\dim_{\mathbb C} H^0(C,\mathscr O_C) = 1$ because holomorphic
-    functions on compact manifolds are constant and $\dim_{\mathbb C}H^1(C,\mathscr O_C) = g$
-    by definition or otherwise by a suitable theorem relating cohomology theories.
-  \end{proof}
-\end{theorem}
-\subsection{Hilbert Polynomials}
-
-While the Euler characteristic certainly is a topological invariant,
-it is rather limiting. Rather than focusing on a single integer,
-the Euler characteristic,
-we are going to keep track of all the Euler characteristics of all
-the twists of a sheaf. This turns out to be described by a polynomial.
-
-Consider a projective scheme $X$ with an ample sheaf $\mathscr L$
-and a coherent sheaf $\mathscr F$.
-
-\begin{definition}
-  The \emph{Hilbert polynomial} of $\mathscr F$ at $m\in\mathbb{Z}$
-  is
-  \begin{align*}
-    P(\mathscr F,\mathscr L)(m) := \chi(X,\mathscr F \otimes \mathscr L^{\otimes m}).
-  \end{align*}
-\end{definition}
-
-A priori, the Hilbert polynomial is a function taking integers to
-integers. The fact that it is described by a polynomial is
-surprising and non-trivial.
-
-\begin{lemma}
-  There exists a unique polynomial $p\in\mathbb{Q}[t]$ such that,
-  for all $m$, $P(\mathscr F,\mathscr L)(m) = p(m)$.
-  \begin{proof}
-    Omitted. See \cite[Lemma 1.2.1]{huybrechts2010}.
-  \end{proof}
-\end{lemma}
-
-\begin{example}\label{ex:hilbert_polynomial}
-  If $\mathscr F$ is a locally free sheaf of type $(r,d)$
-  on $C$ then we use Riemann-Roch \ref{thm:riemann_roch} and
-  \ref{lem:degree_of_tensor} to calculate
-  \begin{align*}
-    P(\mathscr F, \mathscr L)(t) = rt + d + r(1-g)
-  \end{align*}
-  for any degree 1 invertible sheaf $\mathscr L$ on $C$.
-\end{example}
-
-Serre's vanishing theorem \cite[\href{https://stacks.math.columbia.edu/tag/0B5P}{Tag 0B5P}]{stacks-project}
-states that, for $m$ sufficiently large and $j>0$,
-$H^j(X,\mathscr F\otimes\mathscr L^{\otimes m})=0$. Hence,
-eventually,
-$P(\mathscr F,\mathscr L)(m) = \dim \Gamma(X,\mathscr F\otimes \mathscr L^{\otimes m})$.
-
-\section{Locally Free Sheaves and Quot Schemes}
-
-The first step when constructing the analytic moduli spaces of
-holomorphic bundles was to consider the slightly larger space of
-all bundles of a certain rank and degree, including repeated
-occurences of isomorphic instances. While this preliminary space
-did not serve as a true
-classification,
-it provided us with a good starting point for further analysis. As the
-algebraic construction follows a similar procedure, it is now
-time to construct an analogous scheme.
-
-We define a much more general moduli problem called
-the Quot functor which was shown to have a fine moduli space by
-Grothendieck. This is the first piece of machinery which will do a
-lot of the work for us and for many other moduli problems of vector
-bundles. We will show that there is a Quot scheme whose points
-may be thought of as locally free sheaves of a certain rank and
-degree.
-
 \subsection{All Locally Free Sheaves}
 
 Our approach to constructing moduli spaces of equivalence classes of
