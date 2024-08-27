@@ -83,6 +83,7 @@
 \end{abstract}
 
 \begin{romanpages}          % start roman page numbering
+  \setcounter{tocdepth}{2}
   \tableofcontents            % generate and include a table of contents
 \end{romanpages}            % end roman page numbering
 
@@ -1018,7 +1019,6 @@ $P(\mathscr F,\mathscr L)(m) = \dim \Gamma(X,\mathscr F\otimes \mathscr L^{\otim
 
 \chapter{Manifolds as Moduli Spaces}
 
-Consider a compact Riemann $C$ of genus $g\geq 2$.
 What can we say about the set of holomorphic vector bundles on $C$,
 up to isomorphism? What geometric structure does it have? How does
 this structure change if we equip the bundles with additional data?
@@ -1026,10 +1026,10 @@ In this chapter we are going to construct complex manifolds whose
 points correspond to equivalence classes of holomorphic bundles
 and Higgs bundles, a type of decorated holomorphic bundle. These
 manifolds are referred to as moduli spaces. While it
-is possible to construct topological spaces representing all such bundles,
-the result is non-Hausdorff and hence does not provide us with a
+is possible to construct topological spaces parametrising all such bundles,
+this space is non-Hausdorff and hence does not provide us with a
 satisfying answer. The majority of the chapter is going to be spent
-on rectifying this issue.
+rectifying this issue.
 
 The key observation will be to ignore certain `unstable' bundles. We
 are going to find that doing so does not lose much information but
@@ -3186,23 +3186,23 @@ Grothendieck constructed a fine moduli space for it. \cite[{Proposition 3.8}]{gr
     Q(r,d) := \Quot(\mathscr O^{\oplus n}_C)^{r,d}
   \end{align*}
   Now consider the universal quotient family
-  $\hat q : \mathscr O^{\oplus n}_{C\times Q(r,d)} \surj \hat{\mathscr E}$.
+  $q_{\mathscr U} : \mathscr O^{\oplus n}_{C\times Q(r,d)} \surj \mathscr U$.
   Then each quotient sheaf of $\mathscr O_C^{\oplus n}$ is given by
-  $\hat{\mathscr E}_q$ for some $q\in Q(r,d)$. In light of the discussion
+  $\mathscr U_q$ for some $q\in Q(r,d)$. In light of the discussion
   above, define
   \begin{align*}
     Q_\circ(r,d) \subseteq Q(r,d) := \Quot(\mathscr O^{\oplus n}_C)^{r,d}
   \end{align*}
-  to consists of all $q\in Q(r,d)$ such that $\hat{\mathscr E}_q$ is locally
-  free, $H^1(C,\hat{\mathscr E}_q)=0$, and the map
-  $\Gamma(C,\mathscr O^{\oplus n}_C)\surj\Gamma(C,\hat{\mathscr E}_q)$ is
+  to consists of all $q\in Q(r,d)$ such that $\mathscr U_q$ is locally
+  free, $H^1(C,\mathscr U_q)=0$, and the map
+  $\Gamma(C,\mathscr O^{\oplus n}_C)\surj\Gamma(C,\mathscr U_q)$ is
   an isomorphism.
 \end{example}
 
 Some creativity is required to extend this procedure to Higgs
 sheaves. What we are looking for is a scheme $F(r,d)$ whose closed points
 are pairs $(q,\varphi)$ where $q$ is a closed point
-in $Q_\circ(r,d)$ and $\varphi : \hat{\mathscr E}_q \to \hat{\mathscr E}_q \otimes \mathscr K$.
+in $Q_\circ(r,d)$ and $\varphi : \mathscr U_q \to \mathscr U_q \otimes \mathscr K$.
 The following technical lemma is going to enable the construction of
 such a scheme:
 
@@ -3228,22 +3228,22 @@ such a scheme:
 
 \begin{example}\label{ex:quot_scheme_of_higgs}
   Fix a Higgs sheaf $(\mathscr E,\varphi)$ such that
-  $\mathscr E = \hat{\mathscr E}_q$ for some $q\in Q_\circ(r,d)$.
+  $\mathscr E = \mathscr U_q$ for some $q\in Q_\circ(r,d)$.
   Note that $Q_\circ(r,d)$ is a reduced open subscheme
   \cite[281]{nitsure1991}, hence lemma
   \ref{lem:linear_scheme} applies.
-  Considering the sheaf $\Hom(\hat{\mathscr E},\hat{\mathscr E}\otimes\mathscr K)$ on
+  Considering the sheaf $\Hom(\mathscr U,\mathscr U\otimes\mathscr K)$ on
   $C\times Q_\circ(r,d)$ we find that the functor
   \begin{align*}
     (f:T\to Q(r,d))
     \mapsto
-    \Gamma(C\times T,(\identity\times f)^*\Hom(\hat{\mathscr E},\hat{\mathscr E}\otimes\pi^*\mathscr K))
+    \Gamma(C\times T,(\identity\times f)^*\Hom(\mathscr U,\mathscr U\otimes\pi^*\mathscr K))
   \end{align*}
   where $\pi : C\times Q_\circ(r,d)\to C$ is represented by a
   $Q_\circ(r,d)$-scheme $F(r,d)$.
   In particular, a closed point of $F(r,d)$ corresponds to a
   closed point $q\in Q_\circ(r,d)$ and a $q$-point of $F(r,d)$.
-  We may now choose $q$ such that $\mathscr E = \hat{\mathscr E}_q$ and note
+  We may now choose $q$ such that $\mathscr E = \mathscr U_q$ and note
   that
   \begin{align*}
     F(r,d)(q) = \Gamma(C,\Hom(\mathscr E,\mathscr E\otimes\mathscr K)).
@@ -3441,7 +3441,7 @@ $G(T)$ on $X(T)$ by
   we specify a family of quotients
   $\mathscr O^{\oplus n}_{C\times GL_n\times Q(r,d)}\surj \mathscr E$
   of type $(r,d)$ over $GL_n\times Q(r,d)$. We construct such a family by
-  considering the universal family $\hat q:\mathscr Q^{\oplus n}_{C\times Q(r,d)}\surj \hat{\mathscr E}$,
+  considering the universal family $q_{\mathscr U}:\mathscr Q^{\oplus n}_{C\times Q(r,d)}\surj \mathscr U$,
   pulling it back along the projection $\pi:GL_n\times Q(r,d)\to Q(r,d)$,
   and composing it with the sheaf isomorphism
   \begin{align*}
@@ -3453,8 +3453,8 @@ $G(T)$ on $X(T)$ by
     \mathscr O^{\oplus n}_{C\times GL_n\times Q(r,d)}
     \xlongrightarrow{\pi^*\iota}
     \mathscr O^{\oplus n}_{C\times GL_n\times Q(r,d)}
-    \xlongrightarrow{\pi^*\hat q}
-    \pi^*\hat{\mathscr E}
+    \xlongrightarrow{\pi^*q_{\mathscr U}}
+    \pi^*\mathscr U
   \end{align*}
   where each $\pi$ denotes the natural projection. It is straightforward
   to verify that this defines an action that restricts to $Q_\circ(r,d)$.
@@ -3463,7 +3463,7 @@ $G(T)$ on $X(T)$ by
 
 \begin{lemma}\label{lem:lf_orbits_are_iso_classes}
   Consider closed points $q,q'$ in $Q_\circ(r,d)$.
-  Then $\hat{\mathscr E}_q\cong\hat{\mathscr E}_{q'}$
+  Then $\mathscr U_q\cong\mathscr U_{q'}$
   if, and only if, there is a closed point $g$ of $GL_n$
   such that $g\cdot q = q'$ in $Q_\circ(r,d)$.
   \begin{proof}
@@ -3495,9 +3495,9 @@ $G(T)$ on $X(T)$ by
   $g\in GL_n(\mathbb C)$ acts on $\varphi$ via the induced isomorphism
   of sheaves
   \begin{align*}
-    \Hom(\hat{\mathscr E}_q,\hat{\mathscr E}_q\otimes\mathscr K)
+    \Hom(\mathscr U_q,\mathscr U_q\otimes\mathscr K)
     \xlongrightarrow{\sim}
-    \Hom(\hat{\mathscr E}_{g\cdot q},\hat{\mathscr E}_{g\cdot q}\otimes\mathscr K)
+    \Hom(\mathscr U_{g\cdot q},\mathscr U_{g\cdot q}\otimes\mathscr K)
   \end{align*}
   that we obtain from \ref{lem:lf_orbits_are_iso_classes}.
 \end{example}
@@ -3968,25 +3968,25 @@ $G$-linearisations.
   families of quotients
   \begin{align*}
     \mathscr O^{\oplus n}_{C\times Q(r,d)\times GL_n}
-    \xlongrightarrow{(\sigma\times\identity)^* \hat q}
-    (\sigma\times\identity)^* \hat{\mathscr E}
+    \xlongrightarrow{(\sigma\times\identity)^* q_{\mathscr U}}
+    (\sigma\times\identity)^* \mathscr U
   \end{align*}
   and
   \begin{align*}
     \mathscr O^{\oplus n}_{C\times GL_n\times Q(r,d)}
     \xlongrightarrow{\pi^*\iota}
     \mathscr O^{\oplus n}_{C\times GL_n\times Q(r,d)}
-    \xlongrightarrow{\pi^*\hat q}
-    \pi^*\hat{\mathscr E}
+    \xlongrightarrow{\pi^*q_{\mathscr U}}
+    \pi^*\mathscr U
   \end{align*}
   over $GL_n\times Q(r,d)$ where
-  $\hat q : \mathscr O^{\oplus n}_{C\times Q(r,d)\times GL_N} \surj \hat{\mathscr E}$
+  $q_{\mathscr U} : \mathscr O^{\oplus n}_{C\times Q(r,d)\times GL_N} \surj \mathscr U$
   is the universal quotient in $Q(r,d)$. In particular, we have
   an isormorphism of sheaves
   \begin{align}\label{eq:universal_linearisation}
-    (\sigma^*\times\identity)\hat{\mathscr E} \cong (\pi^*\times\identity)\hat{\mathscr E}.
+    (\sigma^*\times\identity)\mathscr U \cong (\pi^*\times\identity)\mathscr U.
   \end{align}
-  This is a linearisation of $\hat{\mathscr E}$ with respect to
+  This is a linearisation of $\mathscr U$ with respect to
   the action $\sigma\times\identity$ on $Q(r,d)\times C$, as the
   cocycle condition (\ref{eq:cocyle_condition}) is easily verified.
 
@@ -4003,7 +4003,7 @@ $G$-linearisations.
     O_{\projective{}{}}(1)$ to $Q(r,d)$ is
   \begin{align*}
     \mathscr L_\ell
-    := \det(\pi_*(\hat{\mathscr E} \otimes \pi^*\mathscr O_C(\ell))).
+    := \det(\pi_*(\mathscr U \otimes \pi^*\mathscr O_C(\ell))).
   \end{align*}
   Hence, for $\ell$ large, $\mathscr L_\ell$ is an ample sheaf
   on $Q(r,d)$. \cite[Proposition 2.2.5]{huybrechts2010}.
@@ -4491,7 +4491,7 @@ This is indeed a moduli space:
     to be a coarse moduli space. This relies on a correspondence between
     natural transformations $\mathcal M^s_h(r,d)\cong\Hom(-,M^s_h(r,d))$ and
     $GL_n$-invariant $f:Q_\circ(r,d)\to M$ given by
-    $\eta\mapsto\eta_{Q_\circ(r,d)}(\hat{\mathscr E})$. See
+    $\eta\mapsto\eta_{Q_\circ(r,d)}(\mathscr U)$. See
     \cite[Proposition 3.35]{hoskins2016} for a precise statement
     of the correspondence.
   \end{proof}
@@ -4714,7 +4714,7 @@ to $\mathscr E$, we have a natural inclusion
     Now $Q_\circ^s(r,d)$ is open in $Q_\circ(r,d)$ so
     $T^*M^s_h(r,d)(\mathbb C)$ is open in
     \begin{align*}
-      \bigsqcup_{q\in M_h(r,d)(\mathbb C)} H^1(C,\End(\hat{\mathscr E}_q))
+      \bigsqcup_{q\in M_h(r,d)(\mathbb C)} H^1(C,\End(\mathscr U_q))
     \end{align*}
     and the inclusion factors through (\ref{eq:cotangent_inclusion})
     where $M_h(r,d)(\mathbb C)$ is the topological space
@@ -4894,33 +4894,21 @@ manifold structures of $M^s_\dol(r,d)$ and $M^s_\varphi(r,d)$
 without making use of Banach Manifolds, Sobolev completions, and
 Elliptic regularity. We have not found a way to do so.
 
-\subsection{General Ringed Spaces}
-
-Another issue we ran into when streamlining the presentation is
-a decent amount of duplication. Indeed, the theory of coherent sheaves
-on manifolds is reasonably similar to that on schemes. Hence
-one might reasonably begin with a more general exposition of this
-theory, establishing the correspondence between locally free sheaves
-and vector bundles, invariants of such sheaves, and the relation to
-embeddings in projective space. Indeed, this is probably the correct
-approach for a more comprehensive treatment of the material.
-Unfortunately, care is required when highlighting special properties
-of one case or the other, so that it is unclear whether, at the end
-of the day, any space would be saved at all. Moreover, the way we
-have chosen to approach the problem makes the material more
-acessible to readers coming from an analytic background.
-
 \subsection{Language Barrier}
 
-Another problem that one runs into when trying to use a more
-algebraic language to present the analytic material is that,
-unsurprisingly, the analytic language is more suitable for the
+In order to compare the two analytic and algebraic approach,
+it is natural to attempt to unify the language as much as possible.
+In particular, it is possible to use the algebraic language of
+sheaves on locally ringed spaces to describe the analytic
+construction, too. Unfortunately, one immediately runs into
+an issue. Unsurprisingly, the analytic language is more suitable for the
 task. While it is certainly possible to exclusively focus on
 sheaves and define moduli spaces in the analytic category, many
 of the proofs are most easily completed using analytic methods.
 Hence unifying the language would inevitably come at the cost
 of adding a substantial degree of complexity to one half of the
-material.
+material. This is not only inconvenient but also leads to an
+unfair comparison.
 
 \section{Future Work}
 
