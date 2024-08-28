@@ -524,6 +524,18 @@ in some sense. In particular, we have Dolbeault's theorem:
   $K_X := \bigwedge^n T_{1,0}^* X$.
 \end{theorem}
 
+Another well-known theorem that will come in useful is Serre duality.
+In the analytic setting, we have the following:
+
+\begin{theorem}[Serre duality]\label{thm:serre_duality}
+  Let $(E,\dol_E)$ be a holomorphic vector bundle on a complex manifold
+  $X$ of dimension $n$. Then
+  \begin{align*}
+    H^{p,q}(X,(E,\dol_E)) \cong
+    H^{n-p,n-q}(X,(E,\dol_E)^*)^*.
+  \end{align*}
+\end{theorem}
+
 \subsection{Higgs Bundles}
 
 Higgs bundles were introduced by Hitchin in~\cite{hitchin1987}
@@ -1175,24 +1187,30 @@ Riemann surface $C$.
 
 \subsection{Connections}
 
-Connections are going to help us in two ways: Firstly, they are going to
-be to correspond to Dolbeault operators and hence lead to an
-alternative point of view on spaces of holomorphic bundles.
-Secondly, they are going to allow us to define the Sobolev norm and
-hence provide us with a suitable Banach manifold structure on
-the moduli spaces.
+Connections are going to help us in two ways: Firstly, it is a common
+theme in geometry that adding structure to a space
+reveals information about the space. Metrics on manifolds are a common
+example of this. In a very similar way, connections may reveal
+information about a bundle and even the corresponding base space.
+We are going to use connections in holomorphic bundles to study
+the holomorphic structure.
+
+Secondly, connections give rise to covariant derivatives and hence are
+going to enable the definition of Sobolev norms. The completions
+with respect to these norms are going to give suitable Banach
+manifold structure on the moduli spaces.
 Begin by recalling that connections enable us to differentiate sections of
 vector bundles:
 
 \begin{definition}
   A \emph{connection} in a smooth complex bundle $E$ on
-  a complex manifold $X$ is a $\mathscr C^\infty(X,\mathbb C)$-linear
-  map $\nabla : \Omega^0(X,E) \to \Omega^1(X,E)$
+  a complex manifold $X$ is a linear map
+  $\nabla : \Omega^0(X,E) \to \Omega^1(X,E)$
   such that
   \begin{align*}
     \nabla (fs) = df \otimes s + f\nabla s,
   \end{align*}
-  for all $f\in \Omega^0_{\mathbb C}(X)$ and $s\in\Omega^0(X,E)$.
+  for all $f\in \mathscr C^\infty(X)$ and $s\in\Omega^0(X,E)$.
 \end{definition}
 
 \begin{example}\label{ex:connection_on_end}
@@ -1212,17 +1230,17 @@ vector bundles:
 
 Note that connections look very similar to Dolbeault operators.
 Indeed, via projections to the $(1,0)$ and $(0,1)$ parts, respectively,
-we obtain a splitting $\nabla = \nabla_{1,0} + \nabla_{0,1}$
+we obtain a splitting $\nabla = \nabla^{1,0} + \nabla^{0,1}$
 where
 \begin{align*}
-  \nabla_{0,1} : \Omega^0(X,E) \to \Omega^{0,1}(X,E).
+  \nabla^{0,1} : \Omega^0(X,E) \to \Omega^{0,1}(X,E).
 \end{align*}
 We may ask whether this is the same as a holomorphic structure on $E$:
 
 \begin{definition}
   Let $\dol_E$ be a Dolbeault operator on $E$.
   A connection $\nabla$ in $E$ is \emph{compatible with $\dol_E$}
-  if, and only if, $\nabla_{0,1} = \dol_E$. In general, we say
+  if, and only if, $\nabla^{0,1} = \dol_E$. In general, we say
   $\nabla$ is \emph{holomorphic} if it is compatible with some
   $\dol_E$.
 \end{definition}
@@ -1230,9 +1248,9 @@ We may ask whether this is the same as a holomorphic structure on $E$:
 Note that all connections $\nabla$ satisfy the Leibniz rule. This has
 two pleasant consequences. Firstly, it is straightforward to check that
 \begin{align*}
-  \nabla_{0,1} (fs) = \dol f\otimes s + f \nabla_{0,1} s.
+  \nabla^{0,1} (fs) = \dol f\otimes s + f \nabla^{0,1} s.
 \end{align*}
-Hence $\nabla$ is holomorphic if, and only if, $(\nabla_{0,1})^2 = 0$.
+Hence $\nabla$ is holomorphic if, and only if, $(\nabla^{0,1})^2 = 0$.
 Secondly, just as is the case for Dolbeault operators, each connection
 $\nabla$ extends to an operator
 \begin{align*}
@@ -1245,7 +1263,7 @@ composition
   \Omega^1(X,E) \xlongrightarrow{d^\nabla}
   \Omega^{2}(X,E)
 \end{align*}
-defines a 2-form $K(\nabla)\in\Omega^2(X,\End(E))$ called
+defines a 2-form $K^\nabla\in\Omega^2(X,\End(E))$ called
 the curvature of $\nabla$.
 
 \subsection{Unitary Connections}
@@ -1281,7 +1299,7 @@ Fortunately for us, it will always be possible to choose a metric:
 Fix such a metric $h$ on $E$. We are going to restrict our attention to
 connections that are compatible with this metric. We call such
 connections unitary because they correspond to connections
-of the unitary principal bundle corresponding to $(E,h)$.
+in the unitary principal bundle corresponding to $(E,h)$.
 
 \begin{definition}
   A connection $\nabla$ in $E$ is \emph{$h$-unitary}
@@ -1311,7 +1329,7 @@ As the connections are required to be unitary, their differences
 are given by sections of the real smooth bundle $\End(E,h)$ of
 skew-Hermitian endomorphisms. Just as the fibres of $\End(E)$
 are Lie algebras of the automorphism group $\Aut(E_x)\cong GL_r(\mathbb C)$,
-the fibres of $\End(E,h)$ are Lie algebras of $\Aut(E_x,h)\cong U(r)$.
+the fibres of $\End(E,h)$ are Lie algebras of $\Aut(E_x,h_x)\cong U(r)$.
 
 \begin{lemma}
   $A_\nabla(E,h)$ is an affine space modelled on
@@ -1339,23 +1357,22 @@ similarities between $A_\dol (E)$ and $A_\nabla(E,h)$ grow even more
 striking:
 
 \begin{lemma}\label{lem:real_vector_space_iso}
-  As $\mathscr C^\infty(C,\mathbb R)$-vector spaces,
+  As $\mathscr C^\infty(C,\mathbb R)$-modules,
   $\Omega^1_{\mathbb{R}}(C,\End(E,h))\cong\Omega^{0,1}(C,\End(E))$.
   \begin{proof}
     Now recall the isomorphism (\ref{eq:holomorphic_tangent_bundle}) of
     smooth vector bundles $T^* X \cong T^*X^{1,0}$. Composing with
     complex conjugation yields an isomorphism of real vector bundles
-    $T^*X \cong T^*_{0,1}$. Hence we have an $\mathbb{R}$-linear
-    isomorphism
+    $T^*X \cong T^*X^{0,1}$. Hence we have a
+    $\mathscr C^\infty(C,\mathbb{R})$-linear isomorphism
     \begin{align*}
       \Omega^1_{\mathbb{R}}(C,\End(E,h))
-      \cong \Gamma^\infty(C,T^*_{0,1}C \otimes_{\mathbb{R}}\End(E,h))
+      \cong \Gamma^\infty(C,T^*C^{0,1} \otimes_{\mathbb{R}}\End(E,h))
     \end{align*}
-    Noticing that $T_{0,1}^* C$ is a complex vector bundle
-    we find
+    Noticing that $T^* C^{0,1}$ is a complex vector bundle we find
     \begin{align*}
-      \Gamma^\infty(C,T^*_{0,1}C \otimes_{\mathbb{R}}\End(E,h))
-      \cong\Gamma^\infty(C,T^*_{0,1}C \otimes\End(E,h)_{\mathbb{C}}).
+      \Gamma^\infty(C,T^*C^{0,1} \otimes_{\mathbb{R}}\End(E,h))
+      \cong\Gamma^\infty(C,T^*C^{0,1} \otimes\End(E,h)_{\mathbb{C}}).
     \end{align*}
     Now the claim follows from the isomorphism of Lie algebras
     \begin{align*}
@@ -1430,8 +1447,6 @@ In fact, $g\cdot\nabla$ is almost immediately a holomorphic connection.
 One then sees that $g\cdot\nabla$ is unitary because
 $g$ and $\nabla$ are.
 
-\todo{complex structure on the affine space}
-
 \subsection{Higgs Connections}
 
 We have successfully viewed the space of holomorphic bundles
@@ -1440,7 +1455,7 @@ $\Omega^1_{\mathbb{R}}(C,\End(E,h))$. This is eventually going
 to help us introduce an infinite dimensional manifold structure on
 $A_\dol (E)$ and hence realise the quotient as such a manifold.
 Let us do the same for the space of Higgs
-bundles $A_\varphi(E)$. We are going to identify $A_\varphi$ with an affine
+bundles $A_\varphi(E)$. We are going to identify $A_\varphi(E)$ with an affine
 space modelled on $\Omega^1_{\mathbb{R}}(C,\End(E,h))^{\oplus 2}$.
 Once again fix a Hermitian metric $h$ on $E$.
 
@@ -1463,25 +1478,25 @@ $\Omega^1_{\mathbb{R}}(C,\End(E,h))\oplus\Omega_{\mathbb{R}}^1(C,\End(E,h))$. Us
 and the map given by (\ref{thm:chern_connection}) we have an inclusion
 of topological spaces
 \begin{align}\label{eq:higgs_chern_correspondence}
-  A_\varphi(E) \subseteq A_\dol (E) \times \Omega^{1,0}(\End(E)) \cong A_\varphi (E,h).
+  A_\varphi(E) \subseteq A_\dol (E) \times \Omega^{1,0}(\End(E)) \cong A_\Phi(E,h).
 \end{align}
-Note that in general $A_\varphi(E)$ and $A_\varphi (E,h)$ are not homeomorphic. In
+Note that in general $A_\varphi(E)$ and $A_\Phi(E,h)$ are not homeomorphic. In
 particular, a Higgs connection $(\nabla,\varphi)$ corresponds to
 a pair $(\dol_E,\varphi)$ where $\dol_E$ is a Dolbeault operator and
 $\varphi$ is a section in $\Omega^{1,0}(C,\End(E))$, not necessarily
 holomorphic. We will have to deal with this at a later stage.
 
-For now, observe that the group $G(E,h)$ also acts on $A_\varphi (E,h)$
+For now, observe that the group $G(E,h)$ also acts on $A_\Phi(E,h)$
 by conjugation:
 \begin{align*}
-  G(E,h) \times A_\varphi (E,h) & \to A_\varphi (E,h)                        \\
+  G(E,h) \times A_\Phi(E,h) & \to A_\Phi(E,h)                        \\
   (g,\nabla,\varphi)            & \mapsto (g\nabla{g}^{-1},g\varphi{g}^{-1})
 \end{align*}
 
 \section{Banach Manifolds}
 
 Our next goal is to equip the affine spaces of connections $A_\nabla(E,h)$
-and $A_\varphi (E,h)$ with manifold structures. Of course, both are affine
+and $A_\Phi(E,h)$ with manifold structures. Of course, both are affine
 spaces modelled on infinite dimensional vector spaces. In the next
 section we are going to require our infinite dimensional manifolds to
 be locally isomorphic to Banach spaces, rather than arbitrary
@@ -1493,22 +1508,22 @@ the space of smooth sections.
 \subsection{Sobolev Spaces}
 
 In many settings, the Banach space completions of choice are the
-$L^p$-spaces. While these spaces are a little bit easier to deal with,
+$L^2$-spaces. While these spaces are a little bit easier to deal with,
 they turn out to be too generous for our application. We are going to
 consider differential operators between the spaces we construct,
 i.e. maps involving differentiation. In order for differential operators
 to be well defined, we need to make sure that the points of the space
 have sufficiently many derivatives. Hence the Banach space completions
 that we are going to use, in some sense, contain sections with a
-certain number of derivatives, all of which in some $L^p$.
+certain number of derivatives, all of which in $L^2$.
 
 Consider the following setting. Let $X$ be a compact
 Riemannian manifold $X$ of dimension $n$, let $E$ be a smooth complex
 bundle on $X$ with Hermitian metric $h$, let $\nabla$ be a $h$-unitary
-connection in $E$, and let $\ell\geq 0$ and $1<p<\infty$ be integers.
+connection in $E$, and let $\ell\geq 0$.
 Here we are going to think of $\nabla$ as a derivative of sections and
-define a space $W_{p,\ell}(X,E)$ which may be thought of as the space of
-sections $X\to E$ with $\ell$ derivatives, all of which in $L^p$. As
+define a space $W_{2,\ell}(X,E)$ which may be thought of as the space of
+sections $X\to E$ with $\ell$ derivatives, all of which in $L^2$. As
 is the case with many of the concepts we encounter throughout this paper,
 these Sobolev spaces are interesting geometric objects to
 contemplate but we are going to use them as a tool. The main
@@ -1525,33 +1540,33 @@ $\Gamma^\infty(X,E)$:
 
 \begin{definition}
   Let $\nabla$ be a $h$-unitary connection in $E$.
-  The \emph{$(p,\ell)$-Sobolev norm} with respect to $\nabla$ on
+  The \emph{$(2,\ell)$-Sobolev norm} with respect to $\nabla$ on
   $\Gamma^\infty(X,E)$ by
   \begin{align*}
-    \Vert s\Vert_{p,\ell}^\nabla := \left(
-    \sum_{i=0}^\ell \int_X \Vert \nabla^i s \Vert^p\:\text{vol}_X
-    \right)^{1/p}.
+    \Vert s\Vert_{2,\ell}^\nabla := \left(
+    \sum_{i=0}^\ell \int_X \Vert \nabla^i s \Vert^2\:\text{vol}_X
+    \right)^{1/2}.
   \end{align*}
 \end{definition}
 
 Observe that Sobolev norms generalise $L^p$ norms. In particular,
-we have $\Vert\cdot\Vert^\nabla_{p,0} = \Vert\cdot\Vert_{L^p}$.
+we have $\Vert\cdot\Vert^\nabla_{2,0} = \Vert\cdot\Vert_{L^2}$.
 Further, the norm depends on the choice of connection $\nabla$. Of
 course, we do not want moduli spaces to have the same dependency.
 Indeed, e.g. by~\cite[Corollary 7.3]{shubin2001}, we have the following:
 \begin{lemma}
   Let $\nabla$ and $\nabla'$ be $h$-unitary connections in $E$. Then the
-  norms $\Vert\cdot\Vert_{p,\ell}^\nabla$ and
-  $\Vert\cdot\Vert_{p,\ell}^{\nabla'}$ are equivalent.
+  norms $\Vert\cdot\Vert_{2,\ell}^\nabla$ and
+  $\Vert\cdot\Vert_{2,\ell}^{\nabla'}$ are equivalent.
 \end{lemma}
 
 Therefore we are justified in defining a completion that does not depend
 on the connection:
 
 \begin{definition}
-  The \emph{Sobolev space} $W_{p,\ell}(X,E)$ is the Banach completion of
+  The \emph{Sobolev space} $W_{2,\ell}(X,E)$ is the Banach completion of
   $\Gamma^\infty(X,E)$ with respect to the norm
-  $\Vert\cdot\Vert_{p,\ell}^\nabla$ for any $h$-unitary connection
+  $\Vert\cdot\Vert_{2,\ell}^\nabla$ for any $h$-unitary connection
   $\nabla$ in $E$.
 \end{definition}
 
@@ -1602,7 +1617,7 @@ Consider a $\mathscr C^\infty(X)$-linear map
 If we are given a chart $U\ni x$ in $X$ such that $P$ maps sections
 $U\to E$ to sections $U\to F$ then $P$ is given by
 \begin{align}\label{eq:local_diff_operator}
-  \restrict{P}{U}(s) = \sum_{|I|\leq m} f_I \partial^I
+  \restrict{P}{U} = \sum_{|I|\leq m} f_I \partial^I 
 \end{align}
 where, for each multi index $I=\{i_1,\ldots,i_{m'}\}$, we have
 $f_I\in\Gamma^\infty(U,\Hom(E,F))$, $|I| := m'$, and we write
@@ -1613,8 +1628,8 @@ If it is possible to express $P$ in this way everywhere,
 the we say that $P$ is a differential operator:
 
 \begin{definition}\label{def:diff_operator}
-  Let $E$ and $F$ be smooth bundles on $X$. A \emph{differential
-    operator $P:E\to F$ of order $m$} is a $\mathscr C^\infty(X)$-linear map
+  Let $E$ and $F$ be real smooth bundles on $X$. A \emph{differential
+    operator $P:E\to F$ of order $m$} is a $\mathbb R$-linear map
   \begin{align*}
     P : \Gamma^\infty(X,E) \to \Gamma^\infty(X,F)
   \end{align*}
@@ -1671,7 +1686,7 @@ the we say that $P$ is a differential operator:
       = \sum_k \partial_k fdx^k\wedge dx^i\otimes A^j
       - fdx^i \wedge \sum_{mn} d^\nabla_{jmn}dx^m\otimes A^n
     \end{align}
-    where $d^\nabla_{ijk}\in \mathscr C^\infty(X)$ such that
+    where $d^\nabla_{ijk}\in \mathscr C^\infty(X,\mathbb R)$ such that
     $d^\nabla(A^i) = \sum_{jk}d^\nabla_{ijk}dx^j\otimes A^k$. Both
     $\nabla$ (\ref{eq:nabla_diff_operator}) and $\nabla^\dagger$
     (\ref{eq:nabla_adjoint}) are differential operators of order 1 hence
@@ -1683,6 +1698,8 @@ It turns out that all differential operators extend to maps of Sobolev
 completions. Of course it is intuitively clear that a differential
 operator of order $m$ involves taking $m$ derivatives and hence
 it can take an element of $W_{2,\ell}$ at most to $W_{2,\ell-m}$.
+Fortunately, it is well-known (e.g. \cite[Proposition 3.8.4]{bc2009})
+that this is always possible:
 
 \begin{theorem}
   Let $P:E\to F$ be a differential operator of order $m$ and
@@ -1690,9 +1707,6 @@ it can take an element of $W_{2,\ell}$ at most to $W_{2,\ell-m}$.
   \begin{align}\label{eq:fredholm_extension}
     P_\ell : W_{2,\ell+m}(X,E) \to W_{2,\ell}(X,F).
   \end{align}
-  \begin{proof}
-    See~\cite[{Proposition 3.8.4}]{bc2009}.
-  \end{proof}
 \end{theorem}
 
 \subsection{Banach Manifolds}
@@ -1739,12 +1753,12 @@ as~\cite[Chapter 7]{kahn1982} or~\cite{bc2009}.
   the affine space (\ref{eq:Higgs_connections_space}) of Higgs connections also
   extends to a Banach manifold
   \begin{align*}
-    A_\varphi(E,h)_\ell := A_\varphi(E,h) + \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell
+    A_\Phi(E,h)_\ell := A_\Phi(E,h) + \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell
     \oplus \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell
   \end{align*}
   with the obvious cotangent space at $(\nabla,\varphi)$:
   \begin{align*}
-    T^*_{\nabla,\varphi} A_\varphi(E,h)_\ell
+    T^*_{\nabla,\varphi} A_\Phi(E,h)_\ell
     = \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell
     \oplus \Omega^1_{\mathbb{R}}(C,\End(E,h))_\ell
   \end{align*}
@@ -1772,21 +1786,21 @@ Having obtained a manifold structure on the affine spaces and the groups
 that act on them, we are in a great position to take quotients to construct
 the analytic moduli spaces of holomorphic bundles that we are after. To do this,
 one needs to ensure that the group actions are sufficiently well-behaved. Moreover,
-we need to ensure that the actions on affine spaces extend to a Banach Lie group
-action on Banach manifolds.
+we need to verify that the actions on the affine spaces extend to Banach Lie group
+actions on the corresponding Banach manifolds.
 
 We will see which properties of our actions are necessary to
 obtain a geometrically well-behaved quotient. A lot of work will go into justifying why
 these properties are attained. In some cases we will have to
 restrict our moduli spaces to avoid special cases while in others
-the theory of elliptic operators is going to be indispensable.
+an application of the theory of elliptic operators will suffice.
 
 \subsection{Proper and Free Group Actions}
 
 Before we extend groups and actions to the realm of infinite dimensional
 Banach spaces, let us study the group actions that we have thus
 far encountered a little more closely. Later we are going to require our
-actions to be free and proper. Let us recall what that means.
+actions to be free and proper. We begin by recalling what that means.
 
 Properness is a topological property. That is, it applies only to
 topological groups:
@@ -1827,18 +1841,19 @@ topological groups:
 \end{example}
 
 \begin{example}\label{ex:higgs_proper_action}
-  The action of $U(E,h)$ on $A_\varphi (E,h)$ is proper.
-  \begin{proof}
-    We have constructed $A_\varphi(E,h)$, essentially, by copying $A_\nabla(E,h)$
+  The action of $U(E,h)$ on $A_\Phi(E,h)$ is proper.
+  \begin{proof}[Proof idea]
+    We have constructed $A_\Phi(E,h)$, essentially, by copying $A_\nabla(E,h)$
     and the action on this additional copy is identical. Hence the map
     $(\sigma,\pi)$ is a product of proper maps and thus proper.
   \end{proof}
 \end{example}
 
-Being free is not a topological property, i.e. any action of any group on any
-set may be free. Nonetheless, it is particularly important in a geometric
-setting as it ensures that the orbits are homogeneous and hence all points in
-the quotient are locally indistinguishable, as one expects from manifolds.
+On the other hand, being free is not a topological property, i.e. any action of
+any group on any set may be free. Nonetheless, it is particularly important in a
+geometric setting as it ensures that the orbits are homogeneous and hence all
+points in the quotient are locally indistinguishable, as one expects from
+manifolds.
 
 \begin{definition}
   An action $\sigma : G\times X\to X$ is \emph{free} if, for all
@@ -1849,7 +1864,7 @@ the quotient are locally indistinguishable, as one expects from manifolds.
   Consider the action of $U(E,h)$ on $A_\nabla(E)$. This is not a free action
   because scalar multiplication commutes with the connection. That is,
   for all $\lambda\in U(1)$, $g\in U(E,h)$, and $\nabla\in A_\nabla(E,h)$,
-  it holds that $\lambda g\cdot \nabla = \nabla$. This flaw is easily fixed,
+  it holds that $\lambda g\cdot \nabla = g\cdot\nabla$. This flaw is easily fixed,
   however. In fact, we immediately have an action of
   \begin{align*}
     G(E,h) := U(E,h) / U(1)
@@ -1861,7 +1876,7 @@ the quotient are locally indistinguishable, as one expects from manifolds.
 
 \begin{example}\label{ex:not_free_double}
   The fact that the $G(E,h)$ action on $A_\nabla(E,h)$ is not free does not
-  immediately imply that the action on $A_\varphi(E,h)$ is not either. However,
+  immediately imply that the action on $A_\Phi(E,h)$ is not either. However,
   similar reasoning shows why it cannot be free: If there is a non-trivial
   proper subbundle $E'\subseteq E$ that is preserved by $\nabla$ and $\varphi$,
   respectively, then an automorphism $g\in G(E,h)$ need only be trivial
@@ -1890,7 +1905,7 @@ corresponding actions on Banach manifolds.
     whenever $\ell > k/2$. \cite[Theorem 6.1]{behzadan2021}
     Note that matrix multiplication consists of addition and
     pointwise multiplication with $k=1$. Moreover, recall that both
-    the base space $C$ and the unitary gauge group $U(E,h)$ is compact.
+    the base space $C$ and the unitary gauge group $U(E,h)$ are compact.
     Using these facts, one may verify locally that the product $gh$ is indeed $W_{2,\ell}$.
   \end{proof}
 \end{example}
@@ -1898,7 +1913,7 @@ corresponding actions on Banach manifolds.
 Whenever we refer to the group $U(E,h)_\ell$ we are implicitly going to
 assume that $\ell$ was chosen sufficiently large for Sobolev multiplication
 to work.
-In complete analogy to the finite dimensional case, the tangent space
+Further, in complete analogy to the finite dimensional case, the tangent space
 at the identity of a Banach Lie group may be equipped with a Lie bracket
 and hence is called the Lie algebra of the group.
 
@@ -1911,7 +1926,7 @@ is a Banach Lie group action if, and only if, it is given by a
 smooth map. Here we use the fact that the product of Banach manifolds
 has a natural Banach manifold structure.
 
-We observe that Sobolev completions allow us to lift group
+Next we observe that Sobolev completions allow us to lift group
 actions:
 
 \begin{example}
@@ -1928,10 +1943,10 @@ actions:
   \end{align*}
   Hence we require $g\in U(E,h)_{\ell + 1}$ to make sure that $g\cdot\nabla\in A_\nabla(E,h)_\ell$.
   Analogously, we have a proper Banach Lie group action of $U(E,h)_{\ell+1}$
-  on $A_\varphi (E,h)_\ell$.
+  on $A_\Phi(E,h)_\ell$.
 \end{example}
 
-All of our recent discussions about proper and free actions, Sobolev
+All of our latest discussions about proper and free actions, Sobolev
 completions, and Banach manifolds are motivated by the next theorem.
 In particular, it will allow us to construct moduli spaces as, possibly
 infinite dimensional, Banach manifolds:
@@ -1942,7 +1957,7 @@ infinite dimensional, Banach manifolds:
   $T_x(G\cdot x) \subseteq T_x X$ is closed and complemented then
   $X/G$ is a Banach manifold and $T_x X/T_x (G\cdot x) \cong T_x(X/G)$
   for all $x\in X$.
-  \begin{proof}
+  \begin{proof}[Proof idea]
     The idea is to construct a slice at each point $x\in X$, i.e. a submanifold
     $x\in S_x\subseteq X$ such that $T_x X = T_xS_x \oplus T_x(G\cdot x)$. A slice is
     what induces the manifold structure of $X/G$ at $x$. More preciesley, if a slice
@@ -1963,7 +1978,7 @@ infinite dimensional, Banach manifolds:
 
 Before we consider examples, we have two remarks about the assumptions of the theorem,
 in particular about the condition that the tangent space of the orbit be closed and
-complemented. Firstly, note that $G\cdot x \subseteq X$ is closed then the tangent
+complemented. Firstly, note that if $G\cdot x \subseteq X$ is closed then the tangent
 space is a closed subspace. This follows by considering trivialisations around $g\cdot x$
 in both $G\cdot x$ and $X$ where it is clear that $G\cdot x$ must be modelled on a closed
 subspace of the tangent space of $X$. Secondly, as the Sobolev completions with $p=2$ are
@@ -1988,10 +2003,10 @@ Hilbert spaces, all closed subspaces in our examples will automatically be compl
 
 Unfortunately, we are not yet ready to apply the theorem \ref{thm:banach_quotient} to
 the actions of $G(E,h)_{\ell+1}$ on $A_\nabla(E,h)_\ell$ and
-$A_\varphi(E,h)_\ell$ as they are not free. Moreover, the tangent spaces
-may fail to be closed. We would like to consider an example of this but
-doing so turns out to be difficult. From algebraic considerations that the bundles
-corresponding to $\mathscr O(-m)\oplus\mathscr O(m)$ for $m\geq 1$ ought
+$A_\Phi(E,h)_\ell$ as they are not free. Moreover, the tangent spaces
+may fail to be closed. We would like to consider an example of the latter,
+but doing so turns out to be difficult. It is going to follow from algebraic
+considerations that the bundles corresponding to $\mathscr O(-m)\oplus\mathscr O(m)$ for $m\geq 1$ ought
 to yield a connection that has a non-closed tangent space to its orbit.
 The difficulty is going to arise in showing that the corresponding subspace
 of the Hilbert space $\Omega^1_{\mathbb R}(C,\End(E,h))_\ell$ is non-closed,
@@ -2014,7 +2029,7 @@ any of the many introductory texts such as \cite{hance2014} and
 \cite[Chapter 6]{warner1983}.
 
 Recall the notion of a differential operator \ref{def:diff_operator}.
-What we are going to require is the the matrix defined by the
+What we are going to require is that the matrix defined by the
 $f_I$ in (\ref{eq:local_diff_operator}) is invertible.
 As homogeniety is required to respect change of coordinates,
 we are only going to care about top-order terms. One way to make all
@@ -2025,7 +2040,7 @@ The following is a more algebraic condition:
 
 \begin{definition}\label{def:elliptic_operator}
   A differential operator $P:E\to F$ is \emph{elliptic} if
-  $\rank E = \rank F$ and, for all $x\in X$, all $s\in\Omega^0_{\mathbb C}(E)$,
+  $\rank E = \rank F$ and, for all $x\in X$, all $s\in\Omega^0_{\mathbb R}(X,E)$,
   and all $f\in \mathscr C^\infty(X,\mathbb R)$ such that $s(x) \neq 0$,
   $f(x) = 0$, and $df(x) \neq 0$, it holds that $P(f^m s)(x) \neq 0$.
 \end{definition}
@@ -2143,11 +2158,11 @@ restrict the Banach spaces we are studying:
 \begin{definition}
   A connection $\nabla\in A_\nabla(E,h)$ is \emph{harmonic} if
   \begin{align}\label{eq:yang_mills_condition}
-    K(\nabla) \in i\mathcal H^2(C)\otimes I
+    K^\nabla \in i\mathcal H^2(C)\otimes I
   \end{align}
   where $I\in\Gamma(C,\End(E))$ is the identity section.
   I.e. there exists a harmonic form $\alpha\in\mathcal H^2(C)$ such
-  that $K(\nabla) = i\alpha\otimes I$ in $\Omega^2(C,\End(E))$.
+  that $K^\nabla = i\alpha\otimes I$ in $\Omega^2(C,\End(E))$.
 \end{definition}
 
 Such harmonic connections are usually called Einstein or Yang-Mills
@@ -2156,8 +2171,8 @@ Consider the space $A_\nabla^{ps}(E,h)$ of harmonic connections.
 We observe that gauge transformations commute with taking curvatures and
 that $I\in\End(E)$ is gauge-invariant. Thus, for $\nabla\in A_\nabla^{ps}(E,h)$,
 \begin{align*}
-  K(g\cdot\nabla)
-  = g\cdot K(\nabla)
+  K^{g\cdot\nabla}
+  = g\cdot K^\nabla
   = i\alpha\otimes gIg^{-1}
   = i\alpha\otimes I,
 \end{align*}
@@ -2174,7 +2189,7 @@ one may easily verify to be proper.
     to consider is the moment map for the $G(E,h)_{\ell+1}$-action
     on $A_\nabla(E,h)_\ell$ considered as a symplectic
     Banach manifold, which we have not introduced for brevity.
-    \cite[Proposition 5.8]{neitzke2021}
+    See \cite[Proposition 5.8]{neitzke2021}.
   \end{proof}
 \end{lemma}
 Just as in the finite dimensional case, the proper $G(E,h)_{\ell+1}$
@@ -2186,7 +2201,7 @@ More importantly, we have the following:
     T_\nabla(G(E,h)_{\ell+1}\cdot\nabla) \subseteq T_\nabla A_\nabla(E,h)_\ell
   \end{align*}
   is a closed subspace.
-  \begin{proof}
+  \begin{proof}[Proof idea]
     Following \cite[77-78]{neitzke2021}.
     The key observation is that, as a subspace of
     $\Omega^1(C,\End(E,h))$,
@@ -2198,7 +2213,7 @@ More importantly, we have the following:
       \rho_\nabla(A) := \restrict{\frac{d}{dt}}{t=0} \exp(tA)\cdot\nabla.
     \end{align*}
     This linearises the action and determines the embedding
-    $T_\nabla G(E,h)_{\ell+1}\subseteq T_\nabla \mathcal A(E,h)_\ell$.
+    $T_\nabla G(E,h)_{\ell+1}\subseteq T_\nabla A_\nabla(E,h)_\ell$.
     Direct calculation shows $\rho_\nabla(A) = \nabla A$
     so, in particular,
     \begin{align*}
@@ -2239,43 +2254,43 @@ More importantly, we have the following:
   \end{proof}
 \end{lemma}
 
-Of course, we have to find a similar harmonicity condition for
-Higgs bundles. To this end, recall the definition
-of the 2-form $K(\nabla) := d^\nabla \circ \nabla$
-in $\Omega^2(C,\End(E))$.
+We have a similar harmonicity condition for
+Higgs bundles.
 
 \begin{definition}
-  A Higgs connection $(\nabla,\varphi)\in A_\varphi(E,h)$
+  A Higgs connection $(\nabla,\Phi)\in A_\Phi(E,h)$
   is \emph{harmonic} if
   \begin{align}\label{eq:Hitchin_equations}
     \nabla_{0,1}\varphi = 0,\hspace{1cm}
-    K(\nabla) + [\varphi,\varphi^\dagger] \in i\mathcal H^2(X)\otimes I
+    K^\nabla + [\varphi,\varphi^\dagger] \in i\mathcal H^2(X)\otimes I
   \end{align}
   for some $\alpha\in\mathcal H^2(C)$ where we write
-  $\varphi = \varphi - \varphi^\dagger$ as in \ref{lem:real_vector_space_iso}.
+  $\Phi = \varphi - \varphi^\dagger$ as in \ref{lem:real_vector_space_iso}.
 \end{definition}
 
 The equations (\ref{eq:Hitchin_equations}) are called Hitchin equations
-so one may call a harmonic Higgs connection Hitchin. The first equation
+so one may call a Higgs connection satisfying these equations Hitchin.
+The first equation
 in (\ref{eq:Hitchin_equations}) merely says that $\varphi$
 corresponds to a holomorphic Higgs field on the holomorphic bundle
-$(E,\nabla_{0,1})$.  The second equation is a harmonicity condition generalising
+$(E,\nabla^{0,1})$.  The second equation is a harmonicity condition generalising
 \ref{eq:yang_mills_condition}. In particular, if $\varphi = 0$ then $\varphi =
   \varphi^\dagger$ so $(\nabla,0)$ is harmonic if, and only if, $\nabla$ is
-harmonic.
+harmonic. That is, the immersion $A_\nabla(E,h)\inc A_\Phi(E,h)$
+restricts to $A^{ps}_\nabla(E,h)\inc A^{ps}_\Phi(E,h)$.
 
-Now consider the space $A_\varphi^{ps}(E,h)$ of harmonic Higgs connections.
-This once again gives rise to a Banach manifold $A_\varphi^{ps}(E,h)_\ell$
+Now consider the space $A_\Phi^{ps}(E,h)$ of harmonic Higgs connections.
+This once again gives rise to a Banach manifold $A_\Phi^{ps}(E,h)_\ell$
 and, for sufficiently large $\ell$, an action by $G(E,h)_{\ell+1}$.
 
 \begin{lemma}
-  Let $(\nabla,\varphi)\in A_\varphi^{ps}(E,h)_\ell$. Then the tangent space
+  Let $(\nabla,\varphi)\in A_\Phi^{ps}(E,h)_\ell$. Then the tangent space
   \begin{align*}
-    T_{\nabla,\varphi}(G(E,h)_{\ell+1}\cdot(\nabla,\varphi))
-    \subseteq T_{\nabla,\varphi}A_{\nabla,\varphi}^{ps}(E,h)_\ell.
+    T_{\nabla,\Phi}(G(E,h)_{\ell+1}\cdot(\nabla,\Phi))
+    \subseteq T_{\nabla,\Phi}A_{\nabla,\Phi}^{ps}(E,h)_\ell.
   \end{align*}
   is a closed subspace.
-  \begin{proof}
+  \begin{proof}[Proof idea]
     This is naturally similar to \ref{lem:holomorphic_tangent_is_closed}.
     The main difference is that one starts out by considering a chain
     complex
@@ -2298,11 +2313,11 @@ and, for sufficiently large $\ell$, an action by $G(E,h)_{\ell+1}$.
   \end{proof}
 \end{lemma}
 
-Note that in $A^{ps}_\dol(E,h)_\ell$ and $A^{ps}_\varphi(E,h)_\ell$ slices for the
+Note that, in $A^{ps}_\nabla(E,h)_\ell$ and $A^{ps}_\Phi(E,h)_\ell$, slices for the
 $G(E,h)_{\ell+1}$-action exist everywhere. Hence the quotients
 \begin{align*}
   M^{ps}_\nabla(E,h) := A^{ps}_\nabla(E,h)_\ell / G(E,h)_{\ell+1},\hspace{1cm}
-  M^{ps}_\varphi(E,h) := A^{ps}_\varphi(E,h)_\ell / G(E,h)_{\ell+1}
+  M^{ps}_\Phi(E,h) := A^{ps}_\Phi(E,h)_\ell / G(E,h)_{\ell+1}
 \end{align*}
 are locally manifolds. Thus one might refer to these as the analytic
 moduli spaces of unitary connections. We are, however, going to go
@@ -2311,10 +2326,10 @@ one step further.
 \subsection{Reducible Connections}
 
 Let us now ensure that gauge transformations act freely on
-our space of connections. We are going to restrict $A^{ps}_\nabla$ and
-$A^{ps}_\varphi$ further to ensure that this is the case. Of course we will have
-to deal with the loss of information that this entails at a later stage.
-
+our space of connections. To achieve this, we are going to 
+restrict $A^{ps}_\nabla$ and $A^{ps}_\Phi$ further. Of course
+we will have to deal with the loss of information that this entails
+at a later stage.
 In light of our observations in \ref{ex:not_free} and \ref{ex:not_free_double}
 we make the following definition:
 
@@ -2325,9 +2340,9 @@ we make the following definition:
     \item A connection $\nabla\in A_\nabla (E,h)$ is \emph{reducible} if there exists
           a non-trivial proper subbundle $E'\subseteq E$ such that $\nabla$ restricts
           to a connection on $E'$.
-    \item Similarly, a Higgs connection $(\nabla,\varphi)\in A_\varphi(E,h)$ is
+    \item Similarly, a Higgs connection $(\nabla,\Phi)\in A_\Phi(E,h)$ is
           \emph{reducible} if there exists a non-trivial proper subbundle $E'\subseteq E$
-          such that $(\nabla,\varphi)$ restricts to a Higgs connection on $E'$.
+          such that $(\nabla,\Phi)$ restricts to a Higgs connection on $E'$.
   \end{itemize}
 \end{definition}
 
@@ -2336,7 +2351,7 @@ consider the spaces of irreducible harmonic connections and their Sobolev
 completions
 \begin{align*}
   A^s_\nabla(E,h)_\ell \subseteq A^{ps}_\nabla(E,h)_\ell,\hspace{1cm}
-  A^s_\varphi(E,h)_\ell \subseteq A^{ps}_\varphi(E,h)_\ell.
+  A^s_\Phi(E,h)_\ell \subseteq A^{ps}_\Phi(E,h)_\ell.
 \end{align*}
 Indeed, this suffices to make the $G(E,h)_{\ell+1}$ action free.
 
@@ -2359,19 +2374,19 @@ Indeed, this suffices to make the $G(E,h)_{\ell+1}$ action free.
 An analogous argument also shows:
 
 \begin{lemma}
-  The action of $G(E,h)_{\ell+1}$ on $A_\varphi(E,h)_\ell$
-  restricts to a free action on $A^{s}_\nabla(E,h)_\ell$.
+  The action of $G(E,h)_{\ell+1}$ on $A_\Phi(E,h)_\ell$
+  restricts to a free action on $A^{s}_\Phi(E,h)_\ell$.
 \end{lemma}
 
 In \ref{table:unitary_connection_spaces} we have summarised all the spaces
 of connections that we have thus far defined.
-\begin{table}[h]
+\begin{table}
   \begin{center}
     \begin{tabular}{|l|lllll|}
       \hline
       \textbf{Elements}   & Proper Action   &             & \begin{tabular}[c]{@{}l@{}}Closed \&\\ Complemented\\ Tangent Space\end{tabular} &             & Free Action       \\ \hline
       Unitary connections & $A_\nabla(E,h)$ & $\supseteq$ & $A^{ps}_\nabla(E,h)$                                                             & $\supseteq$ & $A^s_\nabla(E,h)$ \\ \hline
-      Doubled connections & $A_\varphi(E,h)$   & $\supseteq$ & $A^{ps}_\varphi(E,h)$                                                               & $\supseteq$ & $A^s_\varphi(E,h)$   \\ \hline
+      Higgs connections & $A_\Phi(E,h)$   & $\supseteq$ & $A^{ps}_\varphi(E,h)$                                                               & $\supseteq$ & $A^s_\varphi(E,h)$   \\ \hline
     \end{tabular}
   \end{center}
   \caption{Spaces of unitary holomorphic connections and their group actions.}
@@ -2383,16 +2398,17 @@ sense of \ref{ex:unitary_banach_lie_group}. Define the moduli spaces
 of irreducible harmonic connections:
 \begin{align*}
   M^s_\nabla(E,h) := A^s_\nabla(E,h)_\ell/G(E,h)_{\ell + 1}, \hspace{1cm}
-  M^s_\varphi(E,h) := A^s_\varphi(E,h)_\ell/G(E,h)_{\ell + 1}.
+  M^s_\Phi(E,h) := A^s_\Phi(E,h)_\ell/G(E,h)_{\ell + 1}.
 \end{align*}
-Note that, as the tangent space of $M^s_\nabla(E,h)$ is
+Note that the tangent space of $M^s_\nabla(E,h)$ is
 contained in the kernel of the operator $D^\nabla_{\ell-1}$ via
 \begin{align*}
   T_\nabla A^s_\nabla(E,h)/G(E,h)_{\ell+1}
   = \im(d^\nabla_\ell) \subseteq \ker(d^\nabla_{\ell-1})
   \subseteq \ker(D^\nabla_{\ell-1})
 \end{align*}
-In particular, it follows from (\ref{eq:independence_of_l}) that
+In particular, $D^\nabla$ is elliptic so $D^\nabla_{\ell-1}$ is
+Fredholm so it follows from (\ref{eq:independence_of_l}) that
 the tangent space is independent of the choice of $\ell$.
 
 \subsection{On Symplectic Quotients}\label{sec:symplectic_quotients}
@@ -2405,7 +2421,7 @@ not at all clear why the harmonicity conditions on unitary connections and
 Higgs connections are obvious choices. This question may be
 answered by considering the quotients taken as K\"ahler or Hyperk\"ahler.
 
-While we leave details to other sources,
+While we leave details to other sources (e.g. \cite{thomas2006} and \cite{neitzke2021}),
 we outline the general principles. The key idea of taking such quotients is to
 construct a moment map corresponding to the relevant group action.
 The existence of a moment map ensures that the group action respects
@@ -2424,26 +2440,26 @@ for all $A\in\mathfrak g$ where $\langle \cdot,\cdot\rangle : \mathfrak g^* \tim
 is the natural pairing and $\iota_{\sigma(A)} : \Omega^2_{\mathbb R}(X)\to \Omega^1_{\mathbb R}(X)$
 is the contraction by the vector field $\sigma(A)$. To take a
 quotient $X/G$ then is to consider the topological quotient $\mu^{-1}(0)/G$.
-Assuming some reasonable conditions, similar to the ones
+Under some reasonable conditions similar to the ones
 in the Banach manifold quotient theorem \ref{thm:banach_quotient},
 this quotient may be endowed with a symplectic structure.
 
 One may choose a symplectic form on $A_\nabla(E,h)_\ell$ and
 define a moment map for the action of $G(E,h)_{\ell+1}$ such that the
 pre-image $\mu^{-1}(0)$ contains precisely the harmonic connections.
-Noting that, once a symplectic structure is chosen, the moment map
-is essentially unique os it is indeed natural to focus on harmonic
+Noting that, once a symplectic structure has been chosen on $A_\nabla(E,h)_\ell$,
+the moment map is essentially unique, it is indeed natural to focus on harmonic
 connections to construct the moduli space.
 
 For the case of Higgs bundles, the picture is a little more complicated.
 There are three distinct choices of symplectic structure on
-$A_\varphi(E,h)_\ell$ hence the standard symplectic quotient is non-canonical.
+$A_\Phi(E,h)_\ell$ hence the standard symplectic quotient is non-canonical.
 To get around this, one requires all three moment maps to vanish. It is
 precisely this condition that yields the Hitchin equations that
 define harmonic Higgs connections.
 
-Considering the complex structures on $A_\nabla$ and $A_\varphi$ induced
-by the real isomorphism $A_\dol\cong A_\nabla$, the quotients
+Considering the complex structures on $A_\nabla(E,h)$ and $A_\Phi(E,h)$ induced
+by the real isomorphism $A_\dol(E)\cong A_\nabla(E,h)$, the quotients
 thus constructed yield K\"ahler and Hyperk\"ahler manifolds, respectively.
 
 \section{Properties of the Analytic Moduli Spaces}\label{sec:properties_of_analytic_spaces}
@@ -2474,7 +2490,7 @@ i.e. a geometric space whose points are isomorphism classes of
 holomorphic bundles. What we did instead was observe that the space
 of holomorphic bundles is isomorphic to the space of holomorphic unitary
 connections and that the respective actions agree. In order to realise
-the quotient of the latter into a Banach manifold, we had to discard
+the quotient of the latter as a Banach manifold, we had to discard
 some points. Moving back to the original problem thus raises
 the question: Which bundles did we lose in the process?
 
@@ -2532,7 +2548,7 @@ that it may be derived from:
   \item The \emph{Kempf-Ness theorem} \cite{kn1979} gives a homeomorphism between
         symplectic quotients by compact groups and quotients by their
         complexification in the sense of geometric invariant theory (GIT). In
-        \ref{sec:symplectic_quotients} we have briefly
+        \ref{sec:symplectic_quotients} we briefly
         explained how to view $M^s_\nabla(E)$ as a symplectic quotient
         and in the next chapter we are going to show how to regard
         $M^s_\dol(E)$ as a GIT quotient.
@@ -2601,22 +2617,23 @@ the tangent space:
       0 = \dol_t^2(s) = (\dol_E \alpha_t)(s) + (\alpha_t\wedge\alpha_t)(s)
     \end{align*}
     Thus, writing $\alpha = \restrict{\partial_t\alpha_t}{t=0}$,
-    we have $\dol_E \alpha = 0$. Now, if $\dol_t$ is given by
+    we have $\dol_E \alpha = 0$. Now, if $\dol_t$ is contained in
+    the orbit $GL(E)\cdot\dol_E$ then there is a family
     a family $f : (-\delta,\delta) \to GL(E)$ with $f_0 = I$
-    then one finds $\dol_t = \dol_E + f^{-1}_t \circ \dol_E f_t$.
+    such that $\dol_t = \dol_E + f^{-1}_t \circ \dol_E f_t$.
     Hence $\alpha = \dol_E f$.  Thus the directions normal to
     the $GL(E)$-action at $\dol_E$ are given by
     \begin{align*}
       \frac{\ker(\dol_E : \Omega^{0,1}(E) \to \Omega^{0,2}(E))}{\im(\dol_E : \Omega^0(E)\to\Omega^{0,1}(E))}
-      = H^{0,1}(C,\End(E,\dol_E))
+      = H^{0,1}(C,\End(E,\dol_E)),
     \end{align*}
     as required.
   \end{proof}
 \end{theorem}
 
 It is worth noting that the proof does not rely on $M^s_\dol(E)$ being a manifold
-at all. Indeed, a similar calculation works for a moduli space that is not
-in general a manifold, yet it makes sense to classify curves passing through a point.
+at all. In particular, the proof only uses local properties meaning
+that it may be applied to a wider range of topological spaces.
 
 Having calculated the tangent space, we may observe two key consequences.
 Firstly, we see that the moduli space is indeed a complex manifold in the usual sense:
@@ -2628,13 +2645,13 @@ Firstly, we see that the moduli space is indeed a complex manifold in the usual 
     \dim_{\mathbb{C}} M^s_\dol(E) = (g-1)r^2 + 1.
   \end{align*}
   \begin{proof}
-    By Dolbeault's theorem we may express the tangent space in terms of holomorphic
+    By Dolbeault's theorem \ref{thm:dolbeault} we may express the tangent space in terms of holomorphic
     sections as
     \begin{align*}
       T_{[\dol_E]}M^s_\dol(E) = \Gamma(C,\End(E,\dol_E) \otimes K).
     \end{align*}
     The space of holomorphic sections of a holomorphic vector bundle is finite dimensional,
-    hence so is $M^s_\dol$. Moreover, the tangent space naturally is a complex vector
+    hence so is $M^s_\dol(E)$. Moreover, the tangent space naturally is a complex vector
     space and hence we have a natural complex structure on $M^s_\dol(E)$.
 
     One may now calculate
@@ -2645,17 +2662,11 @@ Firstly, we see that the moduli space is indeed a complex manifold in the usual 
        & = r^2(g-1)+\dim_{\mathbb C} H^0(C,\End(E,\dol_E))          \\
        & = r^2(g-1)+1
     \end{align*}
-    using Riemann-Roch, Serre duality, and \ref{lem:stable_is_simple},
+    using Riemann-Roch \ref{thm:riemann_roch},
+    Serre duality \ref{thm:serre_duality}, and \ref{lem:stable_is_simple},
     in that order.
   \end{proof}
 \end{corollary}
-
-Secondly, we find that the moduli space does not depend on the
-choice of $\ell$. This follows because $A_\nabla^{s}(E,h)$
-is dense in all its Sobolev completions. Hence every orbit has a
-smooth representative meaning that topologically the quotients are
-the same. Moreover, the complex manifold structure clearly
-does not depend on $\ell$ either.
 
 \subsection{Higgs Bundles as Cotangent Vectors}
 
@@ -2664,8 +2675,31 @@ see this is by considering a differential operator analogous to $D^\nabla$,
 showing that it is elliptic, and using this to prove that the
 tangent space is the kernel of a Fredholm operator, i.e. finite
 dimensional. We are going to take a different approach.
+We are going to make use of the following:
 
-Recall that the space of Higgs bundles associated to a holomorphic
+\begin{theorem}\label{thm:stables_are_dense}
+  The subsets
+  \begin{align*}
+    A^s_\dol(E)\subset A_\dol(E), \hspace{1cm}
+    A^s_\varphi(E)\subset A_\varphi(E)
+  \end{align*}
+  are open and dense.
+  \begin{proof}[Proof idea]
+    This is a consequence of stability being an open property
+    in the sense of \cite[Definition 2.1.9]{huybrechts2010}.
+    In particular, the set of non-stable bundles is described by a
+    system of polynomial equations. See \cite[Proposition 2.3.1]{huybrechts2010}
+    to see what such equations might look like.
+
+    Although we are not going to give an analytic proof, it is clear
+    how such a proof could work: One only needs
+    to show that making an aribtrarily small deviation achieves stability.
+    A reasonable choice would be to move in a direction normal to infinitesimal
+    gauge transformation.
+  \end{proof}
+\end{theorem}
+
+Now recall that the space of Higgs bundles associated to a holomorphic
 bundle $(E,\dol_E)$ is the space of holomorphic sections
 \begin{align*}
   \Gamma(C,\End(E,\dol_E) \otimes K_C) = H^{1,0}(C,\End(E,\dol_E)).
@@ -2680,27 +2714,11 @@ whenever $(E,\dol_E)$ is stable. Hence we have an inclusion
 \end{align}
 Observe that the holomorphic bundle underlying a stable Higgs bundle need
 not be stable. Hence (\ref{eq:cotangent_inclusion}) is not a bijection.
-However, we have the next best thing:
-
-\begin{theorem}\label{thm:stables_are_dense}
+However, by \ref{thm:stables_are_dense}, we have the next best
+thing.
+\begin{corollary}
   $T^*M^s_\dol(E)$ is open and dense in $M^s_\varphi(E)$.
-  \begin{proof}[Proof idea]
-    This follows from the more general fact that the stable subsets
-    $A^s_\dol(E)\subseteq A_\dol(E)$ and
-    $A^s_\varphi(E)\subseteq A_\varphi(E)$ open and dense which
-    in turn is a consequence of stability being an open property
-    in the sense of \cite[Definition 2.1.9]{huybrechts2010}.
-    In particular, the set of non-stable bundles is described by a
-    system of polynomial equations. See \cite[Proposition 2.3.1]{huybrechts2010}
-    to see what such equations might look like.
-
-    Although we are not going to give an analytic proof, it is clear
-    what such a proof might look like: One only needs
-    to show that making an aribtrarily small deviation achieves stability.
-    A reasonable choice would be to move in a direction normal to infinitesimal
-    gauge transformation.
-  \end{proof}
-\end{theorem}
+\end{corollary}
 
 Rather than computing the manifold structure on $M^s_\varphi(E)$
 directly, we may now simply deduce it from $T^*M^s_\dol(E)$.
@@ -2712,13 +2730,14 @@ directly, we may now simply deduce it from $T^*M^s_\dol(E)$.
     =2\dim_{\mathbb C}M^s_\dol(E)
     =2(g-1)r^2 + 2.
   \end{align*}
-  \begin{proof}
+  \begin{proof}[Proof idea]
     All that remains is to show that the cotangent space is a submanifold.
     The claim then follows as
     \begin{align*}
       T_{[\dol_E,\varphi]}M^s_\varphi(E) = T_{[\dol_E,\varphi]} T^*_{[\dol_E]}M^s_\dol(E)
     \end{align*}
-    for $[\dol_E]\in A_\dol(E)$. The fact that the manifold
+    for $[\dol_E,\varphi] \in A^s_\varphi(E)$ and
+    $[\dol_E]\in A^s_\dol(E)$. The fact that the manifold
     structure $T^*M^s_\dol(E)$ agrees with that of $M^s_{\varphi}(E)$
     may be deduced from the observation that
     $M^s_\dol(E) \subseteq M^s_\varphi(E)$ is a submanifold
@@ -2970,7 +2989,7 @@ have a moduli space at all:
     \begin{align*}
       \Ext^1(\mathscr O_{\mathbf P^n}(1),\mathscr O_{\mathbf P^n}(-n)) 
       \cong H^1(\mathbf P^n,\mathscr O_{\mathbf P^n}(-n-1))
-      \cong H^0(\mathbf P^n,\mathscr O_{\mathbf P^n}) 
+      \cong H^0(\mathbf P^n,\mathscr O_{\mathbf P^n})^* 
       \cong \mathbb C
     \end{align*}
     using Serre duality and the fact that $\mathscr O_{\mathbf P^n}(-n-1)$
