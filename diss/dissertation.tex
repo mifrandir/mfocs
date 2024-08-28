@@ -32,9 +32,9 @@
 
 
 \maketitle                  % create a title page from the preamble info
-\begin{dedication}
-  To my parents \todo{dedication}
-\end{dedication}
+%\begin{dedication}
+%  To my parents \todo{dedication}
+%\end{dedication}
 
 \begin{acknowledgements}
   I am extremely grateful to my supervisor, [redacted],
@@ -3726,8 +3726,10 @@ obvious under which conditions such quotients exist, let alone how to
 construct them. To overcome these issues, we are going to
 use a very powerful tool called geometric invariant theory (GIT).
 In the affine case, the GIT quotients will not be very difficult
-to obtain. Nonetheless, it this elementary case will
-allow us to appreciate the more general construction.
+to obtain. Nonetheless, this elementary case will
+allow us to appreciate the more general construction. Moreover,
+it will turn out that it is possible to obtain more general
+GIT quotients by gluing affine quotients.
 
 \subsection{Reductive Groups}
 
@@ -3785,29 +3787,29 @@ clear what the good quotient in this case must be:
     We follow \cite[Theorem 4.30]{hoskins2016}. Recall the definition
     \ref{def:good_quotient} of a good quotient. $G$-invariance,
     and affineness are essentially immediate and verifying that
-    $\varphi^\sharp$ is an isomorphism onto $(\varphi_*\mathscr O_X)^G$
+    $\nu^\sharp$ is an isomorphism onto $(\nu*\mathscr O_X)^G$
     is straightforward on distinguished opens.
 
     To show surjectivity, one only needs to consider closed points.
     Reductivity of $G$ enables the construction of some closed point
     $x$ of $X$ for each closed point $y$ of $X\sslash G$ such that
-    $\varphi(x) = y$ where $\varphi : X\to X\sslash G$ is the GIT quotient.
+    $\nu(x) = y$.
 
     Openness and separation of orbits are are addressed by considering
     $G$-invariant closed sets $W$ and $W'$ in $X$ and showing that
     it is possible to find $f\in\mathscr O(X)^G$ such that
     $f(W) = 0$ and $f(W') = 1$. \cite[Lemma 4.29]{hoskins2016}
     This then implies that $\overline{\varphi(W)}$ and $\overline{\varphi(W')}$
-    are disjiont which may be sufficient to prove both remaining conditions.
+    are disjoint which is sufficient to prove both remaining conditions.
   \end{proof}
 \end{theorem}
 
-While we are not yet in a position to take the quotient of the Quot
-schemes with respect to the actions of $GL_n$,
+While we are not yet in a position to take the quotient of $R(r,d)$
+or $F(r,d)$ with respect to the actions of $GL_n$,
 we can at least contemplate some examples of good and geometric
 quotients:
 
-\begin{example}
+\begin{example}\label{ex:a2_action}
   Consider the action of $\mathbf G_m = \Spec\mathbb C[t^\pm]$ on
   $\mathbf A^2 = \Spec\mathbb C[x_1, x_2]$ given by
   the coaction $x_i \mapsto t\otimes x_i$. The ring of
@@ -3841,7 +3843,7 @@ quotients:
 
 \begin{example}
   Of course we would like to take the quotient of $\mathbf A^2-\{(0,0)\}$
-  by the above action of $\mathbf G_m$. Unfortunately, the punctured
+  by the action of $\mathbf G_m$ from \ref{ex:a2_action}. Unfortunately, the punctured
   plane is not affine hence our theory does not yet apply. Instead,
   consider the $\mathbf G_m$-action on $\mathbf G_m^2 = \Spec\mathbb C[x^\pm,y^\pm]$
   given by $x \mapsto t\otimes x$ and $y\mapsto 1\otimes y$. This
@@ -3859,7 +3861,7 @@ quotients:
 
 Consider an affine GIT quotient $\nu : X \surj X\sslash G$. This is
 always a good quotient but it need not be geometric
-(\ref{def:good_quotient} and \ref{def:geometric_quotient}, respectively).
+(see the definitions \ref{def:good_quotient} and \ref{def:geometric_quotient}, respectively).
 Unfortunately, good quotients are, in particular, categorical
 quotients \cite[Proposition 3.30]{hoskins2016} and hence unique
 up to isomorphism. Therefore, the only way to reliably turn a good
@@ -3891,7 +3893,9 @@ quotient into a geometric quotient is to exclude certain orbits.
   $X\sslash^s G := \nu(X^s)$ is open in $X\sslash G$ and
   $\nu^{-1}(X\sslash^s G) = X^s$.
   \begin{proof}
-    $X^s$ and $\nu$ are open \todo{wrong}, hence $\nu(X^s)$ is too.
+    Following \cite[Proposition 4.36]{hoskins2016}.
+    $X^s\subseteq X$ is open and $G$-invariant and $\nu$ is a good quotient,
+    hence $\nu(X^s)\subseteq X\sslash G$ is open, too.
     Then the isomorphism $\nu^\sharp : \mathscr O_Y \to (\nu_*\mathscr O(X))^G$
     allows us to verify $\nu^{-1}(\nu(D(f))) = D(f)$ for the open
     affine cover from the proof of \ref{lem:affine_open_invariant}.
@@ -3906,7 +3910,8 @@ quotient into a geometric quotient is to exclude certain orbits.
     and \ref{lem:restrictions_of_good_quotients}, we know that
     the restriction is a good quotient. We then notice that, by construction,
     the action of $G$ on $X^s$ only has closed orbits. Now good
-    quotients separate closed orbits, hence $\nu$ is injective on orbits.
+    quotients are injective on closed orbits, hence $\nu$ is injective
+    on all orbits.
   \end{proof}
 \end{theorem}
 
@@ -3929,14 +3934,12 @@ quotient into a geometric quotient is to exclude certain orbits.
 
 \section{Constructing Quotients of Projective Schemes}
 
-A this point, the main shortcoming of the GIT quotients that
-we have seen so far is that they only make sense for actions on
-affine schemes. In this section we extend the quotient construction
+At this point, the main shortcoming of the GIT quotients is that they
+only apply to affine schemes. In this section we extend the quotient construction
 to projective schemes with certain well-behaved group actions.
 The abstract theory is rather straightforward to lay out. However,
 it is going to take considerable effort to equip our the actions of interest
 with the additional data required in order to make sense of the quotient.
-
 Fix an action $\sigma : G\times X\to X$ of a reductive
 group on a projective scheme.
 
@@ -3949,10 +3952,10 @@ will come in the form of linearised sheaves:
 \begin{definition}
   A \emph{linearisation} of a quasi-coherent sheaf
   $\mathscr E$ on $X$ with respect to the $G$-action
-  is an isomorphism $\varphi : \sigma^*\mathscr E \cong\pi^*\mathscr E$
+  is an isomorphism $\Psi : \sigma^*\mathscr E \cong\pi^*\mathscr E$
   of sheaves on $G\times X$ satisfying the cocylce condition
   \begin{align}\label{eq:cocyle_condition}
-    (\mu \times \identity)^*\varphi = \pi^*\varphi \circ (\identity\times\sigma)^*\varphi
+    (\mu \times \identity)^*\Psi = \pi^*\Psi \circ (\identity\times\sigma)^*\Psi
   \end{align}
   where $\mu$ denotes the multiplication on $G$.
 \end{definition}
@@ -3960,14 +3963,14 @@ will come in the form of linearised sheaves:
 \begin{example}\label{ex:linearised_action_on_bundle}
   Consider a $G$-linearised invertible sheaf $\mathscr L$ on $X$
   and the corresponding line bundle $\tau : L\to X$. Then the linearisation
-  $\varphi : \sigma^*\mathscr L \cong \pi^*\mathscr L$ induces
+  $\Psi : \sigma^*\mathscr L \cong \pi^*\mathscr L$ induces
   a map
   \begin{equation*}
     % https://q.uiver.app/#q=WzAsNCxbMSwwLCIoR1xcdGltZXMgWClcXHRpbWVzX3tcXHBpLFxcdGF1fSBMIl0sWzIsMCwiKEdcXHRpbWVzIFgpXFx0aW1lc197XFxzaWdtYSxcXHRhdX0gTCJdLFszLDAsIkwiXSxbMCwwLCJHXFx0aW1lcyBMIl0sWzAsMSwiXFxQaGkiXSxbMSwyXSxbMywwLCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
     \begin{tikzcd}
       {G\times L} & {(G\times X)\times_{\pi,\tau} L} & {(G\times X)\times_{\sigma,\tau} L} & L
       \arrow[Rightarrow, no head, from=1-1, to=1-2]
-      \arrow["\varphi", from=1-2, to=1-3]
+      \arrow["\Psi", from=1-2, to=1-3]
       \arrow[from=1-3, to=1-4]
     \end{tikzcd}
   \end{equation*}
@@ -4039,7 +4042,7 @@ $G$-linearisations.
   on $Q(r,d)$. \cite[Proposition 2.2.5]{huybrechts2010}.
   The isomorphism (\ref{eq:universal_linearisation}) induces an isomorphism
   \begin{align*}
-    \varphi:\sigma^*\mathscr L_\ell \cong \pi^*\mathscr L_\ell.
+    \Psi:\sigma^*\mathscr L_\ell \cong \pi^*\mathscr L_\ell.
   \end{align*}
   For $\ell$ large, this is in fact a linearisation.
 \end{example}
@@ -4086,7 +4089,7 @@ some useful results:
       \begin{tikzcd}
         {\Gamma(X,\mathscr E)} & {\Gamma(G\times X,\sigma^*\mathscr E)} & {\Gamma(G\times X,\pi^*\mathscr E)} & {\Gamma(G,\mathscr O_G)\otimes\Gamma(X,\mathscr E)}
         \arrow["{\sigma^*}", from=1-1, to=1-2]
-        \arrow["\varphi", from=1-2, to=1-3]
+        \arrow["\Psi", from=1-2, to=1-3]
         \arrow["\cong", from=1-3, to=1-4]
       \end{tikzcd}
     \end{equation*}
@@ -4098,9 +4101,9 @@ some useful results:
   If $\mathscr L$ is a $G$-linearised invertible sheaf then so is
   $\mathscr L^{\otimes k}$ for all $k\geq 1$.
   \begin{proof}
-    Denote the linearisation by $\varphi : \sigma^*\mathscr L \cong \pi^*\mathscr
+    Denote the linearisation by $\Psi : \sigma^*\mathscr L \cong \pi^*\mathscr
       L$.  Then pullback functor on locally free sheaves is exact, hence we have
-    an induced isomorphism $\varphi^{\otimes k} : \sigma^*\mathscr L^{\otimes k}
+    an induced isomorphism $\Psi^{\otimes k} : \sigma^*\mathscr L^{\otimes k}
       \cong \pi^*\mathscr L^{\otimes k}$ and it is straightforward to check that
     this satisfies the cocyle condition.
   \end{proof}
@@ -4202,15 +4205,36 @@ an open subscheme:
   \begin{proof}[Proof idea]
     Following \cite[Lemma 5.5]{hoskins2016}.  The key observation is that the
     set of points with zero-dimensional stabilisers is open. This essentially
-    follows from \cite[III 12.8]{hartshorne1977}.  Moreover, the union $\bigcup
+    follows from \cite[\nopp {III 12.8}]{hartshorne1977}.  Moreover, the union $\bigcup
     D_+(f)$ over $f\in R(X,\mathscr L)_+^G$ with closed action on $D_+(f)$ is
     open and so is the intersection $X^s(\mathscr L)$.
   \end{proof}
 \end{lemma}
 
-Now consider the GIT quotient $\varphi : X^{ss}(\mathscr L)\to X\sslash^{ss}_{\mathscr L} G$.
+Indeed, we find that projective GIT stability is completely analogous to the definition
+of stability in the affine case \ref{def:affine_stability}, at least when
+considering closed points.
+
+\begin{lemma}
+  A closed point $x\in X^{ss}(\mathscr L)$ is stable if, and only if, the orbit
+  $G\cdot x\subseteq X^{ss}(\mathscr L)$ is closed and $\dim G_x = 0$.
+  \begin{proof}[Proof idea]
+    Following \cite[Lemma 5.9]{hoskins2016}.
+    The `only if' direction is a matter of direct calculation.
+    In the other direction, assume $x\in X^{ss}(\mathscr L)$ has a
+    closed orbit. Choose a standard open $D_+(f)$ containing
+    $x$. Then there is a closed subset $Z\subseteq D_+(f)$ of
+    points $z$ with $\dim G_z > 0$. It is then possible to find
+    a homogeneous $h$ such that $D_+(fh)\cap Z$ is empty and
+    $x\in D_+(fh)$. It is then straightforward to check that this
+    $fh$ witnesses the stability of $x$ in the sense of
+    \ref{def:git_stability}.
+  \end{proof}
+\end{lemma}
+
+Now consider the GIT quotient $\nu : X^{ss}(\mathscr L)\to X\sslash^{ss}_{\mathscr L} G$.
 It follows from the definition \ref{def:good_quotient} that
-$\varphi(X^s(\mathscr L))$ is open in $X\sslash_{\mathscr L} G$.
+$\nu(X^s(\mathscr L))$ is open in $X\sslash_{\mathscr L} G$.
 
 \begin{theorem}
   The GIT quotient $\nu : X^{ss}({\mathscr L}) \to X\sslash^{ss}_{\mathscr L} G$
@@ -4239,26 +4263,6 @@ $\varphi(X^s(\mathscr L))$ is open in $X\sslash_{\mathscr L} G$.
   the construction ought not to depend on the parameter $\ell$.
 \end{example}
 
-We find that projective GIT stability is completely analogous to the definition
-of stability in the affine case \ref{def:affine_stability}, at least when
-considering closed points.
-
-\begin{lemma}
-  A closed point $x\in X^{ss}(\mathscr L)$ is stable if, and only if, the orbit
-  $G\cdot x\subseteq X^{ss}(\mathscr L)$ is closed and $\dim G_x = 0$.
-  \begin{proof}[Proof idea]
-    Following \cite[Lemma 5.9]{hoskins2016}.
-    The `only if' direction is a matter of direct calculation.
-    In the other direction, assume $x\in X^{ss}(\mathscr L)$ has a
-    closed orbit. Choose a standard open $D_+(f)$ containing
-    $x$. Then there is a closed subset $Z\subseteq D_+(f)$ of
-    points $z$ with $\dim G_z > 0$. It is then possible to find
-    a homogeneous $h$ such that $D_+(fh)\cap Z$ is empty and
-    $x\in D_+(fh)$. It is then straightforward to check that this
-    $fh$ witnesses the stability of $x$ in the sense of
-    \ref{def:git_stability}.
-  \end{proof}
-\end{lemma}
 
 \section{Stability Analysis}
 
@@ -4273,8 +4277,8 @@ Once again we find ourselves where we have constructed moduli spaces
 but cannot yet be sure which orbits in $R(r,d)$ and $F(r,d)$
 are represented.
 
-As the analysis between the two moduli spaces is quite similar,
-we are going to focus on the quotient of $R(r,d)$ only.
+As the required analysis is lengthy yet quite similar between the
+two moduli spaces, we are going to focus on the quotient of $R(r,d)$ only.
 The first step in this section is to translate the stability
 conditions of geometric invariant theory to conditions on the locally
 free sheaves which the points of $R(r,d)$.  In particular, we
@@ -4366,8 +4370,6 @@ In particular, we obtain the new value
 
 \subsection{Hilbert-Mumford Weights}
 
-\todo{change to $SL_n$ action?}
-
 Continuing in the context of the previous section, recall that the action
 of $\mathbf G_m$ on the fibre of $L$ over a fixed point $x$ induces a
 representation $\mathbf G_m\to GL(L_x)$. As such representations must
@@ -4414,7 +4416,7 @@ interest to us:
 It is possible to show that $x$ is stable with
 respect to the $\mathbf G_m$-action induced by $\lambda$ if, and only
 if, $\mu^{\mathscr L}(x,\lambda)$ and $\mu^{\mathscr L}(x,\lambda^{-1})$
-positive.
+are positive.
 See \cite[Lemma 6.9]{hoskins2016}.
 The Hilbert-Mumford criterion now just says that measuring the
 stability of a point with respect to every one-parameter subgroup
@@ -4460,10 +4462,10 @@ in our moduli spaces. As usual, we begin with locally free sheaves:
 
 \subsection{The Moduli Space of Stable Sheaves}
 
-It should not come as a surprise that (semi-)stable points of
-$R(r,d)$ correspond to slope (semi-)stable bundles
+It should not come as a surprise that stable points of
+$R(r,d)$ correspond to slope stable bundles
 in the sense of \ref{def:stable_bundle}.
-We begin by translating the notion of slope (semi-)stability to
+We begin by translating the notion of slope stability to
 locally free sheaves:
 
 \begin{lemma}
@@ -4479,13 +4481,13 @@ locally free sheaves:
   \end{proof}
 \end{lemma}
 
-Thus we are justified in calling a locally free sheaf slope (semi-)stable
-whenever its corresponding vector bundle is slope (semi-)stable. We
+Thus we are justified in calling a locally free sheaf slope stable
+whenever its corresponding vector bundle is slope stable. We
 then find that GIT stability in the sense of \ref{ex:lf_git_stability}
 coincides with slope stability:
 
 \begin{example}\label{thm:stability_of_lf_sheaves}
-  For $\ell$ sufficiently large, $Q^s_\circ(r,d)(\mathscr L_\ell)$
+  For $\ell$ sufficiently large, $R^s(r,d)(\mathscr L_\ell)$
   consist of all families of  slope stable sheaves of $R(r,d)$.
   \begin{proof}[Proof idea]
     Following \cite[79-82]{hoskins2016}. This essentially follows
@@ -4571,10 +4573,10 @@ treatment. A precise statement of the theorem that we require is
   \begin{proof}[Proof idea]
     Following \cite[Proposition 8.65]{hoskins2016}.
     $R(r,d)$ is reduced and hence a quasi-projective variety.
-    In particular, the open subset $Q^s_\circ(r,d)$ is a quasi-projective
+    In particular, the open subset $R^s(r,d)$ is a quasi-projective
     variety, too.
 
-    Let us show that $Q^s_\circ(r,d)$ is smooth around every
+    Let us show that $R^s(r,d)$ is smooth around every
     $q : \mathscr O^{\oplus n}_C \surj \mathscr E$. Using~\cite[Proposition 2.2.8]{huybrechts2010}, it suffices
     to show that $\Ext^1(\mathscr F,\mathscr E)=0$ where
     $\mathscr F = \Ker(q)$. This is easily shown by applying
@@ -4590,18 +4592,19 @@ treatment. A precise statement of the theorem that we require is
       \to \Ext^1(\mathscr F,\mathscr E)
       \to 0.
     \end{align*}
-    By taking $d$ sufficiently large, Serre's vanishing theorem
+    By twisting sufficiently, Serre's vanishing theorem
     states
     \begin{align*}
       \Ext^1(\mathscr O^{\oplus n}_C,\mathscr E) = H^1(X,\mathscr E)^n = 0.
     \end{align*}
-    Hence $R(r,d)$ is smooth around $q$.
+    Hence $q(d')$ is a smooth point of some $R(r,d+rd')$, meaning $q$ is smooth
+    in $R(r,d)$.
 
     It now follows from Luna's Slice Theorem and the fact that the
-    projective GIT quotient was constructed by gluing affine GIT quotients
+    projective GIT quotient was constructed by gluing affine GIT quotients,
     that the quotient is also smooth. Then separatedness and reducedness
     follow directly from the reducedness of $R(r,d)$ and
-    $R(r,d)\surj M^s_h(r,d)$ being a geometric quotient.
+    $R^s(r,d)\surj M^s_h(r,d)$ being a geometric quotient.
 
     Quasi-projectivity follows from the presence of an ample
     sheaf on the projective GIT quotient $M^s_h(r,d)$.~\cite[\href{https://stacks.math.columbia.edu/tag/0B42}{Tag 0B42}]{stacks-project}
@@ -4654,9 +4657,9 @@ Using Zariski tangent spaces, one may establish an analogue of
     a smooth variety follows by considering the projection $M^0_H\to M^s_h(r,d)$
     and using the fact that $M^s_h(r,d)$ is a smooth variety.
 
-    Since Nitsure's initial construction it has been established that
+    Since Nitsure's initial construction it has been established
     that $M^s_H(r,d)$ is connected. See \cite{gpo2016} fo a very
-    high level of generality. In particular, $M^s_H(r,d) = M^0$ is
+    high level of generality. In particular, $M^s_H(r,d) = M^0_H$ is
     a smooth variety. This is once again quasi-projective by
     considering the induced ample sheaf on the projective GIT
     quotient.
@@ -4664,7 +4667,7 @@ Using Zariski tangent spaces, one may establish an analogue of
 \end{theorem}
 
 Unfortunately, cotangent spaces are best calculated using deformation
-theory and further applications of Luna's Slice theory. \cite[Corollary 4.5.2]{huybrechts2010}
+theory and further applications of Luna's Slice theorem. \cite[Corollary 4.5.2]{huybrechts2010}
 Hence we record the following result without proof:
 
 \begin{theorem}
@@ -4681,13 +4684,15 @@ point. To do this, we introduce the notion of derivations in the algebraic
 context:
 
 \begin{definition}
-  A \emph{derivation} on an affine scheme $X=\Spec R$ consists of
-  an $R$-module $M$ and a $\mathbb C$-linear map $d : R \to M$ such
-  that $d(fg) = fdg + gdf$.
+  A \emph{derivation} on an affine scheme $X$ consists of
+  an $\mathscr O(X)$-module $M$ and a $\mathbb C$-linear map
+  $d : \mathscr O(X) \to M$ such that $d(fg) = fdg + gdf$.
 \end{definition}
 
-It is important to notice that a derivation $d:R\to M$ is not,
-in general, $R$-linear. There exists a universal derivation that
+Just as connections are maps between $\mathscr C^\infty$-modules that
+are not $\mathscr C^\infty$-linear, it is worth noting that a derivation
+$d:\mathscr O(X)\to M$ is not $\mathscr O(X)$-linear. The reason for introducing derivations
+is that there exists a universal derivation that
 gives rise to the module of differentials:
 
 \begin{theorem}\label{thm:kahler_differential}
@@ -4712,12 +4717,12 @@ gives rise to the module of differentials:
     considering the kernel $\mathfrak a$ of the multiplication map
     $R\otimes R \to R$ and defining $\Omega^1(X) := \mathfrak a/\mathfrak a^2$. Then the derivation
     map is $r \mapsto 1\otimes r - r \otimes 1$. It is now straightforward
-    to verify the universal property.
-  \end{proof}
+    to verify that $\Omega^1(X)$ is initial among derivations.
+    \end{proof}
 \end{theorem}
 
 Now consider an affine scheme $U$. Recall that $\mathscr O(U)$-modules
-correspond to $\mathscr O_U$-modules. Hence we have a sheaf of K\"ahler
+correspond to sheaves of $\mathscr O_U$-modules. Hence we have a sheaf of K\"ahler
 differentials $\Omega^1_U$ on $U$. Moreover, it is routine to check that the
 sheaves of K\"ahler differentials $\Omega^1_U$ on affine opens
 $U\subseteq X$ of a scheme glue to a sheaf on the whole scheme $X$.
@@ -4822,7 +4827,7 @@ be a manifold.
 \begin{example}
   A classical example of this is $X=\Spec \mathbb C[x,y]/(y^2-x^3)$
   which naturally embeds into $\affine{2}{}$ and hence $\projective{2}{}$
-  but fails to have a chart around $[0:0:1]$.
+  but fails to have a chart around $(0,0)$.
 \end{example}
 
 Moreover, analytification extends to maps. That is, there is a
@@ -4893,16 +4898,16 @@ the analytic constructions by applying the anlytification functor.
 Unfortunately, there is no such thing as a free lunch.~\cite{friedman1977}
 Taking the algebraic point of view turned out to be no easier than
 doing things analytically. It was merely a case of moving difficulties
-from one place to another. In particular, obtaining suitable schemes with
-a linearised ample sheaves requires a large amount of creativity.
+from one place to another. In particular, analysing the stability
+conditions arising from GIT is a lot of work.
 Moreover, many of the proofs ended up being analytic, in particular
 stability analysis using one parameter subgroups
 and tangent space calculation using deformation theory come to mind.
 
 \section{Evaluation}
 
-Presenting the constructions of moduli spaces comes with two main
-difficulties. Firstly, each construction takes a lot of space on its
+Presenting the constructions of moduli spaces presented us with two main
+difficulties. Firstly, each of the constructions takes a lot of space on its
 own. In particular, the analytic and algebraic approaches each
 require a lot of theory. This makes it difficult to present both
 processes alongside each other. Due to this, most resources cover
@@ -4926,7 +4931,7 @@ Elliptic regularity. We have not found a way to do so.
 
 \subsection{Language Barrier}
 
-In order to compare the two analytic and algebraic approach,
+In order to compare the analytic and algebraic approaches,
 it is natural to attempt to unify the language as much as possible.
 In particular, it is possible to use the algebraic language of
 sheaves on locally ringed spaces to describe the analytic
@@ -4958,8 +4963,8 @@ symplectic forms on the moduli spaces. Showing that the forms thus
 obtained are actually K\"ahler or Hyperk\"ahler would connect more
 tightly to complex analytic geometry. Moreover, K\"ahler manifolds
 come with a wide range of useful results such as Hodge's theorem
-or Poincar\'e duality for harmonic forms. These would come in
-particularly useful when further studying the moduli spaces.
+or Poincar\'e duality for harmonic forms. These would surely prove
+useful when further studying the moduli spaces.
 
 \subsection{More General Bundles on More General Surfaces}
 
@@ -4977,12 +4982,14 @@ as can be seen in \cite{huybrechts2010} and \cite{kobayashi1987}.
 
 \subsection{Stacks}
 
-Perhaps the most obvious extension of the theory presented here
-arises when trying to study the moduli spaces without discarding
-any isomorphism classes. Indeed, we did not pay a lot
-of attention to the spaces of semistable bundles, which at least
-are analytic spaces or schemes. However, it is possible to go one
-step further. Moduli stacks are powerful enough to parametrise
+Throughout this paper we pruposefully avoided discussing semitable
+bundles and semistable sheaves as much as possible. This does not
+mean that they ought not to be studied. Indeed, the moduli spaces
+of semistable bundles are in some sense more interesting as, by
+definition, they are slightly less well-behaved.
+
+Going one step further, one might consider the full moduli stacks.
+These structures are powerful enough to parametrise
 all isomorphism classes of vector bundles, including the unstable ones.
 As an introduction to the subject, one may consider~\cite{cm2017} where the moduli stack of Higgs bundles is studied.
 
